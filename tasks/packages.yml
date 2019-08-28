@@ -1,0 +1,59 @@
+---
+- name: Install base packages
+  pacman:
+    name:
+      - base
+      - base-devel
+      - pacman-contrib
+      - glibc
+      - rsync
+      - jq
+      - icu
+      - freerdp
+      - filezilla
+      - smartmontools
+      - autorandr
+      - autocutsel
+      - openssh
+      - keychain
+      - fzf
+      - htop
+      - xcape
+      - iperf3
+      - neofetch
+      - figlet
+      - lastpass-cli
+      - code
+      - samba
+      - nmap
+      - ufw
+      - sshfs
+      - ntp
+      - traceroute
+      - reflector
+      - fd
+      - vlc
+      - thunar
+      - teamspeak3
+      - remmina
+      - lxappearance
+      - galculator
+      - unrar
+      - zip
+      - unzip
+      - autossh
+      - keychain
+      - x11-ssh-askpass
+      - qt5-base
+      - tree
+      - the_silver_searcher
+    state: present
+  tags:
+    - packages
+    - basepackages
+
+- name: Use all cores when compressing packages
+  lineinfile:
+    dest: /etc/makepkg.conf
+    regexp: "^COMPRESSXZ"
+    line: "COMPRESSXZ=(xz -c -z - --threads=0)"

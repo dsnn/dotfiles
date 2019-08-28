@@ -1,0 +1,10 @@
+---
+- name: compton | Install compton packages
+  package:
+    name:
+      - compton
+    state: present
+  become: true
+  tags:
+    - compton
+    - packages

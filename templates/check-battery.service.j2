@@ -1,0 +1,9 @@
+[Unit]
+Description=check-battery
+
+[Service]
+Type=oneshot
+ExecStart="{{ user.home }}/bin/cron/checkbat"
+
+[Install]
+WantedBy=multi-user.target

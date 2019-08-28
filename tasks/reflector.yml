@@ -1,0 +1,46 @@
+---
+- name: reflector | Install pacman mirror update service
+  copy:
+    src: files/reflector.service
+    dest: /etc/systemd/system/reflector.service
+  notify:
+    - reload systemd config
+  tags:
+    - reflector
+    - pacman
+    - systemd
+
+- name: reflector | Enable pacman mirror update service
+  service:
+    name: reflector.service
+    enabled: yes
+    state: started
+  notify:
+    - reload systemd config
+  tags:
+    - reflector
+    - pacman
+    - systemd
+
+- name: reflector | Install pacman mirror update timer
+  become: true
+  copy:
+    src: files/reflector.timer
+    dest: /etc/systemd/system/reflector.timer
+  notify:
+    - reload systemd config
+    - restart reflector
+  tags:
+    - reflector
+    - pacman
+    - systemd
+
+- name: reflector | Enable reflector timer
+  service:
+    name: reflector.timer
+    enabled: yes
+    state: started
+  tags:
+    - reflector
+    - pacman
+    - systemd

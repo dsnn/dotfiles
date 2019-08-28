@@ -1,0 +1,18 @@
+---
+- name: git | Install git
+  pacman:
+    name:
+      - git
+    state: present
+  tags:
+    - git
+    - packages
+
+- name: git | Install gitconfig
+  template:
+    src: templates/gitconfig.j2
+    dest: "{{ user.home }}/.gitconfig"
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
+  tags:
+    - git

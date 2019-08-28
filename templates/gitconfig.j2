@@ -1,0 +1,23 @@
+# {{ ansible_managed }}
+
+[user]
+	name = {{ user.name }}
+	email = {{ user.email }} 
+[alias]
+	st = status -s
+	la = !git config -l | grep alias | cut -c 7-
+	ac = !git add . && git commit -a -m
+	pr = "!git checkout master;git pull;git checkout @{-1};git rebase master"
+	qm = "!git checkout $1;git merge @{-1}"
+	ls = !git log --pretty=format:\"%C(yellow)%h%Creset|%cd|%an|%<(70,trunc)%s\" -10 --date=format:\"%y%m%d %H:%M:%S\" | awk -F \"|\" \"{ printf \\\"%s %-20s %-20s %s\\n\\\", \\$1, \\$2, \\$3, \\$4 }\"
+	lg = !git log --pretty=\"%C(yellow)%h%Creset | %cd %d %s (%C(cyan)%an)\" --date=format:\"%Y-%m-%d %H:%M:%S\" --graph
+	bl = branch --list
+	cm = !git commit -m
+	cma = !git commit --amend --no-edit
+	co = !git checkout
+	cob = !git checkout -b
+	qco = !git checkout @{-1}
+	br = !git branch -r
+	ba = !git branch -a
+	last = "!f() { git log -${1+}${1-1} HEAD --pretty=format:'%C(red)%h%Creset - %C(bold white)%s%Creset %C(bold green)<%an>%Creset %C(yellow)(%cr)%Creset' --graph; }; f"
+	dt = !git diff-tree --no-commit-id --name-only -r 

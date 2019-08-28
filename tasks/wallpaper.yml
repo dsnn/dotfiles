@@ -1,0 +1,19 @@
+---
+- name: wallpaper | Ensure config dir exist
+  file:
+    path: '{{ user.config }}'
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
+    state: directory
+    mode: 0755
+  tags:
+    - wallpaper
+
+- name: wallpaper | Install wallpaper
+  copy:
+    src: files/wall.png
+    dest: '{{ user.config }}/wall.png'
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
+  tags:
+    - wallpaper

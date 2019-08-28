@@ -1,0 +1,13 @@
+#define myfont		    Iosevka Nerd Font
+#define myfontsize		14
+#define mypadding		0
+#define browser			/usr/bin/firefox-developer-edition
+#define letterSpacing   2
+
+Xft.dpi:				96
+Xft.antialias:			true
+Xft.rgba:				rgb
+Xft.hinting:			true
+Xft.hintstyle:			hintfull
+
+#include "~/.config/rofi/config"

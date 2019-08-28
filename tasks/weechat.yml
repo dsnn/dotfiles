@@ -1,0 +1,10 @@
+---
+- name: weechat | Install weechat
+  package:
+    state: present
+    name:
+      - weechat
+  become: true
+  tags:
+    - weechat
+    - packages

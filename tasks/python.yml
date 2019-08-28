@@ -1,0 +1,12 @@
+---
+- name: python | Install pip
+  package:
+    state: present
+    name:
+      - python-pip
+      - python-pipenv
+      - python-black
+      - python-language-server
+  become: true
+  tags:
+    - python

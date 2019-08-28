@@ -1,0 +1,78 @@
+---
+- hosts: all
+  become: yes
+  handlers:
+    - name: restart paccache
+      become: yes
+      service:
+        name: paccache.timer
+        state: restarted
+    - name: restart reflector
+      become: yes
+      service:
+        name: reflector.timer
+        state: restarted
+    - name: restart check battery
+      become: yes
+      service:
+        name: check-batter.timer
+        state: restarted
+    - name: reload systemd config
+      command: systemctl daemon-reload
+  pre_tasks:
+    - name: Install python for Ansible
+      raw: test -e /usr/bin/python || (pacman -S python --noconfirm)
+      changed_when: False
+    - name: Install shell
+      pacman: name=zsh state=present
+  tasks:
+    - import_tasks: tasks/hosts.yml
+    - import_tasks: tasks/pacman.yml
+    - import_tasks: tasks/user.yml
+    - import_tasks: tasks/packages.yml
+    - import_tasks: tasks/time.yml
+    - import_tasks: tasks/xorg.yml
+    - import_tasks: tasks/xdg.yml
+    - import_tasks: tasks/zsh.yml
+    - import_tasks: tasks/git.yml
+    - import_tasks: tasks/tmux.yml
+    - import_tasks: tasks/termite.yml
+    - import_tasks: tasks/dunst.yml
+    - import_tasks: tasks/i3.yml
+    - import_tasks: tasks/neovim.yml
+    - import_tasks: tasks/ranger.yml
+    - import_tasks: tasks/rofi.yml
+    - import_tasks: tasks/virtualbox.yml
+      when: ansible_virtualization_type == "virtualbox"
+    - import_tasks: tasks/yay.yml
+    - import_tasks: tasks/polybar.yml
+    - import_tasks: tasks/compton.yml
+    - import_tasks: tasks/fonts.yml
+    - import_tasks: tasks/sound.yml
+    - import_tasks: tasks/python.yml
+    - import_tasks: tasks/mail.yml
+    - import_tasks: tasks/browser.yml
+    - import_tasks: tasks/wallpaper.yml
+    - import_tasks: tasks/lockscreen.yml
+    - import_tasks: tasks/bin.yml
+    - import_tasks: tasks/locale.yml
+    - import_tasks: tasks/reflector.yml
+    - import_tasks: tasks/paccache.yml
+    - import_tasks: tasks/unclutter.yml
+    - import_tasks: tasks/libinput.yml
+      when: ansible_virtualization_type != "virtualbox"
+    - import_tasks: tasks/redshift.yml
+      when: ansible_virtualization_type != "virtualbox"
+    - import_tasks: tasks/power.yml
+      when: ansible_virtualization_type != "virtualbox"
+    - import_tasks: tasks/network.yml
+      when: ansible_virtualization_type != "virtualbox"
+    - import_tasks: tasks/bluetooth.yml
+      when: ansible_virtualization_type != "virtualbox"
+    # - import_tasks: tasks/slack.yml
+    # - import_tasks: tasks/zathura.yml
+    # - import_tasks: tasks/weechat.yml
+    # - import_tasks: tasks/graphics.yml
+    # - import_tasks: tasks/dotnet.yml
+    # - import_tasks: tasks/docker.yml
+    # fix - import_tasks: tasks/spotify.yml

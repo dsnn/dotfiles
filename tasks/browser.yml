@@ -1,0 +1,18 @@
+---
+- name: browser | Install firefox developer edition
+  pacman:
+    name:
+      - firefox
+    state: present
+  tags:
+    - browser
+    - packages
+
+- name: browser | Install google chrome
+  yay:
+    name:
+      - google-chrome
+    state: present
+  tags:
+    - browser
+    - packages

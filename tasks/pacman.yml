@@ -1,0 +1,24 @@
+---
+- name: pacman | Copy pacman configuration file
+  copy:
+    src: files/pacman.conf
+    dest: /etc/pacman.conf
+  tags:
+    - pacman
+    - packages
+
+- name: pacman | Create pacman hook directory
+  file:
+    path: /etc/pacman.d/hooks
+    state: directory
+  tags:
+    - pacman
+    - packages
+
+- name: pacman | Refresh pacman mirrors
+  become: yes
+  pacman:
+    update_cache: yes
+  tags:
+    - pacman
+    - packages

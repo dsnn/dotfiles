@@ -1,0 +1,27 @@
+---
+- name: zathura | Install packages
+  package:
+    state: present
+    name:
+      - zathura
+      - zathura-pdf-poppler
+  become: true
+  tags:
+    - zathura
+    - packages
+
+- name: zathura | Create config dir
+  file:
+    path: '{{ user.config }}/zathura'
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
+    state: directory
+  tags:
+    - zathura
+
+- name: zathura | Install config
+  copy:
+    src: files/zathura
+    dest: '{{ user.config }}/zathura/zathurarc'
+  tags:
+    - zathura

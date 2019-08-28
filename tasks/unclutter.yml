@@ -1,0 +1,10 @@
+---
+- name: unclutter | Install unclutter packages
+  package:
+    name:
+      - unclutter
+    state: present
+  become: true
+  tags:
+    - unclutter
+    - packages

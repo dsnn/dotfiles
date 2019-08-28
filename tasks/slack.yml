@@ -1,0 +1,9 @@
+---
+- name: Slack | Install slack package
+  yay:
+    name:
+      - slack-desktop
+    state: present
+  tags:
+    - slack
+    - packages

@@ -1,0 +1,26 @@
+---
+- name: rofi | Install packages
+  pacman:
+    name: rofi
+    state: present
+  tags:
+    - rofi
+    - packages
+
+- name: rofi | Create config dir
+  file:
+    path: '{{ user.config }}/rofi'
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
+    state: directory
+  tags:
+    - rofi
+
+- name: rofi | Install config
+  copy:
+    src: rofi
+    dest: '{{ user.config }}/rofi/config'
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
+  tags:
+    - rofi

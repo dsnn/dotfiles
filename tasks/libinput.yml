@@ -1,0 +1,45 @@
+---
+- name: libinput | Install packages
+  package:
+    state: present
+    name:
+      - libinput
+      - xdotool
+      - xf86-input-libinput
+  become: true
+  tags:
+    - input
+    - packages
+
+- name: libinput | Install libinput-gestures
+  yay:
+    name:
+      - libinput-gestures
+    state: present
+  tags:
+    - input
+    - packages
+
+- name: libinput | Ensure user autostart dir exists
+  file:
+    path: "{{ user.config }}/autostart"
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
+    state: directory
+  tags:
+    - power
+    - battery
+
+- name: libinput | Install libinput-gestures.conf
+  copy:
+    src: files/libinput-gestures.conf
+    dest: "{{ user.config }}/libinput-gestures.conf"
+  tags:
+    - input
+
+- name: libinput | Install libinput-gestures.desktop
+  copy:
+    src: files/libinput-gestures.desktop
+    dest: "{{ user.config }}/autostart/libinput-gestures.desktop"
+  tags:
+    - input

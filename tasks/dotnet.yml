@@ -1,0 +1,10 @@
+---
+- name: dotnet | Install dotnet packages
+  pacman:
+    name:
+      - dotnet-runtime
+      - dotnet-sdk
+    state: present
+  tags:
+    - dotnet
+    - packages

@@ -1,0 +1,112 @@
+---
+- name: Fonts | Install font packages
+  package:
+    state: present
+    name:
+      - fontconfig
+      - freetype2
+      - gsfonts
+      - libxft
+      - gucharmap
+      - adobe-source-code-pro-fonts
+      - ttf-font-awesome
+      - ttf-inconsolata
+      - ttf-liberation
+      - ttf-roboto
+  become: true
+  tags:
+    - fonts
+    - packages
+
+- name: fonts | Ensure user fonts dir exist
+  file:
+    path: '{{ user.home }}/.fonts'
+    state: directory
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
+    mode: 0755
+  tags:
+    - fonts
+
+- name: fonts | Install custom font files
+  copy:
+    src: '{{ item }}'
+    dest: '{{ user.home }}/.fonts/{{ item | basename }}'
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
+  with_fileglob:
+    - files/fonts/*
+  tags:
+    - fonts
+
+- name: Fonts | Install font packages (AUR)
+  yay:
+    name:
+      - vim-devicons
+      - system-san-francisco-font-git
+      - ttf-iosevka
+    state: present
+  tags:
+    - fonts
+    - packages
+
+- name: Fonts | Enable LCD filter
+  file:
+    src: /etc/fonts/conf.avail/11-lcdfilter-default.conf
+    dest: /etc/fonts/conf.d/11-lcdfilter-default.conf
+    state: link
+  become: true
+  tags:
+    - fonts
+
+- name: Fonts | Enable sub-pixel rendering
+  file:
+    src: /etc/fonts/conf.avail/10-sub-pixel-rgb.conf
+    dest: /etc/fonts/conf.d/10-sub-pixel-rgb.conf
+    state: link
+  become: true
+  tags:
+    - fonts
+
+- name: Fonts | Disable slight hinting default
+  file:
+    path: /etc/fonts/conf.d/10-hinting-slight.conf
+    state: absent
+  become: true
+  tags:
+    - fonts
+
+- name: Fonts | Enable crisper fonts with full hinting
+  file:
+    src: /etc/fonts/conf.avail/10-hinting-full.conf
+    dest: /etc/fonts/conf.d/10-hinting-full.conf
+    state: link
+  become: true
+  tags:
+    - fonts
+
+- name: Fonts | Disable bitmap fonts
+  file:
+    src: /etc/fonts/conf.avail/70-no-bitmaps.conf
+    dest: /etc/fonts/conf.d/70-no-bitmaps.conf
+    state: link
+  become: true
+  tags:
+    - fonts
+
+- name: Fonts | Enable subpixel autohinting with freetype2
+  lineinfile:
+    dest: '/etc/profile.d/freetype2.sh'
+    regexp: '.*export FREETYPE_PROPERTIES=.*'
+    line: 'export FREETYPE_PROPERTIES="truetype:interpreter-version=40"'
+  become: true
+  tags:
+    - fonts
+
+- name: Fonts | Set font family choices
+  copy:
+    src: fonts-local.conf
+    dest: /etc/fonts/local.conf
+  become: true
+  tags:
+    - fonts

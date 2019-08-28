@@ -1,0 +1,60 @@
+---
+- name: Virtualbox guest | Remove no-X guest utils to prevent conflict
+  package:
+    name: virtualbox-guest-utils-nox
+    state: absent
+  become: true
+  tags:
+    - virtualbox
+
+- name: Virtualbox guest | Install guest utils
+  package:
+    state: present
+    name:
+      - virtualbox-guest-utils
+      - virtualbox-guest-modules-arch
+  become: true
+  tags:
+    - virtualbox
+
+- name: Virtualbox guest | Enable vboxservice
+  become: true
+  systemd:
+    enabled: true
+    name: vboxservice.service
+    daemon-reload: true
+  tags:
+    - virtualbox
+    - systemd
+
+- name: Virtualbox guest | Ensure user systemd dir exists
+  file:
+    path: '{{ user.config }}/systemd/user'
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
+    state: directory
+  tags:
+    - virtualbox
+
+- name: Virtualbox guest | Install VBoxClient service
+  copy:
+    src: files/vboxclient.service
+    dest: '{{ user.config }}/systemd/user/vboxclient.service'
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
+  tags:
+    - virtualbox
+#
+# Failed to connect to bus: No such file or directory
+# - name: Virtualbox guest | Enable VBoxClient service
+#   become: true
+#   become_user: '{{ user.name }}'
+#   systemd:
+#     enabled: true
+#     name: vboxclient.service
+#     scope: user
+#   notify:
+#     - reload systemd config
+#   tags:
+#     - virtualbox
+#     - systemd

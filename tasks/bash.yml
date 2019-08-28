@@ -1,0 +1,31 @@
+---
+- name: Bash | Install package and dependencies
+  apt:
+    state: present
+    update_cache: yes
+    force_apt_get: true
+    name:
+      - bash
+      - bash-completion
+  become: true
+  tags:
+    - bash
+    - packages
+
+- name: Bash | Install bash config
+  copy:
+    src: files/bashrc
+    dest: '{{ user.home }}/.bashrc'
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
+  tags:
+    - bash
+
+- name: Bash | Install aliases
+  template:
+    src: templates/aliases.j2
+    dest: '{{ user.home }}/.aliases'
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
+  tags:
+    - bash

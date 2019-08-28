@@ -1,0 +1,26 @@
+---
+- name: ranger | Install packages
+  pacman:
+    name: ranger
+    state: present
+  tags:
+    - ranger
+    - packages
+
+- name: ranger | Create config dir
+  file:
+    path: '{{ user.config }}/ranger'
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
+    state: directory
+  tags:
+    - ranger
+
+- name: ranger | Install config
+  template:
+    src: templates/ranger.j2
+    dest: '{{ user.config }}/ranger/rc.conf'
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
+  tags:
+    - ranger

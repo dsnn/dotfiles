@@ -1,0 +1,18 @@
+---
+ansible_python_interpreter: /usr/bin/python3
+
+user:
+  name: dsn
+  group: dsn
+  email: dsn@dsnn.io
+  home: /home/dsn
+  config: /home/dsn/.config
+  shell: /usr/bin/zsh
+
+hostname: aeon
+
+aur:
+  user: aur_builder
+  group: wheel
+  dir: aur
+  password: aur

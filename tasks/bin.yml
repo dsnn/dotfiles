@@ -1,0 +1,10 @@
+---
+- name: bin | Install bin folder
+  copy:
+    src: files/bin
+    dest: '{{ user.home }}'
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
+    mode: u=rwx,g=rx,o=r
+  tags:
+    - bin

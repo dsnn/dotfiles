@@ -1,0 +1,36 @@
+---
+- name: polybar | Install packages
+  yay:
+    name: polybar-git
+    state: present
+  tags:
+    - polybar
+    - packages
+
+- name: polybar | Create config dir
+  file:
+    path: '{{ user.config }}/polybar'
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
+    state: directory
+  tags:
+    - polybar
+
+- name: polybar | Install config
+  copy:
+    src: polybar
+    dest: '{{ user.config }}/polybar/config'
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
+  tags:
+    - polybar
+
+- name: polybar | Install launch script
+  copy:
+    src: files/bin/polybar/launch_polybar
+    dest: '{{ user.config }}/polybar/launch.sh'
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
+    mode: u=rwx,g=rx,o=x
+  tags:
+    - polybar

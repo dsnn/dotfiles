@@ -1,0 +1,26 @@
+---
+- name: dunst | Install packages
+  pacman:
+    name: dunst
+    state: present
+  tags:
+    - dunst
+    - packages
+
+- name: dunst | Create config dir
+  file:
+    path: '{{ user.config }}/dunst'
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
+    state: directory
+  tags:
+    - dunst
+
+- name: dunst | Install dunst config
+  copy:
+    src: dunst
+    dest: '{{ user.config }}/dunst/dunstrc'
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
+  tags:
+    - dunst

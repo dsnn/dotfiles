@@ -1,0 +1,16 @@
+---
+- name: Sound | Install sound packages
+  package:
+    state: present
+    name:
+      - alsa-utils
+      - alsa-plugins
+      - pavucontrol
+      - pulseaudio
+      - pulsemixer
+      - pulseaudio-bluetooth
+      - pulseaudio-alsa
+  become: true
+  tags:
+    - sound
+    - packages

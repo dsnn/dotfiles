@@ -1,0 +1,33 @@
+---
+- name: nvim | Install neovim packages
+  package:
+    state: present
+    name:
+      - xsel
+      - xclip
+      - ctags
+      - neovim
+      - nodejs
+      - npm
+      - python-neovim
+      - prettier
+      - libnghttp2
+  become: true
+  tags:
+    - neovim
+    - packages
+
+- name: nvim | Install nvim node
+  shell: npm install -g neovim
+  tags:
+    - neovim
+
+- name: nvim | Clone vim config from github
+  become_user: '{{ user.name }}'
+  git:
+    repo: https://github.com/dsnn/vim
+    dest: '{{ user.home }}/projects/vim'
+    version: master
+    update: yes
+  tags:
+    - neovim

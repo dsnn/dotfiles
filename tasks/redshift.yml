@@ -1,0 +1,19 @@
+---
+- name: redshift | Install redshift
+  package:
+    state: present
+    name:
+      - redshift
+  become: true
+  tags:
+    - redshift
+    - packages
+
+- name: redshift | Install redshift config
+  template:
+    src: templates/redshift.j2
+    dest: "{{ user.config }}/redshift.conf"
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
+  tags:
+    - redshift

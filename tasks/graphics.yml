@@ -1,0 +1,10 @@
+---
+- name: Graphics | Install graphic packages
+  pacman:
+    name:
+      - inkscape
+      - gimp
+    state: present
+  tags:
+    - graphics
+    - packages

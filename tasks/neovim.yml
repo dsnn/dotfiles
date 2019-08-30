@@ -44,10 +44,11 @@
 
 - name: nvim | Create symbolic link
   file:
-    src: '{{ user.home }}/projects/dotfiles/vim'
+    src: '{{ user.home }}/projects/dotfiles/files/vim'
     dest: '{{ user.config }}/nvim'
     owner: '{{ user.name }}'
     group: '{{ user.group }}'
     state: link
+    follow: false
   tags:
     - neovim

@@ -1,0 +1,99 @@
+snippet div "- Plain div" b
+<div>${0}</div>
+endsnippet
+
+snippet divc "Place a div using class" b
+<div className="${1:${VISUAL}}">
+	${2:${VISUAL}}
+</div>
+endsnippet
+
+snippet button "<button>"
+<button type="button">${1}</button>
+endsnippet
+
+snippet img "place a <img>"
+<img src="$1" alt="$2">
+endsnippet
+
+snippet import "import" w
+import ${1:${VISUAL}} from '${2:${VISUAL}}';
+endsnippet
+
+snippet proptypes "import for PropTypes" w
+import PropTypes from 'prop-types';
+endsnippet
+
+snippet react "import for react" w
+import React from 'react';
+endsnippet
+
+snippet reactc "import for React with Uomponent" w
+import React, { Component } from 'react';
+endsnippet
+
+snippet constv "const var" w
+const ${1:${VISUAL}} = '${2:${VISUAL}}';
+endsnippet
+
+snippet consto "const object" w
+const ${1:${VISUAL}} = {
+	${2:${VISUAL}}
+};
+endsnippet
+
+snippet exportd "export default" w
+export default ${0:${VISUAL}};
+
+endsnippet
+
+snippet class "class" w
+class ${1:${VISUAL}} = {
+	${2:${VISUAL}}
+}
+endsnippet
+
+snippet component "react class component" w
+class ${1:${VISUAL}} extends Component {
+	constructor(props) {
+		super(props)
+	}
+
+	render() {
+		return (
+			${2:${VISUAL}}
+		)
+	}
+}
+endsnippet
+
+
+snippet classctor "class component with a method" w
+class ${1:${VISUAL}} extends Component {
+	constructor({ ${2:${VISUAL}} }) {
+		this.${2:${VISUAL}} = ${2:${VISUAL}}  
+	}
+
+	${2:${VISUAL}}(){
+		return 1;
+	}
+}
+endsnippet
+
+snippet test "test" w
+test('${1:${VISUAL}}', () => {
+	const expected = 1;
+	const result = 1;
+	expect(result).toBe(expected);
+})
+endsnippet
+
+snippet method "simple class method" w
+${1:${VISUAL}}(${2:${VISUAL}}){
+	${3:${VISUAL}}
+}
+endsnippet
+
+snippet log "console log" w
+console.log(${1:${VISUAL}});
+endsnippet

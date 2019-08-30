@@ -79,3 +79,6 @@ alias vh='vagrant halt -f'
 alias vd='vagrant destroy -f'
 alias vs='vagrant ssh'
 alias vp='vagrant provision'
+
+# ansible
+at() { ansible-playbook ~/projects/dotfiles/playbook.yml --inventory=~/projects/dotfiles/localhost-inventory --ask-become-pass --tags "$1" }

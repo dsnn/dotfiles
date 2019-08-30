@@ -16,7 +16,7 @@
 
 - name: ZSH | Install zshrc config
   copy:
-    src: files/zsh/zshrc
+    src: zsh/zshrc
     dest: '{{ user.home }}/.zshrc'
     owner: '{{ user.name }}'
     group: '{{ user.group }}'
@@ -25,7 +25,7 @@
 
 - name: ZSH | Install aliases
   copy:
-    src: files/zsh/aliases
+    src: zsh/aliases
     dest: '{{ user.home }}/.aliases'
     owner: '{{ user.name }}'
     group: '{{ user.group }}'
@@ -35,7 +35,7 @@
 
 - name: ZSH | Install exports
   copy:
-    src: files/zsh/exports
+    src: zsh/exports
     dest: '{{ user.home }}/.exports'
     owner: '{{ user.name }}'
     group: '{{ user.group }}'

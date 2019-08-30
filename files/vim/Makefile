@@ -13,6 +13,6 @@ help: ## This help
 .DEFAULT_GOAL := help
 
 install: ## Force create symbolic link to vim in config
-	ln -sf /home/dsn/projects/vim /home/dsn/.config/nvim
+	ln -sf ~/projects/dotfiles/files/vim ~/.config/nvim
 
 

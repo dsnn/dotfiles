@@ -101,7 +101,7 @@ endfunction
 " KEYS
 let mapleader = ','
 nmap <leader>, :w<CR>
-nmap <leader>u :so ~/projects/vim/init.vim<CR>
+nmap <leader>u :so ~/projects/dotfiles/files/vim/init.vim<CR>
 nmap <leader>q :bd<CR>
 nmap <leader>w :q<CR>
 nmap <leader><space> :%s/\s\+$<CR>

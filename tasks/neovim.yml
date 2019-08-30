@@ -22,12 +22,12 @@
   tags:
     - neovim
 
-- name: nvim | Clone vim config from github
-  become_user: '{{ user.name }}'
-  git:
-    repo: https://github.com/dsnn/vim
-    dest: '{{ user.home }}/projects/vim'
-    version: master
-    update: yes
+- name: nvim | Create symbolic link
+  file:
+    src: files/vim
+    dest: '{{ user.config }}/nvim'
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
+    state: link
   tags:
     - neovim

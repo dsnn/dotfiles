@@ -27,21 +27,14 @@
     - virtualbox
     - systemd
 
-- name: Virtualbox guest | Ensure user systemd dir exists
-  file:
-    path: '{{ user.config }}/systemd/user'
-    owner: '{{ user.name }}'
-    group: '{{ user.group }}'
-    state: directory
-  tags:
-    - virtualbox
-
 - name: Virtualbox guest | Install VBoxClient service
   copy:
     src: files/vboxclient.service
     dest: '{{ user.config }}/systemd/user/vboxclient.service'
     owner: '{{ user.name }}'
     group: '{{ user.group }}'
+  notify:
+    - ensure folders
   tags:
     - virtualbox
 #

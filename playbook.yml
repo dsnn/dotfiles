@@ -19,6 +19,21 @@
         state: restarted
     - name: reload systemd config
       command: systemctl daemon-reload
+    - name: ensure folders
+      file:
+        path: '{{ item }}'
+        state: directory
+        owner: '{{ user.name }}'
+        group: '{{ user.group }}'
+        mode: 0755
+      with_items:
+        - '{{ user.config }}'
+        - '{{ user.config }}/autostart'
+        - '{{ user.home }}/.cache/i3lock/current'
+        - '{{ user.home }}/.fonts'
+        - '{{ user.home }}/projects'
+        - '{{ user.home }}/systemd'
+        - '{{ user.home }}/systemd/user'
   pre_tasks:
     - name: Install python for Ansible
       raw: test -e /usr/bin/python || (pacman -S python --noconfirm)

@@ -18,16 +18,6 @@
     - fonts
     - packages
 
-- name: fonts | Ensure user fonts dir exist
-  file:
-    path: '{{ user.home }}/.fonts'
-    state: directory
-    owner: '{{ user.name }}'
-    group: '{{ user.group }}'
-    mode: 0755
-  tags:
-    - fonts
-
 - name: fonts | Install custom font files
   copy:
     src: '{{ item }}'

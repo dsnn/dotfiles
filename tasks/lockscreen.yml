@@ -28,20 +28,13 @@
     dest: '{{ user.config }}/betterlockscreenrc'
     owner: '{{ user.name }}'
     group: '{{ user.group }}'
-  tags:
-    - lockscreen
-
-- name: fonts | Ensure lock dir exist
-  file:
-    path: '{{ user.home }}/.cache/i3lock/current'
-    state: directory
-    owner: '{{ user.name }}'
-    group: '{{ user.group }}'
+  notify:
+    - ensure folders
   tags:
     - lockscreen
 
 - name: lockscreen | Update betterlockscreen cache with image
-  command: 'betterlockscreen -u {{ user.config}}/wall.png'
+  command: 'betterlockscreen -u {{ user.config }}/wall.png'
   tags:
     - lockscreen
 

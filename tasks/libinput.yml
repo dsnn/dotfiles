@@ -20,26 +20,20 @@
     - input
     - packages
 
-- name: libinput | Ensure user autostart dir exists
-  file:
-    path: "{{ user.config }}/autostart"
-    owner: "{{ user.name }}"
-    group: "{{ user.group }}"
-    state: directory
-  tags:
-    - power
-    - battery
-
 - name: libinput | Install libinput-gestures.conf
   copy:
     src: files/libinput-gestures.conf
-    dest: "{{ user.config }}/libinput-gestures.conf"
+    dest: '{{ user.config }}/libinput-gestures.conf'
+  notify:
+    - ensure folders
   tags:
     - input
 
 - name: libinput | Install libinput-gestures.desktop
   copy:
     src: files/libinput-gestures.desktop
-    dest: "{{ user.config }}/autostart/libinput-gestures.desktop"
+    dest: '{{ user.config }}/autostart/libinput-gestures.desktop'
+  notify:
+    - ensure folders
   tags:
     - input

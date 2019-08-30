@@ -22,16 +22,6 @@
   tags:
     - neovim
 
-- name: nvim | Ensure project folder exist
-  file:
-    path: '{{ user.home }}/projects'
-    state: directory
-    owner: '{{ user.name }}'
-    group: '{{ user.group }}'
-    mode: 0755
-  tags:
-    - neovim
-
 - name: nvim | Clone dotfiles from github
   become_user: '{{ user.name }}'
   git:
@@ -39,6 +29,8 @@
     dest: '{{ user.home }}/projects/dotfiles'
     version: master
     update: yes
+  notify:
+    - ensure folders
   tags:
     - neovim
 
@@ -50,5 +42,7 @@
     group: '{{ user.group }}'
     state: link
     follow: false
+  notify:
+    - ensure folders
   tags:
     - neovim

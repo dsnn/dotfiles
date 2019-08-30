@@ -22,9 +22,29 @@
   tags:
     - neovim
 
+- name: nvim | Ensure project folder exist
+  file:
+    path: '{{ user.home }}/projects'
+    state: directory
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
+    mode: 0755
+  tags:
+    - neovim
+
+- name: nvim | Clone dotfiles from github
+  become_user: '{{ user.name }}'
+  git:
+    repo: https://github.com/dsnn/dotfiles.git
+    dest: '{{ user.home }}/projects/dotfiles'
+    version: master
+    update: yes
+  tags:
+    - neovim
+
 - name: nvim | Create symbolic link
   file:
-    src: files/vim
+    src: '{{ user.home }}/projects/dotfiles/vim'
     dest: '{{ user.config }}/nvim'
     owner: '{{ user.name }}'
     group: '{{ user.group }}'

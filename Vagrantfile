@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "shell", inline: <<~EOF
 	pacman-key --init
-	pacman-key --refrehs-keys
+	pacman-key --refresh-keys
 	pacman-key --populate
     pacman -Syu --noconfirm --needed git ansible python python-passlib 
     mkdir -p ~/.ssh

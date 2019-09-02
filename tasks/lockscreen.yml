@@ -33,8 +33,14 @@
   tags:
     - lockscreen
 
+- name: lockscreen | Check if wallpaper exists
+  stat:
+    path: '{{ user.config }}/wall.png'
+  register: wallpaper
+
 - name: lockscreen | Update betterlockscreen cache with image
   command: 'betterlockscreen -u {{ user.config }}/wall.png'
+  when: wallpaper.stat.exists == true
   tags:
     - lockscreen
 

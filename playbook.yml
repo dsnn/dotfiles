@@ -63,7 +63,7 @@
     - import_tasks: tasks/polybar.yml
     - import_tasks: tasks/compton.yml
     - import_tasks: tasks/fonts.yml
-    - import_tasks: tasks/sound.yml
+    - import_tasks: tasks/audio.yml
     - import_tasks: tasks/python.yml
     - import_tasks: tasks/mail.yml
     - import_tasks: tasks/browser.yml

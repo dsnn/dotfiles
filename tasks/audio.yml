@@ -1,5 +1,5 @@
 ---
-- name: Sound | Install sound packages
+- name: Audio | Install packages
   package:
     state: present
     name:
@@ -12,5 +12,5 @@
       - pulseaudio-alsa
   become: true
   tags:
-    - sound
+    - audio
     - packages

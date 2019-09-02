@@ -5,7 +5,7 @@
     state: absent
   become: true
   tags:
-    - virtualbox
+    - virtualbox-guest
 
 - name: Virtualbox guest | Install guest utils
   package:
@@ -15,7 +15,7 @@
       - virtualbox-guest-modules-arch
   become: true
   tags:
-    - virtualbox
+    - virtualbox-guest
 
 - name: Virtualbox guest | Enable vboxservice
   become: true
@@ -24,7 +24,7 @@
     name: vboxservice.service
     daemon-reload: true
   tags:
-    - virtualbox
+    - virtualbox-guest
     - systemd
 
 - name: Virtualbox guest | Install VBoxClient service
@@ -36,7 +36,7 @@
   notify:
     - ensure folders
   tags:
-    - virtualbox
+    - virtualbox-guest
 #
 # Failed to connect to bus: No such file or directory
 # - name: Virtualbox guest | Enable VBoxClient service

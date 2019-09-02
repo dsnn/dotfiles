@@ -57,7 +57,7 @@
     - import_tasks: tasks/neovim.yml
     - import_tasks: tasks/ranger.yml
     - import_tasks: tasks/rofi.yml
-    - import_tasks: tasks/virtualbox.yml
+    - import_tasks: tasks/virtualbox-guest.yml
       when: ansible_virtualization_type == "virtualbox"
     - import_tasks: tasks/yay.yml
     - import_tasks: tasks/polybar.yml

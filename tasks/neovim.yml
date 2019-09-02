@@ -22,18 +22,6 @@
   tags:
     - neovim
 
-- name: nvim | Clone dotfiles from github
-  become_user: '{{ user.name }}'
-  git:
-    repo: https://github.com/dsnn/dotfiles.git
-    dest: '{{ user.home }}/projects/dotfiles'
-    version: master
-    update: yes
-  notify:
-    - ensure folders
-  tags:
-    - neovim
-
 - name: nvim | Create symbolic link
   file:
     src: '{{ user.home }}/projects/dotfiles/files/vim'

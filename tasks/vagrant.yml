@@ -1,0 +1,10 @@
+---
+- name: vagrant | Install packages
+  package:
+    name:
+      - vagrant
+    state: present
+  become: true
+  tags:
+    - vagrant
+    - packages

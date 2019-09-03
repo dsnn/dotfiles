@@ -5,8 +5,13 @@ bindkey -v
 zstyle :compinstall filename '$HOME/.zshrc'
 
 # Needs to loaded in order else shell will output "maximum nested function level reached"
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+if [ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh ]; then
+	source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+fi
+
+if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh ]; then
+	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+fi
 
 # load autosuggestions
 autoload -Uz compinit
@@ -38,7 +43,9 @@ if [ -f ~/.shortcuts ]; then
 fi
 
 # keychain
-eval $(keychain --eval --quiet --quick id_rsa ~/.ssh/id_rsa)
+if [ -f ~/.ssh/id_rsa ]; then
+	eval $(keychain --eval --quiet --quick id_rsa ~/.ssh/id_rsa)
+fi
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 

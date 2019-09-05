@@ -1,4 +1,4 @@
-call plug#begin('/home/dsn/.config/nvim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 Plug 'scrooloose/nerdtree', {'true': 'NERDTreeToggle'}
 Plug 'Xuyuanp/nerdtree-git-plugin'

@@ -34,3 +34,4 @@
     - ensure folders
   tags:
     - neovim
+    - dotfiles

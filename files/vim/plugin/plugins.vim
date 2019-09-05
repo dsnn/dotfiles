@@ -21,7 +21,7 @@ Plug 'w0rp/ale'
 Plug 'itchyny/lightline.vim'
 Plug 'nicknisi/vim-base16-lightline'
 Plug 'ryanoasis/vim-devicons'
-Plug 'junegunn/fzf', {'dir': '/home/dsn/.fzf', 'do': './install --all'}
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'prettier/vim-prettier', {'do': 'npm install'}

@@ -1,4 +1,6 @@
-let g:ale_set_highlights = 0
+let g:ale_set_highlights = 1
+highlight ALEErrorSign ctermbg=NONE ctermfg=red
+highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 let g:ale_change_sign_column_color = 0
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '✖'

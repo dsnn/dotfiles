@@ -5,6 +5,7 @@ syntax on
 filetype plugin indent on
 
 " SET
+set encoding=utf8
 set omnifunc=syntaxcomplete#Complete
 set noswapfile
 set clipboard+=unnamedplus
@@ -35,7 +36,7 @@ set linebreak
 set showbreak=_
 set autoindent
 set ttyfast
-set so=7
+set so=10
 set cmdheight=1
 set showmatch
 set laststatus=2
@@ -52,7 +53,7 @@ set incsearch
 set nolazyredraw
 set noexpandtab
 set smarttab
-set tabstop=4
+set tabstop=2
 set softtabstop=4
 set shiftwidth=4
 set shiftround
@@ -65,6 +66,7 @@ abbr fitler filter
 abbr cosnt cosnt
 abbr vonst const
 abbr seperate separate
+abbr cosnt const
 
 " AUTO COMMANDS
 if !exists("statusline_loaded")
@@ -101,21 +103,24 @@ endfunction
 " KEYS
 let mapleader = ','
 nmap <leader>, :w<CR>
-nmap <leader>u :so ~/projects/dotfiles/files/vim/init.vim<CR>
+nmap <leader>u :so ~/.config/nvim/init.vim<CR>
 nmap <leader>q :bd<CR>
 nmap <leader>w :q<CR>
 nmap <leader><space> :%s/\s\+$<CR>
 nmap <leader><space><space> :%s/\n\{2,}/\r\r/g<CR>
 nmap <leader>. <c-^>
 map <leader>ev :e! ~/.config/nvim/init.vim<CR>
-map <leader>eg :e! ~/projects/dotfiles/templates/gitconfig.j2<CR>
+map <leader>eg :e! ~/.gitconfig<CR>
 nnoremap <silent> Q <C-w>c
 set pastetoggle=<leader>v
 noremap <space> :set hlsearch! hlsearch?<CR>
 nnoremap <silent> vv <C-w>v
 nnoremap <silent> ss <C-w>S
-
 nnoremap S :%s//g<Left><Left>
+nmap <silent> <leader>aj :ALENext<cr>
+nmap <silent> <leader>ak :ALEPrevious<cr>
+nmap <silent> <leader>af :ALEFindReferences<cr>
+nmap <silent> <leader>es :UltiSnipsEdit<cr>
 
 " Refresh vim-devicons to ensure they render properly (fixes render issues
 " after sourcing config file)

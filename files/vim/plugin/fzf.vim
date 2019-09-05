@@ -16,7 +16,7 @@ let g:fzf_colors =
 	\ 'header':  ['fg', 'Comment'] }
 
 nmap <silent> <leader>f :Files<cr>
-nmap <silent> <leader>b :Buffers<cr>
+nmap <silent> <leader>r :Buffers<cr>
 nmap <silent> <leader>h :Helptags!<cr>
 nmap <silent> <leader>H :History<cr>
 nmap <silent> <leader>T :BTags<cr>

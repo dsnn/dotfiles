@@ -97,3 +97,25 @@ endsnippet
 snippet log "console log" w
 console.log(${1:${VISUAL}});
 endsnippet
+
+snippet styleddiv "Styled div component" b
+export const ${1:${VISUAL}} = styled.div\`
+
+\`;
+endsnippet
+
+
+snippet switch "switch" i
+switch (${1:${VISUAL}}) {
+	case 0:
+		break;
+	default:
+		return null;
+}
+endsnippet
+
+snippet useEffect "react use effect hook" b
+useEffect(() => {
+	${0}
+}, []);
+endsnippet

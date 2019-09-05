@@ -22,11 +22,14 @@ let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:DevIconsEnableFoldersOpenClose = 1
 let g:DevIconsEnableFolderExtensionPatternMatching = 1
 
+let NERDTreeShowLineNumber=1
 let NERDTreeMinimalUI=1
 let NERDTreeShowHidden=1
 let g:NERDTreeWinPos="left"
 let NERDTreeDirArrowExpandable = "\u00a0" " make arrows invisible
 let NERDTreeDirArrowCollapsible = "\u00a0" " make arrows invisible
+
+autocmd FileType nerdtree setlocal relativenumber
 
 augroup nerdtree
 	autocmd!

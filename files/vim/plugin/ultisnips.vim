@@ -1,4 +1,7 @@
 let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsListSnippets = "<c-tab>"
+let g:UltiSnipsJumpForwardTrigger = "<c-j>"
+let g:UltiSnipsJumpBackwardTrigger= "<c-k>"
 let g:ulti_expand_or_jump_res = 0 " default value, just set once
 
 " If you want :UltiSnipsEdit to split your window.

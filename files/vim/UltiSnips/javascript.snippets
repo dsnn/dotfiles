@@ -1,5 +1,22 @@
-snippet div "- Plain div" b
-<div>${0}</div>
+snippet d "Simple html tag" b
+<${1:div}>${0:${VISUAL}}</${1/(\w+).*/$1/}>
+endsnippet
+
+snippet todo "todo" b
+<!-- TODO: `echo $USER` ${1:desc} `!v strftime("%c")` -->
+endsnippet
+
+global !p
+def complete(t, opts):
+		if t:
+				opts = [ m[len(t):] for m in opts if m.startswith(t) ]
+		if len(opts) == 1:
+				return opts[0]
+		return "(" + '|'.join(opts) + ')'
+endglobal
+
+snippet st "Status" b
+status $1`!p snip.rv=complete(t[1], ['new', 'incomplete', 'invalid'])`
 endsnippet
 
 snippet divc "Place a div using class" b
@@ -103,7 +120,6 @@ export const ${1:${VISUAL}} = styled.div\`
 
 \`;
 endsnippet
-
 
 snippet switch "switch" i
 switch (${1:${VISUAL}}) {

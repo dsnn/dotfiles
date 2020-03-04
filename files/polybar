@@ -41,7 +41,7 @@ font-4 = "Font Awesome 5 Brands:pixelsize=18;3"
 
 modules-left = i3
 modules-center =
-modules-right = updates-arch-combined volume wlan eth battery date time 
+modules-right = updates-arch-combined alsa wlan battery date time 
 
 [module/xwindow]
 type = internal/xwindow
@@ -138,8 +138,8 @@ format-prefix-padding = ${size.padding}
 format-prefix-foreground = ${colors.text} 
 label = %time%
 
-[module/volume]
-type = internal/volume
+[module/alsa]
+type = internal/alsa
 format-volume = <ramp-volume> <label-volume>
 label-volume-foreground = ${colors.text} 
 format-muted-prefix = ""

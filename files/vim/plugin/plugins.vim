@@ -5,7 +5,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
+" Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'mileszs/ack.vim'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-surround'
@@ -25,5 +25,7 @@ Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'prettier/vim-prettier', {'do': 'npm install'}
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()

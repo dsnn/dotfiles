@@ -9,4 +9,4 @@ function! Ulti_ExpandOrJump_and_getRes()
     return g:ulti_expand_or_jump_res
 endfunction
 
-inoremap <CR> <C-R>=(Ulti_ExpandOrJump_and_getRes() > 0)?"":"\n"<CR>
+" inoremap <CR> <C-R>=(Ulti_ExpandOrJump_and_getRes() > 0)?"":"\n"<CR>

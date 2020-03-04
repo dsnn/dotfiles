@@ -12,7 +12,8 @@ let g:ale_echo_msg_format = '%severity% %s% [%linter%% code%]'
 let g:ale_linters = {
 \   'javascript': ['eslint', 'tsserver'],
 \   'typescript': ['tsserver', 'tslint'],
-\   'html': []
+\   'html': [],
+\		'cs': ['OmniSharp']
 \}
 
 let g:ale_fixers = {}

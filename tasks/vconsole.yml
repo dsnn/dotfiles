@@ -1,0 +1,9 @@
+---
+- name: vconsole | Setup console
+  copy:
+    src: files/vconsole.conf
+    dest: 'etc/vconsole.conf'
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
+  tags:
+    - vconsole

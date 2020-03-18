@@ -24,8 +24,11 @@ SAVEHIST=1000
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-POWERLINE_BASH_SELECT=1
-. /usr/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh
+# POWERLINE_BASH_SELECT=1
+# . /usr/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh
+autoload -Uz promptinit
+promptinit
+prompt suse
 
 # source aliases
 if [ -f ~/.aliases ]; then

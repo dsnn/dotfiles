@@ -27,5 +27,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'prettier/vim-prettier', {'do': 'npm install'}
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim'
 
 call plug#end()

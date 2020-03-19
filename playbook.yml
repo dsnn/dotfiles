@@ -60,7 +60,7 @@
     - import_tasks: tasks/virtualbox-guest.yml
       when: ansible_virtualization_type == "virtualbox"
     - import_tasks: tasks/yay.yml
-    - import_tasks: tasks/polybar.yml
+    # - import_tasks: tasks/polybar.yml
     - import_tasks: tasks/compton.yml
     - import_tasks: tasks/fonts.yml
     - import_tasks: tasks/audio.yml

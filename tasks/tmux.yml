@@ -11,17 +11,17 @@
 - name: tmux | Install tmux config
   copy:
     src: files/tmux
-    dest: "{{ user.home }}/.tmux.conf"
-    owner: "{{ user.name }}"
-    group: "{{ user.group }}"
+    dest: '{{ user.home }}/.tmux.conf'
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
   tags:
     - tmux
 
 - name: tmux | Clone tmux plugins from github
-  become_user: "{{ user.name }}"
+  become_user: '{{ user.name }}'
   git:
     repo: https://github.com/tmux-plugins/{{ item }}
-    dest: "{{ user.home }}/.tmux/plugins/{{ item }}"
+    dest: '{{ user.home }}/.tmux/plugins/{{ item }}'
     version: master
     update: yes
   with_items:

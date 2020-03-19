@@ -7,7 +7,7 @@ gaps inner 5
 gaps outer 5
 
 # autostart scripts and applications 
-exec_always --no-startup-id ~/.config/polybar/launch.sh
+# exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec_always --no-startup-id ~/bin/tools/remap-caps-lock
 exec_always --no-startup-id ~/bin/tools/setbg
 exec --no-startup-id compton -f
@@ -143,6 +143,11 @@ mode "resize" {
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
+}
+
+bar {
+		position top
+		status_command i3blocks
 }
 
 set $bg-color 	         #2f343f

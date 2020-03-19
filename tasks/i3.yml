@@ -31,3 +31,13 @@
     group: '{{ user.group }}'
   tags:
     - i3
+
+- name: i3 | Clone i3blocks contrib
+  become_user: '{{ user.name }}'
+  git:
+    repo: https://github.com/vivien/i3blocks-contrib.git
+    dest: '{{ user.config }}/i3blocks/i3blocks-contrib'
+    version: master
+    update: yes
+  tags:
+    - i3

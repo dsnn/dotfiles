@@ -13,8 +13,8 @@
       - xf86-video-intel
       - mesa
       - xf86-input-libinput
-      - xf86-input-mouse
-      - xf86-input-keyboard
+      # - xf86-input-mouse
+      # - xf86-input-keyboard
       - xorg-xmodmap
       - xorg-xrdb
       - xorg-xbacklight

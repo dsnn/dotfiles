@@ -22,6 +22,25 @@
   tags:
     - neovim
 
+- name: nvim | create folders
+  file:
+    path: '{{ item }}'
+    state: directory
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
+    mode: 0755
+  with_items:
+    - '{{ user.config }}'
+    - '{{ user.home }}/projects'
+
+- name: nvim | clone dotfiles for linking
+  become_user: '{{ user.name }}'
+  git:
+    repo: https://github.com/dsnn/dotfiles.git
+    dest: '{{ user.home }}/projects/dotfiles'
+    version: master
+    update: yes
+
 - name: nvim | Create symbolic link
   file:
     src: '{{ user.home }}/projects/dotfiles/files/vim'
@@ -32,6 +51,7 @@
     follow: false
   notify:
     - ensure folders
+    - ensure dotfiles
   tags:
     - neovim
     - dotfiles

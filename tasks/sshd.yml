@@ -1,0 +1,9 @@
+- name: SSH | Push OpenSSH daemon configuration file
+  template:
+    src: templates/sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    mode: 600
+  become: yes
+  become_method: sudo
+  tags:
+    - ssh

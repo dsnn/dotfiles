@@ -34,12 +34,14 @@
     - '{{ user.home }}/projects'
 
 - name: nvim | clone dotfiles for linking
-	become_user: '{{ user.name }}'
-	git:
-		repo: https://github.com/dsnn/dotfiles.git
-		dest: '{{ user.home }}/projects/dotfiles'
-		version: master
-		update: yes
+  become_user: '{{ user.name }}'
+  git:
+    repo: https://github.com/dsnn/dotfiles.git
+    dest: '{{ user.home }}/projects/dotfiles'
+    version: master
+    update: yes
+  tags:
+    - neovim
 
 - name: nvim | Create symbolic link
   file:

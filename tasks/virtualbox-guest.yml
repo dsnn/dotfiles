@@ -27,6 +27,14 @@
     - virtualbox-guest
     - systemd
 
+- name: Virtualbox guest | Creates user systemd directory
+  file:
+    path: '{{ user.config }}/systemd/user'
+    state: directory
+    owner: '{{ user.name }}'
+    group: '{{ user.group }}'
+    mode: 0775
+
 - name: Virtualbox guest | Install VBoxClient service
   copy:
     src: files/vboxclient.service

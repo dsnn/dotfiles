@@ -19,6 +19,13 @@
         state: restarted
     - name: reload systemd config
       command: systemctl daemon-reload
+    - name: ensure dotfiles
+      become_user: '{{ user.name }}'
+      git:
+        repo: https://github.com/dsnn/dotfiles.git
+        dest: '{{ user.home }}/projects/dotfiles'
+        version: master
+        update: yes
     - name: ensure folders
       file:
         path: '{{ item }}'

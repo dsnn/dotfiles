@@ -1,9 +1,0 @@
----
-- name: spotify | Install spotify package
-  yay:
-    name:
-      - spotify
-    state: present
-  tags:
-    - spotify
-    - packages

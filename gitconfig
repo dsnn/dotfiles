@@ -1,8 +1,6 @@
-# {{ ansible_managed }}
-
 [user]
-	name = {{ user.name }}
-	email = {{ user.email }} 
+	name = dsn 
+	email = dsn@dsnn.io 
 [alias]
 	st = status -s
 	la = !git config -l | grep alias | cut -c 7-
@@ -21,3 +19,4 @@
 	ba = !git branch -a
 	last = "!f() { git log -${1+}${1-1} HEAD --pretty=format:'%C(red)%h%Creset - %C(bold white)%s%Creset %C(bold green)<%an>%Creset %C(yellow)(%cr)%Creset' --graph; }; f"
 	dt = !git diff-tree --no-commit-id --name-only -r 
+

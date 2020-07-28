@@ -1,4 +1,5 @@
 alias vim='nvim'
+alias fd='fdfind'
 
 # file shortcuts
 alias cfc="nvim	~/.shortcuts"

@@ -109,8 +109,11 @@ nmap <leader>w :q<CR>
 nmap <leader><space> :%s/\s\+$<CR>
 nmap <leader><space><space> :%s/\n\{2,}/\r\r/g<CR>
 nmap <leader>. <c-^>
+
+" shortcuts
 map <leader>ev :e! ~/.config/nvim/init.vim<CR>
 map <leader>eg :e! ~/.gitconfig<CR>
+
 nnoremap <silent> Q <C-w>c
 set pastetoggle=<leader>v
 noremap <space> :set hlsearch! hlsearch?<CR>

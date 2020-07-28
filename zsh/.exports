@@ -25,9 +25,9 @@ export VISUAL=nvim
 export MANWIDTH=79
 
 # fzf
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'	
+export FZF_DEFAULT_COMMAND='fdfind --type f --hidden --follow'
 export FZF_CTRL_T_COMMAND='$FZF_DEFAULT_COMMAND'
-export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+export FZF_ALT_C_COMMAND="fdfind --type d . $HOME"
 export FZF_COMPLETION_OPTS='+c -x'
 
 # spaceship prompt (install with npm)

@@ -9,4 +9,5 @@
 - keychain
 - tmux
 - stow
-
+- silversearcher-ag 
+- fd-find

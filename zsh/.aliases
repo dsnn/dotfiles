@@ -28,23 +28,6 @@ alias la='ls -alh --color=auto'
 alias lt='ls -alrth --color=auto'
 alias ls='ls -hN --group-directories-first --color=auto'
 
-# language
-alias kse="sudo setxkbmap -layout se"
-alias ken="sudo setxkbmap -layout us" 
-
-# pacman
-alias update="neofetch && sudo pacman -Syu --noconfirm && echo Update complete. | figlet" 
-alias p="sudo pacman"
-alias pf="pacman -Qi"
-alias progs="pacman -Qet"			# List installed programs
-alias progs2="pacman -Qqettm"		# List installed AURs
-alias orphans="pacman -Qdt" 		# List orphan programs
-last() { expac --timefmt='%Y-%m-%d %T' '%l\t%n' | sort | tail -n "$1" }
-
-# network
-wifi-connect() { nmcli device wifi connect $1 password $2 } 
-alias wifi-list='nmcli device wifi list'
-
 # git
 alias g="git"
 alias gp="git push origin master"
@@ -56,7 +39,7 @@ alias ga="git add ."
 alias gc="git commit -m"
 
 # tmux
-alias tl="~/bin/tools/tm"
+alias tl="~/bin/tm"
 
 # ranger
 alias r="ranger"

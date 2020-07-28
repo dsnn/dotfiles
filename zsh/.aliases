@@ -2,29 +2,30 @@ alias vim='nvim'
 alias fd='fdfind'
 
 # file shortcuts
-alias cfc="nvim	~/.shortcuts"
-alias cfv="nvim ~/dotfiles/vim/init.vim"
-alias cft="nvim	~/dotfiles/tmux/.tmux.conf"
-alias cfe="nvim	~/dotfiles/zsh/.exports"
-alias cfa="nvim	~/dotfiles/zsh/.aliases"
-alias cfz="nvim	~/dotfiles/zsh/.zshrc"
+alias cfc="nvim ~/.shortcuts"
 alias cfs="nvim ~/.ssh/config"
-alias cfg="nvim ~/.gitconfig"
+alias cfv="nvim ~/dotfiles/vim/init.vim"
+alias cft="nvim ~/dotfiles/tmux/.tmux.conf"
+alias cfe="nvim ~/dotfiles/zsh/.exports"
+alias cfa="nvim ~/dotfiles/zsh/.aliases"
+alias cfz="nvim ~/dotfiles/zsh/.zshrc"
+alias cfg="nvim ~/dotfiles/git/.gitconfig"
 
 # folder shortcuts
 alias h="cd ~/"
-alias cf="cd ~/.config"
-alias d="cd ~/dotfiles"
-alias pp="cd ~/projects"
 alias s="cd ~/bin"
+alias d="cd ~/dotfiles"
+alias cf="cd ~/.config"
+alias pp="cd ~/projects"
+alias c="cd /mnt/c/"
 
 # navigation
 alias ..="cd .."
-alias cd..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias -- -="cd ~"
+alias cd..="cd .."
 
 # actions
 alias mv='mv -v'

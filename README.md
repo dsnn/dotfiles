@@ -1,6 +1,14 @@
 # dotfiles
 
+```
+sudo apt install make
+
+cd ~/dotfiles
+
+make install
+```
 # packages
+- make
 - git
 - zsh
 - fzf

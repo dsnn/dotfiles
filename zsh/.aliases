@@ -1,6 +1,21 @@
-# {{ ansible_managed }}
-
 alias vim='nvim'
+
+# file shortcuts
+alias cfc="nvim	~/.shortcuts"
+alias cfv="nvim ~/dotfiles/vim/init.vim"
+alias cft="nvim	~/dotfiles/tmux/.tmux.conf"
+alias cfe="nvim	~/dotfiles/zsh/.exports"
+alias cfa="nvim	~/dotfiles/zsh/.aliases"
+alias cfz="nvim	~/dotfiles/zsh/.zshrc"
+alias cfs="nvim ~/.ssh/config"
+alias cfg="nvim ~/.gitconfig"
+
+# folder shortcuts
+alias h="cd ~/"
+alias cf="cd ~/.config"
+alias d="cd ~/dotfiles"
+alias pp="cd ~/projects"
+alias s="cd ~/bin"
 
 # navigation
 alias ..="cd .."
@@ -9,7 +24,6 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias -- -="cd ~"
-alias home="cd ~"
 
 # actions
 alias mv='mv -v'
@@ -62,6 +76,3 @@ alias vh='vagrant halt -f'
 alias vd='vagrant destroy -f'
 alias vs='vagrant ssh'
 alias vp='vagrant provision'
-
-# ansible
-at() { ansible-playbook ~/projects/dotfiles/playbook.yml --inventory=~/projects/dotfiles/localhost-inventory --ask-become-pass --tags "$1" }

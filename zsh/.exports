@@ -1,5 +1,3 @@
-# {{ ansible_managed }}
-
 if [ -d "$HOME/bin" ] ; then
     export PATH="$HOME/bin:$PATH"
 fi
@@ -33,11 +31,11 @@ export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 export FZF_COMPLETION_OPTS='+c -x'
 
 # spaceship prompt (install with npm)
-/* export SPACESHIP_CHAR_SYMBOL="%{\e[38;5;001m%}•%{\e[38;5;011m%}•%{\e[38;5;004m%}• " */
+# export SPACESHIP_CHAR_SYMBOL="%{\e[38;5;001m%}•%{\e[38;5;011m%}•%{\e[38;5;004m%}• "
 
 # npm
-PATH="$PATH:$HOME/.node_modules/bin"
-export npm_config_prefix=~/.node_modules
+# PATH="$PATH:$HOME/.node_modules/bin"
+# export npm_config_prefix=~/.node_modules
 
 # colored man pages
 export LESS_TERMCAP_mb=$'\E[01;31m'

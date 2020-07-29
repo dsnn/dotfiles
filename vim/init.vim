@@ -118,16 +118,28 @@ map <leader>eg :e! ~/.gitconfig<CR>
 noremap x "_x"
 noremap X "_x"
 
+" move selected line(s) up and down
+xnoremap K :move '<-2<CR>gv-gv
+xnoremap J :move '>+1<CR>gv-gv 
+
 nnoremap <silent> Q <C-w>c
 set pastetoggle=<leader>v
 noremap <space> :set hlsearch! hlsearch?<CR>
 nnoremap <silent> vv <C-w>v
 nnoremap <silent> ss <C-w>S
 nnoremap S :%s//g<Left><Left>
+
+" ale
 nmap <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
 nmap <silent> <leader>af :ALEFindReferences<cr>
+
+" ultisnips
 nmap <silent> <leader>es :UltiSnipsEdit<cr>
+
+" limelight
+noremap <leader>l :Limelight!!<CR>
+
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " use <tab> for trigger completion and navigate to the next complete item

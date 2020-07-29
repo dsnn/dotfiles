@@ -31,5 +31,6 @@ Plug 'francoiscabrol/ranger.vim'
 " Plug 'rbgrouleff/bclose.vim'
 Plug 'unblevable/quick-scope'
 Plug 'sheerun/vim-polyglot' 
+Plug 'junegunn/limelight.vim'
 
 call plug#end()

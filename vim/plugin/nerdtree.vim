@@ -3,8 +3,8 @@
 autocmd VimEnter * wincmd p	"
 
 " toggle nerd tree
-map <C-n> :call ToggleNerdTree()<cr>
-nmap <silent> <leader>k :NERDTreeFind<cr>
+" map <C-n> :call ToggleNerdTree()<cr>
+" nmap <silent> <leader>k :NERDTreeFind<cr>
 
 " toggle NERDTree
 function! ToggleNerdTree()

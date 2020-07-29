@@ -17,6 +17,7 @@ let g:coc_global_extensions = [
       \ 'coc-tslint',
       \ 'coc-styled-components',
       \ 'coc-ultisnips',
+      \ 'coc-explorer',
       \]
 
 " https://github.com/neoclide/coc.nvim#example-vim-configuration

@@ -140,6 +140,9 @@ nmap <silent> <leader>es :UltiSnipsEdit<cr>
 " limelight
 noremap <leader>l :Limelight!!<CR>
 
+" explorer
+nmap <C-n> :CocCommand explorer<cr>
+
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " use <tab> for trigger completion and navigate to the next complete item

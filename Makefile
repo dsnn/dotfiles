@@ -13,7 +13,7 @@ help: ## This help
 .DEFAULT_GOAL := help
 
 install: ## install packages 
-	sudo apt install git zsh fzf neovim nodejs keychain tmux stow silversearcher-ag fd-find
+	sudo apt install git zsh fzf neovim nodejs npm keychain tmux stow silversearcher-ag fd-find
 stow: ## stow packages 
 	stow git
 	mkdir -p ~/bin
@@ -23,6 +23,7 @@ stow: ## stow packages
 	stow vim -t ~/.config
 	stow zsh
 tmux: ## setup tmux and dependencies
-		git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm 
-
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm 
+nvm: ## setup nvm
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 

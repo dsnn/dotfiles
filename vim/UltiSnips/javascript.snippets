@@ -1,7 +1,3 @@
-snippet d "Simple html tag" b
-<${1:div}>${0:${VISUAL}}</${1/(\w+).*/$1/}>
-endsnippet
-
 snippet todo "todo" b
 <!-- TODO: `echo $USER` ${1:desc} `!v strftime("%c")` -->
 endsnippet
@@ -19,11 +15,25 @@ snippet st "Status" b
 status $1`!p snip.rv=complete(t[1], ['new', 'incomplete', 'invalid'])`
 endsnippet
 
-snippet divc "Place a div using class" b
+# div
+
+snippet dc "Place a div using class" b
 <div className="${1:${VISUAL}}">
 	${2:${VISUAL}}
 </div>
 endsnippet
+
+snippet ds "Styled div component" b
+export const ${1:${VISUAL}} = styled.div\`
+
+\`;
+endsnippet
+
+snippet d "Simple html tag" b
+<${1:div}>${0:${VISUAL}}</${1/(\w+).*/$1/}>
+endsnippet
+
+# html
 
 snippet button "<button>"
 <button type="button">${1}</button>
@@ -33,20 +43,14 @@ snippet img "place a <img>"
 <img src="$1" alt="$2">
 endsnippet
 
-snippet import "import" w
-import ${1:${VISUAL}} from '${2:${VISUAL}}';
-endsnippet
+# react / javascript
 
-snippet proptypes "import for PropTypes" w
-import PropTypes from 'prop-types';
+snippet im "import" w
+import ${1:${VISUAL}} from '${2:${VISUAL}}';
 endsnippet
 
 snippet react "import for react" w
 import React from 'react';
-endsnippet
-
-snippet reactc "import for React with Uomponent" w
-import React, { Component } from 'react';
 endsnippet
 
 snippet constv "const var" w
@@ -59,66 +63,8 @@ const ${1:${VISUAL}} = {
 };
 endsnippet
 
-snippet exportd "export default" w
+snippet export "export default" w
 export default ${0:${VISUAL}};
-
-endsnippet
-
-snippet class "class" w
-class ${1:${VISUAL}} = {
-	${2:${VISUAL}}
-}
-endsnippet
-
-snippet component "react class component" w
-class ${1:${VISUAL}} extends Component {
-	constructor(props) {
-		super(props)
-	}
-
-	render() {
-		return (
-			${2:${VISUAL}}
-		)
-	}
-}
-endsnippet
-
-
-snippet classctor "class component with a method" w
-class ${1:${VISUAL}} extends Component {
-	constructor({ ${2:${VISUAL}} }) {
-		this.${2:${VISUAL}} = ${2:${VISUAL}}  
-	}
-
-	${2:${VISUAL}}(){
-		return 1;
-	}
-}
-endsnippet
-
-snippet test "test" w
-test('${1:${VISUAL}}', () => {
-	const expected = 1;
-	const result = 1;
-	expect(result).toBe(expected);
-})
-endsnippet
-
-snippet method "simple class method" w
-${1:${VISUAL}}(${2:${VISUAL}}){
-	${3:${VISUAL}}
-}
-endsnippet
-
-snippet log "console log" w
-console.log(${1:${VISUAL}});
-endsnippet
-
-snippet styleddiv "Styled div component" b
-export const ${1:${VISUAL}} = styled.div\`
-
-\`;
 endsnippet
 
 snippet switch "switch" i
@@ -130,8 +76,22 @@ switch (${1:${VISUAL}}) {
 }
 endsnippet
 
+snippet log "console log" w
+console.log(${1:${VISUAL}});
+endsnippet
+
 snippet useEffect "react use effect hook" b
 useEffect(() => {
 	${0}
 }, []);
+endsnippet
+
+# test
+
+snippet test "test" w
+test('${1:${VISUAL}}', () => {
+	const expected = 1;
+	const result = 1;
+	expect(result).toBe(expected);
+})
 endsnippet

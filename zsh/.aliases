@@ -54,6 +54,12 @@ alias gg="git pull"
 alias ga="git add ."
 alias gc="git commit -m"
 
+# npm
+alias ns="npm start";
+alias ni="npm install";
+alias nt="npm test";
+alias nrw="npm run workbench";
+
 # tmux
 alias tl="~/bin/tm"
 

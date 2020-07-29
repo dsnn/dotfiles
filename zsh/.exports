@@ -39,9 +39,14 @@ export FZF_DEFAULT_OPTS="--no-mouse --height 50% -1 --reverse --multi --inline-i
 # spaceship prompt (install with npm)
 # export SPACESHIP_CHAR_SYMBOL="%{\e[38;5;001m%}•%{\e[38;5;011m%}•%{\e[38;5;004m%}• "
 
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 # npm
-# PATH="$PATH:$HOME/.node_modules/bin"
-# export npm_config_prefix=~/.node_modules
+PATH="$PATH:$HOME/.node_modules/bin"
+export npm_config_prefix=~/.node_modules
 
 # colored man pages
 export LESS_TERMCAP_mb=$'\E[01;31m'

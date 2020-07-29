@@ -6,7 +6,7 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
 " Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
-Plug 'mileszs/ack.vim'
+" Plug 'mileszs/ack.vim'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
@@ -28,6 +28,8 @@ Plug 'prettier/vim-prettier', {'do': 'npm install'}
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'francoiscabrol/ranger.vim'
-Plug 'rbgrouleff/bclose.vim'
+" Plug 'rbgrouleff/bclose.vim'
+Plug 'unblevable/quick-scope'
+Plug 'sheerun/vim-polyglot' 
 
 call plug#end()

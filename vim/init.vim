@@ -8,8 +8,8 @@ filetype plugin indent on
 set encoding=utf8
 set omnifunc=syntaxcomplete#Complete
 set noswapfile
-set clipboard+=unnamedplus
-set mouse=n
+set clipboard=unnamedplus
+set mouse=a
 set cpoptions+=$
 set background=dark
 set noshowmode
@@ -114,6 +114,10 @@ nmap <leader>. <c-^>
 map <leader>ev :e! ~/.config/nvim/init.vim<CR>
 map <leader>eg :e! ~/.gitconfig<CR>
 
+" change x buffer so it doesn't interfere with system clipboard
+noremap x "_x"
+noremap X "_x"
+
 nnoremap <silent> Q <C-w>c
 set pastetoggle=<leader>v
 noremap <space> :set hlsearch! hlsearch?<CR>
@@ -141,4 +145,13 @@ inoremap <silent><expr> <Tab>
 " after sourcing config file)
 if exists("g:loaded_webdevicons")
   call webdevicons#refresh()
+endif
+
+" WSL yank support
+let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
+if executable(s:clip)
+    augroup WSLYank
+        autocmd!
+        autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+    augroup END
 endif

@@ -52,6 +52,55 @@ fi
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
+# On dir automatic scrpit execution
+function cd () {
+		builtin cd "$@" && on_dir;
+}
+
+function on_dir() {
+	case $PWD in ~/dotfiles)
+		check_dotfiles
+	esac
+}
+
+# Auto check dotfiles
+function check_dotfiles() {
+		if [ $(git rev-list HEAD...origin/master | wc -l) = 0 ]
+		then
+			echo "Dotfiles up to date."
+		else
+			echo "Dotfiles updates detected:"
+			({cd ~/dotfiles} &> /dev/null && git log ..@{u} --pretty=format:%Cred%aN:%Creset\ %s\ %Cgreen%cd)
+		fi
+}
+
+# Keybindings
+
+# up
+	function up_widget() {
+		BUFFER="cd .."
+		zle accept-line
+	}
+	zle -N up_widget
+	bindkey "^k" up_widget
+
+# git
+	function git_prepare() {
+		if [ -n "$BUFFER" ];
+			then
+				BUFFER="git add -A && git commit -m \"$BUFFER\" && git push"
+		fi
+
+		if [ -z "$BUFFER" ];
+			then
+				BUFFER="git add -A && git commit -v && git push"
+		fi
+				
+		zle accept-line
+	}
+	zle -N git_prepare
+	bindkey "^g" git_prepare
+
 # Suggestions
 bindkey '^ ' autosuggest-accept
 # # Accepts the current suggestion.

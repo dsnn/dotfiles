@@ -1,3 +1,5 @@
+# vi: ft=zsh
+
 if [ -d "$HOME/bin" ] ; then
     export PATH="$HOME/bin:$PATH"
 fi
@@ -24,11 +26,22 @@ export EDITOR=nvim
 export VISUAL=nvim
 export MANWIDTH=79
 
+# fd
+export FD_OPTIONS="--follow --hidden --exclude .git --exclude node_modules"
+
 # fzf
-export FZF_DEFAULT_COMMAND='fdfind --type f --hidden --follow'
-export FZF_CTRL_T_COMMAND='$FZF_DEFAULT_COMMAND'
-export FZF_ALT_C_COMMAND="fdfind --type d . $HOME"
-export FZF_COMPLETION_OPTS='+c -x'
+export FZF_DEFAULT_OPTS="--no-mouse --height 50% -1 --reverse --multi --inline-info --preview-window='right:hidden:wrap' --bind='ctrl-v:toggle-preview,ctrl-d:half-page-down,ctrl-u:half-page-up"
+export FZF_DEFAULT_COMMAND="git ls-files --cached --others --exclude-standard | fdfind --type f --type l $FD_OPTIONS"
+export FZF_CTRL_T_COMMAND="fdfind $FD_OPTIONS"
+export FZF_ALT_C_COMMAND="fdfind --type d $FD_OPTIONS . '/'"
+export FZF_COMPLETION_OPTS="+c -x"
+
+# export FZF_OPTS_LAYOUT="--no-mouse --height 50% -1 --reverse --multi --inline-info"
+# export FZF_OPTS_PREVIEW="--preview='[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file"
+# export FZF_OPTS_PREVIEW_WINDOW="--preview-window='right:hidden:wrap'"
+# export FZF_OPTS_BIND1="--bind='ctrl-v:toggle-preview,ctrl-d:half-page-down,ctrl-u:half-page-up,"
+# export FZF_OPTS_BIND2="ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | pbcopy),ctrl-x:execute(rm -i {+})+abort'"
+# export FZF_DEFAULT_OPTS="$FZF_OPTS_LAYOUT $FZF_OPTS_PREVIEW $FZF_OPTS_PREVIEW_WINDOW $FZF_OPTS_BIND1 $FZF_OPTS_BIND2"
 
 # spaceship prompt (install with npm)
 # export SPACESHIP_CHAR_SYMBOL="%{\e[38;5;001m%}•%{\e[38;5;011m%}•%{\e[38;5;004m%}• "

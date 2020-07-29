@@ -6,8 +6,10 @@ sudo apt install make
 cd ~/dotfiles
 
 make install
+
+tmux: ctrl+a+I to install tmux packages
 ```
-# packages
+## packages
 - make
 - git
 - zsh

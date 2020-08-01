@@ -1,14 +1,14 @@
 {
-  "suggest.autoTrigger": "trigger",
-  "suggest.triggerAfterInsertEnter": true,
-  "suggest.minTriggerInputLength": 2,
-  "suggest.acceptSuggestionOnCommitCharacter": true,
-  "suggest.snippetIndicator": "►",
-  "snippets.ultisnips.enable":	true,	
+	"suggest.autoTrigger": "trigger",
+	"suggest.triggerAfterInsertEnter": true,
+	"suggest.minTriggerInputLength": 2,
+	"suggest.acceptSuggestionOnCommitCharacter": true,
+	"suggest.snippetIndicator": "►",
+	"snippets.ultisnips.enable": true,
 	"prettier.requireConfig": true,
-	"tslint.enable":true,
-	"tslint.autoFixOnSave":true,
-  "coc.preferences.formatOnSaveFiletypes": [
+	"tslint.enable": true,
+	"tslint.autoFixOnSave": true,
+	"coc.preferences.formatOnSaveFiletypes": [
 		"css",
 		"markdown",
 		"Markdown",
@@ -17,22 +17,21 @@
 		"typescript",
 		"typescriptreact"
 	],
-  "explorer.icon.enableNerdfont": true,
-  "explorer.sources": [
-      {"name": "buffer", "expand": true},
-      {"name": "file", "expand": true}
-  ],
-  "explorer.file.column.git.icon.added": "✚",
-  "explorer.file.column.git.icon.deleted": "✖",
-  "explorer.file.column.git.icon.renamed": "➜",
-  "explorer.file.column.git.icon.unmerged": "═",
-  "explorer.file.column.git.icon.untracked": "?",
-  "explorer.file.column.git.icon.modified": "✹",
-  "explorer.file.column.git.icon.ignored": "☒",
-  "explorer.openAction.for.directory": "expandOrCollapse",
-  "explorer.previewAction.onHover": false,
-  "explorer.keyMappings": {
-      "<cr>": ["expandable?", ["expanded?", "collapse", "expand"], "open"]
-  }
+	"explorer.icon.enableNerdfont": true,
+	"explorer.sources": [
+		{ "name": "buffer", "expand": true },
+		{ "name": "file", "expand": true }
+	],
+	"explorer.file.column.git.icon.added": "✚",
+	"explorer.file.column.git.icon.deleted": "✖",
+	"explorer.file.column.git.icon.renamed": "➜",
+	"explorer.file.column.git.icon.unmerged": "═",
+	"explorer.file.column.git.icon.untracked": "?",
+	"explorer.file.column.git.icon.modified": "✹",
+	"explorer.file.column.git.icon.ignored": "☒",
+	"explorer.openAction.for.directory": "expandOrCollapse",
+	"explorer.previewAction.onHover": false,
+	"explorer.keyMappings": {
+		"<cr>": ["expandable?", ["expanded?", "collapse", "expand"], "open"]
+	}
 }
-

@@ -7,8 +7,12 @@ cd ~/dotfiles
 
 make install
 
-tmux: ctrl+a+I to install tmux packages
+tmux: ctrl+a ctrl+I to install tmux packages
 ```
+
+## todo
+
+- coc-explorer config review: https://github.com/weirongxu/coc-explorer
 
 ## packages
 

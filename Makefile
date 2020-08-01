@@ -20,7 +20,7 @@ stow: ## stow packages
 	stow bin -t ~/bin
 	stow tmux
 	mkdir -p ~/.config/nvim
-	stow vim -t ~/.config
+	stow vim -t ~/.config/nvim
 	stow zsh
 tmux: ## setup tmux and dependencies
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm 

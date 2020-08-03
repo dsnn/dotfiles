@@ -10,3 +10,11 @@ endsnippet
 snippet img "insert image"
 ![${1:alt}](${2:http://})
 endsnippet
+
+snippet frontmatter? "markdown front matter" br
+---
+title: $1
+date: "`!v strftime("%Y-%m-%d")`"
+tags: [$2]
+---
+endsnippet

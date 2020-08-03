@@ -129,6 +129,12 @@ nnoremap <silent> vv <C-w>v
 nnoremap <silent> ss <C-w>S
 nnoremap S :%s//g<Left><Left>
 
+" Use alt + hjkl to resize windows
+nnoremap <silent> <M-j>    :resize -2<CR>
+nnoremap <silent> <M-k>    :resize +2<CR>
+nnoremap <silent> <M-h>    :vertical resize -2<CR>
+nnoremap <silent> <M-l>    :vertical resize +2<CR>
+
 " ale
 nmap <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>

@@ -18,8 +18,7 @@ tmux: ctrl+a ctrl+I to install tmux packages
 - colorizer
 - startify
 - review on dir script. requires git fetch atm
-- reveal file in explorer
-- fix global todo snippet
+- fix global todo snippet (missing get_comment_format / vimsnippets.py from ultisnips)
 - fix ctrl+v (pastetoggle). which key overrides it atm
 
 ## packages

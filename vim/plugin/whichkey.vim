@@ -33,6 +33,9 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
 " let g:which_key_map['v'] = [ '<C-W>v'                     , 'split right']
 " let g:which_key_map['z'] = [ 'Goyo'                       , 'zen' ]
 
+" Ignore 
+let g:which_key_map['k'] = 'which_key_ignore'
+
 " s is for search
 let g:which_key_map.s = {
       \ 'name' : '+search' ,

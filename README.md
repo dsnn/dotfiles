@@ -19,7 +19,7 @@ tmux: ctrl+a ctrl+I to install tmux packages
 - startify
 - review on dir script. requires git fetch atm
 - fix global todo snippet (missing get_comment_format / vimsnippets.py from ultisnips)
-- fix ctrl+v (pastetoggle). which key overrides it atm
+- add spellchecking for markdown w/ bindings, fzf integration and toggle
 
 ## packages
 

@@ -57,6 +57,7 @@ set tabstop=2
 set softtabstop=4
 set shiftwidth=4
 set shiftround
+" set spelllang=en_us
 
 " ABBR
 abbr funciton function
@@ -122,7 +123,7 @@ noremap X "_x"
 xnoremap K :move '<-2<CR>gv-gv
 xnoremap J :move '>+1<CR>gv-gv 
 
-set pastetoggle=<leader>v
+set pastetoggle=<F2>
 nnoremap <silent> Q <C-w>c
 noremap <space> :set hlsearch! hlsearch?<CR>
 nnoremap <silent> vv <C-w>v
@@ -157,3 +158,9 @@ if executable(s:clip)
         autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
     augroup END
 endif
+
+" Turn spellcheck on for markdown files. 
+" augroup auto_spellcheck
+"   autocmd BufNewFile,BufRead *.md setlocal spell
+"   augroup END
+

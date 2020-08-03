@@ -19,6 +19,7 @@ tmux: ctrl+a ctrl+I to install tmux packages
 - startify
 - review on dir script. requires git fetch atm
 - reveal file in explorer
+- fix global todo snippet
 
 ## packages
 

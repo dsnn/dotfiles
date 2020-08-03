@@ -27,5 +27,7 @@ Plug 'unblevable/quick-scope'
 Plug 'sheerun/vim-polyglot' 
 Plug 'junegunn/limelight.vim'
 Plug 'liuchengxu/vim-which-key' 
+Plug 'SirVer/ultisnips' 
+Plug 'honza/vim-snippets'
 
 call plug#end()

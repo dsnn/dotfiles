@@ -1,15 +1,8 @@
-nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gc :Gcommit -v -q<CR>
-nnoremap <leader>ga :Gcommit --amend<CR>
-nnoremap <leader>gt :Gcommit -v -q %<CR>
-nnoremap <leader>gd :Gdiff<CR>
-nnoremap <leader>ge :Gedit<CR>
-nnoremap <leader>gr :Gread<CR>
-nnoremap <leader>gw :Gwrite<CR><CR>
-nnoremap <leader>gl :silent! Glog<CR>
-nnoremap <leader>gp :Ggrep<Space>
-nnoremap <leader>gm :Gmove<Space>
-nnoremap <leader>gb :Git branch<Space>
-nnoremap <leader>go :Git checkout<Space>
-nnoremap <leader>gps :Dispatch! git push<CR>
-nnoremap <leader>gpl :Dispatch! git pull<CR>
+nnoremap <leader>ga :Git add .<CR>
+nnoremap <leader>gc :Gcommit -m<CR>
+nnoremap <leader>gd :Git diff<CR>
+nnoremap <leader>gg :Git pull<CR>
+nnoremap <leader>gl :Git ls<CR>
+nnoremap <leader>gp :Git push<CR>
+nnoremap <leader>gpf :Git push --force-with-lease<CR>
+nnoremap <leader>gs :Git status<CR>

@@ -115,6 +115,16 @@ nmap <leader>. <c-^>
 map <leader>ev :e! ~/.config/nvim/init.vim<CR>
 map <leader>eg :e! ~/.gitconfig<CR>
 
+" ultisnips
+function! Chomp(string)
+    return substitute(a:string, '\n\+$', '', '')
+endfunction
+
+let g:snips_author = Chomp(get(g:, 'snips_author', executable('git')? system('git config --global user.name') : expand('$USER')))
+let g:snips_email = get(g:, 'snips_email', executable('git')? system('git config --global user.email') : expand('$HOST'))
+let g:snips_github = get(g:, 'snips_github', 'https://github.com/' . g:snips_author)
+nmap <silent> <leader>es :UltiSnipsEdit<cr>
+
 " change x buffer so it doesn't interfere with system clipboard
 noremap x "_x"
 noremap X "_x"

@@ -13,7 +13,6 @@
 	"diagnostic.warningSign": "⚠",
 	"diagnostic.infoSign": "●",
 	"diagnostic.hintSign": "○",
-	"snippets.userSnippetsDirectory": "~/.config/nvim/snippets",
 	"coc.preferences.formatOnSaveFiletypes": [
 		"css",
 		"markdown",

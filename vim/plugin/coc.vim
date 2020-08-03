@@ -1,5 +1,4 @@
 let g:coc_global_extensions = [
-      \ 'coc-snippets',
       \ 'coc-json',
       \ 'coc-yaml',
       \ 'coc-vimlsp',
@@ -17,6 +16,7 @@ let g:coc_global_extensions = [
       \ 'coc-tslint',
       \ 'coc-styled-components',
       \ 'coc-explorer',
+      \ 'coc-ultisnips',
       \]
 
 " https://github.com/neoclide/coc.nvim#example-vim-configuration
@@ -91,7 +91,7 @@ nmap <leader>k :call CocAction('runCommand', 'explorer.doAction', 'closest', ['r
 "       \ coc#refresh()
 
 " snippets
-nmap <silent> <leader>es :CocCommand snippets.editSnippets<cr>
+" nmap <silent> <leader>es :CocCommand snippets.editSnippets<cr>
 
 " Make <tab> used for trigger completion, completion confirm, snippet expand and jump like VSCode.
 inoremap <silent><expr> <TAB>

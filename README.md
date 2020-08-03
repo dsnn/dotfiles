@@ -12,14 +12,13 @@ tmux: ctrl+a ctrl+I to install tmux packages
 
 ## todo
 
-- change default prettier settings for markdown
-(eg sets 3 spaces for list-items which is not correct according to markdownlint)
-- prettier markdownlint max line length auto-wrap?
-- check out colorizer
-- vim startify w/ sessions? how does this mix with tmux-resurrect etc?
-- fix on dir script for dotfiles (requires to manually run git fetch atm)
-- vim which key
-- fix similar feature as NerdTreeFind (ctrl+k, find/select file in explorer)
+- review which_key mappings
+- review default prettier settings for markdown (eg 3 spaces list item problem)
+- review prettier markdownlint max line length. auto-wrap?
+- colorizer
+- startify
+- review on dir script. requires git fetch atm
+- reveal file in explorer
 
 ## packages
 
@@ -36,3 +35,4 @@ tmux: ctrl+a ctrl+I to install tmux packages
 - silversearcher-ag
 - fd-find
 - curl
+- ranger

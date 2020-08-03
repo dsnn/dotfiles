@@ -122,8 +122,8 @@ noremap X "_x"
 xnoremap K :move '<-2<CR>gv-gv
 xnoremap J :move '>+1<CR>gv-gv 
 
-nnoremap <silent> Q <C-w>c
 set pastetoggle=<leader>v
+nnoremap <silent> Q <C-w>c
 noremap <space> :set hlsearch! hlsearch?<CR>
 nnoremap <silent> vv <C-w>v
 nnoremap <silent> ss <C-w>S

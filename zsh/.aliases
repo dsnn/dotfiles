@@ -53,6 +53,7 @@ alias gs="git st"
 alias gg="git pull"
 alias ga="git add ."
 alias gc="git commit -m"
+alias gd="git diff"
 
 # npm
 alias ns="npm start";

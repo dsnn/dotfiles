@@ -1,13 +1,19 @@
 {
+	"codeLens.enable": true,
+	"suggest.enablePreview": true,
 	"suggest.autoTrigger": "always",
 	"suggest.triggerAfterInsertEnter": true,
 	"suggest.minTriggerInputLength": 2,
 	"suggest.acceptSuggestionOnCommitCharacter": true,
 	"suggest.snippetIndicator": "►",
+	"suggest.maxPreviewWidth": 100,
+	"diagnostic.checkCurrentLine": true,
+	"diagnostic.maxWindowHeight": 20,
+	"diagnostic.errorSign": "✖",
+	"diagnostic.warningSign": "⚠",
+	"diagnostic.infoSign": "●",
+	"diagnostic.hintSign": "○",
 	"snippets.userSnippetsDirectory": "~/.config/nvim/snippets",
-	"prettier.requireConfig": true,
-	"tslint.enable": true,
-	"tslint.autoFixOnSave": true,
 	"coc.preferences.formatOnSaveFiletypes": [
 		"css",
 		"markdown",
@@ -33,5 +39,11 @@
 	"explorer.previewAction.onHover": false,
 	"explorer.keyMappings": {
 		"<cr>": ["expandable?", ["expanded?", "collapse", "expand"], "open"]
-	}
+	},
+	"prettier.requireConfig": true,
+	"eslint.enable": true,
+	"eslint.autoFixOnSave": false,
+	"eslint.autoFix": false,
+	"tslint.enable": true,
+	"tslint.autoFixOnSave": true
 }

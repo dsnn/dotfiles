@@ -16,7 +16,6 @@ let g:coc_global_extensions = [
       \ 'coc-fzf-preview',
       \ 'coc-tslint',
       \ 'coc-styled-components',
-      \ 'coc-ultisnips',
       \ 'coc-explorer',
       \]
 

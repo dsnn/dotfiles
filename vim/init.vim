@@ -135,7 +135,7 @@ nmap <silent> <leader>ak :ALEPrevious<cr>
 nmap <silent> <leader>af :ALEFindReferences<cr>
 
 " ultisnips
-nmap <silent> <leader>es :UltiSnipsEdit<cr>
+nmap <silent> <leader>es :CocCommand snippets.editSnippets<cr>
 
 " limelight
 noremap <leader>l :Limelight!!<CR>

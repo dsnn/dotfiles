@@ -7,7 +7,6 @@ Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
 " Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 " Plug 'mileszs/ack.vim'
-Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'ap/vim-css-color'

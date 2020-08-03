@@ -31,18 +31,18 @@ promptinit
 prompt suse
 
 # source aliases
-if [ -f ~/.aliases ]; then
-	source ~/.aliases
+if [ -f ~/.aliases.zsh ]; then
+	source ~/.aliases.zsh
 fi
 
 # source exports
-if [ -f ~/.exports ]; then
-	source ~/.exports
+if [ -f ~/.exports.zsh ]; then
+	source ~/.exports.zsh
 fi
 
 # source shortcuts
-if [ -f ~/.shortcuts ]; then
-	source ~/.shortcuts
+if [ -f ~/.shortcuts.zsh ]; then
+	source ~/.shortcuts.zsh
 fi
 
 # keychain

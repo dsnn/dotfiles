@@ -12,7 +12,6 @@ tmux: ctrl+a ctrl+I to install tmux packages
 
 ## todo
 
-- review on dir script. requires git fetch atm
 - add spellchecking for markdown w/ bindings, fzf integration and toggle
 - colorizer
 - startify

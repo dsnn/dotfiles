@@ -46,14 +46,14 @@ alias ls='ls -hN --group-directories-first --color=auto'
 
 # git
 alias g="git"
-alias gp="git push origin master"
-alias gpf="git push --force-with-lease"
-alias gl="git ls"
-alias gs="git st"
-alias gg="git pull"
 alias ga="git add ."
 alias gc="git commit -m"
 alias gd="git diff"
+alias gg="git pull"
+alias gl="git ls"
+alias gp="git push origin master"
+alias gpf="git push --force-with-lease"
+alias gs="git st"
 
 # npm
 alias ns="npm start";

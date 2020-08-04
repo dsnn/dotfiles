@@ -12,7 +12,6 @@ tmux: ctrl+a ctrl+I to install tmux packages
 
 ## todo
 
-- review fugitive bindings. what do I really need / use?
 - review which_key mappings
 - review default prettier settings for markdown (eg 3 spaces list item problem)
 - review prettier markdownlint max line length. auto-wrap?

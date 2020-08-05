@@ -57,7 +57,9 @@ set tabstop=2
 set softtabstop=4
 set shiftwidth=4
 set shiftround
-" set spelllang=en_us
+set spelllang=en
+set spellfile=~/.config/nvim/spell/en.utf-8.add
+set complete+=kspell
 
 " ABBR
 abbr funciton function
@@ -146,10 +148,9 @@ nnoremap <silent> <M-k>    :resize +2<CR>
 nnoremap <silent> <M-h>    :vertical resize -2<CR>
 nnoremap <silent> <M-l>    :vertical resize +2<CR>
 
-" ale
-nmap <silent> <leader>aj :ALENext<cr>
-nmap <silent> <leader>ak :ALEPrevious<cr>
-nmap <silent> <leader>af :ALEFindReferences<cr>
+" ALE Move between linting errors
+nnoremap ]r :ALENextWrap<CR>
+nnoremap [r :ALEPreviousWrap<CR>
 
 " limelight
 noremap <leader>l :Limelight!!<CR>
@@ -170,7 +171,21 @@ if executable(s:clip)
 endif
 
 " Turn spellcheck on for markdown files. 
-" augroup auto_spellcheck
-"   autocmd BufNewFile,BufRead *.md setlocal spell
-"   augroup END
+augroup auto_spellcheck
+  autocmd BufNewFile,BufRead *.md setlocal spell
+augroup END
 
+" Set spellfile to location that is guaranteed to exist, can be symlinked to
+" " Dropbox or kept in Git and managed outside of thoughtbot/dotfiles using rcm.
+
+" Toggle spellchecking
+function! ToggleSpellCheck()
+  set spell!
+  if &spell
+    echo "Spellcheck ON"
+  else
+    echo "Spellcheck OFF"
+  endif
+endfunction
+
+nnoremap <silent> <Leader>S :call ToggleSpellCheck()<CR>

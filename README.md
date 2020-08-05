@@ -12,7 +12,6 @@ tmux: ctrl+a ctrl+I to install tmux packages
 
 ## todo
 
-- add spellchecking for markdown w/ bindings, fzf integration and toggle
 - colorizer
 - startify
 

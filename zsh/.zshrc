@@ -53,11 +53,11 @@ fi
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # On dir automatic scrpit execution
-function chpwd () {
-	case $PWD in ~/dotfiles)
-		check_dotfiles
-	esac
-}
+# function chpwd () {
+# 	case $PWD in ~/dotfiles)
+# 		check_dotfiles
+# 	esac
+# }
 
 # Auto check dotfiles
 function check_dotfiles() {

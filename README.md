@@ -10,12 +10,6 @@ make install
 tmux: ctrl+a ctrl+I to install tmux packages
 ```
 
-## todo
-
-- review bindings and move to ftplugins
-- colorizer
-- startify
-
 ## packages
 
 - make
@@ -31,4 +25,5 @@ tmux: ctrl+a ctrl+I to install tmux packages
 - silversearcher-ag
 - fd-find
 - curl
+- ranger
 - ranger

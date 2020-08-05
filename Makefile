@@ -13,7 +13,7 @@ help: ## This help
 .DEFAULT_GOAL := help
 
 install: ## install packages 
-	sudo apt install git zsh fzf neovim nodejs npm keychain tmux stow silversearcher-ag fd-find ranger
+	sudo apt install git zsh fzf neovim nodejs npm keychain tmux stow silversearcher-ag fd-find ranger bat
 stow: ## stow packages 
 	stow git
 	mkdir -p ~/bin

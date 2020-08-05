@@ -73,8 +73,7 @@ function check_dotfiles() {
 				echo "Dotfiles up to date with origin."
 		  fi
 		else
-			echo "Dotfiles updates detected:"
-			({cd ~/dotfiles} &> /dev/null && git log ..@{u} --pretty=format:%Cred%aN:%Creset\ %s\ %Cgreen%cd)
+			echo "Dotfiles updates detected"
 		fi
 }
 

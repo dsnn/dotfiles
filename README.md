@@ -12,6 +12,7 @@ tmux: ctrl+a ctrl+I to install tmux packages
 
 ## todo
 
+- review bindings and move to ftplugins
 - colorizer
 - startify
 

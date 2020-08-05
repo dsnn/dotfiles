@@ -26,4 +26,4 @@ tmux: ctrl+a ctrl+I to install tmux packages
 - fd-find
 - curl
 - ranger
-- ranger
+- bat

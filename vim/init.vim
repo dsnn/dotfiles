@@ -136,6 +136,10 @@ noremap X "_x"
 xnoremap K :move '<-2<CR>gv-gv
 xnoremap J :move '>+1<CR>gv-gv 
 
+" Quickly insert an empty new line without entering insert mode
+nnoremap <silent> <leader>o :<C-u>call append(line("."),   repeat([""], v:count1))<CR>
+nnoremap <silent> <leader>O :<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>
+
 set pastetoggle=<F2>
 nnoremap <silent> Q <C-w>c
 noremap <space> :set hlsearch! hlsearch?<CR>

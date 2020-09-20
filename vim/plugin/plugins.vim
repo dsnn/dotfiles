@@ -29,5 +29,6 @@ Plug 'junegunn/limelight.vim'
 Plug 'liuchengxu/vim-which-key' 
 Plug 'SirVer/ultisnips' 
 Plug 'honza/vim-snippets'
+Plug 'mhinz/vim-startify'
 
 call plug#end()

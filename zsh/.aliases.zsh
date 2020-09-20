@@ -1,5 +1,6 @@
 alias vim='nvim'
 alias fd='fdfind'
+alias cat='batcat'
 
 # file shortcuts
 alias cfc="nvim ~/.shortcuts"

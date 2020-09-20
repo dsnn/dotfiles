@@ -53,24 +53,27 @@ fi
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # On dir automatic scrpit execution
-function cd () {
-		builtin cd "$@" && on_dir;
-}
-
-function on_dir() {
-	case $PWD in ~/dotfiles)
-		check_dotfiles
-	esac
-}
+# function chpwd () {
+# 	case $PWD in ~/dotfiles)
+# 		check_dotfiles
+# 	esac
+# }
 
 # Auto check dotfiles
 function check_dotfiles() {
+		echo "Checking dotfiles, please wait..."
+		git fetch --quiet
 		if [ $(git rev-list HEAD...origin/master | wc -l) = 0 ]
 		then
-			echo "Dotfiles up to date."
+			pending=$(git diff --numstat HEAD~ | wc -l)
+			if [ pending > 0 ]
+			then
+				echo "Dotfiles up to date with origin. But $pending changes pending"
+		  else 
+				echo "Dotfiles up to date with origin."
+		  fi
 		else
-			echo "Dotfiles updates detected:"
-			({cd ~/dotfiles} &> /dev/null && git log ..@{u} --pretty=format:%Cred%aN:%Creset\ %s\ %Cgreen%cd)
+			echo "Dotfiles updates detected"
 		fi
 }
 

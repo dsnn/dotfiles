@@ -1,5 +1,10 @@
 # dotfiles
 
+## TODO
+manually install packages below (not accessible on all distro versions)
+
+- fzf fd-find bat
+
 ```zsh
 sudo apt install make
 

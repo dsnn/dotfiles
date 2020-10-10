@@ -94,6 +94,14 @@ nmap <leader>w :q<CR>
 nmap <leader><space> :%s/\s\+$<CR>
 nmap <leader><space><space> :%s/\n\{2,}/\r\r/g<CR>
 nmap <leader>. <c-^>
+nmap <leader>b :files<CR>
+nmap <C-p> :b
+
+" netrw
+let g:netrw_banner = 0
+nmap <leader>ve :Explore<CR> 
+nmap <leader>vh :Sexplore<CR> 
+nmap <leader>vs :Vexplore<CR> 
 
 " shortcuts
 map <leader>ev :e! ~/.config/nvim/init.vim<CR>

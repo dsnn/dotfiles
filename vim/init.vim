@@ -1,5 +1,3 @@
-source ~/.config/nvim/plugin/plugins.vim
-
 " GENERAL
 syntax on
 filetype plugin indent on
@@ -75,13 +73,8 @@ abbr cosnt const
 " AUTO COMMANDS
 if !exists("statusline_loaded")
 	let statusline_loaded = 1
-	set statusline+=%{FugitiveStatusline()}
 	set statusline+=%F
 endif
-
-" augroup vimrc
-"   autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw
-" augroup END
 
 " APPEARANCE
 if (has("termguicolors"))
@@ -91,18 +84,6 @@ endif
 set t_Co=256
 colorscheme base16-gooey
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
-" FUNCTIONS
-function! RenameFile()
-	let old_name = expand('%')
-	let new_name = input('New file name: ', expand('%'),'file')
-	if new_name != '' && new_name != old_name
-		exec ':saveas ' . new_name
-		exec ':silent !rm ' . old_name
-		redraw!
-	endif
-endfunction
-" map <leader>n :call RenameFile()<cr>
 
 " KEYS
 let mapleader = ','
@@ -117,16 +98,6 @@ nmap <leader>. <c-^>
 " shortcuts
 map <leader>ev :e! ~/.config/nvim/init.vim<CR>
 map <leader>eg :e! ~/.gitconfig<CR>
-
-" ultisnips
-function! Chomp(string)
-    return substitute(a:string, '\n\+$', '', '')
-endfunction
-
-let g:snips_author = Chomp(get(g:, 'snips_author', executable('git')? system('git config --global user.name') : expand('$USER')))
-let g:snips_email = get(g:, 'snips_email', executable('git')? system('git config --global user.email') : expand('$HOST'))
-let g:snips_github = get(g:, 'snips_github', 'https://github.com/' . g:snips_author)
-nmap <silent> <leader>es :UltiSnipsEdit<cr>
 
 " change x buffer so it doesn't interfere with system clipboard
 noremap x "_x"
@@ -152,13 +123,6 @@ nnoremap <silent> <M-j>    :resize -2<CR>
 nnoremap <silent> <M-k>    :resize +2<CR>
 nnoremap <silent> <M-h>    :vertical resize -2<CR>
 nnoremap <silent> <M-l>    :vertical resize +2<CR>
-
-" ALE Move between linting errors
-nnoremap ]r :ALENextWrap<CR>
-nnoremap [r :ALEPreviousWrap<CR>
-
-" limelight
-noremap <leader>l :Limelight!!<CR>
 
 " Refresh vim-devicons to ensure they render properly (fixes render issues
 " after sourcing config file)

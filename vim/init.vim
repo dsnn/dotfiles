@@ -98,6 +98,7 @@ nmap <leader>b :files<CR>
 nmap <C-p> :b
 
 " netrw
+let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 let g:netrw_banner = 0
 nmap <leader>ve :Explore<CR> 
 nmap <leader>vh :Sexplore<CR> 

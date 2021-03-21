@@ -2,22 +2,6 @@ if [ -d "$HOME/bin" ] ; then
     export PATH="$HOME/bin:$PATH"
 fi
 
-if [ -d "$HOME/bin/cron" ] ; then
-    export PATH="$HOME/bin/cron:$PATH"
-fi
-
-if [ -d "$HOME/bin/i3" ] ; then
-    export PATH="$HOME/bin/i3:$PATH"
-fi
-
-if [ -d "$HOME/bin/polybar" ] ; then
-    export PATH="$HOME/bin/polybar:$PATH"
-fi
-
-if [ -d "$HOME/bin/tools" ] ; then
-    export PATH="$HOME/bin/tools:$PATH"
-fi
-
 if [ -d "$HOME/.local/bin" ] ; then
     export PATH="$HOME/.local/bin:$PATH"
 fi

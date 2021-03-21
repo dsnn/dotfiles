@@ -1,5 +1,7 @@
-alias vim='nvim'
 alias fd='fdfind'
+
+alias vim='/home/dsn/.local/bin/nvim/bin/nvim'
+alias nvim='/home/dsn/.local/bin/nvim/bin/nvim'
 
 # file shortcuts
 alias cfc="nvim ~/.shortcuts"

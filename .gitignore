@@ -1,4 +1,5 @@
 .vagrant/
 tags
 .uuid
-
+node_modules/
+package-lock.json

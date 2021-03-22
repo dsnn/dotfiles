@@ -1,15 +1,26 @@
-alias vim='nvim'
+#alias vim='nvim'
 alias fd='fdfind'
 
+# nigthly build
+if [ -x '/home/dsn/.local/bin/nvim/bin/nvim' ]; then
+    alias vim='/home/dsn/.local/bin/nvim/bin/nvim'
+    alias nvim='/home/dsn/.local/bin/nvim/bin/nvim'
+fi
+
+# use batcase if installed
+if [ $(dpkg-query -W -f='${Status}' batcat 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
+	alias cat='batcat'
+fi
+
 # file shortcuts
-alias cfc="nvim ~/.shortcuts"
-alias cfs="nvim ~/.ssh/config"
-alias cfv="nvim ~/dotfiles/vim/init.vim"
-alias cft="nvim ~/dotfiles/tmux/.tmux.conf"
-alias cfe="nvim ~/dotfiles/zsh/.exports.zsh"
-alias cfa="nvim ~/dotfiles/zsh/.aliases.zsh"
-alias cfz="nvim ~/dotfiles/zsh/.zshrc"
-alias cfg="nvim ~/dotfiles/git/.gitconfig"
+alias cfc="vim ~/.shortcuts"
+alias cfs="vim ~/.ssh/config"
+alias cfv="vim ~/dotfiles/vim/init.vim"
+alias cft="vim ~/dotfiles/tmux/.tmux.conf"
+alias cfe="vim ~/dotfiles/zsh/.exports.zsh"
+alias cfa="vim ~/dotfiles/zsh/.aliases.zsh"
+alias cfz="vim ~/dotfiles/zsh/.zshrc"
+alias cfg="vim ~/dotfiles/git/.gitconfig"
 
 # folder shortcuts
 alias h="cd ~/"

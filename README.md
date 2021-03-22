@@ -1,9 +1,18 @@
 # dotfiles
 
 ## TODO
-manually install packages below (not accessible on all distro versions)
 
-- fzf fd-find bat
+Manually install packages below (not accessible on all distro versions)
+
+- fzf
+- fd / fd-find
+- bat
+
+On ubuntu 
+
+```zsh
+sudo apt install fzf fd-find bat 
+```
 
 ```zsh
 sudo apt install make

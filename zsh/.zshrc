@@ -30,15 +30,16 @@ autoload -Uz promptinit
 promptinit
 prompt suse
 
+# source exports
+if [ -f ~/.exports.zsh ]; then
+	source ~/.exports.zsh
+fi
+
 # source aliases
 if [ -f ~/.aliases.zsh ]; then
 	source ~/.aliases.zsh
 fi
 
-# source exports
-if [ -f ~/.exports.zsh ]; then
-	source ~/.exports.zsh
-fi
 
 # source shortcuts
 if [ -f ~/.shortcuts.zsh ]; then

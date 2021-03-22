@@ -8,10 +8,10 @@ Manually install packages below (not accessible on all distro versions)
 - fd / fd-find
 - bat
 
-On ubuntu 
+On ubuntu
 
 ```zsh
-sudo apt install fzf fd-find bat 
+sudo apt install fzf fd-find bat
 ```
 
 ```zsh
@@ -26,18 +26,21 @@ tmux: ctrl+a ctrl+I to install tmux packages
 
 ## packages
 
-- make
-- git
-- zsh
+- curl
 - fzf
+- git
+- keychain
+- make
 - neovim
 - nodejs
 - npm
-- keychain
-- tmux
-- stow
-- silversearcher-ag
-- fd-find
-- curl
 - ranger
-- bat
+- silversearcher-ag
+- stow
+- tmux
+- zsh
+
+## TODO
+
+- which key
+- ale error list

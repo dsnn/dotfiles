@@ -13,6 +13,10 @@ export BROWSER=firefox
 export EDITOR=nvim
 export VISUAL=nvim
 export MANWIDTH=79
+# export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
+# export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0.0
+export LIBGL_ALWAYS_INDIRECT=1
+
 
 # fd
 export FD_OPTIONS="--follow --hidden --exclude .git --exclude node_modules"

@@ -44,20 +44,22 @@ markdownlint --save-dev
 
 ## TODO
 
-Add apps below to make
-
-- ueberzug
+- review / fix install script for *
+- autoinstall nvim deps (e.g. lsp)
+- update for nightly builds (.local/bin)
+- add floaterm w/ lazy*
+- fix Bdelete update tab
+- telescope-arecibo 
+- ueberzug 
 - fd
 - ripgrep
 - jq
 - lazygit
 - lazydocker
+- lazynpm
 - ncdu
 - pynvim
 - neovim-remote
-
-## Review
-
 - pandoc
 - latex support
 - omnisharp

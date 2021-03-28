@@ -99,6 +99,24 @@ vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', {silent = true})
 vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', {silent = true})
 
 -- terminal navigation
+
+vim.g.floaterm_keymap_toggle = '<leader>t'
+vim.g.floaterm_keymap_next   = '<leader>tn'
+vim.g.floaterm_keymap_prev   = '<leader>tp'
+vim.g.floaterm_keymap_new    = '<leader>ta'
+vim.g.floaterm_keymap_kill   = '<leader>tk'
+vim.g.floaterm_title=''
+
+vim.g.floaterm_gitcommit='floaterm'
+vim.g.floaterm_autoinsert=1
+vim.g.floaterm_width=0.8
+vim.g.floaterm_height=0.8
+vim.g.floaterm_wintitle=0
+vim.g.floaterm_autoclose=1
+
+-- vim.api.nvim_set_keymap('n', '<leader>tn', ':FloatermNew<CR>', {silent = true})
+-- vim.api.nvim_set_keymap('n', '<leader>tk', ':FloatermKill<CR>', {silent = true})
+
 vim.cmd([[
   tnoremap <C-h> <C-\><C-N><C-w>h
   tnoremap <C-j> <C-\><C-N><C-w>j

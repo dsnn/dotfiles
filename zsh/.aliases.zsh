@@ -2,6 +2,7 @@ alias fd='fdfind'
 
 alias vim='/home/dsn/.local/bin/nvim/bin/nvim'
 alias nvim='/home/dsn/.local/bin/nvim/bin/nvim'
+alias lazygit='/home/dsn/.local/bin/lazygit/lazygit'
 
 # file shortcuts
 alias cfc="nvim ~/.shortcuts"

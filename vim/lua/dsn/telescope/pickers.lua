@@ -14,7 +14,7 @@ function M.edit_dotfiles()
       preview_width = 0.65,
     },
   }
-end 
+end
 
 function M.git_branches()
   -- actions mappings
@@ -39,7 +39,6 @@ function M.search_all_files()
 --    find_command = { 'fd', '--no-ignore', '--hidden', },
 --  }
 end
-
 
 -- function M.grep_str()
 --   local opts = {
@@ -89,7 +88,7 @@ end
 --     border = true,
 --     previewer = false,
 --     shorten_path = false,
--- 
+--
 --     -- layout_strategy = 'current_buffer',
 --   }
 --   require('telescope.builtin').current_buffer_fuzzy_find(opts)

@@ -49,11 +49,5 @@ require('telescope').setup {
                 ["<C-k>"] = actions.move_selection_previous
             }
         },
-        extension = {
-			fzf_writer = {
-				use_highlighter = false,
-				minimum_grep_characters = 6,
-			},
-        }
     }
 }

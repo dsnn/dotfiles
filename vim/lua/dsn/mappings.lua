@@ -62,7 +62,6 @@ vim.cmd([[
 require('dsn.telescope')
 require('dsn.telescope.pickers')
 local h = require('dsn.telescope.helpers')
-
 h.set_tele_keymap('<leader>fd', 'edit_dotfiles')
 h.set_tele_keymap('<leader>gb', 'git_branches')
 h.set_tele_keymap('<leader>fb', 'buffers')

@@ -14,8 +14,9 @@ return require('packer').startup(function(use)
     -- general
     use 'junegunn/goyo.vim'
     use 'mhinz/vim-startify'
-    use 'terrortylor/nvim-comment'
     use 'voldikss/vim-floaterm'
+    use 'ntpeters/vim-better-whitespace'
+    use 'tpope/vim-surround'
     -- use 'bfredl/nvim-miniyank'
 
     -- buffer, register, tabs & statusline
@@ -25,7 +26,7 @@ return require('packer').startup(function(use)
     use 'gennaro-tedesco/nvim-peekup' 				-- peek on registers
 
     -- navigation
-    use 'airblade/vim-rooter'  					-- cwd to root on open 
+    use 'airblade/vim-rooter'  					-- cwd to root on open
     use 'kevinhwang91/rnvimr'
     use 'kyazdani42/nvim-tree.lua'
     use 'liuchengxu/vim-which-key'
@@ -37,15 +38,16 @@ return require('packer').startup(function(use)
     use 'ryanoasis/vim-devicons'
     use 'norcalli/nvim-colorizer.lua'
     use 'tjdevries/colorbuddy.vim'
-    use 'christianchiarulli/nvcode-color-schemes.vim' 
+    use 'christianchiarulli/nvcode-color-schemes.vim'
     use 'sainnhe/sonokai'
+    use 'ayu-theme/ayu-vim'
 
-    -- lsp & code 
+    -- lsp & code
     use 'glepnir/lspsaga.nvim'
     use 'neovim/nvim-lspconfig'
     use 'kabouzeid/nvim-lspinstall'
     use 'onsails/lspkind-nvim'
-    use 'kosayoda/nvim-lightbulb' 
+    use 'kosayoda/nvim-lightbulb'
     use 'sheerun/vim-polyglot'					-- language pack
     use 'liuchengxu/vista.vim'  				-- lsp symbols & tags
     use 'kevinhwang91/nvim-bqf' 				-- better quick fix window

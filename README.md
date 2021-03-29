@@ -46,6 +46,11 @@ markdownlint --save-dev
 
 ## TODO
 
+- [ ] quickfix win (use w/ telescope)
+- [X] Add `if has wsl: let s:clip = '/mnt/c/Windows/System32/clip.exe' (or win32yank)`
+	- issue: https://github.com/neovim/neovim/issues/13436 (I get: 'could not convert lua table')
+- [ ] remove or change highlight for matching words (on hover)
+- [ ] add lsp gh command
 - [ ] review / fix install script for *
 	- write bash script for w/e. (make it clean and pretty w/ separate functions for w/e)
 	- simple install solution: call script fns from makefile?
@@ -57,14 +62,17 @@ markdownlint --save-dev
 	- app deps (make install now)
 	- nightly build apps (.local/bin)
 	- repos / submodules
-- [ ] add floaterm w/ lazy*
-- [ ] table for nvim plugins 
+- [ ] floaterm 
+    	- better bindings
+		- nnoremap <silent> <leader>tg/td/tn? :FloatermNew --name=lazygit/lazydocker/lazynpm --autocose=2 lazygit<CR>
+		- leader t should toggle term (if it doesn't already?)
+	- lazygit 
+	- lazydocjer
+	- lazynpm
 - [ ] cheat.sh (https://github.com/nvim-telescope/telescope-cheat.nvim)
 	- regex
 	- work stuff (e.g. db connection strings. submodule)
-- [ ] nvim surround plugin
 - [ ] markdown lint / lsp / snippets / preview
-- [ ] better quickfix win 
     - telescope?
     - lsp, typechecks, linters
 - [ ] telescope-arecibo 
@@ -76,6 +84,7 @@ markdownlint --save-dev
 	- notes for home / work (submodule) ?
 	- eleventy (submodule) ?
 - [ ] failsafe for aliases (e.g. check if lazygit exists)
+- [ ] Fix spellcheck (markdown)
 - [ ] shellcheck 
 - [ ] ueberzug 
 - [ ] fd (aka fd-find)
@@ -89,3 +98,11 @@ markdownlint --save-dev
 - [ ] latex support
 - [ ] omnisharp
 - [ ] unzip (required by lua lsp server)
+- [ ] run lua line (LuaDev-Runline) 
+- [ ] base16 colors
+- [ ] exec file cmd: <leader>S cmd luefile %
+
+## Links
+
+- https://github.com/jesseleite/dotfiles/tree/master/vim
+- https://github.com/ngscheurich/dotfiles/tree/main/nvim/.config/nvim

@@ -14,56 +14,56 @@ return require('packer').startup(function(use)
     -- general
     use 'junegunn/goyo.vim'
     use 'mhinz/vim-startify'
-    use 'voldikss/vim-floaterm'
     use 'ntpeters/vim-better-whitespace'
     use 'tpope/vim-surround'
-    -- use 'bfredl/nvim-miniyank'
+    use 'voldikss/vim-floaterm'
+    use 'bfredl/nvim-luadev'
 
     -- buffer, register, tabs & statusline
-    use 'moll/vim-bbye'
-    use 'glepnir/galaxyline.nvim'
-    use 'romgrk/barbar.nvim'
     use 'gennaro-tedesco/nvim-peekup' 				-- peek on registers
+    use 'glepnir/galaxyline.nvim'
+    use 'moll/vim-bbye'
+    use 'romgrk/barbar.nvim'
 
     -- navigation
     use 'airblade/vim-rooter'  					-- cwd to root on open
+    use 'andymass/vim-matchup'
     use 'kevinhwang91/rnvimr'
     use 'kyazdani42/nvim-tree.lua'
     use 'liuchengxu/vim-which-key'
     use 'unblevable/quick-scope'
-    use 'andymass/vim-matchup'
 
     -- icons, colors & themes
-    use 'kyazdani42/nvim-web-devicons'
-    use 'ryanoasis/vim-devicons'
-    use 'norcalli/nvim-colorizer.lua'
-    use 'tjdevries/colorbuddy.vim'
-    use 'christianchiarulli/nvcode-color-schemes.vim'
-    use 'sainnhe/sonokai'
     use 'ayu-theme/ayu-vim'
+    use 'chriskempson/base16-vim'
+    use 'christianchiarulli/nvcode-color-schemes.vim'
+    use 'kyazdani42/nvim-web-devicons'
+    use 'norcalli/nvim-colorizer.lua'
+    use 'ryanoasis/vim-devicons'
+    use 'sainnhe/sonokai'
+    use 'tjdevries/colorbuddy.vim'
 
     -- lsp & code
     use 'glepnir/lspsaga.nvim'
-    use 'neovim/nvim-lspconfig'
     use 'kabouzeid/nvim-lspinstall'
-    use 'onsails/lspkind-nvim'
-    use 'kosayoda/nvim-lightbulb'
-    use 'sheerun/vim-polyglot'					-- language pack
-    use 'liuchengxu/vista.vim'  				-- lsp symbols & tags
     use 'kevinhwang91/nvim-bqf' 				-- better quick fix window
+    use 'kosayoda/nvim-lightbulb'
+    use 'liuchengxu/vista.vim'  				-- lsp symbols & tags
+    use 'neovim/nvim-lspconfig'
+    use 'onsails/lspkind-nvim'
+    use 'sheerun/vim-polyglot'					-- language pack
 
     -- telescope
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     use 'nvim-lua/plenary.nvim'
     use 'nvim-lua/popup.nvim'
     use 'nvim-telescope/telescope-media-files.nvim'
     use 'nvim-telescope/telescope.nvim'
+    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
     -- autocomplete
+    use 'dsznajder/vscode-es7-javascript-react-snippets'
     use 'hrsh7th/nvim-compe'
     use 'hrsh7th/vim-vsnip'
-    use 'dsznajder/vscode-es7-javascript-react-snippets'
-    use 'xabikos/vscode-javascript'
     use 'windwp/nvim-autopairs'
-    -- use 'christianchiarulli/emmet-vim'
+    use 'xabikos/vscode-javascript'
 end)

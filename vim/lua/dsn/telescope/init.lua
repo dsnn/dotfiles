@@ -39,15 +39,16 @@ require('telescope').setup {
         buffer_previewer_maker = previewers.buffer_previewer_maker,
         mappings = {
             i = {
+		["<C-q>"] = actions.send_to_qflist,
                 ["<C-j>"] = actions.move_selection_next,
                 ["<C-k>"] = actions.move_selection_previous,
-                ["<ESC>"] = actions.close,
-                ["<CR>"]  = actions.select_default + actions.center
+                ["<CR>"]  = actions.select_default + actions.center,
+                ["<ESC>"] = actions.close
             },
             n = {
                 ["<C-j>"] = actions.move_selection_next,
                 ["<C-k>"] = actions.move_selection_previous
             }
-        },
+        }
     }
 }

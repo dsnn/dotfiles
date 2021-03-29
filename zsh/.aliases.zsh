@@ -3,6 +3,8 @@ alias fd='fdfind'
 alias vim='/home/dsn/.local/bin/nvim/bin/nvim'
 alias nvim='/home/dsn/.local/bin/nvim/bin/nvim'
 alias lazygit='/home/dsn/.local/bin/lazygit/lazygit'
+alias lazynpm='/home/dsn/.local/bin/lazynpm/lazynpm'
+alias lazydocker='/home/dsn/.local/bin/lazydocker/lazydocker'
 
 # file shortcuts
 alias cfc="nvim ~/.shortcuts"

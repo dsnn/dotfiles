@@ -43,10 +43,13 @@ markdownlint --save-dev
 - tmux
 - zsh
 
+manually download and install 
+- [Lazygit](https://github.com/jesseduffield/lazygit)
+- [Lazydocker](https://github.com/jesseduffield/lazydocker)
+- [Lazynpm](https://github.com/jesseduffield/lazynpm)
 
 ## TODO
 
-- [ ] quickfix win (use w/ telescope)
 - [X] Add `if has wsl: let s:clip = '/mnt/c/Windows/System32/clip.exe' (or win32yank)`
 	- issue: https://github.com/neovim/neovim/issues/13436 (I get: 'could not convert lua table')
 - [ ] remove or change highlight for matching words (on hover)
@@ -62,12 +65,8 @@ markdownlint --save-dev
 	- app deps (make install now)
 	- nightly build apps (.local/bin)
 	- repos / submodules
-- [ ] floaterm 
-    	- better bindings
-		- nnoremap <silent> <leader>tg/td/tn? :FloatermNew --name=lazygit/lazydocker/lazynpm --autocose=2 lazygit<CR>
-		- leader t should toggle term (if it doesn't already?)
 	- lazygit 
-	- lazydocjer
+	- lazydocker
 	- lazynpm
 - [ ] cheat.sh (https://github.com/nvim-telescope/telescope-cheat.nvim)
 	- regex
@@ -101,6 +100,7 @@ markdownlint --save-dev
 - [ ] run lua line (LuaDev-Runline) 
 - [ ] base16 colors
 - [ ] exec file cmd: <leader>S cmd luefile %
+- [ ] change mappings for resizing windows (using C-Arrow atm)
 
 ## Links
 

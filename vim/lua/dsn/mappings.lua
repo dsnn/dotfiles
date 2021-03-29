@@ -29,10 +29,10 @@ require('dsn.compe')
 require('dsn.lsp')
 
 -- terminal
-vim.api.nvim_set_keymap('n', '<leader>t', ':FloatermToggle<CR>', {silent = true})
-vim.api.nvim_set_keymap('n', '<leader>tg',':FloatermNew --name=git --autoclose=2 lazygit<CR>', {silent = true})
-vim.api.nvim_set_keymap('n', '<leader>td',':FloatermNew --name=docker --autoclose=2 lazygit<CR>', {silent = true})
-vim.api.nvim_set_keymap('n', '<leader>tn',':FloatermNew --name=npm --autoclose=2 lazygit<CR>', {silent = true})
+vim.api.nvim_set_keymap('n', '<leader>t',  ':FloatermToggle<CR>', {silent = true})
+vim.api.nvim_set_keymap('n', '<leader>tg', ':FloatermNew --name=git --autoclose=2 lazygit<CR>', {silent = true})
+vim.api.nvim_set_keymap('n', '<leader>td', ':FloatermNew --name=docker --autoclose=2 lazydocker<CR>', {silent = true})
+vim.api.nvim_set_keymap('n', '<leader>tn', ':FloatermNew --name=npm --autoclose=2 lazynpm<CR>', {silent = true})
 
 vim.cmd([[
   tnoremap <C-h> <C-\><C-N><C-w>h
@@ -51,12 +51,10 @@ vim.api.nvim_set_keymap('n', '<TAB>', ':bnext<CR>', map_options)
 vim.api.nvim_set_keymap('n', '<S-TAB>', ':bprevious<CR>', map_options)
 
 -- window resizing
-vim.cmd([[
-  nnoremap <silent> <C-Up>    :resize -2<CR>
-  nnoremap <silent> <C-Down>  :resize +2<CR>
-  nnoremap <silent> <C-Left>  :vertical resize -2<CR>
-  nnoremap <silent> <C-Right> :vertical resize +2<CR>
-]])
+vim.api.nvim_set_keymap('n', '<C-Up>',    ':resize -2<CR>',          {silent = true})
+vim.api.nvim_set_keymap('n', '<C-Down>',  ':resize +2<CR>',          {silent = true})
+vim.api.nvim_set_keymap('n', '<C-Left>',  ':vertical resize -2<CR>', {silent = true})
+vim.api.nvim_set_keymap('n', '<C-Right>', ':vertical resize +2<CR>', {silent = true})
 
 -- telescope
 require('dsn.telescope')
@@ -67,7 +65,12 @@ h.set_tele_keymap('<leader>gb', 'git_branches')
 h.set_tele_keymap('<leader>fb', 'buffers')
 h.set_tele_keymap('<leader>fh', 'help_tags')
 h.set_tele_keymap('<leader>fa', 'search_all_files')
-h.set_tele_keymap('<leader>ff', 'search_all_files')
+h.set_tele_keymap('<leader>f', 'search_all_files')
 h.set_tele_keymap('<leader>fc', 'colorscheme')
 h.set_tele_keymap('<leader>fr', 'registers')
 h.set_tele_keymap('<leader>fq', 'quickfix')
+
+-- luadev
+
+vim.api.nvim_set_keymap('n', '<leader>ll',  ':Luadev-RunLine', {silent = true})
+vim.api.nvim_set_keymap('n', '<leader>ls',  ':Luadev-Run', {silent = true})

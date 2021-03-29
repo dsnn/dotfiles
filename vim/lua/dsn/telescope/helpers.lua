@@ -23,4 +23,4 @@ function M.set_tele_keymap(key, f, options, buffer)
   end
 end
 
-return M 
+return M

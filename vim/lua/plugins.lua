@@ -18,6 +18,7 @@ return require('packer').startup(function(use)
     use 'tpope/vim-surround'
     use 'voldikss/vim-floaterm'
     use 'bfredl/nvim-luadev'
+    use 'terrortylor/nvim-comment'
 
     -- buffer, register, tabs & statusline
     use 'gennaro-tedesco/nvim-peekup' 				-- peek on registers

@@ -48,3 +48,6 @@ vim.wo.number = true
 vim.wo.relativenumber = true
 vim.wo.signcolumn ="yes"
 vim.wo.wrap = true
+vim.o.bg = "dark"
+
+vim.cmd("colorscheme aurora")

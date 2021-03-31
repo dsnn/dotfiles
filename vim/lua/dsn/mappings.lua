@@ -71,6 +71,8 @@ h.set_tele_keymap('<leader>fr', 'registers')
 h.set_tele_keymap('<leader>fq', 'quickfix')
 
 -- luadev
-
 vim.api.nvim_set_keymap('n', '<leader>ll',  ':Luadev-RunLine', {silent = true})
 vim.api.nvim_set_keymap('n', '<leader>ls',  ':Luadev-Run', {silent = true})
+
+-- comments
+require('nvim_comment').setup()

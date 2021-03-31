@@ -1,6 +1,6 @@
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { 
-      "graphql", 
+  ensure_installed = {
+      "graphql",
       "html",
       "bash",
       "python",
@@ -16,9 +16,6 @@ require'nvim-treesitter.configs'.setup {
       "jsdoc",
       "regex",
       "jsonc"
-  }, 
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-    -- disable = { "c", "rust" },  -- list of language that will be disabled
   },
+  highlight = { enable = true },
 }

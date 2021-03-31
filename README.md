@@ -50,6 +50,7 @@ manually download and install
 
 ## TODO
 
+- [ ] Fix broken comments
 - [X] Add `if has wsl: let s:clip = '/mnt/c/Windows/System32/clip.exe' (or win32yank)`
 	- issue: https://github.com/neovim/neovim/issues/13436 (I get: 'could not convert lua table')
 - [ ] remove or change highlight for matching words (on hover)
@@ -101,8 +102,10 @@ manually download and install
 - [ ] base16 colors
 - [ ] exec file cmd: <leader>S cmd luefile %
 - [ ] change mappings for resizing windows (using C-Arrow atm)
+- [ ] neovim session managment (keybindings, autocmds etc)
 
 ## Links
 
 - https://github.com/jesseleite/dotfiles/tree/master/vim
 - https://github.com/ngscheurich/dotfiles/tree/main/nvim/.config/nvim
+- https://github.com/rafamadriz/friendly-snippets

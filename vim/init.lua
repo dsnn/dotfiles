@@ -1,6 +1,6 @@
 require('plugins')
-require('dsn.settings')
 require('dsn.globals')
 require('dsn.treesitter')
 require('dsn.nvimtree')
+require('dsn.settings')
 require('dsn.mappings')

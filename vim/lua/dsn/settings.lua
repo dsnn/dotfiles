@@ -1,4 +1,5 @@
-vim.bo.autoindent = true
+vim.wo.number = true
+vim.wo.relativenumber = true
 vim.bo.expandtab = true
 vim.bo.shiftwidth = 4
 vim.bo.smartindent = true
@@ -15,7 +16,6 @@ vim.cmd('set whichwrap+=<,>,[,],h,l')
 vim.o.backup = false
 vim.o.clipboard = "unnamedplus"
 vim.o.cmdheight = 2
-vim.o.conceallevel = 0
 vim.o.fileencoding = "utf-8"
 vim.o.hidden = true
 vim.o.history = 1000
@@ -29,12 +29,9 @@ vim.o.showmatch = true
 vim.o.showmode = false
 vim.o.showtabline = 2
 vim.o.smartcase = true
-vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.swapfile = false
 vim.o.syntax = 'on'
-vim.o.t_Co = "256"
-vim.o.termguicolors = true
 vim.o.timeoutlen = 300
 vim.o.updatetime = 300
 vim.o.writebackup = false
@@ -44,10 +41,5 @@ vim.wo.foldlevel = 1
 vim.wo.foldmethod = "syntax"
 vim.wo.foldnestmax = 10
 vim.wo.linebreak = true
-vim.wo.number = true
-vim.wo.relativenumber = true
-vim.wo.signcolumn ="yes"
-vim.wo.wrap = true
-vim.o.bg = "dark"
 
-vim.cmd("colorscheme aurora")
+vim.cmd("colorscheme nvcode")

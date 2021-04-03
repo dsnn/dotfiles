@@ -14,7 +14,7 @@ require('telescope').setup {
         borderchars = {'─', '│', '─', '│', '╭', '╮', '╯', '╰'},
         color_devicons = true,
         entry_prefix = "  ",
-        file_ignore_patterns = {},
+        file_ignore_patterns = { ".git", "node_modules" },
         initial_mode = "insert",
         layout_defaults = {horizontal = {mirror = false}, vertical = {mirror = false}},
         layout_strategy = "horizontal",
@@ -42,7 +42,7 @@ require('telescope').setup {
 		["<C-q>"] = actions.send_to_qflist,
                 ["<C-j>"] = actions.move_selection_next,
                 ["<C-k>"] = actions.move_selection_previous,
-                ["<CR>"]  = actions.select_default + actions.center,
+                -- ["<CR>"]  = actions.select_default + actions.center,
                 ["<ESC>"] = actions.close
             },
             n = {
@@ -52,3 +52,54 @@ require('telescope').setup {
         }
     }
 }
+
+local M = {}
+
+function M.dotfiles()
+  require('telescope.builtin').find_files {
+    cwd = "~/dotfiles/",
+    hidden = true,
+    prompt_title = "~ dotfiles ~",
+    shorten_path = false,
+
+    layout_strategy = 'horizontal',
+    layout_config = {
+      preview_width = 0.65,
+    },
+  }
+end
+
+
+function M.help_tags()
+  require('telescope.builtin').help_tags {
+    show_version = true,
+  }
+end
+
+function M.search_all_files()
+  require('telescope.builtin').find_files()
+end
+
+function M.git_branches()
+  require('telescope.builtin').git_branches()
+end
+
+function M.buffers()
+  require('telescope.builtin').buffers {
+    shorten_path = false,
+  }
+end
+
+function M.colorscheme()
+  require('telescope.builtin').colorscheme()
+end
+
+function M.registers()
+  require('telescope.builtin').registers()
+end
+
+function M.quickfix()
+  require('telescope.builtin').quickfix()
+end
+
+return M

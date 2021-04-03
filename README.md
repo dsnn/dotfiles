@@ -50,10 +50,9 @@ manually download and install
 
 ## TODO
 
-- [ ] Fix broken comments
 - [X] Add `if has wsl: let s:clip = '/mnt/c/Windows/System32/clip.exe' (or win32yank)`
 	- issue: https://github.com/neovim/neovim/issues/13436 (I get: 'could not convert lua table')
-- [ ] remove or change highlight for matching words (on hover)
+- [ ] fix highlight for matching words (on hover)
 - [ ] add lsp gh command
 - [ ] review / fix install script for *
 	- write bash script for w/e. (make it clean and pretty w/ separate functions for w/e)
@@ -103,6 +102,10 @@ manually download and install
 - [ ] exec file cmd: <leader>S cmd luefile %
 - [ ] change mappings for resizing windows (using C-Arrow atm)
 - [ ] neovim session managment (keybindings, autocmds etc)
+- [ ] remove binding for floating terminal? 
+	- kinda want ESC to be working inside the term and not escape out of insert mode.
+- [ ] rename var with: https://github.com/glepnir/lspsaga.nvim
+- [ ] lua keymap dsl: https://github.com/tjdevries/astronauta.nvim
 
 ## Links
 

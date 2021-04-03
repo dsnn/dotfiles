@@ -53,21 +53,6 @@ manually download and install
 - [X] Add `if has wsl: let s:clip = '/mnt/c/Windows/System32/clip.exe' (or win32yank)`
 	- issue: https://github.com/neovim/neovim/issues/13436 (I get: 'could not convert lua table')
 - [ ] fix highlight for matching words (on hover)
-- [ ] add lsp gh command
-- [ ] review / fix install script for *
-	- write bash script for w/e. (make it clean and pretty w/ separate functions for w/e)
-	- simple install solution: call script fns from makefile?
-- [ ] autoinstall/updates for
-    	- automatic daily update (might be "dangerous" or annoying if things break ?)
-	    	- on first run for the day ?
-		- cron ?
-	- lsp-servers 
-	- app deps (make install now)
-	- nightly build apps (.local/bin)
-	- repos / submodules
-	- lazygit 
-	- lazydocker
-	- lazynpm
 - [ ] cheat.sh (https://github.com/nvim-telescope/telescope-cheat.nvim)
 	- regex
 	- work stuff (e.g. db connection strings. submodule)
@@ -105,7 +90,22 @@ manually download and install
 - [ ] remove binding for floating terminal? 
 	- kinda want ESC to be working inside the term and not escape out of insert mode.
 - [ ] rename var with: https://github.com/glepnir/lspsaga.nvim
+	-  add lsp gh command
 - [ ] lua keymap dsl: https://github.com/tjdevries/astronauta.nvim
+- [ ] review / fix install script for *
+	- write bash script for w/e. (make it clean and pretty w/ separate functions for w/e)
+	- simple install solution: call script fns from makefile?
+- [ ] autoinstall/updates for
+    	- automatic daily update (might be "dangerous" or annoying if things break ?)
+	    	- on first run for the day ?
+		- cron ?
+	- lsp-servers 
+	- app deps (make install now)
+	- nightly build apps (.local/bin)
+	- repos / submodules
+	- lazygit 
+	- lazydocker
+	- lazynpm
 
 ## Links
 

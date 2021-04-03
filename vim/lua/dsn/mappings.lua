@@ -57,12 +57,15 @@ vim.api.nvim_set_keymap('n', '<C-Left>',  ':vertical resize -2<CR>', {silent = t
 vim.api.nvim_set_keymap('n', '<C-Right>', ':vertical resize +2<CR>', {silent = true})
 
 -- telescope
-vim.api.nvim_set_keymap('n', '<leader>h',  "<cmd>:lua require('dsn.telescope').help_tags()<CR>", map_options)
-vim.api.nvim_set_keymap('n', '<leader>f',  "<cmd>:lua require('dsn.telescope').search_all_files()<CR>", map_options)
+vim.api.nvim_set_keymap('n', '<leader>f',  "<cmd>:lua require('dsn.telescope').find_files()<CR>", map_options)
+vim.api.nvim_set_keymap('n', '<leader>fg', "<cmd>:lua require('dsn.telescope').grep_prompt()<CR>", map_options)
+vim.api.nvim_set_keymap('n', '<leader>gw', "<cmd>:lua require('dsn.telescope').grep_word()<CR>", map_options)
+vim.api.nvim_set_keymap('n', '<leader>fh', "<cmd>:lua require('dsn.telescope').help_tags()<CR>", map_options)
 vim.api.nvim_set_keymap('n', '<leader>fd', "<cmd>:lua require('dsn.telescope').dotfiles()<CR>", map_options)
+vim.api.nvim_set_keymap('n', '<leader>fe', "<cmd>:lua require('dsn.telescope').file_browser()<CR>", map_options)
 vim.api.nvim_set_keymap('n', '<leader>gb', "<cmd>:lua require('dsn.telescope').git_branches()<CR>", map_options)
 vim.api.nvim_set_keymap('n', '<leader>fb', "<cmd>:lua require('dsn.telescope').buffers()<CR>", map_options)
-vim.api.nvim_set_keymap('n', '<leader>fa', "<cmd>:lua require('dsn.telescope').search_all_files()<CR>", map_options)
+vim.api.nvim_set_keymap('n', '<leader>fa', "<cmd>:lua require('dsn.telescope').find_files()<CR>", map_options)
 vim.api.nvim_set_keymap('n', '<leader>fc', "<cmd>:lua require('dsn.telescope').colorscheme()<CR>", map_options)
 vim.api.nvim_set_keymap('n', '<leader>fr', "<cmd>:lua require('dsn.telescope').registers()<CR>", map_options)
 vim.api.nvim_set_keymap('n', '<leader>fq', "<cmd>:lua require('dsn.telescope').quickfix()<CR>", map_options)

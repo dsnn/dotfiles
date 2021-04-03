@@ -59,6 +59,7 @@ return require('packer').startup(function(use)
     use 'nvim-lua/popup.nvim'
     use 'nvim-telescope/telescope-media-files.nvim'
     use 'nvim-telescope/telescope.nvim'
+    use 'nvim-telescope/telescope-fzy-native.nvim'
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
     -- autocomplete

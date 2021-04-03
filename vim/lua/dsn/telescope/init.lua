@@ -6,32 +6,33 @@ local actions = require('telescope.actions')
 local sorters = require('telescope.sorters')
 local previewers = require('telescope.previewers')
 
+require('telescope').load_extension('fzy_native')
 require('telescope').load_extension('media_files')
 
 require('telescope').setup {
     defaults = {
-        border = {},
-        borderchars = {'─', '│', '─', '│', '╭', '╮', '╯', '╰'},
+        -- border = {},
+        -- borderchars = {'─', '│', '─', '│', '╭', '╮', '╯', '╰'},
         color_devicons = true,
-        entry_prefix = "  ",
-        file_ignore_patterns = { ".git", "node_modules" },
-        initial_mode = "insert",
-        layout_defaults = {horizontal = {mirror = false}, vertical = {mirror = false}},
-        layout_strategy = "horizontal",
-        preview_cutoff = 120,
-        prompt_position = "top",
         prompt_prefix = " ",
-        results_height = 1,
-        results_width = 0.8,
-        selection_caret = " ",
-        selection_strategy = "reset",
-        set_env = {['COLORTERM'] = 'truecolor'}, -- default = nil,
-        shorten_path = true,
-        sorting_strategy = "descending",
-        use_less = true,
-        width = 0.75,
-        winblend = 0,
-        file_sorter = sorters.get_fuzzy_file,
+        -- entry_prefix = "  ",
+        file_ignore_patterns = { ".git", "node_modules" },
+        -- initial_mode = "insert",
+        -- layout_defaults = {horizontal = {mirror = false}, vertical = {mirror = false}},
+        -- layout_strategy = "horizontal",
+        -- preview_cutoff = 120,
+        -- prompt_position = "top",
+        -- results_height = 1,
+        -- results_width = 0.8,
+        -- selection_caret = " ",
+        -- selection_strategy = "reset",
+        -- set_env = {['COLORTERM'] = 'truecolor'}, -- default = nil,
+        -- shorten_path = true,
+        -- sorting_strategy = "descending",
+        -- use_less = true,
+        -- width = 0.75,
+        -- winblend = 0,
+        file_sorter = sorters.get_fzy_sorter,
         generic_sorter = sorters.get_generic_fuzzy_sorter,
         file_previewer = previewers.vim_buffer_cat.new,
         grep_previewer = previewers.vim_buffer_vimgrep.new,
@@ -49,6 +50,12 @@ require('telescope').setup {
                 ["<C-j>"] = actions.move_selection_next,
                 ["<C-k>"] = actions.move_selection_previous
             }
+        },
+        extensions = {
+            fzy_native = {
+                override_generic_sorter = false,
+                override_file_sorter = true,
+            }
         }
     }
 }
@@ -57,7 +64,7 @@ local M = {}
 
 function M.dotfiles()
   require('telescope.builtin').find_files {
-    cwd = "~/dotfiles/",
+    cwd = "~/dotfiles",
     hidden = true,
     prompt_title = "~ dotfiles ~",
     shorten_path = false,
@@ -76,8 +83,27 @@ function M.help_tags()
   }
 end
 
-function M.search_all_files()
-  require('telescope.builtin').find_files()
+function M.find_files()
+  require('telescope.builtin').find_files {
+    find_command = { 'rg', '--hidden', '--no-ignore', '--files' },
+  }
+end
+
+function M.grep_prompt()
+  require('telescope.builtin').grep_string {
+    shorten_path = true,
+    search = vim.fn.input("Grep String > "),
+  }
+end
+
+function M.grep_word()
+  require('telescope.builtin').grep_string {
+    short_path = true,
+    word_match = '-w',
+    only_sort_text = true,
+    layout_strategy = 'vertical',
+    sorter = sorters.get_fzy_sorter(),
+  }
 end
 
 function M.git_branches()
@@ -100,6 +126,16 @@ end
 
 function M.quickfix()
   require('telescope.builtin').quickfix()
+end
+
+function M.file_browser()
+  require('telescope.builtin').file_browser {
+    cwd = "~/",
+    sorting_strategy = "ascending",
+    scroll_strategy = "cycle",
+    prompt_position = "top",
+    hidden = true,
+  }
 end
 
 return M

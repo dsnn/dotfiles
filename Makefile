@@ -12,13 +12,9 @@ help: ## This help
 
 .DEFAULT_GOAL := help
 
-install: ## install packages 
-<<<<<<< HEAD
-	sudo apt install git zsh neovim nodejs npm keychain tmux stow silversearcher-ag ranger fzf -y
-=======
-	sudo apt install git keychain neovim nodejs npm ranger silversearcher-ag stow tmux zsh -y
->>>>>>> 9df8385b96faf35ce43649dc30addb7c63254539
-stow: ## stow packages 
+install: ## install packages
+	sudo apt install fzf keychain neovim nodejs npm ranger stow tmux zsh zsh ripgrep -y
+stow: ## stow packages
 	stow git
 	mkdir -p ~/bin
 	stow bin -t ~/bin
@@ -27,10 +23,10 @@ stow: ## stow packages
 	stow vim -t ~/.config/nvim
 	stow zsh
 tmux: ## setup tmux and dependencies
-	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm 
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 nvm: ## setup nvm
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
-autosuggestions: ## setup zsh autosuggestions 
+autosuggestions: ## setup zsh autosuggestions
 	git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 syntaxhighlighting: ## setup zsh syntax highlighting
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting

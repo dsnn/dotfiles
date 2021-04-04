@@ -4,25 +4,25 @@ local sections = require('el.sections')
 local subscribe = require('el.subscribe')
 
 local git_branch = subscribe.buf_autocmd(
-"el_git_branch",
-"BufEnter",
+	"el_git_branch",
+	"BufEnter",
 	function(window, buffer)
 	  return extensions.git_branch(window, buffer)
 	end
 )
 
 local generator = function()
-	return {
-		extensions.mode,
+return {
+	extensions.mode,
 		" ",
-    git_branch,
+		git_branch,
 		sections.split,
-    sections.maximum_width(
-        builtin.responsive_file(140, 90),
-        0.30
-    ),
+		sections.maximum_width(
+			builtin.responsive_file(140, 90),
+			0.30
+		),
 		sections.split,
-    builtin.filetype
+		builtin.filetype
 	}
 end
 

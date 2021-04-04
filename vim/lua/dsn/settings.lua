@@ -1,12 +1,12 @@
 vim.wo.number = true
 vim.wo.relativenumber = true
-vim.bo.tabstop = 4
-vim.bo.shiftwidth = 4
-vim.bo.softtabstop = 4
+vim.bo.tabstop = 2
+vim.bo.shiftwidth = 2
+vim.bo.softtabstop = 2
 vim.bo.expandtab = true
 vim.bo.cindent = true
 vim.bo.textwidth = 120
-vim.bo.wrapmargin = 8
+vim.bo.wrapmargin = 4
 vim.o.showmode = false
 vim.o.showcmd = false
 vim.o.showmatch = true

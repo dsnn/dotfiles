@@ -33,7 +33,6 @@ manually download and install to `~/.local/bin`
 		- issue: https://github.com/neovim/neovim/issues/13436 (I get: 'could not convert lua table')
 	- shellcheck
 - [ ] config
- 	- fix Bdelete update tab 
 	- format / formatters
 	- fix prettier
 	- telescope grep w/ presist search word and result (search, then toggle between buffer and result)
@@ -46,8 +45,6 @@ manually download and install to `~/.local/bin`
 		- error w/ batcat, tmp fix: `sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep`
 		- replace fd for less deps. (fzf uses fd atm. eventho fd is better for file searching it should be fine w/ rg) 
 - [ ] plugins 
-	- pandoc 
-	- latex support
 	- omnisharp 
 	- neovim session managment (keybindings, autocmds etc)
 	- vim which key (bind to e.g. space + char ?) 

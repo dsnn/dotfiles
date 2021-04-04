@@ -4,10 +4,9 @@ local silent_no = { noremap = true, silent = true }
 -- general
 vim.g.mapleader = ','
 
-vim.api.nvim_set_keymap('n', ',,', ':w<CR>', silent_no)
-vim.api.nvim_set_keymap('n', ',q', ':q<CR>', silent_no)
-vim.api.nvim_set_keymap('n', ',w', ':Bdelete<CR>', silent_no)
+vim.api.nvim_set_keymap('n', ',w', ':BufferClose<CR>', silent_no)
 vim.api.nvim_set_keymap('n', '<Leader>.', '<C-^>', silent_no)
+vim.api.nvim_set_keymap('n', '<Leader>,', ':wall<CR>', silent_no)
 vim.api.nvim_set_keymap('n', '<Leader><space>', ':set hlsearch!<CR>', silent_no)
 vim.api.nvim_set_keymap('n', '<Leader>x', '<cmd>:luafile %<CR>', silent_no)
 

@@ -1,18 +1,3 @@
--- vim.api.nvim_set_keymap('n', 'gd',  	  "<cmd>:lua vim.lsp.buf.definition()<CR>", 	  	silent_no)
--- vim.api.nvim_set_keymap('n', 'gD',        "<cmd>:lua vim.lsp.buf.declaration()<CR>",    	silent_no)
--- vim.api.nvim_set_keymap('n', 'gr',        "<cmd>:lua vim.lsp.buf.references()<CR>", 	  	silent_no)
--- vim.api.nvim_set_keymap('n', 'gi',   	  "<cmd>:lua vim.lsp.buf.implementation()<CR>", 	silent_no)
--- vim.api.nvim_set_keymap('n', 'ca',        ":Lspsaga code_action<CR>", 				silent_no)
---vim.api.nvim_set_keymap('n', 'K',         ":Lspsaga hover_doc<CR>", 				silent_no)
--- vim.api.nvim_set_keymap('n', 'gh',        ":Lspsaga lsp_finder<CR>", 				silent_no)
--- vim.api.nvim_set_keymap('n', '<M-p>',     ":Lspsaga diagnostic_jump_prev<CR>", 			silent_no)
--- vim.api.nvim_set_keymap('n', '<M-n>',     ":Lspsaga diagnostic_jump_next<CR>", 			silent_no)
--- vim.api.nvim_set_keymap('n', '<leader>r', ":Lspsaga rename<CR>", 				silent_no)
-
--- -- vim.cmd('nnoremap <silent> <C-f> <cmd>lua require(\'lspsaga.action\').smart_scroll_with_saga(1)<CR>')
--- vim.cmd('nnoremap <silent> <C-b> <cmd>lua require(\'lspsaga.action\').smart_scroll_with_saga(-1)<CR>')
--- vim.cmd('command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()')
---
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end

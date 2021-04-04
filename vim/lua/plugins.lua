@@ -19,36 +19,25 @@ return require('packer').startup(function(use)
 
     -- buffer, register, tabs & statusline
     use 'gennaro-tedesco/nvim-peekup' 				-- peek on registers
-    use 'moll/vim-bbye'
-    use 'romgrk/barbar.nvim'
+    use 'moll/vim-bbye' 					-- del buffers without closing windows
+    use 'romgrk/barbar.nvim' 					-- improved tabline
+    use 'tjdevries/express_line.nvim' 				-- statusline
 
     -- navigation
     use 'airblade/vim-rooter'  					-- cwd to root on open
-    use 'andymass/vim-matchup'
+    use 'andymass/vim-matchup' 					-- extend vims matching (%)
     use 'kevinhwang91/rnvimr'
     use 'kyazdani42/nvim-tree.lua'
-    use 'liuchengxu/vim-which-key'
-    use 'unblevable/quick-scope'
-
-    -- icons, colors & themes
-    use 'ayu-theme/ayu-vim'
-    -- use 'chriskempson/base16-vim'
-    use 'christianchiarulli/nvcode-color-schemes.vim'
-    use 'kyazdani42/nvim-web-devicons'
-    use 'norcalli/nvim-colorizer.lua'
-    use 'ryanoasis/vim-devicons'
-    use 'sainnhe/sonokai'
-    use 'tjdevries/colorbuddy.vim'
+    use 'unblevable/quick-scope' 				-- f-helper: hi unique line chars
 
     -- lsp & code
-    use 'glepnir/lspsaga.nvim'
+    use 'glepnir/lspsaga.nvim' 					-- lsp cmds
     use 'kabouzeid/nvim-lspinstall'
     use 'kevinhwang91/nvim-bqf' 				-- better quick fix window
-    use 'kosayoda/nvim-lightbulb'
     use 'liuchengxu/vista.vim'  				-- lsp symbols & tags
     use 'neovim/nvim-lspconfig'
-    use 'onsails/lspkind-nvim'
     use 'sheerun/vim-polyglot'					-- language pack
+    use { 'prettier/vim-prettier', run = 'npm install' }
 
     -- telescope
     use 'nvim-lua/plenary.nvim'
@@ -57,13 +46,19 @@ return require('packer').startup(function(use)
     use 'nvim-telescope/telescope-fzy-native.nvim'
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
-    -- statusline
-    use 'tjdevries/express_line.nvim'
-
     -- autocomplete
     use 'dsznajder/vscode-es7-javascript-react-snippets'
-    use 'hrsh7th/nvim-compe'
-    use 'hrsh7th/vim-vsnip'
-    use 'windwp/nvim-autopairs'
+    use 'hrsh7th/nvim-compe' 					-- autocomplete
+    use 'hrsh7th/vim-vsnip' 					-- snippets
+    use 'windwp/nvim-autopairs' 				-- TODO. minimal autopars impl.
     use 'xabikos/vscode-javascript'
+
+    -- icons, colors & themes
+    use 'ayu-theme/ayu-vim'
+    use 'christianchiarulli/nvcode-color-schemes.vim'
+    use 'kyazdani42/nvim-web-devicons'
+    use 'norcalli/nvim-colorizer.lua'
+    use 'ryanoasis/vim-devicons'
+    use 'sainnhe/sonokai'
+    use 'tjdevries/colorbuddy.vim'
 end)

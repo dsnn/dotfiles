@@ -75,9 +75,10 @@ manually download and install
 		- regex, work stuff (e.g. db connection strings. submodule)
 	- [ ] telescope-arecibo
 - [ ] fix Bdelete update tab
-- [ ] format / formatters 
+- [ ] format / formatters
 - [ ] failsafe for aliases (e.g. check if lazygit exists)
-- [ ] fix goyo
+- [ ] fix prettier
+- [ ] fix goyo & limelight
 - [ ] telescope grep w/ presist search word and result (search, then toggle between buffer and result)
 - [ ] Fix spellcheck (markdown)
 - [ ] shellcheck

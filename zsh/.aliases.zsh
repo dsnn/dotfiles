@@ -1,4 +1,3 @@
-#alias vim='nvim'
 alias fd='fdfind'
 
 # nigthly build
@@ -7,7 +6,13 @@ if [ -x '/home/dsn/.local/bin/nvim/bin/nvim' ]; then
     alias nvim='/home/dsn/.local/bin/nvim/bin/nvim'
 fi
 
-# use batcase if installed
+# alias vim='/home/dsn/.local/bin/nvim/bin/nvim'
+# alias nvim='/home/dsn/.local/bin/nvim/bin/nvim'
+alias lazygit='/home/dsn/.local/bin/lazygit/lazygit'
+alias lazynpm='/home/dsn/.local/bin/lazynpm/lazynpm'
+alias lazydocker='/home/dsn/.local/bin/lazydocker/lazydocker'
+
+# use batcat if installed
 if [ $(dpkg-query -W -f='${Status}' batcat 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
 	alias cat='batcat'
 fi

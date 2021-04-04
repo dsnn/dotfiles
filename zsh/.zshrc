@@ -1,4 +1,4 @@
-setopt autocd 
+setopt autocd
 setopt extendedglob
 bindkey -v
 

@@ -8,6 +8,10 @@ fi
 
 [ -f $HOME/.exports.local.zsh ] && source $HOME/.exports.local.zsh
 
+if [ -d "$HOME/.local/bin" ] ; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+
 # exports
 export BROWSER=firefox
 export EDITOR=nvim

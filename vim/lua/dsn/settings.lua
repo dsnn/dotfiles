@@ -1,12 +1,17 @@
+vim.cmd("colorscheme nvcode")
+
 vim.wo.number = true
 vim.wo.relativenumber = true
-vim.bo.expandtab = true
-vim.bo.shiftwidth = 4
-vim.bo.smartindent = true
-vim.bo.softtabstop = 4
 vim.bo.tabstop = 4
+vim.bo.shiftwidth = 4
+vim.bo.softtabstop = 4
+vim.bo.expandtab = true
+vim.bo.cindent = true
 vim.bo.textwidth = 120
 vim.bo.wrapmargin = 8
+vim.o.showmode = false
+vim.o.showcmd = false
+vim.o.showmatch = true
 vim.cmd('set cpoptions+=$')
 vim.cmd('set iskeyword+=-')
 vim.cmd('set shortmess+=c')
@@ -20,7 +25,7 @@ vim.o.fileencoding = "utf-8"
 vim.o.hidden = true
 vim.o.history = 1000
 vim.o.ignorecase = true
-vim.o.inccommand = 'nosplit'
+vim.o.inccommand = 'split'
 vim.o.mouse = "a"
 vim.o.pumheight = 10
 vim.o.scrolloff = 10
@@ -41,5 +46,6 @@ vim.wo.foldlevel = 1
 vim.wo.foldmethod = "syntax"
 vim.wo.foldnestmax = 10
 vim.wo.linebreak = true
-
-vim.cmd("colorscheme nvcode")
+vim.o.equalalways = true
+vim.o.splitright = true
+vim.o.splitbelow = true

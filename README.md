@@ -50,48 +50,41 @@ manually download and install
 
 ## TODO
 
-- [X] Add `if has wsl: let s:clip = '/mnt/c/Windows/System32/clip.exe' (or win32yank)`
-	- issue: https://github.com/neovim/neovim/issues/13436 (I get: 'could not convert lua table')
-- [ ] fix highlight for matching words (on hover)
-- [ ] cheat.sh (https://github.com/nvim-telescope/telescope-cheat.nvim)
-	- regex
-	- work stuff (e.g. db connection strings. submodule)
-- [ ] markdown lint / lsp / snippets / preview
-    - telescope?
-    - lsp, typechecks, linters
-- [ ] telescope-arecibo 
+- [ ] LSP
+	- [ ] markdown lint / lsp / snippets / preview
+	- lsp, typechecks, linters
+	- [ ] unzip (required by lua lsp server)
+	- [ ] rename var with: https://github.com/glepnir/lspsaga.nvim
+		-  add lsp gh command
+	- [X] Add `if has wsl: let s:clip = '/mnt/c/Windows/System32/clip.exe' (or win32yank)`
+		- issue: https://github.com/neovim/neovim/issues/13436 (I get: 'could not convert lua table')
+
+- [] Telescope
+	- [ ] cheat.sh (https://github.com/nvim-telescope/telescope-cheat.nvim)
+		- regex, work stuff (e.g. db connection strings. submodule)
+	- [ ] telescope-arecibo 
 - [ ] vim which key (bind to e.g. space + char ?) 
 - [ ] fix Bdelete update tab
+- [ ] failsafe for aliases (e.g. check if lazygit exists)
+- [ ] fix goyo 
+- [ ] telescope grep w/ presist search word and result (search, then toggle between buffer and result)
+- [ ] Fix spellcheck (markdown)
+- [ ] shellcheck 
+- [ ] ueberzug 
+- [ ] ripgrep - error w/ batcat, tmp fix: `sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep`
+- [ ] pynvim
+- [ ] neovim-remote (open files from :term witout nesting)
+- [ ] change mappings for resizing windows (using C-Arrow atm)
+- [ ] lua keymap dsl: https://github.com/tjdevries/astronauta.nvim
+- [ ] pandoc
+- [ ] latex support
+- [ ] omnisharp
+- [ ] neovim session managment (keybindings, autocmds etc)
 - [ ] vimwiki 
 	- readme
 	- todos
 	- notes for home / work (submodule) ?
 	- eleventy (submodule) ?
-- [ ] failsafe for aliases (e.g. check if lazygit exists)
-- [ ] Fix spellcheck (markdown)
-- [ ] shellcheck 
-- [ ] ueberzug 
-- [ ] fd (aka fd-find)
-- [ ] ripgrep - error w/ batcat, tmp fix: `sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep`
-- [ ] lazygit
-- [ ] lazydocker
-- [ ] lazynpm
-- [ ] pynvim
-- [ ] neovim-remote (open files from :term witout nesting)
-- [ ] pandoc
-- [ ] latex support
-- [ ] omnisharp
-- [ ] unzip (required by lua lsp server)
-- [ ] run lua line (LuaDev-Runline) 
-- [ ] base16 colors
-- [ ] exec file cmd: <leader>S cmd luefile %
-- [ ] change mappings for resizing windows (using C-Arrow atm)
-- [ ] neovim session managment (keybindings, autocmds etc)
-- [ ] remove binding for floating terminal? 
-	- kinda want ESC to be working inside the term and not escape out of insert mode.
-- [ ] rename var with: https://github.com/glepnir/lspsaga.nvim
-	-  add lsp gh command
-- [ ] lua keymap dsl: https://github.com/tjdevries/astronauta.nvim
 - [ ] review / fix install script for *
 	- write bash script for w/e. (make it clean and pretty w/ separate functions for w/e)
 	- simple install solution: call script fns from makefile?

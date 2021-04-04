@@ -1,3 +1,18 @@
+-- vim.api.nvim_set_keymap('n', 'gd',  	  "<cmd>:lua vim.lsp.buf.definition()<CR>", 	  	silent_no)
+-- vim.api.nvim_set_keymap('n', 'gD',        "<cmd>:lua vim.lsp.buf.declaration()<CR>",    	silent_no)
+-- vim.api.nvim_set_keymap('n', 'gr',        "<cmd>:lua vim.lsp.buf.references()<CR>", 	  	silent_no)
+-- vim.api.nvim_set_keymap('n', 'gi',   	  "<cmd>:lua vim.lsp.buf.implementation()<CR>", 	silent_no)
+-- vim.api.nvim_set_keymap('n', 'ca',        ":Lspsaga code_action<CR>", 				silent_no)
+--vim.api.nvim_set_keymap('n', 'K',         ":Lspsaga hover_doc<CR>", 				silent_no)
+-- vim.api.nvim_set_keymap('n', 'gh',        ":Lspsaga lsp_finder<CR>", 				silent_no)
+-- vim.api.nvim_set_keymap('n', '<M-p>',     ":Lspsaga diagnostic_jump_prev<CR>", 			silent_no)
+-- vim.api.nvim_set_keymap('n', '<M-n>',     ":Lspsaga diagnostic_jump_next<CR>", 			silent_no)
+-- vim.api.nvim_set_keymap('n', '<leader>r', ":Lspsaga rename<CR>", 				silent_no)
+
+-- -- vim.cmd('nnoremap <silent> <C-f> <cmd>lua require(\'lspsaga.action\').smart_scroll_with_saga(1)<CR>')
+-- vim.cmd('nnoremap <silent> <C-b> <cmd>lua require(\'lspsaga.action\').smart_scroll_with_saga(-1)<CR>')
+-- vim.cmd('command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()')
+--
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -6,23 +21,18 @@ local on_attach = function(client, bufnr)
 
   -- Mappings.
   local opts = { noremap=true, silent=true }
-  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', 'gd', 	   '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'gD', 	   '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gr', 	   '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', 'gi', 	   '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', 'K', 	   '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', '<space>e',  "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
+  buf_set_keymap('n', 'ca', 	   ':Lspsaga code_action<CR>', opts)
+  buf_set_keymap('n', 'gh',   	   ':Lspsaga lsp_finder<CR>', opts)
+  buf_set_keymap('n', '<M-p>',     ":Lspsaga diagnostic_jump_prev<CR>", opts)
+  buf_set_keymap('n', '<M-n>',     ":Lspsaga diagnostic_jump_next<CR>", opts)
+  buf_set_keymap('n', '<leader>r', ":Lspsaga rename<CR>", opts)
 
-  -- Set some keybinds conditional on server capabilities
   if client.resolved_capabilities.document_formatting then
     buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
   elseif client.resolved_capabilities.document_range_formatting then
@@ -30,18 +40,18 @@ local on_attach = function(client, bufnr)
   end
 
   -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
-    vim.api.nvim_exec([[
-      hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
-      hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
-      hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]], false)
-  end
+  -- if client.resolved_capabilities.document_highlight then
+  --   vim.api.nvim_exec([[
+  --     hi LspReferenceRead cterm=bold ctermbg=red guibg=#464646
+  --     hi LspReferenceText cterm=bold ctermbg=red guibg=#464646
+  --     hi LspReferenceWrite cterm=bold ctermbg=red guibg=#464646
+  --     augroup lsp_document_highlight
+  --       autocmd! * <buffer>
+  --       autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+  --       autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+  --     augroup END
+  --   ]], false)
+  -- end
 end
 
 -- Configure lua language server for neovim development
@@ -74,8 +84,7 @@ local function make_config()
     vim.lsp.diagnostic.on_publish_diagnostics, {
       underline = true,
       virtual_text = false,
-      update_in_insert = false,
-    }
+      update_in_insert = false, }
   )
 
   return {
@@ -90,20 +99,27 @@ local function setup_servers()
   require'lspinstall'.setup()
 
   local servers = require'lspinstall'.installed_servers()
-  -- table.insert(servers, "bash")
-  -- table.insert(servers, "css")
-  -- table.insert(servers, "dockerfile")
-  -- table.insert(servers, "graphql")
-  -- table.insert(servers, "html")
-  -- table.insert(servers, "json")
-  -- table.insert(servers, "latex")
-  -- table.insert(servers, "lua")
-  -- table.insert(servers, "python")
-  table.insert(servers, "typescript")
-  -- table.insert(servers, "vim")
-  -- table.insert(servers, "yaml")
+  local to_install = {
+    "bash",
+    "css",
+    "dockerfile",
+    "graphql",
+    "html",
+    "json",
+    "lua",
+    "typescript",
+    "vim",
+    "yaml"
+-- "latex",
+-- "python"
+  }
+
+  for _, server in ipairs(to_install) do
+    table.insert(servers, server)
+  end
 
   for _, server in ipairs(servers) do
+    -- print(server)
     local config = make_config()
 
     -- language specific config
@@ -118,7 +134,7 @@ local function setup_servers()
       "typescript",
       "typescriptreact",
       "typescript.tsx"
-      }; 
+      };
     end
 
     require'lspconfig'[server].setup(config)
@@ -133,20 +149,3 @@ require'lspinstall'.post_install_hook = function ()
   vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
 end
 
--- vim.cmd('inoremap <expr> <c-j> (\"\\<C-n>\")')
--- vim.cmd('inoremap <expr> <c-k> (\"\\<C-p>\")')
-vim.cmd("inoremap <silent><expr> <CR> compe#confirm('<CR>')")
-
--- vim.cmd('nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>')
--- vim.cmd('nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>')
--- vim.cmd('nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>')
--- vim.cmd('nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>')
--- vim.cmd('nnoremap <silent> ca :Lspsaga code_action<CR>')
--- vim.cmd('nnoremap <silent> K :Lspsaga hover_doc<CR>')
--- vim.cmd('nnoremap <silent> gh :Lspsaga lsp_finder<CR>')
--- 
-vim.cmd('nnoremap <silent> <M-p> :Lspsaga diagnostic_jump_prev<CR>')
-vim.cmd('nnoremap <silent> <M-n> :Lspsaga diagnostic_jump_next<CR>')
--- -- vim.cmd('nnoremap <silent> <C-f> <cmd>lua require(\'lspsaga.action\').smart_scroll_with_saga(1)<CR>')
--- vim.cmd('nnoremap <silent> <C-b> <cmd>lua require(\'lspsaga.action\').smart_scroll_with_saga(-1)<CR>')
--- vim.cmd('command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()')

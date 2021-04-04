@@ -14,15 +14,11 @@ return require('packer').startup(function(use)
     -- general
     use 'junegunn/goyo.vim'
     use 'mhinz/vim-startify'
-    use 'ntpeters/vim-better-whitespace'
     use 'tpope/vim-surround'
-    use 'voldikss/vim-floaterm'
-    use 'bfredl/nvim-luadev'
     use 'terrortylor/nvim-comment'
 
     -- buffer, register, tabs & statusline
     use 'gennaro-tedesco/nvim-peekup' 				-- peek on registers
-    use 'glepnir/galaxyline.nvim'
     use 'moll/vim-bbye'
     use 'romgrk/barbar.nvim'
 
@@ -61,6 +57,9 @@ return require('packer').startup(function(use)
     use 'nvim-telescope/telescope.nvim'
     use 'nvim-telescope/telescope-fzy-native.nvim'
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+
+    -- statusline
+    use 'tjdevries/express_line.nvim'
 
     -- autocomplete
     use 'dsznajder/vscode-es7-javascript-react-snippets'

@@ -1,38 +1,36 @@
-local map_options = { noremap = true, silent = true }
+local silent = { silent = true }
+local silent_no = { noremap = true, silent = true }
 
 -- general
 vim.g.mapleader = ','
 
-vim.api.nvim_set_keymap('n', ',,', ':w<CR>', map_options)
-vim.api.nvim_set_keymap('n', ',q', ':q<CR>', map_options)
-vim.api.nvim_set_keymap('n', ',w', ':Bdelete<CR>', map_options)
-vim.api.nvim_set_keymap('n', '<Leader>.', '<C-^>', map_options)
-vim.api.nvim_set_keymap('n', '<Leader><space>', ':set hlsearch!<CR>', map_options)
---vim.api.nvim_set_keymap('n', '<leader>c', ":%s/\s\+$//e<CR>", map_options)
+vim.api.nvim_set_keymap('n', ',,', ':w<CR>', silent_no)
+vim.api.nvim_set_keymap('n', ',q', ':q<CR>', silent_no)
+vim.api.nvim_set_keymap('n', ',w', ':Bdelete<CR>', silent_no)
+vim.api.nvim_set_keymap('n', '<Leader>.', '<C-^>', silent_no)
+vim.api.nvim_set_keymap('n', '<Leader><space>', ':set hlsearch!<CR>', silent_no)
+vim.api.nvim_set_keymap('n', '<Leader>x', '<cmd>:luafile %<CR>', silent_no)
+
+-- remove whitespace manually
+vim.cmd([[ nnoremap <leader>c :%s/\s\+$//<CR> ]])
 
 -- nvim tree
-vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<CR>', map_options)
-vim.api.nvim_set_keymap('n', '<Leader>k', ':NvimTreeFindFile<CR>', map_options)
+vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<CR>', silent_no)
+vim.api.nvim_set_keymap('n', '<Leader>k', ':NvimTreeFindFile<CR>', silent_no)
 
 -- line indentation
-vim.api.nvim_set_keymap('v', '<', '<gv', map_options)
-vim.api.nvim_set_keymap('v', '>', '>gv', map_options)
+vim.api.nvim_set_keymap('v', '<', '<gv', silent_no)
+vim.api.nvim_set_keymap('v', '>', '>gv', silent_no)
 
 -- window navigation
-vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', {silent = true})
-vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', {silent = true})
-vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', {silent = true})
-vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', {silent = true})
+vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', silent)
+vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', silent)
+vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', silent)
+vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', silent)
 
 -- lsp & completion
 require('dsn.compe')
 require('dsn.lsp')
-
--- terminal
-vim.api.nvim_set_keymap('n', '<leader>t',  ':FloatermToggle<CR>', {silent = true})
-vim.api.nvim_set_keymap('n', '<leader>tg', ':FloatermNew --name=git --autoclose=2 lazygit<CR>', {silent = true})
-vim.api.nvim_set_keymap('n', '<leader>td', ':FloatermNew --name=docker --autoclose=2 lazydocker<CR>', {silent = true})
-vim.api.nvim_set_keymap('n', '<leader>tn', ':FloatermNew --name=npm --autoclose=2 lazynpm<CR>', {silent = true})
 
 vim.cmd([[
   tnoremap <C-h> <C-\><C-N><C-w>h
@@ -43,12 +41,12 @@ vim.cmd([[
   inoremap <C-j> <C-\><C-N><C-w>j
   inoremap <C-k> <C-\><C-N><C-w>k
   inoremap <C-l> <C-\><C-N><C-w>l
-  tnoremap <Esc> <C-\><C-n>
+  tnoremap <Esc><Esc> <C-\><C-n>
 ]])
 
 -- buffer navigation
-vim.api.nvim_set_keymap('n', '<TAB>', ':bnext<CR>', map_options)
-vim.api.nvim_set_keymap('n', '<S-TAB>', ':bprevious<CR>', map_options)
+vim.api.nvim_set_keymap('n', '<TAB>', ':bnext<CR>', silent_no)
+vim.api.nvim_set_keymap('n', '<S-TAB>', ':bprevious<CR>', silent_no)
 
 -- window resizing
 vim.api.nvim_set_keymap('n', '<C-Up>',    ':resize -2<CR>',          {silent = true})
@@ -57,18 +55,18 @@ vim.api.nvim_set_keymap('n', '<C-Left>',  ':vertical resize -2<CR>', {silent = t
 vim.api.nvim_set_keymap('n', '<C-Right>', ':vertical resize +2<CR>', {silent = true})
 
 -- telescope
-vim.api.nvim_set_keymap('n', '<leader>f',  "<cmd>:lua require('dsn.telescope').find_files()<CR>", map_options)
-vim.api.nvim_set_keymap('n', '<leader>fg', "<cmd>:lua require('dsn.telescope').grep_prompt()<CR>", map_options)
-vim.api.nvim_set_keymap('n', '<leader>gw', "<cmd>:lua require('dsn.telescope').grep_word()<CR>", map_options)
-vim.api.nvim_set_keymap('n', '<leader>fh', "<cmd>:lua require('dsn.telescope').help_tags()<CR>", map_options)
-vim.api.nvim_set_keymap('n', '<leader>fd', "<cmd>:lua require('dsn.telescope').dotfiles()<CR>", map_options)
-vim.api.nvim_set_keymap('n', '<leader>fe', "<cmd>:lua require('dsn.telescope').file_browser()<CR>", map_options)
-vim.api.nvim_set_keymap('n', '<leader>gb', "<cmd>:lua require('dsn.telescope').git_branches()<CR>", map_options)
-vim.api.nvim_set_keymap('n', '<leader>fb', "<cmd>:lua require('dsn.telescope').buffers()<CR>", map_options)
-vim.api.nvim_set_keymap('n', '<leader>fa', "<cmd>:lua require('dsn.telescope').find_files()<CR>", map_options)
-vim.api.nvim_set_keymap('n', '<leader>fc', "<cmd>:lua require('dsn.telescope').colorscheme()<CR>", map_options)
-vim.api.nvim_set_keymap('n', '<leader>fr', "<cmd>:lua require('dsn.telescope').registers()<CR>", map_options)
-vim.api.nvim_set_keymap('n', '<leader>fq', "<cmd>:lua require('dsn.telescope').quickfix()<CR>", map_options)
+vim.api.nvim_set_keymap('n', '<leader>f',  "<cmd>:lua require('dsn.telescope').find_files()<CR>", silent_no)
+vim.api.nvim_set_keymap('n', '<leader>fg', "<cmd>:lua require('dsn.telescope').grep_prompt()<CR>", silent_no)
+vim.api.nvim_set_keymap('n', '<leader>gw', "<cmd>:lua require('dsn.telescope').grep_word()<CR>", silent_no)
+vim.api.nvim_set_keymap('n', '<leader>fh', "<cmd>:lua require('dsn.telescope').help_tags()<CR>", silent_no)
+vim.api.nvim_set_keymap('n', '<leader>fd', "<cmd>:lua require('dsn.telescope').dotfiles()<CR>", silent_no)
+vim.api.nvim_set_keymap('n', '<leader>fe', "<cmd>:lua require('dsn.telescope').file_browser()<CR>", silent_no)
+vim.api.nvim_set_keymap('n', '<leader>gb', "<cmd>:lua require('dsn.telescope').git_branches()<CR>", silent_no)
+vim.api.nvim_set_keymap('n', '<leader>fb', "<cmd>:lua require('dsn.telescope').buffers()<CR>", silent_no)
+vim.api.nvim_set_keymap('n', '<leader>fa', "<cmd>:lua require('dsn.telescope').find_files()<CR>", silent_no)
+vim.api.nvim_set_keymap('n', '<leader>fc', "<cmd>:lua require('dsn.telescope').colorscheme()<CR>", silent_no)
+vim.api.nvim_set_keymap('n', '<leader>fr', "<cmd>:lua require('dsn.telescope').registers()<CR>", silent_no)
+vim.api.nvim_set_keymap('n', '<leader>fq', "<cmd>:lua require('dsn.telescope').quickfix()<CR>", silent_no)
 
 -- luadev
 vim.api.nvim_set_keymap('n', '<leader>ll',  ':Luadev-RunLine', {silent = true})

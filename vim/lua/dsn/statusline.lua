@@ -1,21 +1,29 @@
-local generator = function(win_id)
-    local el_segments = {}
+local builtin = require('el.builtin')
+local extensions = require('el.extensions')
+local sections = require('el.sections')
+local subscribe = require('el.subscribe')
 
-    local extensions = require('el.extensions')
-    table.insert(el_segments, extensions.mode)
-    table.insert(el_segments, '%f')
+local git_branch = subscribe.buf_autocmd(
+"el_git_branch",
+"BufEnter",
+	function(window, buffer)
+	  return extensions.git_branch(window, buffer)
+	end
+)
 
-    table.insert(el_segments, extensions.git_changes)
-
-    local helper = require("el.helper")
-    table.insert(el_segments, helper.async_buf_setter(
-      win_id,
-      'el_git_stat',
-      extensions.git_changes,
-      5000
-    ))
-
-    return el_segments
+local generator = function()
+	return {
+		extensions.mode,
+		" ",
+    git_branch,
+		sections.split,
+    sections.maximum_width(
+        builtin.responsive_file(140, 90),
+        0.30
+    ),
+		sections.split,
+    builtin.filetype
+	}
 end
 
 require('el').setup { generator = generator }

@@ -7,7 +7,6 @@ local sorters = require('telescope.sorters')
 local previewers = require('telescope.previewers')
 
 require('telescope').load_extension('fzy_native')
-require('telescope').load_extension('media_files')
 
 require('telescope').setup {
     defaults = {

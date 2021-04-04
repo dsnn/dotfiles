@@ -1,5 +1,3 @@
-vim.cmd("colorscheme nvcode")
-
 vim.wo.number = true
 vim.wo.relativenumber = true
 vim.bo.tabstop = 4
@@ -49,3 +47,5 @@ vim.wo.linebreak = true
 vim.o.equalalways = true
 vim.o.splitright = true
 vim.o.splitbelow = true
+
+vim.cmd("colorscheme nvcode")

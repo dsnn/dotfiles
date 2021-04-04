@@ -32,7 +32,7 @@ return require('packer').startup(function(use)
 
     -- icons, colors & themes
     use 'ayu-theme/ayu-vim'
-    use 'chriskempson/base16-vim'
+    -- use 'chriskempson/base16-vim'
     use 'christianchiarulli/nvcode-color-schemes.vim'
     use 'kyazdani42/nvim-web-devicons'
     use 'norcalli/nvim-colorizer.lua'
@@ -53,7 +53,6 @@ return require('packer').startup(function(use)
     -- telescope
     use 'nvim-lua/plenary.nvim'
     use 'nvim-lua/popup.nvim'
-    use 'nvim-telescope/telescope-media-files.nvim'
     use 'nvim-telescope/telescope.nvim'
     use 'nvim-telescope/telescope-fzy-native.nvim'
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}

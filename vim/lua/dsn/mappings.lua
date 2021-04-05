@@ -4,7 +4,7 @@ local silent_no = { noremap = true, silent = true }
 -- general
 vim.g.mapleader = ','
 
-vim.api.nvim_set_keymap('n', ',w', ':BufferClose<CR>', silent_no)
+vim.api.nvim_set_keymap('n', '<Leader>q', ':BufferClose<CR>', silent_no)
 vim.api.nvim_set_keymap('n', '<Leader>.', '<C-^>', silent_no)
 vim.api.nvim_set_keymap('n', '<Leader>,', ':wall<CR>', silent_no)
 vim.api.nvim_set_keymap('n', '<Leader><space>', ':set hlsearch!<CR>', silent_no)
@@ -66,3 +66,6 @@ vim.api.nvim_set_keymap('n', '<space>fq', "<cmd>:lua require('dsn.telescope').qu
 
 -- comments
 require('nvim_comment').setup()
+
+-- limelight
+vim.api.nvim_set_keymap('n', '<leader>l', ":Limelight!!<CR>", silent_no)

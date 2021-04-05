@@ -2,10 +2,11 @@ if not pcall(require, 'telescope') then
   return
 end
 
-local actions = require('telescope.actions')
-local sorters = require('telescope.sorters')
-local previewers = require('telescope.previewers')
+local actions     = require('telescope.actions')
+local sorters     = require('telescope.sorters')
+local previewers  = require('telescope.previewers')
 
+-- require('telescope').load_extension('cheat')
 require('telescope').load_extension('fzy_native')
 
 require('telescope').setup {
@@ -39,7 +40,7 @@ require('telescope').setup {
         buffer_previewer_maker = previewers.buffer_previewer_maker,
         mappings = {
             i = {
-		["<C-q>"] = actions.send_to_qflist,
+		            ["<C-q>"] = actions.send_to_qflist,
                 ["<C-j>"] = actions.move_selection_next,
                 ["<C-k>"] = actions.move_selection_previous,
                 -- ["<CR>"]  = actions.select_default + actions.center,

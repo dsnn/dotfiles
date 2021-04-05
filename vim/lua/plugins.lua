@@ -59,4 +59,5 @@ return require('packer').startup(function(use)
     use 'ryanoasis/vim-devicons'
     use 'sainnhe/sonokai'
     use 'tjdevries/colorbuddy.vim'
+    use 'junegunn/limelight.vim'
 end)

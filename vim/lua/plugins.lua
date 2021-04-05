@@ -47,7 +47,8 @@ return require('packer').startup(function(use)
 
     -- autocomplete
     use 'hrsh7th/nvim-compe' 					                      -- autocomplete
-    -- use 'hrsh7th/vim-vsnip' 					                    -- snippets
+    use 'hrsh7th/vim-vsnip' 					                    -- snippets
+    use 'hrsh7th/vim-vsnip-integ'
     use 'windwp/nvim-autopairs' 			                      -- TODO. minimal autopars impl.
 
     -- icons, colors & themes

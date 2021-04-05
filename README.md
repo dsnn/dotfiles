@@ -25,17 +25,21 @@ manually download and install to `~/.local/bin`
 
 ## TODO
 
-- [ ] LSP
+- [ ] lsp
 	- [ ] linting (markdown)
-	- [ ] snippets
 	- [ ] formatters
 	- [ ] shellcheck
 	- [ ] unzip (required by lua lsp server)
 	- [X] Add `if has wsl: let s:clip = '/mnt/c/Windows/System32/clip.exe' (or win32yank)`
 		- issue: https://github.com/neovim/neovim/issues/13436 (I get: 'could not convert lua table')
+- [ ] telescope
+	- grep w/ presist search word and result (search, then toggle between buffer and result)
+	- cheat.sh (https://github.com/nvim-telescope/telescope-cheat.nvim)
+		- regex, work stuff (e.g. db connection strings. submodule)
+	- telescope-arecibo 
+	- list & insert snippets
 - [ ] config
 	- fix prettier
-	- telescope grep w/ presist search word and result (search, then toggle between buffer and result)
 	- fix spellcheck (markdown)
 - [ ] shell 
 	- failsafe for aliases (e.g. check if lazygit exists) 
@@ -50,9 +54,6 @@ manually download and install to `~/.local/bin`
 	- lua keymap dsl: https://github.com/tjdevries/astronauta.nvim 
 	- neovim-remote (open files from :term witout nesting) 
 	- fix goyo & limelight
-	- telescope: cheat.sh (https://github.com/nvim-telescope/telescope-cheat.nvim)
-		- regex, work stuff (e.g. db connection strings. submodule)
-	- telescope-arecibo 
 	- pynvim
 - [ ] vimwiki
 	- readme
@@ -79,3 +80,4 @@ manually download and install to `~/.local/bin`
 - https://github.com/jesseleite/dotfiles/tree/master/vim
 - https://github.com/ngscheurich/dotfiles/tree/main/nvim/.config/nvim
 - https://github.com/rafamadriz/friendly-snippets
+

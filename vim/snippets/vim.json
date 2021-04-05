@@ -1,0 +1,6 @@
+{
+  "alias": {
+    "prefix": "alias",
+    "body": "alias $1='$2'"
+  }
+}

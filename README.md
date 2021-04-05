@@ -26,7 +26,6 @@ manually download and install to `~/.local/bin`
 ## TODO
 
 - [ ] lsp
-	- [ ] linting (markdown)
 	- [ ] formatters
 	- [ ] shellcheck
 	- [ ] unzip (required by lua lsp server)
@@ -40,7 +39,9 @@ manually download and install to `~/.local/bin`
 	- list & insert snippets
 - [ ] config
 	- fix prettier
+- [ ] markdown
 	- fix spellcheck (markdown)
+	- linting 
 - [ ] shell 
 	- failsafe for aliases (e.g. check if lazygit exists) 
 	- ueberzug 
@@ -55,11 +56,6 @@ manually download and install to `~/.local/bin`
 	- neovim-remote (open files from :term witout nesting) 
 	- fix goyo & limelight
 	- pynvim
-- [ ] vimwiki
-	- readme
-	- todos
-	- notes for home / work (submodule) ?
-	- eleventy (submodule) ?
 - [ ] review / fix (auto-?) install / updates for *
 	- simple install solution: call script fns from makefile?
 	- write bash script for w/e. (make it clean and pretty w/ separate functions for w/e)

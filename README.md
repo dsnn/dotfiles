@@ -37,7 +37,6 @@ manually download and install to `~/.local/bin`
 	- fix prettier
 	- telescope grep w/ presist search word and result (search, then toggle between buffer and result)
 	- fix spellcheck (markdown)
-	- change mappings for resizing windows (using C-Arrow atm)
 - [ ] shell 
 	- failsafe for aliases (e.g. check if lazygit exists) 
 	- ueberzug 

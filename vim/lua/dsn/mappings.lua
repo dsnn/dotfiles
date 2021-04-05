@@ -21,12 +21,19 @@ vim.api.nvim_set_keymap('n', '<Leader>k', ':NvimTreeFindFile<CR>', silent_no)
 vim.api.nvim_set_keymap('v', '<', '<gv', silent_no)
 vim.api.nvim_set_keymap('v', '>', '>gv', silent_no)
 
--- window / terminal navigation
+-- window navigation
 vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', silent)
 vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', silent)
 vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', silent)
 vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', silent)
 
+-- window resizing
+vim.api.nvim_set_keymap('n', '<M-j>',  ':resize -2<CR>',          silent_no)
+vim.api.nvim_set_keymap('n', '<M-k>',  ':resize +2<CR>',          silent_no)
+vim.api.nvim_set_keymap('n', '<M-h>',  ':vertical resize -2<CR>', silent_no)
+vim.api.nvim_set_keymap('n', '<M-l>',  ':vertical resize +2<CR>', silent_no)
+
+-- terminal navigation
 vim.cmd([[
   tnoremap <C-h> <C-\><C-N><C-w>h
   tnoremap <C-j> <C-\><C-N><C-w>j
@@ -42,12 +49,6 @@ vim.cmd([[
 -- buffer navigation
 vim.api.nvim_set_keymap('n', '<TAB>', ':bnext<CR>', silent_no)
 vim.api.nvim_set_keymap('n', '<S-TAB>', ':bprevious<CR>', silent_no)
-
--- window resizing
-vim.api.nvim_set_keymap('n', '<C-Up>',    ':resize -2<CR>',          {silent = true})
-vim.api.nvim_set_keymap('n', '<C-Down>',  ':resize +2<CR>',          {silent = true})
-vim.api.nvim_set_keymap('n', '<C-Left>',  ':vertical resize -2<CR>', {silent = true})
-vim.api.nvim_set_keymap('n', '<C-Right>', ':vertical resize +2<CR>', {silent = true})
 
 -- telescope
 vim.api.nvim_set_keymap('n', '<space>f',  "<cmd>:lua require('dsn.telescope').find_files()<CR>", silent_no)

@@ -4,5 +4,7 @@ require('dsn.treesitter')
 require('dsn.nvimtree')
 require('dsn.statusline')
 require('dsn.prettier')
+require('dsn.lsp')
+require('dsn.compe')
 require('dsn.settings')
-require('dsn.mappings') -- mappings, compe, lsp & telescope
+require('dsn.mappings')

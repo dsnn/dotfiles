@@ -21,15 +21,11 @@ vim.api.nvim_set_keymap('n', '<Leader>k', ':NvimTreeFindFile<CR>', silent_no)
 vim.api.nvim_set_keymap('v', '<', '<gv', silent_no)
 vim.api.nvim_set_keymap('v', '>', '>gv', silent_no)
 
--- window navigation
+-- window / terminal navigation
 vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', silent)
 vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', silent)
 vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', silent)
 vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', silent)
-
--- lsp & completion
-require('dsn.compe')
-require('dsn.lsp')
 
 vim.cmd([[
   tnoremap <C-h> <C-\><C-N><C-w>h
@@ -66,10 +62,6 @@ vim.api.nvim_set_keymap('n', '<space>fa', "<cmd>:lua require('dsn.telescope').fi
 vim.api.nvim_set_keymap('n', '<space>fc', "<cmd>:lua require('dsn.telescope').colorscheme()<CR>", silent_no)
 vim.api.nvim_set_keymap('n', '<space>fr', "<cmd>:lua require('dsn.telescope').registers()<CR>", silent_no)
 vim.api.nvim_set_keymap('n', '<space>fq', "<cmd>:lua require('dsn.telescope').quickfix()<CR>", silent_no)
-
--- luadev
-vim.api.nvim_set_keymap('n', '<leader>ll',  ':Luadev-RunLine', {silent = true})
-vim.api.nvim_set_keymap('n', '<leader>ls',  ':Luadev-Run', {silent = true})
 
 -- comments
 require('nvim_comment').setup()

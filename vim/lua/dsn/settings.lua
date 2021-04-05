@@ -17,6 +17,7 @@ vim.cmd('set showbreak=_')
 vim.cmd('set tags=./tags;,tags;')
 vim.cmd('set whichwrap+=<,>,[,],h,l')
 vim.o.backup = false
+vim.o.completeopt = "menuone,noselect"
 vim.o.clipboard = "unnamedplus"
 vim.o.cmdheight = 2
 vim.o.fileencoding = "utf-8"

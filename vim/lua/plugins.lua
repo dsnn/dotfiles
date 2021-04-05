@@ -18,25 +18,24 @@ return require('packer').startup(function(use)
     use 'terrortylor/nvim-comment'
 
     -- buffer, register, tabs & statusline
-    use 'gennaro-tedesco/nvim-peekup' 				-- peek on registers
-    use 'moll/vim-bbye' 					-- del buffers without closing windows
-    use 'romgrk/barbar.nvim' 					-- improved tabline
-    use 'tjdevries/express_line.nvim' 				-- statusline
+    use 'moll/vim-bbye' 					                          -- del buffers without closing windows
+    use 'romgrk/barbar.nvim' 					                      -- improved tabline
+    use 'tjdevries/express_line.nvim' 				              -- statusline
 
     -- navigation
-    use 'airblade/vim-rooter'  					-- cwd to root on open
-    use 'andymass/vim-matchup' 					-- extend vims matching (%)
+    use 'airblade/vim-rooter'  					                    -- cwd to root on open
+    use 'andymass/vim-matchup' 					                    -- extend vims matching (%)
     use 'kevinhwang91/rnvimr'
     use 'kyazdani42/nvim-tree.lua'
-    use 'unblevable/quick-scope' 				-- f-helper: hi unique line chars
+    use 'unblevable/quick-scope' 				                    -- f-helper: hi unique line chars
 
     -- lsp & code
-    use 'glepnir/lspsaga.nvim' 					-- lsp cmds
+    use 'glepnir/lspsaga.nvim' 					                    -- lsp cmds
     use 'kabouzeid/nvim-lspinstall'
-    use 'kevinhwang91/nvim-bqf' 				-- better quick fix window
-    use 'liuchengxu/vista.vim'  				-- lsp symbols & tags
+    use 'kevinhwang91/nvim-bqf' 				                    -- better quick fix window
+    use 'liuchengxu/vista.vim'  				                    -- lsp symbols & tags
     use 'neovim/nvim-lspconfig'
-    use 'sheerun/vim-polyglot'					-- language pack
+    use 'sheerun/vim-polyglot'					                    -- language pack
     use { 'prettier/vim-prettier', run = 'npm install' }
 
     -- telescope
@@ -47,11 +46,9 @@ return require('packer').startup(function(use)
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
     -- autocomplete
-    use 'dsznajder/vscode-es7-javascript-react-snippets'
-    use 'hrsh7th/nvim-compe' 					-- autocomplete
-    use 'hrsh7th/vim-vsnip' 					-- snippets
-    use 'windwp/nvim-autopairs' 				-- TODO. minimal autopars impl.
-    use 'xabikos/vscode-javascript'
+    use 'hrsh7th/nvim-compe' 					                      -- autocomplete
+    -- use 'hrsh7th/vim-vsnip' 					                    -- snippets
+    use 'windwp/nvim-autopairs' 			                      -- TODO. minimal autopars impl.
 
     -- icons, colors & themes
     use 'ayu-theme/ayu-vim'

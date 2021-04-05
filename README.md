@@ -26,17 +26,17 @@ manually download and install to `~/.local/bin`
 ## TODO
 
 - [ ] LSP
-	- [ ] markdown lint / lsp / snippets / preview
-	- [ ] lsp, typechecks, linters
+	- [ ] linting (markdown)
+	- [ ] snippets
+	- [ ] formatters
+	- [ ] shellcheck
 	- [ ] unzip (required by lua lsp server)
 	- [X] Add `if has wsl: let s:clip = '/mnt/c/Windows/System32/clip.exe' (or win32yank)`
 		- issue: https://github.com/neovim/neovim/issues/13436 (I get: 'could not convert lua table')
-	- shellcheck
 - [ ] config
-	- format / formatters
 	- fix prettier
 	- telescope grep w/ presist search word and result (search, then toggle between buffer and result)
-	- Fix spellcheck (markdown)
+	- fix spellcheck (markdown)
 	- change mappings for resizing windows (using C-Arrow atm)
 - [ ] shell 
 	- failsafe for aliases (e.g. check if lazygit exists) 

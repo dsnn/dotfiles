@@ -27,7 +27,12 @@ manually download and install to `~/.local/bin`
 
 - [Screenshots](https://github.com/awesomeWM/awesome/issues/1395)
 
+## Arch
+
+- [ ] [XDG Base Directory](https://wiki.archlinux.org/index.php/XDG_Base_Directory)
+
 ## TODO
+
 
 - [ ] lsp
 	- [ ] handle installed / missing languages (breaks nvim if package isn't installed). 

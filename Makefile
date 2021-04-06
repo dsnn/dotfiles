@@ -15,13 +15,17 @@ help: ## This help
 install: ## install packages
 	sudo apt install fzf keychain neovim nodejs npm ranger stow tmux zsh zsh ripgrep -y
 stow: ## stow packages
-	stow git
+	mkdir -p ~/.config/git
+	stow git -t ~/.config/git
 	mkdir -p ~/bin
 	stow bin -t ~/bin
-	stow tmux
+	mkdir -p ~/.config/tmux
+	stow tmux -t ~/.config/tmux
 	mkdir -p ~/.config/nvim
 	stow vim -t ~/.config/nvim
-	stow zsh
+	stow zdotdir
+	mkdir -p ~/.config/zsh
+	stow zsh -t ~/.config/zsh
 	mkdir -p ~/.config/kitty
 	stow kitty -t ~/.config/kitty
 	mkdir -p ~/.config/awesome

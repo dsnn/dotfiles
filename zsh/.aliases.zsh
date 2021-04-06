@@ -52,7 +52,7 @@ alias cp='cp -v'
 alias df="df -h"
 alias ka="killall"
 alias mkdir="mkdir -pv"
-alias rf="source ~/.zshrc"
+alias rf="source ~/.config/zsh/.zshrc"
 
 # listing
 alias l='ls -alh --color=auto'
@@ -80,6 +80,10 @@ alias nrw="npm run workbench";
 
 # tmux
 alias tl="~/bin/tm"
+alias tmux="tmux -2 -f \"$XDG_CONFIG_HOME/tmux/.tmux.conf\""
+
+# wget
+alias wget="wget --hsts-file=\"$XDG_CACHE_HOME\"/wget-hsts"
 
 # ranger
 alias r="ranger"

@@ -49,4 +49,6 @@ vim.o.equalalways = true
 vim.o.splitright = true
 vim.o.splitbelow = true
 
+-- if !has('nvim') | set viminfofile=$XDG_CACHE_HOME/vim/viminfo | endif
+
 vim.cmd("colorscheme nvcode")

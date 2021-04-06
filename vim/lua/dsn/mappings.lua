@@ -10,6 +10,10 @@ vim.api.nvim_set_keymap('n', '<Leader>,', ':wall<CR>', silent_no)
 vim.api.nvim_set_keymap('n', '<Leader><space>', ':set hlsearch!<CR>', silent_no)
 vim.api.nvim_set_keymap('n', '<Leader>x', '<cmd>:luafile %<CR>', silent_no)
 
+-- noremap <C-A> ^
+-- noremap <C-E> $
+-- noremap <C-Q> %
+
 -- remove whitespace manually
 vim.cmd([[ nnoremap <leader>c :%s/\s\+$//<CR> ]])
 

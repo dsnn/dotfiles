@@ -22,6 +22,10 @@ stow: ## stow packages
 	mkdir -p ~/.config/nvim
 	stow vim -t ~/.config/nvim
 	stow zsh
+	mkdir -p ~/.config/kitty
+	stow kitty -t ~/.config/kitty
+	mkdir -p ~/.config/awesome
+	stow awesome -t ~/.config/awesome
 tmux: ## setup tmux and dependencies
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 nvm: ## setup nvm

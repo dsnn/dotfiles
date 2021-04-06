@@ -1,4 +1,4 @@
-alias fd='fdfind'
+# fd='fdfind'
 
 # nigthly build
 if [ -x '/home/dsn/.local/bin/nvim/bin/nvim' ]; then
@@ -11,11 +11,11 @@ fi
 alias lazygit='/home/dsn/.local/bin/lazygit/lazygit'
 alias lazynpm='/home/dsn/.local/bin/lazynpm/lazynpm'
 alias lazydocker='/home/dsn/.local/bin/lazydocker/lazydocker'
-
+alias cat='bat'
 # use batcat if installed
-if [ $(dpkg-query -W -f='${Status}' batcat 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
-	alias cat='batcat'
-fi
+# if [ $(dpkg-query -W -f='${Status}' batcat 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
+# 	alias cat='batcat'
+# fi
 
 # file shortcuts
 alias cfc="vim ~/.shortcuts"

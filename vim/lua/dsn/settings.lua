@@ -48,6 +48,8 @@ vim.wo.linebreak = true
 vim.o.equalalways = true
 vim.o.splitright = true
 vim.o.splitbelow = true
+vim.o.termguicolors = true
+
 
 -- if !has('nvim') | set viminfofile=$XDG_CACHE_HOME/vim/viminfo | endif
 

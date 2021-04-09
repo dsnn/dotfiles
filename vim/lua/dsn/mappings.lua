@@ -73,3 +73,7 @@ require('nvim_comment').setup()
 
 -- limelight
 vim.api.nvim_set_keymap('n', '<leader>l', ":Limelight!!<CR>", silent_no)
+
+-- colorizer
+require("colorizer").setup()
+-- :ColorizerToggle

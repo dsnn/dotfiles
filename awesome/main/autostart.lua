@@ -1,0 +1,3 @@
+-- Autostart
+-- TODO: see todo inside script (check if already running)
+--awful.spawn.with_shell("/home/dsn/bin/remap-caps-lock")

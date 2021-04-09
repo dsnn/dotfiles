@@ -30,6 +30,13 @@ manually download and install to `~/.local/bin`
 ## Arch
 
 - [ ] [XDG Base Directory](https://wiki.archlinux.org/index.php/XDG_Base_Directory)
+- [ ] [Qutebrowser](https://wiki.archlinux.org/index.php/Qutebrowser#Installation)
+
+### Font config
+
+```
+ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf $XDG_CONFIG_HOME/fontconfig/conf.d
+```
 
 ## TODO
 

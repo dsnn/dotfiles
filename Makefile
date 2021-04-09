@@ -30,6 +30,8 @@ stow: ## stow packages
 	stow kitty -t ~/.config/kitty
 	mkdir -p ~/.config/awesome
 	stow awesome -t ~/.config/awesome
+	mkdir -p ~/.config/fontconfig
+	stow fontconfig -t ~/.config/fontconfig
 tmux: ## setup tmux and dependencies
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 nvm: ## setup nvm

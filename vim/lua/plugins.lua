@@ -16,6 +16,7 @@ return require('packer').startup(function(use)
     use 'mhinz/vim-startify'
     use 'tpope/vim-surround'
     use 'terrortylor/nvim-comment'
+    use 'godlygeek/tabular'
 
     -- buffer, register, tabs & statusline
     use 'moll/vim-bbye' 					                          -- del buffers without closing windows
@@ -47,7 +48,7 @@ return require('packer').startup(function(use)
 
     -- autocomplete
     use 'hrsh7th/nvim-compe' 					                      -- autocomplete
-    use 'hrsh7th/vim-vsnip' 					                    -- snippets
+    use 'hrsh7th/vim-vsnip' 					                      -- snippets
     use 'hrsh7th/vim-vsnip-integ'
     use 'windwp/nvim-autopairs' 			                      -- TODO. minimal autopars impl.
 

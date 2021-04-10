@@ -2,21 +2,18 @@ local gears = require("gears")
 local awful = require("awful")
 local wibox = require("wibox")
 
-local decoration = {
-    wallpaper = require("decoration.wallpaper"),
-    taglist = require("decoration.taglist"),
-    tasklist = require("decoration.tasklist"),
+local deco = {
+    wallpaper   = require("deco.wallpaper"),
+    taglist     = require("deco.taglist"),
+    tasklist    = require("deco.tasklist"),
 }
 
-local taglist_buttons = decoration.taglist()
-local tasklist_buttons = decoration.tasklist()
+local taglist_buttons   = deco.taglist()
+local tasklist_buttons  = deco.tasklist()
 
 awful.screen.connect_for_each_screen(function(s)
 
     set_wallpaper(s)
-
-    -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -45,20 +42,26 @@ awful.screen.connect_for_each_screen(function(s)
         buttons = tasklist_buttons
     }
 
+    -- Create the wibox
+    s.mywibox = awful.wibar({ position = "top", screen = s })
+
     -- Add widgets to the wibox
     local mykeyboardlayout = awful.widget.keyboardlayout()
     local mytextclock = wibox.widget.textclock('  %Y %B %d, %H:%M  ', 60)
 
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
-        { -- Left widgets
+        -- Left widgets
+        { 
             layout = wibox.layout.fixed.horizontal,
             RC.launcher,
             s.mytaglist,
             s.mypromptbox,
         },
-        s.mytasklist, -- Middle widget
-        { -- Right widgets
+        -- Middle widget
+        s.mytasklist, 
+        -- Right widgets
+        { 
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
             wibox.widget.systray(),

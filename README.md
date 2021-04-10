@@ -48,6 +48,7 @@ ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf $XDG_CONFIG_HOME/fo
 	- [ ] unzip (required by lua lsp server)
 	- [X] Add `if has wsl: let s:clip = '/mnt/c/Windows/System32/clip.exe' (or win32yank)`
 		- issue: https://github.com/neovim/neovim/issues/13436 (I get: 'could not convert lua table')
+	- Vista: toggle keybinding for listing lsp symbols in a sidebar
 - [ ] telescope
 	- grep w/ presist search word and result (search, then toggle between buffer and result)
 	- cheat.sh (https://github.com/nvim-telescope/telescope-cheat.nvim)
@@ -56,6 +57,7 @@ ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf $XDG_CONFIG_HOME/fo
 	- list & insert snippets
 - [ ] config
 	- fix prettier
+	- autocommands (set spell etc)
 - [ ] markdown
 	- fix spellcheck (markdown)
 	- linting

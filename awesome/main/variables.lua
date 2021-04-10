@@ -7,7 +7,7 @@ local _M = {
     editor,
     -- editor_cmd = terminal .. " -e " .. editor,
     editor_cmd = "",
-    wallpaper = home .. "/.config/wall.jpg"
+    -- wallpaper = home .. "/.config/wall.jpg"
 }
 
 return _M

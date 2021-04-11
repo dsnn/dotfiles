@@ -3,6 +3,7 @@ pcall(require, "luarocks.loader")
 local awful = require("awful")
 local beautiful = require("beautiful")
 local menubar = require("menubar")
+local gfs = require("gears.filesystem")
 
 require("awful.autofocus")
 require("awful.hotkeys_popup.keys")
@@ -12,7 +13,8 @@ RC.vars = require('main.variables')
 modkey = RC.vars.modkey
 
 require("main.error")
-require('main.theme')
+-- require('main.theme')
+beautiful.init(gfs.get_themes_dir() .. "default/theme.lua")
 
 local main = {
     layouts = require("main.layouts"),
@@ -44,6 +46,8 @@ RC.globalkeys = binding.bindtotags(RC.globalkeys)
 root.buttons(binding.globalbuttons())
 root.keys(RC.globalkeys)
 
+mykeyboardlayout = awful.widget.keyboardlayout()
+
 require("deco.statusbar")
 
 awful.rules.rules = main.rules(
@@ -51,5 +55,4 @@ awful.rules.rules = main.rules(
     binding.clientbuttons()
 )
 
--- require("main.autostart")
 require("main.signals")

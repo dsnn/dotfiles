@@ -1,13 +1,14 @@
 local awful         = require("awful")
 awful.util          = require("awful.util")
-local gfs           = require("gears.filesystem")
 local theme_assets  = require("beautiful.theme_assets")
+local gfs           = require("gears.filesystem")
 local themes_path   = gfs.get_themes_dir()
 local xresources    = require("beautiful.xresources")
 local dpi           = xresources.apply_dpi
 local cs            = require("themes.dark.colors")
 
 local theme         = {}
+
 theme.wallpaper     = awful.util.getdir("config") .. "wall.jpg"
 
 theme.font          = "Roboto Mono Nerd Font Complete 10"
@@ -42,7 +43,6 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 theme.menu_submenu_icon = themes_path.."default/submenu.png"
 theme.menu_height = dpi(16)
 theme.menu_width  = dpi(140)
-
 
 local titlebar_path                             = themes_path .. "default/titlebar/"
 theme.titlebar_close_button_normal              = titlebar_path.."close_normal.png"

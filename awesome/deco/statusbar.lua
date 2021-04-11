@@ -11,6 +11,9 @@ local deco = {
 local taglist_buttons   = deco.taglist()
 local tasklist_buttons  = deco.tasklist()
 
+-- mytextclock = wibox.widget.textclock('  %Y %B %d, %H:%M  ', 60)
+mytextclock = wibox.widget.textclock()
+
 awful.screen.connect_for_each_screen(function(s)
 
     set_wallpaper(s)
@@ -45,10 +48,6 @@ awful.screen.connect_for_each_screen(function(s)
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
 
-    -- Add widgets to the wibox
-    local mykeyboardlayout = awful.widget.keyboardlayout()
-    local mytextclock = wibox.widget.textclock('  %Y %B %d, %H:%M  ', 60)
-
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         -- Left widgets
@@ -69,5 +68,4 @@ awful.screen.connect_for_each_screen(function(s)
             s.mylayoutbox,
         },
     }
-
 end)

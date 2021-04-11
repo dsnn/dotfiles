@@ -8,9 +8,9 @@ fi
 
 # alias vim='/home/dsn/.local/bin/nvim/bin/nvim'
 # alias nvim='/home/dsn/.local/bin/nvim/bin/nvim'
-alias lazygit='/home/dsn/.local/bin/lazygit/lazygit'
-alias lazynpm='/home/dsn/.local/bin/lazynpm/lazynpm'
-alias lazydocker='/home/dsn/.local/bin/lazydocker/lazydocker'
+# alias lazygit='/home/dsn/.local/bin/lazygit/lazygit'
+# alias lazynpm='/home/dsn/.local/bin/lazynpm/lazynpm'
+# alias lazydocker='/home/dsn/.local/bin/lazydocker/lazydocker'
 alias cat='bat'
 # use batcat if installed
 # if [ $(dpkg-query -W -f='${Status}' batcat 2>/dev/null | grep -c "ok installed") -eq 0 ]; then

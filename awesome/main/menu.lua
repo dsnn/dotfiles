@@ -1,15 +1,14 @@
 local awful = require("awful")
 local hotkeys_popup = require("awful.hotkeys_popup")
-local beautiful = require("beautiful")
 
-local M = {} --menu
-local _M = {} -- module
+local menu = {}
+local M = {}
 
 local terminal = RC.vars.terminal
 local editor = os.getenv("EDITOR") or "vim"
 local editor_cmd = terminal .. " -e " .. editor
 
-M.awesome = {
+menu.awesome = {
    { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
    { "manual", terminal .. " -e man awesome" },
    { "edit config", editor_cmd .. " " .. awesome.conffile },
@@ -17,16 +16,22 @@ M.awesome = {
    { "quit", function() awesome.quit() end },
 }
 
-function _M.get()
+menu.power = {
+   { "shutdown", "poweroff"},
+   { "reboot",   "shutdown -r 0" },
+}
+
+function M.get()
   local menu_items = {
-    { "awesome", M.awesome, beautiful.awesome_subicon },
-    { "open terminal", terminal }
+    { "power", menu.power },
+    { "awesome", menu.awesome },
+    { "terminal", terminal }
   }
   return menu_items
 end
 
 return setmetatable({}, {
-    __call = function(_, ...) 
-        return _M.get(...) 
-    end 
+    __call = function(_, ...)
+        return M.get(...)
+    end
 })

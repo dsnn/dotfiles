@@ -50,17 +50,14 @@ awful.screen.connect_for_each_screen(function(s)
 
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
-        -- Left widgets
-        { 
+        { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            RC.launcher,
+            -- RC.launcher,
             s.mytaglist,
             s.mypromptbox,
         },
-        -- Middle widget
-        s.mytasklist, 
-        -- Right widgets
-        { 
+        s.mytasklist, -- Middle widget
+        { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
             wibox.widget.systray(),

@@ -6,10 +6,11 @@ local themes_path   = gfs.get_themes_dir()
 local xresources    = require("beautiful.xresources")
 local dpi           = xresources.apply_dpi
 local cs            = require("themes.dark.colors")
+local home          = os.getenv("HOME")
 
 local theme         = {}
 
-theme.wallpaper     = awful.util.getdir("config") .. "wall.jpg"
+theme.wallpaper     = home .. "/.config/wall.jpg"
 
 theme.font          = "Roboto Mono Nerd Font Complete 10"
 theme.taglist_font  = "Roboto Mono Nerd Font Complete 10"

@@ -3,56 +3,78 @@ pcall(require, "luarocks.loader")
 local awful = require("awful")
 local beautiful = require("beautiful")
 local menubar = require("menubar")
+local gears = require("gears")
+local home = os.getenv("HOME")
+local gfs = require("gears.filesystem")
 
 require("awful.autofocus")
 require("awful.hotkeys_popup.keys")
 
 RC = {}
-RC.vars = require('main.variables')
+RC.vars = require('variables')
 modkey = RC.vars.modkey
 
-require("main.error")
-require('main.theme')
+require("error")
 
-local main = {
-    layouts = require("main.layouts"),
-    tags    = require("main.tags"),
-    menu    = require("main.menu"),
-    rules   = require("main.rules"),
+beautiful.init(home .. "/.config/awesome/themes/dark/theme.lua")
+-- beautiful.init(gfs.get_themes_dir() .. "default/theme.lua")
+
+if (RC.vars.wallpaper) then
+    local wallpaper = RC.vars.wallpaper
+    if awful.util.file_readable(wallpaper) then theme.wallpaper = wallpaper end
+end
+
+if beautiful.wallpaper then
+    for s = 1, screen.count() do
+        gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+    end
+end
+
+local bindings = require('bindings')
+
+RC.layouts  = {
+    awful.layout.suit.tile,
+    awful.layout.suit.floating
 }
-
-local binding = {
-  globalbuttons = require("binding.globalbuttons"),
-  clientbuttons = require("binding.clientbuttons"),
-  globalkeys    = require("binding.globalkeys"),
-  clientkeys    = require("binding.clientkeys"),
-  bindtotags    = require("binding.bindtotags"),
-}
-
-RC.layouts  = main.layouts()
 awful.layout.layouts = RC.layouts
 
-RC.tags     = main.tags()
-RC.mainmenu = awful.menu({ items     = main.menu() })
+awful.screen.connect_for_each_screen(function(s)
+    awful.tag( { "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, RC.layouts[1])
+end)
+
+local menu = require('menu')
+RC.mainmenu = awful.menu({ items = menu.items })
 RC.launcher = awful.widget.launcher(
   { image = beautiful.awesome_icon, menu = RC.mainmenu }
 )
 
 menubar.utils.terminal = RC.vars.terminal
 
-RC.globalkeys = binding.globalkeys()
-RC.globalkeys = binding.bindtotags(RC.globalkeys)
+RC.globalkeys = bindings.bindtotags(bindings.globalkeys)
 
-root.buttons(binding.globalbuttons())
+root.buttons(bindings.globalbuttons)
 root.keys(RC.globalkeys)
 
 mykeyboardlayout = awful.widget.keyboardlayout()
 
-require("deco.statusbar")
+require("statusbar")
 
-awful.rules.rules = main.rules(
-    binding.clientkeys(),
-    binding.clientbuttons()
+local rules = require('rules')
+
+awful.rules.rules = rules(
+    bindings.clientkeys,
+    bindings.clientbuttons
 )
 
-require("main.signals")
+require("titlebar")
+
+client.connect_signal("manage", function (c)
+    if awesome.startup
+      and not c.size_hints.user_position
+      and not c.size_hints.program_position then
+        awful.placement.no_offscreen(c)
+    end
+end)
+
+client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)

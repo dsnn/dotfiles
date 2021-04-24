@@ -24,9 +24,7 @@ return require('packer').startup(function(use)
     use 'tjdevries/express_line.nvim' 				              -- statusline
 
     -- navigation
-    use 'airblade/vim-rooter'  					                    -- cwd to root on open
     use 'andymass/vim-matchup' 					                    -- extend vims matching (%)
-    use 'kevinhwang91/rnvimr'
     use 'kyazdani42/nvim-tree.lua'
     use 'unblevable/quick-scope' 				                    -- f-helper: hi unique line chars
 
@@ -34,9 +32,7 @@ return require('packer').startup(function(use)
     use 'glepnir/lspsaga.nvim' 					                    -- lsp cmds
     use 'kabouzeid/nvim-lspinstall'
     use 'kevinhwang91/nvim-bqf' 				                    -- better quick fix window
-    use 'liuchengxu/vista.vim'  				                    -- lsp symbols & tags
     use 'neovim/nvim-lspconfig'
-    use 'sheerun/vim-polyglot'					                    -- language pack
     use { 'prettier/vim-prettier', run = 'npm install' }
 
     -- telescope

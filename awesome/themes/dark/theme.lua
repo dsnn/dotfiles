@@ -21,7 +21,7 @@ theme.bg_urgent     = cs.color['orange900']  .. "cc"
 theme.bg_minimize   = cs.color['grey700']    .. "cc"
 theme.bg_systray    = cs.color['grey900']    .. "cc"
 
-theme.fg_normal     = cs.color['grey700']
+theme.fg_normal     = cs.color['white']
 theme.fg_focus      = cs.color['white']
 theme.fg_urgent     = cs.color['white']
 theme.fg_minimize   = cs.color['white']

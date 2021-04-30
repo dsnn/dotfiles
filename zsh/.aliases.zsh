@@ -24,6 +24,7 @@ alias cfv="vim ~/dotfiles/vim/init.vim"
 alias cft="vim ~/dotfiles/tmux/.tmux.conf"
 alias cfe="vim ~/dotfiles/zsh/.exports.zsh"
 alias cfa="vim ~/dotfiles/zsh/.aliases.zsh"
+alias cfal="vim ~/.aliases.local.zsh"
 alias cfz="vim ~/dotfiles/zsh/.zshrc"
 alias cfg="vim ~/dotfiles/git/.gitconfig"
 

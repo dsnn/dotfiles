@@ -41,6 +41,11 @@ if [ -f ~/.config/zsh/.aliases.zsh ]; then
 fi
 
 
+# source local aliases
+if [ -f ~/.aliases.local.zsh ]; then
+	source ~/.aliases.local.zsh
+fi
+
 # source shortcuts
 if [ -f ~/.config/zsh/.shortcuts.zsh ]; then
 	source ~/.config/zsh/.shortcuts.zsh

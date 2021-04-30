@@ -32,6 +32,8 @@ stow: ## stow packages
 	stow awesome -t ~/.config/awesome
 	mkdir -p ~/.config/fontconfig
 	stow fontconfig -t ~/.config/fontconfig
+	mkdir -p ~/.config/i3
+	stow i3 -t ~/.config/i3
 tmux: ## setup tmux and dependencies
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 nvm: ## setup nvm

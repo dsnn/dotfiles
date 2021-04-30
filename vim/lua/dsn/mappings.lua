@@ -55,7 +55,7 @@ vim.api.nvim_set_keymap('n', '<TAB>', ':bnext<CR>', silent_no)
 vim.api.nvim_set_keymap('n', '<S-TAB>', ':bprevious<CR>', silent_no)
 
 -- telescope
-vim.api.nvim_set_keymap('n', '<space>f',  "<cmd>:lua require('dsn.telescope').find_files()<CR>", silent_no)
+-- vim.api.nvim_set_keymap('n', '<space>f',  "<cmd>:lua require('dsn.telescope').find_files()<CR>", silent_no)
 vim.api.nvim_set_keymap('n', '<space>gs', "<cmd>:lua require('dsn.telescope').grep_prompt()<CR>", silent_no)
 vim.api.nvim_set_keymap('n', '<space>gw', "<cmd>:lua require('dsn.telescope').grep_word()<CR>", silent_no)
 vim.api.nvim_set_keymap('n', '<space>fh', "<cmd>:lua require('dsn.telescope').help_tags()<CR>", silent_no)

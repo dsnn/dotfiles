@@ -6,3 +6,6 @@ if pcall(require, 'plenary') then
     return require(name)
   end
 end
+
+DATA_PATH  = vim.fn.stdpath('data')
+CACHE_PATH = vim.fn.stdpath('cache')

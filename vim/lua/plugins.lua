@@ -34,6 +34,8 @@ return require('packer').startup(function(use)
     use 'kevinhwang91/nvim-bqf' 				                    -- better quick fix window
     use 'neovim/nvim-lspconfig'
     use { 'prettier/vim-prettier', run = 'npm install' }
+    use 'nvim-lua/lsp-status.nvim'                          -- lsp info in statusline
+    -- use 'tjdevries/nlua.nvim'
 
     -- telescope
     use 'nvim-lua/plenary.nvim'

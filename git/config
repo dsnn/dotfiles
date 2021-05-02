@@ -21,4 +21,4 @@
 	dt = !git diff-tree --no-commit-id --name-only -r 
 
 [core]
-	autocrlf = input
+	autocrlf = false

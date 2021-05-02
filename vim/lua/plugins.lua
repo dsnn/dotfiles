@@ -35,6 +35,7 @@ return require('packer').startup(function(use)
     use 'neovim/nvim-lspconfig'
     use { 'prettier/vim-prettier', run = 'npm install' }
     use 'nvim-lua/lsp-status.nvim'                          -- lsp info in statusline
+    use 'mhartington/formatter.nvim'
     -- use 'tjdevries/nlua.nvim'
 
     -- telescope

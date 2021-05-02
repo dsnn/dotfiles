@@ -128,6 +128,7 @@ function M.quickfix()
   require('telescope.builtin').quickfix()
 end
 
+-- Fix symbolic links: https://github.com/nvim-telescope/telescope.nvim/issues/693
 function M.file_browser()
   require('telescope.builtin').file_browser {
     cwd = "~/",

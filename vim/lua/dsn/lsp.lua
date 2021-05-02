@@ -38,6 +38,8 @@ vim.fn.sign_define(
 vim.cmd("nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>")
 vim.cmd("nnoremap <silent> gh <cmd>lua vim.lsp.buf.hover()<CR>")
 vim.cmd("nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>")
+-- vim.cmd("nnoremap <silent> <leader>f <cmd>lua vim.lsp.buf.formatting()<CR>")
+vim.cmd("nnoremap <silent> gf :Format<CR>")
 
 vim.cmd("nnoremap <silent> ca :Lspsaga code_action<CR>")
 vim.cmd("nnoremap <silent> <leader>r :Lspsaga rename<CR>")
@@ -129,27 +131,27 @@ require'lspconfig'.tsserver.setup {
     }
 }
 
-local sumneko_root_path = DATA_PATH .. "/lspinstall/lua"
-local sumneko_binary = sumneko_root_path .. "/bin/Linux" .. "/lua-language-server"
-require'lspconfig'.sumneko_lua.setup {
-    cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
-    on_attach = common_on_attach,
-    settings = {
-        Lua = {
-            runtime = {
-                version = 'LuaJIT',
-                path = vim.split(package.path, ';')
-            },
-            diagnostics = {
-                globals = {'vim'}
-            },
-            workspace = {
-                library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true},
-                maxPreload = 10000
-            }
-        }
-    }
-}
+-- local sumneko_root_path = DATA_PATH .. "/lspinstall/lua"
+-- local sumneko_binary = sumneko_root_path .. "/bin/Linux" .. "/lua-language-server"
+-- require'lspconfig'.sumneko_lua.setup {
+--     cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
+--     on_attach = common_on_attach,
+--     settings = {
+--         Lua = {
+--             runtime = {
+--                 version = 'LuaJIT',
+--                 path = vim.split(package.path, ';')
+--             },
+--             diagnostics = {
+--                 globals = {'vim'}
+--             },
+--             workspace = {
+--                 library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true},
+--                 maxPreload = 10000
+--             }
+--         }
+--     }
+-- }
 
 -- npm i -g bash-language-server
 require'lspconfig'.bashls.setup {
@@ -216,35 +218,50 @@ require'lspconfig'.yamlls.setup{
     on_attach = common_on_attach,
 }
 
-vim.cmd('autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 1000)')
+is_cfg_present = function(cfg_name)
+  -- this returns 1 if it's not present and 0 if it's present
+  -- we need to compare it with 1 because both 0 and 1 is `true` in lua
+  return vim.fn.empty(vim.fn.glob(vim.loop.cwd()..cfg_name)) ~= 1
+end
 
-local prettier = {
-  formatCommand = "prettier --stdin-filepath ${INPUT}",
-  formatStdin = true
-}
-require"lspconfig".efm.setup {
-    cmd = {DATA_PATH .. "/lspinstall/efm/efm-langserver"},
-    init_options = {documentFormatting = true, codeAction = false},
-    filetypes = {"lua", "javascriptreact", "javascript", "sh", "html", "css", "json", "yaml", "markdown"},
-    settings = {
-        rootMarkers = {".git/"},
-        languages = {
-            lua = {
-              formatCommand = "lua-format -i --no-keep-simple-function-one-line --no-break-after-operator --column-limit=150 --break-after-table-lb",
-              -- formatCommand = "luafmt --indent-count 2 --line-width 120 --stdin",
-              formatStdin = true
-            },
-            sh = {
-              formatCommand = 'shfmt -ci -s -bn',
-              formatStdin = true
-            },
-            javascript = {prettier},
-            javascriptreact = {prettier},
-            html = {prettier},
-            css = {prettier},
-            json = {prettier},
-            yaml = {prettier},
-            markdown = {prettier}
-        }
+local prettier = function()
+  if is_cfg_present("/.prettierrc") then
+    return {
+      exe = "prettier",
+      args = {
+        string.format(
+          "--stdin-filepath '%s' --config '%s'",
+          vim.api.nvim_buf_get_name(0), vim.loop.cwd().."/.prettierrc"
+        )
+      },
+      stdin = true
     }
+  else
+    -- fallback to global config
+    return {
+      exe = "prettier",
+      args = {
+        string.format(
+          "--stdin-filepath '%s' --config '%s'",
+          vim.api.nvim_buf_get_name(0), vim.fn.stdpath("config").."/.prettierrc"
+        )
+      },
+      stdin = true
+    }
+  end
+end
+
+require'formatter'.setup{
+  logging = false,
+  filetype = {
+    -- lua = {luafmt},
+    javascript = {prettier},
+    typescript = {prettier},
+    typescriptreact = {prettier},
+    html = {prettier},
+    css = {prettier},
+    jsonc = {prettier},
+    yaml = {prettier},
+    markdown = {prettier},
+  }
 }

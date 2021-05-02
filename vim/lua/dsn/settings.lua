@@ -43,6 +43,8 @@ vim.o.equalalways     = true
 vim.o.splitright      = true
 vim.o.splitbelow      = true
 vim.o.termguicolors   = true
+vim.o.swapfile        = false
+vim.g.belloff        = 'all' 
 
 vim.cmd('set cpoptions+=$')
 vim.cmd('set iskeyword+=-')

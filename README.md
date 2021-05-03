@@ -38,57 +38,44 @@ manually download and install to `~/.local/bin`
 ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf $XDG_CONFIG_HOME/fontconfig/conf.d
 ```
 
-## TODO
+## notes
 
+Error w/ batcat, tmp fix: `sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep`
 
-- [ ] lsp
-	- [ ] handle installed / missing languages (breaks nvim if package isn't installed). 
-	- [ ] formatters
-	- [ ] shellcheck
-	- [ ] unzip (required by lua lsp server)
-	- [X] Add `if has wsl: let s:clip = '/mnt/c/Windows/System32/clip.exe' (or win32yank)`
-		- issue: https://github.com/neovim/neovim/issues/13436 (I get: 'could not convert lua table')
-	- Vista: toggle keybinding for listing lsp symbols in a sidebar
-- [ ] telescope
-	- grep w/ presist search word and result (search, then toggle between buffer and result)
-	- cheat.sh (https://github.com/nvim-telescope/telescope-cheat.nvim)
-		- regex, work stuff (e.g. db connection strings. submodule)
-	- telescope-arecibo
-	- list & insert snippets
-- [ ] config
-	- fix prettier
-	- autocommands (set spell etc)
-- [ ] markdown
-	- fix spellcheck (markdown)
-	- linting
-- [ ] shell
-	- failsafe for aliases (e.g. check if lazygit exists)
-	- ueberzug
-	- ripgrep
-		- error w/ batcat, tmp fix: `sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep`
-		- replace fd for less deps. (fzf uses fd atm. eventho fd is better for file searching it should be fine w/ rg)
-- [ ] plugins
-	- omnisharp
+### nvim
+
+  - review plugins in plugins.lua (commented)
+  - telescope:
+    - git branches checkout
+    - window layouts for diff. bindings
+  - check nvim-terminal bindings
+  - check resize windows
+  - autocommand to remove trailing spaces
+	- vista: toggle keybinding for listing lsp symbols in a sidebar
+  - test harpoon
+	- telescope-cheat: E.g. regex, work stuff (e.g. db connection strings. submodule)
+	- spell/spellcheck
+	- more linting (markdown etc)
 	- neovim session managment (keybindings, autocmds etc)
-	- vim which key (bind to e.g. space + char ?)
 	- lua keymap dsl: https://github.com/tjdevries/astronauta.nvim
 	- neovim-remote (open files from :term witout nesting)
-	- fix goyo & limelight
-	- pynvim
-- [ ] review / fix (auto-?) install / updates for *
-	- simple install solution: call script fns from makefile?
-	- write bash script for w/e. (make it clean and pretty w/ separate functions for w/e)
-    	- automatic daily update?
-		- might be "dangerous" or annoying if things break ?
-	    	- on first run for the day ?
-		- cron ?
-	- lsp-servers
-	- app deps (make install now)
-	- nightly build apps (.local/bin)
-	- repos / submodules
-	- lazygit
-	- lazydocker
-	- lazynpm
+  - floatterm
+  - lazygit floatterm? (or fugitive)
+
+### plugins
+
+  - windwp/nvim-autopairs
+  - tpope/vim-scriptease                           -- :Message
+  - pearofducks/ansible-vim
+  - iamcco/markdown-preview.nvim
+  - liuchengxu/vista.vim
+  - brooth/far.vim                                 -- find and replace
+  - JoosepAlviste/nvim-ts-context-commentstring    -- better comments (use w/ vim-commentary instead?)
+  - tpope/vim-repeat
+  - TimUntersberger/neogit                         -- or fugitive?
+  - https://github.com/sindrets/diffview.nvim      -- single tab for diffs (or fugitive)
+  - https://github.com/Shatur95/neovim-session-manager
+  - https://github.com/ThePrimeagen/harpoon
 
 ## Links
 

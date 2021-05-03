@@ -1,25 +1,41 @@
 [user]
 	name = dsn 
 	email = dsn@dsnn.io 
+[core]
+	editor = nvim
 [alias]
+	# log
 	st = status -s
-	la = !git config -l | grep alias | cut -c 7-
-	ac = !git add . && git commit -a -m
-	pr = "!git checkout master;git pull;git checkout @{-1};git rebase master"
-	current = "!git rev-parse --abbrev-ref HEAD"
-	pu = "!git push -u origin $(git current)"
-	qm = "!git checkout $1;git merge @{-1}"
 	ls = !git log --pretty=format:\"%C(yellow)%h%Creset|%cd|%an|%<(70,trunc)%s\" -10 --date=format:\"%y%m%d %H:%M:%S\" | awk -F \"|\" \"{ printf \\\"%s %-20s %-20s %s\\n\\\", \\$1, \\$2, \\$3, \\$4 }\"
 	lg = !git log --pretty=\"%C(yellow)%h%Creset | %cd %d %s (%C(cyan)%an)\" --date=format:\"%Y-%m-%d %H:%M:%S\" --graph
+	last = "!f() { git log -${1+}${1-1} HEAD --pretty=format:'%C(red)%h%Creset - %C(bold white)%s%Creset %C(bold green)<%an>%Creset %C(yellow)(%cr)%Creset' --graph; }; f"
+
+	# branch
 	bl = branch --list
-	cm = !git commit -m
-	cma = !git commit --amend --no-edit
-	co = !git checkout
-	cob = !git checkout -b
-	qco = !git checkout @{-1}
 	br = !git branch -r
 	ba = !git branch -a
-	last = "!f() { git log -${1+}${1-1} HEAD --pretty=format:'%C(red)%h%Creset - %C(bold white)%s%Creset %C(bold green)<%an>%Creset %C(yellow)(%cr)%Creset' --graph; }; f"
-	dt = !git diff-tree --no-commit-id --name-only -r 
-  undo = reset HEAD^
-  cb = rev-parse --abbrev-ref HEAD
+	cb = !git rev-parse --abbrev-ref HEAD
+
+	# commits
+	cm = !git commit -m
+	cma = !git commit --amend --no-edit
+
+	# checkout
+	co = !git checkout
+	cob = !git checkout -b
+
+	# helpers
+	undo = !git reset HEAD^
+	la = !git config -l | grep alias | cut -c 7-
+
+	# push/pull
+	pr = "!git checkout master;git pull;git checkout @{-1};git rebase master"
+	pu = "!git push -u origin $(git cb)"
+	gpf = !git push --force-with-lease
+
+	# rebase
+	rbi = !git rebase --interactive 
+	rbc = !git rebase --continue 
+	rba = !git rebase --abort 
+[pull]
+	rebase = true

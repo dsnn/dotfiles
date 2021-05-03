@@ -21,7 +21,7 @@ return require('packer').startup(function(use)
     -- buffer, register, tabs & statusline
     use 'moll/vim-bbye' 					                          -- del buffers without closing windows
     use 'romgrk/barbar.nvim' 					                      -- improved tabline
-    use 'tjdevries/express_line.nvim' 				              -- statusline
+    use 'glepnir/galaxyline.nvim'                           -- statusline
 
     -- navigation
     use 'andymass/vim-matchup' 					                    -- extend vims matching (%)
@@ -37,8 +37,6 @@ return require('packer').startup(function(use)
     use { 'prettier/vim-prettier', run = 'npm install' }
     use 'nvim-lua/lsp-status.nvim'                          -- lsp info in statusline
     use 'mhartington/formatter.nvim'
-    -- use 'windwp/nvim-autopairs' 			                      -- TODO. minimal autopars impl.
-    -- use 'tjdevries/nlua.nvim'
 
     -- telescope
     use 'nvim-lua/plenary.nvim'
@@ -46,6 +44,10 @@ return require('packer').startup(function(use)
     use 'nvim-telescope/telescope.nvim'
     use 'nvim-telescope/telescope-fzy-native.nvim'
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    -- TODO: when I have more time 
+    -- use 'nvim-telescope/telescope-freccncy.nvim'
+    -- use 'nvim-telescope/telescope-cheat.nvim'
+    -- use { 'nvim-telescope/telescope-arecibo.nvim', rocks = {"openssl", "lua-http-parser"} }
 
     -- autocomplete
     use 'hrsh7th/nvim-compe' 					                      -- autocomplete

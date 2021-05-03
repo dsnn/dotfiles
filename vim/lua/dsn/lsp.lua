@@ -222,7 +222,17 @@ is_cfg_present = function(cfg_name)
 end
 
 local prettier = function()
-  if is_cfg_present("/.prettierrc") then
+  if is_cfg_present("/prettier.config.js") then
+    return {
+      exe = "prettier",
+      args = {
+        string.format("--stdin-filepath '%s' --config '%s'",
+          vim.api.nvim_buf_get_name(0),
+          vim.fn.stdpath("config") .. "/prettier.config.js")
+      },
+      stdin = true
+    }
+  elseif is_cfg_present("/.prettierrc") then
     return {
       exe = "prettier",
       args = {

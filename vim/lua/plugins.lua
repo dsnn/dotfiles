@@ -27,6 +27,7 @@ return require('packer').startup(function(use)
     use 'andymass/vim-matchup' 					                    -- extend vims matching (%)
     use 'kyazdani42/nvim-tree.lua'
     use 'unblevable/quick-scope' 				                    -- f-helper: hi unique line chars
+    use 'folke/lsp-trouble.nvim'
 
     -- lsp & code
     use 'glepnir/lspsaga.nvim' 					                    -- lsp cmds

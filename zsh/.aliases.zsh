@@ -26,7 +26,7 @@ alias cfe="vim ~/dotfiles/zsh/.exports.zsh"
 alias cfa="vim ~/dotfiles/zsh/.aliases.zsh"
 alias cfal="vim ~/.aliases.local.zsh"
 alias cfz="vim ~/dotfiles/zsh/.zshrc"
-alias cfg="vim ~/dotfiles/git/.gitconfig"
+alias cfg="vim ~/dotfiles/git/config"
 
 # folder shortcuts
 alias h="cd ~/"
@@ -72,6 +72,7 @@ alias gl="git ls"
 alias gp="git push origin master"
 alias gpf="git push --force-with-lease"
 alias gs="git st"
+alias cb="git cb"
 
 # npm
 alias ns="npm start";

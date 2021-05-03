@@ -24,6 +24,7 @@ SAVEHIST=1000
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+[ -f ~/build/z/z.sh ] && source ~/build/z/z.sh
 # POWERLINE_BASH_SELECT=1
 # . /usr/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh
 autoload -Uz promptinit

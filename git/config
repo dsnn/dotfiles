@@ -20,3 +20,5 @@
 	last = "!f() { git log -${1+}${1-1} HEAD --pretty=format:'%C(red)%h%Creset - %C(bold white)%s%Creset %C(bold green)<%an>%Creset %C(yellow)(%cr)%Creset' --graph; }; f"
 	dt = !git diff-tree --no-commit-id --name-only -r 
 
+[core]
+	autocrlf = false

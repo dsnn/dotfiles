@@ -35,6 +35,8 @@ return require('packer').startup(function(use)
     use 'neovim/nvim-lspconfig'
     use { 'prettier/vim-prettier', run = 'npm install' }
     use 'nvim-lua/lsp-status.nvim'                          -- lsp info in statusline
+    use 'mhartington/formatter.nvim'
+    -- use 'windwp/nvim-autopairs' 			                      -- TODO. minimal autopars impl.
     -- use 'tjdevries/nlua.nvim'
 
     -- telescope
@@ -48,7 +50,6 @@ return require('packer').startup(function(use)
     use 'hrsh7th/nvim-compe' 					                      -- autocomplete
     use 'hrsh7th/vim-vsnip' 					                      -- snippets
     use 'hrsh7th/vim-vsnip-integ'
-    use 'windwp/nvim-autopairs' 			                      -- TODO. minimal autopars impl.
 
     -- icons, colors & themes
     use 'ayu-theme/ayu-vim'

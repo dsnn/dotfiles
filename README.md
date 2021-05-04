@@ -25,6 +25,7 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
   - telescope:
     - git branches checkout
     - window layouts for diff. bindings
+    - find files from .git and/or specified folders (path changes and telesope doesnt find anything w/ find_files)
   - check nvim-terminal bindings
   - check resize windows
   - autocommand to remove trailing spaces

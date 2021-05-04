@@ -1,46 +1,23 @@
 # dotfiles
 
-## TODO
-
-Manually install packages below (not accessible on all distro versions)
-
-- fzf
-- bat
-
 ```zsh
 sudo apt install make
-
 cd ~/dotfiles
-
 make install
-
 tmux: ctrl+a ctrl+I to install tmux packages
 ```
 
-manually download and install to `~/.local/bin`
-
-- [Lazygit](https://github.com/jesseduffield/lazygit)
-- [Lazydocker](https://github.com/jesseduffield/lazydocker)
-- [Lazynpm](https://github.com/jesseduffield/lazynpm)
-
-## AwesomeWM
-
-- [Screenshots](https://github.com/awesomeWM/awesome/issues/1395)
-
-## Arch
-
-- [ ] [XDG Base Directory](https://wiki.archlinux.org/index.php/XDG_Base_Directory)
-- [ ] [Qutebrowser](https://wiki.archlinux.org/index.php/Qutebrowser#Installation)
-
-### Font config
+### font config
 
 ```
 ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf $XDG_CONFIG_HOME/fontconfig/conf.d
 ```
 
-## notes
+### bat
 
-Error w/ batcat, tmp fix: `sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep`
+```
+sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
+```
 
 ### nvim
 
@@ -77,9 +54,12 @@ Error w/ batcat, tmp fix: `sudo apt install -o Dpkg::Options::="--force-overwrit
   - https://github.com/Shatur95/neovim-session-manager
   - https://github.com/ThePrimeagen/harpoon
 
-## Links
+## links
 
+- https://github.com/glepnir/nvim
 - https://github.com/jesseleite/dotfiles/tree/master/vim
 - https://github.com/ngscheurich/dotfiles/tree/main/nvim/.config/nvim
-- https://github.com/rafamadriz/friendly-snippets
-
+- https://github.com/awesomeWM/awesome/issues/1395
+- https://github.com/jesseduffield/lazygit
+- https://github.com/jesseduffield/lazydocker
+- https://github.com/jesseduffield/lazynpm

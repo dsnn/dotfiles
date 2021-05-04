@@ -23,13 +23,29 @@ HISTSIZE=1000
 SAVEHIST=1000
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 [ -f ~/build/z/z.sh ] && source ~/build/z/z.sh
-# POWERLINE_BASH_SELECT=1
-# . /usr/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh
-autoload -Uz promptinit
-promptinit
-prompt suse
+
+# Find and set branch name var if in git repository.
+function git_branch_name()
+{
+  branch=$(git symbolic-ref HEAD 2> /dev/null | awk 'BEGIN{FS="/"} {print $NF}')
+  if [[ $branch == "" ]];
+  then
+    :
+  else
+    echo '('$branch')'
+  fi
+}
+
+# Enable substitution in the prompt.
+setopt prompt_subst
+
+# Config for prompt. PS1 synonym.
+prompt='%2/ $(git_branch_name) > '
+
+# autoload -Uz promptinit
+# promptinit
+# prompt suse
 
 # source exports
 if [ -f ~/.config/zsh/.exports.zsh ]; then

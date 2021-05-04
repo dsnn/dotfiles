@@ -21,7 +21,6 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
 
 ### nvim
 
-  - review plugins in plugins.lua (commented)
   - telescope:
     - git branches checkout
     - window layouts for diff. bindings
@@ -30,15 +29,11 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
   - check resize windows
   - autocommand to remove trailing spaces
 	- vista: toggle keybinding for listing lsp symbols in a sidebar
-  - test harpoon
-	- telescope-cheat: E.g. regex, work stuff (e.g. db connection strings. submodule)
 	- spell/spellcheck
 	- more linting (markdown etc)
 	- neovim session managment (keybindings, autocmds etc)
-	- lua keymap dsl: https://github.com/tjdevries/astronauta.nvim
-	- neovim-remote (open files from :term witout nesting)
-  - floatterm
-  - lazygit floatterm? (or fugitive)
+  - review lazygit, fugitive and neogit. pick one.
+  - binding for formatted paste?
 
 ### plugins
 
@@ -50,17 +45,30 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
   - brooth/far.vim                                 -- find and replace
   - JoosepAlviste/nvim-ts-context-commentstring    -- better comments (use w/ vim-commentary instead?)
   - tpope/vim-repeat
-  - TimUntersberger/neogit                         -- or fugitive?
-  - https://github.com/sindrets/diffview.nvim      -- single tab for diffs (or fugitive)
-  - https://github.com/Shatur95/neovim-session-manager
-  - https://github.com/ThePrimeagen/harpoon
+  - TimUntersberger/neogit
+  - sindrets/diffview.nvim                         -- single tab for diffs (or fugitive)
+  - Shatur95/neovim-session-manager
+  - ThePrimeagen/harpoon
+  - nvim-telescope/telescope-freccncy.nvim
+  - nvim-telescope/telescope-cheat.nvim'
+  - nvim-telescope/telescope-arecibo.nvim
+  - tjdevries/astronauta.nvim
+  - folke/lsp-trouble.nvim
+  - voldikss/vim-floaterm 
 
-## links
+### links
 
-- https://github.com/glepnir/nvim
-- https://github.com/jesseleite/dotfiles/tree/master/vim
-- https://github.com/ngscheurich/dotfiles/tree/main/nvim/.config/nvim
-- https://github.com/awesomeWM/awesome/issues/1395
-- https://github.com/jesseduffield/lazygit
-- https://github.com/jesseduffield/lazydocker
-- https://github.com/jesseduffield/lazynpm
+  - https://github.com/dandavison/delta
+  - https://github.com/awesomeWM/awesome/issues/1395
+  - https://github.com/jesseduffield/lazygit
+  - https://github.com/jesseduffield/lazydocker
+  - https://github.com/jesseduffield/lazynpm
+
+### dotfiles
+
+  - https://github.com/glepnir/nvim
+  - https://github.com/elianiva/dotfiles
+  - https://github.com/ahmedelgabri/dotfiles
+  - https://github.com/tjdevries/config_manager
+  - https://github.com/ngscheurich/dotfiles
+  - https://github.com/jesseleite/dotfiles

@@ -44,10 +44,6 @@ return require('packer').startup(function(use)
     use 'nvim-telescope/telescope.nvim'
     use 'nvim-telescope/telescope-fzy-native.nvim'
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-    -- TODO: when I have more time 
-    -- use 'nvim-telescope/telescope-freccncy.nvim'
-    -- use 'nvim-telescope/telescope-cheat.nvim'
-    -- use { 'nvim-telescope/telescope-arecibo.nvim', rocks = {"openssl", "lua-http-parser"} }
 
     -- autocomplete
     use 'hrsh7th/nvim-compe' 					                      -- autocomplete

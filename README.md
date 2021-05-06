@@ -24,16 +24,26 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
   - telescope:
     - git branches checkout
     - window layouts for diff. bindings
-    - find files from .git and/or specified folders (path changes and telesope doesnt find anything w/ find_files)
+    - find files from .git and/or specified folders (path changes and telesope doesnt find anything w/ find files)
+	  - cheat: work db connection strings. submodules etc.
   - check nvim-terminal bindings
   - check resize windows
   - autocommand to remove trailing spaces
 	- vista: toggle keybinding for listing lsp symbols in a sidebar
+  - review lazygit, fugitive and neogit. pick one.
+  - binding for formatted paste?
+  - test harpoon
 	- spell/spellcheck
 	- more linting (markdown etc)
 	- neovim session managment (keybindings, autocmds etc)
-  - review lazygit, fugitive and neogit. pick one.
-  - binding for formatted paste?
+	- lua keymap dsl: https://github.com/tjdevries/astronauta.nvim
+	- neovim-remote (open files from :term witout nesting)
+  - floatterm
+  - lazygit floatterm? (or fugitive)
+  - auto create ending tag in .js, .ts etc.
+  - auto format w/ prettier (and keybinding for toggle it off?)
+  - remove so lsp gd doesnt open up a quickfix (gD/gd)
+  - paste shouldnt drop whats been recently yanked
 
 ### plugins
 

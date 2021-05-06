@@ -15,12 +15,24 @@
     "prefix": "datetime",
     "body": "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND"
   },
-  "lorem ipsum line": {
-    "prefix": "lorem",
+  "lorem ipsum 1": {
+    "prefix": "lorem1",
     "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
   },
-  "lorem ipsum paragraph": {
-    "prefix": "loremfull",
-    "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer euismod ligula odio, at blandit orci facilisis in. Nam mollis odio a aliquam fringilla. Maecenas lacinia, ante quis facilisis tincidunt, libero felis laoreet est, a interdum magna justo sit amet libero. Sed purus justo, pellentesque eu lacus sit amet, iaculis dignissim felis. Curabitur euismod interdum turpis, id venenatis justo accumsan sit amet. Nulla scelerisque lectus vel justo venenatis, dictum pharetra tellus maximus. Praesent dui eros, rutrum in sapien non, luctus sollicitudin dolor. Morbi et ipsum lobortis, imperdiet orci maximus, fermentum turpis. Morbi dapibus convallis auctor. Aliquam dictum pretium varius. Cras est eros, mattis dapibus interdum quis, tempus quis odio. Praesent maximus lorem sed sem luctus porttitor at ac tellus. Mauris quis fermentum felis, lobortis placerat nibh. Sed pulvinar, quam auctor tempor commodo, turpis felis dictum neque, et gravida nunc diam eget turpis. Vestibulum et purus eget erat facilisis porta quis ut felis. Donec facilisis orci vel lectus consectetur, eget bibendum nisi suscipit."
+  "lorem ipsum 2": {
+    "prefix": "lorem2",
+    "body": "Fusce vitae varius purus. Nulla eleifend lorem facilisis sem dictum ornare. Donec at dapibus dui, iaculis viverra ipsum. Phasellus eget mauris sed urna lacinia auctor."
+  },
+  "lorem ipsum 3": {
+    "prefix": "lorem3",
+    "body": "Fusce vitae varius purus. Nulla eleifend lorem facilisis sem dictum ornare. Donec at dapibus dui, iaculis viverra ipsum. Phasellus eget mauris sed urna lacinia auctor. Mauris pellentesque nisl ut ligula varius condimentum. Maecenas orci enim, aliquam consectetur velit eget, aliquam condimentum arcu. Phasellus sed vehicula mi. Morbi tempor massa vitae urna finibus, eu commodo neque bibendum."
+  },
+  "lorem ipsum 4": {
+    "prefix": "lorem4",
+    "body": "Fusce vitae varius purus. Nulla eleifend lorem facilisis sem dictum ornare. Donec at dapibus dui, iaculis viverra ipsum. Phasellus eget mauris sed urna lacinia auctor. Mauris pellentesque nisl ut ligula varius condimentum. Maecenas orci enim, aliquam consectetur velit eget, aliquam condimentum arcu. Phasellus sed vehicula mi. Morbi tempor massa vitae urna finibus, eu commodo neque bibendum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum elit mollis blandit aliquet. Proin placerat tempor porttitor. Praesent vel bibendum dolor, ut vestibulum tellus. Nam mollis dapibus eros, et pretium lacus porttitor a. Nullam gravida magna mauris, quis vestibulum nisl aliquet tempor. Duis ut elementum leo. Nulla facilisi."
+  },
+  "log": {
+    "prefix": "log",
+    "body": "console.log('$1', $2);"
   }
 }

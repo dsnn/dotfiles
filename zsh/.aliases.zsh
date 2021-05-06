@@ -78,6 +78,7 @@ alias cb="git cb"
 alias ns="npm start";
 alias ni="npm install";
 alias nt="npm test";
+alias ntu="npm run test:update-snapshot";
 alias nrw="npm run workbench";
 
 # tmux

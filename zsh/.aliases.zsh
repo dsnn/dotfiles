@@ -73,6 +73,7 @@ alias gp="git push origin master"
 alias gpf="git push --force-with-lease"
 alias gs="git st"
 alias cb="git cb"
+alias lzg="lazygit"
 
 # npm
 alias ns="npm start";

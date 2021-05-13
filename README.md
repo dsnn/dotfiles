@@ -30,7 +30,6 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
   - check resize windows
   - autocommand to remove trailing spaces
 	- vista: toggle keybinding for listing lsp symbols in a sidebar
-  - review lazygit, fugitive and neogit. pick one.
   - binding for formatted paste?
   - test harpoon
 	- spell/spellcheck
@@ -38,16 +37,16 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
 	- neovim session managment (keybindings, autocmds etc)
 	- lua keymap dsl: https://github.com/tjdevries/astronauta.nvim
 	- neovim-remote (open files from :term witout nesting)
-  - floatterm
-  - lazygit floatterm? (or fugitive)
-  - auto create ending tag in .js, .ts etc.
   - auto format w/ prettier (and keybinding for toggle it off?)
   - remove so lsp gd doesnt open up a quickfix (gD/gd)
   - paste shouldnt drop whats been recently yanked
+  - add binding for sending telescope response to lsp trouble (e.g c-t)
+  - handle different comment styles in typescript ( // {} )
+  - review JoosepAlviste/nvim-ts-context-commentstring (not working. see mappings cmd / err).
+  - fix statusline 'v' (warnings?)
 
 ### plugins
 
-  - windwp/nvim-autopairs
   - tpope/vim-scriptease                           -- :Message
   - pearofducks/ansible-vim
   - iamcco/markdown-preview.nvim
@@ -55,16 +54,16 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
   - brooth/far.vim                                 -- find and replace
   - JoosepAlviste/nvim-ts-context-commentstring    -- better comments (use w/ vim-commentary instead?)
   - tpope/vim-repeat
-  - TimUntersberger/neogit
-  - sindrets/diffview.nvim                         -- single tab for diffs (or fugitive)
   - Shatur95/neovim-session-manager
   - ThePrimeagen/harpoon
   - nvim-telescope/telescope-freccncy.nvim
   - nvim-telescope/telescope-cheat.nvim'
   - nvim-telescope/telescope-arecibo.nvim
   - tjdevries/astronauta.nvim
-  - folke/lsp-trouble.nvim
-  - voldikss/vim-floaterm 
+  - phaazon/hop.nvim                              -- to replace unblevable/quick-scope ?
+  - TimUntersberger/neogit
+  - norcalli/snippets.nvim                        -- to replace hrsh7th/vim-vsnip ?
+  - lewis6991/gitsigns.nvim
 
 ### links
 

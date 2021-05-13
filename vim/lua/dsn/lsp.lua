@@ -27,7 +27,7 @@ vim.cmd("nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>")
 vim.cmd("nnoremap <silent> gh <cmd>lua vim.lsp.buf.hover()<CR>")
 vim.cmd("nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>")
 -- vim.cmd("nnoremap <silent> <leader>f <cmd>lua vim.lsp.buf.formatting()<CR>")
-vim.cmd("nnoremap <silent> gf :Format<CR>")
+-- vim.cmd("nnoremap <silent> gf :Format<CR>")
 
 vim.cmd("nnoremap <silent> ca :Lspsaga code_action<CR>")
 vim.cmd("nnoremap <silent> <leader>r :Lspsaga rename<CR>")

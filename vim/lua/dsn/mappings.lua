@@ -68,12 +68,18 @@ vim.api.nvim_set_keymap('n', '<space>fc', "<cmd>:lua require('dsn.telescope').co
 vim.api.nvim_set_keymap('n', '<space>fr', "<cmd>:lua require('dsn.telescope').registers()<CR>", silent_no)
 vim.api.nvim_set_keymap('n', '<space>fq', "<cmd>:lua require('dsn.telescope').quickfix()<CR>", silent_no)
 
--- comments
-require('nvim_comment').setup()
-
 -- limelight
-vim.api.nvim_set_keymap('n', '<leader>l', ":Limelight!!<CR>", silent_no)
+vim.api.nvim_set_keymap('n', '<leader>ll', ":Limelight!!<CR>", silent_no)
 
 -- colorizer
 require("colorizer").setup()
--- :ColorizerToggle
+
+-- lsp trouble
+require("trouble").setup()
+vim.api.nvim_set_keymap('n', '<leader>lt', ":LspTroubleToggle<CR>", silent_no)
+
+-- auto closetag
+-- :CloseTagToggleBuffer in case of annoyance
+vim.cmd("let g:closetag_filenames = '*.html,*.tsx'")
+
+vim.api.nvim_set_keymap('n', '<leader>st', "<cmd>:lua require('ts_context_commentstring.internal').update_commentstring()<CR>", silent_no)

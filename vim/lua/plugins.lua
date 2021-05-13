@@ -15,7 +15,6 @@ return require('packer').startup(function(use)
     use 'junegunn/goyo.vim'
     use 'mhinz/vim-startify'
     use 'tpope/vim-surround'
-    use 'terrortylor/nvim-comment'
     use 'godlygeek/tabular'
 
     -- buffer, register, tabs & statusline
@@ -37,6 +36,9 @@ return require('packer').startup(function(use)
     use { 'prettier/vim-prettier', run = 'npm install' }
     use 'nvim-lua/lsp-status.nvim'                          -- lsp info in statusline
     use 'mhartington/formatter.nvim'
+    use 'alvan/vim-closetag'
+    use 'tpope/vim-commentary'
+    use 'JoosepAlviste/nvim-ts-context-commentstring'       -- handle multiple comment-styles in one file
 
     -- telescope
     use 'nvim-lua/plenary.nvim'

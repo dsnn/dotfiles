@@ -20,14 +20,5 @@ require'nvim-treesitter.configs'.setup {
   highlight = { enable = true },
   context_commentstring = {
     enable = true,
-    config = {
-      typescriptreact = {
-        __default = '// %s',
-        tsx_element = '{/* %s */}',
-        tsx_fragment = '{/* %s */}',
-        tsx_attribute = '// %s',
-        comment = '// %s'
-      }
-    }
   },
 }

@@ -105,10 +105,12 @@ require'lspconfig'.tsserver.setup{
         signs = true,
         underline = true,
         update_in_insert = true
-
       })
   }
 }
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- local sumneko_root_path = DATA_PATH .. "/lspinstall/lua"
 -- local sumneko_binary = sumneko_root_path .. "/bin/Linux" .. "/lua-language-server"
@@ -133,127 +135,125 @@ require'lspconfig'.tsserver.setup{
 -- }
 
 -- npm i -g bash-language-server
-require'lspconfig'.bashls.setup{
-  cmd = {
-    DATA_PATH .. "/lspinstall/bash/node_modules/.bin/bash-language-server",
-    "start"
-  },
-  on_attach = common_on_attach,
-  filetypes = {"sh", "zsh"}
-}
+-- require'lspconfig'.bashls.setup{
+--   cmd = {
+--     DATA_PATH .. "/lspinstall/bash/node_modules/.bin/bash-language-server",
+--     "start"
+--   },
+--   on_attach = common_on_attach,
+--   filetypes = {"sh", "zsh"}
+-- }
 
 -- npm install -g vscode-css-languageserver-bin
-require'lspconfig'.cssls.setup{
-  cmd = {
-    "node", DATA_PATH ..
-      "/lspinstall/css/vscode-css/css-language-features/server/dist/node/cssServerMain.js",
-    "--stdio"
-  },
-  on_attach = common_on_attach
-}
+-- require'lspconfig'.cssls.setup{
+--   cmd = {
+--     "node", DATA_PATH ..
+--       "/lspinstall/css/vscode-css/css-language-features/server/dist/node/cssServerMain.js",
+--     "--stdio"
+--   },
+--   on_attach = common_on_attach
+-- }
 
 -- npm install -g dockerfile-language-server-nodejs
-require'lspconfig'.dockerls.setup{
-  cmd = {
-    DATA_PATH .. "/lspinstall/dockerfile/node_modules/.bin/docker-langserver",
-    "--stdio"
-  },
-  on_attach = common_on_attach,
-  root_dir = vim.loop.cwd
-}
+-- require'lspconfig'.dockerls.setup{
+--   cmd = {
+--     DATA_PATH .. "/lspinstall/dockerfile/node_modules/.bin/docker-langserver",
+--     "--stdio"
+--   },
+--   on_attach = common_on_attach,
+--   root_dir = vim.loop.cwd
+-- }
 
 -- npm install -g graphql-language-service-cli
-require'lspconfig'.graphql.setup{on_attach = common_on_attach}
+-- require'lspconfig'.graphql.setup{on_attach = common_on_attach}
 
 -- npm install -g vscode-html-languageserver-bin
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-require'lspconfig'.html.setup{
-  cmd = {
-    "node", DATA_PATH ..
-      "/lspinstall/html/vscode-html/html-language-features/server/dist/node/htmlServerMain.js",
-    "--stdio"
-  },
-  on_attach = common_on_attach,
-  capabilities = capabilities
-}
+-- require'lspconfig'.html.setup{
+--   cmd = {
+--     "node", DATA_PATH ..
+--       "/lspinstall/html/vscode-html/html-language-features/server/dist/node/htmlServerMain.js",
+--     "--stdio"
+--   },
+--   on_attach = common_on_attach,
+--   capabilities = capabilities
+-- }
 
 -- npm install -g vscode-json-languageserver
-require'lspconfig'.jsonls.setup{
-  cmd = {
-    "node", DATA_PATH ..
-      "/lspinstall/json/vscode-json/json-language-features/server/dist/node/jsonServerMain.js",
-    "--stdio"
-  },
-  on_attach = common_on_attach,
+-- require'lspconfig'.jsonls.setup{
+--   cmd = {
+--     "node", DATA_PATH ..
+--       "/lspinstall/json/vscode-json/json-language-features/server/dist/node/jsonServerMain.js",
+--     "--stdio"
+--   },
+--   on_attach = common_on_attach,
 
-  commands = {
-    Format = {
-      function()
-        vim.lsp.buf.range_formatting({}, {0, 0}, {vim.fn.line("$"), 0})
-      end
-    }
-  }
-}
+--   commands = {
+--     Format = {
+--       function()
+--         vim.lsp.buf.range_formatting({}, {0, 0}, {vim.fn.line("$"), 0})
+--       end
+--     }
+--   }
+-- }
 
 -- npm install -g vim-language-server
-require'lspconfig'.vimls.setup{
-  cmd = {
-    DATA_PATH .. "/lspinstall/vim/node_modules/.bin/vim-language-server",
-    "--stdio"
-  },
-  on_attach = common_on_attach
-}
+-- require'lspconfig'.vimls.setup{
+--   cmd = {
+--     DATA_PATH .. "/lspinstall/vim/node_modules/.bin/vim-language-server",
+--     "--stdio"
+--   },
+--   on_attach = common_on_attach
+-- }
 
 -- npm install -g yaml-language-server
-require'lspconfig'.yamlls.setup{
-  cmd = {
-    DATA_PATH .. "/lspinstall/yaml/node_modules/.bin/yaml-language-server",
-    "--stdio"
-  },
-  on_attach = common_on_attach
-}
+-- require'lspconfig'.yamlls.setup{
+--   cmd = {
+--     DATA_PATH .. "/lspinstall/yaml/node_modules/.bin/yaml-language-server",
+--     "--stdio"
+--   },
+--   on_attach = common_on_attach
+-- }
 
-is_cfg_present = function(cfg_name)
-  -- this returns 1 if it's not present and 0 if it's present
-  -- we need to compare it with 1 because both 0 and 1 is `true` in lua
-  return vim.fn.empty(vim.fn.glob(vim.loop.cwd() .. cfg_name)) ~= 1
-end
+-- is_cfg_present = function(cfg_name)
+--   -- this returns 1 if it's not present and 0 if it's present
+--   -- we need to compare it with 1 because both 0 and 1 is `true` in lua
+--   return vim.fn.empty(vim.fn.glob(vim.loop.cwd() .. cfg_name)) ~= 1
+-- end
 
-local prettier = function()
-  if is_cfg_present("/prettier.config.js") then
-    return {
-      exe = "prettier",
-      args = {
-        string.format("--stdin-filepath '%s' --config '%s'",
-          vim.api.nvim_buf_get_name(0),
-          vim.fn.stdpath("config") .. "/prettier.config.js")
-      },
-      stdin = true
-    }
-  elseif is_cfg_present("/.prettierrc") then
-    return {
-      exe = "prettier",
-      args = {
-        string.format("--stdin-filepath '%s' --config '%s'",
-          vim.api.nvim_buf_get_name(0), vim.loop.cwd() .. "/.prettierrc")
-      },
-      stdin = true
-    }
-  else
-    -- fallback to global config
-    return {
-      exe = "prettier",
-      args = {
-        string.format("--stdin-filepath '%s' --config '%s'",
-          vim.api.nvim_buf_get_name(0),
-          vim.fn.stdpath("config") .. "/.prettierrc")
-      },
-      stdin = true
-    }
-  end
-end
+-- local prettier = function()
+--   if is_cfg_present("/prettier.config.js") then
+--     return {
+--       exe = "prettier",
+--       args = {
+--         string.format("--stdin-filepath '%s' --config '%s'",
+--           vim.api.nvim_buf_get_name(0),
+--           vim.fn.stdpath("config") .. "/prettier.config.js")
+--       },
+--       stdin = true
+--     }
+--   elseif is_cfg_present("/.prettierrc") then
+--     return {
+--       exe = "prettier",
+--       args = {
+--         string.format("--stdin-filepath '%s' --config '%s'",
+--           vim.api.nvim_buf_get_name(0), vim.loop.cwd() .. "/.prettierrc")
+--       },
+--       stdin = true
+--     }
+--   else
+--     -- fallback to global config
+--     return {
+--       exe = "prettier",
+--       args = {
+--         string.format("--stdin-filepath '%s' --config '%s'",
+--           vim.api.nvim_buf_get_name(0),
+--           vim.fn.stdpath("config") .. "/.prettierrc")
+--       },
+--       stdin = true
+--     }
+--   end
+-- end
 
 local luafmt = function()
   return {
@@ -274,13 +274,13 @@ require'formatter'.setup{
   logging = false,
   filetype = {
     lua = {luafmt},
-    javascript = {prettier},
-    typescript = {prettier},
-    typescriptreact = {prettier},
-    html = {prettier},
-    css = {prettier},
-    jsonc = {prettier},
-    yaml = {prettier},
-    markdown = {prettier}
+    -- javascript = {prettier},
+    -- typescript = {prettier},
+    -- typescriptreact = {prettier},
+    -- html = {prettier},
+    -- css = {prettier},
+    -- jsonc = {prettier},
+    -- yaml = {prettier},
+    -- markdown = {prettier}
   }
 }

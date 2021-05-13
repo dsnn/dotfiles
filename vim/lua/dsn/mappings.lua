@@ -10,6 +10,9 @@ vim.api.nvim_set_keymap('n', '<Leader>,', ':wall<CR>', silent_no)
 vim.api.nvim_set_keymap('n', '<Leader><space>', ':set hlsearch!<CR>', silent_no)
 vim.api.nvim_set_keymap('n', '<Leader>x', '<cmd>:luafile %<CR>', silent_no)
 
+-- do not replace yank on multiple paste
+vim.api.nvim_set_keymap('x', 'p', 'pgvy', silent_no)
+
 -- noremap <C-A> ^
 -- noremap <C-E> $
 -- noremap <C-Q> %

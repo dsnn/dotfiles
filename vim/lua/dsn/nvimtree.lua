@@ -13,7 +13,7 @@ vim.g.nvim_tree_bindings = {
     ["<2-LeftMouse>"] = tree_cb("edit"),
     ["<2-RightMouse>"] = tree_cb("cd"),
     ["<BS>"] = tree_cb("close_node"),
-    ["<C-]>"] = tree_cb("cd"),
+    ["="] = tree_cb("cd"),
     ["<C-r>"] = tree_cb("full_rename"),
     ["<C-t>"] = tree_cb("tabnew"),
     ["<CR>"] = tree_cb("edit"),

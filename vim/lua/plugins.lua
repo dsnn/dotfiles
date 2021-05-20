@@ -33,7 +33,7 @@ return require('packer').startup(function(use)
     use 'kabouzeid/nvim-lspinstall'
     use 'kevinhwang91/nvim-bqf' 				                    -- better quick fix window
     use 'neovim/nvim-lspconfig'
-    use { 'prettier/vim-prettier', run = 'npm install' }
+    use { 'prettier/vim-prettier', run = 'npm install', branch = 'master' }
     use 'nvim-lua/lsp-status.nvim'                          -- lsp info in statusline
     use 'mhartington/formatter.nvim'
     use 'alvan/vim-closetag'

@@ -35,10 +35,10 @@ vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', silent)
 vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', silent)
 
 -- window resizing
-vim.api.nvim_set_keymap('n', '<M-j>',  ':resize -2<CR>',          silent_no)
-vim.api.nvim_set_keymap('n', '<M-k>',  ':resize +2<CR>',          silent_no)
-vim.api.nvim_set_keymap('n', '<M-h>',  ':vertical resize -2<CR>', silent_no)
-vim.api.nvim_set_keymap('n', '<M-l>',  ':vertical resize +2<CR>', silent_no)
+vim.api.nvim_set_keymap('n', '<Up>',    ':resize -2<CR>',          silent_no)
+vim.api.nvim_set_keymap('n', '<Down>',  ':resize +2<CR>',          silent_no)
+vim.api.nvim_set_keymap('n', '<Right>', ':vertical resize -2<CR>', silent_no)
+vim.api.nvim_set_keymap('n', '<Left>',  ':vertical resize +2<CR>', silent_no)
 
 -- terminal navigation
 vim.cmd([[

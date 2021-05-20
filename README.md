@@ -24,17 +24,14 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
 - telescope:
   - git branches checkout
   - window layouts for diff. bindings
-  - find files from .git and/or specified folders (path changes and telesope doesnt find anything w/ find files)
   - cheat: work db connection strings. submodules etc.
 - check nvim-terminal bindings
-- check resize windows
 - autocommand to remove trailing spaces
 - vista: toggle keybinding for listing lsp symbols in a sidebar
 - spell/spellcheck
 - neovim session managment (keybindings, autocmds etc)
 - neovim-remote (open files from :term witout nesting)
-- auto format w/ prettier (and keybinding for toggle it off?)
-- remove so lsp gd doesnt open up a quickfix (gD/gd)
+- remove so lsp gd doesnt open up a quickfix (gD/gd) ?
 - add binding for sending telescope response to lsp trouble (e.g c-t)
 - handle different comment styles in typescript ( // {} )
   - review JoosepAlviste/nvim-ts-context-commentstring (not working. see mappings cmd / err).
@@ -47,7 +44,7 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
 - iamcco/markdown-preview.nvim
 - liuchengxu/vista.vim
 - brooth/far.vim -- find and replace
-- JoosepAlviste/nvim-ts-context-commentstring -- better comments (use w/ vim-commentary instead?)
+- JoosepAlviste/nvim-ts-context-commentstring
 - tpope/vim-repeat
 - Shatur95/neovim-session-manager
 - ThePrimeagen/harpoon

@@ -40,6 +40,10 @@ return require('packer').startup(function(use)
     use 'tpope/vim-commentary'
     use 'JoosepAlviste/nvim-ts-context-commentstring'       -- handle multiple comment-styles in one file
 
+
+    -- git
+    use 'tpope/vim-fugitive'
+
     -- telescope
     use 'nvim-lua/plenary.nvim'
     use 'nvim-lua/popup.nvim'

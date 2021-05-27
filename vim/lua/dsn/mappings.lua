@@ -85,4 +85,4 @@ vim.api.nvim_set_keymap('n', '<leader>lt', ":LspTroubleToggle<CR>", silent_no)
 -- :CloseTagToggleBuffer in case of annoyance
 vim.cmd("let g:closetag_filenames = '*.html,*.tsx'")
 
-vim.api.nvim_set_keymap('n', '<leader>st', "<cmd>:lua require('ts_context_commentstring.internal').update_commentstring()<CR>", silent_no)
+vim.api.nvim_set_keymap('n', '<leader>uc', "<cmd>:lua require('ts_context_commentstring.internal').update_commentstring()<CR>", silent_no)

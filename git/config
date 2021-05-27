@@ -2,7 +2,7 @@
 	name = dsn 
 	email = dsn@dsnn.io 
 [core]
-	editor = nvim
+	editor = vim
 [alias]
 	# log
 	st = status -s

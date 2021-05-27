@@ -125,7 +125,7 @@ function git_prepare() {
 	zle accept-line
 }
 zle -N git_prepare
-bindkey "^g" git_prepare
+## bindkey "^g" git_prepare
 
 # Suggestions
 # https://github.com/zsh-users/zsh-autosuggestions 

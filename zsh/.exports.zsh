@@ -15,15 +15,14 @@ export VISUAL=nvim
 export MANWIDTH=79
 export LIBGL_ALWAYS_INDIRECT=1
 
-# XDG (just in case, should already default)
+# XDG (just in case, same as defaults)
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.local/cache
 export XDG_DATA_HOME=$HOME/.local/share
 export HISTFILE="$XDG_DATA_HOME"/history
 
-# Disable less history (and this crap in home)
+# Disable less history (and crap in home)
 export LESSHISTFILE=- 
-
 
 # fd
 export FD_OPTIONS="--follow --hidden --exclude .git --exclude node_modules"

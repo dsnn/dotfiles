@@ -1,4 +1,7 @@
 require'nvim-treesitter.configs'.setup {
+  context_commentstring = {
+    enable = true,
+  },
   ensure_installed = {
       "graphql",
       "html",
@@ -18,7 +21,4 @@ require'nvim-treesitter.configs'.setup {
       "jsonc"
   },
   highlight = { enable = true },
-  context_commentstring = {
-    enable = true,
-  },
 }

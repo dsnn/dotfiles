@@ -22,6 +22,7 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
 ### nvim
 
 - telescope:
+  - broken dotfiles shortcuts. cwd not working? anything else broken?
   - cheat: work db connection strings. submodules etc.
 - check nvim-terminal bindings
 - autocommand to remove trailing spaces

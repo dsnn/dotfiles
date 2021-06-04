@@ -84,6 +84,7 @@ function M.dotfiles()
   opts.hidden = true
   opts.prompt_title = "~ dotfiles ~"
   opts.shorten_path = false
+  opts.cwd = "~/dotfiles",
   require('telescope.builtin').find_files(dropdown(opts)) 
 end
 

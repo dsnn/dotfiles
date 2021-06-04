@@ -81,6 +81,8 @@ alias ni="npm install";
 alias nt="npm test";
 alias ntu="npm run test:update-snapshot";
 alias nrw="npm run workbench";
+alias nrt="npm run typecheck";
+alias nrl="npm run lint";
 
 # tmux
 alias tl="~/bin/tm"

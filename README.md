@@ -22,7 +22,6 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
 ### nvim
 
 - telescope:
-  - broken dotfiles shortcuts. cwd not working? anything else broken?
   - cheat: work db connection strings. submodules etc.
 - check nvim-terminal bindings
 - autocommand to remove trailing spaces
@@ -32,6 +31,7 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
 - remove so lsp gd doesnt open up a quickfix (gD/gd) ?
 - add binding for sending telescope response to lsp trouble (e.g c-t)
 - fix statusline 'v' (warnings?)
+- own fn to insert 'console.log()' w/ current selection
 
 ### plugins
 

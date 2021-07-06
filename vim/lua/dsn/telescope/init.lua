@@ -60,10 +60,6 @@ require('telescope').setup {
     }
 }
 
-local dropdown = function(opts)
-  return require('telescope.themes').get_dropdown(opts)
-end
-
 local center_list = {
   borderchars = {
     { '─', '│', '─', '│', '┌', '┐', '┘', '└'},
@@ -71,21 +67,28 @@ local center_list = {
     results = {"─", "│", "─", "│", "├", "┤", "┘", "└"},
     preview = { '─', '│', '─', '│', '┌', '┐', '┘', '└'},
   },
-  width = 0.5,
   previewer = false,
   prompt_title = false,
-  results_height = 15,
 }
 
 local M = {}
 
 function M.dotfiles()
-  local opts = vim.deepcopy(center_list)
-  opts.hidden = true
-  opts.prompt_title = "~ dotfiles ~"
-  opts.shorten_path = false
-  opts.cwd = "~/dotfiles",
-  require('telescope.builtin').find_files(dropdown(opts)) 
+  local theme = require('telescope.themes').get_dropdown({
+    borderchars = {
+      { '─', '│', '─', '│', '┌', '┐', '┘', '└'},
+      prompt = {"─", "│", " ", "│", '┌', '┐', "│", "│"},
+      results = {"─", "│", "─", "│", "├", "┤", "┘", "└"},
+      preview = { '─', '│', '─', '│', '┌', '┐', '┘', '└'},
+    },
+    previewer = false,
+    prompt_title = false,
+    hidden = true,
+    prompt_title = "~ dotfiles ~",
+    shorten_path = false,
+    cwd = "~/dotfiles",
+  }) 
+  require('telescope.builtin').find_files(theme) 
 end
 
 function M.help_tags()
@@ -109,21 +112,22 @@ function M.grep_word()
   require('telescope.builtin').grep_string {
     short_path = true,
     word_match = '-w',
-    only_sort_text = true,
-    layout_strategy = 'vertical',
+    -- only_sort_text = true,
+    -- layout_strategy = 'vertical',
     sorter = sorters.get_fzy_sorter(),
   }
 end
 
 function M.git_branches()
-  local theme = dropdown(center_list)
+  local theme = require('telescope.themes').get_dropdown(center_list)
   require('telescope.builtin').git_branches(theme)
 end
 
 function M.buffers()
-  require('telescope.builtin').buffers {
-    shorten_path = false,
-  }
+  local opts = vim.deepcopy(center_list) 
+  opts.shorten_path = 'false'
+  local theme = require('telescope.themes').get_dropdown(opts)
+  require('telescope.builtin').buffers(theme) 
 end
 
 function M.colorscheme()

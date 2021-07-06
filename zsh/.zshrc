@@ -110,6 +110,14 @@ function up_widget() {
 zle -N up_widget
 bindkey "^u" up_widget
 
+# lazy git
+function run_lazy_git() {
+	BUFFER="lazygit && clear"
+	zle accept-line
+}
+zle -N run_lazy_git
+bindkey "^g" run_lazy_git
+
 # git
 function git_prepare() {
 	if [ -n "$BUFFER" ];

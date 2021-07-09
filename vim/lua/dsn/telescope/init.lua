@@ -148,7 +148,7 @@ function M.file_browser()
     cwd = "~/",
     sorting_strategy = "ascending",
     scroll_strategy = "cycle",
-    prompt_position = "top",
+    -- prompt_position = "top",
     hidden = true,
   }
 end

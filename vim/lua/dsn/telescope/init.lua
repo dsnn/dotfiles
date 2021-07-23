@@ -27,7 +27,7 @@ require('telescope').setup {
         -- selection_caret = " ",
         -- selection_strategy = "reset",
         -- set_env = {['COLORTERM'] = 'truecolor'}, -- default = nil,
-        -- shorten_path = true,
+        -- path_display = true,
         -- sorting_strategy = "descending",
         -- use_less = true,
         -- width = 0.75,
@@ -85,7 +85,7 @@ function M.dotfiles()
     prompt_title = false,
     hidden = true,
     prompt_title = "~ dotfiles ~",
-    shorten_path = false,
+    path_display = false,
     cwd = "~/dotfiles",
   }) 
   require('telescope.builtin').find_files(theme) 
@@ -103,7 +103,7 @@ end
 
 function M.grep_prompt()
   require('telescope.builtin').grep_string {
-    shorten_path = true,
+    path_display = true,
     search = vim.fn.input("Grep String > "),
   }
 end
@@ -125,7 +125,7 @@ end
 
 function M.buffers()
   local opts = vim.deepcopy(center_list) 
-  opts.shorten_path = 'false'
+  opts.path_display = 'false'
   local theme = require('telescope.themes').get_dropdown(opts)
   require('telescope.builtin').buffers(theme) 
 end

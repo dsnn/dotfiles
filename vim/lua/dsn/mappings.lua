@@ -65,7 +65,7 @@ vim.api.nvim_set_keymap('n', '<space>fh', "<cmd>:lua require('dsn.telescope').he
 vim.api.nvim_set_keymap('n', '<space>fd', "<cmd>:lua require('dsn.telescope').dotfiles()<CR>", silent_no)
 vim.api.nvim_set_keymap('n', '<space>fe', "<cmd>:lua require('dsn.telescope').file_browser()<CR>", silent_no)
 vim.api.nvim_set_keymap('n', '<space>gb', "<cmd>:lua require('dsn.telescope').git_branches()<CR>", silent_no)
-vim.api.nvim_set_keymap('n', '<space>fb', "<cmd>:lua require('dsn.telescope').buffers()<CR>", silent_no)
+vim.api.nvim_set_keymap('n', '<space>b', "<cmd>:lua require('dsn.telescope').buffers()<CR>", silent_no)
 vim.api.nvim_set_keymap('n', '<space>fa', "<cmd>:lua require('dsn.telescope').find_files()<CR>", silent_no)
 vim.api.nvim_set_keymap('n', '<space>fc', "<cmd>:lua require('dsn.telescope').colorscheme()<CR>", silent_no)
 vim.api.nvim_set_keymap('n', '<space>fr', "<cmd>:lua require('dsn.telescope').registers()<CR>", silent_no)

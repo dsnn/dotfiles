@@ -31,7 +31,10 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
 - remove so lsp gd doesnt open up a quickfix (gD/gd) ?
 - add binding for sending telescope response to lsp trouble (e.g c-t)
 - fix statusline 'v' (warnings?)
-- own fn to insert 'console.log()' w/ current selection
+- own fn to insert 'console.log()' w/o current selection
+  - own plugin and make use of treesitter (place log before return, outside fn args etc) ?
+- review lir, treesitter -textobjects and -refactor
+- review spaceship-prompt
 
 ### plugins
 
@@ -50,6 +53,9 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
 - TimUntersberger/neogit
 - norcalli/snippets.nvim -- to replace hrsh7th/vim-vsnip ?
 - lewis6991/gitsigns.nvim
+- https://github.com/tamago324/lir.nvim
+- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+- https://github.com/nvim-treesitter/nvim-treesitter-refactor
 
 ### links
 
@@ -59,6 +65,7 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
 - https://github.com/jesseduffield/lazygit
 - https://github.com/jesseduffield/lazydocker
 - https://github.com/jesseduffield/lazynpm
+- https://github.com/spaceship-prompt/spaceship-prompt
 
 ### dotfiles
 

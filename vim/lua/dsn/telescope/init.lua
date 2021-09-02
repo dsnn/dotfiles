@@ -60,7 +60,7 @@ require('telescope').setup {
     }
 }
 
-local center_list = {
+local center_list = require('telescope.themes').get_dropdown({
   borderchars = {
     { '─', '│', '─', '│', '┌', '┐', '┘', '└'},
     prompt = {"─", "│", " ", "│", '┌', '┐', "│", "│"},
@@ -69,26 +69,22 @@ local center_list = {
   },
   previewer = false,
   prompt_title = false,
-}
+})
 
 local M = {}
 
 function M.dotfiles()
-  local theme = require('telescope.themes').get_dropdown({
-    borderchars = {
-      { '─', '│', '─', '│', '┌', '┐', '┘', '└'},
-      prompt = {"─", "│", " ", "│", '┌', '┐', "│", "│"},
-      results = {"─", "│", "─", "│", "├", "┤", "┘", "└"},
-      preview = { '─', '│', '─', '│', '┌', '┐', '┘', '└'},
-    },
-    previewer = false,
-    prompt_title = false,
-    hidden = true,
-    prompt_title = "~ dotfiles ~",
-    path_display = false,
-    cwd = "~/dotfiles",
-  }) 
-  require('telescope.builtin').find_files(theme) 
+  local opts = vim.deepcopy(center_list)
+  opts.layout_config = {
+    width = 0.4,
+    height = 0.4
+  }
+  opts.hidden = true
+  opts.prompt_title = "~ dotfiles ~"
+  opts.path_display = { "absolute" }
+  opts.cwd = "~/dotfiles"
+
+  require('telescope.builtin').find_files(opts) 
 end
 
 function M.help_tags()
@@ -119,15 +115,18 @@ function M.grep_word()
 end
 
 function M.git_branches()
-  local theme = require('telescope.themes').get_dropdown(center_list)
-  require('telescope.builtin').git_branches(theme)
+  local opts = vim.deepcopy(center_list)
+  require('telescope.builtin').git_branches(opts)
 end
 
 function M.buffers()
-  local opts = vim.deepcopy(center_list) 
-  opts.path_display = 'false'
-  local theme = require('telescope.themes').get_dropdown(opts)
-  require('telescope.builtin').buffers(theme) 
+  local opts = vim.deepcopy(center_list)
+  opts.layout_config = {
+    width = 0.4,
+    height = 0.4
+  }
+  opts.hidden = true
+  require('telescope.builtin').buffers(opts) 
 end
 
 function M.colorscheme()

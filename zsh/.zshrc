@@ -110,6 +110,15 @@ function up_widget() {
 zle -N up_widget
 bindkey "^u" up_widget
 
+
+# lazy git
+function run_nvim() {
+	BUFFER="nvim && clear"
+	zle accept-line
+}
+zle -N run_nvim 
+bindkey "^n" run_nvim 
+
 # lazy git
 function run_lazy_git() {
 	BUFFER="lazygit && clear"

@@ -1,12 +1,13 @@
-if pcall(require, 'plenary') then
-  RELOAD = require('plenary.reload').reload_module
-
-  R = function(name)
-    RELOAD(name)
-    return require(name)
-  end
+P = function(v)
+  print(vim.inspect(v))
+  return v
 end
 
+RELOAD = function(...)
+  return require("plenary.reload").reload_module(...)
+end
 
-DATA_PATH  = vim.fn.stdpath('data')
-CACHE_PATH = vim.fn.stdpath('cache')
+R = function(name)
+  RELOAD(name)
+  return require(name)
+end

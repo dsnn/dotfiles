@@ -1,10 +1,23 @@
 
 vim.g.nvim_tree_auto_close = 1 
-vim.g.nvim_tree_auto_ignore_ft = 'startify' 
+vim.g.nvim_tree_auto_ignore_ft = { 'startify' }
 vim.g.nvim_tree_disable_netrw = 0 
 vim.g.nvim_tree_follow = 0 
 vim.g.nvim_tree_indent_markers = 1 
 vim.g.nvim_tree_ignore = { '.git', 'node_modules', '.cache', 'obj' }
+vim.g.nvim_tree_git_hl = 1 
+vim.g.nvim_tree_git_ignore = 1 
+vim.g.nvim_tree_hide_dotfiles = 0 
+vim.g.nvim_tree_width = 35 
+vim.g.nvim_tree_update_cwd = 1 
+
+vim.g.nvim_tree_show_icons = {
+  folders = 1,
+  folder_arrows = 1,
+  files = 1,
+  git = 1
+}
+
 
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 

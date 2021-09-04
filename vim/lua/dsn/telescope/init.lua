@@ -19,19 +19,54 @@ require('telescope').setup {
         file_ignore_patterns = { ".git", "node_modules", "obj" },
         -- initial_mode = "insert",
         -- layout_defaults = {horizontal = {mirror = false}, vertical = {mirror = false}},
-        -- layout_strategy = "horizontal",
+        layout_strategy = "horizontal",
+        layout_config = {
+          width = 0.95,
+          height = 0.85,
+          -- preview_cutoff = 120,
+          prompt_position = "bottom",
+
+          horizontal = {
+            -- width_padding = 0.1,
+            -- height_padding = 0.1,
+            preview_width = function(_, cols, _)
+              if cols > 200 then
+                return math.floor(cols * 0.4)
+              else
+                return math.floor(cols * 0.6)
+              end
+            end,
+          },
+
+          vertical = {
+            -- width_padding = 0.05,
+            -- height_padding = 1,
+            width = 0.9,
+            height = 0.95,
+            preview_height = 0.5,
+          },
+
+          flex = {
+            horizontal = {
+              preview_width = 0.9,
+            },
+          },
+        },
         -- preview_cutoff = 120,
         -- prompt_position = "top",
         -- results_height = 1,
         -- results_width = 0.8,
         -- selection_caret = " ",
-        -- selection_strategy = "reset",
+        selection_strategy = "reset",
         -- set_env = {['COLORTERM'] = 'truecolor'}, -- default = nil,
         -- path_display = true,
-        -- sorting_strategy = "descending",
+        sorting_strategy = "descending",
         -- use_less = true,
         -- width = 0.75,
-        -- winblend = 0,
+        --
+        scroll_strategy = "cycle",
+        color_devicons = true,
+        winblend = 0,
         file_sorter = sorters.get_fzy_sorter,
         generic_sorter = sorters.get_generic_fuzzy_sorter,
         file_previewer = previewers.vim_buffer_cat.new,
@@ -44,7 +79,15 @@ require('telescope').setup {
                 ["<C-j>"] = actions.move_selection_next,
                 ["<C-k>"] = actions.move_selection_previous,
                 -- ["<CR>"]  = actions.select_default + actions.center,
-                ["<ESC>"] = actions.close
+                ["<ESC>"] = actions.close,
+                ["<C-s>"] = actions.select_horizontal,
+                ["<C-space>"] = function(prompt_bufnr)
+                  local opts = {
+                    callback = actions.toggle_selection,
+                    loop_callback = actions.send_selected_to_qflist,
+                  }
+                  require("telescope").extensions.hop._hop_loop(prompt_bufnr, opts)
+                end,
             },
             n = {
                 ["<C-j>"] = actions.move_selection_next,
@@ -55,7 +98,26 @@ require('telescope').setup {
             fzy_native = {
                 override_generic_sorter = true,
                 override_file_sorter = true,
-            }
+            },
+            hop = {
+              -- keys define your hop keys in order; defaults to roughly lower- and uppercased home row
+              -- shown keys here are only subset of defaults!
+              keys = { "a", "s", "d", "f", "g", "h", "j", "k", "l", ";"}, -- ... and more
+
+          -- Highlight groups to link to signs and lines; the below configuration refers to demo
+              -- sign_hl typically only defines foreground to possibly be combined with line_hl
+              sign_hl = { "WarningMsg", "Title" },
+              -- optional, typically a table of two highlight groups that are alternated between
+              line_hl = { "CursorLine", "Normal" },
+          -- options specific to `hop_loop`
+              -- true temporarily disables Telescope selection highlighting
+              clear_selection_hl = false,
+              -- highlight hopped to entry with telescope selection highlight
+              -- note: mutually exclusive with `clear_selection_hl`
+              trace_entry = true,
+              -- jump to entry where hoop loop was started from
+              reset_selection = true,
+            },
         }
     }
 }
@@ -141,15 +203,57 @@ function M.quickfix()
   require('telescope.builtin').quickfix()
 end
 
+function M.git_status()
+  local opts = require('telescope.themes').get_dropdown({
+    winblend = 10,
+    border = true,
+    previewer = false,
+    shorten_path = false,
+  })
+  require('telescope.builtin').git_status(opts)
+end
+
+function M.curbuf()
+  local opts = require('telescope.themes').get_dropdown({
+    winblend = 10,
+    border = true,
+    previewer = false,
+    shorten_path = false,
+  })
+  require("telescope.builtin").current_buffer_fuzzy_find(opts)
+end
+
 -- Fix symbolic links: https://github.com/nvim-telescope/telescope.nvim/issues/693
 function M.file_browser()
   require('telescope.builtin').file_browser {
     cwd = "~/",
     sorting_strategy = "ascending",
-    scroll_strategy = "cycle",
     -- prompt_position = "top",
     hidden = true,
   }
+end
+
+TelescopeMapArgs = TelescopeMapArgs or {}
+
+function M.map(key, f, options, buffer)
+  local map_key = vim.api.nvim_replace_termcodes(key .. f, true, true, true)
+
+  TelescopeMapArgs[map_key] = options or {}
+
+  local mode = "n"
+  local rhs = string.format("<cmd>lua R('dsn.telescope')['%s'](TelescopeMapArgs['%s'])<CR>", f, map_key)
+
+  local map_options = {
+    noremap = true,
+    silent = true,
+  }
+
+  if not buffer then
+    vim.api.nvim_set_keymap(mode, key, rhs, map_options)
+  else
+    print(P(rhs))
+    vim.api.nvim_buf_set_keymap(0, mode, key, rhs, map_options)
+  end
 end
 
 return M

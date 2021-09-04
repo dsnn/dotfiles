@@ -1,3 +1,6 @@
+local saga = require('lspsaga')
+local telescope = require ("dsn.telescope")
+
 vim.fn.sign_define("LspDiagnosticsSignError", {
   texthl = "LspDiagnosticsSignError",
   text = "",
@@ -19,29 +22,22 @@ vim.fn.sign_define("LspDiagnosticsSignInformation", {
   numhl = "LspDiagnosticsSignInformation"
 })
 
--- vim.cmd("nnoremap <silent> gi     <cmd>lua vim.lsp.buf.implementation()<CR>")
-vim.cmd("nnoremap <silent> gD     <cmd>lua vim.lsp.buf.declaration()<CR>")
-vim.cmd("nnoremap <silent> gd     <cmd>lua vim.lsp.buf.definition()<CR>")
-vim.cmd("nnoremap <silent> gh     <cmd>lua vim.lsp.buf.hover()<CR>")
-vim.cmd("nnoremap <silent> gr     <cmd>lua vim.lsp.buf.references()<CR>")
--- vim.cmd('nnoremap <silent> <C-k>  <cmd>lua vim.lsp.buf.signature_help()<CR>')
 
-vim.cmd("nnoremap <silent> K :Lspsaga hover_doc<CR>")
-vim.cmd("nnoremap <silent> ca :Lspsaga code_action<CR>")
-vim.cmd("nnoremap <silent> <leader>r :Lspsaga rename<CR>")
+local noremap = { noremap = true, silent = true }
+vim.api.nvim_set_keymap('n', 'gd',       '<cmd>lua vim.lsp.buf.definition()<CR>',                                 noremap)
+vim.api.nvim_set_keymap('n', 'gT',       '<cmd>lua vim.lsp.buf.type_definition()<CR>',                            noremap)
+vim.api.nvim_set_keymap('n', 'gD',       '<cmd>lua vim.lsp.buf.declaration()<CR>',                                noremap)
+vim.api.nvim_set_keymap('n', 'gr',       '<cmd>lua vim.lsp.buf.references()<CR>',                                 noremap)
+vim.api.nvim_set_keymap('n', 'gh',       "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>",              noremap)
+vim.api.nvim_set_keymap('i', '<space>s', "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>",        noremap)
+vim.api.nvim_set_keymap('n', '<space>r', "<cmd>lua require('lspsaga.rename').rename()<CR>",                       noremap)
+vim.api.nvim_set_keymap('n', '<M-p>',    "<cmd>lua require('lspsaga.diagnostic').lsp_jump_diagnostic_prev()<CR>", noremap)
+vim.api.nvim_set_keymap('n', '<M-n>',    "<cmd>lua require('lspsaga.diagnostic').lsp_jump_diagnostic_next()<CR>", noremap)
+vim.api.nvim_set_keymap('n', 'ca',       "<cmd>lua require('lspsaga.codeaction').code_action()<CR>",              noremap)
+vim.api.nvim_set_keymap('n', '<C-p>',    "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>",      noremap)
+vim.api.nvim_set_keymap('n', '<C-n>',    "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>",     noremap)
 
-vim.cmd("nnoremap <silent> <M-p> :Lspsaga diagnostic_jump_prev<CR>")
-vim.cmd("nnoremap <silent> <M-n> :Lspsaga diagnostic_jump_next<CR>")
-
--- scroll down hover doc or scroll in definition preview
-vim.cmd(
-  "nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>")
-
--- scroll up hover doc
-vim.cmd(
-  "nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>")
-vim.cmd(
-  'command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()')
+-- telescope.map("<space>ca", "lsp_code_actions", nil, true)
 
 -- symbols for autocomplete
 vim.lsp.protocol.CompletionItemKind = {
@@ -53,12 +49,6 @@ vim.lsp.protocol.CompletionItemKind = {
   " ﲀ  (Constant)", " ﳤ  (Struct)", "   (Event)", "   (Operator)",
   "   (TypeParameter)"
 }
-
--- vim.api.nvim_exec([[
---   autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 100)
---   autocmd BufWritePre *.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
---   autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
--- ]])
 
 local function common_on_attach(client)
   -- Set autocommands conditional on server_capabilities
@@ -83,7 +73,7 @@ end
 
 require'lspconfig'.tsserver.setup{
   cmd = {
-    DATA_PATH ..
+      vim.fn.stdpath('data') ..
       "/lspinstall/typescript/node_modules/.bin/typescript-language-server",
     "--stdio"
   },
@@ -109,148 +99,6 @@ require'lspconfig'.tsserver.setup{
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
--- local sumneko_root_path = DATA_PATH .. "/lspinstall/lua"
--- local sumneko_binary = sumneko_root_path .. "/bin/Linux" .. "/lua-language-server"
--- require'lspconfig'.sumneko_lua.setup {
---     cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
---     on_attach = common_on_attach,
---     settings = {
---         Lua = {
---             runtime = {
---                 version = 'LuaJIT',
---                 path = vim.split(package.path, ';')
---             },
---             diagnostics = {
---                 globals = {'vim'}
---             },
---             workspace = {
---                 library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true},
---                 maxPreload = 10000
---             }
---         }
---     }
--- }
-
--- npm i -g bash-language-server
--- require'lspconfig'.bashls.setup{
---   cmd = {
---     DATA_PATH .. "/lspinstall/bash/node_modules/.bin/bash-language-server",
---     "start"
---   },
---   on_attach = common_on_attach,
---   filetypes = {"sh", "zsh"}
--- }
-
--- npm install -g vscode-css-languageserver-bin
--- require'lspconfig'.cssls.setup{
---   cmd = {
---     "node", DATA_PATH ..
---       "/lspinstall/css/vscode-css/css-language-features/server/dist/node/cssServerMain.js",
---     "--stdio"
---   },
---   on_attach = common_on_attach
--- }
-
--- npm install -g dockerfile-language-server-nodejs
--- require'lspconfig'.dockerls.setup{
---   cmd = {
---     DATA_PATH .. "/lspinstall/dockerfile/node_modules/.bin/docker-langserver",
---     "--stdio"
---   },
---   on_attach = common_on_attach,
---   root_dir = vim.loop.cwd
--- }
-
--- npm install -g graphql-language-service-cli
--- require'lspconfig'.graphql.setup{on_attach = common_on_attach}
-
--- npm install -g vscode-html-languageserver-bin
-
--- require'lspconfig'.html.setup{
---   cmd = {
---     "node", DATA_PATH ..
---       "/lspinstall/html/vscode-html/html-language-features/server/dist/node/htmlServerMain.js",
---     "--stdio"
---   },
---   on_attach = common_on_attach,
---   capabilities = capabilities
--- }
-
--- npm install -g vscode-json-languageserver
--- require'lspconfig'.jsonls.setup{
---   cmd = {
---     "node", DATA_PATH ..
---       "/lspinstall/json/vscode-json/json-language-features/server/dist/node/jsonServerMain.js",
---     "--stdio"
---   },
---   on_attach = common_on_attach,
-
---   commands = {
---     Format = {
---       function()
---         vim.lsp.buf.range_formatting({}, {0, 0}, {vim.fn.line("$"), 0})
---       end
---     }
---   }
--- }
-
--- npm install -g vim-language-server
--- require'lspconfig'.vimls.setup{
---   cmd = {
---     DATA_PATH .. "/lspinstall/vim/node_modules/.bin/vim-language-server",
---     "--stdio"
---   },
---   on_attach = common_on_attach
--- }
-
--- npm install -g yaml-language-server
--- require'lspconfig'.yamlls.setup{
---   cmd = {
---     DATA_PATH .. "/lspinstall/yaml/node_modules/.bin/yaml-language-server",
---     "--stdio"
---   },
---   on_attach = common_on_attach
--- }
-
--- is_cfg_present = function(cfg_name)
---   -- this returns 1 if it's not present and 0 if it's present
---   -- we need to compare it with 1 because both 0 and 1 is `true` in lua
---   return vim.fn.empty(vim.fn.glob(vim.loop.cwd() .. cfg_name)) ~= 1
--- end
-
--- local prettier = function()
---   if is_cfg_present("/prettier.config.js") then
---     return {
---       exe = "prettier",
---       args = {
---         string.format("--stdin-filepath '%s' --config '%s'",
---           vim.api.nvim_buf_get_name(0),
---           vim.fn.stdpath("config") .. "/prettier.config.js")
---       },
---       stdin = true
---     }
---   elseif is_cfg_present("/.prettierrc") then
---     return {
---       exe = "prettier",
---       args = {
---         string.format("--stdin-filepath '%s' --config '%s'",
---           vim.api.nvim_buf_get_name(0), vim.loop.cwd() .. "/.prettierrc")
---       },
---       stdin = true
---     }
---   else
---     -- fallback to global config
---     return {
---       exe = "prettier",
---       args = {
---         string.format("--stdin-filepath '%s' --config '%s'",
---           vim.api.nvim_buf_get_name(0),
---           vim.fn.stdpath("config") .. "/.prettierrc")
---       },
---       stdin = true
---     }
---   end
--- end
 
 local luafmt = function()
   return {
@@ -260,24 +108,10 @@ local luafmt = function()
   }
 end
 
--- vim.api.nvim_exec([[
--- augroup FormatAutogroup
---   autocmd!
---   autocmd BufWritePost *.js,*.ts,*.tsx,*.lua FormatWrite
--- augroup END
--- ]], true)
 
 require'formatter'.setup{
   logging = false,
   filetype = {
     lua = {luafmt},
-    -- javascript = {prettier},
-    -- typescript = {prettier},
-    -- typescriptreact = {prettier},
-    -- html = {prettier},
-    -- css = {prettier},
-    -- jsonc = {prettier},
-    -- yaml = {prettier},
-    -- markdown = {prettier}
   }
 }

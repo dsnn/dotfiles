@@ -19,8 +19,9 @@ return require('packer').startup(function(use)
 
     -- buffer, register, tabs & statusline
     use 'moll/vim-bbye' 					                          -- del buffers without closing windows
-    use 'romgrk/barbar.nvim' 					                      -- improved tabline
-    use 'glepnir/galaxyline.nvim'                           -- statusline
+    use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'} -- improved tabline
+    use 'famiu/feline.nvim'                                 -- statusline
+
 
     -- navigation
     use 'andymass/vim-matchup' 					                    -- extend vims matching (%)
@@ -29,10 +30,10 @@ return require('packer').startup(function(use)
     use 'folke/lsp-trouble.nvim'
 
     -- lsp & code
+    use 'neovim/nvim-lspconfig'
     use 'glepnir/lspsaga.nvim' 					                    -- lsp cmds
     use 'kabouzeid/nvim-lspinstall'
     use 'kevinhwang91/nvim-bqf' 				                    -- better quick fix window
-    use 'neovim/nvim-lspconfig'
     use { 'prettier/vim-prettier', run = 'npm install', branch = 'master' }
     use 'nvim-lua/lsp-status.nvim'                          -- lsp info in statusline
     use 'mhartington/formatter.nvim'
@@ -44,12 +45,22 @@ return require('packer').startup(function(use)
     use 'tpope/vim-fugitive'
 
     -- telescope
+    use 'tami5/sqlite.lua' 
     use 'nvim-lua/plenary.nvim'
     use 'nvim-lua/popup.nvim'
     use 'nvim-telescope/telescope.nvim'
     use 'nvim-telescope/telescope-fzy-native.nvim'
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     use 'nvim-treesitter/playground'
+    use { 'nvim-telescope/telescope-hop.nvim' }             -- easier telescope result navigation 
+    use "nvim-telescope/telescope-cheat.nvim"
+    -- use {
+    --   "nvim-telescope/telescope-frecency.nvim",
+    --   config = function()
+    --     require"telescope".load_extension("frecency")
+    --   end,
+    --   requires = {"tami5/sqlite.lua"}
+    -- }
 
     -- autocomplete
     use 'hrsh7th/nvim-compe' 					                      -- autocomplete

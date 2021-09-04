@@ -21,7 +21,9 @@ require'nvim-treesitter.configs'.setup {
   context_commentstring = {
     enable = true,
   },
-  highlight = { enable = true },
+  highlight = { 
+    enable = true,
+  },
   playground = {
     enable = true,
     disable = {},

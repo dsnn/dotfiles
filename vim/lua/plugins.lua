@@ -17,6 +17,16 @@ return require('packer').startup(function(use)
     use 'tpope/vim-surround'
     use 'godlygeek/tabular'
 
+    -- neovim
+    use {
+      "tpope/vim-scriptease",
+      cmd = {
+        "Messages", --view messages in quickfix list
+        "Verbose", -- view verbose output in preview window.
+        "Time", -- measure how long it takes to run some stuff.
+      },
+    }
+
     -- buffer, register, tabs & statusline
     use 'moll/vim-bbye' 					                          -- del buffers without closing windows
     use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'} -- improved tabline

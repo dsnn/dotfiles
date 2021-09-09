@@ -66,6 +66,8 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
 - https://github.com/jesseduffield/lazydocker
 - https://github.com/jesseduffield/lazynpm
 - https://github.com/spaceship-prompt/spaceship-prompt
+- https://github.com/neovim/nvim-lspconfig
+- https://microsoft.github.io/language-server-protocol/implementors/servers/
 
 ### dotfiles
 

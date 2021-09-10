@@ -316,26 +316,26 @@ components.active[3][3] = {
 }
 
 local mode_colors = {
-   ["n"] = { "NORMAL", colors.red },
+   ["n"]  = { "NORMAL", colors.red },
    ["no"] = { "N-PENDING", colors.red },
-   ["i"] = { "INSERT", colors.dark_purple },
+   ["i"]  = { "INSERT", colors.dark_purple },
    ["ic"] = { "INSERT", colors.dark_purple },
-   ["t"] = { "TERMINAL", colors.green },
-   ["v"] = { "VISUAL", colors.cyan },
-   ["V"] = { "V-LINE", colors.cyan },
+   ["t"]  = { "TERMINAL", colors.green },
+   ["v"]  = { "VISUAL", colors.cyan },
+   ["V"]  = { "V-LINE", colors.cyan },
    [""] = { "V-BLOCK", colors.cyan },
-   ["R"] = { "REPLACE", colors.orange },
+   ["R"]  = { "REPLACE", colors.orange },
    ["Rv"] = { "V-REPLACE", colors.orange },
-   ["s"] = { "SELECT", colors.nord_blue },
-   ["S"] = { "S-LINE", colors.nord_blue },
+   ["s"]  = { "SELECT", colors.nord_blue },
+   ["S"]  = { "S-LINE", colors.nord_blue },
    [""] = { "S-BLOCK", colors.nord_blue },
-   ["c"] = { "COMMAND", colors.pink },
+   ["c"]  = { "COMMAND", colors.pink },
    ["cv"] = { "COMMAND", colors.pink },
    ["ce"] = { "COMMAND", colors.pink },
-   ["r"] = { "PROMPT", colors.teal },
+   ["r"]  = { "PROMPT", colors.teal },
    ["rm"] = { "MORE", colors.teal },
    ["r?"] = { "CONFIRM", colors.teal },
-   ["!"] = { "SHELL", colors.green },
+   ["!"]  = { "SHELL", colors.green },
 }
 
 local chad_mode_hl = function()

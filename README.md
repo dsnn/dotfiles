@@ -39,7 +39,6 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
 
 ### plugins
 
-- tpope/vim-scriptease -- :Message
 - pearofducks/ansible-vim
 - iamcco/markdown-preview.nvim
 - brooth/far.vim -- find and replace
@@ -52,7 +51,8 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
 - tjdevries/astronauta.nvim
 - phaazon/hop.nvim -- to replace unblevable/quick-scope ?
 - TimUntersberger/neogit
-- norcalli/snippets.nvim -- to replace hrsh7th/vim-vsnip ?
+- L3MON4D3/LuaSnip - to replace hrsh7th/vim-vsnip ?
+  - rafamadriz/friendly-snippets ?
 - lewis6991/gitsigns.nvim
 - https://github.com/tamago324/lir.nvim
 - https://github.com/nvim-treesitter/nvim-treesitter-textobjects

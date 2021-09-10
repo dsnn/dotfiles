@@ -55,14 +55,14 @@ return require('packer').startup(function(use)
     use 'tpope/vim-fugitive'
 
     -- telescope
-    use 'tami5/sqlite.lua' 
+    use 'tami5/sqlite.lua'
     use 'nvim-lua/plenary.nvim'
     use 'nvim-lua/popup.nvim'
     use 'nvim-telescope/telescope.nvim'
     use 'nvim-telescope/telescope-fzy-native.nvim'
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     use 'nvim-treesitter/playground'
-    use { 'nvim-telescope/telescope-hop.nvim' }             -- easier telescope result navigation 
+    use { 'nvim-telescope/telescope-hop.nvim' }             -- easier telescope result navigation
     use "nvim-telescope/telescope-cheat.nvim"
     -- use {
     --   "nvim-telescope/telescope-frecency.nvim",

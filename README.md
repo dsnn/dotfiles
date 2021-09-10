@@ -19,6 +19,12 @@ ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf $XDG_CONFIG_HOME/fo
 sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
 ```
 
+### makefile
+- add script to fetch/update from latest
+  - nvim
+  - lazygit 
+  - z
+
 ### nvim
 
 - telescope:

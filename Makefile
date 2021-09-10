@@ -12,9 +12,32 @@ help: ## This help
 
 .DEFAULT_GOAL := help
 
-install: ## install packages
-	sudo apt install fzf keychain neovim nodejs npm ranger stow tmux zsh zsh ripgrep -y
+install: zsh deps## install packages
+	@echo "[OK] Packages intalled"
+
+deps: 
+	@echo "========================================"
+	@echo "[OK] Installing dependencies"
+	sudo apt install fzf keychain neovim nodejs npm ranger stow tmux bat ripgrep -y
+	@echo "========================================"
+
+zsh:
+	@echo "========================================"
+	@echo "[OK] Installing ZSH"
+	sudo apt install zsh -y
+	chsh -s $(shell which zsh)
+	@echo "========================================"
+
+dirs:
+	@echo "========================================"
+	@echo "[OK] Creating directories"
+	mkdir -p ~/build
+	mkdir -p ~/projects
+	@echo "========================================"
+
 stow: ## stow packages
+	@echo "========================================"
+	@echo "[OK] Creating symlinks"
 	mkdir -p ~/.config/git
 	stow git -t ~/.config/git
 	mkdir -p ~/bin
@@ -34,13 +57,19 @@ stow: ## stow packages
 	stow fontconfig -t ~/.config/fontconfig
 	mkdir -p ~/.config/i3
 	stow i3 -t ~/.config/i3
+	@echo "========================================"
+
 tmux: ## setup tmux and dependencies
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 nvm: ## setup nvm
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+
 z: ## setup z
 	git clone git@github.com:rupa/z.git
+
 autosuggestions: ## setup zsh autosuggestions
 	git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+
 syntaxhighlighting: ## setup zsh syntax highlighting
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting

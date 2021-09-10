@@ -79,7 +79,7 @@ return require('packer').startup(function(use)
 
     -- icons, colors & themes
     use 'ayu-theme/ayu-vim'
-    use 'christianchiarulli/nvcode-color-schemes.vim'
+    -- use 'christianchiarulli/nvcode-color-schemes.vim'
     use 'kyazdani42/nvim-web-devicons'
     use 'norcalli/nvim-colorizer.lua'
     use 'ryanoasis/vim-devicons'

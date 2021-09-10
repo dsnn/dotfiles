@@ -20,7 +20,7 @@ stow: ## stow packages
 	mkdir -p ~/bin
 	stow bin -t ~/bin
 	mkdir -p ~/.config/tmux
-	stow tmux -t ~/.config/tmux
+	stow tmux 
 	mkdir -p ~/.config/nvim
 	stow vim -t ~/.config/nvim
 	stow zdotdir

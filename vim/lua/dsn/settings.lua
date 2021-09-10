@@ -39,6 +39,7 @@ vim.wo.foldlevel      = 0
 vim.wo.foldmethod     = "manual"
 vim.wo.foldnestmax    = 10
 vim.wo.linebreak      = true
+vim.wo.fillchars      = "stlnc:="
 vim.o.equalalways     = true
 vim.o.splitright      = true
 vim.o.splitbelow      = true

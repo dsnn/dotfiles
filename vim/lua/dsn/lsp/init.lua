@@ -1,5 +1,5 @@
-local saga = require('lspsaga')
-local telescope = require ("dsn.telescope")
+-- local saga = require('lspsaga')
+-- local telescope = require ("dsn.telescope")
 -- local handlers = require("dsn.lsp.handlers")
 
 vim.fn.sign_define("LspDiagnosticsSignError", {
@@ -98,22 +98,31 @@ require'lspconfig'.tsserver.setup{
   }
 }
 
+require'lspconfig'.sumneko_lua.setup {
+    on_attach = common_on_attach,
+    cmd = { vim.fn.stdpath('data') ..  "/lspinstall/lua/sumneko-lua-language-server", "--stdio" },
+    settings = {
+        Lua = {
+            runtime = {
+                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                version = 'LuaJIT',
+                -- Setup your lua path
+                path = vim.split(package.path, ';'),
+            },
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = {'vim'},
+            },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = {
+                    [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                    [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+                },
+            },
+        },
+    },
+}
+
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-
-local luafmt = function()
-  return {
-    exe = "lua-format",
-    args = {"-i", "--config", "~/.config/nvim/.luafmt"},
-    stdin = true
-  }
-end
-
-
-require'formatter'.setup{
-  logging = false,
-  filetype = {
-    lua = {luafmt},
-  }
-}

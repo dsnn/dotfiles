@@ -23,6 +23,7 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
 
 - telescope:
   - cheat: work db connection strings. submodules etc.
+  - small script / binding for git commands (integrate fugitive) ?
 - check nvim-terminal bindings
 - autocommand to remove trailing spaces
 - spell/spellcheck

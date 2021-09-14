@@ -78,11 +78,15 @@ return require('packer').startup(function(use)
     use 'hrsh7th/vim-vsnip-integ'
 
     -- icons, colors & themes
-    use 'ayu-theme/ayu-vim'
     use 'kyazdani42/nvim-web-devicons'
     use 'norcalli/nvim-colorizer.lua'
     use 'ryanoasis/vim-devicons'
-    use 'sainnhe/sonokai'
     use 'tjdevries/colorbuddy.vim'
     use 'junegunn/limelight.vim'
+    use 'sainnhe/sonokai'
+    use 'ayu-theme/ayu-vim'
+    use 'morhetz/gruvbox'
+    use 'altercation/vim-colors-solarized'
+    use 'joshdick/onedark.vim'
+    use 'arcticicestudio/nord-vim'
 end)

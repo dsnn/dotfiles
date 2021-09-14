@@ -45,7 +45,7 @@ vim.o.splitright      = true
 vim.o.splitbelow      = true
 vim.o.termguicolors   = true
 vim.o.swapfile        = false
-vim.g.belloff         = 'all' 
+vim.g.belloff         = 'all'
 vim.g.visualbell      = 'off'
 
 vim.cmd('set cpoptions+=$')

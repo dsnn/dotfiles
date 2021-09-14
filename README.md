@@ -19,8 +19,14 @@ ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf $XDG_CONFIG_HOME/fo
 sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
 ```
 
+### wsl 
+- xrdp
+
+### zsh 
+- spaceship-prompt
+
 ### makefile
-- add script to fetch/update from latest
+- fetch/update from latest
   - nvim
   - lazygit 
   - z
@@ -28,20 +34,12 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
 ### nvim
 
 - telescope:
-  - cheat: work db connection strings. submodules etc.
-  - small script / binding for git commands (integrate fugitive) ?
-- check nvim-terminal bindings
+  - cheat
+  - git actions 
+  - binding send result to qf
 - autocommand to remove trailing spaces
-- spell/spellcheck
-- neovim session managment (keybindings, autocmds etc)
-- neovim-remote (open files from :term witout nesting)
-- remove so lsp gd doesnt open up a quickfix (gD/gd) ?
-- add binding for sending telescope response to lsp trouble (e.g c-t)
-- fix statusline 'v' (warnings?)
-- own fn to insert 'console.log()' w/o current selection
-  - own plugin and make use of treesitter (place log before return, outside fn args etc) ?
-- review lir, treesitter -textobjects and -refactor
-- review spaceship-prompt
+- lsp qf d.ts fix
+- turbo console log lua script
 
 ### plugins
 

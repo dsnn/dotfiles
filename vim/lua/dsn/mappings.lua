@@ -38,6 +38,10 @@ map('n', '<Left>',  ':vertical resize +2<CR>', silent_no)
 map('n', '<TAB>', ':bnext<CR>', silent_no)
 map('n', '<S-TAB>', ':bprevious<CR>', silent_no)
 
+-- buffer split
+map('n', 'vv', '<C-w>v', silent_no)
+map('n', 'ss', '<C-w>s', silent_no)
+
 -- telescope
 map('n', '<space>gp', "<cmd>:lua require('dsn.telescope').grep_prompt()<CR>", silent_no)
 map('n', '<space>gs', "<cmd>:lua require('dsn.telescope').git_status()<CR>", silent_no)

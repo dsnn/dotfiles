@@ -41,7 +41,7 @@ return require('packer').startup(function(use)
 
     -- lsp & code
     use 'neovim/nvim-lspconfig'
-    use 'glepnir/lspsaga.nvim' 					                    -- lsp cmds
+    use { 'tami5/lspsaga.nvim', branch = 'nvim51' } 					                      -- lsp cmds
     use 'kabouzeid/nvim-lspinstall'
     use 'kevinhwang91/nvim-bqf' 				                    -- better quick fix window
     use { 'prettier/vim-prettier', run = 'npm install', branch = 'master' }
@@ -89,4 +89,5 @@ return require('packer').startup(function(use)
     use 'altercation/vim-colors-solarized'
     use 'joshdick/onedark.vim'
     use 'arcticicestudio/nord-vim'
+    use "projekt0n/github-nvim-theme"
 end)

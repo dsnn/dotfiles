@@ -5,6 +5,7 @@ end
 local actions     = require('telescope.actions')
 local sorters     = require('telescope.sorters')
 local previewers  = require('telescope.previewers')
+local utils       = require('telescope.actions.utils')
 
 -- require('telescope').load_extension('cheat')
 require('telescope').load_extension('fzy_native')
@@ -16,7 +17,7 @@ require('telescope').setup {
         color_devicons = true,
         prompt_prefix = " ",
         -- entry_prefix = "  ",
-        file_ignore_patterns = { ".git", "node_modules", "obj" },
+        file_ignore_patterns = { ".git", "node_modules", "obj", "wwwroot" },
         -- initial_mode = "insert",
         -- layout_defaults = {horizontal = {mirror = false}, vertical = {mirror = false}},
         layout_strategy = "horizontal",
@@ -226,7 +227,6 @@ end
 -- Fix symbolic links: https://github.com/nvim-telescope/telescope.nvim/issues/693
 function M.file_browser()
   require('telescope.builtin').file_browser {
-    cwd = "~/",
     sorting_strategy = "ascending",
     -- prompt_position = "top",
     hidden = true,

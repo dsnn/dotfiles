@@ -17,6 +17,8 @@ alias cat='batcat'
 # 	alias cat='batcat'
 # fi
 
+alias update-nvim='bash /home/dsn/dotfiles/bin/get-nvim.sh'
+
 # file shortcuts
 alias cfc="vim ~/.shortcuts"
 alias cfs="vim ~/.ssh/config"

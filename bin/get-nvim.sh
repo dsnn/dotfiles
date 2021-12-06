@@ -1,24 +1,22 @@
 #!/bin/bash
 
-# go to local bin
-LOCAL_BIN="$HOME/.local/bin"
-cd $LOCAL_BIN 
+# super lazy script to download and install nightly build of neovim 
 
-# download latest version of lazygit
-LATEST=$(curl -L -s https://github.com/neovim/neovim/releases/latest | grep -o -E "/(.*)nvim-linux64.tar.gz")
-URL="https://github.com${LATEST}"
+cd "$HOME/.local/bin" 
 
-# download package
-wget $URL
+LATEST=https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
 
-# prepare folder
-mkdir -p lazygit
+wget "${LATEST}"
 
-# extract name & tar
-FILE_NAME=$(basename $URL)
-tar -zxf $FILE_NAME --directory $HOME/.local/bin/nvim
+PKG_NAME=$(basename $LATEST)
 
-# cleanup
-rm -f $FILE_NAME
+tar -xzf $PKG_NAME 
+
+rm -rf nvim
+
+mv nvim-linux64 nvim
+
+rm -f $PKG_NAME
 
 echo "NVIM updated!"
+

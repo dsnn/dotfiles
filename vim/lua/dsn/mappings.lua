@@ -67,9 +67,7 @@ require("colorizer").setup()
 require("trouble").setup()
 map('n', '<leader>lt', ":LspTroubleToggle<CR>", silent_no)
 
-
 map('n', '<leader>uc', "<cmd>:lua require('ts_context_commentstring.internal').update_commentstring()<CR>", silent_no)
-
 
 -- auto closetag
 -- :CloseTagToggleBuffer in case of annoyance

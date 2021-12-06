@@ -5,7 +5,7 @@ end
 local actions     = require('telescope.actions')
 local sorters     = require('telescope.sorters')
 local previewers  = require('telescope.previewers')
-local utils       = require('telescope.actions.utils')
+-- local utils       = require('telescope.actions.utils')
 
 -- require('telescope').load_extension('cheat')
 require('telescope').load_extension('fzy_native')
@@ -66,7 +66,6 @@ require('telescope').setup {
         -- width = 0.75,
         --
         scroll_strategy = "cycle",
-        color_devicons = true,
         winblend = 0,
         file_sorter = sorters.get_fzy_sorter,
         generic_sorter = sorters.get_generic_fuzzy_sorter,
@@ -147,7 +146,7 @@ function M.dotfiles()
   opts.path_display = { "absolute" }
   opts.cwd = "~/dotfiles"
 
-  require('telescope.builtin').find_files(opts) 
+  require('telescope.builtin').find_files(opts)
 end
 
 function M.help_tags()
@@ -189,7 +188,7 @@ function M.buffers()
     height = 0.4
   }
   opts.hidden = true
-  require('telescope.builtin').buffers(opts) 
+  require('telescope.builtin').buffers(opts)
 end
 
 function M.colorscheme()

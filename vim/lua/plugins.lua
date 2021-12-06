@@ -62,6 +62,12 @@ return require('packer').startup(function(use)
 
     -- git
     use 'tpope/vim-fugitive'
+    use {
+      'lewis6991/gitsigns.nvim',
+      requires = {
+        'nvim-lua/plenary.nvim'
+      },
+    }
 
     -- telescope
     use 'tami5/sqlite.lua'

@@ -73,7 +73,7 @@ if [ -f ~/.ssh/id_rsa ]; then
 	eval $(keychain --eval --quiet --quick id_rsa ~/.ssh/id_rsa)
 fi
 
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # On dir automatic scrpit execution
 # function chpwd () {

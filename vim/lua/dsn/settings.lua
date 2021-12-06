@@ -11,7 +11,7 @@ vim.o.showmode        = false
 vim.o.showcmd         = false
 vim.o.showmatch       = true
 vim.o.backup          = false
-vim.o.completeopt     = "menuone,noselect"
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.o.clipboard       = "unnamedplus"
 vim.o.cmdheight       = 2
 vim.o.fileencoding    = "utf-8"
@@ -47,6 +47,8 @@ vim.o.termguicolors   = true
 vim.o.swapfile        = false
 vim.g.belloff         = 'all'
 vim.g.visualbell      = 'off'
+-- vim.opt.spell         = true
+-- vim.opt.spelllang     = { 'en_us' }
 
 vim.cmd('set cpoptions+=$')
 vim.cmd('set iskeyword+=-')

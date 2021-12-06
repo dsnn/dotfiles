@@ -8,12 +8,16 @@ fi
 
 [ -f $HOME/.exports.local.zsh ] && source $HOME/.exports.local.zsh
 
+# vsts
+export PATH=$PATH:/home/dsn/lib/vsts-cli/bin
+
 # exports
 export BROWSER=firefox
-export EDITOR=nvim
 export VISUAL=nvim
+export EDITOR=nvim
 export MANWIDTH=79
 export LIBGL_ALWAYS_INDIRECT=1
+
 
 # XDG (just in case, same as defaults)
 export XDG_CONFIG_HOME=$HOME/.config

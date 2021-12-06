@@ -17,6 +17,10 @@ fi
 autoload -Uz compinit
 compinit
 
+# enable ctrl-x-e to edit command line
+autoload -U edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
+
 # history
 HISTFILE=~/.histfile
 HISTSIZE=1000

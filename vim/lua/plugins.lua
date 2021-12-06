@@ -21,9 +21,9 @@ return require('packer').startup(function(use)
     use {
       "tpope/vim-scriptease",
       cmd = {
-        "Messages", --view messages in quickfix list
-        "Verbose", -- view verbose output in preview window.
-        "Time", -- measure how long it takes to run some stuff.
+        "Messages",                                         -- view messages in quickfix list
+        "Verbose",                                          -- view verbose output in preview window.
+        "Time",                                             -- measure how long it takes to run some stuff.
       },
     }
 
@@ -48,8 +48,17 @@ return require('packer').startup(function(use)
     use 'nvim-lua/lsp-status.nvim'                          -- lsp info in statusline
     use 'mhartington/formatter.nvim'
     use 'alvan/vim-closetag'
+    -- use { 'numToStr/Comment.nvim'}
     use 'tpope/vim-commentary'
     use 'JoosepAlviste/nvim-ts-context-commentstring'       -- handle multiple comment-styles in one file
+    use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
+    use {
+      'David-Kunz/cmp-npm',
+      requires = {
+        'nvim-lua/plenary.nvim'
+      }
+    }
+    use 'f3fora/cmp-spell'
 
     -- git
     use 'tpope/vim-fugitive'
@@ -64,17 +73,18 @@ return require('packer').startup(function(use)
     use 'nvim-treesitter/playground'
     use { 'nvim-telescope/telescope-hop.nvim' }             -- easier telescope result navigation
     use "nvim-telescope/telescope-cheat.nvim"
-    -- use {
-    --   "nvim-telescope/telescope-frecency.nvim",
-    --   config = function()
-    --     require"telescope".load_extension("frecency")
-    --   end,
-    --   requires = {"tami5/sqlite.lua"}
-    -- }
 
     -- autocomplete
-    use 'hrsh7th/nvim-compe' 					                      -- autocomplete
-    use 'hrsh7th/vim-vsnip' 					                      -- snippets
+    use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-path'
+    use 'hrsh7th/cmp-cmdline'
+    use 'hrsh7th/cmp-nvim-lua'
+    use 'saadparwaiz1/cmp_luasnip'
+    use 'hrsh7th/nvim-cmp'
+    -- vsnip
+    use 'hrsh7th/cmp-vsnip'
+    use 'hrsh7th/vim-vsnip'
     use 'hrsh7th/vim-vsnip-integ'
 
     -- icons, colors & themes
@@ -90,4 +100,5 @@ return require('packer').startup(function(use)
     use 'joshdick/onedark.vim'
     use 'arcticicestudio/nord-vim'
     use "projekt0n/github-nvim-theme"
+    use "onsails/lspkind-nvim"
 end)

@@ -26,20 +26,23 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
 - spaceship-prompt
 
 ### makefile
-- fetch/update from latest
-  - nvim
+- general script to fetch/update from latest 
+  - nvim (already working w/ lazy script)
   - lazygit 
   - z
 
 ### nvim
 
+- lua snippets, formating etc
 - telescope:
-  - cheat
-  - git actions 
-  - binding send result to qf
+  - cheat ?
+  - git actions ?
 - autocommand to remove trailing spaces
 - lsp qf d.ts fix
-- turbo console log lua script
+- turbo console log lua command / script
+- vim-dadbod
+- tabnine nvim-cmp (?)
+- vsts integration (bleh)
 
 ### plugins
 

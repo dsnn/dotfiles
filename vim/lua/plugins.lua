@@ -32,7 +32,6 @@ return require('packer').startup(function(use)
     use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'} -- improved tabline
     use 'famiu/feline.nvim'                                 -- statusline
 
-
     -- navigation
     use 'andymass/vim-matchup' 					                    -- extend vims matching (%)
     use 'kyazdani42/nvim-tree.lua'
@@ -41,7 +40,6 @@ return require('packer').startup(function(use)
 
     -- lsp & code
     use 'neovim/nvim-lspconfig'
-    use { 'tami5/lspsaga.nvim', branch = 'nvim51' } 					                      -- lsp cmds
     use 'kabouzeid/nvim-lspinstall'
     use 'kevinhwang91/nvim-bqf' 				                    -- better quick fix window
     use { 'prettier/vim-prettier', run = 'npm install', branch = 'master' }

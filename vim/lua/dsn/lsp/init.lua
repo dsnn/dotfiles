@@ -24,20 +24,19 @@ vim.fn.sign_define("LspDiagnosticsSignInformation", {
 })
 
 
-local noremap = { noremap = true, silent = true }
-vim.api.nvim_set_keymap('n', 'gd',       '<cmd>lua vim.lsp.buf.definition()<CR>',                                 noremap)
-vim.api.nvim_set_keymap('n', 'gI',       '<cmd>lua vim.lsp.buf.implementation()<CR>',                             noremap)
-vim.api.nvim_set_keymap('n', 'gT',       '<cmd>lua vim.lsp.buf.type_definition()<CR>',                            noremap)
-vim.api.nvim_set_keymap('n', 'gD',       '<cmd>lua vim.lsp.buf.declaration()<CR>',                                noremap)
-vim.api.nvim_set_keymap('n', 'gr',       '<cmd>lua vim.lsp.buf.references()<CR>',                                 noremap)
-vim.api.nvim_set_keymap('n', 'gh',       "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>",              noremap)
-vim.api.nvim_set_keymap('i', '<space>s', "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>",        noremap)
-vim.api.nvim_set_keymap('n', '<space>r', "<cmd>lua require('lspsaga.rename').rename()<CR>",                       noremap)
-vim.api.nvim_set_keymap('n', '<M-p>',    "<cmd>lua require('lspsaga.diagnostic').lsp_jump_diagnostic_prev()<CR>", noremap)
-vim.api.nvim_set_keymap('n', '<M-n>',    "<cmd>lua require('lspsaga.diagnostic').lsp_jump_diagnostic_next()<CR>", noremap)
-vim.api.nvim_set_keymap('n', 'ca',       "<cmd>lua require('lspsaga.codeaction').code_action()<CR>",              noremap)
-vim.api.nvim_set_keymap('n', '<C-p>',    "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>",      noremap)
-vim.api.nvim_set_keymap('n', '<C-n>',    "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>",     noremap)
+local opts = { noremap = true, silent = true }
+vim.api.nvim_set_keymap('n', 'gd',       '<cmd>lua vim.lsp.buf.definition()<CR>',       opts)
+vim.api.nvim_set_keymap('n', 'gI',       '<cmd>lua vim.lsp.buf.implementation()<CR>',   opts)
+vim.api.nvim_set_keymap('n', 'gT',       '<cmd>lua vim.lsp.buf.type_definition()<CR>',  opts)
+vim.api.nvim_set_keymap('n', 'gD',       '<cmd>lua vim.lsp.buf.declaration()<CR>',      opts)
+vim.api.nvim_set_keymap('n', 'gr',       '<cmd>lua vim.lsp.buf.references()<CR>',       opts)
+vim.api.nvim_set_keymap('n', 'gh',       "<cmd>lua vim.lsp.buf.hover()<CR>",            opts)
+vim.api.nvim_set_keymap('i', '<space>s', "<cmd>lua vim.lsp.buf.signature_help()<CR>",   opts)
+vim.api.nvim_set_keymap('n', '<space>r', "<cmd>lua vim.lsp.buf.rename()<CR>",           opts)
+vim.api.nvim_set_keymap('n', '<M-p>',    "<cmd>lua vim.diagnostic.goto_prev()<CR>",     opts)
+vim.api.nvim_set_keymap('n', '<M-n>',    "<cmd>lua vim.diagnostic.goto_next()<CR>",     opts)
+vim.api.nvim_set_keymap('n', 'ca',       "<cmd>lua vim.lsp.buf.code_action()<CR>",      opts)
+vim.api.nvim_set_keymap('n', '<space>p', "<cmd>lua vim.lsp.buf.formatting()<CR>",       opts)
 
 -- telescope.map("<space>ca", "lsp_code_actions", nil, true)
 
@@ -124,6 +123,28 @@ require'lspconfig'.sumneko_lua.setup {
     },
 }
 
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = "none"
+})
+
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+  border = "none"
+})
+
+-- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.preselectSupport = true
+capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
+capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+   properties = {
+      "documentation",
+      "detail",
+      "additionalTextEdits",
+   },
+}

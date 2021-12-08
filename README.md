@@ -33,20 +33,20 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
 
 ### nvim
 
-- update lsp config (and remove lspsapa)
-- lua snippets, formating etc
-- telescope:
-  - cheat ?
-  - git actions ?
-- autocommand to remove trailing spaces
-- lsp qf d.ts fix
-- turbo console log lua command / script
-- vim-dadbod
-- tabnine nvim-cmp (?)
-- vsts integration (bleh)
+- review complation/snippets 
+- review lua lsp, snippets, formating etc
+- review telescope: lsp, cheat ? git actions ?
+- review tabnine nvim-cmp 
+- fix automically remove trailing spaces
+- fix lsp quickfix d.ts
+- fix console.log command (log cword)
+- fix nvim-cmp vsts integration 
 
 ### plugins
 
+- tpope/vim-dadbod
+- numToStr/Comment
+- rcarriga/nvim-notify
 - pearofducks/ansible-vim
 - iamcco/markdown-preview.nvim
 - brooth/far.vim -- find and replace

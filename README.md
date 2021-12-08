@@ -33,6 +33,7 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
 
 ### nvim
 
+- update lsp config (and remove lspsapa)
 - lua snippets, formating etc
 - telescope:
   - cheat ?
@@ -56,11 +57,8 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
 - nvim-telescope/telescope-cheat.nvim'
 - nvim-telescope/telescope-arecibo.nvim
 - tjdevries/astronauta.nvim
-- phaazon/hop.nvim -- to replace unblevable/quick-scope ?
+- phaazon/hop.nvim vs unblevable/quick-scope ?
 - TimUntersberger/neogit
-- L3MON4D3/LuaSnip - to replace hrsh7th/vim-vsnip ?
-  - rafamadriz/friendly-snippets ?
-- lewis6991/gitsigns.nvim
 - https://github.com/tamago324/lir.nvim
 - https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 - https://github.com/nvim-treesitter/nvim-treesitter-refactor

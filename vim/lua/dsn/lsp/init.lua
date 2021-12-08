@@ -26,7 +26,7 @@ vim.fn.sign_define("LspDiagnosticsSignInformation", {
 
 local noremap = { noremap = true, silent = true }
 vim.api.nvim_set_keymap('n', 'gd',       '<cmd>lua vim.lsp.buf.definition()<CR>',                                 noremap)
-vim.api.nvim_set_keymap('n', 'gI',       '<cmd>lua vim.lsp.buf.implementation()<CR>',                                 noremap)
+vim.api.nvim_set_keymap('n', 'gI',       '<cmd>lua vim.lsp.buf.implementation()<CR>',                             noremap)
 vim.api.nvim_set_keymap('n', 'gT',       '<cmd>lua vim.lsp.buf.type_definition()<CR>',                            noremap)
 vim.api.nvim_set_keymap('n', 'gD',       '<cmd>lua vim.lsp.buf.declaration()<CR>',                                noremap)
 vim.api.nvim_set_keymap('n', 'gr',       '<cmd>lua vim.lsp.buf.references()<CR>',                                 noremap)

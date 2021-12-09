@@ -35,8 +35,8 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
 
 - review completion, snippets & tabnine
 - review telescope: lsp, cheat & git actions 
-- fix lua: snippets, formatting 
-- fix automically remove trailing spaces
+- fix lua: snippets (L3MON4D3/LuaSnip), formatting (use https://github.com/JohnnyMorganz/StyLua & create augroup/autocmd bufprewrite .lua)
+- fix automically remove trailing spaces (create augroup/autocmd bufprewrite any file)
 - fix lsp quickfix d.ts
 - fix console.log command (log cword)
 - fix nvim-cmp vsts integration 

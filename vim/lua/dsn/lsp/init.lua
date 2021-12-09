@@ -1,4 +1,4 @@
-local root_pattern = require('lspconfig/util').root_pattern
+local util = require('lspconfig/util')
 
 local opts = { noremap = true, silent = true }
 vim.api.nvim_set_keymap('n', 'gd',       '<cmd>lua vim.lsp.buf.definition()<CR>',       opts)
@@ -46,7 +46,7 @@ require'lspconfig'.tsserver.setup{
     common_on_attach(client)
     client.resolved_capabilities.document_formatting = false
   end,
-  root_dir = root_pattern("package.json",
+  root_dir = util.root_pattern("package.json",
     "tsconfig.json", "jsconfig.json", ".git"),
   settings = { documentFormatting = false },
   handlers = {
@@ -86,10 +86,8 @@ require'lspconfig'.eslint.setup{
 require'lspconfig'.graphql.setup{
   cmd = { vim.fn.getenv 'HOME' ..  "/.local/share/nvim/lsp_servers/graphql/node_modules/.bin/graphql-lsp", "server", "-m", "stream" },
   filetypes = { "graphql", "typescriptreact", "javascriptreact" },
-  root_dir = root_pattern('.git', '.graphqlrc*', '.graphql.config.*')
+  root_dir = util.root_pattern('.git', '.graphqlrc*', '.graphql.config.*')
 }
-
-require'lspconfig'.bashls.setup{}
 
 require'lspconfig'.cssls.setup{
   on_attach = common_on_attach,
@@ -112,6 +110,7 @@ require'lspconfig'.html.setup{
 require'lspconfig'.dockerls.setup{
   on_attach = common_on_attach,
   cmd = { vim.fn.getenv 'HOME' ..  "/.local/share/nvim/lsp_servers/dockerfile/node_modules/dockerfile-language-server-nodejs/bin/docker-langserver", "--stdio" },
+  filetypes = { "dockerfile" }
 }
 
 local runtime_path = vim.split(package.path, ';')
@@ -135,6 +134,68 @@ require'lspconfig'.sumneko_lua.setup {
             },
         },
     },
+}
+
+require'lspconfig'.bashls.setup{
+  cmd = { vim.fn.getenv 'HOME' ..  "/.local/share/nvim/lsp_servers/bash/node_modules/.bin/bash-language-server", "--stdio" },
+  cmd_env = {
+    GLOB_PATTERN = "*@(.sh|.inc|.bash|.command)"
+  },
+  filetypes = { "sh" },
+  root_dir = util.find_git_ancestor,
+  single_file_support = true
+}
+
+require'lspconfig'.vimls.setup{
+  cmd = { vim.fn.getenv 'HOME' ..  "/.local/share/nvim/lsp_servers/vim/node_modules/.bin/vim-language-server", "--stdio" },
+  filetypes = { "vim" },
+  init_options = {
+    diagnostic = {
+      enable = true
+    },
+    indexes = {
+      count = 3,
+      gap = 100,
+      projectRootPatterns = { "runtime", "nvim", ".git", "autoload", "plugin" },
+      runtimepath = true
+    },
+    iskeyword = "@,48-57,_,192-255,-#",
+    runtimepath = "",
+    suggest = {
+      fromRuntimepath = true,
+      fromVimruntime = true
+    },
+    vimruntime = ""
+  },
+  root_dir = function(fname)
+    return util.find_git_ancestor(fname) or vim.fn.getcwd()
+  end,
+}
+
+require'lspconfig'.ansiblels.setup{
+  cmd = { vim.fn.getenv 'HOME' ..  "/.local/share/nvim/lsp_servers/ansiblels/bin/ansible-language-server", "--stdio" },
+  filetypes = { "yaml", "yaml.ansible" },
+  -- root_dir = function(startpath)
+  --   return util.search_ancestors(startpath, matcher)
+  -- end,
+  settings = {
+    ansible = {
+      ansible = {
+        path = "ansible"
+      },
+      ansibleLint = {
+        enabled = true,
+        path = "ansible-lint"
+      },
+      executionEnvironment = {
+        enabled = false
+      },
+      python = {
+        interpreterPath = "python"
+      }
+    }
+  },
+  single_file_support = true
 }
 
 

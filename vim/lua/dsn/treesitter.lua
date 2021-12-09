@@ -1,4 +1,10 @@
 require'nvim-treesitter.configs'.setup {
+  highlight = { 
+    enable = true,
+  },
+  indent = {
+    enabled = true,
+  },
   ensure_installed = {
       "graphql",
       "html",
@@ -19,9 +25,6 @@ require'nvim-treesitter.configs'.setup {
       "jsonc"
   },
   context_commentstring = {
-    enable = true,
-  },
-  highlight = { 
     enable = true,
   },
   playground = {

@@ -40,7 +40,7 @@ return require('packer').startup(function(use)
 
     -- lsp & code
     use 'neovim/nvim-lspconfig'
-    use 'kabouzeid/nvim-lspinstall'
+    use 'williamboman/nvim-lsp-installer'
     use 'kevinhwang91/nvim-bqf' 				                    -- better quick fix window
     use { 'prettier/vim-prettier', run = 'npm install', branch = 'master' }
     use 'nvim-lua/lsp-status.nvim'                          -- lsp info in statusline

@@ -33,14 +33,14 @@ sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
 
 ### nvim
 
-- review complation/snippets 
-- review lua lsp, snippets, formating etc
-- review telescope: lsp, cheat ? git actions ?
-- review tabnine nvim-cmp 
+- review completion, snippets & tabnine
+- review telescope: lsp, cheat & git actions 
+- fix lua: snippets, formatting 
 - fix automically remove trailing spaces
 - fix lsp quickfix d.ts
 - fix console.log command (log cword)
 - fix nvim-cmp vsts integration 
+- fix prettier format scroll to bottom: https://github.com/prettier/vim-prettier/issues/248
 
 ### plugins
 

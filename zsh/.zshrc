@@ -5,12 +5,12 @@ bindkey -v
 zstyle :compinstall filename '$HOME/.config/zsh/.zshrc'
 
 # Needs to loaded in order else shell will output "maximum nested function level reached"
-if [ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh ]; then
-	source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+if [ -f ~/build/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh ]; then
+	source ~/build/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 fi
 
-if [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh ]; then
-	source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+if [ -f ~/build/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh ]; then
+	source ~/build/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 fi
 
 # load autosuggestions

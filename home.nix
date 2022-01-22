@@ -8,7 +8,13 @@
   home.username               = "dsn";
   home.homeDirectory          = "/home/dsn";
   home.stateVersion           = "22.05";
-  xdg.cacheHome               = "/home/dsn/.local/cache";
+  # xdg = {
+  #   enable = true;
+  #   cacheHome = "~/.local/cache";
+  #   configHome = "$HOME/.config";
+  #   dataHome = "~/.local/share";
+  # };
+
   home.packages = with pkgs; [
       bat
       fzf
@@ -33,6 +39,10 @@
       wget
       xclip
       z-lua
+  ];
+
+  fonts.fonts = with pkgs; [
+    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
   ];
 
   programs.home-manager = {
@@ -74,13 +84,6 @@
       pull.rebase = true;
     };
   };
-
-  # programs.xdg = {
-  #   enable = true;
-  #   cacheHome = "~/.local/cache";
-  #   configHome = "$HOME/.config";
-  #   dataHome = "~/.local/share";
-  # };
 
   # programs.fontconfig = {
   #   enable = true;

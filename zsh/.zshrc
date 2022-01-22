@@ -41,10 +41,8 @@ function git_branch_name()
   fi
 }
 
-# Enable substitution in the prompt.
+# prompt
 setopt prompt_subst
-
-# Config for prompt. PS1 synonym.
 prompt='%2/ $(git_branch_name) > '
 
 # autoload -Uz promptinit

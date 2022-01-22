@@ -30,6 +30,11 @@ alias cfal="vim ~/.aliases.local.zsh"
 alias cfz="vim ~/dotfiles/zsh/.zshrc"
 alias cfg="vim ~/dotfiles/git/config"
 
+# windows 
+alias cwt="cd /mnt/c/Users/dsn/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/"
+alias cwp="cd /mnt/c/Users/dsn/Documents/PowerShell/"
+alias cwr="cd /mnt/c/root"
+
 # folder shortcuts
 alias h="cd ~/"
 alias s="cd ~/bin"

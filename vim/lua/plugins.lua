@@ -57,6 +57,7 @@ return require('packer').startup(function(use)
       }
     }
     use 'f3fora/cmp-spell'
+    use 'LnL7/vim-nix'
 
     -- git
     use 'tpope/vim-fugitive'

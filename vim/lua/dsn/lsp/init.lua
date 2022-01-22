@@ -198,6 +198,7 @@ require'lspconfig'.ansiblels.setup{
   single_file_support = true
 }
 
+require("lspconfig")["rnix"].setup({})
 
 -- custom lsp diagnostic signs/icons
 

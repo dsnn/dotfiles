@@ -5,34 +5,34 @@
 
 {
   targets.genericLinux.enable = true;
-  home.username = "dsn";
-  home.homeDirectory = "/home/dsn";
-  home.stateVersion = "22.05";
-  xdg.cacheHome = "/home/dsn/.local/cache";
+  home.username               = "dsn";
+  home.homeDirectory          = "/home/dsn";
+  home.stateVersion           = "22.05";
+  xdg.cacheHome               = "/home/dsn/.local/cache";
   home.packages = with pkgs; [
-      tmux
-      vim
-      neovim
       bat
-      git
       fzf
-      keychain
-      nodejs
-      nodePackages.npm
-      ripgrep
-      z-lua
-      wget
-      unzip
+      git
       htop
       jq
-      xclip
+      keychain
       lazygit
-      starship
-      rnix-lsp
+      nawk
+      neovim
       nixfmt
       nixpkgs-fmt
+      nodePackages.npm
+      nodejs
+      ripgrep
+      rnix-lsp
       starship
-      nawk
+      starship
+      tmux
+      unzip
+      vim
+      wget
+      xclip
+      z-lua
   ];
 
   programs.home-manager = {
@@ -40,8 +40,8 @@
   };
 
   programs.git = {
-    enable = true;
-    userName = "dsn";
+    enable    = true;
+    userName  = "dsn";
     userEmail = "dsn@dsnn.io";
     ignores = [
       "node_modules"
@@ -88,11 +88,13 @@
   };
 
   programs.zsh = {
-    enable = true;
-    enableCompletion = false; # TODO: set environment.pathsToLink for e.g. systemd completion 
-    enableAutosuggestions = true;
+    enable                   = true;
+    enableCompletion         = false; # TODO: set environment.pathsToLink for e.g. systemd completion
+    enableAutosuggestions    = true;
     enableSyntaxHighlighting = true;
-    dotDir = ".config/zsh";
+    dotDir                   = ".config/zsh";
+    autocd                   = true;
+    # cdpath                 = true;
 
     history = {
       size       = 50000;
@@ -149,7 +151,7 @@
       cp    = "cp -v";
       df    = "df -h";
       mkdir = "mkdir -pv";
-      rf    = "home-manager switch;source ~/.config/zsh/.zshrc";
+      rf    = "home-manager switch; source ~/.config/zsh/.zshrc";
 
       # listing
       l  = "ls -alh --color=auto";

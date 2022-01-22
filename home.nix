@@ -1,19 +1,36 @@
 { config, pkgs, ... }:
 
 # for package and service info: 
-# https://github.com/nix-community/home-manager/tree/master/modules
+# https://github.com/nix-community/home-manager/tree/master/
 
-{
+let 
+  profileDirectory = config.home.profileDirectory;
+
+in {
+  # Fix home manager for non NixOS
   targets.genericLinux.enable = true;
+
   home.username               = "dsn";
   home.homeDirectory          = "/home/dsn";
   home.stateVersion           = "22.05";
-  # xdg = {
+
+  xdg = {
+    enable = true;
+    cacheHome = ~/.local/cache;
+    configHome = ~/.config;
+    dataHome = ~/.local/share;
+  };
+
+  fonts.fontconfig.enable = true;
+
+  # programs.fontconfig = {
   #   enable = true;
-  #   cacheHome = "~/.local/cache";
-  #   configHome = "$HOME/.config";
-  #   dataHome = "~/.local/share";
   # };
+
+  # fonts = with pkgs; [
+  #   (nerdfonts.override { fonts = [ "FiraCode" "Roboto" ]; })
+  # ];
+
 
   home.packages = with pkgs; [
       bat
@@ -32,17 +49,14 @@
       ripgrep
       rnix-lsp
       starship
-      starship
       tmux
       unzip
       vim
       wget
       xclip
       z-lua
-  ];
-
-  fonts.fonts = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+      zsh
+      (nerdfonts.override { fonts = [ "FiraCode" "RobotoMono" ]; })
   ];
 
   programs.home-manager = {
@@ -84,10 +98,6 @@
       pull.rebase = true;
     };
   };
-
-  # programs.fontconfig = {
-  #   enable = true;
-  # };
 
   programs.fzf = {
     enable = true;
@@ -182,6 +192,7 @@
       df    = "df -h";
       mkdir = "mkdir -pv";
       rf    = "home-manager switch; source ~/.config/zsh/.zshrc";
+      rl    = "source ~/.config/zsh/.zshrc";
 
       # listing
       l  = "ls -alh --color=auto";
@@ -274,10 +285,5 @@
       # starship  prompt
       eval "$(starship init zsh)"
     '';
-
-    # envExtra = ''
-    #  if [ -e /home/dsn/.nix-profile/etc/profile.d/nix.sh ]; then . /home/dsn/.nix-profile/etc/profile.d/nix.sh; fi
-    #  if [ -e /home/dsn/.config/zsh/.zshrc ]; then . /home/dsn/.config/zsh/.zshrc; fi
-    # '';
   };
 }

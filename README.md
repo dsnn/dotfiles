@@ -1,35 +1,12 @@
 # dotfiles
 
-```zsh
-sudo apt install make
-cd ~/dotfiles
-make install
-tmux: ctrl+a ctrl+I to install tmux packages
-```
-
-### font config
-
-```
-ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf $XDG_CONFIG_HOME/fontconfig/conf.d
-```
-
-### bat
-
-```
-sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep
-```
+## TODO nix
+- Fix z, not working (?) 
+- Fix tmux (how to combine w/ windows terminal?)
+- Fix auto create build / projects folders
 
 ### wsl 
 - xrdp
-
-### zsh 
-- spaceship-prompt
-
-### makefile
-- general script to fetch/update from latest 
-  - nvim (already working w/ lazy script)
-  - lazygit 
-  - z
 
 ### nvim
 

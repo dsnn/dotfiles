@@ -1,12 +1,31 @@
 # dotfiles
 
-## TODO nix
-- Fix z, not working (?) 
-- Fix tmux (how to combine w/ windows terminal?)
-- Fix auto create build / projects folders
+- some nix, gymnastics and dotfiles installation
+    ```
+    sudo install -d -m755 -o $(id -u) -g $(id -g) /nix
+    curl -L https://nixos.org/nix/install | sh
+    source $HOME/.nix-profile/etc/profile.d/nix.sh
+    nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+    nix-channel --update
+    export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
+    nix-shell '<home-manager>' -A install
+    rm -rf ~/.config/nixpkgs
+    git clone https://github.com/dsnn/dotfiles.git
+    ln -s ~/dotfiles ~/.config/nixpkgs
+    home-manager switch
+    command -v zsh | sudo tee -a /etc/shells
+    sudo chsh -s "$(command -v zsh)" "${USER}"
+    ```
+## nix
+- clean install:
+  - zsh have the same priority (home-manager-path & nix-2.5.1, need to rm nix-zsh-version, why?)
+- Fix z not working (?) 
+- Fix tmux. Combine w/ windows terminal (?)
+- Fix create default folders (if missing) (~/build etc) 
+- Fix starship prompt. Differs on home pc and fresh installation (?)
 
 ### wsl 
-- xrdp
+- xrdp (?)
 
 ### nvim
 

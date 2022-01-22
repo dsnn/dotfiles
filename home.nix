@@ -48,24 +48,26 @@
       "npm-debug.log"
     ];
     aliases = {
-      ls   = "!${pkgs.git}/bin/git log --pretty=format:\"%h %Cblue%ad%Creset %an %Cgreen%s%Creset\" --decorate --date=short -10";
-      st   = "status -s";
+      ba   = "branch -a";
       bl   = "branch --list";
       br   = "branch -r";
-      ba   = "branch -a";
       cb   = "!${pkgs.git}/bin/git rev-parse --abbrev-ref HEAD";
       cm   = "commit -m";
       cma  = "commit --amend --no-edit";
       co   = "checkout";
       cob  = "checkout -b";
-      undo = "reset HEAD^";
+      gpf  = "push --force-with-lease";
       la   = "!${pkgs.git}/bin/git config -l | grep alias | cut -c 7-";
+      ls   = "!${pkgs.git}/bin/git log --pretty=format:\"%h %Cblue%ad%Creset %an %Cgreen%s%Creset\" --decorate --date=short -10";
+      lg   = "!${pkgs.git}/bin/git log --pretty=\"%C(yellow)%h%Creset | %cd %d %s (%C(cyan)%an)\" --date=format:\"%Y-%m-%d %H:%M:%S\" --graph";
+      last = "!${pkgs.git}/bin/git log -\${1+}\${1-1} HEAD --pretty=format:\"%h %Cblue%ad%Creset %an %Cgreen%s%Creset\" --decorate --date=short -10";
       pr   = "!${pkgs.git}/bin/git checkout master;!${pkgs.git}/bin/git pull;git checkout @{-1};!${pkgs.git}/bin/git rebase master";
       pu   = "!${pkgs.git}/bin/git push -u origin $(!${pkgs.git}/bin/git cb)";
-      gpf  = "push --force-with-lease";
-      rbi  = "rebase --interactive";
-      rbc  = "rebase --continue";
       rba  = "rebase --abort";
+      rbc  = "rebase --continue";
+      rbi  = "rebase --interactive";
+      st   = "status -s";
+      undo = "!${pkgs.git}/bin/git reset HEAD^";
     };
     extraConfig = {
       core.editor = "vim";
@@ -73,23 +75,35 @@
     };
   };
 
+  # programs.xdg = {
+  #   enable = true;
+  #   cacheHome = "~/.local/cache";
+  #   configHome = "$HOME/.config";
+  #   dataHome = "~/.local/share";
+  # };
+
+  # programs.fontconfig = {
+  #   enable = true;
+  # };
 
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
+    # defaultCommand = "rg --files --hidden --follow -g \"!{.git,node_modules}/*\" 2> /dev/null";
   };
 
   # programs.keychain  = {};
   # programs.lazygit   = {};
   # programs.starship  = {};
   # programs.z-lua     = {};
+
   programs.dircolors = {
     enable = true;
   };
 
   programs.zsh = {
     enable                   = true;
-    enableCompletion         = false; # TODO: set environment.pathsToLink for e.g. systemd completion
+    enableCompletion         = true; 
     enableAutosuggestions    = true;
     enableSyntaxHighlighting = true;
     dotDir                   = ".config/zsh";
@@ -97,8 +111,8 @@
     # cdpath                 = true;
 
     history = {
-      size       = 50000;
-      save       = 500000;
+      size       = 10000;
+      save       = 10000;
       path       = "/home/dsn/.config/zsh/history";
       ignoreDups = true;
       share      = true;
@@ -106,17 +120,22 @@
     };
 
     sessionVariables = {
-      LC_CTYPE         = "en_US.UTF-8";
-      LEDGER_COLOR     = "true";
-      LESS             = "-FRSXM";
-      LESSCHARSET      = "utf-8";
-      PAGER            = "less";
-      PROMPT           = "%m %~ $ ";
-      PROMPT_DIRTRIM   = "2";
-      RPROMPT          = "";
-      TERM             = "xterm-256color";
-      TINC_USE_NIX     = "yes";
-      WORDCHARS        = "";
+      LC_CTYPE              = "en_US.UTF-8";
+      LEDGER_COLOR          = "true";
+      LESS                  = "-FRSXM";
+      LESSCHARSET           = "utf-8";
+      PAGER                 = "less";
+      PROMPT                = "%m %~ $ ";
+      PROMPT_DIRTRIM        = "2";
+      RPROMPT               = "";
+      TERM                  = "xterm-256color";
+      TINC_USE_NIX          = "yes";
+      WORDCHARS             = "";
+      BROWSER               = "firefox";
+      VISUAL                = "nvim";
+      EDITOR                = "nvim";
+      MANWIDTH              = 79;
+      LIBGL_ALWAYS_INDIRECT = 1;
     };
 
     shellAliases = {
@@ -124,6 +143,9 @@
       nvim = "/home/dsn/.local/bin/nvim/bin/nvim";
       cat  = "bat";
       awk  = "nawk";
+
+      # scripts
+      # update-nvim="bash /home/dsn/dotfiles/bin/get-nvim.sh";
 
       # file shortcuts
       cfc = "vim ~/dotfiles/home.nix";
@@ -135,6 +157,11 @@
       h="cd ~/";
       d="cd ~/dotfiles";
       cf="cd ~/.config";
+
+      # windows
+      cwt="cd /mnt/c/Users/dsn/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/";
+      cwp="cd /mnt/c/Users/dsn/Documents/PowerShell/";
+      cwr="cd /mnt/c/root";
 
       # navigation
       ".."    = "cd ..";
@@ -161,6 +188,7 @@
       ls = "ls -hN --group-directories-first --color=auto";
 
       # git
+      g   = "git";
       ga  = "git add .";
       gc  = "git commit -m";
       gd  = "git diff";
@@ -173,6 +201,7 @@
       gam = "git commit --amend --no-edit";
       lzg = "lazygit";
 
+      # npm
       ns="npm start";
       ni="npm install";
       nt="npm test";
@@ -180,6 +209,24 @@
       nrw="npm run workbench";
       nrt="npm run typecheck";
       nrl="npm run lint";
+
+      # wget
+      wget="wget --hsts-file=\"/home/dsn/.config/wget\"/wget-hsts";
+
+      # docker
+      ds="docker ps -a";
+      di="docker images";
+      drm="docker rm $(docker ps -qa --no-trunc --filter \"status=exited\")";
+      drmi="docker rmi $(docker images -q -f dangling=true)";
+      # dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
+
+      # vagrant
+      vu="vagrant up";
+      vh="vagrant halt -f";
+      vd="vagrant destroy -f";
+      vs="vagrant ssh";
+      vp="vagrant provision";
+
     };
     initExtra = ''
       # Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
@@ -189,8 +236,8 @@
       bindkey '^ ' autosuggest-accept
 
       # edit current command in vim
-      bindkey -M vicmd "^V" edit-command-line
-      zle -N edit-command-line
+      autoload -U edit-command-line; zle -N edit-command-line
+      bindkey '^e' edit-command-line
 
       # keychain
       if [ -f ~/.ssh/id_rsa ]; then

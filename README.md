@@ -17,6 +17,11 @@
     sudo chsh -s "$(command -v zsh)" "${USER}"
     ```
 
+### nix
+- convert to flakes / imports 
+    - combine nvim and plugins?
+      w/ this everything gets updated to latest at the same time
+
 ### wsl 
 - xrdp (?)
 

@@ -63,6 +63,13 @@ in {
     enable = true;
   };
 
+
+  xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink ~/dotfiles/nvim;
+  # xdg.configFile."nvim" = {
+  #   source = ~/dotfiles/nvim;
+  #   recursive = true;
+  # };
+
   programs.git = {
     enable    = true;
     userName  = "dsn";
@@ -152,8 +159,8 @@ in {
     };
 
     shellAliases = {
-      vim  = "/home/dsn/.local/bin/nvim/bin/nvim";
-      nvim = "/home/dsn/.local/bin/nvim/bin/nvim";
+      # vim  = "/home/dsn/.local/bin/nvim/bin/nvim";
+      # nvim = "/home/dsn/.local/bin/nvim/bin/nvim";
       cat  = "bat";
       awk  = "nawk";
 

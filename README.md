@@ -23,6 +23,7 @@
 - Fix tmux. Combine w/ windows terminal (?)
 - Fix create default folders (if missing) (~/build etc) 
 - Fix starship prompt. Differs on home pc and fresh installation (?)
+- Fix change to neovim nightly (overlay)
 
 ### wsl 
 - xrdp (?)

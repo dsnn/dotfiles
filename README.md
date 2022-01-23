@@ -16,8 +16,6 @@
     command -v zsh | sudo tee -a /etc/shells
     sudo chsh -s "$(command -v zsh)" "${USER}"
     ```
-## nix
-- Fix z not working (?) 
 
 ### wsl 
 - xrdp (?)

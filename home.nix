@@ -54,7 +54,6 @@ in {
       vim
       wget
       xclip
-      z-lua
       zsh
       (nerdfonts.override { fonts = [ "FiraCode" "RobotoMono" ]; })
   ];

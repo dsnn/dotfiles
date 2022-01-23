@@ -17,13 +17,7 @@
     sudo chsh -s "$(command -v zsh)" "${USER}"
     ```
 ## nix
-- clean install:
-  - zsh have the same priority (home-manager-path & nix-2.5.1, need to rm nix-zsh-version, why?)
 - Fix z not working (?) 
-- Fix tmux. Combine w/ windows terminal (?)
-- Fix create default folders (if missing) (~/build etc) 
-- Fix starship prompt. Differs on home pc and fresh installation (?)
-- Fix change to neovim nightly (overlay)
 
 ### wsl 
 - xrdp (?)

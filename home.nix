@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 # for package and service info: 
 # https://github.com/nix-community/home-manager/tree/master/
@@ -119,8 +119,45 @@ in {
 
   # programs.keychain  = {};
   # programs.lazygit   = {};
-  # programs.starship  = {};
   # programs.z-lua     = {};
+
+
+  programs.starship  = {
+    enable = true;
+    settings = {
+       add_newline = false;
+       format = lib.concatStrings [
+        "$directory"
+        "$git_branch"
+        "$git_status"
+        "$character"
+       ];
+       scan_timeout = 10;
+       directory = {
+        truncation_length = 1;
+        truncate_to_repo = true;
+        format = "[$path]($style) [$read_only]($read_only_style)";
+        style = "bold white";
+        read_only = "🔒";
+       };
+       git_branch = {
+        format = "[$symbol$branch]($style) ";
+        symbol = " ";
+        style = "bold grey";
+       };
+       git_status = {
+        format = "$all_status$ahead_behind ";
+        style = "bold grey";
+       };
+       character = {
+        success_symbol = "[➜](bold green)";
+        error_symbol = "[➜](bold red)";
+       };
+       package = {
+          disable = true;
+       };
+    };
+  };
 
   programs.dircolors = {
     enable = true;
@@ -253,6 +290,9 @@ in {
       vs="vagrant ssh";
       vp="vagrant provision";
 
+      # work
+      web="/home/dsn/opto/Core/Code/ServerHtml5/Web";
+      core="/home/dsn/opto/Core/Code";
     };
     initExtra = ''
       # Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)

@@ -1,46 +1,45 @@
-{ pkgs, ... }: 
-{
-  enable                   = true;
-  enableCompletion         = true; 
-  enableAutosuggestions    = true;
+{ pkgs, ... }: {
+  enable = true;
+  enableCompletion = true;
+  enableAutosuggestions = true;
   enableSyntaxHighlighting = true;
-  dotDir                   = ".config/zsh";
-  autocd                   = true;
+  dotDir = ".config/zsh";
+  autocd = true;
   # cdpath                 = true;
 
   history = {
-    size       = 10000;
-    save       = 10000;
-    path       = "/home/dsn/.config/zsh/history";
+    size = 10000;
+    save = 10000;
+    path = "/home/dsn/.config/zsh/history";
     ignoreDups = true;
-    share      = true;
-    extended   = true;
+    share = true;
+    extended = true;
   };
 
   sessionVariables = {
-    LC_CTYPE              = "en_US.UTF-8";
-    LEDGER_COLOR          = "true";
-    LESS                  = "-FRSXM";
-    LESSCHARSET           = "utf-8";
-    PAGER                 = "less";
-    PROMPT                = "%m %~ $ ";
-    PROMPT_DIRTRIM        = "2";
-    RPROMPT               = "";
-    TERM                  = "xterm-256color";
-    TINC_USE_NIX          = "yes";
-    WORDCHARS             = "";
-    BROWSER               = "firefox";
-    VISUAL                = "nvim";
-    EDITOR                = "nvim";
-    MANWIDTH              = 79;
+    LC_CTYPE = "en_US.UTF-8";
+    LEDGER_COLOR = "true";
+    LESS = "-FRSXM";
+    LESSCHARSET = "utf-8";
+    PAGER = "less";
+    PROMPT = "%m %~ $ ";
+    PROMPT_DIRTRIM = "2";
+    RPROMPT = "";
+    TERM = "xterm-256color";
+    TINC_USE_NIX = "yes";
+    WORDCHARS = "";
+    BROWSER = "firefox";
+    VISUAL = "nvim";
+    EDITOR = "nvim";
+    MANWIDTH = 79;
     LIBGL_ALWAYS_INDIRECT = 1;
   };
 
   shellAliases = {
     # vim  = "/home/dsn/.local/bin/nvim/bin/nvim";
     # nvim = "/home/dsn/.local/bin/nvim/bin/nvim";
-    cat  = "bat";
-    awk  = "nawk";
+    cat = "bat";
+    awk = "nawk";
 
     # scripts
     # update-nvim="bash /home/dsn/dotfiles/bin/get-nvim.sh";
@@ -52,83 +51,84 @@
     cfg = "vim ~/dotfiles/home.nix";
 
     # folder shortcuts
-    h="cd ~/";
-    d="cd ~/dotfiles";
-    cf="cd ~/.config";
+    h = "cd ~/";
+    d = "cd ~/dotfiles";
+    cf = "cd ~/.config";
 
     # windows
-    cwt="cd /mnt/c/Users/dsn/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/";
-    cwp="cd /mnt/c/Users/dsn/Documents/PowerShell/";
-    cwr="cd /mnt/c/root";
+    cwt =
+      "cd /mnt/c/Users/dsn/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/";
+    cwp = "cd /mnt/c/Users/dsn/Documents/PowerShell/";
+    cwr = "cd /mnt/c/root";
 
     # navigation
-    ".."    = "cd ..";
-    "..."   = "cd ../..";
-    "...."  = "cd ../../..";
+    ".." = "cd ..";
+    "..." = "cd ../..";
+    "...." = "cd ../../..";
     "....." = "cd ../../../..";
-    "-- -"  = "cd ~";
-    "cd.."  = "cd ..";
+    "-- -" = "cd ~";
+    "cd.." = "cd ..";
 
     # actions
-    mv    = "mv -v";
-    rm    = "rm -i -v";
-    rmd   = "rm -rf";
-    cp    = "cp -v";
-    df    = "df -h";
+    mv = "mv -v";
+    rm = "rm -i -v";
+    rmd = "rm -rf";
+    cp = "cp -v";
+    df = "df -h";
     mkdir = "mkdir -pv";
-    rf    = "home-manager switch; source ~/.config/zsh/.zshrc";
-    rl    = "source ~/.config/zsh/.zshrc";
+    rf = "home-manager switch; source ~/.config/zsh/.zshrc";
+    rl = "source ~/.config/zsh/.zshrc";
 
     # listing
-    l  = "ls -alh --color=auto";
+    l = "ls -alh --color=auto";
     ll = "ls -alh --format=horizontal --color=auto";
     la = "ls -alh --color=auto";
     lt = "ls -alrth --color=auto";
     ls = "ls -hN --group-directories-first --color=auto";
 
     # git
-    g   = "git";
-    ga  = "git add .";
-    gc  = "git commit -m";
-    gd  = "git diff";
+    g = "git";
+    ga = "git add .";
+    gc = "git commit -m";
+    gd = "git diff";
     gpl = "git pull";
-    gl  = "git ls";
-    gp  = "git push origin master";
+    gl = "git ls";
+    gp = "git push origin master";
     gpf = "git push --force-with-lease";
-    gs  = "git st";
-    cb  = "git cb";
+    gs = "git st";
+    cb = "git cb";
     gam = "git commit --amend --no-edit";
     lzg = "lazygit";
 
     # npm
-    ns="npm start";
-    ni="npm install";
-    nt="npm test";
-    ntu="npm run test:update-snapshot";
-    nrw="npm run workbench";
-    nrt="npm run typecheck";
-    nrl="npm run lint";
+    ns = "npm start";
+    ni = "npm install";
+    nt = "npm test";
+    ntu = "npm run test:update-snapshot";
+    nrw = "npm run workbench";
+    nrt = "npm run typecheck";
+    nrl = "npm run lint";
 
     # wget
-    wget="wget --hsts-file=\"/home/dsn/.config/wget\"/wget-hsts";
+    wget = ''wget --hsts-file="/home/dsn/.config/wget"/wget-hsts'';
 
     # docker
-    ds="docker ps -a";
-    di="docker images";
-    drm="docker rm $(docker ps -qa --no-trunc --filter \"status=exited\")";
-    drmi="docker rmi $(docker images -q -f dangling=true)";
+    ds = "docker ps -a";
+    di = "docker images";
+    drm = ''docker rm $(docker ps -qa --no-trunc --filter "status=exited")'';
+    drmi = "docker rmi $(docker images -q -f dangling=true)";
     # dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
 
     # vagrant
-    vu="vagrant up";
-    vh="vagrant halt -f";
-    vd="vagrant destroy -f";
-    vs="vagrant ssh";
-    vp="vagrant provision";
+    vu = "vagrant up";
+    vh = "vagrant halt -f";
+    vd = "vagrant destroy -f";
+    vs = "vagrant ssh";
+    vp = "vagrant provision";
 
     # work
-    web="/home/dsn/opto/Core/Code/ServerHtml5/Web";
-    core="/home/dsn/opto/Core/Code";
+    web = "/home/dsn/opto/Core/Code/ServerHtml5/Web";
+    core = "/home/dsn/opto/Core/Code";
   };
   initExtra = ''
     # Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)

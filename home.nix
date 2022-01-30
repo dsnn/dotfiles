@@ -3,7 +3,7 @@
 # for package and service info: 
 # https://github.com/nix-community/home-manager/tree/master/
 
-let 
+let
   zshsettings = import ./zsh.nix pkgs;
   gitsettings = import ./git.nix pkgs;
   packages = import ./packages.nix pkgs;
@@ -14,9 +14,11 @@ in {
   # Fix home manager for non NixOS
   targets.genericLinux.enable = true;
 
-  home.username               = "dsn";
-  home.homeDirectory          = "/home/dsn";
-  home.stateVersion           = "22.05";
+  config.allowUnfree = true;
+
+  home.username = "dsn";
+  home.homeDirectory = "/home/dsn";
+  home.stateVersion = "22.05";
 
   xdg = {
     enable = true;
@@ -34,18 +36,20 @@ in {
   programs.fzf.enable = true;
   programs.fzf.enableZshIntegration = true;
   programs.git = gitsettings;
-  programs.starship  = starshipsettings;
+  programs.starship = starshipsettings;
   programs.zsh = zshsettings;
 
   # programs.keychain  = {};
   # programs.lazygit   = {};
   # programs.z-lua     = {};
 
-  xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink ~/dotfiles/nvim;
+  xdg.configFile."nvim".source =
+    config.lib.file.mkOutOfStoreSymlink ~/dotfiles/nvim;
 
   nixpkgs.overlays = [
     (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
+      url =
+        "https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz";
     }))
   ];
 }

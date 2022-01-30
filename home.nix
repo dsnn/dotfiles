@@ -4,10 +4,10 @@
 # https://github.com/nix-community/home-manager/tree/master/
 
 let
-  zshsettings = import ./zsh.nix pkgs;
-  gitsettings = import ./git.nix pkgs;
-  packages = import ./packages.nix pkgs;
-  starshipsettings = import ./starship.nix pkgs;
+  zshsettings = import ./modules/zsh.nix pkgs;
+  gitsettings = import ./modules/git.nix pkgs;
+  packages = import ./modules/packages.nix pkgs;
+  starshipsettings = import ./modules/starship.nix pkgs;
   profileDirectory = config.home.profileDirectory;
 
 in {

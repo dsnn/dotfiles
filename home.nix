@@ -4,17 +4,15 @@
 # https://github.com/nix-community/home-manager/tree/master/
 
 let
-  zshsettings = import ./modules/zsh.nix pkgs;
-  gitsettings = import ./modules/git.nix pkgs;
-  packages = import ./modules/packages.nix pkgs;
-  starshipsettings = import ./modules/starship.nix pkgs;
+  zshsettings = import ./modules/zsh.nix { inherit pkgs; };
+  gitsettings = import ./modules/git.nix { inherit pkgs; };
+  packages = import ./modules/packages.nix { inherit pkgs; };
+  starshipsettings = import ./modules/starship.nix { inherit pkgs lib; };
   profileDirectory = config.home.profileDirectory;
 
 in {
   # Fix home manager for non NixOS
   targets.genericLinux.enable = true;
-
-  config.allowUnfree = true;
 
   home.username = "dsn";
   home.homeDirectory = "/home/dsn";
@@ -46,10 +44,9 @@ in {
   xdg.configFile."nvim".source =
     config.lib.file.mkOutOfStoreSymlink ~/dotfiles/nvim;
 
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url =
-        "https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz";
-    }))
-  ];
+  # nixpkgs.overlays = [
+  #   (import (builtins.fetchTarball {
+  #     url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
+  #   }))
+  # ];
 }

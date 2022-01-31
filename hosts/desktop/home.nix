@@ -4,10 +4,10 @@
 # https://github.com/nix-community/home-manager/tree/master/
 
 let
-  zshsettings = import ./modules/zsh.nix { inherit pkgs; };
-  gitsettings = import ./modules/git.nix { inherit pkgs; };
-  packages = import ./modules/packages.nix { inherit pkgs; };
-  starshipsettings = import ./modules/starship.nix { inherit pkgs lib; };
+  zshsettings = import ../../modules/zsh.nix { inherit pkgs; };
+  gitsettings = import ../../modules/git.nix { inherit pkgs; };
+  packages = import ../../modules/packages.nix { inherit pkgs; };
+  starshipsettings = import ../../modules/starship.nix { inherit pkgs lib; };
   profileDirectory = config.home.profileDirectory;
 
 in {

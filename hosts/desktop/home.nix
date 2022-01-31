@@ -14,10 +14,6 @@ in {
   # Fix home manager for non NixOS
   targets.genericLinux.enable = true;
 
-  home.username = "dsn";
-  home.homeDirectory = "/home/dsn";
-  home.stateVersion = "22.05";
-
   xdg = {
     enable = true;
     cacheHome = ~/.local/cache;

@@ -7,15 +7,19 @@
       url = "github:nix-community/home-manager";
       inputs.pkgs.follows = "pkgs";
     };
-    # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = inputs@{ self, pkgs, home-manager }:
+  outputs = inputs@{ self, pkgs, home-manager, neovim-nightly-overlay }:
     let
+      overlays = [ neovim-nightly-overlay.overlay ];
       mkHomeConfiguration = args:
         home-manager.lib.homeManagerConfiguration {
           system = "x86_64-linux";
-          configuration = args.config;
+          configuration = { pkgs, ... }: {
+            imports = args.modules;
+            nixpkgs.overlays = overlays;
+          };
           homeDirectory = "/home/dsn";
           username = "dsn";
           stateVersion = "22.05";
@@ -26,17 +30,12 @@
           specialArgs = { inherit inputs; };
           modules = args.modules;
         };
-      # overlays = [ neovim-nightly-overlay ];
     in {
 
       homeConfigurations.dsn =
-        mkHomeConfiguration { config = import ./hosts/desktop/home.nix; };
+        mkHomeConfiguration { modules = [ ./hosts/desktop/home.nix ]; };
 
-      nixosConfigurations.test = mkConfiguration {
-        modules = [
-          ./hosts/test/configuration.nix
-          ./hosts/test/hardware-configuration.nix
-        ];
-      };
+      nixosConfigurations.test =
+        mkConfiguration { modules = [ ./hosts/test/configuration.nix ]; };
     };
 }

@@ -32,11 +32,11 @@
       homeConfigurations.dsn =
         mkHomeConfiguration { config = import ./hosts/desktop/home.nix; };
 
-      nixosConfigurations.test =
-        mkConfiguration { modules = [ 
-  	    ./hosts/test/configuration.nix
-	    ./hosts/test/hardware-configuration.nix
-	  ]; 
-        };
+      nixosConfigurations.test = mkConfiguration {
+        modules = [
+          ./hosts/test/configuration.nix
+          ./hosts/test/hardware-configuration.nix
+        ];
+      };
     };
 }

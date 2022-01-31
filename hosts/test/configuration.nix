@@ -5,10 +5,9 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   nix = {
     package = pkgs.nixUnstable;
@@ -22,7 +21,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # add ZFS support
-  boot.supportedFilesystems = ["zfs"];
+  boot.supportedFilesystems = [ "zfs" ];
 
   networking.hostId = "8d549888";
   networking.hostName = "nixos"; # Define your hostname.
@@ -34,7 +33,7 @@
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
-  networking.networkmanager.enable  = true;
+  networking.networkmanager.enable = true;
   networking.useDHCP = false;
   networking.interfaces.ens18.useDHCP = true;
 
@@ -54,11 +53,10 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
-  
+
   # Configure keymap in X11
   services.xserver.layout = "us";
   # services.xserver.xkbOptions = "eurosign:e";
@@ -76,10 +74,19 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dsn = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager"]; # Enable ‘sudo’ for the user.
-    hashedPassword = "$6$Cpq27AX2fQ8hR6HH$e2OduForUEcsNZNWbcHtILTg/vfwa6xTgCOpwSttEz19K6r3MSsRRj7yFGO7qotCOtPobyxwhp9/H0FWgbND60";
+    extraGroups = [
+      "wheel"
+      "video"
+      "audio"
+      "disk"
+      "networkmanager"
+    ]; # Enable ‘sudo’ for the user.
+    hashedPassword =
+      "$6$Cpq27AX2fQ8hR6HH$e2OduForUEcsNZNWbcHtILTg/vfwa6xTgCOpwSttEz19K6r3MSsRRj7yFGO7qotCOtPobyxwhp9/H0FWgbND60";
   };
-  users.users.dsn.openssh.authorizedKeys.keys = [ "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCblbdi9GiPOhBlH1aSn3+/0w8w7OVP+jNVbjX0iOf31WMJpyGi8X1ybsZfjrAQ2VoHuX/dN1BJlvOGO36PcDRsXDKE/+Db9VcJR8vzs4d1Nik8lbmjXgWHPv6Ig8SDVrqanV/6Yv9AbgZFqIbfqIsW41i/zkVt8wXYewATI6bjHs5gWox+5h/NBBu6bTCD1He4I8v6/1Dg3D/9o0fmhrwGOdd7W1zxPorjUC9uziUCc4uOnnTH5n1K59TvMYeUsdYtkToew7b1fJAsC1FY09GrgyQ+y+O07oGNLI9NyckEMIi+1hsSi3dNwLG2Y/lqcHM/YgdY3iez63h+W02tEuaF" ];
+  users.users.dsn.openssh.authorizedKeys.keys = [
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCblbdi9GiPOhBlH1aSn3+/0w8w7OVP+jNVbjX0iOf31WMJpyGi8X1ybsZfjrAQ2VoHuX/dN1BJlvOGO36PcDRsXDKE/+Db9VcJR8vzs4d1Nik8lbmjXgWHPv6Ig8SDVrqanV/6Yv9AbgZFqIbfqIsW41i/zkVt8wXYewATI6bjHs5gWox+5h/NBBu6bTCD1He4I8v6/1Dg3D/9o0fmhrwGOdd7W1zxPorjUC9uziUCc4uOnnTH5n1K59TvMYeUsdYtkToew7b1fJAsC1FY09GrgyQ+y+O07oGNLI9NyckEMIi+1hsSi3dNwLG2Y/lqcHM/YgdY3iez63h+W02tEuaF"
+  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -89,7 +96,7 @@
     git
     man
     mkpasswd
-    vim 
+    vim
     wget
     home-manager
     cifs-utils
@@ -107,23 +114,22 @@
 
   # Enable the OpenSSH daemon.
   services.openssh = {
-   enable = true;
-   permitRootLogin = "yes";
+    enable = true;
+    permitRootLogin = "yes";
   };
 
-  services.samba = {
-    enable = true;
-  };
+  services.samba = { enable = true; };
 
   fileSystems."/mnt/private" = {
-      device = "//dss/private";
-      fsType = "cifs";
-      options = let
-        # this line prevents hanging on network split
-        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+    device = "//dss/private";
+    fsType = "cifs";
+    options = let
+      # this line prevents hanging on network split
+      automount_opts =
+        "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
 
-      in ["${automount_opts},credentials=/etc/nixos/smb-secrets"];
-  };  
+    in [ "${automount_opts},credentials=/etc/nixos/smb-secrets" ];
+  };
 
   # ZFS services
   services.zfs.autoSnapshot.enable = true;

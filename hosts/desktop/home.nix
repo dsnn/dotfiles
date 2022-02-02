@@ -33,6 +33,8 @@ in {
   programs.starship = starshipsettings;
   programs.zsh = zshsettings;
 
+  xsession.enable = true;
+
   # programs.keychain  = {};
   # programs.lazygit   = {};
   # programs.z-lua     = {};

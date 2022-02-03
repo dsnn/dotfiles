@@ -8,6 +8,7 @@
       inputs.pkgs.follows = "pkgs";
     };
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+    # nix-colors.url = "github:misterio77/nix-colors";
   };
 
   outputs = inputs@{ self, pkgs, home-manager, neovim-nightly }:

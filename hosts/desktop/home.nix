@@ -14,6 +14,7 @@
     ../../modules/packages.nix
     ../../modules/kitty.nix
     ../../modules/lazygit.nix
+    ../../modules/tmux.nix
   ];
 
   fonts.fontconfig.enable = true;

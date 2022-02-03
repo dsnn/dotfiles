@@ -6,14 +6,24 @@
       add_newline = false;
       scan_timeout = 10;
       format = lib.concatStrings [
+        "$username"
+        "$hostname"
         "$directory"
         "$git_branch"
         "$git_status"
         "$character"
       ];
+      username = {
+        format = "[$user]($style)@";
+        style_user = "bold grey";
+      };
+      hostname = {
+        format = "[$hostname]($style)  ";
+        style = "bold grey";
+      };
       directory = {
         truncation_length = 1;
-        truncate_to_repo = true;
+        truncate_to_repo = false;
         format = "[$path]($style) [$read_only]($read_only_style)";
         style = "bold white";
         read_only = "🔒";

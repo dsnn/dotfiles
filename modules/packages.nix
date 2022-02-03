@@ -1,5 +1,6 @@
-{ pkgs, ... }: {
-  common = with pkgs; [
+{ config, pkgs, ... }: {
+
+  home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" "RobotoMono" ]; })
     bat
     fzf
@@ -14,9 +15,6 @@
     wget
     xclip
     zsh
-  ];
-
-  dev = with pkgs; [
     jq
     lazygit
     neovim
@@ -27,4 +25,5 @@
     ripgrep
     rnix-lsp
   ];
+
 }

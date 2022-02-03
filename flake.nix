@@ -7,12 +7,12 @@
       url = "github:nix-community/home-manager";
       inputs.pkgs.follows = "pkgs";
     };
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = inputs@{ self, pkgs, home-manager, neovim-nightly-overlay }:
+  outputs = inputs@{ self, pkgs, home-manager, neovim-nightly }:
     let
-      overlays = [ neovim-nightly-overlay.overlay ];
+      overlays = [ neovim-nightly.overlay ];
       mkHomeConfiguration = args:
         home-manager.lib.homeManagerConfiguration {
           system = "x86_64-linux";

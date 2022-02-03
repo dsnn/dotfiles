@@ -39,17 +39,17 @@
   nixpkgs.config.allowUnfree = true;
 
   services.xserver.enable = true;
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.displayManager.defaultSession = "none+awesome";
-  services.xserver.windowManager.awesome = {
-    enable = true;
-    luaModules = with pkgs.luaPackages; [
-      luarocks # is the package manager for Lua modules
-      luadbi-mysql # Database abstraction layer
-    ];
-
-  };
   services.xserver.layout = "us";
+  services.xserver.displayManager.lightdm.enable = true;
+
+  # services.xserver.displayManager.defaultSession = "none+awesome";
+  # services.xserver.windowManager.awesome = {
+  #   enable = true;
+  #   luaModules = with pkgs.luaPackages; [
+  #     luarocks # is the package manager for Lua modules
+  #     luadbi-mysql # Database abstraction layer
+  #   ];
+  # };
 
   services.xrdp.enable = true;
   services.xrdp.port = 3389;

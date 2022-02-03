@@ -13,6 +13,7 @@
     # ../../modules/neovim.nix
     ../../modules/packages.nix
     ../../modules/kitty.nix
+    ../../modules/lazygit.nix
   ];
 
   fonts.fontconfig.enable = true;

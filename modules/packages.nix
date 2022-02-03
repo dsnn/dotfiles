@@ -16,7 +16,6 @@
     xclip
     zsh
     jq
-    lazygit
     neovim
     nixfmt
     nixpkgs-fmt

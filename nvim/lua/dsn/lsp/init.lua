@@ -116,7 +116,7 @@ require'lspconfig'.dockerls.setup{
 local runtime_path = vim.split(package.path, ';')
 require'lspconfig'.sumneko_lua.setup {
     on_attach = common_on_attach,
-    cmd = { vim.fn.getenv 'HOME' ..  "/.local/share/nvim/lsp_servers/sumneko_lua/extension/server/bin/Linux/lua-language-server", "--stdio" },
+    cmd = { vim.fn.getenv 'HOME' ..  "/.nix-profile/bin/lua-language-server", "--stdio" },
     settings = {
         Lua = {
             runtime = {

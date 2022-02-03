@@ -9,9 +9,10 @@
     ../../modules/zsh.nix
     ../../modules/fzf.nix
     ../../modules/xdg.nix
-    ../../modules/wm.nix
+    ../../modules/awesome.nix
     # ../../modules/neovim.nix
     ../../modules/packages.nix
+    ../../modules/kitty.nix
   ];
 
   fonts.fontconfig.enable = true;

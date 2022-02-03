@@ -17,7 +17,7 @@ in {
     ../../modules/zsh.nix
     ../../modules/fzf.nix
     ../../modules/xdg.nix
-    ../../modules/wm.nix
+    ../../modules/awesome.nix
   ];
 
   home.packages = packages.common ++ packages.dev;

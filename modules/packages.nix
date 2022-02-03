@@ -24,6 +24,7 @@
     nodejs
     ripgrep
     rnix-lsp
+    sumneko-lua-language-server
   ];
 
 }

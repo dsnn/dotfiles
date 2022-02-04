@@ -36,7 +36,10 @@
       homeConfigurations.dsn =
         mkHomeConfiguration { modules = [ ./hosts/desktop/home.nix ]; };
 
-      nixosConfigurations.test =
+      nixosConfigurations.desktop =
+        mkConfiguration { modules = [ ./hosts/desktop/configuration.nix ]; };
+
+      nixosConfigurations.server =
         mkConfiguration { modules = [ ./hosts/server/configuration.nix ]; };
     };
 }

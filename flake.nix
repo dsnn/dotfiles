@@ -37,6 +37,6 @@
         mkHomeConfiguration { modules = [ ./hosts/desktop/home.nix ]; };
 
       nixosConfigurations.test =
-        mkConfiguration { modules = [ ./hosts/test/configuration.nix ]; };
+        mkConfiguration { modules = [ ./hosts/server/configuration.nix ]; };
     };
 }

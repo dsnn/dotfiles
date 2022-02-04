@@ -18,7 +18,7 @@
   boot.supportedFilesystems = [ "zfs" ];
 
   networking.hostId = "8d549888";
-  networking.hostName = "nixos";
+  networking.hostName = "alpha";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   time.timeZone = "Europe/Stockholm";

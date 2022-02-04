@@ -1,13 +1,5 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }: {
 
-# for package and service info: 
-# https://github.com/nix-community/home-manager/tree/master/
-
-let
-  packages = import ../../modules/packages.nix { inherit pkgs; };
-  profileDirectory = config.home.profileDirectory;
-
-in {
   # Fix home manager for non NixOS
   targets.genericLinux.enable = true;
 
@@ -18,9 +10,12 @@ in {
     ../../modules/fzf.nix
     ../../modules/xdg.nix
     ../../modules/awesome.nix
+    # ../../modules/neovim.nix
+    ../../modules/packages.nix
+    ../../modules/kitty.nix
+    ../../modules/lazygit.nix
+    ../../modules/tmux.nix
   ];
-
-  home.packages = packages.common ++ packages.dev;
 
   fonts.fontconfig.enable = true;
 

@@ -11,4 +11,7 @@
     ../../modules/kitty.nix
     ../../modules/lazygit.nix
   ];
+
+  home.packages = with pkgs; [ discord spotify kodi google-chrome ];
+  # teamspeak 
 }

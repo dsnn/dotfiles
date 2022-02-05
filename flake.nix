@@ -33,16 +33,17 @@
         };
     in {
 
-      homeConfigurations.dsn =
-        mkHomeConfiguration { modules = [ ./hosts/desktop/home.nix ]; };
+      homeConfigurations = {
+        wsl = mkHomeConfiguration { modules = [ ./hosts/wsl/home.nix ]; };
+        desktop =
+          mkHomeConfiguration { modules = [ ./hosts/desktop/home.nix ]; };
+      };
 
-      homeConfigurations.work =
-        mkHomeConfiguration { modules = [ ./hosts/work/home.nix ]; };
-
-      nixosConfigurations.desktop =
-        mkConfiguration { modules = [ ./hosts/desktop/configuration.nix ]; };
-
-      nixosConfigurations.server =
-        mkConfiguration { modules = [ ./hosts/server/configuration.nix ]; };
+      nixosConfigurations = {
+        desktop =
+          mkConfiguration { modules = [ ./hosts/desktop/configuration.nix ]; };
+        server =
+          mkConfiguration { modules = [ ./hosts/server/configuration.nix ]; };
+      };
     };
 }

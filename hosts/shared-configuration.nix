@@ -56,7 +56,9 @@
 
   services.openssh = {
     enable = true;
-    permitRootLogin = "yes";
+    forwardX11 = false;
+    permitRootLogin = "no";
+    passwordAuthentication = false;
   };
   services.samba = { enable = true; };
   services.zfs.autoSnapshot.enable = true;

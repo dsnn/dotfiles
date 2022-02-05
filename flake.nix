@@ -36,6 +36,9 @@
       homeConfigurations.dsn =
         mkHomeConfiguration { modules = [ ./hosts/desktop/home.nix ]; };
 
+      homeConfigurations.work =
+        mkHomeConfiguration { modules = [ ./hosts/work/home.nix ]; };
+
       nixosConfigurations.desktop =
         mkConfiguration { modules = [ ./hosts/desktop/configuration.nix ]; };
 

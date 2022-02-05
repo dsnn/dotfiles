@@ -3,12 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }: {
-  nix = {
-    package = pkgs.nixUnstable;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
+  imports = [ ../modules/nix.nix ../modules/ssh.nix ../modules/xrdp.nix ];
 
   nixpkgs.config.allowUnfree = true;
 
@@ -35,10 +30,6 @@
   services.xserver.enable = true;
   services.xserver.layout = "us";
 
-  services.xrdp.enable = true;
-  services.xrdp.port = 3389;
-  services.xrdp.openFirewall = true;
-
   users.defaultUserShell = pkgs.zsh;
 
   environment.systemPackages = with pkgs; [
@@ -54,12 +45,6 @@
     zsh
   ];
 
-  services.openssh = {
-    enable = true;
-    forwardX11 = false;
-    permitRootLogin = "no";
-    passwordAuthentication = false;
-  };
   services.samba = { enable = true; };
   services.zfs.autoSnapshot.enable = true;
   services.zfs.autoScrub.enable = true;

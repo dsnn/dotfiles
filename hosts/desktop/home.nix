@@ -12,6 +12,6 @@
     ../../modules/lazygit.nix
   ];
 
-  home.packages = with pkgs; [ discord spotify kodi google-chrome ];
+  home.packages = with pkgs; [ discord spotify kodi google-chrome sstp-client ];
   # teamspeak 
 }

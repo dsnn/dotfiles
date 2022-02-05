@@ -13,7 +13,7 @@
   services.xrdp.enable = true;
   services.xrdp.port = 3389;
   services.xrdp.openFirewall = true;
-  services.xrdp.defaultWindowManager = "${pkgs.awesome}/bin/awesome";
+  services.xrdp.defaultWindowManager = "${pkgs.i3-gaps}/bin/i3";
 
   users.users.dsn = {
     isNormalUser = true;

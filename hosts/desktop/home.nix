@@ -6,12 +6,12 @@
   imports = [
     ../shared-home.nix
     ../../modules/xdg.nix
-    ../../modules/awesome.nix
+    ../../modules/i3.nix
     ../../modules/packages.nix
     ../../modules/kitty.nix
     ../../modules/lazygit.nix
   ];
 
-  home.packages = with pkgs; [ discord spotify kodi google-chrome sstp-client ];
+  home.packages = with pkgs; [ discord spotify kodi google-chrome sstp ];
   # teamspeak 
 }

@@ -22,10 +22,15 @@
     nodePackages.npm
     nodejs
     ripgrep
+    fd
     rnix-lsp
     sumneko-lua-language-server
     _1password
     _1password-gui
+    vault
+    pavucontrol
+    firefox
+    direnv
   ];
 
 }

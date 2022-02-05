@@ -34,6 +34,11 @@
     extraConfig = {
       core.editor = "vim";
       pull.rebase = true;
+      merge = {
+        tool = "vimdiff";
+        conflictstyle = "diff3";
+      };
+      mergetool.prompt = false;
     };
   };
 

@@ -10,7 +10,7 @@ in {
       config = {
         modifier = mod;
 
-        bars = [ ]; # use polybar instead
+        # bars = [ ]; # use polybar instead
 
         gaps = {
           inner = 12;

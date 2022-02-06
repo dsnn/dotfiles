@@ -33,7 +33,7 @@
     enable = true;
     port = 3389;
     openFirewall = true;
-    defaultWindowManager = "xterm";
+    defaultWindowManager = "${pkgs.i3-gaps}/bin/i3";
   };
 
   i18n.defaultLocale = "en_US.UTF-8";

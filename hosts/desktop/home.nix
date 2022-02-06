@@ -6,8 +6,8 @@
   imports = [
     ../shared-home.nix
     ../../modules/xdg.nix
-    ../../modules/awesome.nix
     ../../modules/rofi.nix
+    ../../modules/i3.nix
     ../../modules/packages.nix
     ../../modules/kitty.nix
     ../../modules/lazygit.nix
@@ -21,7 +21,6 @@
     google-chrome
     sstp
     teamspeak_client
-    eww
   ];
-  # teamspeak 
+  # eww
 }

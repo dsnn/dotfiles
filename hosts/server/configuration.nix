@@ -8,13 +8,6 @@
   networking.hostId = "8d549888";
   networking.hostName = "alpha";
 
-  services.xserver.displayManager.lightdm.enable = true;
-
-  services.xrdp.enable = true;
-  services.xrdp.port = 3389;
-  services.xrdp.openFirewall = true;
-  services.xrdp.defaultWindowManager = "${pkgs.awesome}/bin/awesome";
-
   users.users.dsn = {
     isNormalUser = true;
     shell = pkgs.zsh;

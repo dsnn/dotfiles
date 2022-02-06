@@ -1,18 +1,18 @@
 { config, pkgs, ... }: {
 
+  ## Something wrong w/ $DISPLAY (on qemu/xrdp?) ? 
+
   services.polybar = {
     enable = true;
-    package = pkgs.polybar.override {
-      i3GapsSupport = true;
-      alsaSupport = true;
-    };
+    package = pkgs.polybarFull;
     config = ./polybar-config;
     script = ''
-      sleep
-      for m in $(polybar --list-monitors | ${pkgs.coreutils}/bin/cut -d":" -f1); do
-        MONITOR=$m polybar nord &
-      done
-          '';
+      /run/current-system/sw/bin/sleep 1
+      polybar nord &
+      # for m in $(polybar --list-monitors | ${pkgs.coreutils}/bin/cut -d":" -f1); do
+      #   MONITOR=$m polybar nord &
+      # done
+    '';
   };
 
 }

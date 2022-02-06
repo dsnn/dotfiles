@@ -5,6 +5,7 @@
 
   imports = [
     ../shared-home.nix
+    ../../services/polybar.nix
     ../../modules/xdg.nix
     ../../modules/rofi.nix
     ../../modules/i3.nix

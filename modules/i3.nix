@@ -19,26 +19,32 @@ in {
           smartBorders = "off";
         };
 
-        startup = [{
-          command = "exec i3-msg workspace 1";
-          always = true;
-          notification = false;
-        }
-        # {
-        #   command = "systemctl --user restart polybar";
-        #   always = true;
-        #   notification = false;
-        # }
-        # { command = "exec firefox"; }
-        # { command = "exec steam"; }
-        # { command = "exec Discord"; }
-        # { command = "xrand --output HDMI-0 --right-of DP-4"; notification = false; }
-        # {
-        #   command = "${pkgs.feh}/bin/feh --bg-scale ~/background.jpg";
-        #   always = true;
-        #   notification = false;
-        # }
-          ];
+        startup = [
+          {
+            command = "exec i3-msg workspace 1";
+            always = true;
+            notification = false;
+          }
+          {
+            command = "systemctl --user restart polybar.service";
+            always = true;
+            notification = false;
+          }
+          # {
+          #   command = "systemctl --user restart polybar";
+          #   always = true;
+          #   notification = false;
+          # }
+          # { command = "exec firefox"; }
+          # { command = "exec steam"; }
+          # { command = "exec Discord"; }
+          # { command = "xrand --output HDMI-0 --right-of DP-4"; notification = false; }
+          # {
+          #   command = "${pkgs.feh}/bin/feh --bg-scale ~/background.jpg";
+          #   always = true;
+          #   notification = false;
+          # }
+        ];
 
         keybindings = {
           "${mod}+f" = "fullscreen toggle";

@@ -9,26 +9,35 @@ in {
     config = {
       modifier = mod;
 
-      bars = [ ]; # use polybar instead
+      # bars = [ ]; # use polybar instead
 
-      # gaps = {
-      #   inner = 12;
-      #   outer = 5;
-      #   smartGaps = true;
-      #   smartBorders = "off";
-      # };
+      gaps = {
+        inner = 12;
+        outer = 5;
+        smartGaps = true;
+        smartBorders = "off";
+      };
+
       startup = [
-        # { command = "exec firefox"; }
-        # { command = "exec steam"; }
-        # { command = "exec Discord"; }
-        # { command = "xrand --output HDMI-0 --right-of DP-4"; notification = false; }
-      ] ++ [
-        # allow polybar to resize itself
+        {
+          command = "exec i3-msg workspace 1";
+          always = true;
+          notification = false;
+        }
         {
           command = "systemctl --user restart polybar";
           always = true;
           notification = false;
         }
+        # { command = "exec firefox"; }
+        # { command = "exec steam"; }
+        # { command = "exec Discord"; }
+        # { command = "xrand --output HDMI-0 --right-of DP-4"; notification = false; }
+        # {
+        #   command = "${pkgs.feh}/bin/feh --bg-scale ~/background.jpg";
+        #   always = true;
+        #   notification = false;
+        # }
       ];
 
       keybindings = {
@@ -38,9 +47,9 @@ in {
 
         "${mod}+q" = "kill";
 
-        "${mod}+Shift+w" = "exec firefox";
-        "${mod}+Return" = "exec kitty";
-        "${mod}+d" = "exec rofi -show run";
+        "${mod}+Shift+w" = "exec ${pkgs.firefox}/bin/firefox";
+        "${mod}+Return" = "exec ${pkgs.kitty}/bin/kitty";
+        "${mod}+d" = "exec ${pkgs.rofi}/bin/rofi -show run";
 
         "${mod}+h" = "focus left";
         "${mod}+j" = "focus down";

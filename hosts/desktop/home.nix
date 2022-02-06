@@ -6,8 +6,7 @@
   imports = [
     ../shared-home.nix
     ../../modules/xdg.nix
-    ../../modules/i3.nix
-    ../../modules/polybar.nix
+    ../../modules/awesome.nix
     ../../modules/rofi.nix
     ../../modules/packages.nix
     ../../modules/kitty.nix
@@ -22,6 +21,7 @@
     google-chrome
     sstp
     teamspeak_client
+    eww
   ];
   # teamspeak 
 }

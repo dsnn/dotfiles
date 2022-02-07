@@ -4,6 +4,7 @@
 
 { config, pkgs, ... }: {
   imports = [ ./hardware-configuration.nix ../shared-configuration.nix ];
+
   networking.hostId = "8d549888";
   networking.hostName = "dsn";
 }

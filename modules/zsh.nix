@@ -24,8 +24,8 @@
       LESS = "-FRSXM";
       LESSCHARSET = "utf-8";
       PAGER = "less";
-      PROMPT = "%m %~ $ ";
-      PROMPT_DIRTRIM = "2";
+      # PROMPT = "%m %~ $ ";
+      # PROMPT_DIRTRIM = "2";
       RPROMPT = "";
       TERM = "xterm-256color";
       TINC_USE_NIX = "yes";
@@ -34,7 +34,7 @@
       VISUAL = "nvim";
       EDITOR = "nvim";
       MANWIDTH = 79;
-      LIBGL_ALWAYS_INDIRECT = 1;
+      # LIBGL_ALWAYS_INDIRECT = 1;
     };
 
     shellAliases = {

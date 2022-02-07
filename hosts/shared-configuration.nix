@@ -29,6 +29,7 @@
   programs.nm-applet.enable = true;
 
   services.samba = { enable = true; };
+
   services.xrdp = {
     enable = true;
     port = 3389;

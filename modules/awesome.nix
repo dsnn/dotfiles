@@ -1,12 +1,14 @@
 { pkgs, ... }: {
 
-  xsession.enable = true;
-  xsession.windowManager.awesome = {
+  xsession = {
     enable = true;
-    luaModules = with pkgs.luaPackages;
-      [
-        luarocks # is the package manager for Lua modules
+    windowManager.awesome = {
+      enable = true;
+      luaModules = with pkgs.luaPackages; [
+        luarocks # package manager for Lua modules
+        luadbi-mysql # database abstraction layer
       ];
+    };
   };
 
 }

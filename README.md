@@ -12,15 +12,15 @@
     rm -rf ~/.config/nixpkgs
     git clone https://github.com/dsnn/dotfiles.git
     ln -s ~/dotfiles ~/.config/nixpkgs
-    home-manager switch
+    home-manager switch --falke .#
     command -v zsh | sudo tee -a /etc/shells
     sudo chsh -s "$(command -v zsh)" "${USER}"
     ```
 
 ### nix
-- convert to flakes / imports 
-    - combine nvim and plugins?
-      w/ this everything gets updated to latest at the same time
+- combine nvim and plugins?
+  w/ this everything gets updated to latest at the same time
+- firefox nix module (w/ config of extensions)
 
 ### wsl 
 - xrdp (?)

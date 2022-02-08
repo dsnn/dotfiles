@@ -28,30 +28,35 @@
 
   programs.nm-applet.enable = true;
 
-  services.samba = { enable = true; };
-
-  services.xrdp = {
+  services.xserver.enable = true;
+  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.displayManager.defaultSession = "none+awesome";
+  services.xserver.windowManager.awesome = {
     enable = true;
-    port = 3389;
-    openFirewall = true;
-    defaultWindowManager = "${pkgs.i3-gaps}/bin/i3";
+    luaModules = with pkgs.luaPackages; [
+      luarocks # package manager for Lua modules
+      luadbi-mysql # database abstraction layer
+    ];
+  };
+
+  services = {
+    samba = { enable = true; };
+    xrdp = {
+      enable = true;
+      port = 3389;
+      openFirewall = true;
+      defaultWindowManager = "${pkgs.awesome}/bin/awesome";
+    };
+    zfs = {
+      autoSnapshot.enable = true;
+      autoScrub.enable = true;
+    };
   };
 
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     font = "Lat2-Terminus16";
     keyMap = "us";
-  };
-
-  services = {
-    xserver = {
-      enable = true;
-      layout = "us";
-    };
-    zfs = {
-      autoSnapshot.enable = true;
-      autoScrub.enable = true;
-    };
   };
 
   users.defaultUserShell = pkgs.zsh;

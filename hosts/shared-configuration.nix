@@ -28,25 +28,8 @@
 
   programs.nm-applet.enable = true;
 
-  services.xserver.enable = true;
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.displayManager.defaultSession = "none+awesome";
-  services.xserver.windowManager.awesome = {
-    enable = true;
-    luaModules = with pkgs.luaPackages; [
-      luarocks # package manager for Lua modules
-      luadbi-mysql # database abstraction layer
-    ];
-  };
-
   services = {
     samba = { enable = true; };
-    xrdp = {
-      enable = true;
-      port = 3389;
-      openFirewall = true;
-      defaultWindowManager = "${pkgs.awesome}/bin/awesome";
-    };
     zfs = {
       autoSnapshot.enable = true;
       autoScrub.enable = true;

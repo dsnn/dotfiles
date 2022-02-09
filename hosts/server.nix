@@ -3,7 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }: {
-  imports = [ ./hardware-configuration.nix ../shared-configuration.nix ];
+  imports = [ ./hardware-configuration.nix ./shared.nix ];
 
   networking.hostId = "8d549888";
   networking.hostName = "alpha";

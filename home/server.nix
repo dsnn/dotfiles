@@ -1,10 +1,10 @@
 { config, pkgs, lib, ... }: {
   imports = [
-    ../shared-home.nix
-    ../../modules/xdg.nix
-    ../../modules/awesome.nix
-    ../../modules/kitty.nix
-    ../../modules/lazygit.nix
+    ./shared.nix
+    ../modules/xdg.nix
+    ../modules/awesome.nix
+    ../modules/kitty.nix
+    ../modules/lazygit.nix
   ];
 
   home.packages = with pkgs; [

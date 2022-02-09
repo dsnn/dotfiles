@@ -34,16 +34,13 @@
     in {
 
       homeConfigurations = {
-        wsl = mkHomeConfiguration { modules = [ ./hosts/wsl/home.nix ]; };
-        desktop =
-          mkHomeConfiguration { modules = [ ./hosts/desktop/home.nix ]; };
+        wsl = mkHomeConfiguration { modules = [ ./home/wsl.nix ]; };
+        desktop = mkHomeConfiguration { modules = [ ./home/desktop.nix ]; };
       };
 
       nixosConfigurations = {
-        desktop =
-          mkConfiguration { modules = [ ./hosts/desktop/configuration.nix ]; };
-        server =
-          mkConfiguration { modules = [ ./hosts/server/configuration.nix ]; };
+        desktop = mkConfiguration { modules = [ ./hosts/desktop.nix ]; };
+        server = mkConfiguration { modules = [ ./hosts/server.nix ]; };
       };
     };
 }

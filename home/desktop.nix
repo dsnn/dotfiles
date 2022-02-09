@@ -4,13 +4,13 @@
   targets.genericLinux.enable = true;
 
   imports = [
-    ../shared-home.nix
+    ./shared.nix
     # ../../modules/awesome.nix
-    ../../modules/xdg.nix
-    ../../modules/rofi.nix
-    ../../modules/packages.nix
-    ../../modules/kitty.nix
-    ../../modules/lazygit.nix
+    ../modules/xdg.nix
+    ../modules/rofi.nix
+    ../modules/packages.nix
+    ../modules/kitty.nix
+    ../modules/lazygit.nix
   ];
 
   xsession.enable = true;

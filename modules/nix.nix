@@ -8,6 +8,6 @@
     '';
 
     # replace duplicates w/ hard links (and save space)
-    nix.autoOptimiseStore = true;
+    # settings.auto-optimise-store = true;
   };
 }

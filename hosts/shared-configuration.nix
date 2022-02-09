@@ -3,8 +3,11 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }: {
+
+  # same nix and ssh config for all hosts 
   imports = [ ../modules/nix.nix ../modules/ssh.nix ];
 
+  # allow proprietary packages
   nixpkgs.config.allowUnfree = true;
 
   boot = {
@@ -22,8 +25,8 @@
   # replicates the default behaviour.
   networking = {
     networkmanager.enable = true;
-    useDHCP = false;
     interfaces.ens18.useDHCP = true;
+    useDHCP = false;
   };
 
   programs.nm-applet.enable = true;

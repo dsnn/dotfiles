@@ -15,6 +15,9 @@
 
   xsession.enable = true;
   # programs.direnv.enable = true;
+
+  services.network-manager-applet = { enable = true; };
+
   home.packages = with pkgs; [
     discord
     spotify

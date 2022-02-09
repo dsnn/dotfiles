@@ -29,8 +29,6 @@
     useDHCP = false;
   };
 
-  programs.nm-applet.enable = true;
-
   services = {
     samba = { enable = true; };
     zfs = {

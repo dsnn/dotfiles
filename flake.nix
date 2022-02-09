@@ -8,10 +8,11 @@
       inputs.pkgs.follows = "pkgs";
     };
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+    deploy-rs.url = "github:serokell/deploy-rs";
     # nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = inputs@{ self, pkgs, home-manager, neovim-nightly }:
+  outputs = inputs@{ self, pkgs, home-manager, neovim-nightly, deploy-rs }:
     let
       overlays = [ neovim-nightly.overlay ];
       mkHomeConfiguration = args:
@@ -36,6 +37,7 @@
       homeConfigurations = {
         wsl = mkHomeConfiguration { modules = [ ./home/wsl.nix ]; };
         desktop = mkHomeConfiguration { modules = [ ./home/desktop.nix ]; };
+        server = mkHomeConfiguration { modules = [ ./home/server.nix ]; };
       };
 
       nixosConfigurations = {

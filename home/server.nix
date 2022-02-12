@@ -2,7 +2,6 @@
   imports = [
     ./shared.nix
     ../modules/xdg.nix
-    ../modules/awesome.nix
     ../modules/kitty.nix
     ../modules/lazygit.nix
   ];
@@ -22,6 +21,6 @@
     zsh
     jq
     neovim
-    _1password
+    _1password # cli
   ];
 }

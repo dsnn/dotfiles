@@ -4,10 +4,9 @@
   targets.genericLinux.enable = true;
 
   imports = [
-    ../shared-home.nix
-    ../../modules/xdg.nix
-    # ../../modules/neovim.nix
-    ../../modules/packages.nix
-    ../../modules/lazygit.nix
+    ./shared.nix
+    ../modules/xdg.nix
+    ../modules/packages.nix
+    ../modules/lazygit.nix
   ];
 }

@@ -13,7 +13,7 @@
     ../modules/lazygit.nix
   ];
 
-  xsession.enable = true;
+  # xsession.enable = true;
   # programs.direnv.enable = true;
 
   services.network-manager-applet = { enable = true; };

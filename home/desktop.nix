@@ -18,6 +18,12 @@
 
   services.network-manager-applet = { enable = true; };
 
+  # compositor for xorg
+  # services.picom.enable = true;
+  # services.picom.fade = true;
+  # services.picom.shadow = true;
+  # services.picom.shadowOpacity = "0.3";
+
   home.packages = with pkgs; [
     discord
     spotify

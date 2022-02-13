@@ -25,10 +25,10 @@
   boot.supportedFilesystems = [ "zfs" ];
 
   # Configure dual booting 
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
-  boot.loader.grub.device = "nodev";
-  boot.loader.grub.useOSProber = true;
+  # boot.loader.grub.enable = true;
+  # boot.loader.grub.version = 2;
+  # boot.loader.grub.device = "nodev";
+  # boot.loader.grub.useOSProber = true;
 
   time.timeZone = "Europe/Stockholm";
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
@@ -77,7 +77,10 @@
   services.xserver.videoDrivers = [ " nvidia " ];
 
   # compositor for xorg
-  services.picom.enable = true;
+  # services.picom.enable = true;
+  # services.picom.fade = true;
+  # services.picom.shadow = true;
+  # services.picom.shadowOpacity = 0.3;
 
   # services.xserver.displayManager.lightdm.enable = true;
   services.xserver.displayManager.defaultSession = "none+awesome";

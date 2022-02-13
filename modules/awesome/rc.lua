@@ -33,8 +33,8 @@ end
 local bindings = require('bindings')
 
 RC.layouts  = {
-    awful.layout.suit.tile,
-    awful.layout.suit.floating
+    awful.layout.suit.floating,
+    awful.layout.suit.tile
 }
 awful.layout.layouts = RC.layouts
 
@@ -67,6 +67,13 @@ awful.rules.rules = rules(
 )
 
 require("titlebar")
+
+-- rounded corners
+-- client.connect_signal("property::geometry", function (c)
+--   delayed_call(function()
+--     gears.surface.apply_shape_bounding(c, gears.shape.rounded_rect, 15)
+--   end)
+-- end)
 
 client.connect_signal("manage", function (c)
     if awesome.startup

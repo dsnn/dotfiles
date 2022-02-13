@@ -68,6 +68,7 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.layout = "se";
+  services.xserver.dpi = 120;
   services.xserver.xkbOptions = "eurosign:e";
 
   # Enable the GNOME Desktop Environment.

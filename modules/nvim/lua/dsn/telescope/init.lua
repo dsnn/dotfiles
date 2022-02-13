@@ -5,11 +5,22 @@ end
 local actions     = require('telescope.actions')
 local sorters     = require('telescope.sorters')
 local previewers  = require('telescope.previewers')
+-- local fb_actions  = require('telescope').extensions.file_browser.actions
+
 -- local utils       = require('telescope.actions.utils')
 
--- require('telescope').load_extension('cheat')
-require('telescope').load_extension('fzy_native')
+-- local fb_actions_nvim = function(prompt_bufnr )
+--   local action_state = require 'telescope.actions.state'
+--   local fb_utils = require 'telescope'.extensions.file_browser.utils
+--   local current_picker = action_state.get_current_picker(prompt_bufnr)
+--   local finder = current_picker.finder
+--   finder.path = vim.loop.os_homedir() + "/dotfiles/modules/nvim"
 
+--   fb_utils.redraw_border_title(current_picker)
+--   current_picker:refresh(finder, { reset_prompt = true, multi = current_picker._multi })
+-- end
+
+-- require('telescope').load_extension('cheat')
 require('telescope').setup {
     defaults = {
         -- border = {},
@@ -118,9 +129,25 @@ require('telescope').setup {
               -- jump to entry where hoop loop was started from
               reset_selection = true,
             },
+            file_browser = {
+              theme = "ivy",
+              -- sorting_strategy = "ascending",
+              -- prompt_position = "top",
+              hidden = true,
+              -- mappings = {
+              --   ["i"] = {
+              --     ["<C-h>"] = fb_actions.goto_home_dir,
+              --     ["<C-v>"] = fb_actions_nvim
+              --   },
+              -- }
+            }
         }
     }
 }
+
+-- load extensions
+require('telescope').load_extension('fzy_native')
+require("telescope").load_extension('file_browser')
 
 local center_list = require('telescope.themes').get_dropdown({
   borderchars = {
@@ -203,6 +230,10 @@ function M.quickfix()
   require('telescope.builtin').quickfix()
 end
 
+function M.file_browser()
+  require('telescope').extensions.file_browser.file_browser()
+end
+
 function M.git_status()
   local opts = require('telescope.themes').get_dropdown({
     winblend = 10,
@@ -221,15 +252,6 @@ function M.curbuf()
     shorten_path = false,
   })
   require("telescope.builtin").current_buffer_fuzzy_find(opts)
-end
-
--- Fix symbolic links: https://github.com/nvim-telescope/telescope.nvim/issues/693
-function M.file_browser()
-  require('telescope.builtin').file_browser {
-    sorting_strategy = "ascending",
-    -- prompt_position = "top",
-    hidden = true,
-  }
 end
 
 TelescopeMapArgs = TelescopeMapArgs or {}

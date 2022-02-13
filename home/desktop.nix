@@ -31,6 +31,7 @@
     google-chrome
     sstp
     teamspeak_client
+    remmina
   ];
   # eww
 }

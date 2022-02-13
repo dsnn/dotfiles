@@ -76,6 +76,9 @@
 
   services.xserver.videoDrivers = [ " nvidia " ];
 
+  # compositor for xorg
+  services.picom.enable = true;
+
   # services.xserver.displayManager.lightdm.enable = true;
   services.xserver.displayManager.defaultSession = "none+awesome";
   services.xserver.windowManager.awesome = {

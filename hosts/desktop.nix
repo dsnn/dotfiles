@@ -111,6 +111,7 @@
     wget
     zsh
     pciutils
+    pavucontrol
   ];
 
   users.mutableUsers = false;

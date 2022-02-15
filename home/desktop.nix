@@ -5,7 +5,6 @@
 
   imports = [
     ./shared.nix
-    # ../../modules/awesome.nix
     ../modules/xdg.nix
     ../modules/rofi.nix
     ../modules/packages.nix

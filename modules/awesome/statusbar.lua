@@ -44,9 +44,9 @@ local tasklist_buttons = gears.table.join(
 )
 
 -- mytextclock = wibox.widget.textclock('  %Y %B %d, %H:%M  ', 60)
-mytextclock = wibox.widget.textclock()
+local mytextclock = wibox.widget.textclock()
 
-function set_wallpaper(s)
+local function set_wallpaper(s)
   if beautiful.wallpaper then
     local wallpaper = beautiful.wallpaper
     if type(wallpaper) == "function" then

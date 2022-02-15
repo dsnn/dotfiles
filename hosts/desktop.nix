@@ -2,11 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+let overlays = import ../modules/overlays.nix;
+in {
   imports = [ ./desktop-hw.nix ];
 
-  # let myAwesome = import ../modules/overlays.nix;
-  # nixpkgs.overlays = [ myAwesome ];
+  nixpkgs.overlays = [ overlays ];
 
   # enable flakes
   nix = {
@@ -90,6 +91,7 @@
   services.xserver.displayManager.defaultSession = "none+awesome";
   services.xserver.windowManager.awesome = {
     enable = true;
+    package = pkgs.awesome-git;
     luaModules = with pkgs.luaPackages; [
       luarocks # package manager for Lua modules
       luadbi-mysql # database abstraction layer

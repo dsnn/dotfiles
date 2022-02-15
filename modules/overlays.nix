@@ -1,6 +1,6 @@
 self: super: {
-  myAwesome = super.awesome.overrideAttrs (old: {
-    pname = "myAwesome";
+  awesome-git = super.awesome.overrideAttrs (old: {
+    pname = "awesome-git";
     src = super.fetchFromGitHub {
       owner = "awesomeWM";
       repo = "awesome";

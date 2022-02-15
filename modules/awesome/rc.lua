@@ -39,7 +39,7 @@ RC.layouts  = {
 awful.layout.layouts = RC.layouts
 
 awful.screen.connect_for_each_screen(function(s)
-    awful.tag( { "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, RC.layouts[1])
+    awful.tag( { "1", "2", "3", "4", "5" }, s, RC.layouts[1])
 end)
 
 RC.mainmenu = require('menu')

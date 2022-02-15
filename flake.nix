@@ -13,8 +13,7 @@
 
   outputs = inputs@{ self, pkgs, home-manager, neovim-nightly }:
     let
-      myAwesome = import ./modules/overlays.nix;
-      overlays = [ neovim-nightly.overlay myAwesome ];
+      overlays = [ neovim-nightly.overlay ];
       mkHomeConfiguration = args:
         home-manager.lib.homeManagerConfiguration {
           system = "x86_64-linux";

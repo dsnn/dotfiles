@@ -5,6 +5,9 @@
 { config, pkgs, ... }: {
   imports = [ ./desktop-hw.nix ];
 
+  # let myAwesome = import ../modules/overlays.nix;
+  # nixpkgs.overlays = [ myAwesome ];
+
   # enable flakes
   nix = {
     package = pkgs.nixUnstable;

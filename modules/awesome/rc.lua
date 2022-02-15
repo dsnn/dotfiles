@@ -42,8 +42,8 @@ awful.screen.connect_for_each_screen(function(s)
     awful.tag( { "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, RC.layouts[1])
 end)
 
-local menu = require('menu')
-RC.mainmenu = awful.menu({ items = menu.items })
+RC.mainmenu = require('menu')
+-- RC.mainmenu = awful.menu({ items = menu.items })
 RC.launcher = awful.widget.launcher(
   { image = beautiful.awesome_icon, menu = RC.mainmenu }
 )

@@ -1,5 +1,7 @@
 local awful = require("awful")
 local hotkeys_popup = require("awful.hotkeys_popup")
+local freedesktop = require("freedesktop")
+local beautiful = require("beautiful")
 
 local terminal = RC.vars.terminal
 local editor = os.getenv("EDITOR") or "vim"
@@ -20,12 +22,24 @@ local power_menu = {
    { "reboot",   "shutdown -r 0" },
 }
 
-menu = {
-   items = {
-      { "power", power_menu },
-      { "awesome", awesome_menu },
-      { "terminal", terminal }
-   }
+menu = freedesktop.menu.build {
+    before = {
+        { "Power", power_menu },
+        { "Awesome", awesome_menu },
+        -- other triads can be put here
+    },
+    after = {
+        { "Open terminal", terminal },
+        -- other triads can be put here
+    }
 }
+
+-- menu = {
+--    items = {
+--       { "power", power_menu },
+--       { "awesome", awesome_menu },
+--       { "terminal", terminal }
+--    }
+-- }
 
 return menu

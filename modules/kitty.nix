@@ -9,8 +9,8 @@
     keybindings = {
       "ctrl+alt+n" = "new_tab";
       "ctrl+alt+q" = "close_tab";
-      "ctrl+alt+h" = "next_tab";
-      "ctrl+alt+l" = "previous_tab";
+      "ctrl+alt+l" = "next_tab";
+      "ctrl+alt+h" = "previous_tab";
     };
   };
 }

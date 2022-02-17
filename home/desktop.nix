@@ -32,6 +32,7 @@
     teamspeak_client
     remmina
     xfce.thunar
+    feh
   ];
   # eww
 }

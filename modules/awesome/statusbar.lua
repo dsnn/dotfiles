@@ -2,6 +2,7 @@ local beautiful = require("beautiful")
 local gears = require("gears")
 local awful = require("awful")
 local wibox = require("wibox")
+local lain  = require("lain")
 
 local taglist_buttons = gears.table.join(
     awful.button({ }, 1, function(t) t:view_only() end),

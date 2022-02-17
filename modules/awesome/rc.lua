@@ -1,24 +1,51 @@
 pcall(require, "luarocks.loader")
 
-local awful = require("awful")
+local awful     = require("awful")
 local beautiful = require("beautiful")
-local menubar = require("menubar")
-local gears = require("gears")
-local home = os.getenv("HOME")
-local gfs = require("gears.filesystem")
+local gears     = require("gears")
+local menubar   = require("menubar")
+
 
 require("awful.autofocus")
 require("awful.hotkeys_popup.keys")
 
-RC = {}
-RC.vars = require('variables')
-modkey = RC.vars.modkey
+-- global variables
+dpi = beautiful.xresources.apply_dpi
+user = {
+    terminal     = "kitty -1",
+    browser      = "firefox",
+    file_manager = "thunar",
+    editor       = "kitty -1 --class editor -e nvim",
+    email_client = "kitty -1 --class email -e neomutt",
 
+    web_search_cmd = "xdg-open https://google.com/?q=",
+
+    dirs = {
+        downloads = os.getenv("XDG_DOWNLOAD_DIR") or "~/Downloads",
+        documents = os.getenv("XDG_DOCUMENTS_DIR") or "~/Documents",
+        screenshots = os.getenv("XDG_SCREENSHOTS_DIR") or "~/Documents/Screenshots",
+    },
+
+    battery_threshold_low = 20,
+    battery_threshold_critical = 5,
+
+    openweathermap_key = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    openweathermap_city_id = "yyyyyy",
+    weather_units = "metric",
+}
+
+-- TODO: replace with global user obj
+RC      = {}
+RC.vars = require('variables')
+modkey  = RC.vars.modkey
+
+-- error handler
 require("error")
 
-beautiful.init(home .. "/.config/awesome/themes/dark/theme.lua")
--- beautiful.init(gfs.get_themes_dir() .. "default/theme.lua")
+-- theme
+beautiful.init(os.getenv("HOME").. "/.config/awesome/themes/dark/theme.lua")
 
+-- wallpaper
 if (RC.vars.wallpaper) then
     local wallpaper = RC.vars.wallpaper
     if awful.util.file_readable(wallpaper) then theme.wallpaper = wallpaper end
@@ -30,42 +57,31 @@ if beautiful.wallpaper then
     end
 end
 
-local bindings = require('bindings')
-
-RC.layouts  = {
-    awful.layout.suit.floating,
-    awful.layout.suit.tile
-}
+-- layouts
+RC.layouts = { awful.layout.suit.floating, awful.layout.suit.tile }
 awful.layout.layouts = RC.layouts
-
 awful.screen.connect_for_each_screen(function(s)
     awful.tag( { "1", "2", "3", "4", "5" }, s, RC.layouts[1])
 end)
 
 RC.mainmenu = require('menu')
--- RC.mainmenu = awful.menu({ items = menu.items })
 RC.launcher = awful.widget.launcher(
   { image = beautiful.awesome_icon, menu = RC.mainmenu }
 )
 
 menubar.utils.terminal = RC.vars.terminal
 
-RC.globalkeys = bindings.bindtotags(bindings.globalkeys)
-
-root.buttons(bindings.globalbuttons)
-root.keys(RC.globalkeys)
-
+-- key bindings
+local keys = require('keys')
 mykeyboardlayout = awful.widget.keyboardlayout()
 
+local rules = require('rules')
+awful.rules.rules = rules(keys.clientkeys, keys.clientbuttons)
+
+-- statusbar
 require("statusbar")
 
-local rules = require('rules')
-
-awful.rules.rules = rules(
-    bindings.clientkeys,
-    bindings.clientbuttons
-)
-
+-- titlebar
 require("titlebar")
 
 -- rounded corners
@@ -75,6 +91,7 @@ require("titlebar")
 --   end)
 -- end)
 
+-- no offscreen
 client.connect_signal("manage", function (c)
     if awesome.startup
       and not c.size_hints.user_position
@@ -83,5 +100,6 @@ client.connect_signal("manage", function (c)
     end
 end)
 
+-- border color on (un)focus
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)

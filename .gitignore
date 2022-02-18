@@ -3,3 +3,4 @@ tags
 .uuid
 node_modules/
 package-lock.json
+packer_compiled.lua

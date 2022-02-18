@@ -36,11 +36,13 @@
       homeConfigurations = {
         wsl = mkHomeConfiguration { modules = [ ./home/wsl.nix ]; };
         desktop = mkHomeConfiguration { modules = [ ./home/desktop.nix ]; };
+        laptop = mkHomeConfiguration { modules = [ ./home/laptop.nix ]; };
         server = mkHomeConfiguration { modules = [ ./home/server.nix ]; };
       };
 
       nixosConfigurations = {
         desktop = mkConfiguration { modules = [ ./hosts/desktop.nix ]; };
+        laptop = mkConfiguration { modules = [ ./hosts/laptop.nix ]; };
         server = mkConfiguration { modules = [ ./hosts/server.nix ]; };
       };
     };

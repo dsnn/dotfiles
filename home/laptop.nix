@@ -35,6 +35,11 @@
     feh
     xcape
     wireguard
+    # blueman
+    # imagemagick 
+    # redshift
+    # upower
+    # ffmpeg
   ];
 
   # services.gvfs.enable = true;

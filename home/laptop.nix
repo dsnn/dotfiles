@@ -33,6 +33,8 @@
     remmina
     xfce.thunar
     feh
+    xcape
+    wireguard
   ];
   # eww
 }

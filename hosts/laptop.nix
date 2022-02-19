@@ -28,6 +28,9 @@ in {
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "zfs" ];
 
+  # disable rpfilter for wireguard
+  networking.firewall.checkReversePath = false;
+
   # Configure dual booting 
   # boot.loader.grub.enable = true;
   # boot.loader.grub.version = 2;

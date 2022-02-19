@@ -75,9 +75,9 @@ in {
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.layout = "se";
+  services.xserver.layout = "se, us";
   services.xserver.dpi = 120;
-  services.xserver.xkbOptions = "eurosign:e";
+  services.xserver.xkbOptions = "grp:alt_space_toggle";
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
@@ -114,6 +114,10 @@ in {
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
+  services.xserver.libinput.touchpad.accelSpeed = "0.6";
+  services.xserver.libinput.touchpad.additionalOptions = ''
+    Option "TappingDrag" "0"
+  '';
 
   environment.systemPackages = with pkgs; [
     cifs-utils

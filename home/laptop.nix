@@ -36,5 +36,9 @@
     xcape
     wireguard
   ];
+
+  # services.gvfs.enable = true;
+  # services.tumbler.enable = true;
+
   # eww
 }

@@ -1,6 +1,6 @@
 # dotfiles
 
-- some nix, gymnastics and dotfiles installation
+- random commands for (nix) dotfiles 
     ```
     sudo install -d -m755 -o $(id -u) -g $(id -g) /nix
     curl -L https://nixos.org/nix/install | sh
@@ -17,24 +17,61 @@
     sudo chsh -s "$(command -v zsh)" "${USER}"
     ```
 
-### nix
-- combine nvim and plugins?
-  w/ this everything gets updated to latest at the same time
-- firefox nix module (w/ config of extensions)
+### infra
+- nix docker host 
+- nix k3s
 
-### wsl 
-- xrdp (?)
+### nix
+- nix nvim plugins (pin version?) 
+- firefox extensions
+- wsl xrdp (?)
+
+### awesomewm
+- top & bottom bar (?)
+- side menu
+- statusbar 
+  - web
+  - dev
+  - im
+  - icons
+    - memory
+    - current ip
+    - volume
+    - calendar 
+    - clock
+    - battery
+    - filesystem (free/total hdd)
+    - power
+    - cpu/load
+    - wifi 
+    - vpn
+    - current ping/speed to internet (speedtest)
+    - temp
+    - weather
+  - apps
+    - firefox
+    - vpn (work/home)
+      - wireguard
+      - openvpn
+      - sstp
+    - discord
+    - teamspeak
+    - vs(code)
+    - terminal
+    - screenshot
+    - spotify
+    - notion
+    - todoist
 
 ### nvim
 
 - review completion, snippets & tabnine
-- review telescope: lsp, cheat & git actions 
-- fix lua: snippets (L3MON4D3/LuaSnip), formatting (use https://github.com/JohnnyMorganz/StyLua & create augroup/autocmd bufprewrite .lua)
-- fix automically remove trailing spaces (create augroup/autocmd bufprewrite any file)
+- review telescope: lsp, cheat, browser & git actions 
+- fix lua: snippets, formatting (stylua/sumneko?) 
+- fix automically remove trailing spaces (bufprewrite)
 - fix lsp quickfix d.ts
-- fix console.log command (log cword)
-- fix nvim-cmp vsts integration 
-- fix prettier format scroll to bottom: https://github.com/prettier/vim-prettier/issues/248
+- fix console.log (cword)
+- fix prettier (https://github.com/prettier/vim-prettier/issues/248)
 
 ### plugins
 

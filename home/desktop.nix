@@ -33,6 +33,9 @@
     remmina
     xfce.thunar
     feh
+    wireguard
+    freerdp
+    slack
   ];
   # eww
 }

@@ -102,6 +102,9 @@ in {
   console.font = "Lat2-Terminus16";
   console.keyMap = "sv-latin1";
 
+  # Enable flash support for ergodox ez 
+  hardware.keyboard.zsa.enable = true;
+
   # Enable sound.
   # sound.enable = true;
   hardware.pulseaudio.enable = true;
@@ -121,6 +124,7 @@ in {
     zsh
     pciutils
     pavucontrol
+    wally-cli
   ];
 
   users.mutableUsers = false;
@@ -128,7 +132,8 @@ in {
   users.users.dsn = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" ];
+    # plugdev is required for ergodox ez 
+    extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" "plugdev" ];
     hashedPassword =
       "$6$n0/53jiplgIPWu8s$m4xx3iAHaYbQBxDtxLWFB0tnO0NpHl761ZgD3piAZkhQyMXRwcGGApDUKTF841PneckL9MgljztMRlx5MNyF70";
     openssh.authorizedKeys.keys = [

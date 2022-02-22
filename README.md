@@ -63,6 +63,9 @@
     - notion
     - todoist
 
+### zsh
+- review [zsh-vi-mode](https://github.com/jeffreytse/zsh-vi-mode)
+
 ### nvim
 
 - review completion, snippets & tabnine
@@ -71,7 +74,7 @@
 - fix automically remove trailing spaces (bufprewrite)
 - fix lsp quickfix d.ts
 - fix console.log (cword)
-- fix prettier (https://github.com/prettier/vim-prettier/issues/248)
+- [fix prettier](https://github.com/prettier/vim-prettier/issues/248)
 
 ### plugins
 
@@ -90,27 +93,27 @@
 - tjdevries/astronauta.nvim
 - phaazon/hop.nvim vs unblevable/quick-scope ?
 - TimUntersberger/neogit
-- https://github.com/tamago324/lir.nvim
-- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
-- https://github.com/nvim-treesitter/nvim-treesitter-refactor
+- [lir.nvim](https://github.com/tamago324/lir.nvim)
+- [treesitter textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
+- [treesitter refactor](https://github.com/nvim-treesitter/nvim-treesitter-refactor)
 
 ### links
 
-- https://github.com/nvim-telescope/telescope.nvim/wiki
-- https://github.com/dandavison/delta
-- https://github.com/awesomeWM/awesome/issues/1395
-- https://github.com/jesseduffield/lazygit
-- https://github.com/jesseduffield/lazydocker
-- https://github.com/jesseduffield/lazynpm
-- https://github.com/spaceship-prompt/spaceship-prompt
-- https://github.com/neovim/nvim-lspconfig
-- https://microsoft.github.io/language-server-protocol/implementors/servers/
+- [telescope](https://github.com/nvim-telescope/telescope.nvim/wiki)
+- [delta](https://github.com/dandavison/delta)
+- [awesomewm](https://github.com/awesomeWM/awesome/issues/1395)
+- [lazygit](https://github.com/jesseduffield/lazygit)
+- [lazydocker](https://github.com/jesseduffield/lazydocker)
+- [lazynpm](https://github.com/jesseduffield/lazynpm)
+- [spaceship-prompt](https://github.com/spaceship-prompt/spaceship-prompt)
+- [lspconfig](https://github.com/neovim/nvim-lspconfig)
+- [lsp servers](https://microsoft.github.io/language-server-protocol/implementors/servers/)
 
 ### dotfiles
 
-- https://github.com/glepnir/nvim
-- https://github.com/elianiva/dotfiles
-- https://github.com/ahmedelgabri/dotfiles
-- https://github.com/tjdevries/config_manager
-- https://github.com/ngscheurich/dotfiles
-- https://github.com/jesseleite/dotfiles
+- [gelpnir](https://github.com/glepnir/nvim)
+- [elianiva](https://github.com/elianiva/dotfiles)
+- [ahmedelgabri](https://github.com/ahmedelgabri/dotfiles)
+- [tjdevries](https://github.com/tjdevries/config_manager)
+- [ngscheurich](https://github.com/ngscheurich/dotfiles)
+- [jesseleite](https://github.com/jesseleite/dotfiles)

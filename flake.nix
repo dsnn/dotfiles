@@ -7,13 +7,14 @@
       url = "github:nix-community/home-manager";
       inputs.pkgs.follows = "pkgs";
     };
+    sops-nix.url = "github:Mic92/sops-nix";
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
     # nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = inputs@{ self, pkgs, home-manager, neovim-nightly }:
+  outputs = inputs@{ self, pkgs, home-manager, sops-nix, neovim-nightly }:
     let
-      overlays = [ neovim-nightly.overlay ];
+      overlays = [ neovim-nightly.overlay sops-nix ];
       mkHomeConfiguration = args:
         home-manager.lib.homeManagerConfiguration {
           system = "x86_64-linux";
@@ -29,7 +30,7 @@
         pkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
-          modules = args.modules;
+          modules = args.modules ++ [ sops-nix.nixosModules.sops ];
         };
     in {
 

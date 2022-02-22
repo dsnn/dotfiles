@@ -125,6 +125,8 @@ in {
     pciutils
     pavucontrol
     wally-cli
+    age
+    sops
   ];
 
   users.mutableUsers = false;

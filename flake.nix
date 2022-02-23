@@ -14,7 +14,7 @@
 
   outputs = inputs@{ self, pkgs, home-manager, sops-nix, neovim-nightly }:
     let
-      overlays = [ neovim-nightly.overlay sops-nix ];
+      overlays = [ neovim-nightly.overlay ];
       mkHomeConfiguration = args:
         home-manager.lib.homeManagerConfiguration {
           system = "x86_64-linux";

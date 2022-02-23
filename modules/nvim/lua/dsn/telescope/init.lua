@@ -1,30 +1,17 @@
-if not pcall(require, 'telescope') then
-  return
+local reloader = function()
+  R "plenary"
+  R "telescope"
+  R "dsn.telescope"
 end
 
 local actions     = require('telescope.actions')
 local sorters     = require('telescope.sorters')
 local previewers  = require('telescope.previewers')
--- local fb_actions  = require('telescope').extensions.file_browser.actions
+local themes      = require('telescope.themes')
 
--- local utils       = require('telescope.actions.utils')
-
--- local fb_actions_nvim = function(prompt_bufnr )
---   local action_state = require 'telescope.actions.state'
---   local fb_utils = require 'telescope'.extensions.file_browser.utils
---   local current_picker = action_state.get_current_picker(prompt_bufnr)
---   local finder = current_picker.finder
---   finder.path = vim.loop.os_homedir() + "/dotfiles/modules/nvim"
-
---   fb_utils.redraw_border_title(current_picker)
---   current_picker:refresh(finder, { reset_prompt = true, multi = current_picker._multi })
--- end
-
--- require('telescope').load_extension('cheat')
 require('telescope').setup {
     defaults = {
         -- border = {},
-        -- borderchars = {'─', '│', '─', '│', '╭', '╮', '╯', '╰'},
         color_devicons = true,
         prompt_prefix = " ",
         -- entry_prefix = "  ",
@@ -78,9 +65,9 @@ require('telescope').setup {
         --
         scroll_strategy = "cycle",
         winblend = 0,
+        file_previewer = previewers.vim_buffer_cat.new,
         file_sorter = sorters.get_fzy_sorter,
         generic_sorter = sorters.get_generic_fuzzy_sorter,
-        file_previewer = previewers.vim_buffer_cat.new,
         grep_previewer = previewers.vim_buffer_vimgrep.new,
         qflist_previewer = previewers.vim_buffer_qflist.new,
         buffer_previewer_maker = previewers.buffer_previewer_maker,
@@ -149,30 +136,17 @@ require('telescope').setup {
 require('telescope').load_extension('fzy_native')
 require("telescope").load_extension('file_browser')
 
-local center_list = require('telescope.themes').get_dropdown({
-  borderchars = {
-    { '─', '│', '─', '│', '┌', '┐', '┘', '└'},
-    prompt = {"─", "│", " ", "│", '┌', '┐', "│", "│"},
-    results = {"─", "│", "─", "│", "├", "┤", "┘", "└"},
-    preview = { '─', '│', '─', '│', '┌', '┐', '┘', '└'},
-  },
-  previewer = false,
-  prompt_title = false,
-})
-
 local M = {}
 
 function M.dotfiles()
-  local opts = vim.deepcopy(center_list)
-  opts.layout_config = {
-    width = 0.4,
-    height = 0.4
-  }
-  opts.hidden = true
-  opts.prompt_title = "~ dotfiles ~"
-  opts.path_display = { "absolute" }
-  opts.cwd = "~/dotfiles"
-
+  local opts = themes.get_dropdown({
+    prompt_title = "~ dotfiles ~",
+    short_path = false,
+    cwd = "~/dotfiles",
+    hidden = true,
+    layout_config = { width = 0.6, height = 0.5, preview_width = 0.5 },
+    layout_strategy = 'horizontal',
+  })
   require('telescope.builtin').find_files(opts)
 end
 
@@ -195,7 +169,7 @@ end
 
 function M.grep_word()
   require('telescope.builtin').grep_string {
-    short_path = true,
+    short_path = false,
     word_match = '-w',
     -- only_sort_text = true,
     -- layout_strategy = 'vertical',
@@ -204,17 +178,23 @@ function M.grep_word()
 end
 
 function M.git_branches()
-  local opts = vim.deepcopy(center_list)
+  local opts = themes.get_dropdown({
+    previewer = false,
+    prompt_title = false,
+  })
   require('telescope.builtin').git_branches(opts)
 end
 
 function M.buffers()
-  local opts = vim.deepcopy(center_list)
-  opts.layout_config = {
-    width = 0.4,
-    height = 0.4
-  }
-  opts.hidden = true
+  local opts = themes.get_dropdown({
+    previewer = false,
+    prompt_title = "Buffers",
+    layout_config = {
+      width = 0.4,
+      height = 0.4
+    },
+    hidden = true
+  })
   require('telescope.builtin').buffers(opts)
 end
 
@@ -235,7 +215,7 @@ function M.file_browser()
 end
 
 function M.git_status()
-  local opts = require('telescope.themes').get_dropdown({
+  local opts = themes.get_dropdown({
     winblend = 10,
     border = true,
     previewer = false,
@@ -245,7 +225,7 @@ function M.git_status()
 end
 
 function M.curbuf()
-  local opts = require('telescope.themes').get_dropdown({
+  local opts = themes.get_dropdown({
     winblend = 10,
     border = true,
     previewer = false,
@@ -277,4 +257,15 @@ function M.map(key, f, options, buffer)
   end
 end
 
-return M
+return setmetatable({}, {
+  __index = function(_, k)
+    reloader()
+
+    if M[k] then
+      return M[k]
+    else
+      return require('telescope.builtin')[k]
+    end
+
+  end
+})

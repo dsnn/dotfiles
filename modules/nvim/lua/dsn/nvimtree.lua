@@ -53,10 +53,26 @@ require('nvim-tree').setup {
     dotfiles = false,
     custom = { '.git', 'node_modules', '.cache', 'obj' }
   },
+  diagnostics = {
+    enable = true,
+    icons = {
+      hint = "",
+      info = "",
+      warning = "",
+      error = "",
+    }
+  },
+  git = {
+    enable = true,
+    ignore = true,
+    timeout = 500,
+  },
   view = {
     width = 60,
+    number = true,
+    relativenumber = true,
     mappings = {
-      list = key_mappings_list 
+      list = key_mappings_list
     }
   },
   nvim_tree_icons = {

@@ -175,7 +175,9 @@
       # starship  prompt
       eval "$(starship init zsh)"
 
-      setxkbmap -option 'caps:ctrl_modifier' && xcape -e 'Caps_Lock=Escape' &
+      if command -v setxkbmap > /dev/null && command -v xcape /dev/null; then
+        setxkbmap -option 'caps:ctrl_modifier' && xcape -e 'Caps_Lock=Escape' &
+      fi 
     '';
   };
 

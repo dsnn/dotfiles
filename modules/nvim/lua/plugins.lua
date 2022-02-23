@@ -107,4 +107,5 @@ return require('packer').startup(function(use)
     use 'arcticicestudio/nord-vim'
     use "projekt0n/github-nvim-theme"
     use "onsails/lspkind-nvim"
+    use "rcarriga/nvim-notify"
 end)

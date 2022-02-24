@@ -49,7 +49,6 @@ return require('packer').startup(function(use)
     -- use { 'numToStr/Comment.nvim'}
     use 'tpope/vim-commentary'
     use 'JoosepAlviste/nvim-ts-context-commentstring'       -- handle multiple comment-styles in one file
-    use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
     use {
       'David-Kunz/cmp-npm',
       requires = {

@@ -18,6 +18,9 @@ map('x', 'p', 'pgvy', silent_no)
 map('n', '<C-n>', ':NvimTreeToggle<CR>', silent_no)
 map('n', '<Leader>k', ':NvimTreeFindFile<CR>', silent_no)
 
+-- snippets
+map('n', '<Leader>s', ':VsnipOpen<CR>', silent_no)
+
 -- line indentation
 map('v', '<', '<gv', silent_no)
 map('v', '>', '>gv', silent_no)

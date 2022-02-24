@@ -1,0 +1,10 @@
+{
+    "export const": {
+        "prefix": "exportc",
+        "body": "export const $1 = ($2) => {$3};"
+    },
+    "export type": {
+        "prefix": "exportt",
+        "body": ["export type ${1:TypeName} =", "{", "$2", "};"]
+    }
+}

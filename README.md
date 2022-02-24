@@ -68,6 +68,7 @@
 
 ### nvim
 
+- treesitter refactor, textobjects etc.
 - review completion, snippets & tabnine
 - review telescope: lsp, cheat, browser & git actions 
 - fix lua: snippets, formatting (stylua/sumneko?) 

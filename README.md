@@ -72,7 +72,6 @@
 - review telescope: lsp, cheat, browser & git actions 
 - fix lua: snippets, formatting (stylua/sumneko?) 
 - fix automically remove trailing spaces (bufprewrite)
-- fix console.log (cword)
 - [fix prettier](https://github.com/prettier/vim-prettier/issues/248)
 
 ### plugins

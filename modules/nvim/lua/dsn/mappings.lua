@@ -73,6 +73,9 @@ map('n', '<leader>uc', "<cmd>:lua require('ts_context_commentstring.internal').u
 -- :CloseTagToggleBuffer in case of annoyance
 vim.cmd("let g:closetag_filenames = '*.html,*.tsx'")
 
+-- console.log
+map('n', '<space>l', "<cmd> :put! =printf('console.log(''%s:'',  %s);', expand('<cword>'), expand('<cword>'))<CR>-2==+", silent_no)
+
 -- remove whitespace manually
 vim.cmd([[ nnoremap <leader>c :%s/\s\+$//<CR> ]])
 

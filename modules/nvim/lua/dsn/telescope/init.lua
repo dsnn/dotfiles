@@ -50,6 +50,7 @@ require('telescope').setup {
             },
           },
         },
+        set_env = { ["COLORTERM"] = "truecolor" },
         -- preview_cutoff = 120,
         -- prompt_position = "top",
         -- results_height = 1,

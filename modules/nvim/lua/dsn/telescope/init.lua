@@ -11,7 +11,6 @@ local themes      = require('telescope.themes')
 
 require('telescope').setup {
     defaults = {
-        -- border = {},
         color_devicons = true,
         prompt_prefix = " ",
         -- entry_prefix = "  ",
@@ -136,6 +135,8 @@ require('telescope').setup {
 require('telescope').load_extension('fzy_native')
 require("telescope").load_extension('file_browser')
 
+local borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+
 local M = {}
 
 function M.dotfiles()
@@ -146,6 +147,7 @@ function M.dotfiles()
     hidden = true,
     layout_config = { width = 0.6, height = 0.5, preview_width = 0.5 },
     layout_strategy = 'horizontal',
+    borderchars = borderchars
   })
   require('telescope.builtin').find_files(opts)
 end
@@ -181,6 +183,7 @@ function M.git_branches()
   local opts = themes.get_dropdown({
     previewer = false,
     prompt_title = false,
+    borderchars = borderchars
   })
   require('telescope.builtin').git_branches(opts)
 end
@@ -193,7 +196,8 @@ function M.buffers()
       width = 0.4,
       height = 0.4
     },
-    hidden = true
+    hidden = true,
+    borderchars = borderchars
   })
   require('telescope.builtin').buffers(opts)
 end
@@ -220,6 +224,7 @@ function M.git_status()
     border = true,
     previewer = false,
     shorten_path = false,
+    borderchars = borderchars
   })
   require('telescope.builtin').git_status(opts)
 end
@@ -230,6 +235,7 @@ function M.curbuf()
     border = true,
     previewer = false,
     shorten_path = false,
+    borderchars = borderchars
   })
   require("telescope.builtin").current_buffer_fuzzy_find(opts)
 end

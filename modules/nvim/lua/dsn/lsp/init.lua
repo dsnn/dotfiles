@@ -16,6 +16,62 @@ vim.api.nvim_set_keymap('n', '<space>p', "<cmd>lua vim.lsp.buf.formatting()<CR>"
 vim.api.nvim_set_keymap('n', '<space>ds', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
 -- telescope.map("<space>ca", "lsp_code_actions", nil, true)
 
+-- local border = {
+--   { "┏", "FloatBorder" },
+--   { "━", "FloatBorder" },
+--   { "┓", "FloatBorder" },
+--   { "┃", "FloatBorder" },
+--   { "┛", "FloatBorder" },
+--   { "━", "FloatBorder" },
+--   { "┗", "FloatBorder" },
+--   { "┃", "FloatBorder" },
+-- }
+
+-- local border = {
+--   { "╔", "FloatBorder" },
+--   { "═", "FloatBorder" },
+--   { "╗", "FloatBorder" },
+--   { "║", "FloatBorder" },
+--   { "╝", "FloatBorder" },
+--   { "═", "FloatBorder" },
+--   { "╚", "FloatBorder" },
+--   { "║", "FloatBorder" },
+-- }
+
+-- local border = {
+--   { "🭽","FloatBorder"},
+--   { "▔","FloatBorder"},
+--   { "🭾","FloatBorder"},
+--   { "▕","FloatBorder"},
+--   { "🭿","FloatBorder"},
+--   { "▁","FloatBorder"},
+--   { "🭼","FloatBorder"},
+--   { "▏","FloatBorder"},
+-- }
+
+-- local border = {
+--   {  "▛","FloatBorder"},
+--   {  "▀","FloatBorder"},
+--   {  "▜","FloatBorder"},
+--   {  "▐","FloatBorder"},
+--   {  "▟","FloatBorder"},
+--   {  "▄","FloatBorder"},
+--   {  "▙","FloatBorder"},
+--   {  "▌","FloatBorder"},
+-- }
+
+local border = {
+  { "╭", "FloatBorder" },
+  { "─", "FloatBorder" },
+  { "╮", "FloatBorder" },
+  { "│", "FloatBorder" },
+  { "╯", "FloatBorder" },
+  { "─", "FloatBorder" },
+  { "╰", "FloatBorder" },
+  { "│", "FloatBorder" },
+}
+--
+
 local function common_on_attach(client)
   -- Set autocommands conditional on server_capabilities
   if client.resolved_capabilities.document_highlight then
@@ -31,6 +87,35 @@ local function common_on_attach(client)
     ]], false)
   end
 end
+
+vim.diagnostic.config({
+  float = {
+    focusable = false,
+    border = border,
+    scope = "cursor",
+    prefix = function(diagnostic, i, total)
+      local icon, highlight
+      if diagnostic.severity == 1 then
+        icon = ""
+        highlight = "DiagnosticError"
+      elseif diagnostic.severity == 2 then
+        icon = ""
+        highlight = "DiagnosticWarn"
+      elseif diagnostic.severity == 3 then
+        icon = ""
+        highlight = "DiagnosticInfo"
+      elseif diagnostic.severity == 4 then
+        icon = ""
+        highlight = "DiagnosticHint"
+      end
+      return i .. "/" .. total .. " " .. icon .. "  ", highlight
+    end,
+  },
+  virtual_text = false,
+  signs = true,
+  underline = true,
+  update_in_insert = true,
+})
 
 local function filter(arr, fn)
   if type(arr) ~= "table" then
@@ -76,14 +161,7 @@ require'lspconfig'.tsserver.setup{
       end
 
       vim.lsp.handlers['textDocument/definition'](err, result, method, ...)
-    end,
-    ["textDocument/publishDiagnostics"] = vim.lsp.with(
-      vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = false,
-        signs = true,
-        underline = true,
-        update_in_insert = true
-      })
+    end
   }
 }
 
@@ -242,11 +320,11 @@ lspDiagnosticSymbol("Information", "")
 lspDiagnosticSymbol("Info", "")
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = "none"
+  border = border
 })
 
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  border = "none"
+  border = border
 })
 
 -- symbols for autocomplete

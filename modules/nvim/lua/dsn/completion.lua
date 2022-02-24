@@ -12,6 +12,9 @@ else
   lspkind.init()
 end
 
+local function replace_keys(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
 
 cmp.setup {
   snippet = {
@@ -25,8 +28,26 @@ cmp.setup {
       ["<C-n>"] = cmp.mapping.select_next_item(),
       ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
       ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-Space>'] = cmp.mapping.confirm({ select = true }),
       ['<C-e>'] = cmp.mapping.close(),
+      ['<Tab>'] = cmp.mapping(function(fallback)
+        if vim.call('vsnip#available', 1) ~= 0 then
+          vim.fn.feedkeys(replace_keys('<Plug>(vsnip-jump-next)'), '')
+        elseif cmp.visible() then
+          cmp.select_next_item()
+        else
+          fallback()
+        end
+      end, { 'i', 's' }),
+      ['<S-Tab>'] = cmp.mapping(function(fallback)
+        if vim.call('vsnip#available', -1) ~= 0 then
+          vim.fn.feedkeys(replace_keys('<Plug>(vsnip-jump-prev)'), '')
+        elseif cmp.visible() then
+          cmp.select_prev_item()
+        else
+          fallback()
+        end
+      end, { 'i', 's' }),
   },
 
   sources = {

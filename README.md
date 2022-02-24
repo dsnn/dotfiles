@@ -69,9 +69,7 @@
 ### nvim
 
 - treesitter refactor, textobjects etc.
-- review completion, snippets & tabnine
 - review telescope: lsp, cheat, browser & git actions 
-- fix lua: snippets, formatting (stylua/sumneko?) 
 - [fix prettier](https://github.com/prettier/vim-prettier/issues/248)
 
 ### plugins

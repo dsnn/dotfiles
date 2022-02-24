@@ -5,6 +5,22 @@
     },
     "export type": {
         "prefix": "exportt",
-        "body": ["export type ${1:TypeName} =", "{", "$2", "};"]
+        "body": ["export type ${1:TypeName} =", "{", "\t$2", "};"]
+    },
+    "import": {
+        "prefix": "import",
+        "body": ["import { $1 } from '$2'; "]
+    },
+    "import default": {
+        "prefix": "importd",
+        "body": ["import $1 from '$2'; "]
+    },
+    "useEffect": {
+        "prefix": "useEffect",
+        "body": ["useEffect(() => {", "$1", "}, [])"]
+    },
+    "if": {
+        "prefix": "if",
+        "body": ["if ($1) {", "$2", "}"]
     }
 }

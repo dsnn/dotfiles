@@ -27,6 +27,22 @@ require'nvim-treesitter.configs'.setup {
   context_commentstring = {
     enable = true,
   },
+  refactor = {
+    highlight_definitions = {
+      enable = true,
+      clear_on_cursor_move = true,
+    },
+    highlight_current_scope = { enable = true },
+  },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "<CR>",
+      node_incremental = "<CR>",
+      scope_incremental = "<TAB>",
+      node_decremental = "<S-TAB>",
+    },
+  },
   playground = {
     enable = true,
     disable = {},

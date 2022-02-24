@@ -74,10 +74,13 @@ return require('packer').startup(function(use)
     use 'nvim-telescope/telescope.nvim'
     use 'nvim-telescope/telescope-fzy-native.nvim'
     use 'nvim-telescope/telescope-file-browser.nvim'
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-    use 'nvim-treesitter/playground'
     use { 'nvim-telescope/telescope-hop.nvim' }             -- easier telescope result navigation
     use "nvim-telescope/telescope-cheat.nvim"
+
+    -- treesitter
+    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use 'nvim-treesitter/playground'
+    use 'nvim-treesitter/nvim-treesitter-refactor'
 
     -- autocomplete
     use 'hrsh7th/cmp-nvim-lsp'

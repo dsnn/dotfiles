@@ -68,7 +68,7 @@
 
 ### nvim
 
-- treesitter refactor, textobjects etc.
+- treesitter textobjects (select, swap).
 - review telescope: lsp, cheat, browser & git actions 
 - [fix prettier](https://github.com/prettier/vim-prettier/issues/248)
 

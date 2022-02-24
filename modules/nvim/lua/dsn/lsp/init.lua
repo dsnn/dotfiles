@@ -146,6 +146,9 @@ require'lspconfig'.sumneko_lua.setup {
     cmd = { vim.fn.getenv 'HOME' ..  "/.nix-profile/bin/lua-language-server", "--stdio" },
     settings = {
         Lua = {
+            telemetry = {
+              enable = false
+            },
             runtime = {
                 version = 'LuaJIT',
                 path = runtime_path

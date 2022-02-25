@@ -66,11 +66,20 @@
 ### zsh
 - review [zsh-vi-mode](https://github.com/jeffreytse/zsh-vi-mode)
 
+### tmux
+- review tmux (replace win terminal and kitty)
+- review tmux resurrect
+- review navigation bindings (w/o prefix)
+- review telescope tmux integration
+- review keybindings for navigation between windows, panes and nvim splits
+
 ### nvim
 
 - treesitter textobjects (select, swap).
 - review telescope: lsp, cheat, browser & git actions 
 - [fix prettier](https://github.com/prettier/vim-prettier/issues/248)
+- fix ugly borders in windows terminal (due to font/Roboto NF)
+- review local work config (runtimepath)
 
 ### plugins
 

@@ -53,14 +53,20 @@ map('n', '<space>fh', "<cmd>:lua require('dsn.telescope').help_tags()<CR>", sile
 map('n', '<space>fd', "<cmd>:lua require('dsn.telescope').dotfiles()<CR>", silent_no)
 map('n', '<space>fe', "<cmd>:lua require('dsn.telescope').file_browser()<CR>", silent_no)
 map('n', '<space>gb', "<cmd>:lua require('dsn.telescope').git_branches()<CR>", silent_no)
-map('n', '<space>b', "<cmd>:lua require('dsn.telescope').buffers()<CR>", silent_no)
+map('n', '<space>b',  "<cmd>:lua require('dsn.telescope').buffers()<CR>", silent_no)
 map('n', '<space>fa', "<cmd>:lua require('dsn.telescope').find_files()<CR>", silent_no)
 map('n', '<space>fc', "<cmd>:lua require('dsn.telescope').colorscheme()<CR>", silent_no)
 map('n', '<space>fr', "<cmd>:lua require('dsn.telescope').registers()<CR>", silent_no)
 map('n', '<space>fq', "<cmd>:lua require('dsn.telescope').quickfix()<CR>", silent_no)
 map('n', '<space>ff', "<cmd>:lua require('dsn.telescope').curbuf()<CR>", silent_no)
 
--- limelight
+-- harpoon
+map('n', '<space>a', "<cmd>:lua require('harpoon.mark').add_file()<CR>", silent_no)
+map('n', '<space>h', "<cmd>:lua require('harpoon.ui').toggle_quick_menu()<CR>", silent_no)
+map('n', '<space>1', "<cmd>:lua require('harpoon.ui').nav_file(1)<CR>", silent_no)
+map('n', '<space>2', "<cmd>:lua require('harpoon.ui').nav_file(2)<CR>", silent_no)
+map('n', '<space>3', "<cmd>:lua require('harpoon.ui').nav_file(3)<CR>", silent_no)
+map('n', '<space>4', "<cmd>:lua require('harpoon.ui').nav_file(4)<CR>", silent_no)
 
 -- colorizer
 require("colorizer").setup()

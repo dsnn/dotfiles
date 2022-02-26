@@ -23,7 +23,7 @@
 
 ### nix
 - nix nvim plugins (pin version?) 
-- firefox extensions
+- firefox (config styles & extensions)
 - wsl xrdp (?)
 
 ### awesomewm
@@ -76,31 +76,15 @@
 ### nvim
 
 - treesitter textobjects (select, swap).
-- review telescope: lsp, cheat, browser & git actions 
-- [fix prettier](https://github.com/prettier/vim-prettier/issues/248)
 - fix ugly borders in windows terminal (due to font/Roboto NF)
 - review local work config (runtimepath)
+- [fix prettier](https://github.com/prettier/vim-prettier/issues/248)
+- [review telescope-file-browser](https://github.com/nvim-telescope/telescope-file-browser.nvim)
 
 ### plugins
 
-- tpope/vim-dadbod
-- numToStr/Comment
-- rcarriga/nvim-notify
-- pearofducks/ansible-vim
-- iamcco/markdown-preview.nvim
-- brooth/far.vim -- find and replace
-- tpope/vim-repeat
-- Shatur95/neovim-session-manager
-- ThePrimeagen/harpoon
-- nvim-telescope/telescope-freccncy.nvim
-- nvim-telescope/telescope-cheat.nvim'
-- nvim-telescope/telescope-arecibo.nvim
-- tjdevries/astronauta.nvim
-- phaazon/hop.nvim vs unblevable/quick-scope ?
 - TimUntersberger/neogit
-- [lir.nvim](https://github.com/tamago324/lir.nvim)
-- [treesitter textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
-- [treesitter refactor](https://github.com/nvim-treesitter/nvim-treesitter-refactor)
+- [comment](https://github.com/numToStr/Comment.nvim)
 
 ### links
 
@@ -120,5 +104,4 @@
 - [elianiva](https://github.com/elianiva/dotfiles)
 - [ahmedelgabri](https://github.com/ahmedelgabri/dotfiles)
 - [tjdevries](https://github.com/tjdevries/config_manager)
-- [ngscheurich](https://github.com/ngscheurich/dotfiles)
-- [jesseleite](https://github.com/jesseleite/dotfiles)
+- [ThePrimeagen](https://github.com/ThePrimeagen/.dotfiles)

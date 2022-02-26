@@ -5,9 +5,12 @@
 { config, pkgs, ... }:
 let overlays = import ../modules/overlays.nix;
 in {
-  imports = [ ./desktop-hw.nix ];
+  imports = [ ./desktop-hw.nix ../modules/sops.nix ];
 
   nixpkgs.overlays = [ overlays ];
+
+  sops.secrets.samba-credentials = { };
+  sops.secrets.nmconnection-work-vpn = { };
 
   # enable flakes
   nix = {
@@ -50,13 +53,14 @@ in {
   networking.hostId = "55aa39de";
   networking.hostName = "dsn"; # Define your hostname.
 
+  environment.etc."NetworkManager/system-connections/work.nmconnection".source =
+    "${config.sops.secrets.nmconnection-work-vpn.path}";
+
   # dont wait for network iface (e.g. disabled wifi)
   systemd.services.NetworkManager-wait-online.enable = false;
 
   # services.systemd-udev-settle.enable = false;
   # services.NetworkManager-wait-online.enable = false;
-
-  services.samba = { enable = true; };
 
   services.zfs.autoSnapshot.enable = true;
   services.zfs.autoScrub.enable = true;
@@ -153,7 +157,35 @@ in {
       options = let
         automount_opts =
           "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-      in [ "${automount_opts},credentials=/etc/nixos/smb-secrets" ];
+      in [
+        "${automount_opts},credentials=${config.sops.secrets.samba-credentials.path}"
+      ];
+    };
+  };
+
+  fileSystems = {
+    "/mnt/share" = {
+      device = "//dss/share";
+      fsType = "cifs";
+      options = let
+        automount_opts =
+          "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+      in [
+        "${automount_opts},credentials=${config.sops.secrets.samba-credentials.path}"
+      ];
+    };
+  };
+
+  fileSystems = {
+    "/mnt/share2" = {
+      device = "//dss/share2";
+      fsType = "cifs";
+      options = let
+        automount_opts =
+          "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+      in [
+        "${automount_opts},credentials=${config.sops.secrets.samba-credentials.path}"
+      ];
     };
   };
 

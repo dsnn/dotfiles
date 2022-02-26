@@ -48,9 +48,9 @@ in {
   networking.networkmanager.enable = true;
 
   networking.useDHCP = false;
-  networking.interfaces.enp5s0.useDHCP = true;
+  # networking.interfaces.enp5s0.useDHCP = true;
   networking.interfaces.enp6s0.useDHCP = true;
-  networking.interfaces.wlp4s0.useDHCP = false;
+  # networking.interfaces.wlp4s0.useDHCP = false;
   # networking.hostId = "8d549888";
   # networking.hostName = "dsn";
   networking.hostId = "55aa39de";

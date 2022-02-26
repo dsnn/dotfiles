@@ -10,7 +10,7 @@ in {
   nixpkgs.overlays = [ overlays ];
 
   # secrets specifications
-  # for e.g. permissions: https://github.com/Mic92/sops-nix#deploy-example
+  # for more options, e.g. permissions: https://github.com/Mic92/sops-nix#deploy-example
   # sops.secrets.user-password.neededForUsers = true;
   sops.secrets.samba-credentials = { };
   sops.secrets.nmconnection-work-vpn = { };
@@ -34,12 +34,6 @@ in {
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "zfs" ];
 
-  # Configure dual booting 
-  # boot.loader.grub.enable = true;
-  # boot.loader.grub.version = 2;
-  # boot.loader.grub.device = "nodev";
-  # boot.loader.grub.useOSProber = true;
-
   time.timeZone = "Europe/Stockholm";
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
@@ -48,19 +42,18 @@ in {
   networking.networkmanager.enable = true;
 
   networking.useDHCP = false;
-  # networking.interfaces.enp5s0.useDHCP = true;
   networking.interfaces.enp6s0.useDHCP = true;
   # networking.interfaces.wlp4s0.useDHCP = false;
-  # networking.hostId = "8d549888";
-  # networking.hostName = "dsn";
+  # networking.interfaces.enp5s0.useDHCP = true;
+
+  #  network id & hostname
   networking.hostId = "55aa39de";
-  networking.hostName = "dsn"; # Define your hostname.
+  networking.hostName = "dsn";
 
   environment.etc."NetworkManager/system-connections/work.nmconnection".source =
     "${config.sops.secrets.nmconnection-work-vpn.path}";
 
-  # dont wait for network iface (e.g. disabled wifi)
-  # systemd.services.systemd-udev-settle.enable = false;
+  # dont wait for network iface 
   systemd.services.NetworkManager-wait-online.enable = false;
 
   services.zfs.autoSnapshot.enable = true;
@@ -77,18 +70,19 @@ in {
   # services.xrdp.openFirewall = true;
   # services.xrdp.defaultWindowManager = "${pkgs.awesome}/bin/awesome";
 
-  # Enable the X11 windowing system.
+  # enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.layout = "se";
   services.xserver.dpi = 120;
   services.xserver.xkbOptions = "eurosign:e";
 
-  # Enable the GNOME Desktop Environment.
+  # enable gdm 
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = false;
 
   services.xserver.videoDrivers = [ " nvidia " ];
 
+  # awesomewm
   services.xserver.displayManager.defaultSession = "none+awesome";
   services.xserver.windowManager.awesome = {
     enable = true;
@@ -99,19 +93,20 @@ in {
     ];
   };
 
+  # locale & keymap
   i18n.defaultLocale = "en_US.UTF-8";
   console.font = "Lat2-Terminus16";
   console.keyMap = "sv-latin1";
 
-  # Enable flash support for ergodox ez 
+  # enable flash support for ergodox ez 
   hardware.keyboard.zsa.enable = true;
 
-  # Enable sound.
-  # sound.enable = true;
+  # pulseaudio 
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.support32Bit = true;
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
 
+  # system packages
   environment.systemPackages = with pkgs; [
     cifs-utils
     coreutils
@@ -130,6 +125,7 @@ in {
     sops
   ];
 
+  # user settings
   users.mutableUsers = false;
   users.defaultUserShell = pkgs.zsh;
   users.users.dsn = {
@@ -145,6 +141,7 @@ in {
     ];
   };
 
+  # mount network shares 
   fileSystems = {
     "/mnt/private" = {
       device = "//dss/private";

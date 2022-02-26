@@ -3,6 +3,6 @@
     enable = true;
     terminal = "${pkgs.kitty}/bin/kitty";
     cycle = true;
-    theme = "Pop-Dark";
+    theme = "android_notification";
   };
 }

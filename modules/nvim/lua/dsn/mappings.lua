@@ -61,7 +61,6 @@ map('n', '<space>fq', "<cmd>:lua require('dsn.telescope').quickfix()<CR>", silen
 map('n', '<space>ff', "<cmd>:lua require('dsn.telescope').curbuf()<CR>", silent_no)
 
 -- limelight
-map('n', '<leader>ll', ":Limelight!!<CR>", silent_no)
 
 -- colorizer
 require("colorizer").setup()

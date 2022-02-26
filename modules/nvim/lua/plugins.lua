@@ -100,7 +100,6 @@ return require('packer').startup(function(use)
     use 'norcalli/nvim-colorizer.lua'
     use 'ryanoasis/vim-devicons'
     use 'tjdevries/colorbuddy.vim'
-    use 'junegunn/limelight.vim'
     use 'sainnhe/sonokai'
     use 'ayu-theme/ayu-vim'
     use 'morhetz/gruvbox'

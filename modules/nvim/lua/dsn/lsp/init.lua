@@ -280,32 +280,6 @@ require'lspconfig'.vimls.setup{
   end,
 }
 
-require'lspconfig'.ansiblels.setup{
-  cmd = { vim.fn.getenv 'HOME' ..  "/.local/share/nvim/lsp_servers/ansiblels/bin/ansible-language-server", "--stdio" },
-  filetypes = { "yaml", "yaml.ansible" },
-  -- root_dir = function(startpath)
-  --   return util.search_ancestors(startpath, matcher)
-  -- end,
-  settings = {
-    ansible = {
-      ansible = {
-        path = "ansible"
-      },
-      ansibleLint = {
-        enabled = true,
-        path = "ansible-lint"
-      },
-      executionEnvironment = {
-        enabled = false
-      },
-      python = {
-        interpreterPath = "python"
-      }
-    }
-  },
-  single_file_support = true
-}
-
 require("lspconfig")["rnix"].setup({})
 
 -- custom lsp diagnostic signs/icons

@@ -50,6 +50,9 @@ in {
   networking.hostId = "55aa39de";
   networking.hostName = "dsn"; # Define your hostname.
 
+  # dont wait for network iface (e.g. disabled wifi)
+  systemd.services.NetworkManager-wait-online.enable = false;
+
   # services.systemd-udev-settle.enable = false;
   # services.NetworkManager-wait-online.enable = false;
 

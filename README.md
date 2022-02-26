@@ -88,6 +88,7 @@
 
 ### links
 
+- [sops-nix](https://github.com/Mic92/sops-nix#deploy-example)
 - [telescope](https://github.com/nvim-telescope/telescope.nvim/wiki)
 - [delta](https://github.com/dandavison/delta)
 - [awesomewm](https://github.com/awesomeWM/awesome/issues/1395)

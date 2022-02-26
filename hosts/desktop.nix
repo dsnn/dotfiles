@@ -9,6 +9,8 @@ in {
 
   nixpkgs.overlays = [ overlays ];
 
+  # secrets specifications
+  # for e.g. permissions: https://github.com/Mic92/sops-nix#deploy-example
   sops.secrets.samba-credentials = { };
   sops.secrets.nmconnection-work-vpn = { };
 

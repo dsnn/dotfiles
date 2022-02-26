@@ -28,7 +28,7 @@
   # services.picom.activeOpacity = "0.9";
   # services.picom.blur = true;
   services.picom.extraOptions = ''
-    corner-radius = 10;
+    corner-radius = 0;
     blur-method = "dual_kawase";
     blur-strength = "10";
     xinerama-shadow-crop = true;

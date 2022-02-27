@@ -1,13 +1,16 @@
 { config, pkgs, ... }: {
-  nix = {
+  # package channel
+  nix.package = pkgs.nixUnstable;
 
-    # enable flakes
-    package = pkgs.nixUnstable;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
+  # enable flakes
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
 
-    # replace duplicates w/ hard links (and save space)
-    # settings.auto-optimise-store = true;
-  };
+  # collect garbage & optimize 
+  nix.gc.automatic = true;
+  nix.gc.dates = "03:15";
+
+  # replace duplicates w/ hard links (and save space)
+  # settings.auto-optimise-store = true;
 }

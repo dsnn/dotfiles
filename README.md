@@ -54,6 +54,7 @@
 ### nvim
 
 - treesitter textobjects (select, swap).
+- telescope file browser shortcut mappings (home, dotfiles) 
 - fix ugly borders in windows terminal (due to font/Roboto NF)
 - review local work config (runtimepath)
 - [fix prettier](https://github.com/prettier/vim-prettier/issues/248)

@@ -13,20 +13,14 @@ require('telescope').setup {
     defaults = {
         color_devicons = true,
         prompt_prefix = " ",
-        -- entry_prefix = "  ",
         file_ignore_patterns = { ".git", "node_modules", "obj", "wwwroot" },
-        -- initial_mode = "insert",
-        -- layout_defaults = {horizontal = {mirror = false}, vertical = {mirror = false}},
         layout_strategy = "horizontal",
         layout_config = {
           width = 0.95,
           height = 0.85,
-          -- preview_cutoff = 120,
           prompt_position = "bottom",
 
           horizontal = {
-            -- width_padding = 0.1,
-            -- height_padding = 0.1,
             preview_width = function(_, cols, _)
               if cols > 200 then
                 return math.floor(cols * 0.4)
@@ -37,8 +31,6 @@ require('telescope').setup {
           },
 
           vertical = {
-            -- width_padding = 0.05,
-            -- height_padding = 1,
             width = 0.9,
             height = 0.95,
             preview_height = 0.5,
@@ -51,18 +43,8 @@ require('telescope').setup {
           },
         },
         set_env = { ["COLORTERM"] = "truecolor" },
-        -- preview_cutoff = 120,
-        -- prompt_position = "top",
-        -- results_height = 1,
-        -- results_width = 0.8,
-        -- selection_caret = " ",
         selection_strategy = "reset",
-        -- set_env = {['COLORTERM'] = 'truecolor'}, -- default = nil,
-        -- path_display = true,
         sorting_strategy = "descending",
-        -- use_less = true,
-        -- width = 0.75,
-        --
         scroll_strategy = "cycle",
         winblend = 0,
         file_previewer = previewers.vim_buffer_cat.new,
@@ -118,15 +100,7 @@ require('telescope').setup {
             },
             file_browser = {
               theme = "ivy",
-              -- sorting_strategy = "ascending",
-              -- prompt_position = "top",
               hidden = true,
-              -- mappings = {
-              --   ["i"] = {
-              --     ["<C-h>"] = fb_actions.goto_home_dir,
-              --     ["<C-v>"] = fb_actions_nvim
-              --   },
-              -- }
             }
         }
     }
@@ -165,7 +139,7 @@ end
 
 function M.grep_prompt()
   require('telescope.builtin').grep_string {
-    path_display = true,
+    short_path = false,
     search = vim.fn.input("Grep String > "),
   }
 end
@@ -174,8 +148,6 @@ function M.grep_word()
   require('telescope.builtin').grep_string {
     short_path = false,
     word_match = '-w',
-    -- only_sort_text = true,
-    -- layout_strategy = 'vertical',
     sorter = sorters.get_fzy_sorter(),
   }
 end
@@ -224,7 +196,7 @@ function M.git_status()
     winblend = 10,
     border = true,
     previewer = false,
-    shorten_path = false,
+    short_path = false,
     borderchars = borderchars
   })
   require('telescope.builtin').git_status(opts)
@@ -235,7 +207,7 @@ function M.curbuf()
     winblend = 10,
     border = true,
     previewer = false,
-    shorten_path = false,
+    short_path = false,
     borderchars = borderchars
   })
   require("telescope.builtin").current_buffer_fuzzy_find(opts)

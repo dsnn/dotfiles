@@ -2,9 +2,9 @@
 
   # enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.layout = "se";
+  services.xserver.layout = "se, us";
   services.xserver.dpi = 120;
-  services.xserver.xkbOptions = "eurosign:e";
+  services.xserver.xkbOptions = "eurosign:e,grp:alt_space_toggle";
 
   # enable gdm 
   services.xserver.displayManager.gdm.enable = true;

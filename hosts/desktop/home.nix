@@ -4,16 +4,16 @@
   targets.genericLinux.enable = true;
 
   imports = [
-    ../modules/git.nix
-    ../modules/starship.nix
-    ../modules/zsh.nix
-    ../modules/fzf.nix
-    ../modules/tmux.nix
-    ../modules/xdg.nix
-    ../modules/rofi.nix
-    ../modules/packages.nix
-    ../modules/kitty.nix
-    ../modules/lazygit.nix
+    ../../modules/home/git.nix
+    ../../modules/home/starship.nix
+    ../../modules/home/zsh.nix
+    ../../modules/home/fzf.nix
+    ../../modules/home/tmux.nix
+    ../../modules/home/xdg.nix
+    ../../modules/home/rofi.nix
+    ../../modules/home/packages.nix
+    ../../modules/home/kitty.nix
+    ../../modules/home/lazygit.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

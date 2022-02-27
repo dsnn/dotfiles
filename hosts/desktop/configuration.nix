@@ -1,21 +1,21 @@
 { config, pkgs, ... }:
-let overlays = import ../modules/overlays.nix;
+let overlays = import ../../modules/system/overlays.nix;
 in {
   imports = [
-    ./desktop-hw.nix
-    ../modules/boot.nix
-    ../modules/zfs.nix
-    ../modules/nix.nix
-    ../modules/locale.nix
-    ../modules/timezone.nix
-    ../modules/ssh.nix
-    ../modules/pulseaudio.nix
-    ../modules/sops.nix
-    ../modules/ergodox.nix
-    ../modules/networkmanager.nix
-    ../modules/awesomewm.nix
-    ../modules/default-share.nix
-    ../modules/user.nix
+    ./hardware.nix
+    ../../modules/system/boot.nix
+    ../../modules/system/zfs.nix
+    ../../modules/system/nix.nix
+    ../../modules/system/locale.nix
+    ../../modules/system/timezone.nix
+    ../../modules/system/ssh.nix
+    ../../modules/system/pulseaudio.nix
+    ../../modules/system/ergodox.nix
+    ../../modules/system/networkmanager.nix
+    ../../modules/system/awesomewm.nix
+    ../../modules/system/cifs.nix
+    ../../modules/system/user.nix
+    ../../modules/sops.nix
   ];
 
   nixpkgs.overlays = [ overlays ];
@@ -28,6 +28,11 @@ in {
   networking.interfaces.enp6s0.useDHCP = true;
   # networking.interfaces.wlp4s0.useDHCP = false;
   # networking.interfaces.enp5s0.useDHCP = true;
+
+  # work vpn profile
+  sops.secrets.nmconnection-work-vpn = { };
+  environment.etc."NetworkManager/system-connections/work.nmconnection".source =
+    "${config.sops.secrets.nmconnection-work-vpn.path}";
 
   environment.systemPackages = with pkgs; [
     cifs-utils

@@ -16,8 +16,8 @@
       createDirectories = false;
     };
     configFile."nvim".source =
-      config.lib.file.mkOutOfStoreSymlink ~/dotfiles/modules/nvim;
+      config.lib.file.mkOutOfStoreSymlink ~/dotfiles/modules/home/nvim;
     configFile."awesome".source =
-      config.lib.file.mkOutOfStoreSymlink ~/dotfiles/modules/awesome;
+      config.lib.file.mkOutOfStoreSymlink ~/dotfiles/modules/home/awesome;
   };
 }

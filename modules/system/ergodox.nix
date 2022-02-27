@@ -4,5 +4,4 @@
 
   # enable flash support for ergodox ez 
   hardware.keyboard.zsa.enable = true;
-
 }

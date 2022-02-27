@@ -35,16 +35,20 @@
     in {
 
       homeConfigurations = {
-        wsl = mkHomeConfiguration { modules = [ ./home/wsl.nix ]; };
-        desktop = mkHomeConfiguration { modules = [ ./home/desktop.nix ]; };
-        laptop = mkHomeConfiguration { modules = [ ./home/laptop.nix ]; };
-        server = mkHomeConfiguration { modules = [ ./home/server.nix ]; };
+        wsl = mkHomeConfiguration { modules = [ ./hosts/wsl/home.nix ]; };
+        desktop =
+          mkHomeConfiguration { modules = [ ./hosts/desktop/home.nix ]; };
+        laptop = mkHomeConfiguration { modules = [ ./hosts/laptop/home.nix ]; };
+        server = mkHomeConfiguration { modules = [ ./hosts/server/home.nix ]; };
       };
 
       nixosConfigurations = {
-        desktop = mkConfiguration { modules = [ ./hosts/desktop.nix ]; };
-        laptop = mkConfiguration { modules = [ ./hosts/laptop.nix ]; };
-        server = mkConfiguration { modules = [ ./hosts/server.nix ]; };
+        desktop =
+          mkConfiguration { modules = [ ./hosts/desktop/configuration.nix ]; };
+        laptop =
+          mkConfiguration { modules = [ ./hosts/laptop/configuration.nix ]; };
+        server =
+          mkConfiguration { modules = [ ./hosts/server/configuration.nix ]; };
       };
     };
 }

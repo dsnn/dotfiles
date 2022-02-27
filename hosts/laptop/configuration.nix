@@ -3,22 +3,22 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-let overlays = import ../modules/overlays.nix;
+let overlays = import ../../modules/system/overlays.nix;
 in {
   imports = [
-    ./laptop-hw.nix
-    ../modules/boot.nix
-    ../modules/zfs.nix
-    ../modules/nix.nix
-    ../modules/locale.nix
-    ../modules/timezone.nix
-    ../modules/ssh.nix
-    ../modules/pulseaudio.nix
-    ../modules/networkmanager.nix
-    ../modules/awesomewm.nix
-    ../modules/libinput.nix
-    ../modules/default-share.nix
-    ../modules/user.nix
+    ./hardware.nix
+    ../../modules/system/boot.nix
+    ../../modules/system/zfs.nix
+    ../../modules/system/nix.nix
+    ../../modules/system/locale.nix
+    ../../modules/system/timezone.nix
+    ../../modules/system/ssh.nix
+    ../../modules/system/pulseaudio.nix
+    ../../modules/system/networkmanager.nix
+    ../../modules/system/awesomewm.nix
+    ../../modules/system/libinput.nix
+    ../../modules/system/cifs.nix
+    ../../modules/system/user.nix
   ];
 
   nixpkgs.overlays = [ overlays ];

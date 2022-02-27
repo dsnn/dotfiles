@@ -6,19 +6,19 @@
 let mod = "Mod4";
 in {
   imports = [
-    ./server-hw.nix
-    ../modules/boot.nix
-    ../modules/zfs.nix
-    ../modules/nix.nix
-    ../modules/xrdp.nix
-    ../modules/locale.nix
-    ../modules/timezone.nix
-    ../modules/ssh.nix
-    ../modules/sops.nix
-    ../modules/networkmanager.nix
-    ../modules/awesomewm.nix
-    ../modules/default-share.nix
-    ../modules/user.nix
+    ./hardware.nix
+    ../../modules/system/boot.nix
+    ../../modules/system/zfs.nix
+    ../../modules/system/nix.nix
+    ../../modules/system/xrdp.nix
+    ../../modules/system/locale.nix
+    ../../modules/system/timezone.nix
+    ../../modules/system/ssh.nix
+    ../../modules/system/networkmanager.nix
+    ../../modules/system/awesomewm.nix
+    ../../modules/system/cifs.nix
+    ../../modules/system/user.nix
+    ../../modules/sops.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

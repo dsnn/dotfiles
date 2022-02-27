@@ -25,43 +25,21 @@
 - nix nvim plugins (pin version?) 
 - firefox (config styles & extensions)
 - wsl xrdp (?)
+- erase your darlings (rpool/local/root@blank)
 
 ### awesomewm
-- top & bottom bar (?)
-- side menu
+- [fix fn-keys](https://pavelmakhov.com/2016/06/awesome-wm-fn-keys/)
+- top & bottom bar
 - statusbar 
   - web
   - dev
   - im
   - icons
-    - memory
-    - current ip
-    - volume
-    - calendar 
-    - clock
-    - battery
-    - filesystem (free/total hdd)
-    - power
-    - cpu/load
-    - wifi 
-    - vpn
-    - current ping/speed to internet (speedtest)
-    - temp
-    - weather
+    - memory current ip volume calendar clock battery filesystem (free/total hdd)
+    - power cpu/load wifi vpn ping/speed (speedtest) temp weather mail
   - apps
-    - firefox
-    - vpn (work/home)
-      - wireguard
-      - openvpn
-      - sstp
-    - discord
-    - teamspeak
-    - vs(code)
-    - terminal
-    - screenshot
-    - spotify
-    - notion
-    - todoist
+    - firefox discord teamspeak vs(code) terminal screenshot spotify notion todoist
+    - vpn (wireguard openvpn sstp)
 
 ### zsh
 - review [zsh-vi-mode](https://github.com/jeffreytse/zsh-vi-mode)

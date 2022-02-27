@@ -3,7 +3,20 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-let overlays = import ../modules/overlays.nix;
+let
+  overlays = import ../modules/overlays.nix;
+  cifsShare = name: {
+    device = "//dss/${name}";
+    fsType = "cifs";
+    options = [
+      "x-systemd.automount"
+      "noauto"
+      "x-systemd.idle-timeout=60"
+      "x-systemd.device-timeout=5s"
+      "x-systemd.mount-timeout=5s"
+      "credentials=${config.sops.secrets.samba-credentials.path}"
+    ];
+  };
 in {
   imports = [ ./desktop-hw.nix ../modules/sops.nix ];
 
@@ -14,29 +27,40 @@ in {
   sops.secrets.samba-credentials = { };
   sops.secrets.nmconnection-work-vpn = { };
 
-  # enable flakes
-  nix = {
-    package = pkgs.nixUnstable;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-    gc = {
-      automatic = true;
-      dates = "03:15";
-    };
-  };
+  # package channel
+  nix.package = pkgs.nixUnstable;
 
   # allow proprietary packages
   nixpkgs.config.allowUnfree = true;
+
+  # enable flakes
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
+
+  # collect garbage & optimize 
+  nix.gc.automatic = true;
+  nix.gc.dates = "03:15";
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "zfs" ];
 
+  # timezone
+  services.timesyncd.enable = true;
   time.timeZone = "Europe/Stockholm";
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
+
+  # locale 
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  # keyboard 
+  console.keyMap = "sv-latin1";
+
+  # font
+  console.font = "Lat2-Terminus16";
 
   networking.networkmanager.enable = true;
 
@@ -92,11 +116,6 @@ in {
     ];
   };
 
-  # locale & keymap
-  i18n.defaultLocale = "en_US.UTF-8";
-  console.font = "Lat2-Terminus16";
-  console.keyMap = "sv-latin1";
-
   # enable flash support for ergodox ez 
   hardware.keyboard.zsa.enable = true;
 
@@ -140,44 +159,9 @@ in {
   };
 
   # mount network shares 
-  fileSystems = {
-    "/mnt/private" = {
-      device = "//dss/private";
-      fsType = "cifs";
-      options = let
-        automount_opts =
-          "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-      in [
-        "${automount_opts},credentials=${config.sops.secrets.samba-credentials.path}"
-      ];
-    };
-  };
-
-  fileSystems = {
-    "/mnt/share" = {
-      device = "//dss/share";
-      fsType = "cifs";
-      options = let
-        automount_opts =
-          "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-      in [
-        "${automount_opts},credentials=${config.sops.secrets.samba-credentials.path}"
-      ];
-    };
-  };
-
-  fileSystems = {
-    "/mnt/share2" = {
-      device = "//dss/share2";
-      fsType = "cifs";
-      options = let
-        automount_opts =
-          "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-      in [
-        "${automount_opts},credentials=${config.sops.secrets.samba-credentials.path}"
-      ];
-    };
-  };
+  fileSystems."/mnt/private" = cifsShare "private";
+  fileSystems."/mnt/share" = cifsShare "share";
+  fileSystems."/mnt/share2" = cifsShare "share2";
 
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).

@@ -1,10 +1,11 @@
 { config, pkgs, ... }: {
-  # font
+
+  # font used for the virtual consoles
   console.font = "Lat2-Terminus16";
 
-  # locale 
+  # default locale for programs, dates, sort etc 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # keyboard 
+  # keyboard mapping table for the virtual consoles 
   console.keyMap = "sv-latin1";
 }

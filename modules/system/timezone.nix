@@ -1,7 +1,8 @@
 { config, pkgs, ... }: {
-  # timezone
+
+  # used when displaying times and dates
   time.timeZone = "Europe/Stockholm";
 
-  # time sync daemon
+  # enable systemd NTP client daemon
   services.timesyncd.enable = true;
 }

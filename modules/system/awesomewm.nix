@@ -1,6 +1,6 @@
 { config, pkgs, ... }: {
 
-  # enable the X11 windowing system.
+  # enable the X11 windowing system
   services.xserver.enable = true;
   services.xserver.layout = "se, us";
   services.xserver.dpi = 120;
@@ -8,8 +8,8 @@
 
   # enable gdm 
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = false;
 
+  # video drivers
   services.xserver.videoDrivers = [ " nvidia " ];
 
   # awesomewm

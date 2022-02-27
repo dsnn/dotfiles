@@ -14,7 +14,6 @@ let
   };
 in {
 
-  # secrets specifications
   # for more options, e.g. permissions: https://github.com/Mic92/sops-nix#deploy-example
   sops.secrets.samba-credentials = { };
 

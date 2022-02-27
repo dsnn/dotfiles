@@ -1,5 +1,6 @@
 { config, pkgs, ... }: {
-  # package channel
+
+  # package instance to use throughout the system
   nix.package = pkgs.nixUnstable;
 
   # enable flakes

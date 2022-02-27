@@ -1,6 +1,6 @@
 { config, pkgs, ... }: {
 
-  # networkmanager
+  # handle network iface automatically 
   networking.networkmanager.enable = true;
 
   # dont wait for network iface 

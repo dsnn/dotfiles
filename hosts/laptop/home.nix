@@ -11,6 +11,7 @@
     ../../modules/home/packages.nix
     ../../modules/home/kitty.nix
     ../../modules/home/lazygit.nix
+    ../../modules/home/picom.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -22,35 +23,38 @@
   programs.dircolors.enable = true;
   programs.keychain.enable = true;
 
+  # enable network manager applet
   services.network-manager-applet = { enable = true; };
 
-  # compositor for xorg
-  # services.picom.enable = true;
-  # services.picom.fade = true;
-  # services.picom.shadow = true;
-  # services.picom.shadowOpacity = "0.3";
+  # create symlinks to local shares
+  home.file."private".source = config.lib.file.mkOutOfStoreSymlink /mnt/private;
+  home.file."share".source = config.lib.file.mkOutOfStoreSymlink /mnt/share;
+  home.file."share2".source = config.lib.file.mkOutOfStoreSymlink /mnt/share2;
 
   home.packages = with pkgs; [
-    discord
-    spotify
-    kodi
-    google-chrome
-    sstp
-    teamspeak_client
-    remmina
-    xfce.thunar
-    feh
-    xcape
-    wireguard
     # blueman
+    # ffmpeg
     # imagemagick 
     # redshift
     # upower
-    # ffmpeg
+    discord
+    feh
+    freerdp
+    google-chrome
+    kodi
+    remmina
+    slack
+    spotify
+    sstp
+    teamspeak_client
+    wireguard
+    xcape
+    xfce.thunar
   ];
 
+  # for thunar: removable memdia, smb etc 
   # services.gvfs.enable = true;
-  # services.tumbler.enable = true;
 
-  # eww
+  # for thunar: external program to generate thumbnails
+  # services.tumbler.enable = true;
 }

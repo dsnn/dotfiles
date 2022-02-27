@@ -1,4 +1,5 @@
 { config, pkgs, lib, ... }: {
+
   imports = [
     ../../modules/home/git.nix
     ../../modules/home/starship.nix

@@ -1,8 +1,5 @@
 { config, pkgs, lib, ... }: {
 
-  # Fix home manager for non NixOS
-  targets.genericLinux.enable = true;
-
   imports = [
     ../../modules/home/git.nix
     ../../modules/home/starship.nix

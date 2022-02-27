@@ -1,6 +1,4 @@
 { config, pkgs, ... }: {
-  programs.lazygit = {
-    enable = true;
-    # settings = { };
-  };
+
+  programs.lazygit.enable = true;
 }

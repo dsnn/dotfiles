@@ -27,6 +27,13 @@
 - wsl xrdp (?)
 - erase your darlings (rpool/local/root@blank)
 - run mkpasswd & save to sops for [passwordFile](https://nixos.org/manual/nixos/stable/options.html#opt-users.extraUsers._name_.passwordFile)
+- fail2ban
+- fstrim
+- syncthing
+- buildCores
+- [powerManagement.enable?](https://nixos.org/manual/nixos/stable/options.html#opt-hardware.nvidia.powerManagement.enable)
+- [hardware.opengl.extraPackages](https://nixos.org/manual/nixos/stable/options.html#opt-hardware.opengl.extraPackages)
+  - [Accelerated Video Playback (vaapiIntel)](https://nixos.wiki/wiki/Accelerated_Video_Playback)
 
 ### awesomewm
 - [fix fn-keys](https://pavelmakhov.com/2016/06/awesome-wm-fn-keys/)

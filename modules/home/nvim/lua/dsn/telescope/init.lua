@@ -120,8 +120,8 @@ function M.dotfiles()
     short_path = false,
     cwd = "~/dotfiles",
     hidden = true,
-    layout_config = { width = 0.6, height = 0.5, preview_width = 0.5 },
-    layout_strategy = 'horizontal',
+    layout_strategy = "vertical",
+    layout_config = { width = 0.6, height = 0.9 },
     borderchars = borderchars
   })
   require('telescope.builtin').find_files(opts)
@@ -133,6 +133,8 @@ end
 
 function M.find_files()
   require('telescope.builtin').find_files {
+    layout_strategy = "vertical",
+    layout_config = { width = 0.6, height = 0.9 },
     find_command = { 'rg', '--hidden', '--no-ignore', '--files' },
   }
 end
@@ -140,6 +142,8 @@ end
 function M.grep_prompt()
   require('telescope.builtin').grep_string {
     short_path = false,
+    layout_strategy = "vertical",
+    layout_config = { width = 0.6, height = 0.9 },
     search = vim.fn.input("Grep String > "),
   }
 end
@@ -148,6 +152,8 @@ function M.grep_word()
   require('telescope.builtin').grep_string {
     short_path = false,
     word_match = '-w',
+    layout_strategy = "vertical",
+    layout_config = { width = 0.6, height = 0.9 },
     sorter = sorters.get_fzy_sorter(),
   }
 end

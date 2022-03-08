@@ -9,6 +9,8 @@ local sorters     = require('telescope.sorters')
 local previewers  = require('telescope.previewers')
 local themes      = require('telescope.themes')
 
+local fb_actions = require "telescope".extensions.file_browser.actions
+
 require('telescope').setup {
     defaults = {
         color_devicons = true,
@@ -109,6 +111,7 @@ require('telescope').setup {
 -- load extensions
 require('telescope').load_extension('fzy_native')
 require("telescope").load_extension('file_browser')
+require("telescope").load_extension('hop')
 
 local borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
 
@@ -171,10 +174,7 @@ function M.buffers()
   local opts = themes.get_dropdown({
     previewer = false,
     prompt_title = "Buffers",
-    layout_config = {
-      width = 0.4,
-      height = 0.4
-    },
+    layout_config = { width = 0.4, height = 0.4 },
     hidden = true,
     borderchars = borderchars
   })
@@ -194,7 +194,11 @@ function M.quickfix()
 end
 
 function M.file_browser()
-  require('telescope').extensions.file_browser.file_browser()
+  require('telescope').extensions.file_browser.file_browser({
+    path = "%:p:h",
+    files = false,
+    hidden = true
+  })
 end
 
 function M.git_status()

@@ -29,6 +29,11 @@ in {
   # networking.interfaces.wlp4s0.useDHCP = false;
   # networking.interfaces.enp5s0.useDHCP = true;
 
+  # testing xfce
+  # services.xserver.desktopManager.xterm.enable = false;
+  # services.xserver.desktopManager.xfce.enable = true;
+  # services.xserver.displayManager.defaultSession = "xfce";
+
   # work vpn profile
   sops.secrets.nmconnection-work-vpn = { };
   environment.etc."NetworkManager/system-connections/work.nmconnection".source =

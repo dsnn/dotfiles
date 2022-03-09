@@ -23,4 +23,20 @@
     ];
   };
 
+  # services.xserver.displayManager.sessionCommands = ''
+  #   ${pkgs.xorg.xrdb}/bin/xrdb -merge <${
+  #     pkgs.writeText "Xresources" ''
+  #       Xft.dpi: 192
+
+  #       ! These might also be useful depending on your monitor and personal preference:
+  #       Xft.autohint: 0
+  #       Xft.lcdfilter:  lcddefault
+  #       Xft.hintstyle:  hintfull
+  #       Xft.hinting: 1
+  #       Xft.antialias: 1
+  #       Xft.rgba: rgb
+  #     ''
+  #   }
+  # '';
+
 }

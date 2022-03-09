@@ -160,7 +160,9 @@ end
 
 function M.git_branches()
   local opts = themes.get_dropdown({
-    previewer = false,
+    short_path = true,
+    layout_strategy = "vertical",
+    layout_config = { width = 0.6, height = 0.9 },
     prompt_title = false,
     borderchars = borderchars
   })

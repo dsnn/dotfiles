@@ -34,6 +34,7 @@
 - [powerManagement.enable?](https://nixos.org/manual/nixos/stable/options.html#opt-hardware.nvidia.powerManagement.enable)
 - [hardware.opengl.extraPackages](https://nixos.org/manual/nixos/stable/options.html#opt-hardware.opengl.extraPackages)
   - [Accelerated Video Playback (vaapiIntel)](https://nixos.wiki/wiki/Accelerated_Video_Playback)
+- review [git-agecrypt](https://github.com/vlaci/git-agecrypt) for semi-secrets. [See here](https://github.com/Mic92/sops-nix/issues/159)
 
 ### awesomewm
 - [fix fn-keys](https://pavelmakhov.com/2016/06/awesome-wm-fn-keys/)

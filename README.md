@@ -35,18 +35,18 @@
 - [hardware.opengl.extraPackages](https://nixos.org/manual/nixos/stable/options.html#opt-hardware.opengl.extraPackages)
   - [Accelerated Video Playback (vaapiIntel)](https://nixos.wiki/wiki/Accelerated_Video_Playback)
 - review [git-agecrypt](https://github.com/vlaci/git-agecrypt) for semi-secrets. [See here](https://github.com/Mic92/sops-nix/issues/159)
+- xresources: set scaling, hinting, antialias etc [See here](https://wiki.archlinux.org/title/HiDPI#X_Resources)
 
 ### awesomewm
 - [fix fn-keys](https://pavelmakhov.com/2016/06/awesome-wm-fn-keys/)
-- top & bottom bar
-- statusbar 
-  - web
-  - dev
-  - im
-  - icons
+- double tapping min/max window
+- always show resize in corners (?)
+- statusbar (top & bottom bar) 
+  - tags: web dev im
+  - icons (or in submenu):
     - memory current ip volume calendar clock battery filesystem (free/total hdd)
     - power cpu/load wifi vpn ping/speed (speedtest) temp weather mail
-  - apps
+  - apps 
     - firefox discord teamspeak vs(code) terminal screenshot spotify notion todoist
     - vpn (wireguard openvpn sstp)
 

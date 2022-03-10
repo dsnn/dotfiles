@@ -15,13 +15,22 @@
   ];
 
   nixpkgs.config.allowUnfree = true;
-  nix.package = pkgs.nixUnstable;
 
   fonts.fontconfig.enable = true;
 
   programs.home-manager.enable = true;
   programs.dircolors.enable = true;
   programs.keychain.enable = true;
+
+  xresources.properties = {
+    "Xft.dpi" = "120";
+    "Xft.autohint" = "0";
+    "Xft.lcdfilter" = "lcddefault";
+    "Xft.hintstyle" = "hintfull";
+    "Xft.hinting" = "1";
+    "Xft.antialias" = "1";
+    "Xft.rgba" = "rgb";
+  };
 
   # enable network manager applet
   services.network-manager-applet = { enable = true; };

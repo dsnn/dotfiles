@@ -53,5 +53,7 @@
     teamspeak_client
     wireguard
     xfce.thunar
+    xfce.tumbler
+    nomacs
   ];
 }

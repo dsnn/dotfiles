@@ -17,25 +17,30 @@
     sudo chsh -s "$(command -v zsh)" "${USER}"
     ```
 
-### infra
-- nix docker host 
-- nix k3s
+### server 
+- docker 
+- k3s
+- syncthing
+- drone
+- gitea
+- cups
+- unifi
+- heimdall
+- sftp
+- backup/rsync
 
 ### nix
 - nix nvim plugins (pin version?) 
-- firefox (config styles & extensions)
-- wsl xrdp (?)
-- erase your darlings (rpool/local/root@blank)
+- [firefox (config styles & extensions)](https://nixos.wiki/wiki/Firefox)
+- wsl xrdp
+- [erase your darlings (rpool/local/root@blank)](https://grahamc.com/blog/erase-your-darlings)
 - run mkpasswd & save to sops for [passwordFile](https://nixos.org/manual/nixos/stable/options.html#opt-users.extraUsers._name_.passwordFile)
-- fail2ban
-- fstrim
-- syncthing
-- buildCores
+- [syncthing](https://nixos.wiki/wiki/Syncthing)
+- [buildCores](https://nixos.org/manual/nix/stable/advanced-topics/cores-vs-jobs.html)
 - [powerManagement.enable?](https://nixos.org/manual/nixos/stable/options.html#opt-hardware.nvidia.powerManagement.enable)
 - [hardware.opengl.extraPackages](https://nixos.org/manual/nixos/stable/options.html#opt-hardware.opengl.extraPackages)
   - [Accelerated Video Playback (vaapiIntel)](https://nixos.wiki/wiki/Accelerated_Video_Playback)
 - review [git-agecrypt](https://github.com/vlaci/git-agecrypt) for semi-secrets. [See here](https://github.com/Mic92/sops-nix/issues/159)
-- xresources: set scaling, hinting, antialias etc [See here](https://wiki.archlinux.org/title/HiDPI#X_Resources)
 
 ### awesomewm
 - [fix fn-keys](https://pavelmakhov.com/2016/06/awesome-wm-fn-keys/)

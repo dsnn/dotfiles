@@ -125,8 +125,8 @@
     vp = "vagrant provision";
 
     # work
-    web = "/home/dsn/opto/Core/Code/ServerHtml5/Web";
-    core = "/home/dsn/opto/Core/Code";
+    web = "/home/dsn/work/core/code/ServerHtml5/Web";
+    core = "/home/dsn/work/core/code";
   };
 
   programs.zsh.initExtra = ''

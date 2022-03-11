@@ -57,6 +57,7 @@ in {
     sops
     docker
     docker-compose
+    inetutils
   ];
 
   # Before changing this value read the documentation for this option

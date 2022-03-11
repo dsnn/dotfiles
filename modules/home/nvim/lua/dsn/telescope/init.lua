@@ -59,7 +59,7 @@ require('telescope').setup {
                 ["<C-j>"] = actions.move_selection_next,
                 ["<C-k>"] = actions.move_selection_previous,
                 -- ["<CR>"]  = actions.select_default + actions.center,
-                ["<ESC>"] = actions.close,
+                -- ["<ESC>"] = actions.close, -- no normal mode, tho
                 ["<C-s>"] = actions.select_horizontal,
                 ["<C-space>"] = function(prompt_bufnr)
                   local opts = {
@@ -68,17 +68,15 @@ require('telescope').setup {
                   }
                   require("telescope").extensions.hop._hop_loop(prompt_bufnr, opts)
                 end,
+                ["<C-h>"] = "which_key"
             },
             n = {
                 ["<C-j>"] = actions.move_selection_next,
-                ["<C-k>"] = actions.move_selection_previous
+                ["<C-k>"] = actions.move_selection_previous,
+                ["<C-h>"] = "which_key"
             }
         },
         extensions = {
-            fzy_native = {
-                override_generic_sorter = true,
-                override_file_sorter = true,
-            },
             hop = {
               -- keys define your hop keys in order; defaults to roughly lower- and uppercased home row
               -- shown keys here are only subset of defaults!
@@ -98,9 +96,23 @@ require('telescope').setup {
               -- jump to entry where hoop loop was started from
               reset_selection = true,
             },
+            fzy_native = {
+                override_generic_sorter = true,
+                override_file_sorter = true,
+            },
             file_browser = {
               theme = "ivy",
               hidden = true,
+              mappings = {
+                ["i"] = {
+                  ["<C-j>"] = actions.move_selection_next,
+                  ["<C-k>"] = actions.move_selection_previous,
+                },
+                ["n"] = {
+                  ["<C-j>"] = actions.move_selection_next,
+                  ["<C-k>"] = actions.move_selection_previous
+                },
+              },
             }
         }
     }
@@ -196,7 +208,9 @@ function M.quickfix()
 end
 
 function M.file_browser()
-  require('telescope').extensions.file_browser.file_browser()
+  require('telescope').extensions.file_browser.file_browser({
+    path = "%:p:h"
+  })
 end
 
 function M.git_status()

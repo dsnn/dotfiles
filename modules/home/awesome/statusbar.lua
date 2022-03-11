@@ -8,12 +8,12 @@ local lain  = require("lain")
 local theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/dark"
 local theme = theme_dir .. "/theme.lua"
 
-local spacing = wibox.widget.textbox(' ')
-local separators = lain.util.separators
+-- local spacing = wibox.widget.textbox(' ')
+-- local separators = lain.util.separators
 local markup = lain.util.markup
-local font = "Roboto Bold 10"
+-- local font = "Roboto Bold 10"
 local space3 = markup.font("Roboto 3", " ")
-local blue   = "#80CCE6"
+-- local blue   = "#80CCE6"
 
 
 --- statusbar

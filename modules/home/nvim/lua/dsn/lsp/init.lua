@@ -232,7 +232,7 @@ require'lspconfig'.sumneko_lua.setup {
                 path = runtime_path
             },
             diagnostics = {
-                globals = {'vim', 'client',  'awesome', 'root', 'screen', 'modkey', 'mykeyboardlayout', 'dpi', 'user'},
+                globals = {'vim', 'client',  'awesome', 'root', 'screen', 'modkey', 'mykeyboardlayout', 'dpi', 'user', 'theme'},
             },
             workspace = {
                 library = {

@@ -42,14 +42,16 @@
   - [Accelerated Video Playback (vaapiIntel)](https://nixos.wiki/wiki/Accelerated_Video_Playback)
 - review [git-agecrypt](https://github.com/vlaci/git-agecrypt) for semi-secrets. [See here](https://github.com/Mic92/sops-nix/issues/159)
 - kodi settings & addons
+- move package installation to the module(s). e.g i3 should install itself and all deps.
 
 ### i3 
 - [fix fn-keys](https://pavelmakhov.com/2016/06/awesome-wm-fn-keys/)
 - autostart (firefox, discord, teamspeak, terminal, spotify)
 - shortcut for work-vpn + rfreerdp
 - shortcut for wireguard (?)
-- remove window titlebar
 - fix workspace (starts at 10 for second screen, should be 1 & 2)
+- remove shortcut for spotify (should autostart instead)
+- host specific configurations (e.g. xorg.xbacklight for laptop only)
 
 ### polybar
 - icons
@@ -74,6 +76,7 @@
 ### nvim
 - review treesitter textobjects (select, swap).
 - review local work config (runtimepath)
+- fix leader+t default to this readme (if e.g. work/todo.md doesnt exists)
 - fix ugly borders in windows terminal (due to font/Roboto NF)
 - [telescope file browser shortcut mappings (home, dotfiles)](https://github.com/nvim-telescope/telescope-file-browser.nvim)
 - [fix prettier](https://github.com/prettier/vim-prettier/issues/248)

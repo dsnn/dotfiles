@@ -45,23 +45,15 @@
 - move package installation to the module(s). e.g i3 should install itself and all deps.
 
 ### i3 
-- fix fn-keys
 - autostart (firefox, discord, teamspeak, terminal, spotify)
-- shortcut for work-vpn + rfreerdp
-- shortcut for wireguard (?)
 - fix workspace (starts at 10 for second screen, should be 1 & 2)
-- remove shortcut for spotify (should autostart instead)
 - host specific configurations (e.g. xorg.xbacklight for laptop only)
-
-### polybar
-- icons
-- network icon/menu (nm-applet or custom) (wifi/VPN)
-- notifications/dunst
-- pavucontrol (volume, mute/unmute, source) 
-- battery
-- ping/speed (speedtest) temp
-- menu for more info/shortcuts (?)
-- powermenu
+- polybar
+  - network manager
+    - wireguard /work vpn + rdp
+    - [nm-applet](https://github.com/polybar/polybar/issues/1355)
+    - [rofi nm](https://github.com/P3rf/rofi-network-manager)
+  - fix left-click on date should open gsimplecal (through label action)
 
 ### zsh
 - review [zsh-vi-mode](https://github.com/jeffreytse/zsh-vi-mode)

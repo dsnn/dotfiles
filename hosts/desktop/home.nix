@@ -14,6 +14,7 @@
     ../../modules/home/xresources.nix
     ../../modules/home/i3.nix
     ../../modules/home/polybar
+    ../../modules/home/dunst.nix
     ../../modules/home/picom.nix
   ];
 
@@ -38,7 +39,6 @@
     feh
     freerdp
     google-chrome
-    kodi
     remmina
     slack
     spotify
@@ -51,5 +51,9 @@
     nomacs
     lxappearance
     nordzy-icon-theme
+    libnotify
+    eww
+    gsimplecal
   ];
+
 }

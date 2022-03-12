@@ -55,7 +55,7 @@ font-0 = RobotoMono Nerd Font:weight=bold:size=11;2
 ;---------------------------------------
 
 modules-left = i3
-modules-right = lan cpu memory sound storage battery date
+modules-right = lan cpu memory sound storage battery date powermenu
 ; modules-center = xwindow
 
 ;---------------------------------------
@@ -241,3 +241,34 @@ format-foreground = ${colors.white}
 format-background = ${colors.black}
 format-underline = ${colors.black}
 
+;---------------------------------------
+;	   POWER
+;---------------------------------------
+
+[module/powermenu]
+type = custom/menu
+format-foreground = ${colors.black}
+format-background = ${colors.orange}
+format-underline = ${colors.orange1}
+label-open = "  "
+label-open-font = 4
+label-close = "  Abort "
+label-close-foreground = ${colors.black}
+label-close-background = ${colors.green}
+label-close-underline = ${colors.green1}
+label-separator = " "
+label-separator-foreground = ${colors.xcolor1}
+
+; reboot
+menu-0-1 = "  Reboot "
+menu-0-1-exec = systemctl reboot
+menu-0-1-foreground = ${colors.black}
+menu-0-1-background = ${colors.red}
+menu-0-1-underline = ${colors.orange1}
+
+; shutdown
+menu-0-0 = "  Shutdown "
+menu-0-0-exec = systemctl poweroff
+menu-0-0-foreground = ${colors.black}
+menu-0-0-background = ${colors.red}
+menu-0-0-underline = ${colors.orange1}

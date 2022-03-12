@@ -45,7 +45,7 @@
 - move package installation to the module(s). e.g i3 should install itself and all deps.
 
 ### i3 
-- [fix fn-keys](https://pavelmakhov.com/2016/06/awesome-wm-fn-keys/)
+- fix fn-keys
 - autostart (firefox, discord, teamspeak, terminal, spotify)
 - shortcut for work-vpn + rfreerdp
 - shortcut for wireguard (?)

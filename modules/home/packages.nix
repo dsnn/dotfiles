@@ -29,6 +29,7 @@
     _1password-gui
     vault
     pavucontrol
+    pamixer
     firefox
     direnv
   ];

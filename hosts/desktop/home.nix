@@ -13,6 +13,7 @@
     ../../modules/home/lazygit.nix
     ../../modules/home/xresources.nix
     ../../modules/home/i3.nix
+    ../../modules/home/polybar
     ../../modules/home/picom.nix
   ];
 

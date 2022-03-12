@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let mod = "Mod4";
 in {
 
@@ -8,19 +8,6 @@ in {
 
   # install i3 deps
   # home.packages = with pkgs; [ xorg.xbacklight pavucontrol ];
-
-  # polybar
-  services.polybar.enable = true;
-  services.polybar.package = pkgs.polybarFull;
-  services.polybar.config = pkgs.substituteAll {
-    src = ./polybar-config;
-    interface = "enp6s0";
-  };
-  services.polybar.script = ''
-    for m in $(polybar --list-monitors | ${pkgs.coreutils}/bin/cut -d":" -f1); do
-      MONITOR=$m polybar mybar &
-    done
-  '';
 
   # xsession
   xsession.enable = true;
@@ -36,6 +23,9 @@ in {
 
   # i3 startup
   xsession.windowManager.i3.config.startup = [
+    { command = "exec firefox"; }
+    { command = "exec Discord"; }
+    { command = "nm-applet --indicator"; }
     {
       command = "exec i3-msg workspace 1";
       always = true;
@@ -47,6 +37,10 @@ in {
       notification = false;
     }
   ];
+  xsession.windowManager.i3.config.assigns = {
+    "1" = [{ class = "^Firefox$"; }];
+    "9" = [{ class = "^Discord$"; }];
+  };
 
   # no title bar
   xsession.windowManager.i3.config.window.titlebar = false;
@@ -112,22 +106,31 @@ in {
     #bindsym XF86AudioPause exec "mpc pause"
 
     # pulse audio controls
-    # "XF86AudioRaiseVolume" =
-    #   "exec --no-startup-id ${pkgs.pactl}/bin/pactl set-sink-volume 0 +5% #increase sound volume";
-    # "XF86AudioLowerVolume" =
-    #   "exec --no-startup-id ${pkgs.pactl}/bin/pactl set-sink-volume 0 -5% #decrease sound volume";
-    # "XF86AudioMute" =
-    #   "exec --no-startup-id ${pkgs.pactl}/bin/pactl set-sink-mute 0 toggle # mute sound";
+    "XF86AudioRaiseVolume" = "exec ${pkgs.pamixer}/bin/pamixer --increase 5";
+    "XF86AudioLowerVolume" = "exec ${pkgs.pamixer}/bin/pamixer --decrease 5";
+    "XF86AudioMute" = "exec ${pkgs.pamixer} --toggle-mute";
 
     # sreen brightness controls
     # "XF86MonBrightnessUp" =
-    #   "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -inc 10 # increase screen brightness";
+    #   "exec ${pkgs.brightnessctl}/bin/brightnessctl set +2%";
     # "XF86MonBrightnessDown" =
-    #   "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -dec 10 # decrease screen brightness";
+    #   "exec ${pkgs.brightnessctl}/bin/brightnessctl set 2%-";
 
     "${mod}+Shift+r" = "restart";
     "${mod}+Shift+e" = ''
       exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"'';
   };
+
+  xsession.windowManager.i3.extraConfig = ''
+    for_window [window_type="dialog"] floating enable
+    for_window [window_type="utility"] floating enable
+    for_window [window_type="toolbar"] floating enable
+    for_window [window_type="splash"] floating enable
+    for_window [window_type="menu"] floating enable
+    for_window [window_type="dropdown_menu"] floating enable
+    for_window [window_type="popup_menu"] floating enable
+    for_window [window_type="tooltip"] floating enable
+    for_window [window_type="notification"] floating enable
+  '';
 
 }

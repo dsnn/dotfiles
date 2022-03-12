@@ -2,6 +2,13 @@
 let mod = "Mod4";
 in {
 
+  # reference 
+  # https://github.com/nix-community/home-manager/blob/master/modules/services/window-managers/i3-sway/i3.nix
+  # https://github.com/nix-community/home-manager/blob/master/modules/services/window-managers/i3-sway/lib/options.nix
+
+  # install i3 deps
+  # home.packages = with pkgs; [ xorg.xbacklight pavucontrol ];
+
   # polybar
   services.polybar.enable = true;
   services.polybar.package = pkgs.polybarFull;
@@ -17,6 +24,10 @@ in {
 
   # xsession
   xsession.enable = true;
+
+  # cursor
+  xsession.pointerCursor.package = pkgs.nordzy-cursor-theme;
+  xsession.pointerCursor.name = "Nordzy-cursors";
 
   # i3
   xsession.windowManager.i3.enable = true;
@@ -37,7 +48,16 @@ in {
     }
   ];
 
-  # i3 config
+  # no title bar
+  xsession.windowManager.i3.config.window.titlebar = false;
+
+  # window commands
+  # xsession.windowManager.i3.config.window.commands = [{
+  #   command = "border pixel 1";
+  #   critera = { class = "^.*"; };
+  # }];
+
+  # i3 keybindings 
   xsession.windowManager.i3.config.keybindings = {
     "${mod}+f" = "fullscreen toggle";
     "${mod}+t" = "split toggle";
@@ -46,10 +66,8 @@ in {
 
     "${mod}+q" = "kill";
 
-    "${mod}+Shift+w" = "exec ${pkgs.firefox}/bin/firefox";
     "${mod}+Return" = "exec ${pkgs.kitty}/bin/kitty";
     "${mod}+d" = "exec ${pkgs.rofi}/bin/rofi -show run";
-    "${mod}+m" = "exec spotify";
 
     "${mod}+h" = "focus left";
     "${mod}+j" = "focus down";
@@ -85,6 +103,27 @@ in {
     "${mod}+Shift+8" = "move container to workspace 8";
     "${mod}+Shift+9" = "move container to workspace 9";
     "${mod}+Shift+0" = "move container to workspace 10";
+
+    # multimedia keys
+    #bindsym XF86AudioPlay  exec "mpc toggle"
+    #bindsym XF86AudioStop  exec "mpc stop"
+    #bindsym XF86AudioNext  exec "mpc next"
+    #bindsym XF86AudioPrev  exec "mpc prev"
+    #bindsym XF86AudioPause exec "mpc pause"
+
+    # pulse audio controls
+    # "XF86AudioRaiseVolume" =
+    #   "exec --no-startup-id ${pkgs.pactl}/bin/pactl set-sink-volume 0 +5% #increase sound volume";
+    # "XF86AudioLowerVolume" =
+    #   "exec --no-startup-id ${pkgs.pactl}/bin/pactl set-sink-volume 0 -5% #decrease sound volume";
+    # "XF86AudioMute" =
+    #   "exec --no-startup-id ${pkgs.pactl}/bin/pactl set-sink-mute 0 toggle # mute sound";
+
+    # sreen brightness controls
+    # "XF86MonBrightnessUp" =
+    #   "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -inc 10 # increase screen brightness";
+    # "XF86MonBrightnessDown" =
+    #   "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -dec 10 # decrease screen brightness";
 
     "${mod}+Shift+r" = "restart";
     "${mod}+Shift+e" = ''

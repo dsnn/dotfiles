@@ -2,19 +2,28 @@
 let mod = "Mod4";
 in {
 
+  # polybar
+  services.polybar.enable = true;
+  services.polybar.package = pkgs.polybarFull;
+  services.polybar.config = pkgs.substituteAll {
+    src = ./polybar-config;
+    interface = "enp6s0";
+  };
+  services.polybar.script = ''
+    for m in $(polybar --list-monitors | ${pkgs.coreutils}/bin/cut -d":" -f1); do
+      MONITOR=$m polybar mybar &
+    done
+  '';
+
+  # xsession
   xsession.enable = true;
 
+  # i3
   xsession.windowManager.i3.enable = true;
-  xsession.windowManager.i3.package = pkgs.i3-gaps;
-
   xsession.windowManager.i3.config.modifier = mod;
-  xsession.windowManager.i3.config.gaps = {
-    inner = 12;
-    outer = 5;
-    smartGaps = true;
-    smartBorders = "off";
-  };
+  xsession.windowManager.i3.config.bars = [ ];
 
+  # i3 startup
   xsession.windowManager.i3.config.startup = [
     {
       command = "exec i3-msg workspace 1";
@@ -28,16 +37,19 @@ in {
     }
   ];
 
+  # i3 config
   xsession.windowManager.i3.config.keybindings = {
     "${mod}+f" = "fullscreen toggle";
     "${mod}+t" = "split toggle";
     "${mod}+Space" = "focus toggle_mode";
+    "${mod}+Shift+f" = "floating toggle";
 
     "${mod}+q" = "kill";
 
     "${mod}+Shift+w" = "exec ${pkgs.firefox}/bin/firefox";
     "${mod}+Return" = "exec ${pkgs.kitty}/bin/kitty";
     "${mod}+d" = "exec ${pkgs.rofi}/bin/rofi -show run";
+    "${mod}+m" = "exec spotify";
 
     "${mod}+h" = "focus left";
     "${mod}+j" = "focus down";

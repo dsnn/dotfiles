@@ -12,7 +12,6 @@ in {
     ../../modules/system/pulseaudio.nix
     ../../modules/system/ergodox.nix
     ../../modules/system/networkmanager.nix
-    ../../modules/system/awesomewm.nix
     ../../modules/system/cifs.nix
     ../../modules/system/user.nix
     ../../modules/sops.nix
@@ -29,10 +28,19 @@ in {
   # networking.interfaces.wlp4s0.useDHCP = false;
   # networking.interfaces.enp5s0.useDHCP = true;
 
-  # testing xfce
-  # services.xserver.desktopManager.xterm.enable = false;
-  # services.xserver.desktopManager.xfce.enable = true;
-  # services.xserver.displayManager.defaultSession = "xfce";
+  # enable the X11 windowing system
+  services.xserver.enable = true;
+  services.xserver.layout = "se, us";
+  services.xserver.dpi = 120;
+  services.xserver.xkbOptions = "eurosign:e,grp:alt_space_toggle";
+
+  # video drivers
+  services.xserver.videoDrivers = [ " nvidia " ];
+
+  # window manager
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.defaultSession = "none+i3";
+  services.xserver.windowManager.i3.enable = true;
 
   # work vpn profile
   sops.secrets.nmconnection-work-vpn = { };

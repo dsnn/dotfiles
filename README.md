@@ -41,19 +41,25 @@
 - [hardware.opengl.extraPackages](https://nixos.org/manual/nixos/stable/options.html#opt-hardware.opengl.extraPackages)
   - [Accelerated Video Playback (vaapiIntel)](https://nixos.wiki/wiki/Accelerated_Video_Playback)
 - review [git-agecrypt](https://github.com/vlaci/git-agecrypt) for semi-secrets. [See here](https://github.com/Mic92/sops-nix/issues/159)
+- kodi settings & addons
 
-### awesomewm
+### i3 
 - [fix fn-keys](https://pavelmakhov.com/2016/06/awesome-wm-fn-keys/)
-- double tapping min/max window
-- always show resize in corners (?)
-- statusbar (top & bottom bar) 
-  - tags: web dev im
-  - icons (or in submenu):
-    - memory current ip volume calendar clock battery filesystem (free/total hdd)
-    - power cpu/load wifi vpn ping/speed (speedtest) temp weather mail
-  - apps 
-    - firefox discord teamspeak vs(code) terminal screenshot spotify notion todoist
-    - vpn (wireguard openvpn sstp)
+- autostart (firefox, discord, teamspeak, terminal, spotify)
+- shortcut for work-vpn + rfreerdp
+- shortcut for wireguard (?)
+- remove window titlebar
+- fix workspace (starts at 10 for second screen, should be 1 & 2)
+
+### polybar
+- icons
+- network icon/menu (nm-applet or custom) (wifi/VPN)
+- notifications/dunst
+- pavucontrol (volume, mute/unmute, source) 
+- battery
+- ping/speed (speedtest) temp
+- menu for more info/shortcuts (?)
+- powermenu
 
 ### zsh
 - review [zsh-vi-mode](https://github.com/jeffreytse/zsh-vi-mode)
@@ -66,13 +72,11 @@
 - review keybindings for navigation between windows, panes and nvim splits
 
 ### nvim
-
-- treesitter textobjects (select, swap).
-- telescope file browser shortcut mappings (home, dotfiles) 
-- fix ugly borders in windows terminal (due to font/Roboto NF)
+- review treesitter textobjects (select, swap).
 - review local work config (runtimepath)
+- fix ugly borders in windows terminal (due to font/Roboto NF)
+- [telescope file browser shortcut mappings (home, dotfiles)](https://github.com/nvim-telescope/telescope-file-browser.nvim)
 - [fix prettier](https://github.com/prettier/vim-prettier/issues/248)
-- [review telescope-file-browser](https://github.com/nvim-telescope/telescope-file-browser.nvim)
 
 ### plugins
 

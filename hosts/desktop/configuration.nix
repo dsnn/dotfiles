@@ -28,6 +28,9 @@ in {
   # networking.interfaces.wlp4s0.useDHCP = false;
   # networking.interfaces.enp5s0.useDHCP = true;
 
+  # persist settings for some apps (https://nixos.wiki/wiki/I3#DConf)
+  programs.dconf.enable = true;
+
   # enable the X11 windowing system
   services.xserver.enable = true;
   services.xserver.layout = "se, us";

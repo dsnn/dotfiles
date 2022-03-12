@@ -45,8 +45,10 @@
     teamspeak_client
     wireguard
     xfce.thunar
-    xfce.tumbler
+    xfce.tumbler # thunar thunbnails
+    xfce.xfconf # thunar persist settings
     nomacs
-    material-icons
+    lxappearance
+    nordzy-icon-theme
   ];
 }

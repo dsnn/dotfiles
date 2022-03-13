@@ -27,7 +27,7 @@
   programs.keychain.enable = true;
 
   # enable network manager applet
-  services.network-manager-applet = { enable = true; };
+  # services.network-manager-applet.enable = true;
 
   # create symlinks to local shares
   home.file."private".source = config.lib.file.mkOutOfStoreSymlink /mnt/private;

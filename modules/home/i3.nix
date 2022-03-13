@@ -25,9 +25,13 @@ in {
   xsession.windowManager.i3.config.startup = [
     { command = "exec firefox"; }
     { command = "exec Discord"; }
-    { command = "nm-applet --indicator"; }
     {
       command = "exec i3-msg workspace 1";
+      always = true;
+      notification = false;
+    }
+    {
+      command = "exec i3-msg workspace 2";
       always = true;
       notification = false;
     }
@@ -39,7 +43,8 @@ in {
   ];
   xsession.windowManager.i3.config.assigns = {
     "1" = [{ class = "^Firefox$"; }];
-    "9" = [{ class = "^Discord$"; }];
+    "2" = [{ class = "^kitty$"; }];
+    "3" = [{ class = "^Discord$"; }];
   };
 
   # no title bar

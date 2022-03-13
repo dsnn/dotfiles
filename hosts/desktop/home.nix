@@ -13,7 +13,6 @@
     ../../modules/home/lazygit.nix
     ../../modules/home/xresources.nix
     ../../modules/home/i3.nix
-    ../../modules/home/polybar
     ../../modules/home/dunst.nix
     ../../modules/home/picom.nix
   ];
@@ -48,12 +47,13 @@
     xfce.thunar
     xfce.tumbler # thunar thunbnails
     xfce.xfconf # thunar persist settings
+    lxappearance # thunar & i3 (icons & cursor)
+    nordzy-icon-theme # thunar
     nomacs
-    lxappearance
-    nordzy-icon-theme
-    libnotify
+    libnotify # dunst
     eww
-    gsimplecal
+    gsimplecal # polybar
+    polybarFull
   ];
 
 }

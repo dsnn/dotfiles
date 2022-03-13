@@ -35,8 +35,6 @@
 - review [git-agecrypt](https://github.com/vlaci/git-agecrypt) for semi-secrets. [See here](https://github.com/Mic92/sops-nix/issues/159)
 
 ### i3 
-- autostart (firefox, discord, teamspeak, terminal, spotify)
-- fix workspace (starts at 10 for second screen, should be 1 & 2)
 - host specific configurations (e.g. xorg.xbacklight for laptop only)
 - polybar
   - network manager

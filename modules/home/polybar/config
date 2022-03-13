@@ -43,6 +43,7 @@ padding-right = 0
 module-margin-left = 0
 module-margin-right = 1
 monitor = ${env:MONITOR}
+enable-ipc = true
 
 ;---------------------------------------
 ;		FONTS
@@ -203,6 +204,19 @@ format-volume-underline = ${colors.yellow1}
 ;---------------------------------------
 ;	   BATTERY
 ;---------------------------------------
+
+;animate battery indicator/status
+;ramp-capacity-0 = %{F#e31a1c o#e31a1c +o} %{F-}
+;ramp-capacity-1 = %{F#e31a1c o#e31a1c +o} %{F-}
+;ramp-capacity-2 = %{F#d7a645 o#d7a645 +o} %{F-}
+;ramp-capacity-3 = %{F#31a354 o#31a354 +o} %{F-}
+;ramp-capacity-4 = %{F#31a354 o#31a354 +o} %{F-}
+
+;animation-charging-0 = 
+;animation-charging-1 = 
+;animation-charging-2 = 
+;animation-charging-3 = 
+;animation-charging-4 = 
 
 [module/battery]
 type = internal/battery

@@ -7,7 +7,7 @@ in {
   # https://github.com/nix-community/home-manager/blob/master/modules/services/window-managers/i3-sway/lib/options.nix
 
   # install i3 deps
-  # home.packages = with pkgs; [ xorg.xbacklight pavucontrol ];
+  # home.packages = with pkgs; [ xorg.xbacklight pavucontrol polybarFull gsimplecal ];
 
   # xsession
   xsession.enable = true;
@@ -23,29 +23,24 @@ in {
 
   # i3 startup
   xsession.windowManager.i3.config.startup = [
-    { command = "exec firefox"; }
-    { command = "exec Discord"; }
+    # { command = "exec firefox"; }
+    # { command = "exec Discord"; }
     {
+      # xrandr --output X --primary
       command = "exec i3-msg workspace 1";
       always = true;
       notification = false;
     }
     {
-      command = "exec i3-msg workspace 2";
-      always = true;
-      notification = false;
-    }
-    {
-      command = "systemctl --user restart polybar.service";
+      command = "/home/dsn/.config/polybar/launch.sh";
       always = true;
       notification = false;
     }
   ];
-  xsession.windowManager.i3.config.assigns = {
-    "1" = [{ class = "^Firefox$"; }];
-    "2" = [{ class = "^kitty$"; }];
-    "3" = [{ class = "^Discord$"; }];
-  };
+  # xsession.windowManager.i3.config.assigns = {
+  #   "1" = [{ class = "^Firefox$"; }];
+  #   "3" = [{ class = "^Discord$"; }];
+  # };
 
   # no title bar
   xsession.windowManager.i3.config.window.titlebar = false;

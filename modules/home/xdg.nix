@@ -22,4 +22,7 @@
 
   xdg.configFile."awesome".source =
     config.lib.file.mkOutOfStoreSymlink ~/dotfiles/modules/home/awesome;
+
+  xdg.configFile."polybar".source =
+    config.lib.file.mkOutOfStoreSymlink ~/dotfiles/modules/home/polybar;
 }

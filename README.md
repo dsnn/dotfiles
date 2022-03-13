@@ -30,19 +30,9 @@
 - backup/rsync
 
 ### nix
-- nix nvim plugins (pin version?) 
-- [firefox (config styles & extensions)](https://nixos.wiki/wiki/Firefox)
-- wsl xrdp
-- [erase your darlings (rpool/local/root@blank)](https://grahamc.com/blog/erase-your-darlings)
-- run mkpasswd & save to sops for [passwordFile](https://nixos.org/manual/nixos/stable/options.html#opt-users.extraUsers._name_.passwordFile)
 - [syncthing](https://nixos.wiki/wiki/Syncthing)
-- [buildCores](https://nixos.org/manual/nix/stable/advanced-topics/cores-vs-jobs.html)
-- [powerManagement.enable?](https://nixos.org/manual/nixos/stable/options.html#opt-hardware.nvidia.powerManagement.enable)
-- [hardware.opengl.extraPackages](https://nixos.org/manual/nixos/stable/options.html#opt-hardware.opengl.extraPackages)
-  - [Accelerated Video Playback (vaapiIntel)](https://nixos.wiki/wiki/Accelerated_Video_Playback)
+- kodi overlay (v18: archive addon broken in latest version) 
 - review [git-agecrypt](https://github.com/vlaci/git-agecrypt) for semi-secrets. [See here](https://github.com/Mic92/sops-nix/issues/159)
-- kodi settings & addons
-- move package installation to the module(s). e.g i3 should install itself and all deps.
 
 ### i3 
 - autostart (firefox, discord, teamspeak, terminal, spotify)

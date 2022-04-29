@@ -1,5 +1,12 @@
 { config, pkgs, lib, ... }: {
 
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball {
+      url =
+        "https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz";
+    }))
+  ];
+
   targets.genericLinux.enable = true;
 
   nixpkgs.config.allowUnfree = true;
@@ -291,8 +298,8 @@
       vp = "vagrant provision";
 
       # work
-      web = "/home/dsn/opto/Core/Code/ServerHtml5/Web";
-      core = "/home/dsn/opto/Core/Code";
+      web = "/home/dsn/work/core/code/ServerHtml5/Web";
+      core = "/home/dsn/work/core/code";
     };
 
     initExtra = ''
@@ -353,6 +360,7 @@
     keychain
     nawk
     starship
+    pkgs.neovim-nightly
     tmux
     unzip
     vim
@@ -360,7 +368,6 @@
     xclip
     zsh
     jq
-    neovim
     nixfmt
     nixpkgs-fmt
     nodePackages.npm

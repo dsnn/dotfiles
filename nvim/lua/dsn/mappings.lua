@@ -10,6 +10,7 @@ map('n', '<Leader>.', '<C-^>', silent_no)
 map('n', '<Leader>,', ':wall<CR>', silent_no)
 map('n', '<Leader><space>', ':set hlsearch!<CR>', silent_no)
 map('n', '<Leader>x', '<cmd>luafile %<CR>', silent_no)
+map('n', '<Leader>t', '<cmd>e /home/dsn/work/TODO.md<CR>', silent_no)
 
 -- do not replace yank on multiple paste
 map('x', 'p', 'pgvy', silent_no)

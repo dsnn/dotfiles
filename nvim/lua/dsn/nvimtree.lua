@@ -99,7 +99,7 @@ require('nvim-tree').setup {
     timeout = 500,
   },
   view = {
-    width = 60,
+    width = 50,
     number = true,
     relativenumber = true,
     mappings = {

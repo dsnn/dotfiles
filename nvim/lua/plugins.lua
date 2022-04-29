@@ -30,7 +30,7 @@ return require('packer').startup(function(use)
     -- buffer, register, tabs & statusline
     use 'moll/vim-bbye' 					                          -- del buffers without closing windows
     use {'akinsho/bufferline.nvim', tag= "*", requires = 'kyazdani42/nvim-web-devicons'} -- improved tabline
-    use 'famiu/feline.nvim'                                 -- statusline
+    use { 'feline-nvim/feline.nvim', tag = "*" }                  -- statusline
 
     -- navigation
     use 'andymass/vim-matchup' 					                    -- extend vims matching (%)

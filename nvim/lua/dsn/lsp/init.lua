@@ -74,7 +74,7 @@ local border = {
 
 local function common_on_attach(client)
   -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_exec([[
       hi LspReferenceRead cterm=bold ctermbg=red guibg=#464646
       hi LspReferenceText cterm=bold ctermbg=red guibg=#464646
@@ -148,7 +148,7 @@ require'lspconfig'.tsserver.setup{
   },
   on_attach = function (client)
     common_on_attach(client)
-    client.resolved_capabilities.document_formatting = false
+    client.server_capabilities.documentFormattingProvider = false
   end,
   root_dir = util.root_pattern("package.json",
     "tsconfig.json", "jsconfig.json", ".git"),

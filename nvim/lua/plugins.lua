@@ -59,6 +59,7 @@ return require('packer').startup(function(use)
     use 'LnL7/vim-nix'
     use 'ThePrimeagen/harpoon'
     use 'tpope/vim-repeat'
+    use 'hashivim/vim-terraform'
 
     -- git
     use 'tpope/vim-fugitive'

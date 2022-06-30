@@ -218,6 +218,12 @@ require'lspconfig'.dockerls.setup{
   filetypes = { "dockerfile" }
 }
 
+require'lspconfig'.terraformls.setup{
+  on_attach = common_on_attach,
+  cmd = { vim.fn.getenv 'HOME' ..  "/.local/share/nvim/lsp_servers/terraform/terraform-ls", "serve"},
+  filetypes = { "terraform", "tf" }
+}
+
 local runtime_path = vim.split(package.path, ';')
 require'lspconfig'.sumneko_lua.setup {
     on_attach = common_on_attach,

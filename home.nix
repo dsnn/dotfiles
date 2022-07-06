@@ -15,6 +15,12 @@
   home.homeDirectory = "/home/dsn";
   home.stateVersion = "22.05";
 
+  home.sessionVariables = {
+    NIX_PATH =
+      "$HOME/.nix-defexpr/channels:nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixpkgs:/nix/var/nix/profiles/per-user/root/channels";
+    # PATH = "";
+  };
+
   xdg = {
     enable = true;
     cacheHome = ~/.local/cache;
@@ -297,9 +303,11 @@
       vs = "vagrant ssh";
       vp = "vagrant provision";
 
-      # work
+      # shortcuts 
       web = "/home/dsn/work/core/code/ServerHtml5/Web";
       core = "/home/dsn/work/core/code";
+      pp = "/home/dsn/projects";
+      b = "/home/dsn/build";
     };
 
     initExtra = ''

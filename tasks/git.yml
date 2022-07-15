@@ -1,8 +1,16 @@
 ---
+- name: git | Install git
+  package:
+    state: present
+    name:
+      - git
+  tags:
+    - git
+    - packages
+
 - name: Git | Install git config
   template:
     src: "{{ user.home }}/dotfiles/templates/gitconfig.j2"
     dest: "{{ user.home }}/.gitconfig"
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
-

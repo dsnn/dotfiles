@@ -24,9 +24,9 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 # XDG
-export XDG_CONFIG_HOME="{{ user.home }}/.config"
-export XDG_DATA_HOME="{{ user.home }}/.local/share"
-export XDG_CACHE_HOME="{{ user.home }}/.local/cache"
+export XDG_CONFIG_HOME="/home/dsn/.config"
+export XDG_DATA_HOME="/home/dsn/.local/share"
+export XDG_CACHE_HOME="/home/dsn/.local/cache"
 
 # volta
 export VOLTA_HOME="$HOME/.volta"

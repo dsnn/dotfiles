@@ -9,3 +9,21 @@
   file: 
     src: "{{ user.home }}/dotfiles/files/tmux.conf"
     dest: "{{ user.home }}/.config/tmux/tmux.conf" 
+
+- name: tmux | Clone tmux plugins from github
+  become_user: '{{ user.name }}'
+  git:
+    repo: https://github.com/tmux-plugins/{{ item }}
+    dest: '{{ user.home }}/.config/tmux/plugins/{{ item }}'
+    version: master
+    update: no 
+  with_items:
+    - tpm
+    - tmux-continuum
+    - tmux-sensible
+    - tmux-pain-control
+    - tmux-yank
+    - tmux-prefix-highlight
+  tags:
+    - tmux
+    - packages

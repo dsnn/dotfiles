@@ -28,3 +28,13 @@
     dest: "{{ user.home }}/.config/starship.toml"
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
+
+- name: ZSH | Install dircolors config
+  file:
+    src: "{{ user.home }}/dotfiles/files/dircolors"
+    dest: "{{ user.home }}/.config/dircolors"
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
+    state: link
+  tags:
+    - zsh

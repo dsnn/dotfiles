@@ -1,0 +1,11 @@
+---
+- name: mail | Install mail packages
+  package:
+    state: present
+    name:
+      - msmtp
+      - offlineimap
+      - neomutt
+  become: true
+  tags:
+    - mail

@@ -1,0 +1,38 @@
+---
+- hosts: localhost 
+  become: true 
+  tasks:
+
+    - name: Volta | Get latest release
+      uri:                                                               
+        url: https://api.github.com/repos/volta-cli/volta/releases/latest
+        return_content: true                                             
+      register: json_reponse                                             
+
+    - name: Volta | Download tarball 
+      get_url:                                                           
+        url: "{{ json_reponse.json.tarball_url }}"                       
+        dest: "/tmp/volta-latest.tar.gz"
+
+    - name: Volta | Unarchive tarball 
+      unarchive: 
+        src: "/tmp/volta-latest.tar.gz"
+        dest: "/tmp"
+        list_files: yes
+      register: volta_archive_contents
+
+    - name: Volta | Remove volta folder from user home 
+      file: 
+        state: absent 
+        path: "{{ user.home }}/.local/bin/volta"
+
+    - name: Volta | Move files to home folder 
+      command: "mv /tmp/{{ volta_archive_contents.files[0] }} {{ user.home }}/.local/bin/volta"
+
+    - name: Volta | Update volta directory owner
+      file:
+        path: "{{ user.home }}/.local/bin/volta"
+        owner: "{{ user.name }}"
+        group: "{{ user.group }}"
+        mode: "0755"
+        recurse: yes

@@ -11,7 +11,7 @@
       dest: /tmp/starship_install.sh
       mode: '0755'
 
-  - name: Install starship prompt 
+  - name: ZSH | Install starship prompt 
     script:
         cmd: /tmp/starship_install.sh --yes
         executable: /bin/sh

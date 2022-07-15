@@ -1,0 +1,9 @@
+---
+- name: Neovim | Symlink folder
+  file: 
+    src: "{{ user.home }}/dotfiles/files/nvim" 
+    dest: "{{ user.home }}/.config/nvim"
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
+    state: link
+

@@ -1,0 +1,21 @@
+---
+- hosts: all 
+  become: true 
+  tasks:
+  - name: Tmux | Get latest tag 
+    github_release:
+      user: tmux 
+      repo: tmux 
+      action: latest_release
+    register: tmux_latest 
+
+  - name: Tmux | Install package 
+    unarchive: 
+      src: "https://github.com/tmux/tmux/releases/download/{{ tmux_latest['tag'] }}/tmux-{{ tmux_latest['tag'] }}.tar.gz"
+      dest: "{{ user.home }}/.local/bin/tmux"
+      remote_src: true 
+
+  - name: Tmux | Symlink config
+    file: 
+      src: "{{ user.home }}/dotfiles/files/tmux.conf"
+      dest: "{{ user.home }}/.config/tmux/tmux.conf" 

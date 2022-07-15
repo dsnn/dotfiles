@@ -1,0 +1,8 @@
+---
+- name: bin | Symlink scripts 
+  file: 
+    src: "{{ user.home }}/dotfiles/files/bin"
+    dest: "{{ user.home }}/bin"
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
+    state: link

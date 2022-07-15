@@ -4,3 +4,6 @@ tags
 node_modules/
 package-lock.json
 packer_compiled.lua
+*.log
+.zcompdump
+history

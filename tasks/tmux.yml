@@ -1,0 +1,11 @@
+---
+- name: Tmux | Install package
+  package:
+    state: present
+    name: 
+      - tmux
+
+- name: Tmux | Symlink config
+  file: 
+    src: "{{ user.home }}/dotfiles/files/tmux.conf"
+    dest: "{{ user.home }}/.config/tmux/tmux.conf" 

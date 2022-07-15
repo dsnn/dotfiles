@@ -1,0 +1,17 @@
+
+---
+- hosts: localhost 
+  become: true 
+  tasks:
+    # TDOO: add is installed / to update 
+    
+  - name: ZSH | Download starship install script 
+    get_url:
+      url: https://starship.rs/install.sh
+      dest: /tmp/starship_install.sh
+      mode: '0755'
+
+  - name: Install starship prompt 
+    script:
+        cmd: /tmp/starship_install.sh --yes
+        executable: /bin/sh

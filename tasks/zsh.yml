@@ -1,0 +1,30 @@
+---
+- name: ZSH | Copy zshenv 
+  copy:
+    src: "{{ user.home }}/dotfiles/files/zshenv"
+    dest: "{{ user.home }}/.zshenv"
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
+
+- name: ZSH | Install package(s)
+  package:
+    state: present
+    name:
+      - zsh
+      - zsh-syntax-highlighting
+      - zsh-autosuggestions
+
+- name: ZSH | Symlink config (zshrc)
+  file: 
+    src: "{{ user.home }}/dotfiles/files/zsh"
+    dest: "{{ user.home }}/.config/zsh"
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
+    state: link
+
+- name: ZSH | Symlink startship prompt config
+  copy:
+    src: "{{ user.home }}/dotfiles/files/starship.toml"
+    dest: "{{ user.home }}/.config/starship.toml"
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"

@@ -1,0 +1,8 @@
+---
+- name: Git | Install git config
+  template:
+    src: "{{ user.home }}/dotfiles/templates/gitconfig.j2"
+    dest: "{{ user.home }}/.gitconfig"
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
+

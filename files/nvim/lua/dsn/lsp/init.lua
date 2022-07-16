@@ -227,7 +227,7 @@ require'lspconfig'.terraformls.setup{
 local runtime_path = vim.split(package.path, ';')
 require'lspconfig'.sumneko_lua.setup {
     on_attach = common_on_attach,
-    cmd = { vim.fn.getenv 'HOME' ..  "/.nix-profile/bin/lua-language-server", "--stdio" },
+    cmd = { vim.fn.getenv 'HOME' ..  "/.local/share/nvim/lsp_servers/sumneko_lua/lua-language-server", "--stdio" },
     settings = {
         Lua = {
             telemetry = {

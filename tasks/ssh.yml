@@ -1,0 +1,9 @@
+---
+- name: SSH | Install ssh config
+  template:
+    src: "{{ user.home }}/dotfiles/templates/sshconfig.j2"
+    dest: "{{ user.home }}/.ssh/config"
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
+  tags:
+    - ssh

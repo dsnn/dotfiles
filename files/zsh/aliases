@@ -40,7 +40,7 @@ alias rf="source ~/.config/zsh/.zshrc"
 
 # ansible
 alias ad="ansible-playbook ~/dotfiles/playbooks/dotfiles.yml -K"
-alias ae="ansible-vault edit ~/dotfiles/group_vars/secrets.yml"
+alias ae="ansible-vault edit ~/dotfiles/group_vars/all/secrets.yml"
 
 # listing
 alias l="ls -alh --color=auto"

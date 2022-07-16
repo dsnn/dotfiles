@@ -32,6 +32,9 @@ export FZF_CTRL_T_COMMAND='$FZF_DEFAULT_COMMAND'
 export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 export FZF_COMPLETION_OPTS='+c -x'
 
+# ansible
+export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault-password
+
 # nvim
 export PATH="$HOME/.local/bin/nvim/bin:$PATH"
 

@@ -1,0 +1,35 @@
+---
+- hosts: localhost 
+  become: true 
+  tasks:
+
+    - name: Neovim | Get latest release
+      uri:
+        url: https://api.github.com/repos/neovim/neovim/releases/latest
+        return_content: true
+      register: json_reponse
+
+    - name: Neovim | Download tarball
+      get_url:
+        url: "{{ json_reponse.json.assets[2].browser_download_url }}"
+        dest: "/tmp/neovim-latest.tar.gz"
+
+    - name: Neovim | Remove neovim folder from user home 
+      file: 
+        state: absent 
+        path: "{{ user.home }}/.local/bin/nvim"
+
+    - name: Neovim | Unarchive tarball 
+      unarchive: 
+        src: "/tmp/neovim-latest.tar.gz"
+        dest: "/tmp"
+        list_files: yes
+      register: neovim_archive_contents
+       
+    - name: Neovim | Move files to home folder 
+      command: "mv /tmp/nvim-linux64 {{ user.home }}/.local/bin/nvim"
+
+    - name: Neovim | Remove tarball 
+      file: 
+        state: absent
+        path: "/tmp/neovim-latest.tar.gz"

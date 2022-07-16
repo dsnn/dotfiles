@@ -15,3 +15,8 @@
     script:
         cmd: /tmp/starship_install.sh --yes
         executable: /bin/sh
+
+  - name: ZSH | Starship prompt Cleanup
+    file:
+      state: absent
+      path: "/tmp/starship_install.sh"

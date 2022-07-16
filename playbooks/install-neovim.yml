@@ -29,6 +29,15 @@
     - name: Neovim | Move files to home folder 
       command: "mv /tmp/nvim-linux64 {{ user.home }}/.local/bin/nvim"
 
+
+    - name: Neovim | Update neovim directory owner
+      file:
+        path: "{{ user.home }}/.local/bin/nvim"
+        owner: "{{ user.name }}"
+        group: "{{ user.group }}"
+        mode: "0755"
+        recurse: yes
+
     - name: Neovim | Remove tarball 
       file: 
         state: absent

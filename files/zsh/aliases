@@ -1,8 +1,6 @@
 alias cat="bat"
 alias awk="nawk"
-
-# scripts
-# update-nvim="bash /home/dsn/dotfiles/bin/get-nvim.sh";
+alias vim="nvim"
 
 # file shortcuts
 alias cfc="vim ~/dotfiles"
@@ -10,15 +8,18 @@ alias cfs="vim ~/.ssh/config"
 alias cfz="vim ~/dotfiles/files/zsh/.zshrc"
 alias cfg="vim ~/dotfiles/files/gitconfig"
 
-# folder shortcuts
+# shortcuts
 alias h="cd ~/"
 alias d="cd ~/dotfiles"
 alias cf="cd ~/.config"
-
-# windows
+alias bin="cd ~/.local/bin"
 alias cwt="cd /mnt/c/Users/dsn/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/"
 alias cwp="cd /mnt/c/Users/dsn/Documents/PowerShell/"
 alias cwr="cd /mnt/c/root"
+alias web="cd /home/dsn/work/core/code/ServerHtml5/Web"
+alias core="cd /home/dsn/work/core/code"
+alias pp="cd /home/dsn/projects"
+alias b="cd /home/dsn/build"
 
 # navigation
 alias ..="cd .."
@@ -36,12 +37,15 @@ alias cp="cp -v"
 alias df="df -h"
 alias mkdir="mkdir -pv"
 alias rf="source ~/.config/zsh/.zshrc"
-alias rl="ansible-playbook /home/dsn/dotfiles/playbooks/dotfiles.yml -K"
+
+# ansible
+alias ad="ansible-playbook ~/dotfiles/playbooks/dotfiles.yml -K"
+alias ae="ansible-vault edit ~/dotfiles/group_vars/secrets.yml"
 
 # listing
 alias l="ls -alh --color=auto"
-alias ll="ls -alh --format=horizontal --color=auto"
 alias la="ls -alh --color=auto"
+alias ll="ls -alh --color=auto --format=horizontal "
 alias lt="ls -alrth --color=auto"
 alias ls="ls -hN --group-directories-first --color=auto"
 
@@ -71,8 +75,3 @@ alias nrl="npm run lint"
 # wget
 alias wget=''wget --hsts-file="/home/dsn/.config/wget"/wget-hsts''
 
-# shortcuts 
-alias web="cd /home/dsn/work/core/code/ServerHtml5/Web"
-alias core="cd /home/dsn/work/core/code"
-alias pp="cd /home/dsn/projects"
-alias b="cd /home/dsn/build"

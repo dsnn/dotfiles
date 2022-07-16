@@ -36,3 +36,8 @@
         group: "{{ user.group }}"
         mode: "0755"
         recurse: yes
+
+    - name: Volta | Cleanup
+      file:
+        state: absent
+        path: "/tmp/volta-latest.tar.gz"

@@ -1,21 +1,55 @@
 ---
-- hosts: all 
+- hosts: localhost 
   become: true 
   tasks:
-  - name: Tmux | Get latest tag 
-    github_release:
-      user: tmux 
-      repo: tmux 
-      action: latest_release
-    register: tmux_latest 
 
-  - name: Tmux | Install package 
-    unarchive: 
-      src: "https://github.com/tmux/tmux/releases/download/{{ tmux_latest['tag'] }}/tmux-{{ tmux_latest['tag'] }}.tar.gz"
-      dest: "{{ user.home }}/.local/bin/tmux"
-      remote_src: true 
+    - name: Tmux | Install build deps 
+      package:
+        state: present
+        name:
+          - pkg-config
+          - libevent-dev
+          - bison
 
-  - name: Tmux | Symlink config
-    file: 
-      src: "{{ user.home }}/dotfiles/files/tmux.conf"
-      dest: "{{ user.home }}/.config/tmux/tmux.conf" 
+    - name: Tmux | Get latest release
+      uri:
+        url: https://api.github.com/repos/tmux/tmux/releases/latest
+        return_content: true
+      register: json_reponse
+
+    - name: Tmux | Download tarball
+      get_url:
+        url: "{{ json_reponse.json.tarball_url }}"
+        dest: "/tmp/tmux-latest.tar.gz"
+
+    - name: Tmux | Unarchive tarball 
+      unarchive: 
+        src: "/tmp/tmux-latest.tar.gz"
+        dest: "/tmp"
+        list_files: yes
+      register: tmux_archive_contents
+
+    - name: Tmux | Generate configure 
+      shell: 
+        chdir: /tmp/{{ tmux_archive_contents.files[0] }}
+        cmd: "./autogen.sh"
+
+    - name: Tmux | Run configure 
+      shell: 
+        chdir: /tmp/{{ tmux_archive_contents.files[0] }}
+        cmd: "./configure"
+
+    - name: Tmux | Make install 
+      shell: 
+        chdir: /tmp/{{ tmux_archive_contents.files[0] }}
+        cmd: "make && sudo make install"
+
+    - name: Tmux | Remove build dir 
+      file: 
+        state: absent
+        path: "/tmp/{{ tmux_archive_contents.files[0] }}"
+        
+    - name: Tmux | Remove tarball 
+      file: 
+        state: absent
+        path: "/tmp/tmux-latest.tar.gz"

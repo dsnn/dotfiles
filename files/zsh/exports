@@ -35,6 +35,9 @@ export FZF_COMPLETION_OPTS='+c -x'
 # ansible
 export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault-password
 
+# tmuxp
+TMUXP_CONFIGDIR=$HOME/.config/tmuxp
+
 # nvim
 export PATH="$HOME/.local/bin/nvim/bin:$PATH"
 

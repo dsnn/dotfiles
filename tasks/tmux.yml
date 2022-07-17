@@ -4,14 +4,17 @@
     state: present
     name: 
       - tmux
+      - tmuxp
 
 - name: Tmux | Symlink config
   file: 
     src: "{{ user.home }}/dotfiles/files/tmux.conf"
     dest: "{{ user.home }}/.config/tmux/tmux.conf" 
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
+    state: link
 
 - name: tmux | Clone tmux plugins from github
-  become_user: '{{ user.name }}'
   git:
     repo: https://github.com/tmux-plugins/{{ item }}
     dest: '{{ user.home }}/.config/tmux/plugins/{{ item }}'
@@ -20,10 +23,15 @@
   with_items:
     - tpm
     - tmux-continuum
-    - tmux-sensible
-    - tmux-pain-control
-    - tmux-yank
-    - tmux-prefix-highlight
+    - tmux-resurrect
   tags:
     - tmux
     - packages
+
+- name: Tmux | Symlink tmuxp workspaces
+  file: 
+    src: "{{ user.home }}/dotfiles/files/tmuxp"
+    dest: "{{ user.home }}/.config/tmuxp" 
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
+    state: link

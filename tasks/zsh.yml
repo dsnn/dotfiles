@@ -23,11 +23,12 @@
     state: link
 
 - name: ZSH | Symlink startship prompt config
-  copy:
+  file:
     src: "{{ user.home }}/dotfiles/files/starship.toml"
     dest: "{{ user.home }}/.config/starship.toml"
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
+    state: link
 
 - name: ZSH | Install dircolors config
   file:

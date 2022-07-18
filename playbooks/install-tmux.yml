@@ -7,9 +7,13 @@
       package:
         state: present
         name:
+          - libncurses5-dev
+          - libncursesw5-dev
           - pkg-config
           - libevent-dev
           - bison
+          - autotools-dev
+          - automake
 
     - name: Tmux | Get latest release
       uri:
@@ -35,6 +39,7 @@
         cmd: "./autogen.sh"
 
     - name: Tmux | Run configure 
+      become: true
       shell: 
         chdir: /tmp/{{ tmux_archive_contents.files[0] }}
         cmd: "./configure"

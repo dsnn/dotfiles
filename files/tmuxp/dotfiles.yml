@@ -2,9 +2,7 @@ session_name: dotfiles
 start_directory: ~/dotfiles
 windows:
   - window_name: dev 
-    layout: main-vertical 
-    options: 
-      main-pane-width: 20
+    layout: even-vertical
     panes:
       - shell_command: nvim 
         focus: true

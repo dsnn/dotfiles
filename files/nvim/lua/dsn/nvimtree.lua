@@ -33,31 +33,6 @@ local key_mappings_list = {
 
 -- vim.g.nvim_tree_indent_markers = 1
 vim.g.nvim_tree_git_ignore     = 1
-vim.g.nvim_tree_git_hl         = 1
-vim.g.nvim_tree_show_icons = {
-    folders = 1,
-    folder_arrows = 1,
-    files = 1,
-    git = 1
-};
-vim.g.nvim_tree_icons = {
-    default = '',
-    symlink = '',
-    git = {
-        unstaged = "",
-        staged = "✓",
-        unmerged = "",
-        renamed = "➜",
-        untracked = "✗"
-    },
-    folder = {
-        default = "",
-        open = "",
-        empty = "",
-        empty_open = "",
-        symlink = ""
-    }
-};
 
 require('nvim-tree').setup {
   -- auto_close = true,
@@ -65,6 +40,7 @@ require('nvim-tree').setup {
   disable_netrw = false,
   update_cwd = true,
   renderer = {
+    highlight_git = true,
     indent_markers = {
       enable = false,
       icons = {
@@ -75,6 +51,30 @@ require('nvim-tree').setup {
     },
     icons = {
       webdev_colors = true,
+      glyphs = {
+        default = '',
+        symlink = '',
+        git = {
+            unstaged = "",
+            staged = "✓",
+            unmerged = "",
+            renamed = "➜",
+            untracked = "✗"
+        },
+        folder = {
+            default = "",
+            open = "",
+            empty = "",
+            empty_open = "",
+            symlink = ""
+        }
+      },
+      show = {
+        folder = true,
+        folder_arrow = true,
+        file = true,
+        git = true
+      }
     },
   },
   update_focused_file = {

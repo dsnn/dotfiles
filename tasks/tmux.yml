@@ -1,9 +1,8 @@
 ---
-- name: Tmux | Install package
+- name: Tmux | Install tmuxp 
   package:
     state: present
     name: 
-      - tmux
       - tmuxp
 
 - name: Tmux | Symlink config
@@ -13,8 +12,9 @@
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
     state: link
+    follow: false
 
-- name: tmux | Clone tmux plugins from github
+- name: Tmux | Clone tmux plugins from github
   git:
     repo: https://github.com/tmux-plugins/{{ item }}
     dest: '{{ user.home }}/.config/tmux/plugins/{{ item }}'
@@ -27,6 +27,14 @@
   tags:
     - tmux
     - packages
+
+- name: Tmux | Update plugins owner
+  file:
+    path: "{{ user.home}}/.config/tmux/plugins"
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
+    recurse: yes
+    mode: '0755'
 
 - name: Tmux | Symlink tmuxp workspaces
   file: 

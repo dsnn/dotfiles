@@ -5,6 +5,12 @@
     name: 
       - tmuxp
 
+- name: Tmux | Create config dir
+  file:
+    path: "{{ user.home }}/.config/tmux"
+    state: directory
+    mode: '0755'
+
 - name: Tmux | Symlink config
   file: 
     src: "{{ user.home }}/dotfiles/files/tmux.conf"
@@ -34,7 +40,6 @@
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
     recurse: yes
-    mode: '0755'
 
 - name: Tmux | Symlink tmuxp workspaces
   file: 

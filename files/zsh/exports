@@ -1,5 +1,3 @@
-# {{ ansible manaaged }}
-
 export KEYTIMEOUT=1 # ZSH: Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
 export LC_CTYPE="en_US.UTF-8"
 export LEDGER_COLOR="true"

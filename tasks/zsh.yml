@@ -22,6 +22,19 @@
     group: "{{ user.group }}"
     state: link
 
+- name: ZSH | Create secrets dir
+  file:
+    path: "{{ user.home }}/.secrets"
+    state: directory
+    mode: '0755'
+
+- name: ZSH | Create secret exports from template
+  template:
+    src: "{{ user.home }}/dotfiles/templates/exports.secret.j2"
+    dest: "{{ user.home }}/.secrets/exports.secret"
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
+
 - name: ZSH | Symlink startship prompt config
   file:
     src: "{{ user.home }}/dotfiles/files/starship.toml"

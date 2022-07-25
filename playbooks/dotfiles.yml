@@ -1,6 +1,16 @@
 ---
 - hosts: all 
   become: true 
+  pre_tasks:
+    - name: Bootstrap | Create base folders
+      file: "{{ item }}"
+      owner: "{{ user.name }}"
+      group: "{{ user.group }}"
+      with_items:
+      - "{{ user.home }}/.config"
+      - "{{ user.home }}/.local/bin"
+      - "{{ user.home }}/.local/share/nvim/lsp_servers/sumneko_lua/server"
+
   tasks:
   - import_tasks: ../tasks/bin.yml
   - import_tasks: ../tasks/zsh.yml

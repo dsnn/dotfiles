@@ -14,6 +14,7 @@
           - bison
           - autotools-dev
           - automake
+          - build-essential
 
     - name: Tmux | Get latest release
       uri:

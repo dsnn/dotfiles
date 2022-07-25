@@ -13,6 +13,7 @@
       - zsh
       - zsh-syntax-highlighting
       - zsh-autosuggestions
+      - keychain
 
 - name: ZSH | Symlink config (zshrc)
   file: 
@@ -50,5 +51,12 @@
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
     state: link
+  tags:
+    - zsh
+
+- name: ZSH | Change user shell to zsh 
+  user:
+    name: "{{ user.name }}"
+    shell: /usr/bin/zsh
   tags:
     - zsh

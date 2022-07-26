@@ -6,6 +6,8 @@
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
     mode: "0700"
+  tags:
+    - zsh
 
 - name: ZSH | Install package(s)
   ansible.builtin.package:
@@ -15,6 +17,8 @@
       - zsh-syntax-highlighting
       - zsh-autosuggestions
       - keychain
+  tags:
+    - zsh
 
 - name: ZSH | Symlink config (zshrc)
   ansible.builtin.file:
@@ -23,12 +27,16 @@
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
     state: link
+  tags:
+    - zsh
 
 - name: ZSH | Create secrets dir
   ansible.builtin.file:
     path: "{{ user.home }}/.secrets"
     state: directory
     mode: "0700"
+  tags:
+    - zsh
 
 - name: ZSH | Create secret exports from template
   ansible.builtin.template:
@@ -37,6 +45,8 @@
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
     mode: "0700"
+  tags:
+    - zsh
 
 - name: ZSH | Symlink startship prompt config
   ansible.builtin.file:
@@ -45,6 +55,8 @@
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
     state: link
+  tags:
+    - zsh
 
 - name: ZSH | Install dircolors config
   ansible.builtin.file:

@@ -8,3 +8,10 @@
     mode: "0755"
   tags:
     - ssh
+
+- name: SSH | Install mosh
+  ansible.builtin.package:
+    name: mosh
+    state: present
+  tags:
+    - ssh

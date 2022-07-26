@@ -1,6 +1,6 @@
 ---
 - name: Docker | Install package
-  package:
+  ansible.builtin.package:
     name: docker
     state: present
   tags:
@@ -8,7 +8,7 @@
     - packages
 
 - name: Docker | Add user to docker group
-  user:
+  ansible.builtin.user:
     name: "{{ user.name }}"
     groups: docker
     append: true
@@ -16,9 +16,9 @@
     - docker
 
 - name: Docker | Enable docker service
-  service:
+  ansible.builtin.service:
     name: docker.service
-    enabled: yes
+    enabled: true
     state: started
   tags:
     - docker

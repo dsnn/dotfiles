@@ -1,6 +1,6 @@
 ---
-- name: bin | Symlink scripts 
-  file: 
+- name: bin | Symlink scripts
+  ansible.builtin.file:
     src: "{{ user.home }}/dotfiles/files/bin"
     dest: "{{ user.home }}/bin"
     owner: "{{ user.name }}"

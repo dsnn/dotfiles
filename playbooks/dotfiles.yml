@@ -1,6 +1,6 @@
 ---
-- hosts: all 
-  become: true 
+- hosts: all
+  become: true
   # pre_tasks:
   #   - name: Bootstrap | Create base folders
   #     file: "{{ item }}"
@@ -12,12 +12,12 @@
   #     - "{{ user.home }}/.local/share/nvim/lsp_servers/sumneko_lua/server"
 
   tasks:
-  - import_tasks: ../tasks/bin.yml
-  - import_tasks: ../tasks/zsh.yml
-  - import_tasks: ../tasks/neovim.yml
-  - import_tasks: ../tasks/git.yml
-  - import_tasks: ../tasks/bat.yml
-  - import_tasks: ../tasks/fzf.yml
-  - import_tasks: ../tasks/tmux.yml
-  - import_tasks: ../tasks/ssh.yml
-  - import_tasks: ../tasks/python.yml
+    - import_tasks: ../tasks/bin.yml
+    - import_tasks: ../tasks/zsh.yml
+    - import_tasks: ../tasks/neovim.yml
+    - import_tasks: ../tasks/git.yml
+    - import_tasks: ../tasks/bat.yml
+    - import_tasks: ../tasks/fzf.yml
+    - import_tasks: ../tasks/tmux.yml
+    - import_tasks: ../tasks/ssh.yml
+    - import_tasks: ../tasks/python.yml

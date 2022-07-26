@@ -1,6 +1,6 @@
 ---
 - name: dotnet | Install dotnet packages
-  package:
+  ansible.builtin.package:
     name:
       - dotnet-runtime
       - dotnet-sdk

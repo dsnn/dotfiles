@@ -1,13 +1,14 @@
 ---
-- name: ZSH | Copy zshenv 
-  copy:
+- name: ZSH | Copy zshenv
+  ansible.builtin.copy:
     src: "{{ user.home }}/dotfiles/files/zshenv"
     dest: "{{ user.home }}/.zshenv"
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
+    mode: "0700"
 
 - name: ZSH | Install package(s)
-  package:
+  ansible.builtin.package:
     state: present
     name:
       - zsh
@@ -16,7 +17,7 @@
       - keychain
 
 - name: ZSH | Symlink config (zshrc)
-  file: 
+  ansible.builtin.file:
     src: "{{ user.home }}/dotfiles/files/zsh"
     dest: "{{ user.home }}/.config/zsh"
     owner: "{{ user.name }}"
@@ -24,20 +25,21 @@
     state: link
 
 - name: ZSH | Create secrets dir
-  file:
+  ansible.builtin.file:
     path: "{{ user.home }}/.secrets"
     state: directory
-    mode: '0755'
+    mode: "0700"
 
 - name: ZSH | Create secret exports from template
-  template:
+  ansible.builtin.template:
     src: "{{ user.home }}/dotfiles/templates/exports.secret.j2"
     dest: "{{ user.home }}/.secrets/exports.secret"
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
+    mode: "0700"
 
 - name: ZSH | Symlink startship prompt config
-  file:
+  ansible.builtin.file:
     src: "{{ user.home }}/dotfiles/files/starship.toml"
     dest: "{{ user.home }}/.config/starship.toml"
     owner: "{{ user.name }}"
@@ -45,7 +47,7 @@
     state: link
 
 - name: ZSH | Install dircolors config
-  file:
+  ansible.builtin.file:
     src: "{{ user.home }}/dotfiles/files/dircolors"
     dest: "{{ user.home }}/.config/dircolors"
     owner: "{{ user.name }}"
@@ -54,8 +56,8 @@
   tags:
     - zsh
 
-- name: ZSH | Change user shell to zsh 
-  user:
+- name: ZSH | Change user shell to zsh
+  ansible.builtin.user:
     name: "{{ user.name }}"
     shell: /usr/bin/zsh
   tags:

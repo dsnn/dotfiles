@@ -1,14 +1,14 @@
 ---
 - name: FZF | Install package
-  package:
+  ansible.builtin.package:
     state: present
-    name: 
+    name:
       - fzf
       - fd-find
 
 - name: FZF | Replace fd with fdfind (symlink)
-  file:
-    src: "/usr/bin/fdfind"
+  ansible.builtin.file:
+    src: /usr/bin/fdfind
     dest: "{{ user.home }}/.local/bin/fd"
     owner: "{{ user.name }}"
     group: "{{ user.group }}"

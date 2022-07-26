@@ -1,0 +1,42 @@
+---
+- hosts: localhost
+  become: true
+  tasks:
+
+    - name: Lazygit | Get latest release
+      uri:
+        url: https://api.github.com/repos/jesseduffield/lazygit/releases/latest
+        return_content: true
+      register: json_reponse
+
+    - name: Lazygit | Download tarball
+      get_url:
+        url: "{{ json_reponse.json.assets[10].browser_download_url }}"
+        dest: "/tmp/lazygit-latest.tar.gz"
+
+    - name: Lazygit | Unarchive tarball
+      unarchive:
+        src: "/tmp/lazygit-latest.tar.gz"
+        dest: "/tmp"
+        list_files: yes
+      register: lazygit_archive_contents
+
+    - name: Lazygit | Remove lazygit folder from user home
+      file:
+        state: absent
+        path: "{{ user.home }}/.local/bin/lazygit"
+
+    - name: Lazygit | Move files to home folder
+      command: "mv /tmp/{{ lazygit_archive_contents.files[2] }} {{ user.home }}/.local/bin"
+
+    - name: Lazygit | Update lazygit owner
+      file:
+        path: "{{ user.home }}/.local/bin/lazygit"
+        owner: "{{ user.name }}"
+        group: "{{ user.group }}"
+        mode: "0755"
+
+    - name: Lazygit | Remove tarball
+      file:
+        state: absent
+        path: "/tmp/lazygit-latest.tar.gz"

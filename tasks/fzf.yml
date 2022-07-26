@@ -13,3 +13,4 @@
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
     state: link
+    follow: false

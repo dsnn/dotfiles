@@ -5,11 +5,16 @@
     name:
       - tmuxp
 
-- name: Tmux | Create config dir
+- name: Tmux | Create directories
   ansible.builtin.file:
-    path: "{{ user.home }}/.config/tmux"
+    path: "{{ item }}"
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
     state: directory
     mode: "0755"
+  with_items:
+    - "{{ user.home }}/.config/tmux"
+    - "{{ user.home }}//.config/tmux/resurrect"
 
 - name: Tmux | Symlink config
   ansible.builtin.file:

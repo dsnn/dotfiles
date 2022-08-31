@@ -2,63 +2,11 @@
 - hosts: localhost
   become: true
   tasks:
-    - name: Volta | Get latest release
-      ansible.builtin.uri:
-        url: https://api.github.com/repos/volta-cli/volta/releases/latest
-        return_content: true
-      register: json_response
-
-    - name: Volta | Download tarball
+    - name: Volta | Download installer
       ansible.builtin.get_url:
-        url: "{{ json_response.json.assets[2].browser_download_url }}"
-        dest: /tmp/volta-latest.tar.gz
-        mode: "0777"
+        url: https://get.volta.sh
+        dest: /tmp/volta.sh
+        mode: '0777'
 
-    - name: Volta | Create archive dir
-      ansible.builtin.file:
-        path: /tmp/volta-latest
-        state: directory
-        mode: "0777"
-
-    - name: Volta | Unarchive tarball
-      ansible.builtin.unarchive:
-        src: /tmp/volta-latest.tar.gz
-        dest: /tmp/volta-latest
-        list_files: true
-      register: volta_archive_contents
-
-    - name: Volta | Update volta archive directory owner
-      ansible.builtin.file:
-        path: /tmp/volta-latest
-        owner: "{{ user.name }}"
-        group: "{{ user.group }}"
-        mode: "0755"
-        recurse: true
-
-    - name: Volta | Remove volta folder from user home
-      ansible.builtin.file:
-        state: absent
-        path: "{{ user.home }}/.local/bin/volta"
-
-    - name: Volta | Create archive dir
-      ansible.builtin.file:
-        path: "{{ user.home }}/.local/bin/volta"
-        state: directory
-        mode: "0777"
-
-    - name: Volta | Move files to home folder
-      ansible.builtin.command: mv /tmp/volta-latest {{ user.home }}/.local/bin/volta
-      changed_when: false
-
-    - name: Volta | Update volta directory owner
-      ansible.builtin.file:
-        path: "{{ user.home }}/.local/bin/volta"
-        owner: "{{ user.name }}"
-        group: "{{ user.group }}"
-        mode: "0755"
-        recurse: true
-
-    - name: Volta | Cleanup
-      ansible.builtin.file:
-        state: absent
-        path: /tmp/volta-latest.tar.gz
+    - name: Volta | Install
+      command: bash /tmp/volta.sh

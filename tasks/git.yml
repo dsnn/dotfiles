@@ -15,3 +15,5 @@
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
     mode: "0700"
+  tags:
+    - git

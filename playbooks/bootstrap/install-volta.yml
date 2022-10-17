@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  become: true
+  tasks:
+    - name: Volta | Download installer
+      ansible.builtin.get_url:
+        url: https://get.volta.sh
+        dest: /tmp/volta.sh
+        mode: '0777'
+
+    - name: Volta | Install
+      command: bash /tmp/volta.sh

@@ -1,9 +1,17 @@
 ---
 - name: SSH | Install ssh config
-  template:
+  ansible.builtin.template:
     src: "{{ user.home }}/dotfiles/templates/sshconfig.j2"
     dest: "{{ user.home }}/.ssh/config"
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
+    mode: "0755"
+  tags:
+    - ssh
+
+- name: SSH | Install mosh
+  ansible.builtin.package:
+    name: mosh
+    state: present
   tags:
     - ssh

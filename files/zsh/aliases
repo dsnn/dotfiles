@@ -42,6 +42,9 @@ alias rf="source ~/.config/zsh/.zshrc"
 alias ap="ansible-playbook"
 alias ad="ansible-playbook ~/dotfiles/playbooks/dotfiles.yml -K"
 alias ae="ansible-vault edit ~/dotfiles/group_vars/all/secrets.yml"
+alias ap='ansible-playbook'
+alias av='ansible-vault'
+alias al='ansible-lint'
 
 # listing
 alias l="ls -alh --color=auto"
@@ -75,4 +78,3 @@ alias nrl="npm run lint"
 
 # wget
 alias wget=''wget --hsts-file="/home/dsn/.config/wget"/wget-hsts''
-

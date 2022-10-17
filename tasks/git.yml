@@ -1,6 +1,6 @@
 ---
 - name: git | Install git
-  package:
+  ansible.builtin.package:
     state: present
     name:
       - git
@@ -9,8 +9,9 @@
     - packages
 
 - name: Git | Install git config
-  template:
+  ansible.builtin.template:
     src: "{{ user.home }}/dotfiles/templates/gitconfig.j2"
     dest: "{{ user.home }}/.gitconfig"
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
+    mode: "0700"

@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  become: true
+  tasks:
+    - name: ZSH | Download starship install script
+      ansible.builtin.get_url:
+        url: https://starship.rs/install.sh
+        dest: /tmp/starship_install.sh
+        mode: "0777"
+
+    - name: ZSH | Install starship prompt
+      ansible.builtin.script:
+        cmd: /tmp/starship_install.sh --yes
+        executable: /bin/sh
+
+    - name: ZSH | Starship prompt Cleanup
+      ansible.builtin.file:
+        state: absent
+        path: /tmp/starship_install.sh

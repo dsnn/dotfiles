@@ -1,0 +1,14 @@
+---
+- name: Python | Install package(s)
+  ansible.builtin.package:
+    name:
+      - python3-pip
+    state: present
+  tags:
+    - python
+
+- name: Python | Install ansible lint
+  ansible.builtin.pip:
+    name: ansible-lint
+  tags:
+    - python

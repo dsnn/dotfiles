@@ -1,31 +1,36 @@
 ---
-- name: Tmux | Install tmuxp 
-  package:
+- name: Tmux | Install tmuxp
+  ansible.builtin.package:
     state: present
-    name: 
+    name:
       - tmuxp
 
-- name: Tmux | Create config dir
-  file:
-    path: "{{ user.home }}/.config/tmux"
+- name: Tmux | Create directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
     state: directory
-    mode: '0755'
+    mode: "0755"
+  with_items:
+    - "{{ user.home }}/.config/tmux"
+    - "{{ user.home }}//.config/tmux/resurrect"
 
 - name: Tmux | Symlink config
-  file: 
+  ansible.builtin.file:
     src: "{{ user.home }}/dotfiles/files/tmux.conf"
-    dest: "{{ user.home }}/.config/tmux/tmux.conf" 
+    dest: "{{ user.home }}/.config/tmux/tmux.conf"
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
     state: link
     follow: false
 
 - name: Tmux | Clone tmux plugins from github
-  git:
+  ansible.builtin.git:
     repo: https://github.com/tmux-plugins/{{ item }}
-    dest: '{{ user.home }}/.config/tmux/plugins/{{ item }}'
+    dest: "{{ user.home }}/.config/tmux/plugins/{{ item }}"
     version: master
-    update: no 
+    update: false
   with_items:
     - tpm
     - tmux-continuum
@@ -35,16 +40,16 @@
     - packages
 
 - name: Tmux | Update plugins owner
-  file:
+  ansible.builtin.file:
     path: "{{ user.home}}/.config/tmux/plugins"
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
-    recurse: yes
+    recurse: true
 
 - name: Tmux | Symlink tmuxp workspaces
-  file: 
+  ansible.builtin.file:
     src: "{{ user.home }}/dotfiles/files/tmuxp"
-    dest: "{{ user.home }}/.config/tmuxp" 
+    dest: "{{ user.home }}/.config/tmuxp"
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
     state: link

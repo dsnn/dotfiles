@@ -1,13 +1,14 @@
 ---
 - name: Bat | Install package
-  package: 
+  ansible.builtin.package:
     state: present
     name: bat
 
-- name: Bat | Symlink bat 
-  file:
-    src: "/usr/bin/batcat"
+- name: Bat | Symlink bat
+  ansible.builtin.file:
+    src: /usr/bin/batcat
     dest: "{{ user.home }}/.local/bin/bat"
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
     state: link
+    follow: false

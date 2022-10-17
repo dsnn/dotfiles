@@ -15,7 +15,7 @@ require('telescope').setup {
     defaults = {
         color_devicons = true,
         prompt_prefix = " ",
-        file_ignore_patterns = { ".git", "node_modules", "obj", "wwwroot" },
+        file_ignore_patterns = { "^.git/", "^node_modules/", "^obj/", "^wwwroot/" },
         layout_strategy = "horizontal",
         layout_config = {
           width = 0.95,

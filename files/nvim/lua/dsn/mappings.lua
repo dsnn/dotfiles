@@ -49,6 +49,7 @@ map('n', 'ss', '<C-w>s', silent_no)
 -- telescope
 map('n', '<space>gp', "<cmd>:lua require('dsn.telescope').grep_prompt()<CR>", silent_no)
 map('n', '<space>gs', "<cmd>:lua require('dsn.telescope').git_status()<CR>", silent_no)
+map('n', '<space>gl', "<cmd>:lua require('dsn.telescope').live_grep()<CR>", silent_no)
 map('n', '<space>gw', "<cmd>:lua require('dsn.telescope').grep_word()<CR>", silent_no)
 map('n', '<space>fh', "<cmd>:lua require('dsn.telescope').help_tags()<CR>", silent_no)
 map('n', '<space>fd', "<cmd>:lua require('dsn.telescope').dotfiles()<CR>", silent_no)

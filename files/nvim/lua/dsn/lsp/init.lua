@@ -9,6 +9,7 @@ vim.api.nvim_set_keymap('n', 'gr',       '<cmd>lua vim.lsp.buf.references()<CR>'
 vim.api.nvim_set_keymap('n', 'gh',       "<cmd>lua vim.lsp.buf.hover()<CR>",            opts)
 vim.api.nvim_set_keymap('n', '<space>s', "<cmd>lua vim.lsp.buf.signature_help()<CR>",   opts)
 vim.api.nvim_set_keymap('n', '<space>r', "<cmd>lua vim.lsp.buf.rename()<CR>",           opts)
+vim.api.nvim_set_keymap('n', '<leader>f',"<cmd>lua vim.lsp.buf.format()<CR>",           opts)
 vim.api.nvim_set_keymap('n', '<M-p>',    "<cmd>lua vim.diagnostic.goto_prev()<CR>",     opts)
 vim.api.nvim_set_keymap('n', '<M-n>',    "<cmd>lua vim.diagnostic.goto_next()<CR>",     opts)
 vim.api.nvim_set_keymap('n', 'ca',       "<cmd>lua vim.lsp.buf.code_action()<CR>",      opts)

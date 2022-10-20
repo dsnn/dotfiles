@@ -4,108 +4,107 @@ local reloader = function()
   R "dsn.telescope"
 end
 
-local actions     = require('telescope.actions')
-local sorters     = require('telescope.sorters')
-local previewers  = require('telescope.previewers')
-local themes      = require('telescope.themes')
+local actions    = require('telescope.actions')
+local sorters    = require('telescope.sorters')
+local previewers = require('telescope.previewers')
+local themes     = require('telescope.themes')
 
-local fb_actions = require "telescope".extensions.file_browser.actions
 
 require('telescope').setup {
-    defaults = {
-        color_devicons = true,
-        prompt_prefix = " ",
-        file_ignore_patterns = { "^.git/", "^node_modules/", "^obj/", "^wwwroot/" },
-        layout_strategy = "horizontal",
-        layout_config = {
-          width = 0.95,
-          height = 0.85,
-          prompt_position = "bottom",
+  defaults = {
+    color_devicons = true,
+    prompt_prefix = " ",
+    file_ignore_patterns = { "^.git/", "^node_modules/", "^obj/", "^wwwroot/" },
+    layout_strategy = "horizontal",
+    layout_config = {
+      width = 0.95,
+      height = 0.85,
+      prompt_position = "bottom",
 
-          horizontal = {
-            preview_width = function(_, cols, _)
-              if cols > 200 then
-                return math.floor(cols * 0.4)
-              else
-                return math.floor(cols * 0.6)
-              end
-            end,
-          },
+      horizontal = {
+        preview_width = function(_, cols, _)
+          if cols > 200 then
+            return math.floor(cols * 0.4)
+          else
+            return math.floor(cols * 0.6)
+          end
+        end,
+      },
 
-          vertical = {
-            width = 0.9,
-            height = 0.95,
-            preview_height = 0.5,
-          },
+      vertical = {
+        width = 0.9,
+        height = 0.95,
+        preview_height = 0.5,
+      },
 
-          flex = {
-            horizontal = {
-              preview_width = 0.9,
-            },
-          },
+      flex = {
+        horizontal = {
+          preview_width = 0.9,
         },
-        set_env = { ["COLORTERM"] = "truecolor" },
-        selection_strategy = "reset",
-        sorting_strategy = "descending",
-        scroll_strategy = "cycle",
-        winblend = 0,
-        file_previewer = previewers.vim_buffer_cat.new,
-        file_sorter = sorters.get_fzy_sorter,
-        generic_sorter = sorters.get_generic_fuzzy_sorter,
-        grep_previewer = previewers.vim_buffer_vimgrep.new,
-        qflist_previewer = previewers.vim_buffer_qflist.new,
-        buffer_previewer_maker = previewers.buffer_previewer_maker,
-        mappings = {
-            i = {
-		            ["<C-q>"] = actions.send_to_qflist,
-                ["<C-j>"] = actions.move_selection_next,
-                ["<C-k>"] = actions.move_selection_previous,
-                -- ["<CR>"]  = actions.select_default + actions.center,
-                ["<ESC>"] = actions.close,
-                ["<C-s>"] = actions.select_horizontal,
-                ["<C-space>"] = function(prompt_bufnr)
-                  local opts = {
-                    callback = actions.toggle_selection,
-                    loop_callback = actions.send_selected_to_qflist,
-                  }
-                  require("telescope").extensions.hop._hop_loop(prompt_bufnr, opts)
-                end,
-            },
-            n = {
-                ["<C-j>"] = actions.move_selection_next,
-                ["<C-k>"] = actions.move_selection_previous
-            }
-        },
-        extensions = {
-            fzy_native = {
-                override_generic_sorter = true,
-                override_file_sorter = true,
-            },
-            hop = {
-              -- keys define your hop keys in order; defaults to roughly lower- and uppercased home row
-              -- shown keys here are only subset of defaults!
-              keys = { "a", "s", "d", "f", "g", "h", "j", "k", "l", ";"}, -- ... and more
+      },
+    },
+    set_env = { ["COLORTERM"] = "truecolor" },
+    selection_strategy = "reset",
+    sorting_strategy = "descending",
+    scroll_strategy = "cycle",
+    winblend = 0,
+    file_previewer = previewers.vim_buffer_cat.new,
+    file_sorter = sorters.get_fzy_sorter,
+    generic_sorter = sorters.get_generic_fuzzy_sorter,
+    grep_previewer = previewers.vim_buffer_vimgrep.new,
+    qflist_previewer = previewers.vim_buffer_qflist.new,
+    buffer_previewer_maker = previewers.buffer_previewer_maker,
+    mappings = {
+      i = {
+        ["<C-q>"] = actions.send_to_qflist,
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
+        -- ["<CR>"]  = actions.select_default + actions.center,
+        ["<ESC>"] = actions.close,
+        ["<C-s>"] = actions.select_horizontal,
+        ["<C-space>"] = function(prompt_bufnr)
+          local opts = {
+            callback = actions.toggle_selection,
+            loop_callback = actions.send_selected_to_qflist,
+          }
+          require("telescope").extensions.hop._hop_loop(prompt_bufnr, opts)
+        end,
+      },
+      n = {
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous
+      }
+    },
+    extensions = {
+      fzy_native = {
+        override_generic_sorter = true,
+        override_file_sorter = true,
+      },
+      hop = {
+        -- keys define your hop keys in order; defaults to roughly lower- and uppercased home row
+        -- shown keys here are only subset of defaults!
+        keys = { "a", "s", "d", "f", "g", "h", "j", "k", "l", ";" }, -- ... and more
 
-          -- Highlight groups to link to signs and lines; the below configuration refers to demo
-              -- sign_hl typically only defines foreground to possibly be combined with line_hl
-              sign_hl = { "WarningMsg", "Title" },
-              -- optional, typically a table of two highlight groups that are alternated between
-              line_hl = { "CursorLine", "Normal" },
-          -- options specific to `hop_loop`
-              -- true temporarily disables Telescope selection highlighting
-              clear_selection_hl = false,
-              -- highlight hopped to entry with telescope selection highlight
-              -- note: mutually exclusive with `clear_selection_hl`
-              trace_entry = true,
-              -- jump to entry where hoop loop was started from
-              reset_selection = true,
-            },
-            file_browser = {
-              theme = "ivy",
-              hidden = true,
-            }
-        }
+        -- Highlight groups to link to signs and lines; the below configuration refers to demo
+        -- sign_hl typically only defines foreground to possibly be combined with line_hl
+        sign_hl = { "WarningMsg", "Title" },
+        -- optional, typically a table of two highlight groups that are alternated between
+        line_hl = { "CursorLine", "Normal" },
+        -- options specific to `hop_loop`
+        -- true temporarily disables Telescope selection highlighting
+        clear_selection_hl = false,
+        -- highlight hopped to entry with telescope selection highlight
+        -- note: mutually exclusive with `clear_selection_hl`
+        trace_entry = true,
+        -- jump to entry where hoop loop was started from
+        reset_selection = true,
+      },
+      file_browser = {
+        theme = "ivy",
+        hidden = true,
+      }
     }
+  }
 }
 
 -- load extensions
@@ -197,8 +196,13 @@ function M.file_browser()
   require('telescope').extensions.file_browser.file_browser({
     path = "%:p:h",
     files = false,
-    hidden = true
+    hidden = true,
+    -- theme = "ivy"
   })
+end
+
+function M.live_grep()
+  require('telescope.builtin').live_grep()
 end
 
 function M.git_status()
@@ -218,7 +222,11 @@ function M.curbuf()
     border = true,
     previewer = false,
     short_path = false,
-    borderchars = borderchars
+    borderchars = borderchars,
+    layout_config = {
+      width = 0.5,
+      height = 0.5,
+    }
   })
   require("telescope.builtin").current_buffer_fuzzy_find(opts)
 end

@@ -9,7 +9,6 @@ local sorters    = require('telescope.sorters')
 local previewers = require('telescope.previewers')
 local themes     = require('telescope.themes')
 
-
 require('telescope').setup {
   defaults = {
     color_devicons = true,
@@ -197,7 +196,6 @@ function M.file_browser()
     path = "%:p:h",
     files = false,
     hidden = true,
-    -- theme = "ivy"
   })
 end
 

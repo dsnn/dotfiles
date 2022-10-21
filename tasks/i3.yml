@@ -4,6 +4,7 @@
     state: present
     name:
       - i3
+      - i3blocks
   tags:
     - i3
     - packages

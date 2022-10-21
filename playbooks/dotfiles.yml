@@ -21,3 +21,4 @@
     - import_tasks: ../tasks/tmux.yml
     - import_tasks: ../tasks/ssh.yml
     - import_tasks: ../tasks/python.yml
+    - import_tasks: ../tasks/i3.yml

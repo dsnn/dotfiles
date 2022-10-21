@@ -1,0 +1,9 @@
+---
+- name: i3 | Install i3
+  ansible.builtin.package:
+    state: present
+    name:
+      - i3
+  tags:
+    - i3
+    - packages

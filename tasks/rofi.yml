@@ -1,27 +1,27 @@
 ---
-- name: i3 | Install i3
+- name: rofi | Install rofi
   ansible.builtin.package:
     state: present
     name:
-      - i3
+      - rofi
   tags:
-    - i3
+    - rofi
     - packages
 
-- name: i3 | Create config dir
+- name: rofi | Create config dir
   ansible.builtin.file:
-    path: '{{ user.home }}/.config/i3'
+    path: '{{ user.home }}/.config/rofi'
     owner: '{{ user.name }}'
     group: '{{ user.group }}'
     state: directory
   tags:
-    - i3
+    - rofi
 
-- name: i3 | Install config
+- name: rofi | Install config
   ansible.builtin.copy:
-    src: "{{ user.home }}/dotfiles/files/i3config"
-    dest: '{{ user.home }}/.config/i3/config'
+    src: "{{ user.home }}/dotfiles/files/rofi"
+    dest: '{{ user.home }}/.config/rofi/config'
     owner: '{{ user.name }}'
     group: '{{ user.group }}'
   tags:
-    - i3
+    - rofi

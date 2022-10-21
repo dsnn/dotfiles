@@ -1,0 +1,32 @@
+! r o f i
+
+! State:           'bg',    'fg',    'bgalt', 'hlbg',  'hlfg'
+rofi.color-normal: #101218, #ffffff, #101218, #ffffff, #101218
+rofi.color-urgent: #101218, #ee829f, #101218, #ee829f, #101218
+rofi.color-active: #101218, #97bbf7, #101218, #97bbf7, #101218
+!                  'bg',    'border'
+rofi.color-window: #101218, #ffffff
+
+! rofi.color-enabled:             true
+! rofi.color-window:              #000, #000, #000
+! rofi.color-normal:              #111, #819396, #222, #008ed4, #ffffff
+! rofi.color-active:              #002b37, #008ed4, #003643, #008ed4, #66c6ff
+! rofi.color-urgent:              #002b37, #da4281, #003643, #008ed4, #890661
+
+rofi.fake-transparency:         true
+rofi.lines:                     10
+rofi.bw:                        0
+rofi.opacity:                   "10"
+rofi.hide-scrollbar:            true
+rofi.width:                     30
+rofi.terminal:					termite
+
+rofi.kb-row-up:					Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab
+rofi.kb-row-down:               Down,Control+j
+rofi.kb-accept-entry:           Control+m,Return,KP_Enter
+rofi.kb-remove-to-eol:          Control+Shift+e
+rofi.kb-mode-next:              Shift+Right,Control+Tab,Control+l
+rofi.kb-mode-previous:          Shift+Left,Control+Shift+Tab,Control+h
+rofi.kb-remove-char-back:       BackSpace
+
+rofi.theme: /usr/share/rofi/themes/sidebar.rasi

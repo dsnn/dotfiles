@@ -52,11 +52,11 @@ cmp.setup {
 
   sources = {
     { name = "vsnip" },
+    { name = "buffer", keyword_length = 3 },
     { name = "nvim_lsp" },
     { name = "nvim_lua" },
     -- { name = "luasnip" },
     { name = "path" },
-    { name = "buffer", keyword_length = 5 },
     { name = 'npm', keyword_length = 4},
   -- cmp-spell
   -- cmp-nvim-lsp-signature-help

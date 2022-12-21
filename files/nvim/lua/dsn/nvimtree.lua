@@ -82,7 +82,8 @@ require('nvim-tree').setup {
   },
   filters = {
     dotfiles = false,
-    custom = {'node_modules', '.cache', 'obj' }
+    custom = {'node_modules', '.cache', 'obj' },
+    exclude = { 'Object' }
   },
   diagnostics = {
     enable = true,

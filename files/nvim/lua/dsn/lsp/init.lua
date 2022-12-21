@@ -13,7 +13,7 @@ vim.api.nvim_set_keymap('n', '<leader>f', "<cmd>lua vim.lsp.buf.format()<CR>", o
 vim.api.nvim_set_keymap('n', '<M-p>', "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
 vim.api.nvim_set_keymap('n', '<M-n>', "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
 vim.api.nvim_set_keymap('n', 'ca', "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-vim.api.nvim_set_keymap('n', '<space>p', "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+vim.api.nvim_set_keymap('n', '<space>p', "<cmd>lua vim.lsp.buf.format { async = true }<CR>", opts)
 vim.api.nvim_set_keymap('n', '<space>ds', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
 -- telescope.map("<space>ca", "lsp_code_actions", nil, true)
 
@@ -137,16 +137,18 @@ local function filterReactDTS(value)
   return string.match(value.uri, 'react/index.d.ts') == nil
 end
 
+local frontend_filestypes = {
+  "javascript", "javascriptreact", "javascript.jsx", "typescript",
+  "typescriptreact", "typescript.tsx"
+}
+
 require 'lspconfig'.tsserver.setup {
   cmd = {
     vim.fn.stdpath('data') ..
-        "/lsp_servers/tsserver/node_modules/.bin/typescript-language-server",
-    "--stdio"
+      "/lsp_servers/tsserver/node_modules/.bin/typescript-language-server",
+      "--stdio"
   },
-  filetypes = {
-    "javascript", "javascriptreact", "javascript.jsx", "typescript",
-    "typescriptreact", "typescript.tsx"
-  },
+  filetypes = frontend_filestypes,
   on_attach = function(client)
     common_on_attach(client)
     client.server_capabilities.documentFormattingProvider = false
@@ -168,13 +170,11 @@ require 'lspconfig'.tsserver.setup {
 
 require 'lspconfig'.eslint.setup {
   on_attach = common_on_attach,
-  cmd = { vim.fn.getenv 'HOME' ..
-      "/.local/share/nvim/lsp_servers/vscode-eslint/node_modules/vscode-langservers-extracted/bin/vscode-eslint-language-server",
+  cmd = {
+    vim.fn.stdpath('data') ..
+      "/lsp_servers/vscode-eslint/node_modules/vscode-langservers-extracted/bin/vscode-eslint-language-server",
     "--stdio" },
-  filetypes = {
-    "javascript", "javascriptreact", "javascript.jsx", "typescript",
-    "typescriptreact", "typescript.tsx"
-  },
+  filetypes = frontend_filestypes,
   settings = {
     codeAction = {
       showDocumentation = {
@@ -192,54 +192,73 @@ require 'lspconfig'.eslint.setup {
 }
 
 require 'lspconfig'.graphql.setup {
-  cmd = { vim.fn.getenv 'HOME' .. "/.local/share/nvim/lsp_servers/graphql/node_modules/.bin/graphql-lsp", "server", "-m",
-    "stream" },
+  cmd = {
+    vim.fn.stdpath('data') ..
+      "/lsp_servers/graphql/node_modules/.bin/graphql-lsp", "server", "-m",
+      "stream"
+  },
   filetypes = { "graphql", "typescriptreact", "javascriptreact" },
   root_dir = util.root_pattern('.git', '.graphqlrc*', '.graphql.config.*')
 }
 
 require 'lspconfig'.cssls.setup {
   on_attach = common_on_attach,
-  cmd = { vim.fn.getenv 'HOME' ..
-      "/.local/share/nvim/lsp_servers/cssls/node_modules/vscode-langservers-extracted/bin/vscode-css-language-server",
-    "--stdio" },
+  cmd = {
+    vim.fn.stdpath('data') ..
+      "/lsp_servers/cssls/node_modules/vscode-langservers-extracted/bin/vscode-css-language-server",
+      "--stdio"
+  },
   filetypes = { "typescriptreact", "javascriptreact" },
 }
 
 require 'lspconfig'.jsonls.setup {
   on_attach = common_on_attach,
-  cmd = { vim.fn.getenv 'HOME' ..
-      "/.local/share/nvim/lsp_servers/jsonls/node_modules/vscode-langservers-extracted/bin/vscode-json-language-server",
-    "--stdio" },
+  cmd = {
+    vim.fn.stdpath('data') ..
+      "/lsp_servers/jsonls/node_modules/vscode-langservers-extracted/bin/vscode-json-language-server",
+      "--stdio"
+  },
   filetypes = { "json" },
 }
 
 require 'lspconfig'.html.setup {
   on_attach = common_on_attach,
-  cmd = { vim.fn.getenv 'HOME' ..
-      "/.local/share/nvim/lsp_servers/html/node_modules/vscode-langservers-extracted/bin/vscode-html-language-server",
-    "--stdio" },
+  cmd = {
+    vim.fn.stdpath('data') ..
+      "/lsp_servers/html/node_modules/vscode-langservers-extracted/bin/vscode-html-language-server",
+      "--stdio"
+  },
   filetypes = { "typescriptreact", "javascriptreact", "html" },
 }
 
 require 'lspconfig'.dockerls.setup {
   on_attach = common_on_attach,
-  cmd = { vim.fn.getenv 'HOME' ..
-      "/.local/share/nvim/lsp_servers/dockerfile/node_modules/dockerfile-language-server-nodejs/bin/docker-langserver",
-    "--stdio" },
+  cmd = {
+    vim.fn.stdpath('data') ..
+      "/lsp_servers/dockerfile/node_modules/dockerfile-language-server-nodejs/bin/docker-langserver",
+      "--stdio"
+  },
   filetypes = { "dockerfile" }
 }
 
 require 'lspconfig'.terraformls.setup {
   on_attach = common_on_attach,
-  cmd = { vim.fn.getenv 'HOME' .. "/.local/share/nvim/lsp_servers/terraform/terraform-ls", "serve" },
+  cmd = {
+    vim.fn.stdpath('data') ..
+      "/lsp_servers/terraform/terraform-ls",
+      "serve"
+  },
   filetypes = { "terraform", "tf" }
 }
 
 local runtime_path = vim.split(package.path, ';')
 require 'lspconfig'.sumneko_lua.setup {
   on_attach = common_on_attach,
-  cmd = { vim.fn.getenv 'HOME' .. "/.local/share/nvim/lsp_servers/sumneko_lua/server/bin/lua-language-server", "--stdio" },
+  cmd = {
+    vim.fn.stdpath('data') ..
+      "/lsp_servers/sumneko_lua/server/bin/lua-language-server",
+      "--stdio"
+  },
   settings = {
     Lua = {
       telemetry = {
@@ -263,7 +282,11 @@ require 'lspconfig'.sumneko_lua.setup {
 }
 
 require 'lspconfig'.bashls.setup {
-  cmd = { vim.fn.getenv 'HOME' .. "/.local/share/nvim/lsp_servers/bash/node_modules/.bin/bash-language-server", "--stdio" },
+  cmd = {
+    vim.fn.stdpath('data') ..
+      "/lsp_servers/bash/node_modules/.bin/bash-language-server",
+      "--stdio"
+  },
   cmd_env = {
     GLOB_PATTERN = "*@(.sh|.inc|.bash|.command)"
   },
@@ -273,7 +296,11 @@ require 'lspconfig'.bashls.setup {
 }
 
 require 'lspconfig'.vimls.setup {
-  cmd = { vim.fn.getenv 'HOME' .. "/.local/share/nvim/lsp_servers/vim/node_modules/.bin/vim-language-server", "--stdio" },
+  cmd = {
+    vim.fn.stdpath('data') ..
+      "/lsp_servers/vim/node_modules/.bin/vim-language-server",
+      "--stdio"
+  },
   filetypes = { "vim" },
   init_options = {
     diagnostic = {

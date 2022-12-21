@@ -35,20 +35,20 @@
       register: tmux_archive_contents
 
     - name: Tmux | Generate configure
-      ansible.builtin.command: ./tmp/{{ tmux_archive_contents.files[0] }}/autogen.sh
+      become: true
+      ansible.builtin.script: /tmp/{{ tmux_archive_contents.files[0] }}autogen.sh
       changed_when: false
 
     - name: Tmux | Run configure
-      become: true
-      ansible.builtin.command: . /tmp/{{ tmux_archive_contents.files[0] }}/configure
+      ansible.builtin.command: . /tmp/{{ tmux_archive_contents.files[0] }}configure
       changed_when: false
 
     - name: Tmux | Make
-      ansible.builtin.command: /tmp/{{ tmux_archive_contents.files[0] }}/make
+      ansible.builtin.command: /tmp/{{ tmux_archive_contents.files[0] }}make
       changed_when: false
 
     - name: Tmux | Make install
-      ansible.builtin.command: sudo /tmp/{{ tmux_archive_contents.files[0] }}/make install
+      ansible.builtin.command: sudo /tmp/{{ tmux_archive_contents.files[0] }}make install
       changed_when: false
 
     - name: Tmux | Remove build dir

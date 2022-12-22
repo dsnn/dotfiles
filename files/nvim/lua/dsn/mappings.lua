@@ -1,6 +1,6 @@
 local silent = { silent = true }
 local silent_no = { noremap = true, silent = true }
-local map = vim.api.nvim_set_keymap;
+local map = vim.keymap.set;
 
 -- general
 vim.g.mapleader = ','
@@ -8,10 +8,11 @@ vim.g.mapleader = ','
 map('n', '<Leader>q', ':Bdelete<CR>', silent_no)
 map('n', '<Leader>.', '<C-^>', silent_no)
 map('n', '<Leader>,', ':wall<CR>', silent_no)
-map('n', '<Leader><space>', ':set hlsearch!<CR>', silent_no)
+map('n', '<Leader>h', ':set hlsearch!<CR>', silent_no)
 map('n', '<Leader>x', '<cmd>luafile %<CR>', silent_no)
 map('n', '<Leader>t', '<cmd>e /home/dsn/work/TODO.md<CR>', silent_no)
 map('n', '<Leader>m', '<cmd>Messages<CR>', silent_no)
+
 
 -- do not replace yank on multiple paste
 map('x', 'p', 'pgvy', silent_no)
@@ -21,7 +22,7 @@ map('n', '<C-n>', ':NvimTreeToggle<CR>', silent_no)
 map('n', '<Leader>k', ':NvimTreeFindFile<CR>', silent_no)
 
 -- snippets
-map('n', '<Leader>s', ':VsnipOpen<CR>', silent_no)
+map('n', '<Leader>s', '<cmd>:lua require("luasnip.loaders").edit_snippet_files()<CR>', silent_no)
 
 -- line indentation
 map('v', '<', '<gv', silent_no)
@@ -48,20 +49,23 @@ map('n', 'vv', '<C-w>v', silent_no)
 map('n', 'ss', '<C-w>s', silent_no)
 
 -- telescope
-map('n', '<space>gp', "<cmd>:lua require('dsn.telescope').grep_prompt()<CR>", silent_no)
-map('n', '<space>gs', "<cmd>:lua require('dsn.telescope').git_status()<CR>", silent_no)
-map('n', '<space>gl', "<cmd>:lua require('dsn.telescope').live_grep()<CR>", silent_no)
-map('n', '<space>gw', "<cmd>:lua require('dsn.telescope').grep_word()<CR>", silent_no)
-map('n', '<space>fh', "<cmd>:lua require('dsn.telescope').help_tags()<CR>", silent_no)
-map('n', '<space>fd', "<cmd>:lua require('dsn.telescope').dotfiles()<CR>", silent_no)
-map('n', '<space>fe', "<cmd>:lua require('dsn.telescope').file_browser()<CR>", silent_no)
-map('n', '<space>gb', "<cmd>:lua require('dsn.telescope').git_branches()<CR>", silent_no)
-map('n', '<space>b',  "<cmd>:lua require('dsn.telescope').buffers()<CR>", silent_no)
-map('n', '<space>fa', "<cmd>:lua require('dsn.telescope').find_files()<CR>", silent_no)
-map('n', '<space>fc', "<cmd>:lua require('dsn.telescope').colorscheme()<CR>", silent_no)
-map('n', '<space>fr', "<cmd>:lua require('dsn.telescope').registers()<CR>", silent_no)
-map('n', '<space>fq', "<cmd>:lua require('dsn.telescope').quickfix()<CR>", silent_no)
-map('n', '<space>ff', "<cmd>:lua require('dsn.telescope').curbuf()<CR>", silent_no)
+map('n', '<space>gp',       "<cmd>:lua require('dsn.telescope').grep_prompt()<CR>", silent_no)
+map('n', '<space>gs',       "<cmd>:lua require('dsn.telescope').git_status()<CR>", silent_no)
+map('n', '<space>gl',       "<cmd>:lua require('dsn.telescope').live_grep()<CR>", silent_no)
+map('n', '<space>gw',       "<cmd>:lua require('dsn.telescope').grep_word()<CR>", silent_no)
+map('n', '<space>fh',       "<cmd>:lua require('dsn.telescope').help_tags()<CR>", silent_no)
+map('n', '<space>fd',       "<cmd>:lua require('dsn.telescope').dotfiles()<CR>", silent_no)
+map('n', '<space>fe',       "<cmd>:lua require('dsn.telescope').file_browser()<CR>", silent_no)
+map('n', '<space>gb',       "<cmd>:lua require('dsn.telescope').git_branches()<CR>", silent_no)
+map('n', '<Leader><space>', "<cmd>:lua require('dsn.telescope').buffers()<CR>", silent_no)
+map('n', '<space>fa',       "<cmd>:lua require('dsn.telescope').find_files()<CR>", silent_no)
+map('n', '<space>fc',       "<cmd>:lua require('dsn.telescope').colorscheme()<CR>", silent_no)
+map('n', '<space>fr',       "<cmd>:lua require('dsn.telescope').registers()<CR>", silent_no)
+map('n', '<space>fq',       "<cmd>:lua require('dsn.telescope').quickfix()<CR>", silent_no)
+map('n', '<space>ff',       "<cmd>:lua require('dsn.telescope').curbuf()<CR>", silent_no)
+map('n', '<space>fo',       "<cmd>:lua require('dsn.telescope').oldfiles()<CR>", silent_no)
+map('n', '<space>fp',       "<cmd>:lua require('dsn.telescope').diagnostics()<CR>", silent_no)
+map('n', '<space>k',        "<cmd>:lua require('dsn.telescope').keymaps()<CR>", silent_no)
 
 -- harpoon
 map('n', '<space>a', "<cmd>:lua require('harpoon.mark').add_file()<CR>", silent_no)

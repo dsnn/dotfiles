@@ -1,67 +1,58 @@
-local cmp_present, cmp = pcall(require, 'cmp')
+local cmp = require 'cmp'
+local luasnip = require 'luasnip'
+local lspkind = require "lspkind"
 
-if not cmp_present then
-  return
-end
+require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/dsn/snippets" })
 
-local lspkind_present, lspkind = pcall(require, "lspkind")
-
-if not lspkind_present then
-  return
-else
-  lspkind.init()
-end
-
-local function replace_keys(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
+lspkind.init()
 
 cmp.setup {
   snippet = {
     expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
-
-  mapping = {
-      ["<C-p>"] = cmp.mapping.select_prev_item(),
-      ["<C-n>"] = cmp.mapping.select_next_item(),
-      ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-      ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-      ['<C-Space>'] = cmp.mapping.confirm({ select = true }),
-      ['<C-e>'] = cmp.mapping.close(),
-      ['<Tab>'] = cmp.mapping(function(fallback)
-        if vim.call('vsnip#available', 1) ~= 0 then
-          vim.fn.feedkeys(replace_keys('<Plug>(vsnip-jump-next)'), '')
-        elseif cmp.visible() then
-          cmp.select_next_item()
-        else
-          fallback()
-        end
-      end, { 'i', 's' }),
-      ['<S-Tab>'] = cmp.mapping(function(fallback)
-        if vim.call('vsnip#available', -1) ~= 0 then
-          vim.fn.feedkeys(replace_keys('<Plug>(vsnip-jump-prev)'), '')
-        elseif cmp.visible() then
-          cmp.select_prev_item()
-        else
-          fallback()
-        end
-      end, { 'i', 's' }),
+  mapping = cmp.mapping.preset.insert {
+    ['<C-n>'] = cmp.mapping(function()
+      if luasnip.choice_active() then
+        luasnip.change_choice(1)
+      end
+    end),
+    ['<C-p>'] = cmp.mapping(function()
+      if luasnip.choice_active() then
+        luasnip.change_choice(-1)
+      end
+    end),
+    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-d>'] = cmp.mapping.scroll_docs(4),
+    ['<C-space>'] = cmp.mapping.confirm { select = true },
+    ['<TAB>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+    ['<S-TAB>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
   },
-
   sources = {
-    { name = "vsnip" },
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
     { name = "buffer", keyword_length = 3 },
-    { name = "nvim_lsp" },
     { name = "nvim_lua" },
-    -- { name = "luasnip" },
     { name = "path" },
-    { name = 'npm', keyword_length = 4},
-  -- cmp-spell
-  -- cmp-nvim-lsp-signature-help
+    { name = 'npm', keyword_length = 4 },
   },
-
   sorting = {
     comparators = {
       cmp.config.compare.offset,
@@ -73,21 +64,18 @@ cmp.setup {
       cmp.config.compare.order,
     },
   },
-
   formatting = {
     format = lspkind.cmp_format {
       mode = "symbol_text",
       maxwidth = 50,
       menu = {
-        buffer      = "[buf]",
-        nvim_lsp    = "[LSP]",
-        nvim_lua    = "[api]",
-        path        = "[path]",
-        vsnip       = "[vsnip]",
+        buffer   = "[buf]",
+        nvim_lsp = "[LSP]",
+        nvim_lua = "[api]",
+        path     = "[path]",
       },
     },
   },
-
   view = {
     entries = "native"
   },
@@ -96,36 +84,3 @@ cmp.setup {
     ghost_text = true,
   }
 }
-
-cmp.setup.cmdline("/", {
-  completion = {
-    autocomplete = false,
-  },
-  sources = cmp.config.sources({
-    { name = "nvim_lsp_document_symbol" },
-  }),
-})
-
-cmp.setup.cmdline(":", {
-  completion = {
-    autocomplete = false,
-  },
-
-  sources = cmp.config.sources({
-    {
-      name = "path",
-    },
-  }, {
-    {
-      name = "cmdline",
-      max_item_count = 20,
-      keyword_length = 4,
-    },
-  }),
-})
-
-vim.cmd([[
-    let g:vsnip_snippet_dir="~/.config/nvim/snippets"
-]])
-
-

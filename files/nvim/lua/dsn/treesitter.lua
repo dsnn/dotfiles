@@ -1,10 +1,4 @@
 require'nvim-treesitter.configs'.setup {
-  highlight = { 
-    enable = true,
-  },
-  indent = {
-    enabled = true,
-  },
   ensure_installed = {
       "graphql",
       "html",
@@ -23,6 +17,13 @@ require'nvim-treesitter.configs'.setup {
       "jsdoc",
       "regex",
       "jsonc"
+  },
+  highlight = {
+    enable = true,
+  },
+  indent = {
+    enable = true,
+    disable = { 'python' }
   },
   context_commentstring = {
     enable = true,
@@ -43,33 +44,48 @@ require'nvim-treesitter.configs'.setup {
       node_decremental = "<S-TAB>",
     },
   },
-  playground = {
-    enable = true,
-    disable = {},
-    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-    persist_queries = false, -- Whether the query persists across vim sessions
-    keybindings = {
-      toggle_query_editor = 'o',
-      toggle_hl_groups = 'i',
-      toggle_injected_languages = 't',
-      toggle_anonymous_nodes = 'a',
-      toggle_language_display = 'I',
-      focus_language = 'f',
-      unfocus_language = 'F',
-      update = 'R',
-      goto_node = '<cr>',
-      show_help = '?',
+  textobjects = {
+    select = {
+      enable = true,
+      lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ['aa'] = '@parameter.outer',
+        ['ia'] = '@parameter.inner',
+        ['af'] = '@function.outer',
+        ['if'] = '@function.inner',
+        ['ac'] = '@class.outer',
+        ['ic'] = '@class.inner',
+      },
     },
-  }
+    move = {
+      enable = true,
+      set_jumps = true, -- whether to set jumps in the jumplist
+      goto_next_start = {
+        [']m'] = '@function.outer',
+        [']]'] = '@class.outer',
+      },
+      goto_next_end = {
+        [']M'] = '@function.outer',
+        [']['] = '@class.outer',
+      },
+      goto_previous_start = {
+        ['[m'] = '@function.outer',
+        ['[['] = '@class.outer',
+      },
+      goto_previous_end = {
+        ['[M'] = '@function.outer',
+        ['[]'] = '@class.outer',
+      },
+    },
+    swap = {
+      enable = true,
+      swap_next = {
+        ['<leader>a'] = '@parameter.inner',
+      },
+      swap_previous = {
+        ['<leader>b'] = '@parameter.inner',
+      },
+    },
+  },
 }
-
--- Keybindings
--- R: Refreshes the playground view when focused or reloads the query when the query editor is focused.
--- o: Toggles the query editor when the playground is focused.
--- a: Toggles visibility of anonymous nodes.
--- i: Toggles visibility of highlight groups.
--- I: Toggles visibility of the language the node belongs to.
--- t: Toggles visibility of injected languages.
--- f: Focuses the language tree under the cursor in the playground. The query editor will now be using the focused language.
--- F: Unfocuses the currently focused language.
--- <cr>: Go to current node in code buffer

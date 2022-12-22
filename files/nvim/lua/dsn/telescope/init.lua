@@ -12,14 +12,12 @@ local themes     = require('telescope.themes')
 require('telescope').setup {
   defaults = {
     color_devicons = true,
-    prompt_prefix = " ",
     file_ignore_patterns = { "^.git/", "^node_modules/", "^obj/", "^wwwroot/" },
     layout_strategy = "horizontal",
     layout_config = {
       width = 0.95,
       height = 0.85,
       prompt_position = "bottom",
-
       horizontal = {
         preview_width = function(_, cols, _)
           if cols > 200 then
@@ -29,13 +27,11 @@ require('telescope').setup {
           end
         end,
       },
-
       vertical = {
         width = 0.9,
         height = 0.95,
         preview_height = 0.5,
       },
-
       flex = {
         horizontal = {
           preview_width = 0.9,
@@ -55,19 +51,11 @@ require('telescope').setup {
     buffer_previewer_maker = previewers.buffer_previewer_maker,
     mappings = {
       i = {
-        ["<C-q>"] = actions.send_to_qflist,
         ["<C-j>"] = actions.move_selection_next,
         ["<C-k>"] = actions.move_selection_previous,
-        -- ["<CR>"]  = actions.select_default + actions.center,
+        ["<C-q>"] = actions.send_to_qflist,
         ["<ESC>"] = actions.close,
         ["<C-s>"] = actions.select_horizontal,
-        ["<C-space>"] = function(prompt_bufnr)
-          local opts = {
-            callback = actions.toggle_selection,
-            loop_callback = actions.send_selected_to_qflist,
-          }
-          require("telescope").extensions.hop._hop_loop(prompt_bufnr, opts)
-        end,
       },
       n = {
         ["<C-j>"] = actions.move_selection_next,
@@ -78,25 +66,6 @@ require('telescope').setup {
       fzy_native = {
         override_generic_sorter = true,
         override_file_sorter = true,
-      },
-      hop = {
-        -- keys define your hop keys in order; defaults to roughly lower- and uppercased home row
-        -- shown keys here are only subset of defaults!
-        keys = { "a", "s", "d", "f", "g", "h", "j", "k", "l", ";" }, -- ... and more
-
-        -- Highlight groups to link to signs and lines; the below configuration refers to demo
-        -- sign_hl typically only defines foreground to possibly be combined with line_hl
-        sign_hl = { "WarningMsg", "Title" },
-        -- optional, typically a table of two highlight groups that are alternated between
-        line_hl = { "CursorLine", "Normal" },
-        -- options specific to `hop_loop`
-        -- true temporarily disables Telescope selection highlighting
-        clear_selection_hl = false,
-        -- highlight hopped to entry with telescope selection highlight
-        -- note: mutually exclusive with `clear_selection_hl`
-        trace_entry = true,
-        -- jump to entry where hoop loop was started from
-        reset_selection = true,
       },
       file_browser = {
         theme = "ivy",
@@ -109,7 +78,6 @@ require('telescope').setup {
 -- load extensions
 require('telescope').load_extension('fzy_native')
 require("telescope").load_extension('file_browser')
-require("telescope").load_extension('hop')
 
 local borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
 
@@ -123,7 +91,7 @@ function M.dotfiles()
     hidden = true,
     layout_strategy = "vertical",
     layout_config = { width = 0.6, height = 0.9 },
-    borderchars = borderchars
+    borderchars = borderchars,
   })
   require('telescope.builtin').find_files(opts)
 end
@@ -179,6 +147,18 @@ function M.buffers()
   require('telescope.builtin').buffers(opts)
 end
 
+function M.old_files()
+  require('telescope.builtin').old_files()
+end
+
+function M.keymaps()
+  require('telescope.builtin').keymaps()
+end
+
+function M.diagnostics()
+  require('telescope.builtin').diagnostics()
+end
+
 function M.colorscheme()
   require('telescope.builtin').colorscheme()
 end
@@ -222,8 +202,8 @@ function M.curbuf()
     short_path = false,
     borderchars = borderchars,
     layout_config = {
-      width = 0.5,
-      height = 0.5,
+      width = 0.8,
+      height = 0.8,
     }
   })
   require("telescope.builtin").current_buffer_fuzzy_find(opts)

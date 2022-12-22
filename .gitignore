@@ -7,3 +7,4 @@ packer_compiled.lua
 *.log
 .zcompdump
 history
+.luarc.json

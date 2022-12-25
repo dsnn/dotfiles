@@ -57,4 +57,4 @@ vim.cmd('set tags=./tags;,tags;')
 vim.cmd('set whichwrap+=<,>,[,],h,l')
 -- if !has('nvim') | set viminfofile=$XDG_CACHE_HOME/vim/viminfo | endif
 
-vim.cmd("colorscheme onedark")
+vim.cmd("colorscheme gruvbox")

@@ -80,7 +80,6 @@ map("s", "<c-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", silent_no)
 map("i", "<c-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", silent_no)
 map("s", "<c-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", silent_no)
 
-
 -- colorizer
 require("colorizer").setup()
 

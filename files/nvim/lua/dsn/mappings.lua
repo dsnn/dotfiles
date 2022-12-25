@@ -13,7 +13,6 @@ map('n', '<Leader>x', '<cmd>luafile %<CR>', silent_no)
 map('n', '<Leader>t', '<cmd>e /home/dsn/work/TODO.md<CR>', silent_no)
 map('n', '<Leader>m', '<cmd>Messages<CR>', silent_no)
 
-
 -- do not replace yank on multiple paste
 map('x', 'p', 'pgvy', silent_no)
 
@@ -74,6 +73,13 @@ map('n', '<space>1', "<cmd>:lua require('harpoon.ui').nav_file(1)<CR>", silent_n
 map('n', '<space>2', "<cmd>:lua require('harpoon.ui').nav_file(2)<CR>", silent_no)
 map('n', '<space>3', "<cmd>:lua require('harpoon.ui').nav_file(3)<CR>", silent_no)
 map('n', '<space>4', "<cmd>:lua require('harpoon.ui').nav_file(4)<CR>", silent_no)
+
+--- luasnip
+map("i", "<c-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", silent_no)
+map("s", "<c-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", silent_no)
+map("i", "<c-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", silent_no)
+map("s", "<c-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", silent_no)
+
 
 -- colorizer
 require("colorizer").setup()

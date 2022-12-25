@@ -13,16 +13,16 @@ cmp.setup {
     end,
   },
   mapping = cmp.mapping.preset.insert {
-    ['<C-n>'] = cmp.mapping(function()
-      if luasnip.choice_active() then
-        luasnip.change_choice(1)
-      end
-    end),
-    ['<C-p>'] = cmp.mapping(function()
-      if luasnip.choice_active() then
-        luasnip.change_choice(-1)
-      end
-    end),
+    -- ['<C-n>'] = cmp.mapping(function()
+    --   if luasnip.choice_active() then
+    --     luasnip.change_choice(1)
+    --   end
+    -- end),
+    -- ['<C-p>'] = cmp.mapping(function()
+    --   if luasnip.choice_active() then
+    --     luasnip.change_choice(-1)
+    --   end
+    -- end),
     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
     ['<C-d>'] = cmp.mapping.scroll_docs(4),
     ['<C-space>'] = cmp.mapping.confirm { select = true },

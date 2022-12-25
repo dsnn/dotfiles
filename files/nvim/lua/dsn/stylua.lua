@@ -1,7 +1,7 @@
 local Path = require "plenary.path"
 local Job = require "plenary.job"
 
-local lspconfig_util = require "lspconfig.util"
+local lspconfig_util = require("lspconfig.util")
 
 local cached_configs = {}
 

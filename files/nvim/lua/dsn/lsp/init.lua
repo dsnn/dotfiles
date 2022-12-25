@@ -1,5 +1,3 @@
-local util = require('lspconfig/util')
-
 local border = {
   { "╭", "FloatBorder" },
   { "─", "FloatBorder" },

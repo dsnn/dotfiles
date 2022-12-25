@@ -4,10 +4,11 @@ local reloader = function()
   R "dsn.telescope"
 end
 
-local actions    = require('telescope.actions')
-local sorters    = require('telescope.sorters')
-local previewers = require('telescope.previewers')
-local themes     = require('telescope.themes')
+local action_layout = require("telescope.actions.layout")
+local actions       = require('telescope.actions')
+local previewers    = require('telescope.previewers')
+local sorters       = require('telescope.sorters')
+local themes        = require('telescope.themes')
 
 require('telescope').setup {
   defaults = {
@@ -54,13 +55,30 @@ require('telescope').setup {
         ["<C-j>"] = actions.move_selection_next,
         ["<C-k>"] = actions.move_selection_previous,
         ["<C-q>"] = actions.send_to_qflist,
-        ["<ESC>"] = actions.close,
+        ["<ESC>"] = actions.close, -- do not enter normal mode on esc
         ["<C-s>"] = actions.select_horizontal,
+        ["<M-p>"] = action_layout.toggle_preview
       },
       n = {
         ["<C-j>"] = actions.move_selection_next,
-        ["<C-k>"] = actions.move_selection_previous
+        ["<C-k>"] = actions.move_selection_previous,
+        ["<M-p>"] = action_layout.toggle_preview
       }
+    },
+    pickers = {
+      file_browser = {
+        mappings = {
+          n = {
+            ["l"] = function(prompt_bufnr)
+              local selection = require("telescope.actions.state").get_selected_entry()
+              local dir = vim.fn.fnamemodify(selection.path, ":p:h")
+              require("telescope.actions").close(prompt_bufnr)
+              -- Depending on what you want put `cd`, `lcd`, `tcd`
+              vim.cmd(string.format("silent lcd %s", dir))
+            end
+          }
+        }
+      },
     },
     extensions = {
       fzy_native = {
@@ -77,7 +95,7 @@ require('telescope').setup {
 
 -- load extensions
 require('telescope').load_extension('fzy_native')
-require("telescope").load_extension('file_browser')
+require('telescope').load_extension('file_browser')
 
 local borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
 
@@ -113,7 +131,7 @@ function M.grep_prompt()
     short_path = false,
     layout_strategy = "vertical",
     layout_config = { width = 0.6, height = 0.9 },
-    search = vim.fn.input("Grep String > "),
+    search = vim.fn.input("Grep String > ")
   }
 end
 

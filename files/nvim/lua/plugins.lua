@@ -15,16 +15,18 @@ require('packer').startup(function(use)
   use {
     'neovim/nvim-lspconfig',
     requires = {
-      -- Automatically install LSPs to stdpath for neovim
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
-
-      -- Useful status updates for LSP
       'j-hui/fidget.nvim',
-
-      -- Additional lua configuration, makes nvim stuff amazing
       'folke/neodev.nvim',
     },
+  }
+
+  use {
+    "williamboman/mason.nvim",
+    "mfussenegger/nvim-dap",
+    "jayp0521/mason-nvim-dap.nvim",
+    "rcarriga/nvim-dap-ui"
   }
 
   -- general
@@ -75,6 +77,12 @@ require('packer').startup(function(use)
   use 'ThePrimeagen/harpoon'
   use 'tpope/vim-repeat'
   use 'hashivim/vim-terraform'
+  use { "nvim-neotest/neotest",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    }
+  }
 
   -- git
   use 'tpope/vim-fugitive'
@@ -95,9 +103,7 @@ require('packer').startup(function(use)
   }
   use 'nvim-telescope/telescope-fzy-native.nvim'
   use 'nvim-telescope/telescope-file-browser.nvim'
-  use 'nvim-telescope/telescope-hop.nvim' -- easier telescope result navigation
   use "nvim-telescope/telescope-cheat.nvim"
-  use 'nvim-telescope/telescope-ui-select.nvim'
   use 'stevearc/dressing.nvim'
   use 'tami5/sqlite.lua'
   use 'nvim-lua/popup.nvim'

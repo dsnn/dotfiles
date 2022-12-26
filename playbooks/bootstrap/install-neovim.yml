@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: local
   become: true
   tasks:
     - name: Neovim | Get latest release

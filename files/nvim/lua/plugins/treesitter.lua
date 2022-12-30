@@ -1,3 +1,8 @@
+-- Parsers and queries are loaded independent from each other.
+-- Both need to be compatable with each other (same version) though.
+-- In case you see treesitter errors, try: `:TSInstall vim` to install the newest version
+-- maintainers recommends ensure_installed to have `vim, c, help, lua` (builtin parsers)
+
 return {
   "nvim-treesitter/nvim-treesitter",
   dependencies = {
@@ -9,6 +14,7 @@ return {
     require("nvim-treesitter.configs").setup({
       ensure_installed = {
         "bash",
+        "c",
         "c_sharp",
         "comment",
         "css",
@@ -25,6 +31,7 @@ return {
         "regex",
         "tsx",
         "typescript",
+        "vim",
         "yaml",
       },
       highlight = {

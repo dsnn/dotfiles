@@ -25,7 +25,7 @@ local servers = {
   vimls = {},
   yamlls = {},
   omnisharp = {},
-  diagnosticls = {},
+  -- diagnosticls = {},
 
   -- diagnostic-languageserver = {},
   -- eslint_d = {},
@@ -162,19 +162,19 @@ return {
         vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
       end
 
-      nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-      nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-      nmap('gT', vim.lsp.buf.type_definition, 'Type [D]efinition')
-      nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-      nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-      nmap('gh', vim.lsp.buf.hover, '[G]oto [H]over Documentation')
-      nmap('<space>s', vim.lsp.buf.signature_help, '[S]ignature Documentation')
-      nmap('<space>r', vim.lsp.buf.rename, '[R]ename')
-      nmap('<space>f', vim.lsp.buf.format, '[F]ormat')
-      nmap('<M-n>', vim.diagnostic.goto_next, 'Goto [N]ext diagnostic')
-      nmap('<M-p>', vim.diagnostic.goto_prev, 'Goto [P]revious diagnostic')
-      nmap('ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-      nmap('<space>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+      nmap('gd', vim.lsp.buf.definition, 'LSP: [G]oto [D]efinition')
+      nmap('gI', vim.lsp.buf.implementation, 'LSP: [G]oto [I]mplementation')
+      nmap('gT', vim.lsp.buf.type_definition, 'LSP: Type [D]efinition')
+      nmap('gD', vim.lsp.buf.declaration, 'LSP: [G]oto [D]eclaration')
+      nmap('gr', require('telescope.builtin').lsp_references, 'LSP: [G]oto [R]eferences')
+      nmap('gh', vim.lsp.buf.hover, 'LSP: [G]oto [H]over Documentation')
+      nmap('<space>s', vim.lsp.buf.signature_help, 'LSP: [S]ignature Documentation')
+      nmap('<space>r', vim.lsp.buf.rename, 'LSP: [R]ename')
+      nmap('<space>f', vim.lsp.buf.format, 'LSP: [F]ormat')
+      nmap('<M-n>', vim.diagnostic.goto_next, 'LSP: Goto [N]ext diagnostic')
+      nmap('<M-p>', vim.diagnostic.goto_prev, 'LSP: Goto [P]revious diagnostic')
+      nmap('ca', vim.lsp.buf.code_action, 'LSP: [C]ode [A]ction')
+      nmap('<space>ds', require('telescope.builtin').lsp_document_symbols, 'LSP: [D]ocument [S]ymbols')
 
       vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
         vim.lsp.buf.format()

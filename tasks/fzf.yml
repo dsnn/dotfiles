@@ -4,13 +4,17 @@
     state: present
     name:
       - fzf
-      - fd-find
 
-- name: FZF | Replace fd with fdfind (symlink)
-  ansible.builtin.file:
-    src: /usr/bin/fdfind
-    dest: "{{ user.home }}/.local/bin/fd"
-    owner: "{{ user.name }}"
-    group: "{{ user.group }}"
-    state: link
-    follow: false
+# change task to install via dpkg (to: /usr/bin/fd)
+# https://github.com/sharkdp/fd#on-ubuntu
+# `sudo dpkg -i fd_<version>.deb`
+# required(?) to have telescope file_browser work in neovim
+
+# - name: FZF | Replace fd with fdfind (symlink)
+#   ansible.builtin.file:
+#     src: /usr/bin/fdfind
+#     dest: "{{ user.home }}/.local/bin/fd"
+#     owner: "{{ user.name }}"
+#     group: "{{ user.group }}"
+#     state: link
+#     follow: false

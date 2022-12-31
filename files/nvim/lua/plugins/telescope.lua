@@ -1,3 +1,7 @@
+-- if no files are shown in file browser, try:
+-- https://github.com/sharkdp/fd#on-ubuntu
+-- `sudo dpkg -i fd_<version>.deb`
+
 local borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
 
 local function dotfiles()
@@ -72,7 +76,8 @@ local function file_browser()
   require('telescope').extensions.file_browser.file_browser({
     path = "%:p:h",
     files = false,
-    hidden = true,
+    hidden = false,
+    previewer = false,
   })
 end
 
@@ -111,30 +116,26 @@ end
 return {
   "nvim-telescope/telescope.nvim",
   cmd = { "Telescope" },
-  dependencies = {
-    "nvim-telescope/telescope-fzy-native.nvim",
-    "nvim-telescope/telescope-file-browser.nvim",
-    "nvim-telescope/telescope-cheat.nvim",
-  },
+  lazy = false,
   branch = '0.1.x',
   keys = {
-    { "<space>fd", dotfiles, desc = "Find dotfiles" },
-    { "<space>gp", grep_prompt, desc = "Grep string" },
-    { '<space>gs', git_status, desc = "Git status" },
-    { '<space>gl', live_grep, desc = "Live grep" },
-    { '<space>gw', grep_word, desc = "Grep word under cursor" },
-    { '<space>fh', help_tags, desc = "Help tags" },
-    { '<space>fe', file_browser, desc = "File browser" },
-    { '<space>gb', git_branches, desc = "Git branches for current directory" },
-    { '<Leader><space>', buffers, desc = "Open buffers" },
-    { '<space>fa', find_files, desc = "Search for files (respecting .gitignore)" },
-    { '<space>fc', "<cmd>Telescope colorscheme<CR>", desc = "Available colorschemes" },
-    { '<space>fr', "<cmd>Telescope registers<CR>", desc = "Registers" },
-    { '<space>fq', "<cmd>Telescope quickfix<CR>", desc = "Quickfix list" },
-    { '<space>ff', curbuf, desc = "Live fuzzy search in current buffer" },
-    { '<space>fo', "<cmd>Telescope oldfiles<CR>", desc = "Previously open files" },
-    { '<space>fp', "<cmd>Telescope diagnostics<CR>", desc = "List diagnostics" },
-    { '<space>k', "<cmd>Telescope keymaps<CR>", desc = "List (and run on <CR>) normal mode keymappings" },
+    { "<space>fd", dotfiles, desc = "Telescope: Find dotfiles" },
+    { "<space>gp", grep_prompt, desc = "Telescope: Grep string" },
+    { '<Leader><space>', buffers, desc = "Telescope: Open buffers" },
+    { '<space>fa', find_files, desc = "Telescope: Search for files (respecting .gitignore)" },
+    { '<space>fc', "<cmd>Telescope colorscheme<CR>", desc = "Telescope: Available colorschemes" },
+    { '<space>fe', file_browser, desc = "Telescope: File browser" },
+    { '<space>ff', curbuf, desc = "Telescope: Live fuzzy search in current buffer" },
+    { '<space>fh', help_tags, desc = "Telescope: Help tags" },
+    { '<space>fo', "<cmd>Telescope oldfiles<CR>", desc = "Telescope: Previously open files" },
+    { '<space>fp', "<cmd>Telescope diagnostics<CR>", desc = "Telescope: List diagnostics" },
+    { '<space>fq', "<cmd>Telescope quickfix<CR>", desc = "Telescope: Quickfix list" },
+    { '<space>fr', "<cmd>Telescope registers<CR>", desc = "Telescope: Registers" },
+    { '<space>gb', git_branches, desc = "Telescope: Git branches for current directory" },
+    { '<space>gl', live_grep, desc = "Telescope: Live grep" },
+    { '<space>gs', git_status, desc = "Telescope: Git status" },
+    { '<space>gw', grep_word, desc = "Telescope: Grep word under cursor" },
+    { '<space>k', "<cmd>Telescope keymaps<CR>", desc = "Telescope: List (and run on <CR>) normal mode keymappings" },
   },
   config = function()
     local action_layout = require("telescope.actions.layout")
@@ -188,15 +189,32 @@ return {
             ["<C-j>"] = actions.move_selection_next,
             ["<C-k>"] = actions.move_selection_previous,
             ["<C-q>"] = actions.send_to_qflist,
-            ["<ESC>"] = actions.close, -- do not enter normal mode on esc
+            -- ["<ESC>"] = actions.close, -- do not enter normal mode on esc
             ["<C-s>"] = actions.select_horizontal,
-            ["<M-p>"] = action_layout.toggle_preview
+            ["<M-p>"] = action_layout.toggle_preview,
+            ["<C-e>"] = false,
           },
           n = {
             ["<C-j>"] = actions.move_selection_next,
             ["<C-k>"] = actions.move_selection_previous,
             ["<M-p>"] = action_layout.toggle_preview
           }
+        },
+        pickers = {
+          --   find_files = {
+          --     find_command = { fd, "--type", "f", "--hidden", "--exclude", ".git" },
+          --     mappings = {
+          --       n = {
+          --         ["cd"] = function(prompt_bufnr)
+          --           local selection = require("telescope.actions.state").get_selected_entry()
+          --           local dir = vim.fn.fnamemodify(selection.path, ":p:h")
+          --           require("telescope.actions").close(prompt_bufnr)
+          --           -- Depending on what you want put `cd`, `lcd`, `tcd`
+          --           cmd(string.format("silent lcd %s", dir))
+          --         end,
+          --       },
+          --     },
+          --   },
         },
         extensions = {
           fzy_native = {
@@ -206,6 +224,7 @@ return {
           file_browser = {
             theme = "ivy",
             hidden = true,
+            hijack_netrw = true,
           }
         }
       }

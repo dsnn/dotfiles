@@ -32,4 +32,10 @@ return {
   "unblevable/quick-scope",
   "williamboman/mason-lspconfig.nvim",
   "williamboman/nvim-lsp-installer",
+  {
+    "nvim-telescope/telescope-file-browser.nvim",
+    version = "0.1.0"
+  },
+  "nvim-telescope/telescope-fzy-native.nvim",
+  "nvim-telescope/telescope-cheat.nvim",
 }

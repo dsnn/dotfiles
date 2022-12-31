@@ -17,6 +17,10 @@ map('x', 'p', 'pgvy', silent_no)
 map('v', '<', '<gv', silent_no)
 map('v', '>', '>gv', silent_no)
 
+-- visual search
+-- vim.keymap.set('v', '<m-/>', '<esc>/\\%V'
+vim.keymap.set('x', '/', '<Esc>/\\%V')
+
 -- window navigation
 map('n', '<C-h>', '<C-w>h', silent)
 map('n', '<C-j>', '<C-w>j', silent)
@@ -40,6 +44,7 @@ map('n', 'ss', '<C-w>s', silent_no)
 -- file tree nav 
 map('n', '<C-n>', ':Neotree toggle<CR>', silent_no)
 map('n', '<Leader>k', ':Neotree reveal_file=%<CR>', silent_no)
+-- map('n', '<Leader>f', ":lua require('lir.float').toggle()<CR>", silent_no)
 
 -- snippets
 map('n', '<Leader>s', '<cmd>:lua require("luasnip.loaders").edit_snippet_files()<CR>', silent_no)
@@ -60,8 +65,7 @@ map('n', '<space>4', "<cmd>:lua require('harpoon.ui').nav_file(4)<CR>", silent_n
 map('n', '<leader>lt', ":TroubleToggle<CR>", silent_no)
 
 -- console.log
-map('n', '<space>l', "<cmd> :put! =printf('console.log(''%s:'',  %s);', expand('<cword>'), expand('<cword>'))<CR>-2==+",
-  silent_no)
+map('n', '<space>l', "<cmd> :put! =printf('console.log(''%s:'',  %s);', expand('<cword>'), expand('<cword>'))<CR>-2==+", silent_no)
 
 -- remove whitespace manually
 vim.cmd([[ nnoremap <leader>c :%s/\s\+$//<CR> ]])

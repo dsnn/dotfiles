@@ -38,4 +38,5 @@ return {
   },
   "nvim-telescope/telescope-fzy-native.nvim",
   "nvim-telescope/telescope-cheat.nvim",
+  "samjwill/vim-auto-nohlsearch",
 }

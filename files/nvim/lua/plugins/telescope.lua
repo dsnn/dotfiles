@@ -77,7 +77,6 @@ local function file_browser()
     path = "%:p:h",
     files = false,
     hidden = false,
-    previewer = false,
   })
 end
 

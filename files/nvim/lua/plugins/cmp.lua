@@ -10,7 +10,7 @@ return {
 
     cmp.setup({
       completion = {
-        completeopt = "menu,menuone,noinsert",
+        completeopt = "menu,menuone,noselect",
       },
       snippet = {
         expand = function(args)
@@ -52,8 +52,8 @@ return {
         end, { 'i', 's' }),
       },
       sources = {
-        { name = 'nvim_lsp' },
         { name = 'luasnip' },
+        { name = 'nvim_lsp' },
         { name = "buffer", keyword_length = 3 },
         { name = "nvim_lua" },
         { name = "path" },
@@ -66,6 +66,7 @@ return {
           menu = {
             buffer   = "[buf]",
             nvim_lsp = "[LSP]",
+            luasnip  = "[snippet]",
             nvim_lua = "[api]",
             path     = "[path]",
           },

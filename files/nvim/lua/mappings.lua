@@ -41,7 +41,7 @@ map('n', '<S-TAB>', ':bprevious<CR>', silent_no)
 map('n', 'vv', '<C-w>v', silent_no)
 map('n', 'ss', '<C-w>s', silent_no)
 
--- file tree nav 
+-- file tree nav
 map('n', '<C-n>', ':Neotree toggle<CR>', silent_no)
 map('n', '<Leader>k', ':Neotree reveal_file=%<CR>', silent_no)
 -- map('n', '<Leader>f', ":lua require('lir.float').toggle()<CR>", silent_no)
@@ -53,7 +53,7 @@ map('n', '<Leader>s', '<cmd>:lua require("luasnip.loaders").edit_snippet_files()
 map('n', '<leader>r', ":VimuxPromptCommand<CR>", silent_no)
 map('n', '<leader>e', ":VimuxRunLastCommand<CR>", silent_no)
 
--- bookmarks 
+-- bookmarks
 map('n', '<space>a', "<cmd>:lua require('harpoon.mark').add_file()<CR>", silent_no)
 map('n', '<space>h', "<cmd>:lua require('harpoon.ui').toggle_quick_menu()<CR>", silent_no)
 map('n', '<space>1', "<cmd>:lua require('harpoon.ui').nav_file(1)<CR>", silent_no)
@@ -65,7 +65,8 @@ map('n', '<space>4', "<cmd>:lua require('harpoon.ui').nav_file(4)<CR>", silent_n
 map('n', '<leader>lt', ":TroubleToggle<CR>", silent_no)
 
 -- console.log
-map('n', '<space>l', "<cmd> :put! =printf('console.log(''%s:'',  %s);', expand('<cword>'), expand('<cword>'))<CR>-2==+", silent_no)
+map('n', '<space>l', "<cmd> :put! =printf('console.log(''%s:'',  %s);', expand('<cword>'), expand('<cword>'))<CR>-2==+",
+  silent_no)
 
 -- remove whitespace manually
 vim.cmd([[ nnoremap <leader>c :%s/\s\+$//<CR> ]])

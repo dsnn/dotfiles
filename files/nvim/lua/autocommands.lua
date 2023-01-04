@@ -1,3 +1,5 @@
+vim.cmd([[autocmd FileType markdown setlocal spell]])
+
 vim.cmd([[
   augroup TelescopeColorOverrides
     autocmd!

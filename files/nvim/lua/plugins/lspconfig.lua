@@ -84,7 +84,7 @@ return {
     vim.diagnostic.config({
       float = {
         focusable = false,
-        border = border,
+        border = "rounded",
         scope = "cursor",
         prefix = function(diagnostic, i, total)
           local icon, highlight

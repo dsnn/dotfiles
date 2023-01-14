@@ -40,6 +40,10 @@ return {
         "git_status",
         "diagnostics",
       },
+      source_selector = {
+        winbar = true,
+        statusline = false,
+      },
       diagnostics = {
         autopreview = false,
         autopreview_config = { use_float = true },

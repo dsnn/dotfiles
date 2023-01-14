@@ -12,7 +12,6 @@ return {
   --       return vim.ui.input(...)
   --   end
   -- end
-  enabled = false,
   lazy = false,
   config = function()
     require('dressing').setup()

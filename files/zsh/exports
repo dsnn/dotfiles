@@ -20,6 +20,9 @@ export XDG_CONFIG_HOME="/home/dsn/.config"
 export XDG_DATA_HOME="/home/dsn/.local/share"
 export XDG_CACHE_HOME="/home/dsn/.local/cache"
 
+# todoist
+export TODOIST_API_KEY="~/.todoist-api-key"
+
 # volta
 export VOLTA_HOME="$HOME/.config/volta"
 export PATH="$VOLTA_HOME/bin:$PATH"

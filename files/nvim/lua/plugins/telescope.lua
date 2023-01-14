@@ -4,6 +4,20 @@
 
 local borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
 
+local function notes()
+  require('telescope.builtin').find_files({
+    cwd = "~/notes",
+    file_ignore_patterns = { "assets/*"}
+  })
+end
+
+local function projects()
+  require('telescope.builtin').find_files({
+    cwd = "~/projects",
+    file_ignore_patterns = { "node_modules/*"},
+  })
+end
+
 local function dotfiles()
   local themes = require('telescope.themes')
   local opts = themes.get_dropdown({
@@ -135,6 +149,8 @@ return {
     { '<space>gs', git_status, desc = "Telescope: Git status" },
     { '<space>gw', grep_word, desc = "Telescope: Grep word under cursor" },
     { '<space>k', "<cmd>Telescope keymaps<CR>", desc = "Telescope: List (and run on <CR>) normal mode keymappings" },
+    { '<space>fn', notes, desc = "Telescope: Notes file browser" },
+    { '<space>fm', projects, desc = "Telescope: Projects file browser" },
   },
   config = function()
     local action_layout = require("telescope.actions.layout")

@@ -9,6 +9,7 @@ map('n', '<Leader>h', ':set hlsearch!<CR>', silent_no)
 map('n', '<Leader>x', ':luafile %<CR>', silent_no)
 map('n', '<Leader>t', ':e ~/work/TODO.md<CR>', silent_no)
 map('n', '<Leader>m', ':Messages<CR>', silent_no)
+map('n', '<esc>',     ':noh<cr>', silent_no)
 
 -- do not replace yank on multiple paste
 map('x', 'p', 'pgvy', silent_no)

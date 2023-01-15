@@ -7,7 +7,6 @@ map('n', '<Leader>.', '<C-^>', silent_no)
 map('n', '<Leader>,', ':wall<CR>', silent_no)
 map('n', '<Leader>h', ':set hlsearch!<CR>', silent_no)
 map('n', '<Leader>x', ':luafile %<CR>', silent_no)
-map('n', '<Leader>t', ':e ~/work/TODO.md<CR>', silent_no)
 map('n', '<Leader>m', ':Messages<CR>', silent_no)
 map('n', '<esc>',     ':noh<cr>', silent_no)
 
@@ -49,10 +48,6 @@ map('n', '<Leader>k', ':Neotree reveal_file=%<CR>', silent_no)
 
 -- snippets
 map('n', '<Leader>s', '<cmd>:lua require("luasnip.loaders").edit_snippet_files()<CR>', silent_no)
-
--- vimux
-map('n', '<leader>r', ":VimuxPromptCommand<CR>", silent_no)
-map('n', '<leader>e', ":VimuxRunLastCommand<CR>", silent_no)
 
 -- bookmarks
 map('n', '<space>a', "<cmd>:lua require('harpoon.mark').add_file()<CR>", silent_no)

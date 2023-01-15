@@ -22,7 +22,6 @@ return {
   "nvim-lualine/lualine.nvim",
   "nvim-tree/nvim-web-devicons",
   "onsails/lspkind-nvim",
-  "preservim/vimux",
   "rcarriga/nvim-dap-ui",
   "saadparwaiz1/cmp_luasnip",
   "tami5/sqlite.lua",

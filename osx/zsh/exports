@@ -1,0 +1,61 @@
+export KEYTIMEOUT=1 # ZSH: Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
+export LC_CTYPE="en_US.UTF-8"
+export LEDGER_COLOR="true"
+export LESS="-FRSXM"
+export LESSCHARSET="utf-8"
+export PAGER="less"
+export RPROMPT=""
+export TERM="xterm-256color"
+export WORDCHARS=""
+export BROWSER="firefox"
+export VISUAL="nvim"
+export EDITOR="nvim"
+export MANWIDTH=79
+
+[ -d "$HOME/bin" ] && export PATH="$HOME/bin:$PATH"
+[ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
+
+# XDG
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.local/cache"
+
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+
+# todoist
+export TODOIST_API_KEY="~/.todoist-api-key"
+
+# volta
+export VOLTA_HOME="$HOME/.config/volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
+# fzf
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'	
+export FZF_CTRL_T_COMMAND='$FZF_DEFAULT_COMMAND'
+export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+export FZF_COMPLETION_OPTS='+c -x'
+
+# ansible
+export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault-password
+
+# tmuxp
+TMUXP_CONFIGDIR=$HOME/.config/tmuxp
+
+# nvim
+export PATH="$HOME/.local/bin/nvim/bin:$PATH"
+
+# npm
+PATH="$PATH:$HOME/.node_modules/bin"
+export npm_config_prefix=~/.node_modules
+
+# yarn
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# colored man pages
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;38;5;74m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[38;33;246m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[04;38;5;146m'

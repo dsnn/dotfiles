@@ -8,3 +8,4 @@ packer_compiled.lua
 .zcompdump
 history
 .luarc.json
+.DS_Store

@@ -20,10 +20,23 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.local/cache"
 
+# work
+export WORK_USER=op://Private/Work/AD/user
+export WORK_PASSWORD=op://Private/Work/AD/password
+export WORK_VPN=op://Private/Work/AD/vpn
+export WORK_IP=op://Private/Work/AD/ip
+
+# starship
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
+# ssh
+export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+
+#curl
+export PATH=/opt/homebrew/opt/curl/bin:$PATH
+
 # todoist
-export TODOIST_API_KEY="~/.todoist-api-key"
+export TODOIST_API_KEY=op://Private/Todoist/Developer/api_token
 
 # volta
 export VOLTA_HOME="$HOME/.config/volta"
@@ -31,7 +44,7 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 
 # fzf
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'	
-export FZF_CTRL_T_COMMAND='$FZF_DEFAULT_COMMAND'
+export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 export FZF_COMPLETION_OPTS='+c -x'
 

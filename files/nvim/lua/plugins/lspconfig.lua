@@ -49,7 +49,7 @@ local servers = {
         version = 'LuaJIT',
       },
       diagnostics = {
-        globals = { 'vim' },
+        globals = { 'vim', 'pcall', 'require' },
       },
       workspace = {
         checkThirdParty = false,

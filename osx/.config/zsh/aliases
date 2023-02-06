@@ -1,5 +1,5 @@
 alias cat="bat"
-alias awk="nawk"
+#alias awk="nawk"
 alias vim="nvim"
 
 # file shortcuts
@@ -7,6 +7,7 @@ alias cfc="vim ~/.config"
 alias cfs="vim ~/.ssh/config"
 alias cfz="vim ~/.config/zsh/.zshrc"
 alias cfa="vim ~/.config/zsh/aliases"
+alias cfe="vim ~/.config/zsh/exports"
 alias cfg="vim ~/.gitconfig"
 
 # shortcuts

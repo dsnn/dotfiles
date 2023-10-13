@@ -5,12 +5,15 @@
       community.general.homebrew:
         state: present
         name:
+          - ansible-lint
+          - mosh 
           - wakeonlan
           - gnu-sed
           - lazygit
           - neovim
           - starship
           - tmux
+          - tpm
           - tmuxp
           - volta
           - ansible
@@ -23,14 +26,14 @@
           - z
           - luajit
           - sqlite
-          - zsh
-          - keychain
           - sstp-client
+          - zsh
           - zsh-autosuggestions
           - zsh-completions
+          - zsh-syntax-highlighting
+          - keychain
           - coreutils
           - stow
-          - zsh-syntax-highlighting
           - curl
           - docker-compose
           - fd

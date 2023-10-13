@@ -10,8 +10,9 @@
     - ssh
 
 - name: SSH | Install mosh
-  ansible.builtin.package:
-    name: mosh
+  community.general.homebrew:
     state: present
+    name:
+      - mosh 
   tags:
     - ssh

@@ -10,15 +10,21 @@
     - zsh
 
 - name: ZSH | Install package(s)
-  ansible.builtin.package:
+  community.general.homebrew:
     state: present
     name:
       - zsh
-      - zsh-syntax-highlighting
       - zsh-autosuggestions
-      - keychain
+      - zsh-completions
+      - zsh-syntax-highlighting
   tags:
     - zsh
+
+- name: ZSH | Create .config directory if it does not exist
+  ansible.builtin.file:
+    path: "{{ user.home }}/.config"
+    state: directory
+    mode: '0755'
 
 - name: ZSH | Symlink config (zshrc)
   ansible.builtin.file:
@@ -68,9 +74,10 @@
   tags:
     - zsh
 
-- name: ZSH | Change user shell to zsh
-  ansible.builtin.user:
-    name: "{{ user.name }}"
-    shell: /usr/bin/zsh
-  tags:
-    - zsh
+      # TODO: Use and change default shell to brew zsh
+      # - name: ZSH | Change user shell to zsh
+      #   ansible.builtin.user:
+      #     name: "{{ user.name }}"
+      #     shell: /usr/bin/zsh
+      #   tags:
+      #     - zsh

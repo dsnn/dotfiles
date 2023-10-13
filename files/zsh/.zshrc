@@ -29,7 +29,7 @@ source ~/.config/zsh/keybindings
 eval "$(starship init zsh)"
 
 # 1password shell completions
-if ! command -v op &> /dev/null
+if command -v op &> /dev/null
 then
   eval "$(op completion zsh)"; compdef _op op
 fi

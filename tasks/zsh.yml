@@ -91,10 +91,26 @@
   tags:
     - zsh
 
-      # TODO: Use and change default shell to brew zsh
-      # - name: ZSH | Change user shell to zsh
-      #   ansible.builtin.user:
-      #     name: "{{ user.name }}"
-      #     shell: /usr/bin/zsh
-      #   tags:
-      #     - zsh
+# TODO: workaround for using brew installed shell
+# - name: ZSH | Change user shell to zsh
+#   ansible.builtin.command: 
+#     cmd: command -v zsh | sudo tee -a /etc/shells
+#   tags:
+#    - zsh
+#    - shell
+#
+# - name: ZSH | Change user shell to zsh
+#   ansible.builtin.command: 
+#     cmd: sudo chsh -s "$(command -v zsh)" "${USER}"
+#   tags:
+#    - zsh
+#    - shell
+
+# - name: ZSH | Change user shell to zsh
+#   become: true
+#   ansible.builtin.user:
+#     name: "{{ user.name }}"
+#     shell: /home/linuxbrew/.linuxbrew/bin/zsh
+#   tags:
+#    - zsh
+#    - shell

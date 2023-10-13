@@ -5,6 +5,7 @@
       community.general.homebrew:
         state: present
         name:
+          - gnu-sed
           - lazygit
           - neovim
           - starship

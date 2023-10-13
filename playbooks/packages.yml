@@ -1,0 +1,43 @@
+---
+- hosts: local
+  tasks:
+    - name: Install packages
+      community.general.homebrew:
+        state: present
+        name:
+          - lazygit
+          - neovim
+          - starship
+          - tmux
+          - tmuxp
+          - volta
+          - ansible
+          - wget
+          - awk
+          - git
+          - ripgrep
+          - bat
+          - htop
+          - z
+          - luajit
+          - sqlite
+          - zsh
+          - keychain
+          - sstp-client
+          - zsh-autosuggestions
+          - zsh-completions
+          - coreutils
+          - stow
+          - zsh-syntax-highlighting
+          - curl
+          - docker-compose
+          - fd
+          - tree-sitter
+          - freerdp
+          - fzf
+          # - homebrew/cask/1password-cli
+          # - homebrew/cask/docker
+          # - homebrew/cask/kitty
+          # - homebrew/cask/db-browser-for-sqlite
+          # - homebrew/cask/font-fira-code-nerd-font
+          # - homebrew/cask/mos

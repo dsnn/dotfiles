@@ -11,6 +11,7 @@ export BROWSER="firefox"
 export VISUAL="nvim"
 export EDITOR="nvim"
 export MANWIDTH=79
+export LANG="en_US.UTF-8"
 
 [ -d "$HOME/bin" ] && export PATH="$HOME/bin:$PATH"
 [ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"

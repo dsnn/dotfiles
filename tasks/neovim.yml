@@ -6,3 +6,7 @@
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
     state: link
+  tags:
+    - vim
+    - neovim
+    - neovim

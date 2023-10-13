@@ -1,11 +1,10 @@
 ---
-
 ansible_python_interpreter: /usr/bin/python3
 
 user:
   name: dsn
-  group: dsn
-  home: "/home/dsn"
+  group: staff
+  home: "/Users/dsn"
   shell: /usr/bin/zsh
   email: dsn@dsnn.io
   # password: "{{ user_password }}"

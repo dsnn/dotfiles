@@ -29,7 +29,10 @@ source ~/.config/zsh/keybindings
 eval "$(starship init zsh)"
 
 # 1password shell completions
-eval "$(op completion zsh)"; compdef _op op
+if ! command -v op &> /dev/null
+then
+  eval "$(op completion zsh)"; compdef _op op
+fi
 
 [ -f ~/.ssh/id_rsa ] && eval $(keychain --eval --quiet --quick id_rsa ~/.ssh/id_rsa)
 [ -f ~/.secrets/exports.secret ] && source ~/.secrets/exports.secret

@@ -5,6 +5,7 @@
       community.general.homebrew:
         state: present
         name:
+          - wakeonlan
           - gnu-sed
           - lazygit
           - neovim

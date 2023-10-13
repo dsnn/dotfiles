@@ -1,4 +1,21 @@
 ---
+# when: ansible_facts['os_family'] == "Darwin"
+# when: ansible_distribution == 'MacOSX'
+#
+# when: ansible_facts['os_family'] == "Debian"
+# when: ansible_distribution == 'Ubuntu'
+
+- name: ZSH | Create zsh profile
+  ansible.builtin.template:
+    src: "{{ user.home }}/dotfiles/templates/zprofile.j2"
+    dest: "{{ user.home }}/.zprofile"
+    owner: "{{ user.name }}"
+    group: "{{ user.group }}"
+    mode: "0755"
+  tags:
+    - zsh
+    - zprofile
+
 - name: ZSH | Copy zshenv
   ansible.builtin.copy:
     src: "{{ user.home }}/dotfiles/files/zshenv"
@@ -24,7 +41,7 @@
   ansible.builtin.file:
     path: "{{ user.home }}/.config"
     state: directory
-    mode: '0755'
+    mode: "0755"
 
 - name: ZSH | Symlink config (zshrc)
   ansible.builtin.file:

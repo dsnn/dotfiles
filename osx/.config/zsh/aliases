@@ -1,5 +1,4 @@
 alias cat="bat"
-#alias awk="nawk"
 alias vim="nvim"
 
 # file shortcuts

@@ -47,11 +47,15 @@ alias av='ansible-vault'
 alias al='ansible-lint'
 
 # listing
-alias l="ls -alh --color=auto"
-alias la="ls -alh --color=auto"
-alias ll="ls -alh --color=auto --format=horizontal "
-alias lt="ls -alrth --color=auto"
-alias ls="ls -hN --group-directories-first --color=auto"
+# alias l="ls -alh --color=auto"
+# alias la="ls -alh --color=auto"
+# alias ll="ls -alh --color=auto --format=horizontal "
+# alias lt="ls -alrth --color=auto"
+# alias ls="ls -h --color=auto"
+alias l="gls -alh --color=auto"
+alias la="gls -alh --color=auto"
+alias ll="gls -alh --color=auto --format=horizontal "
+alias ls="gls -h --color=auto"
 
 # git
 alias g="git"

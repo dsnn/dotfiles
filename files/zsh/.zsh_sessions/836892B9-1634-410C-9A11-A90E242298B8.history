@@ -1,0 +1,7 @@
+ls
+chsh -s /bin/bash
+ls
+ls -la
+echo $SHELL
+ls
+exit

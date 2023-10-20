@@ -5,44 +5,55 @@
       community.general.homebrew:
         state: present
         name:
-          - ansible-lint
-          - mosh 
-          - wakeonlan
-          - gnu-sed
-          - lazygit
-          - neovim
-          - starship
-          - tmux
-          - tpm
-          - tmuxp
-          - volta
           - ansible
-          - wget
+          - ansible-lint
           - awk
-          - git
-          - ripgrep
           - bat
+          - coreutils
+          - curl
+          - docker-compose
+          - fd
+          - freerdp
+          - fzf
+          - git
+          - git-delta
+          - gls
+          - gnu-sed
           - htop
-          - z
+          - keychain
+          - lazygit
           - luajit
+          - mosh
+          - neovim
+          - ripgrep
           - sqlite
           - sstp-client
+          - starship
+          - stow
+          - tmux
+          - tmuxp
+          - tpm
+          - tree-sitter
+          - volta
+          - wakeonlan
+          - wget
+          - z
           - zsh
           - zsh-autosuggestions
           - zsh-completions
           - zsh-syntax-highlighting
-          - keychain
-          - coreutils
-          - stow
-          - curl
-          - docker-compose
-          - fd
-          - tree-sitter
-          - freerdp
-          - fzf
-          # - homebrew/cask/1password-cli
+        tags:
+          - packages
+
+    - name: Install casks
+      community.general.homebrew:
+        state: present
+        name:
+          - homebrew/cask/1password-cli
           # - homebrew/cask/docker
           # - homebrew/cask/kitty
           # - homebrew/cask/db-browser-for-sqlite
-          # - homebrew/cask/font-fira-code-nerd-font
-          # - homebrew/cask/mos
+          - homebrew/cask/font-fira-code-nerd-font
+          - homebrew/cask/mos
+        tags:
+          - casks

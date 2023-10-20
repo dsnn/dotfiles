@@ -1,19 +1,19 @@
 ---
 - hosts: local
-  # become: true
-  # pre_tasks:
-  #   - name: Bootstrap | Create base folders
-  #     file: "{{ item }}"
-  #     owner: "{{ user.name }}"
-  #     group: "{{ user.group }}"
-  #     with_items:
-  #     - "{{ user.home }}/.config"
-  #     - "{{ user.home }}/.local/bin"
-  #     - "{{ user.home }}/.local/share/nvim/lsp_servers/sumneko_lua/server"
-
   tasks:
+    - name: dotfiles | Create base folders
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ user.name }}"
+        group: "{{ user.group }}"
+        mode: "0755"
+      with_items:
+        - "{{ user.home }}/.config"
+        - "{{ user.home }}/.local/bin"
     - import_tasks: ../tasks/bin.yml
     - import_tasks: ../tasks/zsh.yml
+    - import_tasks: ../tasks/karabiner.yml
     - import_tasks: ../tasks/neovim.yml
     - import_tasks: ../tasks/git.yml
     - import_tasks: ../tasks/tmux.yml

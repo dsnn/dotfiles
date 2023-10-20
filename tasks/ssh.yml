@@ -1,4 +1,12 @@
 ---
+- name: SSH | Install mosh
+  community.general.homebrew:
+    state: present
+    name:
+      - mosh
+  tags:
+    - ssh
+
 - name: SSH | Install ssh config
   ansible.builtin.template:
     src: "{{ user.home }}/dotfiles/templates/sshconfig.j2"
@@ -6,13 +14,5 @@
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
     mode: "0755"
-  tags:
-    - ssh
-
-- name: SSH | Install mosh
-  community.general.homebrew:
-    state: present
-    name:
-      - mosh 
   tags:
     - ssh

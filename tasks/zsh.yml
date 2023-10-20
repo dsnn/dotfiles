@@ -1,14 +1,8 @@
 ---
-# when: ansible_facts['os_family'] == "Darwin"
-# when: ansible_distribution == 'MacOSX'
-#
-# when: ansible_facts['os_family'] == "Debian"
-# when: ansible_distribution == 'Ubuntu'
-
 - name: ZSH | Create zsh profile
   ansible.builtin.template:
     src: "{{ user.home }}/dotfiles/templates/zprofile.j2"
-    dest: "{{ user.home }}/.zprofile"
+    dest: "{{ user.home }}/.config/zsh/.zprofile"
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
     mode: "0755"
@@ -26,16 +20,16 @@
   tags:
     - zsh
 
-- name: ZSH | Install package(s)
-  community.general.homebrew:
-    state: present
-    name:
-      - zsh
-      - zsh-autosuggestions
-      - zsh-completions
-      - zsh-syntax-highlighting
-  tags:
-    - zsh
+# - name: ZSH | Install package(s)
+#   community.general.homebrew:
+#     state: present
+#     name:
+#       - zsh
+#       - zsh-autosuggestions
+#       - zsh-completions
+#       - zsh-syntax-highlighting
+#   tags:
+#     - zsh
 
 - name: ZSH | Create .config directory if it does not exist
   ansible.builtin.file:
@@ -73,8 +67,8 @@
 
 - name: ZSH | Symlink startship prompt config
   ansible.builtin.file:
-    src: "{{ user.home }}/dotfiles/files/starship.toml"
-    dest: "{{ user.home }}/.config/starship.toml"
+    src: "{{ user.home }}/dotfiles/files/starship"
+    dest: "{{ user.home }}/.config/starship"
     owner: "{{ user.name }}"
     group: "{{ user.group }}"
     state: link
@@ -90,17 +84,16 @@
     state: link
   tags:
     - zsh
-
 # TODO: workaround for using brew installed shell
 # - name: ZSH | Change user shell to zsh
-#   ansible.builtin.command: 
+#   ansible.builtin.command:
 #     cmd: command -v zsh | sudo tee -a /etc/shells
 #   tags:
 #    - zsh
 #    - shell
 #
 # - name: ZSH | Change user shell to zsh
-#   ansible.builtin.command: 
+#   ansible.builtin.command:
 #     cmd: sudo chsh -s "$(command -v zsh)" "${USER}"
 #   tags:
 #    - zsh

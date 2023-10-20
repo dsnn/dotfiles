@@ -3,30 +3,32 @@ alias awk="nawk"
 alias vim="nvim"
 
 # file shortcuts
-alias cfc="vim ~/dotfiles"
-alias cfs="vim ~/.ssh/config"
-alias cfz="vim ~/dotfiles/files/zsh/.zshrc"
-alias cfg="vim ~/dotfiles/files/gitconfig"
+alias cfc="vim $HOME/dotfiles"
+alias cfs="vim $HOME/.ssh/config"
+alias cfa="vim $HOME/dotfiles/files/zsh/aliases"
+alias cfe="vim $HOME/dotfiles/files/zsh/exports"
+alias cfz="vim $HOME/dotfiles/files/zsh/.zshrc"
+alias cfg="vim $HOME/dotfiles/files/gitconfig"
 
 # shortcuts
-alias h="cd ~/"
-alias d="cd ~/dotfiles"
-alias cf="cd ~/.config"
-alias bin="cd ~/.local/bin"
+alias h="cd $HOME/"
+alias d="cd $HOME/dotfiles"
+alias cf="cd $HOME/.config"
+alias bin="cd $HOME/.local/bin"
 alias cwt="cd /mnt/c/Users/dsn/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/"
 alias cwp="cd /mnt/c/Users/dsn/Documents/PowerShell/"
 alias cwr="cd /mnt/c/root"
-alias web="cd /home/dsn/work/core/code/ServerHtml5/Web"
-alias core="cd /home/dsn/work/core/code"
-alias pp="cd /home/dsn/projects"
-alias b="cd /home/dsn/build"
+alias web="cd $HOME/work/core/code/ServerHtml5/Web"
+alias core="cd $HOME/work/core/code"
+alias pp="cd $HOME/projects"
+alias b="cd $HOME/build"
 
 # navigation
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-alias -- -="cd ~"
+alias -- -="cd $HOME"
 alias cd..="cd .."
 
 # actions
@@ -36,22 +38,17 @@ alias rmd="rm -rf"
 alias cp="cp -v"
 alias df="df -h"
 alias mkdir="mkdir -pv"
-alias rf="source ~/.config/zsh/.zshrc"
+alias rf="source $HOME/.config/zsh/.zshrc"
 
 # ansible
 alias ap="ansible-playbook"
-alias ad="ansible-playbook ~/dotfiles/playbooks/dotfiles.yml -K"
-alias ae="ansible-vault edit ~/dotfiles/group_vars/all/secrets.yml"
+alias ad="ansible-playbook $HOME/dotfiles/playbooks/dotfiles.yml -K"
+alias ae="ansible-vault edit $HOME/dotfiles/group_vars/all/secrets.yml"
 alias ap='ansible-playbook'
 alias av='ansible-vault'
 alias al='ansible-lint'
 
 # listing
-# alias l="ls -alh --color=auto"
-# alias la="ls -alh --color=auto"
-# alias ll="ls -alh --color=auto --format=horizontal "
-# alias lt="ls -alrth --color=auto"
-# alias ls="ls -h --color=auto"
 alias l="gls -alh --color=auto"
 alias la="gls -alh --color=auto"
 alias ll="gls -alh --color=auto --format=horizontal "
@@ -81,4 +78,4 @@ alias nrt="npm run typecheck"
 alias nrl="npm run lint"
 
 # wget
-alias wget=''wget --hsts-file="/home/dsn/.config/wget"/wget-hsts''
+alias wget=''wget --hsts-file="$HOME/.config/wget"/wget-hsts''

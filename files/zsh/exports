@@ -16,9 +16,9 @@ export MANWIDTH=79
 [ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
 
 # XDG
-export XDG_CONFIG_HOME="/home/dsn/.config"
-export XDG_DATA_HOME="/home/dsn/.local/share"
-export XDG_CACHE_HOME="/home/dsn/.local/cache"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.local/cache"
 
 # todoist
 export TODOIST_API_KEY="~/.todoist-api-key"

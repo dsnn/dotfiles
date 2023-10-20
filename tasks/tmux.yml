@@ -1,5 +1,5 @@
 ---
-- name: Tmux | Install packages 
+- name: Tmux | Install packages
   community.general.homebrew:
     state: present
     name:

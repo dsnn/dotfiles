@@ -14,9 +14,9 @@
 	cob  = "checkout -b";
 	gpf  = "push --force-with-lease";
 	la   = "!git config -l | grep alias | cut -c 7-";
-	ls   = "log --pretty=format:'%h %Cblue%ad%Creset %an %Cgreen%s%Creset' --decorate --date=short -10";
+	ls   = "log --pretty=format:'%h %Cblue%ad%Creset %an %Cgreen%s%Creset' --decorate --date=format:'%Y-%m-%d %H:%M:%S' -10";
 	lg   = "log --pretty='%C(yellow)%h%Creset | %cd %d %s (%C(cyan)%an)' --date=format:'%Y-%m-%d %H:%M:%S' --graph";
-	last = "!git log -''${1+}''${1-1} HEAD --pretty=format:'%h %Cblue%ad%Creset %an %Cgreen%s%Creset' --decorate --date=short -10";
+	last = "!git log -''${1+}''${1-1} HEAD --pretty=format:'%h %Cblue%ad%Creset %an %Cgreen%s%Creset' --decorate --date=format:'%Y-%m-%d %H:%M:%S' -10";
 	pr   = "!git checkout master;!git pull;git checkout @{-1};!git rebase master";
 	pu   = "push -u origin $(git cb)";
 	rba  = "rebase --abort";

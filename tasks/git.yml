@@ -4,6 +4,7 @@
     state: present
     name:
       - git
+      - git-delta
   tags:
     - git
     - packages

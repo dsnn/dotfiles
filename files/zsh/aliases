@@ -4,7 +4,6 @@ alias vim="nvim"
 
 # file shortcuts
 alias cfc="vim $HOME/dotfiles"
-alias cfs="vim $HOME/.ssh/config"
 alias cfa="vim $HOME/dotfiles/files/zsh/aliases"
 alias cfe="vim $HOME/dotfiles/files/zsh/exports"
 alias cfz="vim $HOME/dotfiles/files/zsh/.zshrc"

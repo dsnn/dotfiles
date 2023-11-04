@@ -17,7 +17,7 @@
           - fzf
           - git
           - git-delta
-          - gls
+          - lsd
           - gnu-sed
           - htop
           - keychain
@@ -25,6 +25,7 @@
           - luajit
           - mosh
           - neovim
+          - nmap
           - ripgrep
           - sqlite
           - sstp-client
@@ -34,6 +35,7 @@
           - tmuxp
           - tpm
           - tree-sitter
+          - packer
           - volta
           - wakeonlan
           - wget
@@ -49,11 +51,11 @@
       community.general.homebrew:
         state: present
         name:
-          - homebrew/cask/1password-cli
+          # - homebrew/cask/1password-cli
           # - homebrew/cask/docker
           # - homebrew/cask/kitty
           # - homebrew/cask/db-browser-for-sqlite
-          - homebrew/cask/font-fira-code-nerd-font
-          - homebrew/cask/mos
+          # - homebrew/cask/font-fira-code-nerd-font
+          # - homebrew/cask/mos
       tags:
         - casks

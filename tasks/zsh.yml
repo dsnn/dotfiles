@@ -64,6 +64,7 @@
     mode: "0700"
   tags:
     - zsh
+    - secret-exports
 
 - name: ZSH | Symlink startship prompt config
   ansible.builtin.file:

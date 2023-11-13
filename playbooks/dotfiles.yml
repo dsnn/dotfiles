@@ -11,6 +11,7 @@
       with_items:
         - "{{ user.home }}/.config"
         - "{{ user.home }}/.local/bin"
+        - "{{ user.home }}/projects"
     - import_tasks: ../tasks/bin.yml
     - import_tasks: ../tasks/zsh.yml
     - import_tasks: ../tasks/karabiner.yml

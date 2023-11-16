@@ -49,17 +49,7 @@
       system = "aarch64-darwin";
       pkgs = import nixpkgs { system = "aarch64-darwin"; };
       specialArgs = { inherit inputs; };
-      modules = [
-        ./hosts/macbook/configuration.nix
-        home-manager.darwinModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users.dsn.imports = [ ./hosts/macbook/home.nix ];
-          };
-        }
-      ];
+      modules = [ ./hosts/macbook/configuration.nix ];
 
     };
     # agenix.darwinModules.default

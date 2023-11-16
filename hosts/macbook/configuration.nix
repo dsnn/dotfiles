@@ -5,16 +5,16 @@
   environment = {
     shells = with pkgs; [ bash zsh ];
     loginShell = pkgs.zsh;
-    systemPackages = [
-      pkgs.coreutils 
-      pkgs.home-manager
+    systemPackages = with pkgs; [
+      coreutils
+      home-manager
       # pkgs.agenix.packages.aarch64-darwin.default
     ];
     systemPath = [ "/opt/homebrew/bin" ];
     pathsToLink = [ "/Applications" ];
   };
 
-  users.users.dsn.home = "/Users/dsn";
+  # users.users.dsn.home = "/Users/dsn";
 
   nix.extraOptions = ''
     experimental-features = nix-command flakes
@@ -22,6 +22,8 @@
 
   nix.package = pkgs.nixUnstable;
   nix.gc.automatic = true;
+  nix.gc.interval = { Weekday = 0; Hour = 0; Minute = 0; };
+  nix.gc.options = "--delete-older-than 30d";
   # nix.gc.interval = "03:15";
   
   # replace duplicates w/ hard links (and save space)

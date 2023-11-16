@@ -1,0 +1,38 @@
+{
+    "export const": {
+        "prefix": "exportc",
+        "body": "export const $1 = ($2) => {$3};"
+    },
+    "export type": {
+        "prefix": "exportt",
+        "body": ["export type ${1:TypeName} = {", "\t$2", "};"]
+    },
+    "import": {
+        "prefix": "import",
+        "body": ["import { $1 } from '$2'; "]
+    },
+    "import default": {
+        "prefix": "importd",
+        "body": ["import $1 from '$2'; "]
+    },
+    "useEffect": {
+        "prefix": "useEffect",
+        "body": ["useEffect(() => {", "$1", "}, [])"]
+    },
+    "if": {
+        "prefix": "if",
+        "body": ["if ($1) {", "$2", "}"]
+    },
+    "react fc": {
+        "prefix": "React",
+        "body": ["React.FC<$1>"]
+    },
+    "arrow fn": {
+        "prefix": "constf",
+        "body": ["const $1 = ($2) => {", "$3", "};"]
+    },
+    "object destruct": {
+        "prefix": "consto",
+        "body": ["const { $1 } = props;"]
+    }
+}

@@ -1,0 +1,38 @@
+{
+  "todo": {
+    "prefix": "todo",
+    "body": "TODO: $0"
+  },
+  "date": {
+    "prefix": "date",
+    "body": "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE"
+  },
+  "time": {
+    "prefix": "time",
+    "body": "$CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND"
+  },
+  "datetime": {
+    "prefix": "datetime",
+    "body": "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND"
+  },
+  "lorem ipsum 1": {
+    "prefix": "lorem1",
+    "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+  },
+  "lorem ipsum 2": {
+    "prefix": "lorem2",
+    "body": "Fusce vitae varius purus. Nulla eleifend lorem facilisis sem dictum ornare. Donec at dapibus dui, iaculis viverra ipsum. Phasellus eget mauris sed urna lacinia auctor."
+  },
+  "lorem ipsum 3": {
+    "prefix": "lorem3",
+    "body": "Fusce vitae varius purus. Nulla eleifend lorem facilisis sem dictum ornare. Donec at dapibus dui, iaculis viverra ipsum. Phasellus eget mauris sed urna lacinia auctor. Mauris pellentesque nisl ut ligula varius condimentum. Maecenas orci enim, aliquam consectetur velit eget, aliquam condimentum arcu. Phasellus sed vehicula mi. Morbi tempor massa vitae urna finibus, eu commodo neque bibendum."
+  },
+  "lorem ipsum 4": {
+    "prefix": "lorem4",
+    "body": "Fusce vitae varius purus. Nulla eleifend lorem facilisis sem dictum ornare. Donec at dapibus dui, iaculis viverra ipsum. Phasellus eget mauris sed urna lacinia auctor. Mauris pellentesque nisl ut ligula varius condimentum. Maecenas orci enim, aliquam consectetur velit eget, aliquam condimentum arcu. Phasellus sed vehicula mi. Morbi tempor massa vitae urna finibus, eu commodo neque bibendum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum elit mollis blandit aliquet. Proin placerat tempor porttitor. Praesent vel bibendum dolor, ut vestibulum tellus. Nam mollis dapibus eros, et pretium lacus porttitor a. Nullam gravida magna mauris, quis vestibulum nisl aliquet tempor. Duis ut elementum leo. Nulla facilisi."
+  },
+  "log": {
+    "prefix": "log",
+    "body": "console.log('$1', $2);"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "log": {
+    "prefix": "log",
+    "body": "console.log('$1', $2);"
+  },
+  "ef": {
+    "prefix": "comp",
+    "body": "export const Comp = () => {};"
+  }
+}

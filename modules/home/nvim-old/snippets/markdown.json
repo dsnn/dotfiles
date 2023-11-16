@@ -1,0 +1,28 @@
+{
+  "code": {
+    "prefix": "code",
+    "body": [
+      "```",
+      "$1",
+      "```"
+    ]
+  },
+  "link": {
+    "prefix": "link",
+    "body": "[$1]($2)"
+  },
+  "image": {
+    "prefix": "img",
+    "body": "![$1]($2)"
+  },
+  "frontmatter": {
+    "prefix": "frontmatter",
+    "body": [
+      "---",
+      "title: $1",
+      "date: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+      "tags: $2",
+      "---"
+    ]
+  }
+}

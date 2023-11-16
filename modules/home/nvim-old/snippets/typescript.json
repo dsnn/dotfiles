@@ -1,0 +1,18 @@
+{
+    "import": {
+        "prefix": "import",
+        "body": ["import { $1 } from '$2'; "]
+    },
+    "import default": {
+        "prefix": "importd",
+        "body": ["import $1 from '$2'; "]
+    },
+    "export explicit": {
+        "prefix": "export",
+        "body": "export { $1 }"
+    },
+    "export default": {
+        "prefix": "exportd",
+        "body": "export default $1"
+    }
+}

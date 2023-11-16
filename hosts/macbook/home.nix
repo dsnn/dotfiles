@@ -6,6 +6,7 @@
     ../../modules/home/lazygit.nix
     ../../modules/home/starship.nix
     ../../modules/home/zsh.nix
+    # ../../modules/home/yabai.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -56,6 +57,8 @@
     EDITOR = "nvim";
   };
   home.stateVersion = "23.11";
+  home.username = "dsn";
+  home.homeDirectory = "/Users/dsn";
 
   xdg.enable = true;
   # xdg.cacheHome = ~/.local/cache;
@@ -63,7 +66,8 @@
   # xdg.dataHome = ~/.local/share;
 
   programs.zsh.shellAliases = {
-    rf = "darwin-rebuild switch --flake ~/dotfiles";
+    rs = "darwin-rebuild switch --flake ~/dotfiles/#macbook";
+    rf = "home-manager switch --flake ~/dotfiles/#macbook; source ~/.config/zsh/.zshrc";
     nixup = "pushd ~/dotfiles; nix flake update; nixswitch; popd";
 
     cfc = "vim $HOME/dotfiles/hosts/macbook/configuration.nix";

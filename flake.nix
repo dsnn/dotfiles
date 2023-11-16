@@ -11,7 +11,7 @@
     # unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.pkgs.follows = "nixpkgs";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # macOS Support (master)
     darwin.url = "github:lnl7/nix-darwin";
@@ -34,13 +34,23 @@
     # };
   };
 
-  outputs = inputs@{ self, nixpkgs, darwin, home-manager, ... }: {
-    darwinConfigurations.osx = darwin.lib.darwinSystem {
+  outputs = inputs@{ self, nixpkgs, darwin, home-manager, ... }:
+  let
+    system = "aarch64-darwin";
+    pkgs = nixpkgs.legacyPackages.${system};
+  in {
+
+    homeConfigurations.macbook = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      modules = [ ./hosts/macbook/home.nix ];
+    };
+
+    darwinConfigurations.macbook = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       pkgs = import nixpkgs { system = "aarch64-darwin"; };
       specialArgs = { inherit inputs; };
       modules = [
-        ./hosts/macbook/configuration.nix 
+        ./hosts/macbook/configuration.nix
         home-manager.darwinModules.home-manager
         {
           home-manager = {
@@ -49,8 +59,9 @@
             users.dsn.imports = [ ./hosts/macbook/home.nix ];
           };
         }
-        # agenix.darwinModules.default
       ];
+
     };
+    # agenix.darwinModules.default
   };
 }

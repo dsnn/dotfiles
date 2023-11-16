@@ -70,7 +70,6 @@
     cp = "cp -v";
     df = "df -h";
     mkdir = "mkdir -pv";
-    # rf = "home-manager switch; source ~/.config/zsh/.zshrc";
     rl = "source ~/.config/zsh/.zshrc";
 
     # listing

@@ -7,6 +7,7 @@
     loginShell = pkgs.zsh;
     systemPackages = [
       pkgs.coreutils 
+      pkgs.home-manager
       # pkgs.agenix.packages.aarch64-darwin.default
     ];
     systemPath = [ "/opt/homebrew/bin" ];
@@ -20,6 +21,12 @@
   '';
 
   nix.package = pkgs.nixUnstable;
+  nix.gc.automatic = true;
+  # nix.gc.interval = "03:15";
+  
+  # replace duplicates w/ hard links (and save space)
+  # settings.auto-optimise-store = true;
+  
   # nixpkgs.config.allowUnfree = true;
 
   # system.keyboard.enableKeyMapping = true;

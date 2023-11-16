@@ -13,6 +13,7 @@ darwin-rebuild switch --flake ~/nixfiles
 - merge zsh deps. one folder w/ default.nix, starhip.nix, bat, zoxide etc?
 - merge tmux w/ tmuxp?
 - merge git w/ lazygit
+- launchctl kickstart -k gui/${UID}/org.nixos.yabai && launchctl kickstart -k gui/${UID}/org.nixos.skhd
 
 # Links
 

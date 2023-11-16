@@ -123,8 +123,6 @@
       ctrl + alt - q : yabai --stop-service
       ctrl + alt - s : yabai --start-service
       ctrl + alt - r : yabai --restart-service
-
-      # launchctl kickstart -k gui/${UID}/org.nixos.yabai && launchctl kickstart -k gui/${UID}/org.nixos.skhd
      '';
   };
 }

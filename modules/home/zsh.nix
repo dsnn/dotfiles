@@ -20,7 +20,6 @@
   programs.zsh.history = {
     size = 10000;
     save = 10000;
-    # path = "/home/dsn/.config/zsh/history";
     ignoreDups = true;
     share = true;
     extended = true;
@@ -49,12 +48,6 @@
     cat = "bat";
     awk = "nawk";
     tracert = "trip";
-
-    # TODO: OS specific file shortcuts
-    # cfc = "vim $HOME/dotfiles/home.nix";
-    # cfs = "vim $HOME/.ssh/config";
-    # cfz = "vim $HOME/dotfiles/home.nix";
-    # cfg = "vim $HOME/dotfiles/home.nix";
 
     # folder shortcuts
     h = "cd ~/";
@@ -164,6 +157,7 @@
     bindkey "^g" run_lazy_git
 
     # TODO: source $HOME/.config/zsh/exports
+    source $HOME/.secrets/exports.secret
 
     # starship  prompt
     if command -v starship &> /dev/null

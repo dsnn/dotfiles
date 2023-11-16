@@ -63,13 +63,31 @@
   # xdg.dataHome = ~/.local/share;
 
   xdg.configFile."nvim" = {
-    source = config.lib.file.mkOutOfStoreSymlink /Users/dsn/nixfiles/modules/home/nvim;
+    source = config.lib.file.mkOutOfStoreSymlink /Users/dsn/dotfiles/modules/home/nvim;
   };
 
   programs.zsh.shellAliases = {
-    rf = "darwin-rebuild switch --flake ~/nixfiles";
-    nixup = "pushd ~/nixfiles; nix flake update; nixswitch; popd";
+    rf = "darwin-rebuild switch --flake ~/dotfiles";
+    nixup = "pushd ~/dotfiles; nix flake update; nixswitch; popd";
+
+    cfc = "vim $HOME/dotfiles/hosts/macbook/configuration.nix";
+    cfh = "vim $HOME/dotfiles/hosts/macbook/home.nix";
+    # TODO: OS specific file shortcuts
+    # cfs = "vim $HOME/.ssh/config";
+    # cfz = "vim $HOME/dotfiles/home.nix";
+    # cfg = "vim $HOME/dotfiles/home.nix";
   };
+  programs.zsh.history.path = "/Users/dsn/.config/zsh/history";
+  # programs._1password = {
+  #   enable = true;
+  # };
+  # ssh_agent ~/Library/Group\\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+  # programs._1password-gui = {
+  #   enable = true;
+  #   polkitPolicyOwners = ["dsn"];
+  # };
+
+
 
   # fonts.fontconfig.enable = true;
   programs.home-manager.enable = true;

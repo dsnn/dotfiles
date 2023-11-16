@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }: {
 
   imports = [
-    #../../modules/home/tmux.nix
+    ../../modules/home/tmux.nix
     ../../modules/home/git.nix
     ../../modules/home/lazygit.nix
     ../../modules/home/starship.nix
@@ -11,10 +11,11 @@
   nixpkgs.config.allowUnfree = true;
   # nix.package = pkgs.nixUnstable;
 
+  # home.username = "dsn";
+  # home.homeDirectory = "/Users/dsn";
   home.packages = with pkgs; [
     # docker-compose
     # neovim
-    # tmuxp
     # _1password
     # _1password-gui
     ansible
@@ -49,7 +50,6 @@
     # slack
     # spotify
   ];
-
   home.sessionVariables = {
     PAGER = "less";
     CLICLOLOR = 1;
@@ -61,10 +61,6 @@
   # xdg.cacheHome = ~/.local/cache;
   # xdg.configHome = ~/.config;
   # xdg.dataHome = ~/.local/share;
-
-  xdg.configFile."nvim" = {
-    source = config.lib.file.mkOutOfStoreSymlink /Users/dsn/dotfiles/modules/home/nvim;
-  };
 
   programs.zsh.shellAliases = {
     rf = "darwin-rebuild switch --flake ~/dotfiles";
@@ -78,6 +74,7 @@
     # cfg = "vim $HOME/dotfiles/home.nix";
   };
   programs.zsh.history.path = "/Users/dsn/.config/zsh/history";
+
   # programs._1password = {
   #   enable = true;
   # };
@@ -94,10 +91,15 @@
   programs.dircolors.enable = true;
   programs.keychain.enable = true;
 
-  home.file.".inputrc".source = ../../modules/home/inputrc;
   home.file.".hushlogin".text =  "";
+  home.file.".inputrc".source = ../../modules/home/inputrc;
+  home.file.".config/dircolors".source = ../../modules/home/dircolors;
+  xdg.configFile."nvim" = {
+    source = config.lib.file.mkOutOfStoreSymlink ../../modules/home/nvim;
+  };
 
-  # home.file.".config/nvim".source = ../../modules/home/nvim;
-  # home.file.".config/dircolors".source = ../../../dotfiles/files/dircolors;
-  # home.file.".config/tmuxp".source = ../../../dotfiles/files/tmuxp;
+  xdg.configFile."karabiner" = {
+    source = config.lib.file.mkOutOfStoreSymlink ../../modules/home/karabiner;
+  };
+
 }

@@ -158,8 +158,9 @@
     zle -N run_lazy_git
     bindkey "^g" run_lazy_git
 
-    # TODO: source $HOME/.config/zsh/exports
-    source $HOME/.secrets/exports.secret
+    if [ -f "$HOME/.secrets/export.secret" ]; then 
+      source $HOME/.secrets/export.secret
+    fi
 
     # starship  prompt
     if command -v starship &> /dev/null

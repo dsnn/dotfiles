@@ -1,56 +1,56 @@
 { pkgs, config, lib, ... }: {
 
   imports = [
-    ../../modules/home/tmux.nix
     ../../modules/home/git.nix
     ../../modules/home/lazygit.nix
     ../../modules/home/starship.nix
+    ../../modules/home/tmux.nix
     ../../modules/home/zsh.nix
   ];
 
-  nixpkgs.config.allowUnfree = true;
-  # nix.package = pkgs.nixUnstable;
 
   home.packages = with pkgs; [
-    docker-compose
-    # _1password-gui
+    # discord
+    # google-chrome
     _1password
     ansible
     ansible-lint
     cksfv
     curl
     direnv
+    docker-compose
     fd
     freerdp
     gnused
     htop
     jq
     keychain
+    kitty
     mosh
     nawk
+    neovim
     nixfmt
     nixpkgs-fmt
     packer
     ripgrep
     rnix-lsp
+    slack
+    spotify
     unzip
     vim
     volta
     wakeonlan
     wget
     xclip
-    neovim
-    kitty
-    # discord
-    # feh
-    # google-chrome
-    # slack
-    # spotify
   ];
+
+  nixpkgs.config.allowUnfree = true;
+
   home.sessionVariables = {
     PAGER = "less";
     CLICLOLOR = 1;
     EDITOR = "nvim";
+    SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
   };
   home.stateVersion = "23.11";
   home.username = "dsn";
@@ -59,15 +59,16 @@
   xdg.enable = true;
 
   programs.zsh.shellAliases = {
-    rs = "darwin-rebuild switch --flake ~/dotfiles/#macbook";
-    rf = "home-manager switch --flake ~/dotfiles/#macbook; source ~/.config/zsh/.zshrc";
-    ru = "pushd ~/dotfiles; nix flake update; nixswitch; popd";
     cfc = "vim $HOME/dotfiles/hosts/macbook/configuration.nix";
-    cfh = "vim $HOME/dotfiles/hosts/macbook/home.nix";
-    cfz = "vim $HOME/dotfiles/modules/home/zsh.nix";
-    cfs = "vim $HOME/dotfiles/hosts/macbook/home.nix";
     cfg = "vim $HOME/dotfiles/modules/home/git.nix";
+    cfh = "vim $HOME/dotfiles/hosts/macbook/home.nix";
+    cfs = "vim $HOME/dotfiles/hosts/macbook/home.nix";
+    cfz = "vim $HOME/dotfiles/modules/home/zsh.nix";
+    rf = "home-manager switch --flake ~/dotfiles/#macbook; source ~/.config/zsh/.zshrc";
+    rs = "darwin-rebuild switch --flake ~/dotfiles/#macbook";
+    ru = "pushd ~/dotfiles; nix flake update; nixswitch; popd";
   };
+  programs.zsh.history.path = "/Users/dsn/.config/zsh/history";
   programs.zsh.history.path = "/Users/dsn/.config/zsh/history";
 
   programs.ssh.enable = true;
@@ -77,7 +78,6 @@
     IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
   '';
 
-  # fonts.fontconfig.enable = true;
   programs.home-manager.enable = true;
   programs.dircolors.enable = true;
   programs.keychain.enable = true;
@@ -85,6 +85,7 @@
   home.file.".hushlogin".text =  "";
   home.file.".inputrc".source = ../../modules/home/inputrc;
   home.file.".config/dircolors".source = ../../modules/home/dircolors;
+  home.file.".secrets/export.secrets".source = ../../secrets/export.secrets;
   xdg.configFile."nvim" = {
     source = config.lib.file.mkOutOfStoreSymlink ../../modules/home/nvim;
   };
@@ -92,5 +93,4 @@
   xdg.configFile."karabiner" = {
     source = config.lib.file.mkOutOfStoreSymlink ../../modules/home/karabiner;
   };
-
 }

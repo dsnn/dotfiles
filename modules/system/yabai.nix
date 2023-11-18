@@ -7,7 +7,7 @@
     enable = true;
     enableScriptingAddition = true;
     config = {
-      focus_follows_mouse          = "autoraise";
+      focus_follows_mouse          = "off";
       mouse_follows_focus          = "off";
       window_placement             = "second_child";
       window_opacity               = "off";
@@ -48,14 +48,13 @@
         yabai -m rule --add app="^Calculator$" manage=off
         yabai -m rule --add app="^Karabiner-Elements$" manage=off
 
-        # yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
-        # yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
-        # yabai -m rule --add label="System Preferences" app="^System Preferences$" title=".*" manage=off
-        # yabai -m rule --add label="App Store" app="^App Store$" manage=off
-        # yabai -m rule --add label="Activity Monitor" app="^Activity Monitor$" manage=off
-        # yabai -m rule --add label="Dictionary" app="^Dictionary$" manage=off
-        # yabai -m rule --add label="Software Update" title="Software Update" manage=off
-        # yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
+        yabai -m rule --add app="^Finder$" manage=off
+        yabai -m rule --add app="^Safari$"  manage=off
+        yabai -m rule --add app="^App Store$" manage=off
+        yabai -m rule --add app="^Activity Monitor$" manage=off
+        yabai -m rule --add app="^Dictionary$" manage=off
+        yabai -m rule --add label="Software Update" manage=off
+        yabai -m rule --add app="System Information" manage=off
       '';
   };
 

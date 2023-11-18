@@ -1,44 +1,24 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
 
-  programs.zsh.enable = true;
-
-  environment = {
-    shells = with pkgs; [ bash zsh ];
-    loginShell = pkgs.zsh;
-    systemPackages = with pkgs; [
-      coreutils
-      home-manager
-      # pkgs.agenix.packages.aarch64-darwin.default
-    ];
-    systemPath = [ "/opt/homebrew/bin" ];
-    pathsToLink = [ "/Applications" ];
-  };
-
-  # users.users.dsn.home = "/Users/dsn";
+  imports = [
+    ../../modules/system/yabai.nix
+  ];
 
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
-
   nix.package = pkgs.nixUnstable;
-  nix.gc.automatic = true;
-  nix.gc.interval = { Weekday = 0; Hour = 0; Minute = 0; };
-  nix.gc.options = "--delete-older-than 30d";
-  # nix.gc.interval = "03:15";
-  
-  # replace duplicates w/ hard links (and save space)
-  # settings.auto-optimise-store = true;
-  
-  # nixpkgs.config.allowUnfree = true;
+  nix.gc = {
+    automatic = true;
+    interval = { Weekday = 0; Hour = 0; Minute = 0; };
+    options = "--delete-older-than 30d";
+  };
 
-  # system.keyboard.enableKeyMapping = true;
-  # system.keyboard.remapCapsLockToEscape = true;
-
-  # fonts.fontDir.enable = true; # DANGER
-  # fonts.fonts = [ (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; }) ];
-
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
+  environment.shells = with pkgs; [ bash zsh ];
+  environment.loginShell = pkgs.zsh;
+  environment.systemPackages = with pkgs; [ coreutils home-manager ];
+  environment.systemPath = [ "/opt/homebrew/bin" ];
+  environment.pathsToLink = [ "/Applications" ];
 
   system.defaults = {
     finder.AppleShowAllExtensions = true;
@@ -48,33 +28,17 @@
     NSGlobalDomain.InitialKeyRepeat = 14;
     NSGlobalDomain.KeyRepeat = 1;
   };
+  system.stateVersion = 4; # Used for backwards compatibility, please read the changelog before changing.
 
-  # Used for backwards compatibility, please read the changelog before changing.
-  # $ darwin-rebuild changelog
-  system.stateVersion = 4;
+  users.users.dsn.home = "/Users/dsn";
 
-  homebrew = {
-    enable = true;
-    caskArgs.no_quarantine = true;
-    global.brewfile = true;
-    casks = [ 
-      # "raycast" 
-      # "font-fira-code-nerd-font"
-      # "kitty"
-      # "mos"
-    ];
-    # masApps = { };
-    taps = [ 
-      "fujiapple852/trippy" 
-      # "1password/tap"
-      # "hashicorp/tap"
-      # "homebrew/bundle"
-      #"homebrew/cask-fonts"
-    ];
-    brews = [ 
-      "sstp-client"
-      "trippy" # https://github.com/fujiapple852/trippy
-       # "hashicorp/tap/packer"
-    ];
-  };
+  services.nix-daemon.enable = true;
+
+  programs.zsh.enable = true;
+
+  homebrew.enable = true;
+  homebrew.caskArgs.no_quarantine = true;
+  homebrew.global.brewfile = true;
+  homebrew.taps = [ "fujiapple852/trippy" ];
+  homebrew.brews = [ "mas" "sstp-client" "trippy" ];
 }

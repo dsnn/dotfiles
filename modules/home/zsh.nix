@@ -3,9 +3,12 @@
   # Dependencies
   programs.bat.enable = true;
   programs.bat.config.theme = "TwoDark";
+
   programs.lsd.enable = true;
+
   programs.zoxide.enable = true;
   programs.zoxide.enableZshIntegration = true;
+
   programs.fzf.enable = true;
   programs.fzf.enableZshIntegration = true;
 

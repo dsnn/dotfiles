@@ -1,0 +1,7 @@
+keys:
+  - &dsn age1f4tujr44q6ldjf4n69yv0x5tn7xcu4hy5xj9lapmtgrzny56xfasw2803c
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+      age:
+      - *dsn

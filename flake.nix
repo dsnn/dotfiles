@@ -17,7 +17,9 @@
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    # TODO: agenix.url = "github:ryantm/agenix";
+    # Secrets
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     
     # # Generate System Images
     # nixos-generators.url = "github:nix-community/nixos-generators";
@@ -34,7 +36,7 @@
     # };
   };
 
-  outputs = inputs@{ self, nixpkgs, darwin, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, darwin, home-manager, sops-nix, ... }:
   let
     system = "aarch64-darwin";
     pkgs = nixpkgs.legacyPackages.${system};
@@ -42,7 +44,10 @@
 
     homeConfigurations.macbook = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      modules = [ ./hosts/macbook/home.nix ];
+      modules = [
+        ./hosts/macbook/home.nix
+        # sops-nix.nixosModules.sops
+      ];
     };
 
     darwinConfigurations.macbook = darwin.lib.darwinSystem {
@@ -50,8 +55,6 @@
       pkgs = import nixpkgs { system = "aarch64-darwin"; };
       specialArgs = { inherit inputs; };
       modules = [ ./hosts/macbook/configuration.nix ];
-
     };
-    # agenix.darwinModules.default
   };
 }

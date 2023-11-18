@@ -40,5 +40,5 @@
   homebrew.caskArgs.no_quarantine = true;
   homebrew.global.brewfile = true;
   homebrew.taps = [ "fujiapple852/trippy" ];
-  homebrew.brews = [ "mas" "sstp-client" "trippy" ];
+  homebrew.brews = [ "mas" "sstp-client" "trippy" "git-crypt" ];
 }

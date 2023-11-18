@@ -158,8 +158,8 @@
     zle -N run_lazy_git
     bindkey "^g" run_lazy_git
 
-    if [ -f "$HOME/.secrets/export.secret" ]; then 
-      source $HOME/.secrets/export.secret
+    if [ -f "$HOME/.secrets/export.secrets" ]; then 
+      source $HOME/.secrets/export.secrets
     fi
 
     # starship  prompt
@@ -180,7 +180,6 @@
     ######### EXPORTS #########
 
     # PATH
-    [ -d "$HOME/bin" ] && export PATH="$HOME/bin:$PATH"
     [ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
 
     # XDG

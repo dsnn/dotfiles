@@ -50,7 +50,7 @@
     PAGER = "less";
     CLICLOLOR = 1;
     EDITOR = "nvim";
-    SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+    SSH_AUTH_SOCK="/Users/dsn/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
   };
   home.stateVersion = "23.11";
   home.username = "dsn";
@@ -69,13 +69,12 @@
     ru = "pushd ~/dotfiles; nix flake update; nixswitch; popd";
   };
   programs.zsh.history.path = "/Users/dsn/.config/zsh/history";
-  programs.zsh.history.path = "/Users/dsn/.config/zsh/history";
 
   programs.ssh.enable = true;
   programs.ssh.extraConfig = ''
     AddKeysToAgent yes
     IdentityFile ~/.ssh/id_rsa
-    IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+    IdentityAgent "/Users/dsn//Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
   '';
 
   programs.home-manager.enable = true;
@@ -86,6 +85,7 @@
   home.file.".inputrc".source = ../../modules/home/inputrc;
   home.file.".config/dircolors".source = ../../modules/home/dircolors;
   home.file.".secrets/export.secrets".source = ../../secrets/export.secrets;
+  home.file.".local/bin".source = ../../modules/home/bin;
   xdg.configFile."nvim" = {
     source = config.lib.file.mkOutOfStoreSymlink ../../modules/home/nvim;
   };

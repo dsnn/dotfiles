@@ -69,6 +69,10 @@
 
   programs.ssh.enable = true;
   programs.ssh.includes = [ "/Users/dsn/.ssh/config.d/*" ];
+  programs.ssh.extraConfig= ''
+    AddKeysToAgent yes
+    IdentityFile ~/.ssh/id_rsa
+  '';
 
   programs.home-manager.enable = true;
   programs.dircolors.enable = true;

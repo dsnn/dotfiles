@@ -8,7 +8,6 @@
     ../../modules/home/zsh.nix
   ];
 
-
   home.packages = with pkgs; [
     # discord
     # google-chrome
@@ -56,8 +55,6 @@
   home.username = "dsn";
   home.homeDirectory = "/Users/dsn";
 
-  xdg.enable = true;
-
   programs.zsh.shellAliases = {
     cfc = "vim $HOME/dotfiles/hosts/macbook/configuration.nix";
     cfg = "vim $HOME/dotfiles/modules/home/git.nix";
@@ -71,26 +68,20 @@
   programs.zsh.history.path = "/Users/dsn/.config/zsh/history";
 
   programs.ssh.enable = true;
-  programs.ssh.extraConfig = ''
-    AddKeysToAgent yes
-    IdentityFile ~/.ssh/id_rsa
-    IdentityAgent "/Users/dsn//Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-  '';
+  programs.ssh.includes = [ "/Users/dsn/.ssh/config.d/*" ];
 
   programs.home-manager.enable = true;
   programs.dircolors.enable = true;
   programs.keychain.enable = true;
 
-  home.file.".hushlogin".text =  "";
-  home.file.".inputrc".source = ../../modules/home/inputrc;
-  home.file.".config/dircolors".source = ../../modules/home/dircolors;
-  home.file.".secrets/export.secrets".source = ../../secrets/export.secrets;
-  home.file.".local/bin".source = ../../modules/home/bin;
-  xdg.configFile."nvim" = {
-    source = config.lib.file.mkOutOfStoreSymlink ../../modules/home/nvim;
-  };
-
-  xdg.configFile."karabiner" = {
-    source = config.lib.file.mkOutOfStoreSymlink ../../modules/home/karabiner;
-  };
+  home.file."/Users/dsn/.hushlogin".text =  "";
+  home.file."/Users/dsn/.inputrc".source = ../../modules/home/inputrc;
+  home.file."/Users/dsn/.config/dircolors".source = ../../modules/home/dircolors;
+  home.file."/Users/dsn/.secrets/export.secrets".source = ../../secrets/export.secrets;
+  home.file."/Users/dsn/.ssh/config.d/sshconfig.secrets".source = ../../secrets/sshconfig.secrets;
+  home.file."/Users/dsn/.local/bin".source = ../../modules/home/bin;
+  home.file."/Users/dsn/.config/nvim".source = config.lib.file.mkOutOfStoreSymlink
+    "${config.home.homeDirectory}/dotfiles/modules/home/nvim";
+  home.file."/Users/dsn/.config/karabiner".source = config.lib.file.mkOutOfStoreSymlink
+    "${config.home.homeDirectory}/dotfiles/modules/home/karabiner";
 }

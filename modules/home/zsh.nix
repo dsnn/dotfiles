@@ -124,7 +124,7 @@
     #   eval $(keychain --eval --quiet --quick id_rsa ~/.ssh/id_rsa)
     # fi
 
-    # enable vi-mode 
+    # enable vi-mode
     bindkey -v
 
     # keybinding for accepting autosuggestion
@@ -134,7 +134,7 @@
     autoload -U edit-command-line; zle -N edit-command-line
     bindkey '^e' edit-command-line
 
-    # keybinding for cd .. 
+    # keybinding for cd ..
     function up_widget() {
       BUFFER="cd .."
       zle accept-line
@@ -147,8 +147,8 @@
       BUFFER="nvim && clear"
       zle accept-line
     }
-    zle -N run_nvim 
-    bindkey "^n" run_nvim 
+    zle -N run_nvim
+    bindkey "^n" run_nvim
 
     # keybinding for lazy git
     function run_lazy_git() {
@@ -157,10 +157,6 @@
     }
     zle -N run_lazy_git
     bindkey "^g" run_lazy_git
-
-    if [ -f "$HOME/.secrets/export.secrets" ]; then 
-      source $HOME/.secrets/export.secrets
-    fi
 
     # starship  prompt
     if command -v starship &> /dev/null
@@ -175,12 +171,17 @@
     fi
 
     [ -f ~/.ssh/id_rsa ] && eval $(keychain --eval --quiet --quick id_rsa ~/.ssh/id_rsa)
-    [ -f ~/.secrets/exports.secret ] && source ~/.secrets/exports.secret
 
     ######### EXPORTS #########
 
-    # PATH
-    [ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
+    if [ -f "$HOME/.secrets/export.secrets" ]; then
+      source $HOME/.secrets/export.secrets
+    fi
+
+    # bin
+    if [ -d "$HOME/.local/bin" ]; then
+      export PATH="$HOME/.local/bin:$PATH"
+    fi
 
     # XDG
     export XDG_CONFIG_HOME="$HOME/.config"
@@ -192,27 +193,21 @@
     export PATH="$VOLTA_HOME/bin:$PATH"
 
     # fzf
-    export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'	
+    export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
     export FZF_CTRL_T_COMMAND='$FZF_DEFAULT_COMMAND'
     export FZF_ALT_C_COMMAND="fd -t d . $HOME"
     export FZF_COMPLETION_OPTS='+c -x'
 
-    # ansible
-    export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault-password
-    
     # tmuxp
     TMUXP_CONFIGDIR=$HOME/.config/tmuxp
-    
+
     # nvim
     export PATH="$HOME/.local/bin/nvim/bin:$PATH"
-    
+
     # npm
     PATH="$PATH:$HOME/.node_modules/bin"
     export npm_config_prefix=~/.node_modules
-    
-    # yarn
-    export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-    
+
     # colored man pages
     export LESS_TERMCAP_mb=$'\E[01;31m'
     export LESS_TERMCAP_md=$'\E[01;38;5;74m'
@@ -222,5 +217,4 @@
     export LESS_TERMCAP_ue=$'\E[0m'
     export LESS_TERMCAP_us=$'\E[04;38;5;146m'
   '';
-
 }

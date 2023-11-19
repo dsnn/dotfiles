@@ -11,7 +11,7 @@
   home.packages = with pkgs; [
     # discord
     # google-chrome
-    _1password
+    # _1password
     ansible
     ansible-lint
     cksfv
@@ -69,9 +69,8 @@
 
   programs.ssh.enable = true;
   programs.ssh.includes = [ "/Users/dsn/.ssh/config.d/*" ];
-  programs.ssh.extraConfig= ''
-    AddKeysToAgent yes
-    IdentityFile /Users/dsn/.ssh/id_rsa.pub
+  programs.ssh.extraConfig = ''
+    IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
   '';
 
   programs.home-manager.enable = true;

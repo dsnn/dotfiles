@@ -2,48 +2,10 @@
 
   imports = [
     ../../modules/home/git.nix
-    ../../modules/home/lazygit.nix
     ../../modules/home/starship.nix
     ../../modules/home/tmux.nix
     ../../modules/home/zsh.nix
   ];
-
-  home.packages = with pkgs; [
-    # discord
-    # google-chrome
-    # _1password
-    ansible
-    ansible-lint
-    cksfv
-    curl
-    direnv
-    docker-compose
-    fd
-    freerdp
-    gnused
-    htop
-    jq
-    keychain
-    kitty
-    mosh
-    nawk
-    neovim
-    nixfmt
-    nixpkgs-fmt
-    packer
-    ripgrep
-    rnix-lsp
-    slack
-    spotify
-    unzip
-    vim
-    volta
-    wakeonlan
-    wget
-    xclip
-  ];
-
-  nixpkgs.config.allowUnfree = true;
 
   home.sessionVariables = {
     PAGER = "less";
@@ -87,4 +49,41 @@
     "${config.home.homeDirectory}/dotfiles/modules/home/nvim";
   home.file."/Users/dsn/.config/karabiner".source = config.lib.file.mkOutOfStoreSymlink
     "${config.home.homeDirectory}/dotfiles/modules/home/karabiner";
+
+  nixpkgs.config.allowUnfree = true;
+
+  home.packages = with pkgs; [
+    # discord
+    # google-chrome
+    # _1password
+    ansible
+    ansible-lint
+    cksfv
+    curl
+    direnv
+    docker-compose
+    fd
+    freerdp
+    gnused
+    htop
+    jq
+    keychain
+    kitty
+    mosh
+    nawk
+    neovim
+    nixfmt
+    nixpkgs-fmt
+    packer
+    ripgrep
+    rnix-lsp
+    slack
+    spotify
+    unzip
+    vim
+    volta
+    wakeonlan
+    wget
+    xclip
+  ];
 }

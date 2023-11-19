@@ -71,7 +71,7 @@
   programs.ssh.includes = [ "/Users/dsn/.ssh/config.d/*" ];
   programs.ssh.extraConfig= ''
     AddKeysToAgent yes
-    IdentityFile ~/.ssh/id_rsa
+    IdentityFile /Users/dsn/.ssh/id_rsa.pub
   '';
 
   programs.home-manager.enable = true;

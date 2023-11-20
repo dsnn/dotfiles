@@ -20,7 +20,7 @@
     # Secrets
     # sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     # sops-nix.url = "github:Mic92/sops-nix";
-    
+
     # # Generate System Images
     # nixos-generators.url = "github:nix-community/nixos-generators";
     # nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
@@ -52,6 +52,13 @@
       pkgs = import nixpkgs { system = "aarch64-darwin"; };
       specialArgs = { inherit inputs; };
       modules = [ ./hosts/macbook/configuration.nix ];
+    };
+
+    nixosConfigurations.alpha = pkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      pkgs = import nixpkgs { system = "x86_64-linux"; };
+      specialArgs = { inherit inputs; };
+      modules = [ ./hosts/desktop/configuration.nix ];
     };
   };
 }

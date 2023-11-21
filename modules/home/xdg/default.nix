@@ -17,11 +17,11 @@
   };
 
   # config symlinks
-  xdg.configFile."nvim".source =
-    config.lib.file.mkOutOfStoreSymlink ~/dotfiles/modules/home/nvim;
+  # xdg.configFile."nvim".source =
+  #   config.lib.file.mkOutOfStoreSymlink ~/dotfiles/modules/home/nvim;
 
-  xdg.configFile."awesome".source =
-    config.lib.file.mkOutOfStoreSymlink ~/dotfiles/modules/home/awesome;
+  # xdg.configFile."awesome".source =
+  #   config.lib.file.mkOutOfStoreSymlink ~/dotfiles/modules/home/awesome;
 
   xdg.configFile."polybar".source =
     config.lib.file.mkOutOfStoreSymlink ~/dotfiles/modules/home/polybar;

@@ -2,7 +2,7 @@
 let mod = "Mod4";
 in {
 
-  # reference 
+  # reference
   # https://github.com/nix-community/home-manager/blob/master/modules/services/window-managers/i3-sway/i3.nix
   # https://github.com/nix-community/home-manager/blob/master/modules/services/window-managers/i3-sway/lib/options.nix
 
@@ -51,7 +51,7 @@ in {
   #   critera = { class = "^.*"; };
   # }];
 
-  # i3 keybindings 
+  # i3 keybindings
   xsession.windowManager.i3.config.keybindings = {
     "${mod}+f" = "fullscreen toggle";
     "${mod}+t" = "split toggle";

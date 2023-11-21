@@ -1,10 +1,12 @@
 { pkgs, config, lib, ... }: {
 
   imports = [
-    ../../modules/home/git.nix
-    ../../modules/home/starship.nix
-    ../../modules/home/tmux.nix
-    ../../modules/home/zsh.nix
+    ../../modules/home/git
+    ../../modules/home/neovim
+    ../../modules/home/karabiner
+    ../../modules/home/starship
+    ../../modules/home/tmux
+    ../../modules/home/zsh
   ];
 
   home.sessionVariables = {
@@ -46,10 +48,6 @@
   home.file."/Users/dsn/.secrets/export.secrets".source = ../../secrets/export.secrets;
   home.file."/Users/dsn/.ssh/config.d/sshconfig.secrets".source = ../../secrets/sshconfig.secrets;
   home.file."/Users/dsn/.local/bin".source = ../../modules/home/bin;
-  home.file."/Users/dsn/.config/nvim".source = config.lib.file.mkOutOfStoreSymlink
-    "${config.home.homeDirectory}/dotfiles/modules/home/nvim";
-  home.file."/Users/dsn/.config/karabiner".source = config.lib.file.mkOutOfStoreSymlink
-    "${config.home.homeDirectory}/dotfiles/modules/home/karabiner";
 
   nixpkgs.config.allowUnfree = true;
 

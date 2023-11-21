@@ -7,13 +7,13 @@
     ../../modules/home/starship
     ../../modules/home/tmux
     ../../modules/home/zsh
+    ../../modules/home/ssh
+    ../../modules/home/dircolors
   ];
 
   home.sessionVariables = {
     PAGER = "less";
     CLICLOLOR = 1;
-    EDITOR = "nvim";
-    SSH_AUTH_SOCK="/Users/dsn/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
   };
   home.stateVersion = "23.11";
   home.username = "dsn";
@@ -31,22 +31,12 @@
   };
   programs.zsh.history.path = "/Users/dsn/.config/zsh/history";
 
-  programs.ssh.enable = true;
-  programs.ssh.includes = [ "/Users/dsn/.ssh/config.d/*" ];
-  programs.ssh.forwardAgent = true;
-  programs.ssh.extraConfig = ''
-    IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-  '';
-
   programs.home-manager.enable = true;
-  programs.dircolors.enable = true;
   programs.keychain.enable = true;
 
   home.file."/Users/dsn/.hushlogin".text =  "";
   home.file."/Users/dsn/.inputrc".source = ../../modules/home/inputrc;
-  home.file."/Users/dsn/.config/dircolors".source = ../../modules/home/dircolors;
   home.file."/Users/dsn/.secrets/export.secrets".source = ../../secrets/export.secrets;
-  home.file."/Users/dsn/.ssh/config.d/sshconfig.secrets".source = ../../secrets/sshconfig.secrets;
   home.file."/Users/dsn/.local/bin".source = ../../modules/home/bin;
 
   nixpkgs.config.allowUnfree = true;

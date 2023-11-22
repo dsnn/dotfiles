@@ -38,25 +38,41 @@
 
   outputs = inputs@{ self, nixpkgs, darwin, home-manager, ... }:
   let
-    system = "aarch64-darwin";
-    pkgs = nixpkgs.legacyPackages.${system};
+    darwinSys= "aarch64-darwin";
+    amdSys = "x86_64-linux";
+
+    pkgsForSystem = system: import nixpkgs {
+        # overlays = [
+        #   localOverlay
+        # ];
+        inherit system;
+    };
+
+    mkHomeConfiguration = args: home-manager.lib.homeManagerConfiguration (rec {
+      system = args.system or amdSys;
+      configuration = import ./home.nix;
+      homeDirectory = "/home/jon";
+      username = "jon";
+      # pkgs = pkgsForSystem system;
+    } // args);
+
   in {
 
     homeConfigurations.macbook = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
       modules = [ ./hosts/macbook/home.nix ];
+      pkgs = pkgsForSystem darwinSys;
     };
 
     darwinConfigurations.macbook = darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      pkgs = import nixpkgs { system = "aarch64-darwin"; };
+      system = darwinSys;
+      pkgs = import nixpkgs { system = darwinSys; };
       specialArgs = { inherit inputs; };
       modules = [ ./hosts/macbook/configuration.nix ];
     };
 
-    nixosConfigurations.alpha = pkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      pkgs = import nixpkgs { system = "x86_64-linux"; };
+    nixosConfigurations.alpha = nixpkgs.legacyPackages.${amdSys}.lib.nixosSystem {
+      system = amdSys;
+      pkgs = import nixpkgs { system = amdSys; };
       specialArgs = { inherit inputs; };
       modules = [ ./hosts/desktop/configuration.nix ];
     };

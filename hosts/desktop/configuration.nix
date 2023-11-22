@@ -30,20 +30,31 @@
   #   useXkbConfig = true; # use xkbOptions in tty.
   # };
 
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # window manager
+  # services.xserver.enable = true;
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
 
   # services.xserver.displayManager.gdm.enable = true;
   # services.xserver.displayManager.defaultSession = "none+i3";
   # services.xserver.windowManager.i3.enable = true;
+  # services.xserver.windowManager.i3.extraPackages = with pkgs; [ i3status ];
 
+  services.xserver.enable = true;
+  services.xserver.autorun = false;
   services.xserver.layout = "us";
   services.xserver.xkbOptions = "eurosign:e,caps:escape";
   services.xserver.dpi = 120;
-  # services.xserver.videoDrivers = [ " nvidia " ];
+  # services.xserver.desktopManager.default = "none";
+  services.xserver.desktopManager.xterm.enable = false;
+  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.displayManager.defaultSession = "none+i3";
+  services.xserver.windowManager.i3.enable = true;
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  services.xserver.libinput.enable = true; 
+
+  # services.xserver.layout = "us";
+  # services.xserver.videoDrivers = [ " nvidia " ];
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -57,12 +68,14 @@
   users.mutableUsers = false;
   users.defaultUserShell = pkgs.zsh;
 
+  programs.zsh.enable = true;
+
   users.users.dsn = {
     shell = pkgs.zsh;
     isNormalUser = true;
     extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" "docker" ];
     hashedPassword = "$y$j9T$Wg1CGw.yYxfHmeXp.joE3/$Z70N2uCHfh2BcQ978valtj/FByc3jwX.3q94hzD39U0";
-    users.users.dsn.openssh.authorizedKeys.keys = [
+    openssh.authorizedKeys.keys = [
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCblbdi9GiPOhBlH1aSn3+/0w8w7OVP+jNVbjX0iOf31WMJpyGi8X1ybsZfjrAQ2VoHuX/dN1BJlvOGO36PcDRsXDKE/+Db9VcJR8vzs4d1Nik8lbmjXgWHPv6Ig8SDVrqanV/6Yv9AbgZFqIbfqIsW41i/zkVt8wXYewATI6bjHs5gWox+5h/NBBu6bTCD1He4I8v6/1Dg3D/9o0fmhrwGOdd7W1zxPorjUC9uziUCc4uOnnTH5n1K59TvMYeUsdYtkToew7b1fJAsC1FY09GrgyQ+y+O07oGNLI9NyckEMIi+1hsSi3dNwLG2Y/lqcHM/YgdY3iez63h+W02tEuaF"
     ];
   };
@@ -113,7 +126,6 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # networking.firewall.enable = false;
 
-  system.copySystemConfiguration = true;
   system.stateVersion = "23.05";
 }
 

@@ -6,15 +6,18 @@ in {
   # https://github.com/nix-community/home-manager/blob/master/modules/services/window-managers/i3-sway/i3.nix
   # https://github.com/nix-community/home-manager/blob/master/modules/services/window-managers/i3-sway/lib/options.nix
 
+  home.file."${config.home.homeDirectory}/.config/polybar".source = config.lib.file.mkOutOfStoreSymlink
+    "${config.home.homeDirectory}/dotfiles/modules/home/i3/polybar";
+
   # install i3 deps
-  # home.packages = with pkgs; [ xorg.xbacklight pavucontrol polybarFull gsimplecal ];
+  home.packages = with pkgs; [ xorg.xbacklight pavucontrol polybarFull gsimplecal ];
 
   # xsession
   xsession.enable = true;
 
   # cursor
-  xsession.pointerCursor.package = pkgs.nordzy-cursor-theme;
-  xsession.pointerCursor.name = "Nordzy-cursors";
+  home.pointerCursor.package = pkgs.nordzy-cursor-theme;
+  home.pointerCursor.name = "Nordzy-cursors";
 
   # i3
   xsession.windowManager.i3.enable = true;

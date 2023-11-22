@@ -2,7 +2,8 @@
   description = "Nix configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # NixPkgs (nixos-23.05)
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
@@ -63,6 +64,11 @@
       pkgs = pkgsForSystem darwinSys;
     };
 
+    homeConfigurations.alpha = home-manager.lib.homeManagerConfiguration {
+      modules = [ ./hosts/desktop/home.nix ];
+      pkgs = pkgsForSystem amdSys;
+    };
+
     darwinConfigurations.macbook = darwin.lib.darwinSystem {
       system = darwinSys;
       pkgs = import nixpkgs { system = darwinSys; };
@@ -70,9 +76,9 @@
       modules = [ ./hosts/macbook/configuration.nix ];
     };
 
-    nixosConfigurations.alpha = nixpkgs.legacyPackages.${amdSys}.lib.nixosSystem {
+    nixosConfigurations.alpha = nixpkgs.lib.nixosSystem {
       system = amdSys;
-      pkgs = import nixpkgs { system = amdSys; };
+      # pkgs = import nixpkgs { system = amdSys; };
       specialArgs = { inherit inputs; };
       modules = [ ./hosts/desktop/configuration.nix ];
     };

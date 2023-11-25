@@ -2,29 +2,20 @@
 let
   t-smart-manager = pkgs.tmuxPlugins.mkTmuxPlugin {
     pluginName = "t-smart-tmux-session-manager";
-    version = "unstable-2023-09-20";
+    version = "unstable-2023-10-23";
     rtpFilePath = "t-smart-tmux-session-manager.tmux";
     src = pkgs.fetchFromGitHub {
       owner = "joshmedeski";
       repo = "t-smart-tmux-session-manager";
-      rev = "63360755451a1d536f5847b3a3dc41bb3050b10c";
-      sha256 = "00051slyy55qdxf0l41kfw6sr46nm2br31hdkwpy879ia5acligi";
-    };
-  };
-  tmux-super-fingers = pkgs.tmuxPlugins.mkTmuxPlugin {
-    pluginName = "tmux-super-fingers";
-    version = "unstable-2023-09-04";
-    src = pkgs.fetchFromGitHub {
-      owner = "artemave";
-      repo = "tmux_super_fingers";
-      rev = "19945b066ecea03165231d45a73ec0862a1e5e03";
-      sha256 = "0vgh1nc2l5lsp2gwl0kbd9bxr3acj5g647p9522f5yzlhw7sbr33";
+      rev = "01b60128b4bebeedd7dc3a4b95d3257f70d4a417";
+      sha256 = "0l+2ZRj9knjDRUiGePTt14UxrI0FNVHIdIZtKZs8bek=";
     };
   };
 in {
 
   home.packages = with pkgs; [ tmuxp lsof ];
-  home.file.".config/tmuxp".source = ./tmuxp;
+  home.file."${config.home.homeDirectory}/.config/tmuxp".source = config.lib.file.mkOutOfStoreSymlink
+    "${config.home.homeDirectory}/dotfiles/modules/home/tmux/tmuxp";
 
   programs.zsh.initExtra = ''
     # tmux
@@ -50,22 +41,21 @@ in {
   [
     better-mouse-mode
     yank
-    tmux-thumbs
     sensible
+    {
+      plugin = tmux-fzf;
+    }
     {
       plugin = t-smart-manager;
       extraConfig = ''
         set -g @t-fzf-prompt '  '
-        set -g @t-bind "T"
+        set -g @t-fzf-default-results 'sessions'
+        set -g @t-bind "space"
 
         # skip "kill-pane 1? (y/n)" prompt
         bind-key x kill-pane
 
       '';
-    }
-    {
-      plugin = tmux-super-fingers;
-      extraConfig = "set -g @super-fingers-key f";
     }
     {
       plugin = resurrect;
@@ -149,6 +139,8 @@ in {
 
     # resurrect env save files
     # set -g @resurrect-dir '$HOME/.config/tmux/resurrect'
+
+    TMUX_FZF_LAUNCH_KEY="f"
 
     set -g @plugin 'tmux-plugins/tmux-resurrect'
     set -g @plugin 'tmux-plugins/tmux-continuum'

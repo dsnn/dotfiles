@@ -164,6 +164,11 @@
       eval "$(starship init zsh)"
     fi
 
+    if command -v direnv &> /dev/null
+    then
+      eval "$(direnv hook zsh)"
+    fi
+
     # 1password shell completions
     if command -v op &> /dev/null
     then

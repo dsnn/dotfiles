@@ -33,6 +33,7 @@
 
   programs.home-manager.enable = true;
   programs.keychain.enable = true;
+  programs.direnv.enable = true;
 
   home.file."/Users/dsn/.hushlogin".text =  "";
   home.file."/Users/dsn/.inputrc".source = ../../modules/home/inputrc;

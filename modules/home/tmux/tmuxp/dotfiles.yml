@@ -1,9 +1,7 @@
-session_name: dotfiles 
+session_name: dotfiles
 start_directory: ~/dotfiles
 windows:
-  - window_name: dev 
-    layout: even-vertical
+  - window_name: dev
     panes:
-      - shell_command: nvim 
-        focus: true
-      - pane 
+      - shell_command: nvim
+  - window_name: nix

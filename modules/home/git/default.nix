@@ -10,8 +10,6 @@
   programs.git.ignores = [ ".DS_Store" "node_modules" "npm-debug.log" ];
   programs.git.delta.enable = true;
 
-  programs.lazygit.enable = true;
-
   programs.git.aliases = {
     ba = "branch -a";
     bl = "branch --list";

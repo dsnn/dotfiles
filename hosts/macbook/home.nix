@@ -1,6 +1,7 @@
 { pkgs, config, lib, ... }: {
 
   imports = [
+    ../../modules/home/lazygit
     ../../modules/home/git
     ../../modules/home/neovim
     ../../modules/home/karabiner

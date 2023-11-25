@@ -1,5 +1,7 @@
 { config, pkgs, ... }: {
 
+  # TODO: https://github.com/catppuccin/rofi
+
   home.packages = with pkgs; [ kitty ];
 
   programs.rofi.enable = true;

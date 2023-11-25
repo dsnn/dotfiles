@@ -1,5 +1,7 @@
 { config, pkgs, ... }: {
 
+  # TODO: https://github.com/catppuccin/dunst
+
   services.dunst.enable = true;
 
   services.dunst.settings.global = {

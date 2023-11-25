@@ -2,6 +2,8 @@
 let mod = "Mod4";
 in {
 
+  # TODO: https://github.com/catppuccin/i3
+
   # reference
   # https://github.com/nix-community/home-manager/blob/master/modules/services/window-managers/i3-sway/i3.nix
   # https://github.com/nix-community/home-manager/blob/master/modules/services/window-managers/i3-sway/lib/options.nix

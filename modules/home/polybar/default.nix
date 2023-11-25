@@ -1,5 +1,7 @@
 { pkgs, ...}: {
 
+  # TODO: https://github.com/catppuccin/polybar
+
   home.packages = with pkgs; [ polybarFull gsimplecal ];
 
   home.file."${config.home.homeDirectory}/.config/polybar".source = config.lib.file.mkOutOfStoreSymlink

@@ -6,6 +6,10 @@
     ../../modules/home/karabiner
     ../../modules/home/starship
     ../../modules/home/tmux
+    ../../modules/home/tmuxp
+    ../../modules/home/bat
+    ../../modules/home/zoxide
+    ../../modules/home/fzf
     ../../modules/home/zsh
     ../../modules/home/ssh
     ../../modules/home/dircolors

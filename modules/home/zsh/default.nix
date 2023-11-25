@@ -1,16 +1,6 @@
 { pkgs, ... }: {
 
-  # Dependencies
-  programs.bat.enable = true;
-  programs.bat.config.theme = "TwoDark";
-
   programs.lsd.enable = true;
-
-  programs.zoxide.enable = true;
-  programs.zoxide.enableZshIntegration = true;
-
-  programs.fzf.enable = true;
-  programs.fzf.enableZshIntegration = true;
 
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
@@ -19,7 +9,6 @@
   programs.zsh.dotDir = ".config/zsh";
   programs.zsh.autocd = true;
   # programs.zsh.completionInit = "autoload -Uz compinit";
-
   programs.zsh.history = {
     size = 10000;
     save = 10000;

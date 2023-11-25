@@ -1,13 +1,15 @@
 { pkgs, ...}: {
   imports = [
     "./awesome"
-    # "./bin"
+    "./bat"
     "./dircolors"
     "./dunst"
+    "./fzf"
     "./git"
     "./i3"
     "./karabiner"
     "./kitty"
+    "./lsd"
     "./neovim"
     "./picom"
     "./polybar"
@@ -15,8 +17,13 @@
     "./ssh"
     "./starship"
     "./tmux"
+    "./tmuxp"
     "./xdg"
     "./xresources"
+    "./zoxide"
     "./zsh"
+    # "./bin"
   ];
 }
+
+

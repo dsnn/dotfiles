@@ -1,7 +1,5 @@
 { pkgs, ... }: {
 
-  programs.lsd.enable = true;
-
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
   programs.zsh.enableAutosuggestions = true;

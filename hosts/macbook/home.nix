@@ -10,6 +10,7 @@
     ../../modules/home/bat
     ../../modules/home/zoxide
     ../../modules/home/fzf
+    ../../modules/home/lsd
     ../../modules/home/zsh
     ../../modules/home/ssh
     ../../modules/home/dircolors

@@ -9,6 +9,7 @@
     ../../modules/home/ssh
     ../../modules/home/dircolors
     ../../modules/home/xresources
+    ../../modules/home/polybar
     ../../modules/home/i3
     ../../modules/home/rofi
   ];

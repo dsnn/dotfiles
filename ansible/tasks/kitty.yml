@@ -1,9 +1,0 @@
----
-- name: kitty | Install kitty
-  ansible.builtin.package:
-    state: present
-    name:
-      - kitty
-  tags:
-    - kitty
-    - packages

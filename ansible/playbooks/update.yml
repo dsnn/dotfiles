@@ -1,8 +1,0 @@
----
-- hosts: local
-  tasks:
-    - name: Upgrade | Homebrew and packages
-      community.general.homebrew:
-        state: latest
-        update_homebrew: true
-        upgrade_all: true

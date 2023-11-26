@@ -1,7 +1,0 @@
-{% for host in ssh_hosts %}
-Host {{ host.name }}
-{% for setting in host.settings %}
-  {{ setting }}
-{% endfor %}
-
-{% endfor %}

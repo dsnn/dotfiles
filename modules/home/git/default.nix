@@ -4,6 +4,21 @@
     SSH_AUTH_SOCK="/Users/dsn/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
   };
 
+  programs.zsh.shellAliases = {
+    g = "git";
+    ga = "git add .";
+    gc = "git commit -m";
+    gd = "git diff";
+    gpl = "git pull";
+    gl = "git ls";
+    gp = "git push origin master";
+    gpf = "git push --force-with-lease";
+    gs = "git st";
+    cb = "git cb";
+    gam = "git commit --amend --no-edit";
+    lzg = "lazygit";
+  };
+
   programs.git.enable = true;
   programs.git.userName = "dsn";
   programs.git.userEmail = "dsn@dsnn.io";

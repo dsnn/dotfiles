@@ -120,8 +120,6 @@ in {
        set -s escape-time 0
        set -g status-interval 0
 
-       bind -n C-k send-keys -R ^M \;
-
        set -g status-right '%Y-%m-%d %H:%M'
 
        set-option -g status-position top

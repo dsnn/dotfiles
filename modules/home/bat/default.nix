@@ -5,4 +5,8 @@
 
     programs.bat.enable = true;
     programs.bat.config.theme = "TwoDark";
+
+  programs.zsh.shellAliases = {
+    cat = "bat";
+  };
 }

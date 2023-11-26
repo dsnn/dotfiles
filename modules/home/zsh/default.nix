@@ -34,7 +34,6 @@
   };
 
   programs.zsh.shellAliases = {
-    cat = "bat";
     awk = "nawk";
     tracert = "trip";
 
@@ -60,20 +59,6 @@
     df = "df -h";
     mkdir = "mkdir -pv";
     rl = "source ~/.config/zsh/.zshrc";
-
-    # git
-    g = "git";
-    ga = "git add .";
-    gc = "git commit -m";
-    gd = "git diff";
-    gpl = "git pull";
-    gl = "git ls";
-    gp = "git push origin master";
-    gpf = "git push --force-with-lease";
-    gs = "git st";
-    cb = "git cb";
-    gam = "git commit --amend --no-edit";
-    lzg = "lazygit";
 
     # npm
     ns = "npm start";
@@ -106,9 +91,6 @@
 
     # enable vi-mode
     bindkey -v
-
-    # default ^L is used for nav
-    bindkey "^K" clear-screen
 
     # keybinding for accepting autosuggestion
     bindkey '^ ' autosuggest-accept

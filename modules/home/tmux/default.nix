@@ -32,24 +32,41 @@ in {
   programs.tmux.enable = true;
   programs.tmux.baseIndex = 1;
   programs.tmux.clock24 = true;
-  programs.tmux.customPaneNavigationAndResize = true;
   programs.tmux.disableConfirmationPrompt = true;
   programs.tmux.escapeTime = 0;
   programs.tmux.historyLimit = 10000;
   programs.tmux.keyMode = "vi";
   programs.tmux.mouse = true;
   programs.tmux.prefix = "C-a";
-  programs.tmux.reverseSplit = true;
-  programs.tmux.sensibleOnTop = false;
+  programs.tmux.reverseSplit = false;
+  programs.tmux.sensibleOnTop = true;
   programs.tmux.terminal = "tmux-256color";
 
   programs.tmux.plugins = with pkgs.tmuxPlugins;
   [
     better-mouse-mode
     yank
-    # sensible
+    {
+
+      # TODO: set -g @tilish-dmenu 'on' does not work, make your own implm.
+      plugin = tilish;
+      extraConfig = ''
+        set -g @plugin 'jabirali/tmux-tilish'
+      '';
+    }
+    {
+      plugin = vim-tmux-navigator;
+      extraConfig = ''
+        set -g @plugin 'christoomey/vim-tmux-navigator'
+        set -g @tilish-navigator 'on'
+      '';
+    }
     {
       plugin = tmux-fzf;
+      # TODO: does it work? https://github.com/sainnhe/tmux-fzf#key-binding
+      extraConfig = ''
+        TMUX_FZF_LAUNCH_KEY="f"
+      '';
     }
     {
       plugin = catppuccin;
@@ -72,10 +89,6 @@ in {
         set -g @t-fzf-prompt '  '
         set -g @t-fzf-default-results 'sessions'
         set -g @t-bind "space"
-
-        # skip "kill-pane 1? (y/n)" prompt
-        bind-key x kill-pane
-
       '';
     }
     {
@@ -98,8 +111,9 @@ in {
   ];
 
    programs.tmux.extraConfig = ''
-       # reload configuration
-       bind -n C-M-r source-file ~/.config/tmux/tmux.conf \; display '~/.tmux.conf sourced'
+       # navigate windows
+       bind -n C-M-h previous-window
+       bind -n C-M-l next-window
 
        set-option -g status-position top
    '';

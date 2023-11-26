@@ -117,6 +117,9 @@ in {
        bind -n C-M-h previous-window
        bind -n C-M-l next-window
 
+       set -s escape-time 0
+       set -g status-interval 0
+
        bind -n C-k send-keys -R ^M \;
 
        set -g status-right '%Y-%m-%d %H:%M'

@@ -1,0 +1,28 @@
+#!/run/current-system/sw/bin/bash
+
+choice=$(echo -e "hm\ndarwin\nnixpkgs\n" | fzf)
+
+case $choice in
+hm)
+	SELECTED_PATH="/Users/dsn/projects/nix/home-manager/modules"
+	;;
+
+darwin)
+	SELECTED_PATH="/Users/dsn/projects/nix/nix-darwin/modules"
+	;;
+
+nixpkgs)
+	SELECTED_PATH="/Users/dsn/projects/nix/nixpkgs/pkgs"
+	;;
+
+esac
+
+if [ -n $SELECTED_PATH ]; then
+
+	SELECTED_RESULT=$(fd . $SELECTED_PATH | fzf)
+
+	# Use the choice variable
+	if [ -n $SELECTED_RESULT ]; then
+		nvim $SELECTED_RESULT
+	fi
+fi

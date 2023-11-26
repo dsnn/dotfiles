@@ -11,6 +11,7 @@
     ../../modules/home/bat
     ../../modules/home/zoxide
     ../../modules/home/fzf
+    ../../modules/home/vivid
     ../../modules/home/lsd
     ../../modules/home/zsh
     ../../modules/home/ssh

@@ -31,7 +31,6 @@
     VISUAL = "nvim";
     EDITOR = "nvim";
     MANWIDTH = 79;
-    # LIBGL_ALWAYS_INDIRECT = 1;
   };
 
   programs.zsh.shellAliases = {
@@ -43,7 +42,7 @@
     h = "cd ~/";
     d = "cd ~/dotfiles";
     cf = "cd ~/.config";
-
+    cfp = "cd ~/projects/";
 
     # navigation
     ".." = "cd ..";
@@ -61,12 +60,6 @@
     df = "df -h";
     mkdir = "mkdir -pv";
     rl = "source ~/.config/zsh/.zshrc";
-
-    # listing
-    l="lsd -alh --color=auto";
-    la="lsd -alh --color=auto";
-    ls="lsd -h --color=auto";
-    ll="lsd -alh --color=auto --format=horizontal ";
 
     # git
     g = "git";
@@ -193,14 +186,5 @@
     # npm
     PATH="$PATH:$HOME/.node_modules/bin"
     export npm_config_prefix=~/.node_modules
-
-    # colored man pages
-    export LESS_TERMCAP_mb=$'\E[01;31m'
-    export LESS_TERMCAP_md=$'\E[01;38;5;74m'
-    export LESS_TERMCAP_me=$'\E[0m'
-    export LESS_TERMCAP_se=$'\E[0m'
-    export LESS_TERMCAP_so=$'\E[38;33;246m'
-    export LESS_TERMCAP_ue=$'\E[0m'
-    export LESS_TERMCAP_us=$'\E[04;38;5;146m'
   '';
 }

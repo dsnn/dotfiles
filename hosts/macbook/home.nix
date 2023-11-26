@@ -20,6 +20,7 @@
     ../../modules/home/bin
     ../../modules/home/volta
     ../../modules/home/direnv
+    ../../modules/home/wget
   ];
 
   home.sessionVariables = {
@@ -79,7 +80,6 @@
     unzip
     vim
     wakeonlan
-    wget
     xclip
   ];
 }

@@ -57,19 +57,6 @@
     df = "df -h";
     mkdir = "mkdir -pv";
     rl = "source ~/.config/zsh/.zshrc";
-
-    # npm
-    ns = "npm start";
-    nd = "npm run dev";
-    ni = "npm install";
-    nt = "npm test";
-    ntu = "npm run test:update-snapshot";
-    nrt = "npm run typecheck";
-    nrl = "npm run lint";
-
-    # wget
-    wget = ''wget --hsts-file="$HOME/.config/wget"/wget-hsts'';
-
   };
 
   programs.zsh.initExtra = ''

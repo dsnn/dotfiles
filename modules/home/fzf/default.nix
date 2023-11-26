@@ -3,6 +3,9 @@
   # https://github.com/junegunn/fzf
   # https://github.com/nix-community/home-manager/blob/master/modules/programs/fzf.nix
 
+  # deps
+  home.packages = with pkgs; [ fd ];
+
   programs.fzf.enable = true;
   programs.fzf.enableZshIntegration = true;
   programs.fzf.tmux.enableShellIntegration = true;

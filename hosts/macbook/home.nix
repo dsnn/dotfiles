@@ -1,4 +1,6 @@
-{ pkgs, config, lib, ... }: {
+{ pkgs, config, ... }: {
+
+  nixpkgs.config.allowUnfree = true;
 
   imports = [
     ../../modules/home/lazygit
@@ -25,10 +27,7 @@
     ../../modules/home/1password
   ];
 
-  home.stateVersion = "23.11";
-  home.username = "dsn";
-  home.homeDirectory = "/Users/dsn";
-
+  # host specific aliases
   programs.zsh.shellAliases = {
     cfc = "vim $HOME/dotfiles/hosts/macbook/configuration.nix";
     cfg = "vim $HOME/dotfiles/modules/home/git.nix";
@@ -39,15 +38,15 @@
     rs = "darwin-rebuild switch --flake ~/dotfiles/#macbook";
     ru = "pushd ~/dotfiles; nix flake update; nixswitch; popd";
   };
-  programs.zsh.history.path = "/Users/dsn/.config/zsh/history";
 
   programs.home-manager.enable = true;
 
+  home.stateVersion = "23.11";
+  home.username = "dsn";
+  home.homeDirectory = "/Users/dsn";
+
   home.file."/Users/dsn/.hushlogin".text =  "";
   home.file."/Users/dsn/.inputrc".source = ../../modules/home/inputrc;
-  home.file."/Users/dsn/.secrets/export.secrets".source = ../../secrets/export.secrets;
-
-  nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
     # discord
@@ -55,7 +54,6 @@
     # _1password
     ansible
     ansible-lint
-    cksfv
     curl
     fd
     freerdp

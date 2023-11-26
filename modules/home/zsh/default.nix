@@ -1,4 +1,7 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
+
+  home.file."${config.home.homeDirectory}/.secrets/export.secrets".source = config.lib.file.mkOutOfStoreSymlink
+    "${config.home.homeDirectory}/dotfiles/secrets/export.secrets";
 
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
@@ -6,7 +9,6 @@
   programs.zsh.syntaxHighlighting.enable = true;
   programs.zsh.dotDir = ".config/zsh";
   programs.zsh.autocd = true;
-  # programs.zsh.completionInit = "autoload -Uz compinit";
   programs.zsh.history = {
     size = 10000;
     save = 10000;
@@ -14,7 +16,7 @@
     share = true;
     extended = true;
   };
-
+  programs.zsh.history.path = "${config.home.homeDirectory}/.config/zsh/history";
   programs.zsh.sessionVariables = {
     LC_CTYPE = "en_US.UTF-8";
     LEDGER_COLOR = "true";

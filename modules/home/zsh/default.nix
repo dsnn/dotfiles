@@ -81,12 +81,6 @@
     zle -N up_widget
     bindkey "^u" up_widget
 
-    # 1password shell completions
-    if command -v op &> /dev/null
-    then
-      eval "$(op completion zsh)"; compdef _op op
-    fi
-
     if [ -f "$HOME/.secrets/export.secrets" ]; then
       source $HOME/.secrets/export.secrets
     fi

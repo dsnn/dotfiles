@@ -22,6 +22,7 @@
     ../../modules/home/direnv
     ../../modules/home/wget
     ../../modules/home/keychain
+    ../../modules/home/1password
   ];
 
   home.stateVersion = "23.11";

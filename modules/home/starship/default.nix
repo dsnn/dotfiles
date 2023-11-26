@@ -1,5 +1,12 @@
 { pkgs, lib, ... }: {
 
+  programs.zsh.initExtra = ''
+    if command -v starship &> /dev/null
+    then
+      eval "$(starship init zsh)"
+    fi
+  '';
+
   programs.starship =
     let
       flavour = "mocha"; # One of `latte`, `frappe`, `macchiato`, or `mocha`

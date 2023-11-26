@@ -16,6 +16,10 @@
     ../../modules/home/zsh
     ../../modules/home/ssh
     ../../modules/home/dircolors
+    ../../modules/home/xdg
+    ../../modules/home/bin
+    ../../modules/home/volta
+    ../../modules/home/direnv
   ];
 
   home.sessionVariables = {
@@ -40,12 +44,10 @@
 
   programs.home-manager.enable = true;
   programs.keychain.enable = true;
-  programs.direnv.enable = true;
 
   home.file."/Users/dsn/.hushlogin".text =  "";
   home.file."/Users/dsn/.inputrc".source = ../../modules/home/inputrc;
   home.file."/Users/dsn/.secrets/export.secrets".source = ../../secrets/export.secrets;
-  home.file."/Users/dsn/.local/bin".source = ../../modules/home/bin;
 
   nixpkgs.config.allowUnfree = true;
 
@@ -57,8 +59,6 @@
     ansible-lint
     cksfv
     curl
-    direnv
-    docker-compose
     fd
     freerdp
     gnused
@@ -78,7 +78,6 @@
     spotify
     unzip
     vim
-    volta
     wakeonlan
     wget
     xclip

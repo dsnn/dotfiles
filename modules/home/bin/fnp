@@ -1,28 +1,27 @@
 #!/run/current-system/sw/bin/bash
 
-choice=$(echo -e "hm\ndarwin\nnixpkgs\n" | fzf)
+FZF_CMD="fzf --cycle"
 
-case $choice in
-hm)
-	SELECTED_PATH="/Users/dsn/projects/nix/home-manager/modules"
-	;;
+function abort_on_empty() {
+	[ -z $1 ] && exit 1
+}
 
-darwin)
-	SELECTED_PATH="/Users/dsn/projects/nix/nix-darwin/modules"
-	;;
+declare -A CHOICE_ARR
+CHOICE_ARR["hm"]="$HOME/projects/nix/home-manager/modules"
+CHOICE_ARR["darwin"]="$HOME/projects/nix/nix-darwin/modules"
+CHOICE_ARR["nixpkgs"]="$HOME/projects/nix/nixpkgs/pkgs"
 
-nixpkgs)
-	SELECTED_PATH="/Users/dsn/projects/nix/nixpkgs/pkgs"
-	;;
+CHOICE_KEYS="${!CHOICE_ARR[*]}"
+SELECTED_CHOICE=$(echo -e $CHOICE_KEYS | tr " " "\n" | $FZF_CMD)
 
-esac
+abort_on_empty $SELECTED_CHOICE
 
-if [ -n $SELECTED_PATH ]; then
+SELECTED_PATH=${CHOICE_ARR[$SELECTED_CHOICE]}
 
-	SELECTED_RESULT=$(fd . $SELECTED_PATH | fzf)
+abort_on_empty $SELECTED_PATH
 
-	# Use the choice variable
-	if [ -n $SELECTED_RESULT ]; then
-		nvim $SELECTED_RESULT
-	fi
-fi
+SELECTED_RESULT=$(fd . $SELECTED_PATH | $FZF_CMD)
+
+abort_on_empty $SELECTED_RESULT
+
+nvim $SELECTED_RESULT

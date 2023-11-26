@@ -1,12 +1,12 @@
-{ config, pkgs, ... }: {
+{ pkgs, config, ... }: {
   xdg.enable = true;
-  xdg.cacheHome = "$HOME/.local/cache";
-  xdg.configHome = "$HOME/.config";
-  xdg.dataHome = "$HOME/.local/share";
+  xdg.cacheHome = "${config.home.homeDirectory}/.local/cache";
+  xdg.configHome = "${config.home.homeDirectory}/.config";
+  xdg.dataHome = "${config.home.homeDirectory}/.local/share";
   xdg.userDirs = {
     desktop = "";
     documents = "";
-    download = "$HOME/Download";
+    download = "$HOME/Downloads";
     music = "";
     pictures = "";
     publicShare = "";

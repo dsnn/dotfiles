@@ -114,6 +114,9 @@
     # enable vi-mode
     bindkey -v
 
+    # default ^L is used for nav
+    bindkey "^K" clear-screen
+
     # keybinding for accepting autosuggestion
     bindkey '^ ' autosuggest-accept
 

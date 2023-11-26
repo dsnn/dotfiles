@@ -21,12 +21,9 @@
     ../../modules/home/volta
     ../../modules/home/direnv
     ../../modules/home/wget
+    ../../modules/home/keychain
   ];
 
-  home.sessionVariables = {
-    PAGER = "less";
-    CLICLOLOR = 1;
-  };
   home.stateVersion = "23.11";
   home.username = "dsn";
   home.homeDirectory = "/Users/dsn";
@@ -44,7 +41,6 @@
   programs.zsh.history.path = "/Users/dsn/.config/zsh/history";
 
   programs.home-manager.enable = true;
-  programs.keychain.enable = true;
 
   home.file."/Users/dsn/.hushlogin".text =  "";
   home.file."/Users/dsn/.inputrc".source = ../../modules/home/inputrc;
@@ -65,7 +61,6 @@
     gnused
     htop
     jq
-    keychain
     kitty
     mosh
     nawk

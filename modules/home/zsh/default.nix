@@ -60,13 +60,8 @@
   };
 
   programs.zsh.initExtra = ''
-    # Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
+    # make vi mode transitions faster
     export KEYTIMEOUT=1
-
-    # keychain
-    if [ -f ~/.ssh/id_rsa ]; then
-      eval $(keychain --eval --quiet --quick id_rsa ~/.ssh/id_rsa)
-    fi
 
     # enable vi-mode
     bindkey -v

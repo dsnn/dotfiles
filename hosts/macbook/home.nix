@@ -25,6 +25,7 @@
     ../../modules/home/wget
     ../../modules/home/keychain
     ../../modules/home/1password
+    ../../modules/home/kitty
   ];
 
   # host specific aliases
@@ -60,7 +61,6 @@
     gnused
     htop
     jq
-    kitty
     mosh
     nawk
     neovim

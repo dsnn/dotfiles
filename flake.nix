@@ -38,49 +38,50 @@
   };
 
   outputs = inputs@{ self, nixpkgs, darwin, home-manager, ... }:
-  let
-    darwinSys= "aarch64-darwin";
-    amdSys = "x86_64-linux";
+    let
+      darwinSys = "aarch64-darwin";
+      amdSys = "x86_64-linux";
 
-    pkgsForSystem = system: import nixpkgs {
+      pkgsForSystem = system: import nixpkgs {
         # overlays = [
         #   localOverlay
         # ];
         inherit system;
+      };
+
+      mkHomeConfiguration = args: home-manager.lib.homeManagerConfiguration (rec {
+        system = args.system or amdSys;
+        configuration = import ./home.nix;
+        homeDirectory = "/home/jon";
+        username = "jon";
+        # pkgs = pkgsForSystem system;
+      } // args);
+
+    in
+    {
+
+      homeConfigurations.macbook = home-manager.lib.homeManagerConfiguration {
+        modules = [ ./hosts/macbook/home.nix ];
+        pkgs = pkgsForSystem darwinSys;
+      };
+
+      homeConfigurations.alpha = home-manager.lib.homeManagerConfiguration {
+        modules = [ ./hosts/desktop/home.nix ];
+        pkgs = pkgsForSystem amdSys;
+      };
+
+      darwinConfigurations.macbook = darwin.lib.darwinSystem {
+        system = darwinSys;
+        pkgs = import nixpkgs { system = darwinSys; };
+        specialArgs = { inherit inputs; };
+        modules = [ ./hosts/macbook/configuration.nix ];
+      };
+
+      nixosConfigurations.alpha = nixpkgs.lib.nixosSystem {
+        system = amdSys;
+        # pkgs = import nixpkgs { system = amdSys; };
+        specialArgs = { inherit inputs; };
+        modules = [ ./hosts/desktop/configuration.nix ];
+      };
     };
-
-    mkHomeConfiguration = args: home-manager.lib.homeManagerConfiguration (rec {
-      system = args.system or amdSys;
-      configuration = import ./home.nix;
-      homeDirectory = "/home/jon";
-      username = "jon";
-      # pkgs = pkgsForSystem system;
-    } // args);
-
-  in {
-
-    homeConfigurations.macbook = home-manager.lib.homeManagerConfiguration {
-      modules = [ ./hosts/macbook/home.nix ];
-      pkgs = pkgsForSystem darwinSys;
-    };
-
-    homeConfigurations.alpha = home-manager.lib.homeManagerConfiguration {
-      modules = [ ./hosts/desktop/home.nix ];
-      pkgs = pkgsForSystem amdSys;
-    };
-
-    darwinConfigurations.macbook = darwin.lib.darwinSystem {
-      system = darwinSys;
-      pkgs = import nixpkgs { system = darwinSys; };
-      specialArgs = { inherit inputs; };
-      modules = [ ./hosts/macbook/configuration.nix ];
-    };
-
-    nixosConfigurations.alpha = nixpkgs.lib.nixosSystem {
-      system = amdSys;
-      # pkgs = import nixpkgs { system = amdSys; };
-      specialArgs = { inherit inputs; };
-      modules = [ ./hosts/desktop/configuration.nix ];
-    };
-  };
 }

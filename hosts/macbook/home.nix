@@ -66,6 +66,7 @@
     neovim
     nixfmt
     nixpkgs-fmt
+    nixd
     packer
     ripgrep
     rnix-lsp

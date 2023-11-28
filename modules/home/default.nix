@@ -1,29 +1,27 @@
-{ pkgs, ...}: {
+{ pkgs, ... }: {
   imports = [
-    "./awesome"
-    "./bat"
-    "./dircolors"
-    "./dunst"
-    "./fzf"
-    "./git"
-    "./i3"
-    "./karabiner"
-    "./kitty"
-    "./lsd"
-    "./neovim"
-    "./picom"
-    "./polybar"
-    "./rofi"
-    "./ssh"
-    "./starship"
-    "./tmux"
-    "./tmuxp"
-    "./xdg"
-    "./xresources"
-    "./zoxide"
-    "./zsh"
-    # "./bin"
+    ./lazygit
+    ./git
+    ./neovim
+    ./karabiner
+    ./starship
+    ./tmux
+    ./tmuxp
+    ./bat
+    ./zoxide
+    ./fzf
+    ./vivid
+    ./lsd
+    ./zsh
+    ./ssh
+    ./dircolors
+    ./xdg
+    ./bin
+    ./volta
+    ./direnv
+    ./wget
+    ./keychain
+    ./op
+    ./kitty
   ];
 }
-
-

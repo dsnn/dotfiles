@@ -42,23 +42,9 @@
       darwinSys = "aarch64-darwin";
       amdSys = "x86_64-linux";
 
-      pkgsForSystem = system: import nixpkgs {
-        # overlays = [
-        #   localOverlay
-        # ];
-        inherit system;
-      };
+      pkgsForSystem = system: import nixpkgs { inherit system; };
 
-      mkHomeConfiguration = args: home-manager.lib.homeManagerConfiguration (rec {
-        system = args.system or amdSys;
-        configuration = import ./home.nix;
-        homeDirectory = "/home/jon";
-        username = "jon";
-        # pkgs = pkgsForSystem system;
-      } // args);
-
-    in
-    {
+    in {
 
       homeConfigurations.macbook = home-manager.lib.homeManagerConfiguration {
         modules = [ ./hosts/macbook/home.nix ];

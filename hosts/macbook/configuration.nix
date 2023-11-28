@@ -1,8 +1,11 @@
 { pkgs, inputs, ... }: {
 
-  imports = [
-    ../../modules/system/yabai.nix
-  ];
+  imports = [ ../../modules/darwin ];
+
+  dotfiles.services = {
+    yabai.enable = true;
+    skhd.enable = true;
+  };
 
   nix.extraOptions = ''
     experimental-features = nix-command flakes
@@ -10,7 +13,11 @@
   nix.package = pkgs.nixUnstable;
   nix.gc = {
     automatic = true;
-    interval = { Weekday = 0; Hour = 0; Minute = 0; };
+    interval = {
+      Weekday = 0;
+      Hour = 0;
+      Minute = 0;
+    };
     options = "--delete-older-than 30d";
   };
 
@@ -21,14 +28,27 @@
   environment.pathsToLink = [ "/Applications" ];
 
   system.defaults = {
+    # ".GlobalPreferences" = { "com.apple.mouse.scaling" = "1"; };
+    # NSAutomaticCapitalizationEnabled = false;
+    # NSAutomaticDashSubstitutionEnabled = false;
+    # NSAutomaticPeriodSubstitutionEnabled = false;
+    # NSAutomaticQuoteSubstitutionEnabled = false;
+    # NSAutomaticSpellingCorrectionEnabled = false;
+    NSGlobalDomain.AppleShowAllExtensions = true;
+    NSGlobalDomain.InitialKeyRepeat = 15;
+    NSGlobalDomain.KeyRepeat = 2;
+    dock.autohide = true;
     finder.AppleShowAllExtensions = true;
     finder._FXShowPosixPathInTitle = true;
-    dock.autohide = true;
-    NSGlobalDomain.AppleShowAllExtensions = true;
-    NSGlobalDomain.InitialKeyRepeat = 14;
-    NSGlobalDomain.KeyRepeat = 1;
   };
-  system.stateVersion = 4; # Used for backwards compatibility, please read the changelog before changing.
+
+  # system.keyboard = {
+  #   enableKeyMapping = true;
+  #   remapCapsLockToEscape = true;
+  # };
+
+  # Used for backwards compatibility, please read the changelog before changing.
+  system.stateVersion = 4;
 
   users.users.dsn.home = "/Users/dsn";
 

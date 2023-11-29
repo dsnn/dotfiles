@@ -3,7 +3,7 @@ with lib;
 let
   cfg = config.dotfiles.git;
 
-  is-linux = pkgs.stdenv.isLinux;
+  # is-linux = pkgs.stdenv.isLinux;
   is-darwin = pkgs.stdenv.isDarwin;
 
 in {

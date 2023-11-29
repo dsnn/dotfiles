@@ -1,1 +1,1 @@
-{ pkgs, ... }: { imports = [ ./skhd ./yabai ]; }
+{ ... }: { imports = [ ./skhd ./yabai ]; }

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
 
   # enable the X11 windowing system
   services.xserver.enable = true;
@@ -6,7 +6,7 @@
   services.xserver.dpi = 120;
   services.xserver.xkbOptions = "eurosign:e,grp:alt_space_toggle";
 
-  # enable gdm 
+  # enable gdm
   services.xserver.displayManager.gdm.enable = true;
 
   # video drivers

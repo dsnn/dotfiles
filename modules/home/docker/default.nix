@@ -1,4 +1,4 @@
-{ pkgs, ...}: {
+{ ... }: {
 
   programs.zsh.shellAliases = {
     ds = "docker ps -a";

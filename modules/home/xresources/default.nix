@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ ... }: {
 
   # TODO: https://github.com/catppuccin/xresources
 

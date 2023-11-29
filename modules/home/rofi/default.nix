@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
 
   # TODO: https://github.com/catppuccin/rofi
 

@@ -52,25 +52,25 @@
   # home.file."share2".source = config.lib.file.mkOutOfStoreSymlink /mnt/share2;
 
   home.packages = with pkgs; [
-  #  discord
-     feh
-  #  freerdp
-     google-chrome
-  #  remmina
-     slack
-     spotify
-     sstp
-  #  wireguard
-     xfce.thunar
-     xfce.tumbler # thunar thunbnails
-     xfce.xfconf # thunar persist settings
-     lxappearance # thunar & i3 (icons & cursor)
-     nordzy-icon-theme # thunar
-  #  nomacs
-     libnotify # dunst
-     eww
-  #  gsimplecal # polybar
-  #  polybarFull
+    #  discord
+    feh
+    #  freerdp
+    google-chrome
+    #  remmina
+    slack
+    spotify
+    sstp
+    #  wireguard
+    xfce.thunar
+    xfce.tumbler # thunar thunbnails
+    xfce.xfconf # thunar persist settings
+    lxappearance # thunar & i3 (icons & cursor)
+    nordzy-icon-theme # thunar
+    #  nomacs
+    libnotify # dunst
+    eww
+    #  gsimplecal # polybar
+    #  polybarFull
   ];
 
 }

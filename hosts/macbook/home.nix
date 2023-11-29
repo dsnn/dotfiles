@@ -1,4 +1,4 @@
-{ lib, pkgs, config, ... }: {
+{ pkgs, ... }: {
 
   nixpkgs.config.allowUnfree = true;
 
@@ -67,6 +67,7 @@
     neovim
     nixfmt
     nixpkgs-fmt
+    nil
     nixd
     packer
     ripgrep

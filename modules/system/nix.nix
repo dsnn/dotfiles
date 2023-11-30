@@ -1,17 +1,16 @@
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
 
-  # package instance to use throughout the system
-  nix.package = pkgs.nixUnstable;
-
-  # enable flakes
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
 
-  # collect garbage & optimize 
-  nix.gc.automatic = true;
-  nix.gc.dates = "03:15";
+  nix.package = pkgs.nixUnstable;
 
-  # replace duplicates w/ hard links (and save space)
-  # settings.auto-optimise-store = true;
+  nix.gc.automatic = true;
+  nix.gc.interval = {
+    Weekday = 0;
+    Hour = 0;
+    Minute = 0;
+  };
+  nix.gc.options = "--delete-older-than 30d";
 }

@@ -1,23 +1,36 @@
-{ config, pkgs, lib, ... }: {
+{ pkgs, ... }: {
 
   # Fix home manager for non NixOS
   targets.genericLinux.enable = true;
 
   imports = [
-    ../../modules/home/git.nix
-    ../../modules/home/starship.nix
-    ../../modules/home/zsh.nix
-    ../../modules/home/fzf.nix
-    ../../modules/home/tmux.nix
-    ../../modules/home/xdg.nix
-    ../../modules/home/packages.nix
-    ../../modules/home/lazygit.nix
+    ../../modules/home/fzf
+    ../../modules/home/git
+    ../../modules/home/lazygit
+    ../../modules/home/starship
+    ../../modules/home/tmux
+    ../../modules/home/xdg
+    ../../modules/home/zsh
   ];
 
   nixpkgs.config.allowUnfree = true;
   fonts.fontconfig.enable = true;
 
   programs.home-manager.enable = true;
-  programs.dircolors.enable = true;
-  programs.keychain.enable = true;
+
+  home.packages = with pkgs; [
+    curl
+    fd
+    htop
+    jq
+    nawk
+    neovim
+    nixfmt
+    nixpkgs-fmt
+    nil
+    ripgrep
+    unzip
+    vim
+    xclip
+  ];
 }

@@ -1,31 +1,12 @@
-{ pkgs, ... }: {
+{ ... }: {
 
-  imports = [ ../../modules/darwin ];
+  imports = [ ../../modules/system ];
 
   dotfiles.services = {
     yabai.enable = true;
     skhd.enable = true;
   };
-
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
-  nix.package = pkgs.nixUnstable;
-  nix.gc = {
-    automatic = true;
-    interval = {
-      Weekday = 0;
-      Hour = 0;
-      Minute = 0;
-    };
-    options = "--delete-older-than 30d";
-  };
-
-  environment.shells = with pkgs; [ bash zsh ];
-  environment.loginShell = pkgs.zsh;
-  environment.systemPackages = with pkgs; [ coreutils home-manager ];
-  environment.systemPath = [ "/opt/homebrew/bin" ];
-  environment.pathsToLink = [ "/Applications" ];
+  dotfiles.homebrew.enable = true;
 
   system.defaults = {
     # ".GlobalPreferences" = { "com.apple.mouse.scaling" = "1"; };
@@ -56,9 +37,9 @@
 
   programs.zsh.enable = true;
 
-  homebrew.enable = true;
-  homebrew.caskArgs.no_quarantine = true;
-  homebrew.global.brewfile = true;
-  homebrew.taps = [ "fujiapple852/trippy" ];
-  homebrew.brews = [ "mas" "sstp-client" "trippy" "git-crypt" ];
+  # homebrew.enable = true;
+  # homebrew.caskArgs.no_quarantine = true;
+  # homebrew.global.brewfile = true;
+  # homebrew.taps = [ "fujiapple852/trippy" ];
+  # homebrew.brews = [ "mas" "sstp-client" "trippy" "git-crypt" ];
 }

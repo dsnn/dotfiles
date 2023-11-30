@@ -1,27 +1,27 @@
 { ... }: {
   imports = [
-    ./lazygit
-    ./git
-    ./neovim
-    ./karabiner
-    ./starship
-    ./tmux
-    ./tmuxp
-    ./bat
-    ./zoxide
-    ./fzf
-    ./vivid
-    ./lsd
-    ./zsh
-    ./ssh
-    ./dircolors
-    ./xdg
+    ./bat.nix
     ./bin
-    ./volta
-    ./direnv
-    ./wget
-    ./keychain
-    ./op
-    ./kitty
+    ./dircolors
+    ./direnv.nix
+    ./fzf.nix
+    ./git.nix
+    ./karabiner
+    ./keychain.nix
+    ./kitty.nix
+    ./lazygit.nix
+    ./lsd.nix
+    ./neovim
+    ./op.nix
+    ./ssh.nix
+    ./starship.nix
+    ./tmux.nix
+    ./tmuxp
+    ./vivid.nix
+    ./volta.nix
+    ./wget.nix
+    ./xdg.nix
+    ./zoxide.nix
+    ./zsh.nix
   ];
 }

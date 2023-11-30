@@ -65,7 +65,7 @@
 
       nixosConfigurations.alpha = nixpkgs.lib.nixosSystem {
         system = amdSys;
-        # pkgs = import nixpkgs { system = amdSys; };
+        pkgs = import nixpkgs { system = amdSys; };
         specialArgs = { inherit inputs; };
         modules = [ ./hosts/desktop/configuration.nix ];
       };

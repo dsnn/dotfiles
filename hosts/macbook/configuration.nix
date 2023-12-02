@@ -1,11 +1,17 @@
 { ... }: {
 
-  imports = [ ../../modules/system ];
+  imports = [
+    ../../modules/system/environment.nix
+    ../../modules/system/homebrew.nix
+    ../../modules/system/nix-doc.nix
+    # ../../modules/system/skhd.nix
+    ../../modules/system/yabai.nix
+  ];
 
-  dotfiles.services = {
-    yabai.enable = true;
-    skhd.enable = true;
-  };
+  # dotfiles.services = {
+  #   yabai.enable = true;
+  #   skhd.enable = true;
+  # };
   dotfiles.homebrew.enable = true;
 
   system.defaults = {

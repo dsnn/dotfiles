@@ -2,31 +2,16 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  imports = [ ../../modules/home ];
+  imports = [ ../../modules/home ../../modules/collections/zsh.nix ];
 
-  dotfiles.lazygit.enable = true;
-  dotfiles.git.enable = true;
-  dotfiles.neovim.enable = true;
   dotfiles.karabiner.enable = true;
-  dotfiles.starship.enable = true;
-  dotfiles.tmux.enable = true;
-  dotfiles.tmuxp.enable = true;
-  dotfiles.bat.enable = true;
-  dotfiles.zoxide.enable = true;
-  dotfiles.fzf.enable = true;
-  dotfiles.vivid.enable = true;
-  dotfiles.lsd.enable = true;
-  dotfiles.zsh.enable = true;
-  dotfiles.ssh.enable = true;
-  dotfiles.dircolors.enable = true;
-  dotfiles.xdg.enable = true;
-  dotfiles.bin.enable = true;
-  dotfiles.volta.enable = true;
-  dotfiles.direnv.enable = true;
-  dotfiles.wget.enable = true;
   dotfiles.keychain.enable = true;
-  dotfiles.op.enable = true;
   dotfiles.kitty.enable = true;
+  dotfiles.neovim.enable = true;
+  dotfiles.op.enable = true;
+  dotfiles.ssh.enable = true;
+  dotfiles.volta.enable = true;
+  dotfiles.wget.enable = true;
 
   # host specific aliases
   programs.zsh.shellAliases = {
@@ -51,9 +36,9 @@
   home.file."/Users/dsn/.inputrc".source = ../../modules/home/inputrc;
 
   home.packages = with pkgs; [
+    # _1password
     # discord
     # google-chrome
-    # _1password
     ansible
     ansible-lint
     curl
@@ -65,10 +50,10 @@
     mosh
     nawk
     neovim
-    nixfmt
-    nixpkgs-fmt
     nil
     nixd
+    nixfmt
+    nixpkgs-fmt
     packer
     ripgrep
     rnix-lsp

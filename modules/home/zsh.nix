@@ -73,6 +73,12 @@ in {
       df = "df -h";
       mkdir = "mkdir -pv";
       rl = "source ~/.config/zsh/.zshrc";
+
+      # nix
+      bir = "nix repl";
+      biu = "nix run";
+      bii = "nix-instansiate";
+      bis = "nix shell";
     };
 
     programs.zsh.initExtra = ''

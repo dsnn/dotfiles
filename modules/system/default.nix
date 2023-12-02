@@ -1,25 +1,26 @@
 { ... }: {
   imports = [
-    ./awesomewm
-    ./boot.nix
-    ./cifs.nix
+    # ./awesomewm
+    # ./boot.nix
+    # ./cifs.nix
+    # ./ergodox.nix
+    # ./fail2ban.nix
+    # ./libinput.nix
+    # ./locale.nix
+    # ./networkmanager.nix
+    # ./nix.nix
+    # ./overlays.nix
+    # ./pulseaudio.nix
+    # ./ssh.nix
+    # ./timezone.nix
+    # ./user.nix
+    # ./xrdp.nix
+    # ./zfs.nix
     ./environment.nix
-    ./ergodox.nix
-    ./fail2ban.nix
     ./homebrew.nix
-    ./libinput.nix
-    ./locale.nix
-    ./networkmanager.nix
-    ./nix.nix
-    ./overlays.nix
-    ./pulseaudio.nix
+    ./nix-doc.nix
     ./skhd.nix
-    ./ssh.nix
-    ./timezone.nix
-    ./user.nix
-    ./xrdp.nix
     ./yabai.nix
-    ./zfs.nix
   ];
 }
 

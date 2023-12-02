@@ -3,7 +3,7 @@
   imports = [
     ../../modules/system/environment.nix
     ../../modules/system/homebrew.nix
-    ../../modules/system/nix-doc.nix
+    # ../../modules/system/nix-doc.nix
     # ../../modules/system/skhd.nix
     ../../modules/system/yabai.nix
   ];

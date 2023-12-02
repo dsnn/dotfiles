@@ -52,11 +52,12 @@
 
       homeConfigurations = {
         macbook = home-manager.lib.homeManagerConfiguration {
-          modules = [ ./hosts/macbook/home.nix ];
+          modules = [ ./home.nix ];
           pkgs = pkgsForSystem darwinSys;
+          # extraSpecialArgs = { myMods = import ./modules/home };
         };
         alpha = home-manager.lib.homeManagerConfiguration {
-          modules = [ ./hosts/desktop/home.nix ];
+          modules = [ ./home.nix ];
           pkgs = pkgsForSystem amdSys;
         };
       };

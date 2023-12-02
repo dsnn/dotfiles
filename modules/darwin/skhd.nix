@@ -1,14 +1,8 @@
 { lib, config, ... }:
 with lib;
-let cfg = config.dotfiles.services.skhd;
+let cfg = config.mine.services.skhd;
 in {
-  options.dotfiles.services.skhd = {
-    enable = mkEnableOption "Enable skhd";
-    greeter = mkOption {
-      type = types.bool;
-      default = false;
-    };
-  };
+  options.mine.services.skhd = { enable = mkEnableOption "Enable skhd"; };
 
   config = mkIf cfg.enable {
     services.skhd = {

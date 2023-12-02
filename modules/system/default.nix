@@ -19,8 +19,6 @@
     ./environment.nix
     ./homebrew.nix
     ./nix-doc.nix
-    ./skhd.nix
-    ./yabai.nix
   ];
 }
 

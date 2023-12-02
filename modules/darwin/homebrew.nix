@@ -1,13 +1,9 @@
 { lib, config, ... }:
 with lib;
-let cfg = config.dotfiles.homebrew;
+let cfg = config.mine.services.homebrew;
 in {
-  options.dotfiles.homebrew = {
+  options.mine.services.homebrew = {
     enable = mkEnableOption "Enable homebrew";
-    greeter = mkOption {
-      type = types.bool;
-      default = false;
-    };
   };
 
   config = mkIf cfg.enable {

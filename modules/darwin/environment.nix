@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-let is-darwin = pkgs.stdenv.isDarwin;
-in {
+{ pkgs, ... }: {
   environment.shells = with pkgs; [ bash zsh ];
   environment.loginShell = pkgs.zsh;
   environment.systemPackages = with pkgs; [
@@ -12,6 +10,6 @@ in {
     neovim
     vim
   ];
-  environment.systemPath = if is-darwin then [ "/opt/homebrew/bin" ] else [ ];
-  environment.pathsToLink = if is-darwin then [ "/Applications" ] else [ ];
+  environment.systemPath = [ "/opt/homebrew/bin" ];
+  environment.pathsToLink = [ "/Applications" ];
 }

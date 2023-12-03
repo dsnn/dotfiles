@@ -1,5 +1,11 @@
 # dotfiles
 
+## Remote deploy via nixos-rebuild
+
+```nix
+nixos-rebuild switch --flake .#profile --fast --use-remote-sudo --target-host <user@host> --build-host <user@host> --verbose
+```
+
 # TODO
 
 - https://github.com/catppuccin/base16

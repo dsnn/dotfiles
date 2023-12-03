@@ -1,17 +1,14 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [
-      ./hardware.nix
-    ];
+  imports = [ ./hardware.nix ];
 
   nixpkgs.config.allowUnfree = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "alpha";
+  networking.hostName = "grey";
   networking.hostId = "199f97e0";
   networking.networkmanager.enable = true;
 
@@ -51,7 +48,7 @@
   services.xserver.displayManager.defaultSession = "none+i3";
   services.xserver.windowManager.i3.enable = true;
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true; 
+  services.xserver.libinput.enable = true;
 
   # services.xserver.layout = "us";
   # services.xserver.videoDrivers = [ " nvidia " ];
@@ -64,7 +61,6 @@
   hardware.pulseaudio.support32Bit = true;
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
 
-
   users.mutableUsers = false;
   users.defaultUserShell = pkgs.zsh;
 
@@ -74,16 +70,15 @@
     shell = pkgs.zsh;
     isNormalUser = true;
     extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" "docker" ];
-    hashedPassword = "$y$j9T$Wg1CGw.yYxfHmeXp.joE3/$Z70N2uCHfh2BcQ978valtj/FByc3jwX.3q94hzD39U0";
+    hashedPassword =
+      "$y$j9T$Wg1CGw.yYxfHmeXp.joE3/$Z70N2uCHfh2BcQ978valtj/FByc3jwX.3q94hzD39U0";
     openssh.authorizedKeys.keys = [
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCblbdi9GiPOhBlH1aSn3+/0w8w7OVP+jNVbjX0iOf31WMJpyGi8X1ybsZfjrAQ2VoHuX/dN1BJlvOGO36PcDRsXDKE/+Db9VcJR8vzs4d1Nik8lbmjXgWHPv6Ig8SDVrqanV/6Yv9AbgZFqIbfqIsW41i/zkVt8wXYewATI6bjHs5gWox+5h/NBBu6bTCD1He4I8v6/1Dg3D/9o0fmhrwGOdd7W1zxPorjUC9uziUCc4uOnnTH5n1K59TvMYeUsdYtkToew7b1fJAsC1FY09GrgyQ+y+O07oGNLI9NyckEMIi+1hsSi3dNwLG2Y/lqcHM/YgdY3iez63h+W02tEuaF"
     ];
   };
 
-  nix =
-   let
-      users = [ "root" "dsn" ];
-   in {
+  nix = let users = [ "root" "dsn" ];
+  in {
     settings = {
       experimental-features = "nix-command flakes";
       http-connections = 50;
@@ -94,9 +89,7 @@
       trusted-users = users;
       allowed-users = users;
     };
-    gc = {
-      automatic = true;
-    };
+    gc = { automatic = true; };
   };
 
   environment.systemPackages = with pkgs; [

@@ -38,7 +38,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, darwin, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, darwin, home-manager, deploy-rs, ... }:
     let
       darwinSys = "aarch64-darwin";
       amdSys = "x86_64-linux";
@@ -56,8 +56,27 @@
       };
 
       nixosConfigurations.grey = mkConfig {
-        system = darwinSys;
+        system = "x86_64-linux";
         modules = [ ./hosts/grey/configuration.nix ];
+      };
+
+      deploy.nodes = {
+        grey = {
+          # sshOpts = [ "-p" "2221" ];
+          hostname = "grey";
+          fastConnection = true;
+          profiles.system = {
+            user = "dsn";
+            path = deploy-rs.lib.x86_64-linux.activate.nixos
+              self.nixosConfigurations.grey;
+            remoteBuild = true;
+          };
+        };
+      };
+
+      devShells.${amdSys} = pkgs.mkShell {
+        buildInputs = [ pkgs.deploy-rs ];
+        inputsFrom = [ ];
       };
 
       # darwinConfigurations = {

@@ -42,42 +42,39 @@
     let
       darwinSys = "aarch64-darwin";
       amdSys = "x86_64-linux";
-      # inherit (self) outputs;
-      # systems = [ "aarch64-darwin" "x86_64-linux" ];
-      # forAllSystems = nixpkgs.lib.getAttrs systems;
+      systems = [ "x86_64-linux" "aarch64-darwin" ];
+      lib = import ./lib inputs;
+    in with lib; {
+      inherit lib;
 
-      pkgsForSystem = system: import nixpkgs { inherit system; };
-    in {
-      # lib = import ./lib { inherit inputs; };
+      homeConfigurations.silver = mkHome { system = darwinSys; };
+      homeConfigurations.grey = mkHome { system = amdSys; };
 
-      homeConfigurations = {
-        macbook = home-manager.lib.homeManagerConfiguration {
-          modules = [ ./home.nix ];
-          pkgs = pkgsForSystem darwinSys;
-          # extraSpecialArgs = { myMods = import ./modules/home };
-        };
-        alpha = home-manager.lib.homeManagerConfiguration {
-          modules = [ ./home.nix ];
-          pkgs = pkgsForSystem amdSys;
-        };
+      darwinConfigurations.silver = mkConfig {
+        system = darwinSys;
+        modules = [ ./hosts/silver/configuration.nix ];
       };
 
-      darwinConfigurations = {
-        macbook = darwin.lib.darwinSystem {
-          system = darwinSys;
-          pkgs = import nixpkgs { system = darwinSys; };
-          specialArgs = { inherit inputs; };
-          modules = [ ./hosts/macbook/configuration.nix ];
-        };
+      nixosConfigurations.grey = mkConfig {
+        system = darwinSys;
+        modules = [ ./hosts/grey/configuration.nix ];
       };
 
-      nixosConfigurations = {
-        alpha = nixpkgs.lib.nixosSystem {
-          system = amdSys;
-          pkgs = import nixpkgs { system = amdSys; };
-          specialArgs = { inherit inputs; };
-          modules = [ ./hosts/desktop/configuration.nix ];
-        };
-      };
+      # darwinConfigurations = {
+      #   macbook = darwin.lib.darwinSystem {
+      #     system = darwinSys;
+      #     pkgs = import nixpkgs { system = darwinSys; };
+      #     specialArgs = { inherit inputs; };
+      #   };
+      # };
+
+      # nixosConfigurations = {
+      #   alpha = nixpkgs.lib.nixosSystem {
+      #     system = amdSys;
+      #     pkgs = import nixpkgs { system = amdSys; };
+      #     specialArgs = { inherit inputs; };
+      #     modules = [ ./hosts/desktop/configuration.nix ];
+      #   };
+      # };
     };
 }

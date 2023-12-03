@@ -2,7 +2,7 @@
   environment.shells = with pkgs; [ bash zsh ];
   environment.loginShell = pkgs.zsh;
   environment.systemPackages = with pkgs; [
-    _1password
+    # _1password
     coreutils
     git
     home-manager

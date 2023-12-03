@@ -1,9 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
-  # is-linux = pkgs.stdenv.isLinux;
-  is-darwin = pkgs.stdenv.isDarwin;
+  inherit (pkgs.stdenv) isLinux isDarwin;
+  inherit (lib) mkIf;
 in {
-
 
   # Fix home manager for non NixOS
   # targets.genericLinux.enable = true;
@@ -39,8 +38,8 @@ in {
     cfs = "vim $HOME/dotfiles/hosts/macbook/home.nix";
     cfz = "vim $HOME/dotfiles/modules/home/zsh.nix";
     rf =
-      "home-manager switch --flake ~/dotfiles/#macbook; source ~/.config/zsh/.zshrc";
-    rs = "darwin-rebuild switch --flake ~/dotfiles/#macbook";
+      "home-manager switch --flake ~/dotfiles/#silver; source ~/.config/zsh/.zshrc";
+    rs = "darwin-rebuild switch --flake ~/dotfiles/#silver";
     ru = "pushd ~/dotfiles; nix flake update; rf; popd";
   };
 
@@ -48,10 +47,10 @@ in {
 
   home.stateVersion = "23.11";
   home.username = "dsn";
-  home.homeDirectory = lib.mkIf is-darwin "/Users/dsn" else "/home/dsn";
+  home.homeDirectory = if isDarwin then "/Users/dsn" else "/home/dsn";
 
   home.file."/Users/dsn/.hushlogin".text = "";
-  home.file."/Users/dsn/.inputrc".source = ../../modules/home/inputrc;
+  home.file."/Users/dsn/.inputrc".source = ./modules/home/inputrc;
 
   home.packages = with pkgs; [
     # _1password
@@ -97,7 +96,6 @@ in {
     # xcape
     # xfce.thunar
   ];
-
 
   # for thunar: removable memdia, smb etc
   # services.gvfs.enable = true;

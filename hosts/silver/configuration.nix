@@ -1,5 +1,7 @@
 { ... }: {
 
+  nixpkgs.config.allowUnfree = true;
+
   imports = [
     ../../modules/darwin/environment.nix
     ../../modules/darwin/homebrew.nix

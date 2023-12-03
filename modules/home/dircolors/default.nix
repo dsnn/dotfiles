@@ -14,6 +14,7 @@ in {
 
     programs.dircolors.enable = true;
 
-    home.file."/Users/dsn/.config/dircolors".source = ./config;
+    home.file."${config.home.homeDirectory}/.config/dircolors".source =
+      ./config;
   };
 }

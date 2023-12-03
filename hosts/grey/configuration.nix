@@ -1,6 +1,4 @@
-{ config, pkgs, ... }:
-
-{
+{ config, pkgs, ... }: {
   imports = [ ./hardware.nix ];
 
   nixpkgs.config.allowUnfree = true;
@@ -11,6 +9,36 @@
   networking.hostName = "grey";
   networking.hostId = "199f97e0";
   networking.networkmanager.enable = true;
+
+  security.sudo.extraRules = [{
+    users = [ "dsn" ];
+    commands = [{
+      command = "ALL";
+      options =
+        [ "NOPASSWD" ]; # "SETENV" # Adding the following could be a good idea
+    }];
+  }];
+
+  # security.sudo.extraRules = let
+  #   storePrefix = "/nix/store/*";
+  #   systemName = "nixos-system-${config.networking.hostName}-*";
+  # in [
+  #   {
+  #     commands = [{
+  #       command =
+  #         "${storePrefix}-nix-*/bin/nix-env -p /nix/var/nix/profiles/system --set ${storePrefix}-${systemName}";
+  #       options = [ "NOPASSWD" ];
+  #     }];
+  #     groups = [ "wheel" ];
+  #   }
+  #   {
+  #     commands = [{
+  #       command = "${storePrefix}-${systemName}/bin/switch-to-configuration";
+  #       options = [ "NOPASSWD" ];
+  #     }];
+  #     groups = [ "wheel" ];
+  #   }
+  # ];
 
   # persist settings for some apps (https://nixos.wiki/wiki/I3#DConf)
   programs.dconf.enable = true;

@@ -42,7 +42,6 @@
     let
       darwinSys = "aarch64-darwin";
       amdSys = "x86_64-linux";
-      systems = [ "x86_64-linux" "aarch64-darwin" ];
       lib = import ./lib inputs;
     in with lib; {
       inherit lib;
@@ -50,34 +49,33 @@
       homeConfigurations.silver = mkHome { system = darwinSys; };
       homeConfigurations.grey = mkHome { system = amdSys; };
 
-      darwinConfigurations.silver = mkConfig {
-        system = darwinSys;
+      darwinConfigurations.silver = darwin.lib.darwinSystem {
+        specialArgs = { inherit inputs outputs; };
         modules = [ ./hosts/silver/configuration.nix ];
       };
 
-      nixosConfigurations.grey = mkConfig {
-        system = "x86_64-linux";
+      nixosConfigurations.grey = nixpkgs.lib.nixosSystem {
+        system = amdSys;
+        specialArgs = { inherit inputs outputs; };
         modules = [ ./hosts/grey/configuration.nix ];
       };
 
-      deploy.nodes = {
-        grey = {
-          # sshOpts = [ "-p" "2221" ];
-          hostname = "grey";
-          fastConnection = true;
-          profiles.system = {
-            user = "dsn";
-            path = deploy-rs.lib.x86_64-linux.activate.nixos
-              self.nixosConfigurations.grey;
-            remoteBuild = true;
-          };
+      deploy.nodes.grey = {
+        hostname = "grey";
+        fastConnection = true;
+        profiles.system = {
+          sshUser = "dsn";
+          user = "dsn";
+          path = deploy-rs.lib.x86_64-linux.activate.nixos
+            self.nixosConfigurations.grey;
+          remoteBuild = true;
         };
       };
 
-      devShells.${amdSys} = pkgs.mkShell {
-        buildInputs = [ pkgs.deploy-rs ];
-        inputsFrom = [ ];
-      };
+      # devShell.default = pkgs.mkShell {
+      #   buildInputs = [ pkgs.deploy-rs ];
+      #   inputsFrom = [ ];
+      # };
 
       # darwinConfigurations = {
       #   macbook = darwin.lib.darwinSystem {

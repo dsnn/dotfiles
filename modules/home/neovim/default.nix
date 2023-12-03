@@ -26,7 +26,7 @@ in {
       bindkey "^n" run_nvim
     '';
 
-    home.file."/Users/dsn/.config/nvim".source =
+    home.file."${config.home.homeDirectory}/.config/nvim".source =
       config.lib.file.mkOutOfStoreSymlink
       "${config.home.homeDirectory}/dotfiles/modules/home/neovim/nvim";
   };

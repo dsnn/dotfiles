@@ -1,7 +1,7 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, ... }:
 let
-  inherit (pkgs.stdenv) isLinux isDarwin;
-  inherit (lib) mkIf;
+  inherit (pkgs.stdenv) isDarwin;
+  # inherit (lib) mkIf;
 in {
 
   # Fix home manager for non NixOS
@@ -49,8 +49,9 @@ in {
   home.username = "dsn";
   home.homeDirectory = if isDarwin then "/Users/dsn" else "/home/dsn";
 
-  home.file."/Users/dsn/.hushlogin".text = "";
-  home.file."/Users/dsn/.inputrc".source = ./modules/home/inputrc;
+  home.file."${config.home.homeDirectory}/.hushlogin".text = "";
+  home.file."${config.home.homeDirectory}/.inputrc".source =
+    ./modules/home/inputrc;
 
   home.packages = with pkgs; [
     # _1password
@@ -74,8 +75,8 @@ in {
     packer
     ripgrep
     rnix-lsp
-    slack
-    spotify
+    # slack
+    # spotify
     unzip
     vim
     wakeonlan

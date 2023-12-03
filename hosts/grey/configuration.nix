@@ -10,6 +10,9 @@
   networking.hostId = "199f97e0";
   networking.networkmanager.enable = true;
 
+  # TODO: Remove later.
+  # Temp / testing workaround for remote deploy.
+  # Insecure and not recommended
   security.sudo.extraRules = [{
     users = [ "dsn" ];
     commands = [{
@@ -19,6 +22,7 @@
     }];
   }];
 
+  # TODO: Review and try this later
   # security.sudo.extraRules = let
   #   storePrefix = "/nix/store/*";
   #   systemName = "nixos-system-${config.networking.hostName}-*";

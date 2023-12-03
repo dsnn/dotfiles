@@ -2,42 +2,21 @@
   description = "Nix configuration";
 
   inputs = {
-    # nixpkgs.url = "github:NixOS/nixpkgs";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-
-    # NixPkgs (nixos-23.05)
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
-
-    # NixPkgs Unstable (nixos-unstable)
-    # unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    home-manager.url = "github:nix-community/home-manager/release-23.11";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    # macOS Support (master)
-    darwin.url = "github:lnl7/nix-darwin";
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
-
-    # Secrets
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-    sops-nix.url = "github:Mic92/sops-nix";
-
-    # # Generate System Images
-    # nixos-generators.url = "github:nix-community/nixos-generators";
     # nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
-
-    # System Deployment
-    deploy-rs.url = "github:serokell/deploy-rs";
+    # nixos-generators.url = "github:nix-community/nixos-generators";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
+    darwin.url = "github:lnl7/nix-darwin";
     deploy-rs.inputs.nixpkgs.follows = "nixpkgs-unstable";
-
-    # Flake Hygiene
-    flake-checker = {
-      url = "github:DeterminateSystems/flake-checker";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    deploy-rs.url = "github:serokell/deploy-rs";
+    flake-checker.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    flake-checker.url = "github:DeterminateSystems/flake-checker";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.url = "github:nix-community/home-manager/release-23.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+    sops.inputs.nixpkgs.follows = "nixpkgs";
+    sops.url = "github:Mic92/sops-nix";
   };
-
   outputs = inputs@{ self, nixpkgs, darwin, home-manager, deploy-rs, ... }:
     let
       darwinSys = "aarch64-darwin";
@@ -50,14 +29,14 @@
       homeConfigurations.grey = mkHome { system = amdSys; };
 
       darwinConfigurations.silver = darwin.lib.darwinSystem {
-        specialArgs = { inherit inputs outputs; };
         modules = [ ./hosts/silver/configuration.nix ];
+        specialArgs = { inherit inputs outputs; };
+        system = darwinSys;
       };
 
       nixosConfigurations.grey = nixpkgs.lib.nixosSystem {
-        system = amdSys;
-        specialArgs = { inherit inputs outputs; };
         modules = [ ./hosts/grey/configuration.nix ];
+        specialArgs = { inherit inputs outputs; };
       };
 
       deploy.nodes.grey = {
@@ -71,27 +50,5 @@
           remoteBuild = true;
         };
       };
-
-      # devShell.default = pkgs.mkShell {
-      #   buildInputs = [ pkgs.deploy-rs ];
-      #   inputsFrom = [ ];
-      # };
-
-      # darwinConfigurations = {
-      #   macbook = darwin.lib.darwinSystem {
-      #     system = darwinSys;
-      #     pkgs = import nixpkgs { system = darwinSys; };
-      #     specialArgs = { inherit inputs; };
-      #   };
-      # };
-
-      # nixosConfigurations = {
-      #   alpha = nixpkgs.lib.nixosSystem {
-      #     system = amdSys;
-      #     pkgs = import nixpkgs { system = amdSys; };
-      #     specialArgs = { inherit inputs; };
-      #     modules = [ ./hosts/desktop/configuration.nix ];
-      #   };
-      # };
     };
 }

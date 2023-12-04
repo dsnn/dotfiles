@@ -3,6 +3,11 @@
   # Temp / testing workaround for remote deploy.
   # Insecure and not recommended
 
+  # sudo.configFile = ''
+  #   Defaults lecture=always
+  #   Defaults lecture_file=${misc/groot.txt}
+  # '';
+
   security.sudo.extraRules = [{
     users = [ "dsn" ];
     commands = [{

@@ -1,7 +1,12 @@
 { ... }: {
 
-  services.openssh.enable = true;
-  # services.openssh.forwardX11 = false;
-  # services.openssh.permitRootLogin = "no";
-  # services.openssh.passwordAuthentication = false;
+  openssh = {
+    enable = true;
+    allowSFTP = true;
+    # forwardX11 = false;
+    # permitRootLogin = "no";
+    # passwordAuthentication = false;
+  };
+
+  # sshd.enable = true;
 }

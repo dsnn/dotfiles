@@ -19,24 +19,32 @@
   };
   outputs = inputs@{ self, nixpkgs, darwin, home-manager, deploy-rs, ... }:
     let
-      darwinSys = "aarch64-darwin";
-      amdSys = "x86_64-linux";
-      lib = import ./lib inputs;
-    in with lib; {
-      inherit lib;
+      aarch64-darwin = "aarch64-darwin";
+      x86_64-linux = "x86_64-linux";
+    in {
 
-      homeConfigurations.silver = mkHome { system = darwinSys; };
-      homeConfigurations.grey = mkHome { system = amdSys; };
+      homeConfigurations.silver = home-manager.lib.homeManagerConfiguration {
+        modules = [ ../home.nix ];
+        pkgs = import nixpkgs { system = aarch64-darwin; };
+        extraSpecialArgs = { system = aarch64-darwin; };
+      };
+
+      homeConfigurations.grey = home-manager.lib.homeManagerConfiguration {
+        modules = [ ../home.nix ];
+        pkgs = import nixpkgs { system = x86_64-linux; };
+        extraSpecialArgs = { system = x86_64-linux; };
+      };
 
       darwinConfigurations.silver = darwin.lib.darwinSystem {
         modules = [ ./hosts/silver/configuration.nix ];
-        specialArgs = { inherit inputs outputs; };
-        system = darwinSys;
+        specialArgs = { inherit inputs; };
+        system = aarch64-darwin;
       };
 
       nixosConfigurations.grey = nixpkgs.lib.nixosSystem {
         modules = [ ./hosts/grey/configuration.nix ];
-        specialArgs = { inherit inputs outputs; };
+        specialArgs = { inherit inputs; };
+        system = x86_64-linux;
       };
 
       deploy.nodes.grey = {

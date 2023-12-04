@@ -133,7 +133,7 @@ in {
 
       set -g status-right '%Y-%m-%d %H:%M'
 
-      set-option -g status-position top
+      set-option -g status-position bottom
 
       # don't exit from tmux when closing a session
       set -g detach-on-destroy off

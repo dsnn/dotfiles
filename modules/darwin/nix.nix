@@ -1,10 +1,10 @@
-{ pkgs, ... }: {
+{ ... }: {
 
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
 
-  nix.package = pkgs.nixUnstable;
+  # nix.package = pkgs.nixUnstable;
 
   nix.gc.automatic = true;
   nix.gc.interval = {

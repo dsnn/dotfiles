@@ -1,33 +1,35 @@
-{ lib, config, ... }:
-with lib;
-let cfg = config.dotfiles.neovim;
-in {
-  options.dotfiles.neovim = {
-    enable = mkEnableOption "Enable neovim";
-    greeter = mkOption {
-      type = types.bool;
-      default = false;
-    };
+{ config, ... }: {
+
+  # TODO: home.packages
+  # Install/handle dependencies
+  # [
+  #   fd
+  #   jq
+  #   nawk
+  #   neovim
+  #   nil
+  #   nixd
+  #   nixfmt
+  #   nixpkgs-fmt
+  #   ripgrep
+  #   rnix-lsp
+  # ];
+
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
   };
 
-  config = mkIf cfg.enable {
+  programs.zsh.initExtra = ''
+    function run_nvim() {
+      BUFFER="nvim && clear"
+      zle accept-line
+    }
+    zle -N run_nvim
+    bindkey "^n" run_nvim
+  '';
 
-    home.sessionVariables = {
-      EDITOR = "nvim";
-      VISUAL = "nvim";
-    };
-
-    programs.zsh.initExtra = ''
-      function run_nvim() {
-        BUFFER="nvim && clear"
-        zle accept-line
-      }
-      zle -N run_nvim
-      bindkey "^n" run_nvim
-    '';
-
-    home.file."${config.home.homeDirectory}/.config/nvim".source =
-      config.lib.file.mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/dotfiles/modules/home/neovim/nvim";
-  };
+  home.file."${config.home.homeDirectory}/.config/nvim".source =
+    config.lib.file.mkOutOfStoreSymlink
+    "${config.home.homeDirectory}/dotfiles/modules/home/neovim/nvim";
 }

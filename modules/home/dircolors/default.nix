@@ -1,20 +1,5 @@
-{ lib, config, ... }:
-with lib;
-let cfg = config.dotfiles.dircolors;
-in {
-  options.dotfiles.dircolors = {
-    enable = mkEnableOption "Enable dircolors";
-    greeter = mkOption {
-      type = types.bool;
-      default = false;
-    };
-  };
+{ config, ... }: {
+  programs.dircolors.enable = true;
 
-  config = mkIf cfg.enable {
-
-    programs.dircolors.enable = true;
-
-    home.file."${config.home.homeDirectory}/.config/dircolors".source =
-      ./config;
-  };
+  home.file."${config.home.homeDirectory}/.config/dircolors".source = ./config;
 }

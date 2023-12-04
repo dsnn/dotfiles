@@ -1,34 +1,68 @@
-{ config, pkgs, ... }:
+{ config, pkgs, extraSpecialArgs, ... }:
 let
   inherit (pkgs.stdenv) isDarwin;
+  inherit (extraSpecialArgs) isServer;
+  packages = import ./packages.nix;
   # inherit (lib) mkIf;
 in {
 
   # Fix home manager for non NixOS
   # targets.genericLinux.enable = true;
 
-  nixpkgs.config.allowUnfree = true;
-  # nix.package = pkgs.nixUnstable;
+  imports = [
+    ./modules/home/bat.nix
+    ./modules/home/bin
+    ./modules/home/dircolors
+    ./modules/home/direnv.nix
+    ./modules/home/fzf.nix
+    ./modules/home/git.nix
+    ./modules/home/inputrc.nix
+    ./modules/home/karabiner
+    ./modules/home/keychain.nix
+    ./modules/home/kitty.nix
+    ./modules/home/lazygit.nix
+    ./modules/home/lsd.nix
+    ./modules/home/neovim
+    ./modules/home/op.nix
+    ./modules/home/ssh.nix
+    ./modules/home/starship.nix
+    ./modules/home/tmux.nix
+    ./modules/home/tmuxp
+    ./modules/home/vivid.nix
+    ./modules/home/volta.nix
+    ./modules/home/wget.nix
+    ./modules/home/xdg.nix
+    ./modules/home/zoxide.nix
+    ./modules/home/zsh.nix
+  ];
 
-  imports = [ ./modules/home ./modules/collections/zsh.nix ];
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      allowUnfreePredicate = _: true;
+    };
+  };
 
-  dotfiles.karabiner.enable = true;
-  dotfiles.keychain.enable = true;
-  dotfiles.kitty.enable = true;
-  dotfiles.neovim.enable = true;
-  dotfiles.op.enable = true;
-  dotfiles.ssh.enable = true;
-  dotfiles.volta.enable = true;
-  dotfiles.wget.enable = true;
+  home = {
+    username = "dsn";
+    homeDirectory = if isDarwin then "/Users/dsn" else "/home/dsn";
+    stateVersion = "23.11";
+    packages = packages { inherit pkgs isServer; };
+    file."${config.home.homeDirectory}/.hushlogin".text = "";
+  };
+
+  # Nicely reload system units when changing configs
+  systemd.user.startServices = "sd-switch";
+
+  # TODO: mkIf (isServer && config.network.cifs.enable = true) {
+  #   home.file."private".source = config.lib.file.mkOutOfStoreSymlink /mnt/private;
+  #   home.file."share".source = config.lib.file.mkOutOfStoreSymlink /mnt/share;
+  #   home.file."share2".source = config.lib.file.mkOutOfStoreSymlink /mnt/share2;
+  # };
+
+  programs.home-manager.enable = true;
 
   # fonts.fontconfig.enable = true;
-  # programs.firefox.enable = true;
-  # services.network-manager-applet = { enable = true; };
-
-  # create symlinks to local shares
-  # home.file."private".source = config.lib.file.mkOutOfStoreSymlink /mnt/private;
-  # home.file."share".source = config.lib.file.mkOutOfStoreSymlink /mnt/share;
-  # home.file."share2".source = config.lib.file.mkOutOfStoreSymlink /mnt/share2;
 
   # host specific aliases
   programs.zsh.shellAliases = {
@@ -43,64 +77,4 @@ in {
     ru = "pushd ~/dotfiles; nix flake update; rf; popd";
   };
 
-  programs.home-manager.enable = true;
-
-  home.stateVersion = "23.11";
-  home.username = "dsn";
-  home.homeDirectory = if isDarwin then "/Users/dsn" else "/home/dsn";
-
-  home.file."${config.home.homeDirectory}/.hushlogin".text = "";
-  home.file."${config.home.homeDirectory}/.inputrc".source =
-    ./modules/home/inputrc;
-
-  home.packages = with pkgs; [
-    # _1password
-    # discord
-    # google-chrome
-    ansible
-    ansible-lint
-    curl
-    fd
-    freerdp
-    gnused
-    htop
-    jq
-    mosh
-    nawk
-    neovim
-    nil
-    nixd
-    nixfmt
-    nixpkgs-fmt
-    packer
-    ripgrep
-    rnix-lsp
-    # slack
-    # spotify
-    unzip
-    vim
-    wakeonlan
-    xclip
-    # feh
-    # sstp
-    # discord
-    # feh
-    # freerdp
-    # google-chrome
-    # kodi
-    # remmina
-    # slack
-    # spotify
-    # sstp
-    # teamspeak_client
-    # wireguard
-    # xcape
-    # xfce.thunar
-  ];
-
-  # for thunar: removable memdia, smb etc
-  # services.gvfs.enable = true;
-
-  # for thunar: external program to generate thumbnails
-  # services.tumbler.enable = true;
 }

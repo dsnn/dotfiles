@@ -19,43 +19,51 @@
   };
   outputs = inputs@{ self, nixpkgs, darwin, home-manager, deploy-rs, ... }:
     let
+      inherit (self) outputs;
       aarch64-darwin = "aarch64-darwin";
       x86_64-linux = "x86_64-linux";
     in {
 
       homeConfigurations.silver = home-manager.lib.homeManagerConfiguration {
-        modules = [ ../home.nix ];
-        pkgs = import nixpkgs { system = aarch64-darwin; };
-        extraSpecialArgs = { system = aarch64-darwin; };
+        modules = [ ./home.nix ];
+        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+        extraSpecialArgs = {
+          inherit inputs outputs;
+          isServer = false;
+        };
       };
 
       homeConfigurations.grey = home-manager.lib.homeManagerConfiguration {
-        modules = [ ../home.nix ];
-        pkgs = import nixpkgs { system = x86_64-linux; };
-        extraSpecialArgs = { system = x86_64-linux; };
+        modules = [ ./home.nix ];
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {
+          inherit inputs outputs;
+          isServer = true;
+        };
       };
 
       darwinConfigurations.silver = darwin.lib.darwinSystem {
         modules = [ ./hosts/silver/configuration.nix ];
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs outputs; };
         system = aarch64-darwin;
       };
 
       nixosConfigurations.grey = nixpkgs.lib.nixosSystem {
         modules = [ ./hosts/grey/configuration.nix ];
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs outputs; };
         system = x86_64-linux;
       };
 
-      deploy.nodes.grey = {
-        hostname = "grey";
-        fastConnection = true;
-        profiles.system = {
-          sshUser = "dsn";
-          user = "dsn";
-          path = deploy-rs.lib.x86_64-linux.activate.nixos
-            self.nixosConfigurations.grey;
-          remoteBuild = true;
+      deploy.nodes = {
+        grey = {
+          hostname = "grey";
+          fastConnection = true;
+          profiles.system = {
+            user = "dsn";
+            path = deploy-rs.lib.x86_64-linux.activate.nixos
+              self.nixosConfigurations.grey;
+            remoteBuild = true;
+          };
         };
       };
     };

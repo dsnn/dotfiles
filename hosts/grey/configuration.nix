@@ -1,13 +1,13 @@
 { pkgs, ... }: {
   imports = [
-    ../../modules/common.nix
-    #../../modules/nixos/cifs.nix
-    ../../modules/nixos/containers/gitea.nix
-    ../../modules/nixos/fail2ban.nix
-    ../../modules/nixos/openssh.nix
-    ../../modules/nixos/security.nix
-    ../../modules/nixos/users.nix
-    ../../modules/nixos/virtualisation.nix
+    ../../system/common.nix
+    #../../system/nixos/cifs.nix
+    ../../system/nixos/containers/gitea.nix
+    ../../system/nixos/fail2ban.nix
+    ../../system/nixos/openssh.nix
+    ../../system/nixos/security.nix
+    ../../system/nixos/users.nix
+    ../../system/nixos/virtualisation.nix
     ./hardware.nix
   ];
 

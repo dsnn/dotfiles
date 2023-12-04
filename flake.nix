@@ -25,7 +25,7 @@
     in {
 
       homeConfigurations.silver = home-manager.lib.homeManagerConfiguration {
-        modules = [ ./home.nix ];
+        modules = [ ./home/home.nix ];
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         extraSpecialArgs = {
           inherit inputs outputs;
@@ -35,7 +35,7 @@
       };
 
       homeConfigurations.grey = home-manager.lib.homeManagerConfiguration {
-        modules = [ ./home.nix ];
+        modules = [ ./home/home.nix ];
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {
           inherit inputs outputs;

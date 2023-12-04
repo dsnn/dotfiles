@@ -1,38 +1,13 @@
-{ config, pkgs, isServer, hostname, ... }:
+{ lib, config, pkgs, isServer, hostname, ... }:
 let
   inherit (pkgs.stdenv) isDarwin;
   packages = import ./packages.nix;
-  # inherit (lib) mkIf;
 in {
 
   # Fix home manager for non NixOS
   # targets.genericLinux.enable = true;
 
-  imports = [
-    ./modules/home/bat.nix
-    ./modules/home/bin
-    ./modules/home/dircolors
-    ./modules/home/direnv.nix
-    ./modules/home/fzf.nix
-    ./modules/home/git.nix
-    ./modules/home/karabiner
-    ./modules/home/keychain.nix
-    ./modules/home/kitty.nix
-    ./modules/home/lazygit.nix
-    ./modules/home/lsd.nix
-    ./modules/home/neovim
-    ./modules/home/op.nix
-    ./modules/home/ssh.nix
-    ./modules/home/starship.nix
-    ./modules/home/tmux.nix
-    ./modules/home/tmuxp
-    ./modules/home/vivid.nix
-    ./modules/home/volta.nix
-    ./modules/home/wget.nix
-    ./modules/home/xdg.nix
-    ./modules/home/zoxide.nix
-    ./modules/home/zsh.nix
-  ];
+  imports = lib.concatMap import [ ./programs ./scripts ./services ./modules ];
 
   nixpkgs = {
     config = {

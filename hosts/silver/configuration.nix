@@ -3,10 +3,10 @@
   nixpkgs.config.allowUnfree = true;
 
   imports = [
-    ../../modules/common.nix
-    ../../modules/darwin/homebrew.nix
-    ../../modules/darwin/skhd.nix
-    ../../modules/darwin/yabai.nix
+    ../../system/common.nix
+    ../../system/darwin/homebrew.nix
+    ../../system/darwin/skhd.nix
+    ../../system/darwin/yabai.nix
   ];
 
   mine.services = {

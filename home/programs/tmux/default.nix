@@ -24,6 +24,8 @@ let
   # };
 in {
 
+  imports = [ ./tmuxp ];
+
   programs.zsh.initExtra = ''
     export PATH=${t-smart-manager}/share/tmux-plugins/t-smart-tmux-session-manager/bin/:$PATH
   '';

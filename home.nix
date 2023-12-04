@@ -1,7 +1,6 @@
-{ config, pkgs, extraSpecialArgs, ... }:
+{ config, pkgs, isServer, ... }:
 let
   inherit (pkgs.stdenv) isDarwin;
-  inherit (extraSpecialArgs) isServer;
   packages = import ./packages.nix;
   # inherit (lib) mkIf;
 in {

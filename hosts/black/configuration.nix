@@ -1,51 +1,38 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-let mod = "Mod4";
-in {
+{ pkgs, ... }: {
   imports = [
-    ./hardware.nix
-    ../../modules/system/boot.nix
-    ../../modules/system/zfs.nix
-    ../../modules/system/nix.nix
-    ../../modules/system/xrdp.nix
-    ../../modules/system/locale.nix
-    ../../modules/system/timezone.nix
-    ../../modules/system/ssh.nix
-    ../../modules/system/networkmanager.nix
-    ../../modules/system/awesomewm.nix
-    ../../modules/system/cifs.nix
-    ../../modules/system/user.nix
+    ../../modules/common.nix
+    #../../modules/nixos/cifs.nix
+    ../../modules/nixos/fail2ban.nix
+    ../../modules/nixos/openssh.nix
+    ../../modules/nixos/security.nix
+    ../../modules/nixos/users.nix
     ../../modules/sops.nix
+    ./hardware.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
 
-  networking.hostId = "8d549888";
-  networking.hostName = "alpha";
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.useDHCP = false;
-  networking.interfaces.ens18.useDHCP = true;
+  networking.hostId = "8d549888";
+  networking.hostName = "black";
+  networking.networkmanager.enable = true;
+  systemd.services.NetworkManager-wait-online.enable = false;
+
+  time.timeZone = "Europe/Stockholm";
+  services.timesyncd.enable = true;
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  programs.zsh.enable = true;
 
   environment.systemPackages = with pkgs; [
-    coreutils
-    git
-    man
-    vim
-    wget
-    home-manager
-    cifs-utils
     gcc
-    xrdp
-    zsh
-    docker
-    docker-compose
+    inetutils
+    pavucontrol
+    pciutils
   ];
 
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "21.11";
 }
 

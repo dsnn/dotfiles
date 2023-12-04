@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 let
   cifsShare = name: {
     device = "//dss/${name}";

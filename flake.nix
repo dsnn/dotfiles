@@ -30,6 +30,7 @@
         extraSpecialArgs = {
           inherit inputs outputs;
           isServer = false;
+          hostname = "silver";
         };
       };
 
@@ -39,6 +40,7 @@
         extraSpecialArgs = {
           inherit inputs outputs;
           isServer = true;
+          hostname = "grey";
         };
       };
 

@@ -1,4 +1,4 @@
-{ config, pkgs, isServer, ... }:
+{ config, pkgs, isServer, hostname, ... }:
 let
   inherit (pkgs.stdenv) isDarwin;
   packages = import ./packages.nix;
@@ -75,14 +75,13 @@ in {
 
   # host specific aliases
   programs.zsh.shellAliases = {
-    cfc = "vim $HOME/dotfiles/hosts/macbook/configuration.nix";
+    cfc = "vim $HOME/dotfiles/hosts/${hostname}/configuration.nix";
     cfg = "vim $HOME/dotfiles/modules/home/git.nix";
-    cfh = "vim $HOME/dotfiles/hosts/macbook/home.nix";
-    cfs = "vim $HOME/dotfiles/hosts/macbook/home.nix";
+    cfh = "vim $HOME/dotfiles/home.nix";
     cfz = "vim $HOME/dotfiles/modules/home/zsh.nix";
     rf =
-      "home-manager switch --flake ~/dotfiles/#silver; source ~/.config/zsh/.zshrc";
-    rs = "darwin-rebuild switch --flake ~/dotfiles/#silver";
+      "home-manager switch --flake ~/dotfiles/#${hostname}; source ~/.config/zsh/.zshrc";
+    rs = "darwin-rebuild switch --flake ~/dotfiles/#${hostname}";
     ru = "pushd ~/dotfiles; nix flake update; rf; popd";
   };
 

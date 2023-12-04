@@ -2,6 +2,7 @@
   imports = [
     ./hardware.nix
     ../../modules/nixos/virtualisation.nix
+    ../../modules/nixos/fail2ban.nix
     ../../modules/nixos/containers/gitea.nix
     ../../modules/common.nix
   ];
@@ -63,6 +64,7 @@
   #   keyMap = "us";
   #   useXkbConfig = true; # use xkbOptions in tty.
   # };
+  # keyMap = "sv-latin1";
 
   services.xserver = {
 
@@ -87,9 +89,6 @@
       i3.enable = true;
       i3.extraPackages = with pkgs; [ i3status ];
     };
-
-    # Enable touchpad support (enabled default in most desktopManager).
-    libinput.enable = true;
   };
 
   # Enable CUPS to print documents.

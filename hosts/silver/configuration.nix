@@ -1,11 +1,10 @@
-{ ... }: {
+{ pkgs, ... }: {
 
   nixpkgs.config.allowUnfree = true;
 
   imports = [
-    ../../modules/darwin/environment.nix
+    ../../modules/common.nix
     ../../modules/darwin/homebrew.nix
-    ../../modules/darwin/nix.nix
     ../../modules/darwin/skhd.nix
     ../../modules/darwin/yabai.nix
   ];
@@ -15,6 +14,11 @@
     yabai.enable = true;
     homebrew.enable = true;
   };
+
+  environment.loginShell = pkgs.zsh;
+  environment.shells = with pkgs; [ bash zsh ];
+  environment.systemPath = [ "/opt/homebrew/bin" ];
+  environment.pathsToLink = [ "/Applications" ];
 
   system.defaults = {
     NSGlobalDomain.AppleShowAllExtensions = true;

@@ -16,7 +16,6 @@ in {
     ./modules/home/direnv.nix
     ./modules/home/fzf.nix
     ./modules/home/git.nix
-    ./modules/home/inputrc.nix
     ./modules/home/karabiner
     ./modules/home/keychain.nix
     ./modules/home/kitty.nix
@@ -50,6 +49,17 @@ in {
     packages = packages { inherit pkgs isServer; };
     file."${config.home.homeDirectory}/.hushlogin".text = "";
   };
+
+  home.file."${config.home.homeDirectory}/.inputrc".text = ''
+    set show-all-if-ambiguous on
+    set completion-ignore-case on
+    set mark-directories on
+    set mark-symlinked-directories on
+    set match-hidden-files off
+    set visible-stats on
+    set keymap vi
+    set editing-mode vi-insert
+  '';
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";

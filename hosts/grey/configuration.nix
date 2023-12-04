@@ -1,5 +1,10 @@
 { config, pkgs, ... }: {
-  imports = [ ./hardware.nix ];
+  imports = [
+    ./hardware.nix
+    ../../modules/nixos/virtualisation.nix
+    ../../modules/nixos/containers/gitea.nix
+    ../../modules/common.nix
+  ];
 
   nixpkgs.config.allowUnfree = true;
 
@@ -59,45 +64,51 @@
   #   useXkbConfig = true; # use xkbOptions in tty.
   # };
 
-  # window manager
-  # services.xserver.enable = true;
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
+  services.xserver = {
 
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.displayManager.defaultSession = "none+i3";
-  # services.xserver.windowManager.i3.enable = true;
-  # services.xserver.windowManager.i3.extraPackages = with pkgs; [ i3status ];
+    enable = true;
+    autorun = false;
+    layout = "us";
+    xkbOptions = "eurosign:e,caps:escape";
+    dpi = 120;
+    # videoDrivers = [ " nvidia " ];
 
-  services.xserver.enable = true;
-  services.xserver.autorun = false;
-  services.xserver.layout = "us";
-  services.xserver.xkbOptions = "eurosign:e,caps:escape";
-  services.xserver.dpi = 120;
-  # services.xserver.desktopManager.default = "none";
-  services.xserver.desktopManager.xterm.enable = false;
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.displayManager.defaultSession = "none+i3";
-  services.xserver.windowManager.i3.enable = true;
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+    # desktopManager.default = "none";
+    desktopManager.xterm.enable = false;
+    # desktopManager.gnome.enable = true;
 
-  # services.xserver.layout = "us";
-  # services.xserver.videoDrivers = [ " nvidia " ];
+    displayManager = {
+      lightdm.enable = true;
+      # gdm.enable = true;
+      defaultSession = "none+i3";
+    };
+
+    windowManager = {
+      i3.enable = true;
+      i3.extraPackages = with pkgs; [ i3status ];
+    };
+
+    # Enable touchpad support (enabled default in most desktopManager).
+    libinput.enable = true;
+  };
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-  hardware.pulseaudio.support32Bit = true;
-  hardware.pulseaudio.package = pkgs.pulseaudioFull;
-
-  users.mutableUsers = false;
-  users.defaultUserShell = pkgs.zsh;
-
   programs.zsh.enable = true;
 
+  sound.enable = true;
+  hardware.pulseaudio = {
+    enable = true;
+    support32Bit = true;
+    package = pkgs.pulseaudioFull;
+
+  };
+
+  users = {
+    mutableUsers = false;
+    defaultUserShell = pkgs.zsh;
+  };
   users.users.dsn = {
     shell = pkgs.zsh;
     isNormalUser = true;
@@ -109,37 +120,25 @@
     ];
   };
 
-  nix = let users = [ "root" "dsn" ];
-  in {
-    settings = {
-      experimental-features = "nix-command flakes";
-      http-connections = 50;
-      warn-dirty = false;
-      log-lines = 50;
-      sandbox = "relaxed";
-      auto-optimise-store = true;
-      trusted-users = users;
-      allowed-users = users;
-    };
-    gc = { automatic = true; };
-  };
+  # users.users.root.passwordFile = config.sops.secrets."password/root".path;
+  # security.sudo.wheelNeedsPassword = false;
+  # https://github.com/serokell/deploy-rs/issues/25
+  # nix.trustedUsers = [ "@wheel" ];
+
+  # sops = {
+  #   secrets."password/root" = {
+  #     sopsFile = ../.secrets/passwords.yaml;
+  #     neededForUsers = true;
+  #   };
+  # };
+
+  users.groups.docker.members = config.users.groups.wheel.members;
 
   environment.systemPackages = with pkgs; [
-    cifs-utils
-    coreutils
     gcc
-    git
-    home-manager
-    man
-    tree
-    vim
-    neovim
-    wget
-    pciutils
-    pavucontrol
-    age
-    sops
     inetutils
+    pavucontrol
+    pciutils
   ];
 
   services.openssh.enable = true;

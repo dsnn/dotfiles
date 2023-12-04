@@ -1,4 +1,4 @@
-{ ... }: {
+{ config, ... }: {
   home.file."${config.home.homeDirectory}/.inputrc".text = ''
     set show-all-if-ambiguous on
     set completion-ignore-case on

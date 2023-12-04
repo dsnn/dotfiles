@@ -1,5 +1,7 @@
-{ pkgs, ... }:
-let trustedUsers = [ "root" "dsn" "@wheel" ];
+{ pkgs, lib, ... }:
+let
+  trustedUsers = [ "root" "dsn" "@wheel" ];
+  inherit (pkgs.stdenv) isDarwin;
 in {
 
   environment.shells = with pkgs; [ bash zsh ];
@@ -32,18 +34,13 @@ in {
 
     gc = {
       automatic = true;
-      # TODO: review this. darwin only or changed in 23.11?
-      # interval = {
-      #   Weekday = 0;
-      #   Hour = 0;
-      #   Minute = 0;
-      # };
       options = "--delete-older-than 30d";
     };
 
-    # TODO: review this. darwin only or changed in 23.11?
-    # generateNixPathFromInputs = true;
-    # linkInputs = true;
-    # generateRegistryFromInputs = true;
+    gc.interval = lib.mkIf (isDarwin) {
+      Weekday = 0;
+      Hour = 0;
+      Minute = 0;
+    };
   };
 }

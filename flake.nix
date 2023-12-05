@@ -16,6 +16,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     sops.inputs.nixpkgs.follows = "nixpkgs";
     sops.url = "github:Mic92/sops-nix";
+    nixvim.url = "github:nix-community/nixvim";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
   outputs = inputs@{ self, nixpkgs, darwin, home-manager, deploy-rs, ... }:
     let

@@ -1,18 +1,14 @@
-{ config, ... }: {
+{ config, pkgs, ... }: {
 
-  # TODO: neovim install / handle dependencies
-  # [
-  #   fd
-  #   jq
-  #   nawk
-  #   neovim
-  #   nil
-  #   nixd
-  #   nixfmt
-  #   nixpkgs-fmt
-  #   ripgrep
-  #   rnix-lsp
-  # ];
+  home.packages = with pkgs; [
+    neovim
+    nil
+    nixd
+    nixfmt
+    nixpkgs-fmt
+    ripgrep
+    rnix-lsp
+  ];
 
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -30,5 +26,5 @@
 
   home.file."${config.home.homeDirectory}/.config/nvim".source =
     config.lib.file.mkOutOfStoreSymlink
-    "${config.home.homeDirectory}/dotfiles/modules/home/neovim/nvim";
+    "${config.home.homeDirectory}/dotfiles/home/programs/neovim/nvim";
 }

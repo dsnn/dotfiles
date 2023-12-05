@@ -10,14 +10,7 @@ with pkgs;
   jq
   mosh
   nawk
-  neovim
-  nil
-  nixd
-  nixfmt
-  nixpkgs-fmt
   packer
-  ripgrep
-  rnix-lsp
   unzip
   vim
   wakeonlan

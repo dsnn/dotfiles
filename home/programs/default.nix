@@ -12,6 +12,7 @@
   ./lazygit.nix
   ./lsd.nix
   ./neovim
+  # ./nixvim.nix
   ./op.nix
   ./ssh.nix
   ./starship.nix

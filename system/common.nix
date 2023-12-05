@@ -12,7 +12,6 @@ in {
     home-manager
     htop
     man
-    neovim
     sops
     vim
     wget

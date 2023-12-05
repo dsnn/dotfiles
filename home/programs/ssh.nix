@@ -7,5 +7,5 @@
   '';
 
   home.file."${config.home.homeDirectory}/.ssh/config.d/sshconfig.secrets".source =
-    ../../secrets/sshconfig.secrets;
+    ../../home/secrets/sshconfig.secrets;
 }

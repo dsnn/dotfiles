@@ -2,7 +2,7 @@
 
   home.file."${config.home.homeDirectory}/.secrets/export.secrets".source =
     config.lib.file.mkOutOfStoreSymlink
-    "${config.home.homeDirectory}/dotfiles/secrets/export.secrets";
+    "${config.home.homeDirectory}/dotfiles/home/secrets/export.secrets";
 
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;

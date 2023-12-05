@@ -1,2 +1,2 @@
-secrets/*.secret filter=git-crypt diff=git-crypt
-secrets/*.secrets filter=git-crypt diff=git-crypt
+home/secrets/*.secret filter=git-crypt diff=git-crypt
+home/secrets/*.secrets filter=git-crypt diff=git-crypt

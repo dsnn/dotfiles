@@ -1,7 +1,6 @@
 { config, ... }: {
 
-  # TODO: home.packages
-  # Install/handle dependencies
+  # TODO: neovim install / handle dependencies
   # [
   #   fd
   #   jq

@@ -2,8 +2,10 @@
   ./bat.nix
   ./dircolors
   ./direnv.nix
+  ./docker.nix
   ./fzf.nix
   ./git.nix
+  ./inputrc.nix
   ./karabiner
   ./keychain.nix
   ./kitty.nix
@@ -18,6 +20,7 @@
   ./volta.nix
   ./wget.nix
   ./xdg.nix
+  ./xresources.nix
   ./zoxide.nix
   ./zsh.nix
 ]

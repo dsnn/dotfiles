@@ -23,5 +23,11 @@ with pkgs;
   wakeonlan
   xclip
   # sstp
-] ++ pkgs.lib.optionals isServer [ _1password ]
+] ++ pkgs.lib.optionals isServer [
+  _1password
+]
 
+# TODO: packages: install fonts
+# [
+#   (nerdfonts.override { fonts = [ "FiraCode" "RobotoMono" ]; })
+# ];

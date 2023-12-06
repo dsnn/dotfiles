@@ -1,7 +1,6 @@
 [
   ./bat.nix
   ./dircolors
-  ./direnv.nix
   ./docker.nix
   ./fzf.nix
   ./git.nix
@@ -12,7 +11,6 @@
   ./lazygit.nix
   ./lsd.nix
   ./neovim
-  # ./nixvim.nix
   ./op.nix
   ./ssh.nix
   ./starship.nix

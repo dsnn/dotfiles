@@ -26,7 +26,7 @@ in {
       warn-dirty = false;
       log-lines = 50;
       auto-optimise-store = true;
-      sandbox = "relaxed";
+      # sandbox = "relaxed";
       trusted-users = trustedUsers;
       allowed-users = trustedUsers;
     };

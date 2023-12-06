@@ -10,6 +10,7 @@ nixos-rebuild switch --flake .#profile --fast --use-remote-sudo --target-host <u
 
 - https://github.com/catppuccin/base16
 - [flake checker github action](https://determinate.systems/posts/flake-checker)
+- review https://github.com/ClementTsang/bottom
 
 # Links
 
@@ -18,3 +19,4 @@ nixos-rebuild switch --flake .#profile --fast --use-remote-sudo --target-host <u
 - [tmux tilish](https://github.com/jabirali/tmux-tilish)
 - [tmuxp examples](https://tmuxp.git-pull.com/configuration/examples.html)
 - [catppuccin](https://github.com/catppuccin/catppuccin)
+- [bat-extras](https://github.com/eth-p/bat-extras/tree/master)

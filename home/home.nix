@@ -45,6 +45,8 @@ in {
   # };
 
   programs.home-manager.enable = true;
+  programs.bottom.enable = true;
+  programs.direnv.enable = true;
 
   # fonts.fontconfig.enable = true;
 

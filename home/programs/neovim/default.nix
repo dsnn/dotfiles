@@ -6,46 +6,28 @@
 
     plugins = with pkgs; [
       # vimPlugins.omnisharp-extended-lsp-nvim
-      vimPlugins.catppuccin-nvim
-      vimPlugins.gitsigns-nvim
-      vimPlugins.lualine-nvim
-      vimPlugins.nvim-colorizer-lua
+
+      # languages
       vimPlugins.nvim-lspconfig
       vimPlugins.nvim-treesitter-context
       vimPlugins.nvim-treesitter.withAllGrammars
-      vimPlugins.nvim-web-devicons
-      vimPlugins.oil-nvim
-      vimPlugins.plenary-nvim
-      vimPlugins.popup-nvim
-      vimPlugins.telescope-nvim
-      vimPlugins.vim-floaterm
-      vimPlugins.luasnip
-    ];
 
-    extraPackages = with pkgs; [
-      # dotnet-sdk_8
-      # omnisharp-roslyn
-      fd
-      lazydocker
-      lua-language-server
-      nil
-      nil
-      nixd
-      nixfmt
-      nixpkgs-fmt
-      # nodePackages."bash-language-server"
-      # nodePackages."diagnostic-languageserver"
-      # nodePackages."dockerfile-language-server-nodejs"
-      # nodePackages."pyright"
-      # nodePackages."typescript"
-      # nodePackages."typescript-language-server"
-      # nodePackages."vscode-langservers-extracted"
-      # nodePackages."yaml-language-server"
-      ripgrep
-      rnix-lsp
-      shfmt
-      # terraform
-      # terraform-ls
+      # extra
+      vimPlugins.oil-nvim
+      vimPlugins.luasnip
+      vimPlugins.vim-floaterm
+      vimPlugins.gitsigns-nvim
+      vimPlugins.lualine-nvim
+
+      # ui
+      vimPlugins.catppuccin-nvim
+      vimPlugins.nvim-colorizer-lua
+      vimPlugins.nvim-web-devicons
+
+      # telescope
+      vimPlugins.telescope-nvim
+      vimPlugins.popup-nvim
+      vimPlugins.plenary-nvim
     ];
   };
 

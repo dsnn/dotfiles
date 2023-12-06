@@ -61,7 +61,6 @@ in {
     }
     {
       plugin = tmux-fzf;
-      # TODO: does it work? https://github.com/sainnhe/tmux-fzf#key-binding
       extraConfig = ''
         TMUX_FZF_LAUNCH_KEY="f"
       '';
@@ -71,7 +70,8 @@ in {
       extraConfig = ''
         set -g @catppuccin_flavour 'mocha'
         set -g @catppuccin_window_tabs_enabled on
-        set -g @catppuccin_date_time "%H:%M"
+        set -g @catppuccin_status_modules_left "directory"
+        set -g @catppuccin_status_modules_right "application session"
       '';
     }
     # {
@@ -97,19 +97,18 @@ in {
         set -g @resurrect-strategy-vim 'session'
         set -g @resurrect-strategy-nvim 'session'
         set -g @resurrect-capture-pane-contents 'on'
-
-        # set -g @resurrect-dir '$HOME/.config/tmux/resurrect'
       '';
     }
-    {
-      plugin = continuum;
-      extraConfig = ''
-        set -g @continuum-restore 'on'
-        set -g @continuum-boot 'on'
-        set -g @continuum-save-interval '60'
-        set -g @continuum-systemd-start-cmd 'start-server'
-      '';
-    }
+    # https://github.com/tmux-plugins/tmux-continuum/issues/118
+    # {
+    #   plugin = continuum;
+    #   extraConfig = ''
+    #     set -g @continuum-restore 'on'
+    #     set -g @continuum-boot 'on'
+    #     set -g @continuum-save-interval '60'
+    #     set -g @continuum-systemd-start-cmd 'start-server'
+    #   '';
+    # }
   ];
 
   programs.tmux.extraConfig = ''
@@ -120,9 +119,8 @@ in {
     set -s escape-time 0
     set -g status-interval 0
 
-    set -g status-right '%Y-%m-%d %H:%M'
-
-    set-option -g status-position bottom
+    set -g status-justify centre
+    set -g status-position bottom
 
     # don't exit from tmux when closing a session
     set -g detach-on-destroy off

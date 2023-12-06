@@ -45,8 +45,16 @@ in {
   # };
 
   programs.home-manager.enable = true;
+
+  # TODO: https://github.com/catppuccin/bottom
+  # https://github.com/nix-community/home-manager/blob/master/modules/programs/bottom.nix
   programs.bottom.enable = true;
-  programs.direnv.enable = true;
+
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+  };
 
   # fonts.fontconfig.enable = true;
 

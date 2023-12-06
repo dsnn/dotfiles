@@ -2,6 +2,7 @@
 let
   inherit (pkgs.stdenv) isDarwin;
   packages = import ./packages.nix;
+  rebuild-command = if isDarwin then "darwin-rebuild" else "nixos-rebuild";
 in {
 
   # Fix home manager for non NixOS
@@ -66,7 +67,7 @@ in {
     cfz = "vim $HOME/dotfiles/modules/home/zsh.nix";
     rf =
       "home-manager switch --flake ~/dotfiles/#${hostname}; source ~/.config/zsh/.zshrc";
-    rs = "darwin-rebuild switch --flake ~/dotfiles/#${hostname}";
+    rs = "${rebuild-command} switch --flake ~/dotfiles/#${hostname}";
     ru = "pushd ~/dotfiles; nix flake update; rf; popd";
   };
 

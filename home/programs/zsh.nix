@@ -83,6 +83,8 @@
     autoload -U edit-command-line; zle -N edit-command-line
     bindkey '^e' edit-command-line
 
+    bindkey -s ^f "t && clear"
+
     # keybinding for cd ..
     function up_widget() {
       BUFFER="cd .."

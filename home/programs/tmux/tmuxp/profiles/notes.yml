@@ -1,6 +1,6 @@
-session_name: notes 
-start_directory: ~/notes
+session_name: notes
+start_directory: ~/projects/notes
 windows:
-  - window_name: notes 
+  - window_name: notes
     panes:
-      - focus: true 
+      - focus: true

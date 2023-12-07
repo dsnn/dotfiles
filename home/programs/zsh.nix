@@ -76,24 +76,18 @@
     # enable vi-mode
     bindkey -v
 
-    # keybinding for accepting autosuggestion
     bindkey '^ ' autosuggest-accept
 
-    # edit current command in vim
     autoload -U edit-command-line; zle -N edit-command-line
     bindkey '^e' edit-command-line
 
-    run-t-command () { t; zle redisplay }
-    zle -N run-t-command
-    bindkey '^f' run-t-command
+    run-tmux-command () { t; zle redisplay }
+    zle -N run-tmux-command
+    bindkey '^f' run-tmux-command
 
-    # keybinding for cd ..
-    function up_widget() {
-      BUFFER="cd .."
-      zle accept-line
-    }
-    zle -N up_widget
-    bindkey "^u" up_widget
+    run-cd-command () { BUFFER="cd .."; zle accept-line }
+    zle -N run-cd-command
+    bindkey '^u' run-cd-command
 
     if [ -f "$HOME/.secrets/export.secrets" ]; then
       source $HOME/.secrets/export.secrets

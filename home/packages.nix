@@ -1,22 +1,7 @@
 { pkgs, isServer, ... }:
 with pkgs;
 [
-  ansible
-  ansible-lint
-  curl
-  fd
-  gnused
-  htop
-  jq
-  mosh
-  nawk
-  packer
-  unzip
-  vim
-  wakeonlan
-  xclip
-  # sstp
-
+  # dotnet-sdk_8
   # neovim
   # nodePackages."bash-language-server"
   # nodePackages."diagnostic-languageserver"
@@ -27,20 +12,35 @@ with pkgs;
   # nodePackages."vscode-langservers-extracted"
   # nodePackages."yaml-language-server"
   # omnisharp-roslyn
+  # sstp
   # terraform
   # terraform-ls
+  ansible
+  ansible-lint
+  curl
   fd
+  fd
+  git-crypt
+  gnused
+  htop
+  jq
   lazydocker
   lua-language-server
+  mosh
+  nawk
   nil
   nil
   nixd
   nixfmt
   nixpkgs-fmt
+  packer
   ripgrep
   rnix-lsp
   shfmt
-# dotnet-sdk_8
+  unzip
+  vim
+  wakeonlan
+  xclip
 ] ++ pkgs.lib.optionals isServer [
   _1password
 ]

@@ -1,4 +1,4 @@
-{ }: {
+{ ... }: {
   # TODO: Remove later.
   # Temp / testing workaround for remote deploy.
   # Insecure and not recommended

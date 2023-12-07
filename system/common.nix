@@ -36,10 +36,10 @@ in {
       options = "--delete-older-than 30d";
     };
 
-    gc.interval = lib.mkIf (isDarwin) {
-      Weekday = 0;
-      Hour = 0;
-      Minute = 0;
-    };
+    # gc.interval = lib.mkIf (isDarwin) {
+    #   Weekday = 0;
+    #   Hour = 0;
+    #   Minute = 0;
+    # };
   };
 }

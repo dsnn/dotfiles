@@ -9,3 +9,5 @@ packer_compiled.lua
 history
 .luarc.json
 .DS_Store
+result
+*.qcow2

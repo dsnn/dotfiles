@@ -1,8 +1,8 @@
 { ... }: {
 
-  openssh = {
+  services.openssh = {
     enable = true;
-    allowSFTP = true;
+    # allowSFTP = true;
     # forwardX11 = false;
     # permitRootLogin = "no";
     # passwordAuthentication = false;

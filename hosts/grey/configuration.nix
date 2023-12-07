@@ -3,8 +3,8 @@
     ../../system/common.nix
     #../../system/nixos/cifs.nix
     ../../system/nixos/containers/gitea.nix
-    ../../system/nixos/fail2ban.nix
-    ../../system/nixos/openssh.nix
+    ../../system/nixos/services/fail2ban.nix
+    ../../system/nixos/services/openssh.nix
     ../../system/nixos/security.nix
     ../../system/nixos/users.nix
     ../../system/nixos/virtualisation.nix
@@ -22,7 +22,7 @@
   systemd.services.NetworkManager-wait-online.enable = false;
 
   time.timeZone = "Europe/Stockholm";
-  services.timesyncd.enable = true;
+  # services.timesyncd.enable = true;
   i18n.defaultLocale = "en_US.UTF-8";
 
   # Enable CUPS to print documents.

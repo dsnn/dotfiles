@@ -83,7 +83,9 @@
     autoload -U edit-command-line; zle -N edit-command-line
     bindkey '^e' edit-command-line
 
-    bindkey -s ^f "t && clear"
+    run-t-command () { t; zle redisplay }
+    zle -N run-t-command
+    bindkey '^f' run-t-command
 
     # keybinding for cd ..
     function up_widget() {

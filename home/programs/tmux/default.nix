@@ -23,6 +23,15 @@
     better-mouse-mode
     yank
     {
+      plugin = fzf-tmux-url;
+      extraConfig = ''
+        set -g @plugin 'wfxr/tmux-fzf-url'
+        set -g @fzf-url-bind 'u'
+        set -g @fzf-url-history-limit '2000'
+        set -g @fzf-url-fzf-options '-w 50% -h 50% --multi -0 --no-preview --no-border'
+      '';
+    }
+    {
       plugin = tilish;
       extraConfig = ''
         set -g @plugin 'jabirali/tmux-tilish'

@@ -81,6 +81,15 @@
     autoload -U edit-command-line; zle -N edit-command-line
     bindkey '^e' edit-command-line
 
+    # list the PATH separated by new lines
+    alias lpath='echo $PATH | tr ":" "\n"'
+
+    # Recursively delete `.DS_Store` files
+    alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
+
+    # remove broken symlinks
+    alias clsym="find -L . -name . -o -type d -prune -o -type l -exec rm {} +"
+
     run-tmux-command () { t; zle redisplay }
     zle -N run-tmux-command
     bindkey '^f' run-tmux-command

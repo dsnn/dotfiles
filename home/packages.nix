@@ -41,6 +41,7 @@ with pkgs;
   vim
   wakeonlan
   xclip
+  spotify-tui
 ] ++ pkgs.lib.optionals isServer [
   _1password
 ]

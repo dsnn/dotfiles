@@ -7,10 +7,14 @@ in {
   };
 
   config = mkIf cfg.enable {
-    homebrew.enable = true;
-    homebrew.caskArgs.no_quarantine = true;
-    homebrew.global.brewfile = true;
-    homebrew.taps = [ "fujiapple852/trippy" ];
-    homebrew.brews = [ "mas" "sstp-client" "trippy" "git-crypt" ];
+    homebrew = {
+
+      enable = true;
+      caskArgs.no_quarantine = true;
+      global.brewfile = true;
+      taps = [ "fujiapple852/trippy" ];
+      brews = [ "mas" "sstp-client" "trippy" "git-crypt" ];
+      casks = [ "arc" ];
+    };
   };
 }

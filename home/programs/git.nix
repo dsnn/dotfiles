@@ -22,11 +22,16 @@ in {
     cb = "git cb";
     gam = "git commit --amend --no-edit";
     lzg = "lazygit";
+
+    # TODO: review this. not tested
     delete-merged-branches =
       "!f() { git checkout --quiet master && git branch --merged | grep --invert-match '\\*' | xargs -n 1 git branch --delete; git checkout --quiet @{-1}; }; f";
-    day =
-      "!sh -c 'git log --reverse --no-merges --branches=* --date=local --after=\"yesterday 11:59PM\" --author=\"`git config --get user.name`\"'";
 
+    # TODO: show commits for today
+    day =
+      "!sh -c 'git log --reverse --no-merges --branches --date=iso --after=\"yesterday 23:59\" --author=\"`git config --get user.name`\"'";
+
+    # TODO: review this. not working.
     # order files by number of commits, ascending
     # Written by Corey Haines
     # Scriptified by Gary Bernhardt

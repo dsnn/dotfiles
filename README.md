@@ -2,24 +2,26 @@
 
 ## Test configurations
 
-```
-nix-build '<nixpkgs/nixos>' -A vm -I nixpkgs=channel:nixos-23.11 -I nixos-config=./configuration.nix
+```nix
+nix-build '<nixpkgs/nixos>' -A vm -I nixpkgs=channel:nixos-23.11 \
+  -I nixos-config=./configuration.nix
 ```
 
 ## Remote deploy via nixos-rebuild
 
 ```nix
-nixos-rebuild switch --flake .#profile --fast --use-remote-sudo --target-host <user@host> --build-host <user@host> --verbose
+nixos-rebuild switch --flake .#profile --fast --use-remote-sudo \
+  --target-host <user@host> --build-host <user@host> --verbose
 ```
 
-# TODO
+## TODO
 
-- https://github.com/catppuccin/base16
+- [catppuccin base16](https://github.com/catppuccin/base16)
 - [flake checker github action](https://determinate.systems/posts/flake-checker)
-- review https://github.com/ClementTsang/bottom
+- review [bottom](https://github.com/ClementTsang/bottom)
 - [tmux-continuum issue 118](https://github.com/tmux-plugins/tmux-continuum/issues/118)
 
-# Links
+## Links
 
 - [Deleting old generations](https://github.com/LnL7/nix-darwin/wiki/Deleting-old-generations)
 - [Upgrading macOS](https://github.com/LnL7/nix-darwin/wiki/Upgrading-macOS)

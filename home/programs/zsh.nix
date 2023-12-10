@@ -90,10 +90,6 @@
     # remove broken symlinks
     alias clsym="find -L . -name . -o -type d -prune -o -type l -exec rm {} +"
 
-    run-tmux-command () { t; zle redisplay }
-    zle -N run-tmux-command
-    bindkey '^f' run-tmux-command
-
     run-cd-command () { BUFFER="cd .."; zle accept-line }
     zle -N run-cd-command
     bindkey '^u' run-cd-command

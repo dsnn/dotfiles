@@ -59,8 +59,29 @@
     # don't exit from tmux when closing a session
     set -g detach-on-destroy off
 
+    # disabled activity monitoring
+    setw -g monitor-activity off
+    set -g visual-activity off
+
+    # disable programs change name
     set -g allow-rename off
-    set -g default-command zsh
+
+    # synchronize all panes in a window
+    bind y setw synchronize-panes
+
+    # pane movement
+    bind -r C-h select-window -t :-
+    bind -r C-l select-window -t :+
+
+    # open lazygit in a new window
+    bind-key g display-popup -w "80%" -h "80%" -d "#{pane_current_path}" -E "lazygit"
+
+    unbind s
+    bind s display-popup -E "\
+      tmux list-sessions -F '#{?session_attached,,#{session_name}} ' |\
+      sed '/^\s*$/d' |\
+      fzf --reverse --header jump-to-session |\
+      xargs tmux switch-client -t"
 
     # vim-style copy-paste
     bind -n C-M-u copy-mode

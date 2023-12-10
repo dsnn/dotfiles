@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
   imports = [ ./tmuxp ];
 
   programs.tmux = {
@@ -46,8 +46,6 @@
       extraConfig = ''
         set -g @catppuccin_flavour 'mocha'
         set -g @catppuccin_window_tabs_enabled on
-        set -g @catppuccin_status_modules_left "directory"
-        set -g @catppuccin_directory_text "#{pane_current_path}"
         set -g @catppuccin_status_modules_right "application session"
       '';
     }

@@ -17,6 +17,7 @@ nixos-rebuild switch --flake .#profile --fast --use-remote-sudo --target-host <u
 - https://github.com/catppuccin/base16
 - [flake checker github action](https://determinate.systems/posts/flake-checker)
 - review https://github.com/ClementTsang/bottom
+- [tmux-continuum issue 118](https://github.com/tmux-plugins/tmux-continuum/issues/118)
 
 # Links
 

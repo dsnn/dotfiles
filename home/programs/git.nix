@@ -22,6 +22,18 @@ in {
     cb = "git cb";
     gam = "git commit --amend --no-edit";
     lzg = "lazygit";
+    delete-merged-branches =
+      "!f() { git checkout --quiet master && git branch --merged | grep --invert-match '\\*' | xargs -n 1 git branch --delete; git checkout --quiet @{-1}; }; f";
+    day =
+      "!sh -c 'git log --reverse --no-merges --branches=* --date=local --after=\"yesterday 11:59PM\" --author=\"`git config --get user.name`\"'";
+
+    # order files by number of commits, ascending
+    # Written by Corey Haines
+    # Scriptified by Gary Bernhardt
+    # Show churn for a time range:
+    #   $ git churn --since='1 month ago'
+    churn = ''
+      !f() { git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort | awk 'BEGIN {print "count	file"} {print $1 "	" $2}' | sort -g; }; f'';
   };
 
   programs.git = {

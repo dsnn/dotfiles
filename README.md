@@ -14,6 +14,19 @@ nixos-rebuild switch --flake .#profile --fast --use-remote-sudo \
   --target-host <user@host> --build-host <user@host> --verbose
 ```
 
+## Apple upgrades
+
+When upgrading macOS apple doesn't care about you, so they rewrite your /etc/zshrc.
+Result: no commands or configurations are working, NIX_PATH is empty etc.
+Fix: Add this to the bottom of /etc/zshrc.
+
+```zsh
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+. '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+
+```
+
 ## TODO
 
 - [oil.nvim](https://github.com/stevearc/oil.nvim)

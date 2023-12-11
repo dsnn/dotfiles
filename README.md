@@ -16,6 +16,7 @@ nixos-rebuild switch --flake .#profile --fast --use-remote-sudo \
 
 ## TODO
 
+- [oil.nvim](https://github.com/stevearc/oil.nvim)
 - [catppuccin base16](https://github.com/catppuccin/base16)
 - [flake checker github action](https://determinate.systems/posts/flake-checker)
 - review [bottom](https://github.com/ClementTsang/bottom)

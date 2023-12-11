@@ -14,10 +14,11 @@
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
-    sops.inputs.nixpkgs.follows = "nixpkgs";
-    sops.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    sops-nix.url = "github:Mic92/sops-nix";
   };
-  outputs = inputs@{ self, nixpkgs, darwin, home-manager, deploy-rs, ... }:
+  outputs =
+    inputs@{ self, nixpkgs, darwin, home-manager, deploy-rs, sops-nix, ... }:
     let
       inherit (self) outputs;
       aarch64-darwin = "aarch64-darwin";

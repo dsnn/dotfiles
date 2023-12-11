@@ -23,6 +23,15 @@
     better-mouse-mode
     yank
     {
+      plugin = tmux-thumbs;
+      extraConfig = ''
+        set -g @plugin 'fcsonline/tmux-thumbs'
+        set -g @thumbs-command 'echo -n {} | pbcopy' # copy to clipboard
+        set -g @thumbs-key C
+        set -g @thumbs-contrast 1
+      '';
+    }
+    {
       plugin = fzf-tmux-url;
       extraConfig = ''
         set -g @plugin 'wfxr/tmux-fzf-url'

@@ -43,3 +43,5 @@ fi
 - [tmuxp examples](https://tmuxp.git-pull.com/configuration/examples.html)
 - [catppuccin](https://github.com/catppuccin/catppuccin)
 - [bat-extras](https://github.com/eth-p/bat-extras/tree/master)
+- [nix-community srvos](https://github.com/nix-community/srvos)
+- [nix-community infra](https://github.com/nix-community/infra)

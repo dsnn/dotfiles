@@ -1,8 +1,8 @@
-{ pkgs, lib, ... }:
-let
-  trustedUsers = [ "root" "dsn" "@wheel" ];
-  inherit (pkgs.stdenv) isDarwin;
+{ inputs, pkgs, ... }:
+let trustedUsers = [ "root" "dsn" "@wheel" ];
 in {
+
+  imports = [ inputs.sops-nix.nixosModules.sops ./sops.nix ];
 
   environment.shells = with pkgs; [ bash zsh ];
   environment.systemPackages = with pkgs; [
@@ -16,8 +16,6 @@ in {
     vim
     wget
   ];
-
-  # sops.age.keyFile = "/secrets/age/keys.txt";
 
   nix = {
     settings = {

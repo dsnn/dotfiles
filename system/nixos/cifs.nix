@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let
   cifsShare = name: {
     device = "//dss/${name}";
@@ -12,10 +12,11 @@ in {
 
   environment.systemPackages = with pkgs; [ cifs-utils ];
 
-  # for more options, e.g. permissions: https://github.com/Mic92/sops-nix#deploy-example
-  sops.secrets.samba-credentials = { };
+  sops.secrets."samba-credentials" = { };
 
-  # mount default network shares
+  environment.etc."nixos/smb-secrets".source =
+    config.sops.secrets."samba-credentials".path;
+
   fileSystems."/mnt/private" = cifsShare "private";
   fileSystems."/mnt/share" = cifsShare "share";
   fileSystems."/mnt/share2" = cifsShare "share2";

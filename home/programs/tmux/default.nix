@@ -6,7 +6,7 @@
     aggressiveResize = true;
     baseIndex = 1;
     clock24 = true;
-    customPaneNavigationAndResize = true;
+    customPaneNavigationAndResize = false;
     disableConfirmationPrompt = true;
     escapeTime = 0;
     keyMode = "vi";

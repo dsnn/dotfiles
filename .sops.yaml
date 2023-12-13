@@ -15,7 +15,8 @@ creation_rules:
     key_groups:
       - age:
           - *primary
-  - path_regex: secrets/[^/]+\.yaml$
+
+  - path_regex: hosts/green/[^/]+\.yaml$
     key_groups:
       - age:
           - *primary

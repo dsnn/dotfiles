@@ -16,9 +16,11 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix";
+    nixos-wsl.url = "github:nix-community/NixOS-WSL";
+    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs =
-    inputs@{ self, nixpkgs, darwin, home-manager, deploy-rs, sops-nix, ... }:
+    inputs@{ self, nixpkgs, darwin, home-manager, deploy-rs, sops-nix, nixos-wsl, ... }:
     let
       inherit (self) outputs;
       aarch64-darwin = "aarch64-darwin";
@@ -45,6 +47,16 @@
         };
       };
 
+      homeConfigurations.green = home-manager.lib.homeManagerConfiguration {
+        modules = [ ./home/home.nix ];
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {
+          inherit inputs outputs;
+          isServer = true;
+          hostname = "green";
+        };
+      };
+
       darwinConfigurations.silver = darwin.lib.darwinSystem {
         modules = [ ./hosts/silver/configuration.nix ];
         specialArgs = { inherit inputs outputs; };
@@ -53,6 +65,15 @@
 
       nixosConfigurations.grey = nixpkgs.lib.nixosSystem {
         modules = [ ./hosts/grey/configuration.nix ];
+        specialArgs = { inherit inputs outputs; };
+        system = x86_64-linux;
+      };
+
+      nixosConfigurations.green = nixpkgs.lib.nixosSystem {
+        modules = [ 
+	./hosts/green/configuration.nix 
+	nixos-wsl.nixosModules.wsl
+	];
         specialArgs = { inherit inputs outputs; };
         system = x86_64-linux;
       };

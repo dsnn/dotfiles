@@ -84,13 +84,6 @@
     # disable programs change name
     set -g allow-rename off
 
-    # synchronize all panes in a window
-    bind y setw synchronize-panes
-
-    # pane movement
-    bind -r C-h select-window -t :-
-    bind -r C-l select-window -t :+
-
     # open lazygit in a new window
     bind-key g display-popup -w "80%" -h "80%" -d "#{pane_current_path}" -E "lazygit"
 
@@ -100,6 +93,9 @@
       sed '/^\s*$/d' |\
       fzf --reverse --header jump-to-session |\
       xargs tmux switch-client -t"
+
+    # synchronize all panes in a window
+    bind -n C-M-y setw synchronize-panes
 
     # vim-style copy-paste
     bind -n C-M-u copy-mode

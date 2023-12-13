@@ -19,8 +19,8 @@
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
   };
-  outputs =
-    inputs@{ self, nixpkgs, darwin, home-manager, deploy-rs, sops-nix, nixos-wsl, ... }:
+  outputs = inputs@{ self, nixpkgs, darwin, home-manager, deploy-rs, sops-nix
+    , nixos-wsl, ... }:
     let
       inherit (self) outputs;
       aarch64-darwin = "aarch64-darwin";
@@ -70,10 +70,8 @@
       };
 
       nixosConfigurations.green = nixpkgs.lib.nixosSystem {
-        modules = [ 
-	./hosts/green/configuration.nix 
-	nixos-wsl.nixosModules.wsl
-	];
+        modules =
+          [ ./hosts/green/configuration.nix nixos-wsl.nixosModules.wsl ];
         specialArgs = { inherit inputs outputs; };
         system = x86_64-linux;
       };

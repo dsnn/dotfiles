@@ -1,5 +1,4 @@
-{ inputs, config, lib, pkgs, ... }:
-{
+{ inputs, pkgs, ... }: {
 
   networking.hostName = "green";
   time.timeZone = "Europe/Stockholm";
@@ -21,7 +20,6 @@
   # wsl.automountPath = "/mnt";
   # wsl.startMenuLaunchers = true;
 
-
   nix = {
     settings = {
       trusted-users = [ "dsn" ];
@@ -29,11 +27,7 @@
       auto-optimise-store = true;
     };
 
-    registry = {
-      nixpkgs = {
-        flake = inputs.nixpkgs;
-      };
-    };
+    registry = { nixpkgs = { flake = inputs.nixpkgs; }; };
 
     nixPath = [
       "nixpkgs=${inputs.nixpkgs.outPath}"
@@ -42,7 +36,7 @@
     ];
 
     package = pkgs.nixFlakes;
-    extraOptions = ''experimental-features = nix-command flakes'';
+    extraOptions = "experimental-features = nix-command flakes";
 
     gc = {
       automatic = true;
@@ -55,7 +49,7 @@
   users.users.dsn = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel "];
+    extraGroups = [ "wheel " ];
   };
 
   environment.systemPackages = with pkgs; [
@@ -64,7 +58,8 @@
     inetutils
     home-manager
     gcc
+    (import ../../system/wsl/wsl2yank.nix { inherit pkgs; })
   ];
 
-  system.stateVersion = "23.05"; # Did you read the comment?
+  system.stateVersion = "23.05";
 }

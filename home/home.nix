@@ -67,7 +67,7 @@ in {
     cfz = "vim $HOME/dotfiles/modules/home/zsh.nix";
     rf =
       "home-manager switch --flake ~/dotfiles/#${hostname}; source ~/.config/zsh/.zshrc";
-    rs = "${rebuild-command} switch --flake ~/dotfiles/#${hostname}";
+    rs = "sudo ${rebuild-command} switch --flake ~/dotfiles/#${hostname}";
     ru = "pushd ~/dotfiles; nix flake update; rf; popd";
   };
 

@@ -16,6 +16,7 @@ in {
 
   environment.etc."nixos/smb-secrets".source =
     config.sops.secrets."samba-credentials".path;
+  environment.etc."nixos/smb-secrets".mode = "0600";
 
   fileSystems."/mnt/private" = cifsShare "private";
   fileSystems."/mnt/share" = cifsShare "share";

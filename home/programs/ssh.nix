@@ -9,8 +9,6 @@ let
   '';
 in {
 
-  sops.secrets."ssh-hosts-internal" = { };
-
   programs.ssh.enable = true;
   programs.ssh.includes = [ "${config.home.homeDirectory}/.ssh/config.d/*" ];
   programs.ssh.forwardAgent = true;

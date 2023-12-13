@@ -1,11 +1,23 @@
-{ config, ... }: {
+{ config, pkgs, ... }:
+let
+  inherit (pkgs.stdenv) isDarwin;
+  linux-extra-config = ''
+    IdentityAgent ~/.1password/agent.sock
+  '';
+  darwin-extra-config = ''
+    IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+  '';
+in {
+
+  sops.secrets."ssh-hosts-internal" = { };
+
   programs.ssh.enable = true;
   programs.ssh.includes = [ "${config.home.homeDirectory}/.ssh/config.d/*" ];
   programs.ssh.forwardAgent = true;
-  programs.ssh.extraConfig = ''
-    IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-  '';
+  programs.ssh.extraConfig =
+    if isDarwin then darwin-extra-config else linux-extra-config;
 
-  home.file."${config.home.homeDirectory}/.ssh/config.d/sshconfig.secrets".source =
-    ../../home/secrets/sshconfig.secrets;
+  sops.secrets."ssh-hosts-internal" = {
+    path = "${config.home.homeDirectory}/.ssh/config.d/ssh-hosts-internal";
+  };
 }

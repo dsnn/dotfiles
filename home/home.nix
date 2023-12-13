@@ -1,4 +1,4 @@
-{ lib, config, pkgs, isServer, hostname, ... }:
+{ inputs, lib, config, pkgs, isServer, hostname, ... }:
 let
   inherit (pkgs.stdenv) isDarwin;
   packages = import ./packages.nix;
@@ -8,7 +8,13 @@ in {
   # Fix home manager for non NixOS
   # targets.genericLinux.enable = true;
 
-  imports = lib.concatMap import [ ./programs ./scripts ./services ./modules ];
+  imports = lib.concatMap import [
+    ./programs
+    ./scripts
+    ./services
+    ./modules
+    ./secrets
+  ];
 
   nixpkgs = {
     config = {

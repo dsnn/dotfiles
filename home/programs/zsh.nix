@@ -1,8 +1,6 @@
 { config, ... }: {
 
-  home.file."${config.home.homeDirectory}/.secrets/export.secrets".source =
-    config.lib.file.mkOutOfStoreSymlink
-    "${config.home.homeDirectory}/dotfiles/home/secrets/export.secrets";
+  sops.secrets."zsh-exports" = { };
 
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
@@ -94,8 +92,8 @@
     zle -N run-cd-command
     bindkey '^u' run-cd-command
 
-    if [ -f "$HOME/.secrets/export.secrets" ]; then
-      source $HOME/.secrets/export.secrets
+    if [ -f '${config.sops.secrets."zsh-exports".path}' ]; then
+      source '${config.sops.secrets."zsh-exports".path}'
     fi
   '';
 }

@@ -27,6 +27,14 @@ fi
 
 ```
 
+## Home-manager
+If home manager crashes on 'Could not find suitable profile directory':
+Manually create this folder:
+
+```zsh
+mkdir -p ~/.local/state/nix/profiles
+```
+
 ## TODO
 
 - [oil.nvim](https://github.com/stevearc/oil.nvim)

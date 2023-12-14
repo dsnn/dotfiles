@@ -1,4 +1,4 @@
-{ inputs, lib, config, pkgs, isServer, hostname, ... }:
+{ lib, config, pkgs, isServer, hostname, ... }:
 let
   inherit (pkgs.stdenv) isDarwin;
   packages = import ./packages.nix;
@@ -45,17 +45,7 @@ in {
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
-  # TODO: mkIf (isServer && config.network.cifs.enable = true) {
-  #   home.file."private".source = config.lib.file.mkOutOfStoreSymlink /mnt/private;
-  #   home.file."share".source = config.lib.file.mkOutOfStoreSymlink /mnt/share;
-  #   home.file."share2".source = config.lib.file.mkOutOfStoreSymlink /mnt/share2;
-  # };
-
   programs.home-manager.enable = true;
-
-  # TODO: https://github.com/catppuccin/bottom
-  # https://github.com/nix-community/home-manager/blob/master/modules/programs/bottom.nix
-  programs.bottom.enable = true;
 
   programs.direnv = {
     enable = true;

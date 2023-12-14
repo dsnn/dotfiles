@@ -42,6 +42,7 @@ with pkgs;
   wakeonlan
   xclip
   spotify-tui
+  proselint
 ] ++ pkgs.lib.optionals isServer [
   _1password
 ]

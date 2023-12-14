@@ -28,6 +28,7 @@ fi
 ```
 
 ## Home-manager
+
 If home manager crashes on 'Could not find suitable profile directory':
 Manually create this folder:
 
@@ -39,7 +40,7 @@ mkdir -p ~/.local/state/nix/profiles
 
 - [oil.nvim](https://github.com/stevearc/oil.nvim)
 - [catppuccin base16](https://github.com/catppuccin/base16)
-- [flake checker github action](https://determinate.systems/posts/flake-checker)
+- [flake checker GitHub action](https://determinate.systems/posts/flake-checker)
 - review [bottom](https://github.com/ClementTsang/bottom)
 - [tmux-continuum issue 118](https://github.com/tmux-plugins/tmux-continuum/issues/118)
 

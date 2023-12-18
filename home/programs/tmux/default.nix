@@ -115,6 +115,11 @@ in {
     # synchronize all panes in a window
     bind -n C-M-y setw synchronize-panes
 
+    # Set new panes to open in current directory
+    bind c new-window -c "#{pane_current_path}"
+    bind '"' split-window -c "#{pane_current_path}"
+    bind % split-window -h -c "#{pane_current_path}"
+
     # vim-style copy-paste
     bind -n C-M-u copy-mode
     bind -n C-M-p paste-buffer

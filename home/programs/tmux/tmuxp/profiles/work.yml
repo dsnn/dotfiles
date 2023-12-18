@@ -1,11 +1,11 @@
-session_name: dev
+session_name: work
 start_directory: ~/work/core/code/
 windows:
-  - window_name: dev
-    layout: main-horizontal
-    options:
-      main-pane-height: 50
+  - window_name: code
     panes:
       - focus: true
-      - pane
-      - pane
+
+  - window_name: npm
+    panes:
+      - focus: true
+

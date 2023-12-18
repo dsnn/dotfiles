@@ -1,5 +1,22 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+  tmux-smart-session-manager = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "t-smart-tmux-session-manager";
+    version = "unstable-2023-10-23";
+    rtpFilePath = "t-smart-tmux-session-manager.tmux";
+    src = pkgs.fetchFromGitHub {
+      owner = "joshmedeski";
+      repo = "t-smart-tmux-session-manager";
+      rev = "01b60128b4bebeedd7dc3a4b95d3257f70d4a417";
+      sha256 = "0l+2ZRj9knjDRUiGePTt14UxrI0FNVHIdIZtKZs8bek=";
+    };
+  };
+in {
   imports = [ ./tmuxp ];
+
+  programs.zsh.initExtra = ''
+    export PATH=${tmux-smart-session-manager}/share/tmux-plugins/t-smart-tmux-session-manager/bin/:$PATH
+  '';
 
   programs.tmux = {
     enable = true;
@@ -22,6 +39,14 @@
   programs.tmux.plugins = with pkgs.tmuxPlugins; [
     better-mouse-mode
     yank
+    {
+      plugin = tmux-smart-session-manager;
+      extraConfig = ''
+        set -g @t-fzf-prompt '  '
+        set -g @t-fzf-default-results 'sessions'
+        set -g @t-bind "space"
+      '';
+    }
     {
       plugin = tmux-thumbs;
       extraConfig = ''
@@ -86,13 +111,6 @@
 
     # open lazygit in a new window
     bind-key g display-popup -w "80%" -h "80%" -d "#{pane_current_path}" -E "lazygit"
-
-    unbind s
-    bind s display-popup -E "\
-      tmux list-sessions -F '#{?session_attached,,#{session_name}} ' |\
-      sed '/^\s*$/d' |\
-      fzf --reverse --header jump-to-session |\
-      xargs tmux switch-client -t"
 
     # synchronize all panes in a window
     bind -n C-M-y setw synchronize-panes

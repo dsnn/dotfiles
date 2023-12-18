@@ -1,0 +1,11 @@
+session_name: dev
+start_directory: ~/work/core/code/
+windows:
+  - window_name: dev
+    layout: main-horizontal
+    options:
+      main-pane-height: 50
+    panes:
+      - focus: true
+      - pane
+      - pane

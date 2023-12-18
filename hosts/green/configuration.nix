@@ -1,5 +1,7 @@
 { inputs, pkgs, ... }: {
 
+  programs.nix-ld.dev.enable = true;
+
   networking.hostName = "green";
   time.timeZone = "Europe/Stockholm";
 

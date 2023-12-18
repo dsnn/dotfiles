@@ -99,6 +99,7 @@ in {
       ba = "branch -a";
       bl = "branch --list";
       br = "branch -r";
+      current = "!${pkgs.git}/bin/git rev-parse --abbrev-ref HEAD";
       cb = "!${pkgs.git}/bin/git rev-parse --abbrev-ref HEAD";
       cm = "commit -m";
       cma = "commit --amend --no-edit";

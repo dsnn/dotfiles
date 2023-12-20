@@ -9,7 +9,11 @@ vim.opt.updatecount = 0 -- don't write swap files after some number of updates
 vim.opt.backupdir = { "~/.vim-tmp", "~/.tmp", "~/tmp", "/var/tmp", "/tmp" }
 vim.opt.directory = { "~/.vim-tmp", "~/.tmp", "~/tmp", "/var/tmp", "/tmp" }
 
+-- no statusline or '-' as split separator
 vim.opt.laststatus = 0
+vim.api.nvim_set_hl(0, "Statusline", { link = "Normal" })
+vim.api.nvim_set_hl(0, "StatuslineNC", { link = "Normal" })
+vim.opt.statusline = string.rep("-", vim.api.nvim_win_get_width(0))
 
 vim.cmd([[abbr funciton function]])
 vim.cmd([[abbr teh the]])

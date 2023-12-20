@@ -9,6 +9,8 @@ vim.opt.updatecount = 0 -- don't write swap files after some number of updates
 vim.opt.backupdir = { "~/.vim-tmp", "~/.tmp", "~/tmp", "/var/tmp", "/tmp" }
 vim.opt.directory = { "~/.vim-tmp", "~/.tmp", "~/tmp", "/var/tmp", "/tmp" }
 
+vim.opt.laststatus = 0
+
 vim.cmd([[abbr funciton function]])
 vim.cmd([[abbr teh the]])
 vim.cmd([[abbr tempalte template]])

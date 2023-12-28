@@ -16,8 +16,8 @@ nixos-rebuild switch --flake .#profile --fast --use-remote-sudo \
 
 ## Apple upgrades
 
-When upgrading macOS apple doesn't care about you, so they rewrite your /etc/zshrc.
-Result: no commands or configurations are working, NIX_PATH is empty etc.
+When upgrading macOS your /etc/zshrc might reset.
+Result: commands or configurations stop working, NIX_PATH is empty etc.
 Fix: Add this to the bottom of /etc/zshrc.
 
 ```zsh
@@ -38,14 +38,14 @@ mkdir -p ~/.local/state/nix/profiles
 
 ## TODO
 
-- [oil.nvim](https://github.com/stevearc/oil.nvim)
 - [catppuccin base16](https://github.com/catppuccin/base16)
 - [flake checker GitHub action](https://determinate.systems/posts/flake-checker)
-- review [bottom](https://github.com/ClementTsang/bottom)
 - [tmux-continuum issue 118](https://github.com/tmux-plugins/tmux-continuum/issues/118)
 
 ## Links
 
+- [bottom](https://github.com/ClementTsang/bottom)
+- [oil.nvim](https://github.com/stevearc/oil.nvim)
 - [Deleting old generations](https://github.com/LnL7/nix-darwin/wiki/Deleting-old-generations)
 - [Upgrading macOS](https://github.com/LnL7/nix-darwin/wiki/Upgrading-macOS)
 - [tmux tilish](https://github.com/jabirali/tmux-tilish)

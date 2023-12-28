@@ -58,6 +58,11 @@ in {
         yabai -m rule --add app="^Dictionary$" manage=off
         yabai -m rule --add label="Software Update" manage=off
         yabai -m rule --add app="System Information" manage=off
+
+        # TODO: review
+        # yabai -m rule --add label="System Preferences" app="^System Preferences$" title=".*" manage=off
+        # yabai -m rule --add label="Calculator" app="^Calculator$" manage=off
+        # yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
       '';
     };
   };

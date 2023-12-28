@@ -21,12 +21,22 @@
   environment.pathsToLink = [ "/Applications" ];
 
   system.defaults = {
-    NSGlobalDomain.AppleShowAllExtensions = true;
-    NSGlobalDomain.InitialKeyRepeat = 15;
-    NSGlobalDomain.KeyRepeat = 2;
-    dock.autohide = true;
-    finder.AppleShowAllExtensions = true;
-    finder._FXShowPosixPathInTitle = true;
+    NSGlobalDomain = {
+      AppleInterfaceStyle = "Dark";
+      AppleShowAllExtensions = true;
+      InitialKeyRepeat = 15;
+      KeyRepeat = 2;
+      # _HIHideMenuBar = true;
+    };
+    dock = {
+      autohide = true;
+      orientation = "bottom";
+      show-recents = false;
+    };
+    finder = {
+      AppleShowAllExtensions = true;
+      _FXShowPosixPathInTitle = true;
+    };
   };
 
   # Used for backwards compatibility, please read the changelog before changing.

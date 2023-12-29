@@ -6,14 +6,8 @@
     ../../system/common.nix
     ../../system/darwin/homebrew.nix
     ../../system/darwin/skhd.nix
-    ../../system/darwin/yabai.nix
+    # ../../system/darwin/yabai.nix
   ];
-
-  mine.services = {
-    skhd.enable = true;
-    yabai.enable = true;
-    homebrew.enable = true;
-  };
 
   environment.loginShell = pkgs.zsh;
   environment.shells = with pkgs; [ bash zsh ];

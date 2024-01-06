@@ -6,7 +6,7 @@
     ../../system/common.nix
     ../../system/darwin/homebrew.nix
     ../../system/darwin/skhd.nix
-    # ../../system/darwin/yabai.nix
+    ../../system/darwin/yabai.nix
   ];
 
   environment.loginShell = pkgs.zsh;

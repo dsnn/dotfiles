@@ -1,51 +1,49 @@
-{ config, ... }:
-let domain = "gitea.dsnn.io";
+{ pkgs, config, ... }:
+let
+  droneserver = config.users.users.droneserver.name;
+  domain = "drone.dsnn.io";
 in {
 
-  networking.firewall.allowedTCPPorts = [ 3000 ];
+  networking.firewall.allowedTCPPorts = [ 3030 ];
 
-  sops.secrets = {
-    "postgres-gitea-db-pass" = { owner = config.services.gitea.user; };
+  sops.secrets = { "drone" = { owner = droneserver; }; };
+
+  users.users.droneserver = {
+    isSystemUser = true;
+    createHome = true;
+    group = droneserver;
   };
+  users.groups.droneserver = { };
 
   services.postgresql = {
-    ensureDatabases = [ config.services.gitea.user ];
+    ensureDatabases = [ droneserver ];
     ensureUsers = [{
-      name = config.services.gitea.database.user;
+      name = droneserver;
       ensureDBOwnership = true;
     }];
   };
 
-  services.gitea = {
-    enable = true;
-    database = {
-      type = "postgres";
-      host = "/run/postgresql";
-      port = 5432;
-      passwordFile = config.sops.secrets."postgres-gitea-db-pass".path;
-    };
-
-    settings = {
-      log.LEVEL = "Info";
-      session.COOKIE_SECURE = true;
-      # metrics.ENABLED = true;
-
-      service = { DISABLE_REGISTRATION = true; };
-
-      server = {
-        DOMAIN = domain;
-        HTTP_ADDR = "127.0.0.1";
-        HTTP_PORT = 3000;
-        ROOT_URL = "https://${domain}/";
-      };
+  systemd.services.drone-server = {
+    wantedBy = [ "multi-user.target" ];
+    script = ''
+      ${pkgs.drone}/bin/drone-server
+    '';
+    serviceConfig = {
+      EnvironmentFile = [ config.sops.secrets.drone.path ];
+      Environment = [
+        "DRONE_DATABASE_DATASOURCE=postgres:///droneserver?host=/run/postgresql"
+        "DRONE_DATABASE_DRIVER=postgres"
+        "DRONE_SERVER_PORT=:3030"
+        "DRONE_SERVER_HOST=drone.dsnn.io"
+        "DRONE_SERVER_PROTO=https"
+      ];
+      User = droneserver;
+      Group = droneserver;
     };
   };
 
-  services.nginx.virtualHosts.${domain} = let
-    httpAddress = config.services.gitea.settings.server.HTTP_ADDR;
-    httpPort = config.services.gitea.settings.server.HTTP_PORT;
-  in {
-    locations."/".proxyPass = "http://${httpAddress}:${toString httpPort}";
+  services.nginx.virtualHosts.${domain} = {
+    locations."/".proxyPass = "http://127.0.0.1:3030";
 
     extraConfig = ''
       # recommended HTTP headers according to https://securityheaders.io

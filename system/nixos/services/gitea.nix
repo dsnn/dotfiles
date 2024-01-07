@@ -2,8 +2,6 @@
 let domain = "gitea.dsnn.io";
 in {
 
-  networking.firewall.allowedTCPPorts = [ 2222 ];
-
   sops.secrets = {
     "postgres-gitea-db-pass" = { owner = config.services.gitea.user; };
   };
@@ -19,7 +17,6 @@ in {
   services.gitea = {
     enable = true;
     database = {
-      user = "gitea";
       type = "postgres";
       host = "/run/postgresql";
       port = 5432;
@@ -29,7 +26,7 @@ in {
     settings = {
       log.LEVEL = "Info";
       session.COOKIE_SECURE = true;
-      metrics.ENABLED = true;
+      # metrics.ENABLED = true;
 
       service = { DISABLE_REGISTRATION = true; };
 

@@ -20,10 +20,8 @@
     restartIfChanged = true;
 
     confinement.enable = true;
-    confinement.packages =
-      [ pkgs.git pkgs.gnutar pkgs.bash pkgs.nixFlakes pkgs.gzip ];
-
-    path = [ pkgs.git pkgs.gnutar pkgs.bash pkgs.nixFlakes pkgs.gzip ];
+    confinement.packages = with pkgs; [ git gnutar bash nixFlakes gzip ];
+    path = with pkgs; [ git gnutar bash nixFlakes gzip ];
 
     serviceConfig = {
       Environment = {
@@ -54,7 +52,7 @@
         }:/etc/ssh/ssh_known_hosts"
         "${
           builtins.toFile "ssh_config" ''
-            Host git.dsnn.io
+            Host gitea.dsnn.io
             ForwardAgent yes
           ''
         }:/etc/ssh/ssh_config"

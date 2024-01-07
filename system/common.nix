@@ -30,7 +30,6 @@ in {
     };
 
     gc = {
-      user = "root";
       automatic = true;
       options = "--delete-older-than 30d";
     };

@@ -1,13 +1,21 @@
 { ... }: {
-  # TODO: Remove later.
-  # Temp / testing workaround for remote deploy.
-  # Insecure and not recommended
+  # security.acme = {
+  #   acceptTerms = true;
+  #   email = "letsencrypt@example.com";
+  #   certs = {
+  #     "git.my-domain.tld".email = "foo@bar.com";
+  #     "drone.my-domain.tld".email = "foo@bar.com";
+  #   };
+  # };
 
   # sudo.configFile = ''
   #   Defaults lecture=always
   #   Defaults lecture_file=${misc/groot.txt}
   # '';
 
+  # TODO: Remove later.
+  # Temp / testing workaround for remote deploy.
+  # Insecure and not recommended
   security.sudo.extraRules = [{
     users = [ "dsn" ];
     commands = [{

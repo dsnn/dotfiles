@@ -1,26 +1,5 @@
 { pkgs, ... }: {
 
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
-
-  services.nginx = {
-    enable = true;
-    recommendedGzipSettings = true;
-    recommendedOptimisation = true;
-    recommendedProxySettings = true;
-    recommendedTlsSettings = true;
-  };
-
-  # security.acme = {
-  #   acceptTerms = true;
-  #   email = "letsencrypt@example.com";
-  #   certs = {
-  #     "git.my-domain.tld".email = "foo@bar.com";
-  #     "drone.my-domain.tld".email = "foo@bar.com";
-  #   };
-  # };
-
-  services.postgresql = { enable = true; };
-
   virtualisation.docker = {
     enable = true;
     enableOnBoot = true;

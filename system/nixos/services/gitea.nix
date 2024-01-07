@@ -35,10 +35,9 @@ in {
 
       server = {
         DOMAIN = domain;
-        HTTP_ADDR = "127.0.0.1";
+        HTTP_ADDR = "192.168.2.2";
         HTTP_PORT = 3000;
         ROOT_URL = "https://${domain}/";
-        SSH_PORT = 2222;
       };
     };
   };
@@ -47,18 +46,7 @@ in {
     httpAddress = config.services.gitea.settings.server.HTTP_ADDR;
     httpPort = config.services.gitea.settings.server.HTTP_PORT;
   in {
-    forceSSL = false;
-    enableACME = false;
-
     locations."/".proxyPass = "http://${httpAddress}:${toString httpPort}";
-
-    locations."/metrics" = {
-      extraConfig = ''
-        access_log off;
-        allow 127.0.0.1;
-        deny all;
-      '';
-    };
 
     extraConfig = ''
       # recommended HTTP headers according to https://securityheaders.io

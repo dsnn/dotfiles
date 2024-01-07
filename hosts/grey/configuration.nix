@@ -10,6 +10,7 @@
     ../../system/nixos/services/postgres.nix
     ../../system/nixos/users.nix
     ../../system/nixos/virtualisation.nix
+    ../../system/nixos/networking.nix
     ./hardware.nix
   ];
 

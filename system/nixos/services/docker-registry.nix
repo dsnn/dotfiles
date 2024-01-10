@@ -2,20 +2,26 @@
 
   networking.firewall.allowedTCPPorts = [ 5000 ];
 
+  sops.secrets = {
+    "docker-registry-http-secret" = { owner = "docker-registry"; };
+  };
+
   services.dockerRegistry = {
     enable = true;
-    listenAddress = "127.0.0.1";
+    listenAddress = "192.168.2.2";
     port = 5000;
     enableDelete = true;
     enableGarbageCollect = true;
     garbageCollectDates = "daily";
+    extraConfig = {
+      http.secret = config.sops.secrets."docker-registry-http-secret".path;
+    };
     # enableRedisCache
     # redisUrl
     # redisPassword
-    # REGISTRY_HTTP_SECRET
   };
 
-  services.nginx.virtualHosts."git.dsnn.io" = let
+  services.nginx.virtualHosts."registry.dsnn.io" = let
     httpAddress = config.services.dockerRegistry.listenAddress;
     httpPort = config.services.dockerRegistry.port;
   in {

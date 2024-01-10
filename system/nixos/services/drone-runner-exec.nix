@@ -21,7 +21,7 @@ in {
       EnvironmentFile = [ config.sops.secrets.drone.path ];
       Environment = [
         "DRONE_RPC_PROTO=http"
-        "DRONE_RPC_HOST=localhost:3030"
+        "DRONE_RPC_HOST=127.0.0.1:3030"
         "DRONE_RUNNER_CAPACITY=2"
         "DRONE_RUNNER_NAME=drone-runner-exec"
       ];

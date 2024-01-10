@@ -1,6 +1,4 @@
-{ config, ... }:
-let domain = "gitea.dsnn.io";
-in {
+{ config, ... }: {
 
   networking.firewall.allowedTCPPorts = [ 3000 ];
 
@@ -28,24 +26,18 @@ in {
     settings = {
       log.LEVEL = "Info";
       session.COOKIE_SECURE = true;
-      # metrics.ENABLED = true;
-
       service = { DISABLE_REGISTRATION = true; };
-
       server = {
-        DOMAIN = domain;
+        DOMAIN = "gitea.dsnn.io";
         HTTP_ADDR = "127.0.0.1";
         HTTP_PORT = 3000;
-        ROOT_URL = "https://${domain}/";
+        ROOT_URL = "https://gitea.dsnn.io/";
       };
     };
   };
 
-  services.nginx.virtualHosts.${domain} = let
-    httpAddress = config.services.gitea.settings.server.HTTP_ADDR;
-    httpPort = config.services.gitea.settings.server.HTTP_PORT;
-  in {
-    locations."/".proxyPass = "http://${httpAddress}:${toString httpPort}";
+  services.nginx.virtualHosts."gitea.dsnn.io" = {
+    locations."/".proxyPass = "http://127.0.0.1:3000";
 
     extraConfig = ''
       # recommended HTTP headers according to https://securityheaders.io

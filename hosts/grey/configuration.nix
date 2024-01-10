@@ -9,6 +9,8 @@
     ../../system/nixos/services/openssh.nix
     ../../system/nixos/services/postgres.nix
     ../../system/nixos/services/drone-srv.nix
+    ../../system/nixos/services/drone-runner-docker.nix
+    ../../system/nixos/services/drone-runner-exec.nix
     ../../system/nixos/users.nix
     ../../system/nixos/virtualisation.nix
     ../../system/nixos/networking.nix

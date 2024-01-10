@@ -1,7 +1,5 @@
 { pkgs, config, ... }:
-let
-  droneserver = config.users.users.droneserver.name;
-  domain = "drone.dsnn.io";
+let droneserver = config.users.users.droneserver.name;
 in {
 
   networking.firewall.allowedTCPPorts = [ 3030 ];
@@ -36,13 +34,14 @@ in {
         "DRONE_SERVER_PORT=:3030"
         "DRONE_SERVER_HOST=drone.dsnn.io"
         "DRONE_SERVER_PROTO=https"
+        "DRONE_GITEA_SERVER=https://gitea.dsnn.io"
       ];
       User = droneserver;
       Group = droneserver;
     };
   };
 
-  services.nginx.virtualHosts.${domain} = {
+  services.nginx.virtualHosts."drone.dsnn.io" = {
     locations."/".proxyPass = "http://127.0.0.1:3030";
 
     extraConfig = ''

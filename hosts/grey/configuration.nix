@@ -5,6 +5,7 @@
     ../../system/nixos/containers/drone-runner-docker.nix
     ../../system/nixos/containers/flame.nix
     ../../system/nixos/security.nix
+    ../../system/nixos/services/docker-registry.nix
     ../../system/nixos/services/drone-runner-exec.nix
     ../../system/nixos/services/drone-srv.nix
     ../../system/nixos/services/fail2ban.nix
@@ -13,7 +14,6 @@
     ../../system/nixos/services/nginx.nix
     ../../system/nixos/services/openssh.nix
     ../../system/nixos/services/postgres.nix
-    ../../system/nixos/services/docker-registry.nix
     ../../system/nixos/users.nix
     ../../system/nixos/virtualisation.nix
     ./hardware.nix

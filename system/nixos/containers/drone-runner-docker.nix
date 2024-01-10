@@ -17,7 +17,7 @@ in {
       image = "drone/drone-runner-docker:1";
       environmentFiles = [ config.sops.secrets.drone.path ];
       environment = {
-        DRONE_RPC_HOST = "192.168.2.2:3030";
+        DRONE_RPC_HOST = "127.0.0.1:3030";
         DRONE_RPC_PROTO = "http";
         DRONE_RUNNER_CAPACITY = "2";
         DRONE_RUNNER_NAME = "drone-runner-docker";

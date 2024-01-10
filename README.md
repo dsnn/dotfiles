@@ -41,6 +41,8 @@ mkdir -p ~/.local/state/nix/profiles
 - [catppuccin base16](https://github.com/catppuccin/base16)
 - [flake checker GitHub action](https://determinate.systems/posts/flake-checker)
 - [tmux-continuum issue 118](https://github.com/tmux-plugins/tmux-continuum/issues/118)
+- [jellyfin hw acc](https://nixos.wiki/wiki/Jellyfin)
+- [impermanence](https://nixos.wiki/wiki/Impermanence)
 
 ## Links
 

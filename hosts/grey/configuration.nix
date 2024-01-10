@@ -3,17 +3,17 @@
     ../../system/common.nix
     ../../system/nixos/cifs.nix
     ../../system/nixos/security.nix
+    ../../system/nixos/services/drone-runner-docker.nix
+    ../../system/nixos/services/drone-runner-exec.nix
+    ../../system/nixos/services/drone-srv.nix
     ../../system/nixos/services/fail2ban.nix
     ../../system/nixos/services/gitea.nix
+    ../../system/nixos/services/jellyfin.nix
     ../../system/nixos/services/nginx.nix
     ../../system/nixos/services/openssh.nix
     ../../system/nixos/services/postgres.nix
-    ../../system/nixos/services/drone-srv.nix
-    ../../system/nixos/services/drone-runner-docker.nix
-    ../../system/nixos/services/drone-runner-exec.nix
     ../../system/nixos/users.nix
     ../../system/nixos/virtualisation.nix
-    ../../system/nixos/networking.nix
     ./hardware.nix
   ];
 
@@ -25,6 +25,8 @@
   networking.hostId = "199f97e0";
   networking.hostName = "grey";
   networking.networkmanager.enable = true;
+  networking.firewall.enable = true;
+
   systemd.services.NetworkManager-wait-online.enable = false;
 
   time.timeZone = "Europe/Stockholm";

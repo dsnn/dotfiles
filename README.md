@@ -43,6 +43,7 @@ mkdir -p ~/.local/state/nix/profiles
 - [tmux-continuum issue 118](https://github.com/tmux-plugins/tmux-continuum/issues/118)
 - [jellyfin hw acc](https://nixos.wiki/wiki/Jellyfin)
 - [impermanence](https://nixos.wiki/wiki/Impermanence)
+- [flame](https://github.com/pawelmalak/flame)
 
 ## Links
 

@@ -1,4 +1,5 @@
 { pkgs, ... }: {
+
   imports = [
     ../../system/common.nix
     ../../system/nixos/cifs.nix
@@ -32,7 +33,7 @@
   systemd.services.NetworkManager-wait-online.enable = false;
 
   time.timeZone = "Europe/Stockholm";
-  # services.timesyncd.enable = true;
+  services.timesyncd.enable = true;
   i18n.defaultLocale = "en_US.UTF-8";
 
   # Enable CUPS to print documents.

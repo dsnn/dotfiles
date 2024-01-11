@@ -49,6 +49,16 @@
         };
       };
 
+      homeConfigurations.black = home-manager.lib.homeManagerConfiguration {
+        modules = [ ./home/home.nix ];
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {
+          inherit inputs outputs;
+          isServer = true;
+          hostname = "black";
+        };
+      };
+
       homeConfigurations.green = home-manager.lib.homeManagerConfiguration {
         modules = [ ./home/home.nix ];
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
@@ -67,6 +77,12 @@
 
       nixosConfigurations.grey = nixpkgs.lib.nixosSystem {
         modules = [ ./hosts/grey/configuration.nix ];
+        specialArgs = { inherit inputs outputs; };
+        system = x86_64-linux;
+      };
+
+      nixosConfigurations.black = nixpkgs.lib.nixosSystem {
+        modules = [ ./hosts/black/configuration.nix ];
         specialArgs = { inherit inputs outputs; };
         system = x86_64-linux;
       };

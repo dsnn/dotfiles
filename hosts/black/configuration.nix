@@ -1,7 +1,8 @@
 { pkgs, ... }: {
   imports = [
     ../../system/common.nix
-    #../../system/nixos/cifs.nix
+    ../../system/nixos/cifs.nix
+    ../../system/nixos/security.nix
     ../../system/nixos/fail2ban.nix
     ../../system/nixos/openssh.nix
     ../../system/nixos/security.nix

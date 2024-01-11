@@ -1,12 +1,12 @@
 { config, ... }:
-let droneserver = config.users.users.droneserver.name;
+let dronerunner = config.users.users.drone-runner-docker.name;
 in {
 
-  sops.secrets = { "drone" = { owner = droneserver; }; };
+  sops.secrets = { "drone" = { owner = dronerunner; }; };
 
   users.users.drone-runner-docker = {
     isSystemUser = true;
-    group = droneserver;
+    group = dronerunner;
   };
   users.groups.drone-runner-docker = { };
 

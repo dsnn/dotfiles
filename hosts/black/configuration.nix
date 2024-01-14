@@ -58,7 +58,6 @@
     inetutils
     pavucontrol
     pciutils
-    terraform
   ];
 
   system.stateVersion = "23.05";

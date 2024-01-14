@@ -4,11 +4,12 @@ in {
 
   sops.secrets = { "drone" = { owner = droneserver; }; };
 
-  users.users.drone-runner-exec = {
+  users.users.droneserver = {
     isSystemUser = true;
+    createHome = true;
     group = droneserver;
   };
-  users.groups.drone-runner-exec = { };
+  users.groups.droneserver = { };
 
   systemd.services.drone-runner-exec = {
     enable = true;

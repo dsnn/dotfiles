@@ -1,14 +1,15 @@
 { config, ... }:
-let dronerunner = config.users.users.drone-runner-docker.name;
+let droneserver = config.users.users.droneserver.name;
 in {
 
-  sops.secrets = { "drone" = { owner = dronerunner; }; };
+  sops.secrets = { "drone" = { owner = droneserver; }; };
 
-  users.users.drone-runner-docker = {
+  users.users.droneserver = {
     isSystemUser = true;
-    group = dronerunner;
+    createHome = true;
+    group = droneserver;
   };
-  users.groups.drone-runner-docker = { };
+  users.groups.droneserver = { };
 
   virtualisation.oci-containers.backend = "docker";
   virtualisation.oci-containers.containers = {

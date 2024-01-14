@@ -25,8 +25,8 @@ in {
     garbageCollectDates = "daily";
     extraConfig = {
       http.secret = config.sops.secrets."docker-registry-http-secret".path;
-      auth.htpasswd.realm = "Registry Realm";
-      auth.htpasswd.path = "/auth/htpasswd";
+      # auth.htpasswd.realm = "Registry Realm";
+      # auth.htpasswd.path = "/auth/htpasswd";
       # config.sops.secrets."docker-registry-htpasswd".path;
       # environment:
       #       REGISTRY_AUTH: htpasswd

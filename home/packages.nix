@@ -7,8 +7,8 @@ with pkgs;
   # nodePackages."diagnostic-languageserver"
   # nodePackages."dockerfile-language-server-nodejs"
   # nodePackages."pyright"
-  # nodePackages."typescript"
-  # nodePackages."typescript-language-server"
+  nodePackages."typescript"
+  nodePackages."typescript-language-server"
   # nodePackages."vscode-langservers-extracted"
   # nodePackages."yaml-language-server"
   # omnisharp-roslyn
@@ -19,7 +19,6 @@ with pkgs;
   ansible-lint
   curl
   fd
-  fd
   git-crypt
   gnused
   htop
@@ -29,10 +28,11 @@ with pkgs;
   mosh
   nawk
   nil
-  nil
   nixd
   nixfmt
   nixpkgs-fmt
+  gnumake
+  cmake
   packer
   ripgrep
   rnix-lsp

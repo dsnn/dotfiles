@@ -22,44 +22,33 @@ local function getTelescopeOpts(state, path)
   }
 end
 
-return {
+local M = {
   "nvim-neo-tree/neo-tree.nvim",
   dependencies = {
     "mrbjarksen/neo-tree-diagnostics.nvim",
+    "nvim-lua/plenary.nvim",
+    "nvim-tree/nvim-web-devicons",
+    "MunifTanjim/nui.nvim",
   },
-  cmd = "Neotree",
-  config = function()
+  tag = "3.16", 
+}
+
+function M.config() 
     require("neo-tree").setup({
       close_if_last_window = false,
       popup_border_style = "rounded",
       enable_git_status = true,
       enable_diagnostics = true,
-      sources = {
-        "filesystem",
-        "buffers",
-        "git_status",
-        "diagnostics",
+
+      event_handlers = {
+        {
+          event = "neo_tree_buffer_enter",
+          handler = function(arg)
+            vim.cmd [[ setlocal relativenumber ]]
+          end,
+        }
       },
-      source_selector = {
-        winbar = true,
-        statusline = false,
-      },
-      diagnostics = {
-        autopreview = false,
-        autopreview_config = { use_float = true },
-        autopreview_event = "neo_tree_buffer_enter",
-        bind_to_cwd = true,
-        diag_sort_function = "severity",
-        -- follow_behavior = {
-        --   always_focus_file = false,
-        --   expand_followed = true,
-        --   collapse_others = true,
-        -- },
-        follow_current_file = true,
-        group_dirs_and_files = true,
-        group_empty_dirs = true,
-        show_unloaded = true,
-      },
+
       default_component_configs = {
         container = {
           enable_character_fade = true
@@ -108,6 +97,30 @@ return {
           }
         },
       },
+
+      sources = {
+        "filesystem",
+        "buffers",
+        "git_status",
+        "diagnostics",
+      },
+
+      source_selector = {
+        winbar = true,
+        statusline = false,
+      },
+
+      diagnostics = {
+        autopreview = false,
+        autopreview_config = { use_float = true },
+        autopreview_event = "neo_tree_buffer_enter",
+        bind_to_cwd = true,
+        diag_sort_function = "severity",
+        group_dirs_and_files = true,
+        group_empty_dirs = true,
+        show_unloaded = true,
+      },
+
       window = {
         position = "left",
         width = 40,
@@ -116,42 +129,33 @@ return {
           nowait = true,
         },
         mappings = {
-          ["<space>"] = {
-            "toggle_node",
-            nowait = false,
-          },
+          ["<"] = "prev_source",
           ["<2-LeftMouse>"] = "open",
           ["<cr>"] = "open",
-          ["<esc>"] = "revert_preview",
-          ["P"] = { "toggle_preview", config = { use_float = true } },
-          ["S"] = "open_split",
-          ["s"] = "open_vsplit",
-          -- ["t"] = "open_tabnew",
-          ["w"] = "open_with_window_picker",
-          ["C"] = "close_node",
-          ["z"] = "close_all_nodes",
-          ["Z"] = "expand_all_nodes",
-          ["a"] = {
-            "add",
-            config = {
-              show_path = "none"
-            }
-          },
-          ["A"] = "add_directory",
-          ["d"] = "delete",
-          ["r"] = "rename",
-          ["y"] = "copy_to_clipboard",
-          ["x"] = "cut_to_clipboard",
-          ["p"] = "paste_from_clipboard",
-          ["c"] = "copy",
-          ["m"] = "move",
-          ["q"] = "close_window",
-          ["R"] = "refresh",
-          ["?"] = "show_help",
-          ["<"] = "prev_source",
+          ["<esc>"] = "cancel",
+          ["<space>"] = { "toggle_node", nowait = false, },
           [">"] = "next_source",
+          ["?"] = "show_help",
+          ["A"] = "add_directory",
+          ["C"] = "close_node",
+          ["P"] = { "toggle_preview", config = { use_float = true } },
+          ["R"] = "refresh",
+          ["S"] = "open_split",
+          ["Z"] = "expand_all_nodes",
+          ["a"] = { "add", config = { show_path = "relative" } },
+          ["c"] = "copy",
+          ["d"] = "delete",
+          ["m"] = "move",
+          ["p"] = "paste_from_clipboard",
+          ["q"] = "close_window",
+          ["r"] = "rename",
+          ["s"] = "open_vsplit",
           ["te"] = "telescope_find",
           ["ts"] = "telescope_grep",
+          ["w"] = "open_with_window_picker",
+          ["x"] = "cut_to_clipboard",
+          ["y"] = "copy_to_clipboard",
+          ["z"] = "close_all_nodes",
           ["h"] = function(state)
             local node = state.tree:get_node()
             if node.type == 'directory' and node:is_expanded() then
@@ -208,7 +212,10 @@ return {
             --".null-ls_*",
           },
         },
-        follow_current_file = false,
+        follow_current_file = {
+          enabled = true,
+          leave_dirs_open = true,
+        },
         group_empty_dirs = false,
         hijack_netrw_behavior = "open_default",
         use_libuv_file_watcher = false,
@@ -227,7 +234,10 @@ return {
         }
       },
       buffers = {
-        follow_current_file = true,
+        follow_current_file = {
+          enabled = true,
+          leave_dirs_open = true,
+        },
         group_empty_dirs = true,
         show_unloaded = true,
         window = {
@@ -258,4 +268,5 @@ return {
       -- },
     })
   end
-}
+
+return M

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 vim.g.mapleader = ","
 vim.g.maplocalleader = " "
 
@@ -48,3 +49,16 @@ spec("user.lspconfig");
 -- }
 
 require("user.lazy")
+||||||| parent of 3d7c6d5 (wip)
+vim.g.mapleader = ","
+vim.g.maplocalleader = " "
+
+-- require("autocommands")
+require("globals")
+require("options")
+require("mappings")
+require("load-lazy")
+=======
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.lazy")
+>>>>>>> 3d7c6d5 (wip)

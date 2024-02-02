@@ -64,6 +64,9 @@ vim.keymap.set("n", "<space>t", ":TroubleToggle<CR>", silent_no)
 vim.keymap.set("n", "<space>do", ":DiffviewOpen<CR>", silent_no)
 vim.keymap.set("n", "<space>dc", ":DiffviewClose<CR>", silent_no)
 
+-- git
+vim.keymap.set("n", "<space>g", ":Git<CR>", silent_no)
+
 -- console.log
 vim.keymap.set(
   "n",

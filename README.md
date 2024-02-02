@@ -48,7 +48,6 @@ mkdir -p ~/.local/state/nix/profiles
 ## Links
 
 - [bottom](https://github.com/ClementTsang/bottom)
-- [oil.nvim](https://github.com/stevearc/oil.nvim)
 - [Deleting old generations](https://github.com/LnL7/nix-darwin/wiki/Deleting-old-generations)
 - [Upgrading macOS](https://github.com/LnL7/nix-darwin/wiki/Upgrading-macOS)
 - [tmux tilish](https://github.com/jabirali/tmux-tilish)

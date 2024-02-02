@@ -1,16 +1,7 @@
 { pkgs, isServer, ... }:
 with pkgs;
 [
-  # dotnet-sdk_8
-  # neovim
-  # nodePackages."bash-language-server"
-  # nodePackages."diagnostic-languageserver"
-  # nodePackages."dockerfile-language-server-nodejs"
-  # nodePackages."pyright"
-  nodePackages."typescript"
-  nodePackages."typescript-language-server"
-  # nodePackages."vscode-langservers-extracted"
-  # nodePackages."yaml-language-server"
+  dotnet-sdk_8
   # omnisharp-roslyn
   # sstp
   # terraform
@@ -24,19 +15,12 @@ with pkgs;
   htop
   jq
   lazydocker
-  lua-language-server
   mosh
   nawk
-  nil
-  nixd
-  nixfmt
-  nixpkgs-fmt
   gnumake
   cmake
   packer
   ripgrep
-  rnix-lsp
-  shfmt
   unzip
   vim
   wakeonlan

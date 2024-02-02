@@ -1,68 +1,76 @@
 local silent = { silent = true }
 local silent_no = { noremap = true, silent = true }
-local map = vim.keymap.set;
 
-map('n', '<Leader>q', ':Bdelete<CR>', silent_no)
-map('n', '<Leader>.', '<C-^>', silent_no)
-map('n', '<Leader>,', ':wall<CR>', silent_no)
-map('n', '<Leader>h', ':set hlsearch!<CR>', silent_no)
-map('n', '<Leader>x', ':luafile %<CR>', silent_no)
-map('n', '<Leader>m', ':Messages<CR>', silent_no)
-map('n', '<esc>',     ':noh<cr>', silent_no)
+vim.keymap.set("n", "<Leader>q", ":lua MiniBufremove.delete()<CR>", silent_no)
+vim.keymap.set("n", "<Leader>w", ":q<CR>", silent_no)
+vim.keymap.set("n", "<Leader>.", "<C-^>", silent_no)
+vim.keymap.set("n", "<Leader>,", ":wall<CR>", silent_no)
+vim.keymap.set("n", "<C-s>", ":wall<CR>", silent_no)
+vim.keymap.set("n", "<Leader>h", ":set hlsearch!<CR>", silent_no)
+vim.keymap.set("n", "<Leader>x", ":luafile %<CR>", silent_no)
+vim.keymap.set("n", "<Leader>m", ":Messages<CR>", silent_no)
+vim.keymap.set("n", "<esc>", ":noh<cr>", silent_no)
 
 -- do not replace yank on multiple paste
-map('x', 'p', 'pgvy', silent_no)
+vim.keymap.set("x", "p", "pgvy", silent_no)
 
 -- line indentation
-map('v', '<', '<gv', silent_no)
-map('v', '>', '>gv', silent_no)
+vim.keymap.set("v", "<", "<gv", silent_no)
+vim.keymap.set("v", ">", ">gv", silent_no)
 
 -- visual search
 -- vim.keymap.set('v', '<m-/>', '<esc>/\\%V'
-vim.keymap.set('x', '/', '<Esc>/\\%V')
+vim.keymap.set("x", "/", "<Esc>/\\%V")
 
 -- window navigation
-map('n', '<C-h>', '<C-w>h', silent)
-map('n', '<C-j>', '<C-w>j', silent)
-map('n', '<C-k>', '<C-w>k', silent)
-map('n', '<C-l>', '<C-w>l', silent)
+vim.keymap.set("n", "<C-h>", "<C-w>h", silent)
+vim.keymap.set("n", "<C-j>", "<C-w>j", silent)
+vim.keymap.set("n", "<C-k>", "<C-w>k", silent)
+vim.keymap.set("n", "<C-l>", "<C-w>l", silent)
 
 -- window resizing
-map('n', '<Up>', ':resize -2<CR>', silent_no)
-map('n', '<Down>', ':resize +2<CR>', silent_no)
-map('n', '<Right>', ':vertical resize -2<CR>', silent_no)
-map('n', '<Left>', ':vertical resize +2<CR>', silent_no)
+vim.keymap.set("n", "<Up>", ":resize -2<CR>", silent_no)
+vim.keymap.set("n", "<Down>", ":resize +2<CR>", silent_no)
+vim.keymap.set("n", "<Right>", ":vertical resize -2<CR>", silent_no)
+vim.keymap.set("n", "<Left>", ":vertical resize +2<CR>", silent_no)
 
 -- buffer navigation
-map('n', '<TAB>', ':bnext<CR>', silent_no)
-map('n', '<S-TAB>', ':bprevious<CR>', silent_no)
+vim.keymap.set("n", "<TAB>", ":bnext<CR>", silent_no)
+vim.keymap.set("n", "<S-TAB>", ":bprevious<CR>", silent_no)
 
 -- buffer split
-map('n', 'vv', '<C-w>v', silent_no)
-map('n', 'ss', '<C-w>s', silent_no)
+vim.keymap.set("n", "vv", "<C-w>v", silent_no)
+vim.keymap.set("n", "ss", "<C-w>s", silent_no)
 
 -- file tree nav
-map('n', '<C-n>', ':Neotree toggle<CR>', silent_no)
-map('n', '<Leader>k', ':Neotree reveal_file=%<CR>', silent_no)
--- map('n', '<Leader>f', ":lua require('lir.float').toggle()<CR>", silent_no)
+vim.keymap.set("n", "<C-n>", ":Neotree toggle<CR>", silent_no)
+vim.keymap.set("n", "<Leader>k", ":Neotree reveal_file=%<CR>", silent_no)
 
 -- snippets
-map('n', '<Leader>s', '<cmd>:lua require("luasnip.loaders").edit_snippet_files()<CR>', silent_no)
+vim.keymap.set("n", "<Leader>s", '<cmd>:lua require("luasnip.loaders").edit_snippet_files()<CR>', silent_no)
 
 -- bookmarks
-map('n', '<space>a', "<cmd>:lua require('harpoon.mark').add_file()<CR>", silent_no)
-map('n', '<space>h', "<cmd>:lua require('harpoon.ui').toggle_quick_menu()<CR>", silent_no)
-map('n', '<space>1', "<cmd>:lua require('harpoon.ui').nav_file(1)<CR>", silent_no)
-map('n', '<space>2', "<cmd>:lua require('harpoon.ui').nav_file(2)<CR>", silent_no)
-map('n', '<space>3', "<cmd>:lua require('harpoon.ui').nav_file(3)<CR>", silent_no)
-map('n', '<space>4', "<cmd>:lua require('harpoon.ui').nav_file(4)<CR>", silent_no)
+vim.keymap.set("n", "<space>a", "<cmd>:lua require('harpoon.mark').add_file()<CR>", silent_no)
+vim.keymap.set("n", "<space>h", "<cmd>:lua require('harpoon.ui').toggle_quick_menu()<CR>", silent_no)
+vim.keymap.set("n", "<space>1", "<cmd>:lua require('harpoon.ui').nav_file(1)<CR>", silent_no)
+vim.keymap.set("n", "<space>2", "<cmd>:lua require('harpoon.ui').nav_file(2)<CR>", silent_no)
+vim.keymap.set("n", "<space>3", "<cmd>:lua require('harpoon.ui').nav_file(3)<CR>", silent_no)
+vim.keymap.set("n", "<space>4", "<cmd>:lua require('harpoon.ui').nav_file(4)<CR>", silent_no)
 
 -- lsp trouble
-map('n', '<leader>lt', ":TroubleToggle<CR>", silent_no)
+vim.keymap.set("n", "<space>t", ":TroubleToggle<CR>", silent_no)
+
+-- diffview
+vim.keymap.set("n", "<space>do", ":DiffviewOpen<CR>", silent_no)
+vim.keymap.set("n", "<space>dc", ":DiffviewClose<CR>", silent_no)
 
 -- console.log
-map('n', '<space>l', "<cmd> :put! =printf('console.log(''%s:'',  %s);', expand('<cword>'), expand('<cword>'))<CR>-2==+",
-  silent_no)
+vim.keymap.set(
+  "n",
+  "<space>l",
+  "<cmd> :put! =printf('console.log(''%s:'',  %s);', expand('<cword>'), expand('<cword>'))<CR>-2==+",
+  silent_no
+)
 
 -- remove whitespace manually
 vim.cmd([[ nnoremap <leader>c :%s/\s\+$//<CR> ]])

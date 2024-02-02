@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 vim.g.mapleader = ","
 vim.g.maplocalleader = " "
 
@@ -6,13 +5,19 @@ require("user.globals")
 require("user.options")
 require("user.mappings")
 require("user.autocommands")
-
-spec("user.telescope");
-spec("user.colorscheme");
-spec("user.neotree");
-spec("user.treesitter");
-spec("user.mason");
-spec("user.lspconfig");
+require("user.telescope")
+require("user.colorscheme")
+require("user.neotree")
+require("user.treesitter")
+require("user.lspconfig")
+require("user.cmp")
+require("user.trouble")
+require("user.mini")
+require("user.formatters")
+require("user.copilot")
+require("user.diffview")
+-- require("vim-tmux-
+-- avigator")
 
 -- return {
 --   "David-Kunz/cmp-npm",
@@ -47,18 +52,3 @@ spec("user.lspconfig");
 --   "nvim-telescope/telescope-fzy-native.nvim",
 --   "nvim-telescope/telescope-cheat.nvim",
 -- }
-
-require("user.lazy")
-||||||| parent of 3d7c6d5 (wip)
-vim.g.mapleader = ","
-vim.g.maplocalleader = " "
-
--- require("autocommands")
-require("globals")
-require("options")
-require("mappings")
-require("load-lazy")
-=======
--- bootstrap lazy.nvim, LazyVim and your plugins
-require("config.lazy")
->>>>>>> 3d7c6d5 (wip)

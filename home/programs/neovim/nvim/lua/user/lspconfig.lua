@@ -56,6 +56,7 @@ local servers = {
   "jsonls",
   "tsserver",
   "lua_ls",
+  "nil_ls",
 }
 
 local default_diagnostic_config = {

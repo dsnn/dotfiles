@@ -117,8 +117,8 @@ in {
 
     # Set new panes to open in current directory
     bind c new-window -c "#{pane_current_path}"
-    bind '"' split-window -c "#{pane_current_path}"
-    bind % split-window -h -c "#{pane_current_path}"
+    bind 's' split-window -c "#{pane_current_path}"
+    bind 'v' split-window -h -c "#{pane_current_path}"
 
     # vim-style copy-paste
     bind -n C-M-u copy-mode

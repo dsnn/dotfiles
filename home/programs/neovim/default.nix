@@ -45,8 +45,8 @@ in {
 
     plugins = with pkgs.vimPlugins; [
       cmp-buffer
-      cmp-cmdline
-      cmp-cmdline-history
+      # cmp-cmdline
+      # cmp-cmdline-history
       cmp-nvim-lsp
       cmp-nvim-lsp-signature-help
       cmp-nvim-lua
@@ -58,6 +58,8 @@ in {
       diffview-nvim
       friendly-snippets
       gruvbox-material
+      catppuccin-nvim
+      kanagawa-nvim
       harpoon
       lspkind-nvim
       lualine-nvim

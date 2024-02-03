@@ -22,7 +22,7 @@ vim.keymap.set("v", ">", ">gv", silent_no)
 -- vim.keymap.set('v', '<m-/>', '<esc>/\\%V'
 vim.keymap.set("x", "/", "<Esc>/\\%V")
 
--- window navigation
+-- navigation
 vim.keymap.set("n", "<C-h>", "<C-w>h", silent)
 vim.keymap.set("n", "<C-j>", "<C-w>j", silent)
 vim.keymap.set("n", "<C-k>", "<C-w>k", silent)

@@ -32,8 +32,8 @@ cmp.setup({
     { name = "copilot" },
     { name = "nvim_lua" },
     { name = "path" },
-    { name = "cmdline", keyword_length = 4 },
-    { name = "cmdline-history", keyword_length = 4 },
+    -- { name = "cmdline", keyword_length = 4 },
+    -- { name = "cmdline-history", keyword_length = 4 },
   }),
   formatting = {
     format = lspkind.cmp_format({

@@ -1,8 +1,10 @@
 local cmp = require("cmp")
-local luasnip = require("LuaSnip")
+local luasnip = require("luasnip")
 local lspkind = require("lspkind")
 local copilot_cmp = require("copilot_cmp")
 
+require("cmp_nvim_lsp")
+require("cmp_luasnip")
 require("luasnip.loaders.from_vscode").lazy_load()
 
 copilot_cmp.setup({
@@ -66,17 +68,17 @@ cmp.setup({
       end
     end, { "i", "s" }),
   }),
-  sources = cmp.config.sources({
-    { name = "nvim_lsp" },
-    { name = "luasnip" },
+  sources = {
     { name = "buffer" },
-    { name = "copilot", priority = 100 },
-    -- { name = "nvim_lua" },
-    -- { name = "path" },
-    -- { name = "npm", keyword_length = 4 },
-    -- { name = "cmdline", keyword_length = 4 },
-    -- { name = "cmdline-history", keyword_length = 4 },
-  }),
+    { name = "nvim_lsp" },
+    { name = "nvim_lsp_signature_help" },
+    { name = "luasnip" },
+    { name = "copilot" },
+    { name = "nvim_lua" },
+    { name = "path" },
+    { name = "cmdline", keyword_length = 4 },
+    { name = "cmdline-history", keyword_length = 4 },
+  },
   formatting = {
     format = lspkind.cmp_format({
       mode = "symbol_text",

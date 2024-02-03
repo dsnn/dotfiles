@@ -1,5 +1,5 @@
 local lspconfig = require("lspconfig")
-local cmp_lsp = require("cmp_nvim_lsp")
+local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 local function lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = true }
@@ -26,9 +26,12 @@ local function on_attach(client, bufnr)
 end
 
 local function common_capabilities()
-  local capabilities =
-    vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
+  local vim_capabilities = vim.lsp.protocol.make_client_capabilities()
+  local cmp_capabilities = cmp_nvim_lsp.default_capabilities()
+  local capabilities = vim.tbl_deep_extend("force", {}, vim_capabilities, cmp_capabilities)
+
   capabilities.textDocument.completion.completionItem.snippetSupport = true
+
   return capabilities
 end
 

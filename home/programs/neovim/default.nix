@@ -48,6 +48,7 @@ in {
       cmp-nvim-lsp-signature-help
       cmp-nvim-lua
       cmp-path
+      cmp_luasnip
       conform-nvim
       copilot-cmp
       copilot-lua
@@ -59,11 +60,11 @@ in {
       lualine-nvim
       luasnip
       mini-nvim
+      neo-tree-nvim
       neodev-nvim
       neogit
       nui-nvim
-      nvim-compe
-      nvim-lspconfig
+      nvim-cmp
       nvim-lspconfig
       nvim-treesitter-context
       nvim-treesitter-refactor
@@ -78,8 +79,6 @@ in {
       vim-fugitive
       vim-surround
       vim-tmux-navigator
-      (fromGitHub "e578fe7a5832421b0d2c5b3c0a7a1e40e0f6a47a" "main"
-        "nvim-neo-tree/neo-tree.nvim")
       (fromGitHub "483019d251c31acd14102bc279f938f98d9a3de6" "main"
         "mrbjarksen/neo-tree-diagnostics.nvim")
     ];

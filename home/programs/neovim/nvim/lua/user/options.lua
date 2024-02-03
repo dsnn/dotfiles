@@ -36,7 +36,6 @@ vim.opt.updatetime = 100
 vim.opt.virtualedit = "block"
 vim.opt.writebackup = false
 vim.wo.cursorline = true
-vim.wo.fillchars = "stlnc:="
 vim.wo.foldenable = false
 vim.wo.foldlevel = 0
 vim.wo.foldmethod = "manual"

@@ -24,13 +24,30 @@ local has_words_before = function()
 end
 
 cmp.setup({
-  completion = {
-    completeopt = "menu,menuone,noselect",
-  },
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
+  sources = cmp.config.sources({
+    { name = "buffer" },
+    { name = "nvim_lsp" },
+    { name = "nvim_lsp_signature_help" },
+    { name = "luasnip" },
+    { name = "copilot" },
+    { name = "nvim_lua" },
+    { name = "path" },
+    { name = "cmdline", keyword_length = 4 },
+    { name = "cmdline-history", keyword_length = 4 },
+  }),
+  formatting = {
+    format = lspkind.cmp_format({
+      mode = "symbol_text",
+      maxwidth = 50,
+      menu = {
+        buffer = "[buf]",
+        copilot = "[copilot]",
+        luasnip = "[snippet]",
+        nvim_lsp = "[LSP]",
+        nvim_lua = "[api]",
+        path = "[path]",
+      },
+    }),
   },
   mapping = cmp.mapping.preset.insert({
     ["<C-n>"] = cmp.mapping(function()
@@ -68,30 +85,13 @@ cmp.setup({
       end
     end, { "i", "s" }),
   }),
-  sources = {
-    { name = "buffer" },
-    { name = "nvim_lsp" },
-    { name = "nvim_lsp_signature_help" },
-    { name = "luasnip" },
-    { name = "copilot" },
-    { name = "nvim_lua" },
-    { name = "path" },
-    { name = "cmdline", keyword_length = 4 },
-    { name = "cmdline-history", keyword_length = 4 },
+  completion = {
+    completeopt = "menu,menuone,noselect",
   },
-  formatting = {
-    format = lspkind.cmp_format({
-      mode = "symbol_text",
-      maxwidth = 50,
-      menu = {
-        buffer = "[buf]",
-        copilot = "[copilot]",
-        luasnip = "[snippet]",
-        nvim_lsp = "[LSP]",
-        nvim_lua = "[api]",
-        path = "[path]",
-      },
-    }),
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
   },
   view = {
     entries = "native",

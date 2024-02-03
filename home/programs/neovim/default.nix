@@ -22,15 +22,18 @@ in {
     nodePackages."bash-language-server"
     nodePackages."diagnostic-languageserver"
     nodePackages."dockerfile-language-server-nodejs"
-    nodePackages."pyright"
+    nodePackages."graphql-language-service-cli"
     nodePackages."typescript"
     nodePackages."typescript-language-server"
-    nodePackages."vscode-langservers-extracted"
-    nodePackages."yaml-language-server"
+    nodePackages."vim-language-server"
+    nodePackages."vscode-langservers-extracted" # HTML/CSS/JSON/ESLint language servers extracted from vscode
     prettierd
     rnix-lsp
     shfmt
     stylua
+    tailwindcss-language-server
+    yaml-language-server
+    docker-compose-language-service
   ];
 
   programs.neovim = {

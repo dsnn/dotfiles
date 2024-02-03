@@ -56,10 +56,19 @@ end
 
 local servers = {
   "bashls",
+  "cssls",
+  "diagnosticls",
+  "dockerls",
+  "docker_compose_language_service",
+  "eslint",
+  "graphql",
+  "html",
   "jsonls",
-  "tsserver",
   "lua_ls",
   "nil_ls",
+  "tsserver",
+  "vimls",
+  "yamlls",
 }
 
 local default_diagnostic_config = {

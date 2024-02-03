@@ -28,6 +28,13 @@ vim.keymap.set("n", "<C-j>", "<C-w>j", silent)
 vim.keymap.set("n", "<C-k>", "<C-w>k", silent)
 vim.keymap.set("n", "<C-l>", "<C-w>l", silent)
 
+vim.keymap.set("n", "n", "nzz", silent_no)
+vim.keymap.set("n", "N", "Nzz", silent_no)
+vim.keymap.set("n", "*", "*zz", silent_no)
+vim.keymap.set("n", "#", "#zz", silent_no)
+vim.keymap.set("n", "g*", "g*zz", silent_no)
+vim.keymap.set("n", "g#", "g#zz", silent_no)
+
 -- window resizing
 vim.keymap.set("n", "<Up>", ":resize -2<CR>", silent_no)
 vim.keymap.set("n", "<Down>", ":resize +2<CR>", silent_no)

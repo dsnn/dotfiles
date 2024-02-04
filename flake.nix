@@ -76,7 +76,7 @@
       };
 
       nixosConfigurations.grey = nixpkgs.lib.nixosSystem {
-        modules = [ ./hosts/grey/configuration.nix ];
+        modules = [ ./hosts/grey/configuration.nix nix-ld.nixosModules.nix-ld ];
         specialArgs = { inherit inputs outputs; };
         system = x86_64-linux;
       };

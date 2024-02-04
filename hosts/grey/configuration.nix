@@ -1,5 +1,7 @@
 { pkgs, ... }: {
 
+  programs.nix-ld.dev.enable = true;
+
   imports = [
     ../../system/common.nix
     ../../system/nixos/cifs.nix

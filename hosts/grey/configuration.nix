@@ -11,6 +11,7 @@
     ../../system/nixos/services/drone-srv.nix
     ../../system/nixos/services/fail2ban.nix
     ../../system/nixos/services/gitea.nix
+    ../../system/nixos/services/homepage-dashboard.nix
     ../../system/nixos/services/jellyfin.nix
     ../../system/nixos/services/nginx.nix
     ../../system/nixos/services/openssh.nix

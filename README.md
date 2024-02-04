@@ -36,6 +36,23 @@ Manually create this folder:
 mkdir -p ~/.local/state/nix/profiles
 ```
 
+## node
+
+If node isn't available check that host configuration has nix-ld enabled.
+
+```nix
+
+  ...
+  nixosConfigurations.host = nixpkgs.lib.nixosSystem {
+    modules = [
+      ./<host>/configuration.nix
+      nix-ld.nixosModules.nix-ld
+    ];
+  ...
+
+  programs.nix-ld.dev.enable = true;
+```
+
 ## TODO
 
 - [catppuccin base16](https://github.com/catppuccin/base16)

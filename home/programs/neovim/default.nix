@@ -45,8 +45,7 @@ in {
 
     plugins = with pkgs.vimPlugins; [
       cmp-buffer
-      # cmp-cmdline
-      # cmp-cmdline-history
+      cmp-cmdline
       cmp-nvim-lsp
       cmp-nvim-lsp-signature-help
       cmp-nvim-lua

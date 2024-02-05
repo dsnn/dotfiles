@@ -5,20 +5,15 @@ local function lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = true }
   local keymap = vim.api.nvim_buf_set_keymap
 
+  keymap(bufnr, "n", "<space>ca", "<cmd>vim.lsp.buf.code_action<CR>", opts)
+  keymap(bufnr, "n", "<space>fo", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
   keymap(bufnr, "n", "<space>n", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
   keymap(bufnr, "n", "<space>p", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
-  keymap(bufnr, "n", "<space>fo", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
   keymap(bufnr, "n", "<space>r", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-  keymap(bufnr, "n", "<space>ca", "<cmd>vim.lsp.buf.code_action<CR>", opts)
   keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
   keymap(bufnr, "n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
   keymap(bufnr, "n", "gi", "<cmd>Telescope diagnostics<CR>", opts)
   keymap(bufnr, "n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
-
-  keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  keymap(bufnr, "n", "<space>gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  keymap(bufnr, "n", "<space>gd", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
 end
 
 local function on_attach(client, bufnr)

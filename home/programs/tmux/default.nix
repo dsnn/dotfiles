@@ -31,7 +31,7 @@ in {
     prefix = "C-a";
     reverseSplit = false;
     sensibleOnTop = false;
-    terminal = "tmux-256color";
+    terminal = "xterm-256color";
     resizeAmount = 10;
     historyLimit = 5000;
   };
@@ -95,36 +95,39 @@ in {
   ];
 
   programs.tmux.extraConfig = ''
-    set -g status-interval 0
-    set -g status-justify left
-    set -g status-position top
+        set -g status-interval 0
+        set -g status-justify left
+        set -g status-position top
 
-    # don't exit from tmux when closing a session
-    set -g detach-on-destroy off
+    		set -ga terminal-overrides ',*:Tc' # this is for 256 color
+    	  set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q' # this is for the cursor shape
 
-    # disabled activity monitoring
-    setw -g monitor-activity off
-    set -g visual-activity off
+        # don't exit from tmux when closing a session
+        set -g detach-on-destroy off
 
-    # disable programs change name
-    set -g allow-rename off
+        # disabled activity monitoring
+        setw -g monitor-activity off
+        set -g visual-activity off
 
-    # open lazygit in a new window
-    bind-key g display-popup -w "80%" -h "80%" -d "#{pane_current_path}" -E "lazygit"
+        # disable programs change name
+        set -g allow-rename off
 
-    # synchronize all panes in a window
-    bind -n C-M-y setw synchronize-panes
+        # open lazygit in a new window
+        bind-key g display-popup -w "80%" -h "80%" -d "#{pane_current_path}" -E "lazygit"
 
-    # Set new panes to open in current directory
-    bind c new-window -c "#{pane_current_path}"
-    bind 's' split-window -c "#{pane_current_path}"
-    bind 'v' split-window -h -c "#{pane_current_path}"
+        # synchronize all panes in a window
+        bind -n C-M-y setw synchronize-panes
 
-    # vim-style copy-paste
-    bind -n C-M-u copy-mode
-    bind -n C-M-p paste-buffer
-    bind -T copy-mode-vi v send-keys -X begin-selection
-    bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
-    bind -T copy-mode-vi r send-keys -X rectangle-toggle
+        # Set new panes to open in current directory
+        bind c new-window -c "#{pane_current_path}"
+        bind 's' split-window -c "#{pane_current_path}"
+        bind 'v' split-window -h -c "#{pane_current_path}"
+
+        # vim-style copy-paste
+        bind -n C-M-u copy-mode
+        bind -n C-M-p paste-buffer
+        bind -T copy-mode-vi v send-keys -X begin-selection
+        bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+        bind -T copy-mode-vi r send-keys -X rectangle-toggle
   '';
 }

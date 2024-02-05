@@ -1,14 +1,14 @@
 local silent = { silent = true }
 local silent_no = { noremap = true, silent = true }
 
-vim.keymap.set("n", "<Leader>q", ":lua MiniBufremove.delete()<CR>", silent_no)
-vim.keymap.set("n", "<Leader>w", ":q<CR>", silent_no)
-vim.keymap.set("n", "<Leader>.", "<C-^>", silent_no)
-vim.keymap.set("n", "<Leader>,", ":wall<CR>", silent_no)
+vim.keymap.set("n", "<leader>q", ":lua MiniBufremove.delete()<CR>", silent_no)
+vim.keymap.set("n", "<leader>w", ":q<CR>", silent_no)
+vim.keymap.set("n", "<leader>.", "<C-^>", silent_no)
+vim.keymap.set("n", "<leader>,", ":wall<CR>", silent_no)
 vim.keymap.set("n", "<C-s>", ":wall<CR>", silent_no)
-vim.keymap.set("n", "<Leader>h", ":set hlsearch!<CR>", silent_no)
-vim.keymap.set("n", "<Leader>x", ":luafile %<CR>", silent_no)
-vim.keymap.set("n", "<Leader>m", ":Messages<CR>", silent_no)
+vim.keymap.set("n", "<leader>h", ":set hlsearch!<CR>", silent_no)
+vim.keymap.set("n", "<leader>x", ":luafile %<CR>", silent_no)
+vim.keymap.set("n", "<leader>m", ":messages<CR>", silent_no)
 vim.keymap.set("n", "<esc>", ":noh<cr>", silent_no)
 
 -- do not replace yank on multiple paste
@@ -34,6 +34,22 @@ vim.keymap.set("n", "*", "*zz", silent_no)
 vim.keymap.set("n", "#", "#zz", silent_no)
 vim.keymap.set("n", "g*", "g*zz", silent_no)
 vim.keymap.set("n", "g#", "g#zz", silent_no)
+
+-- start / end of line
+vim.keymap.set("n", "H", "^", silent_no)
+vim.keymap.set("n", "L", "$", silent_no)
+vim.keymap.set("v", "H", "^", silent_no)
+vim.keymap.set("v", "L", "$", silent_no)
+
+-- move code
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", silent_no)
+vim.keymap.set("v", "<A-k>", ":m '<-1<CR>gv=gv", silent_no)
+
+-- redo
+vim.keymap.set("n", "U", "<C-r>", silent_no)
+
+-- quickfix
+vim.keymap.set("n", "<space>co", ":copen<CR>", silent_no)
 
 -- window resizing
 vim.keymap.set("n", "<Up>", ":resize -2<CR>", silent_no)

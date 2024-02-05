@@ -8,8 +8,8 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "<space>i", "<cmd>lua vim.diagnostic.open_float({ border = 'rounded' })<CR>", opts)
   keymap(bufnr, "n", "<space>n", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
   keymap(bufnr, "n", "<space>p", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
-  keymap(bufnr, "n", "<space>f", "<cmd>lua vim.lsp.buf.format<CR>", opts)
-  keymap(bufnr, "n", "<space>r", "<cmd>lua vim.lsp.buf.rename<CR>", opts)
+  keymap(bufnr, "n", "<space>fo", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
+  keymap(bufnr, "n", "<space>r", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
   keymap(bufnr, "n", "<space>ca", "<cmd>vim.lsp.buf.code_action<CR>", opts)
   keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
   keymap(bufnr, "n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
@@ -65,7 +65,7 @@ local servers = {
   "diagnosticls",
   "dockerls",
   "docker_compose_language_service",
-  "eslint",
+  -- "eslint",
   "graphql",
   "html",
   "jsonls",

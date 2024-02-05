@@ -50,21 +50,11 @@ cmp.setup({
     }),
   },
   mapping = cmp.mapping.preset.insert({
-    ["<C-n>"] = cmp.mapping(function()
-      if luasnip.choice_active() then
-        luasnip.change_choice(1)
-      end
-    end),
-    ["<C-p>"] = cmp.mapping(function()
-      if luasnip.choice_active() then
-        luasnip.change_choice(-1)
-      end
-    end),
     ["<C-u>"] = cmp.mapping.scroll_docs(-4),
     ["<C-d>"] = cmp.mapping.scroll_docs(4),
     ["<CR>"] = cmp.mapping.confirm({ select = true }),
     ["<C-space>"] = cmp.mapping.complete({}),
-    ["<TAB>"] = cmp.mapping(function(fallback)
+    ["<C-n>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_jumpable() then
@@ -75,7 +65,7 @@ cmp.setup({
         fallback()
       end
     end, { "i", "s" }),
-    ["<S-TAB>"] = cmp.mapping(function(fallback)
+    ["<C-p>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then
@@ -85,18 +75,35 @@ cmp.setup({
       end
     end, { "i", "s" }),
   }),
-  completion = {
-    completeopt = "menu,menuone,noselect",
-  },
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
     end,
   },
-  view = {
-    entries = "native",
-  },
   experimental = {
     ghost_text = true,
   },
+
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
 })
+
+-- -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+-- cmp.setup.cmdline({ "/", "?" }, {
+--   mapping = cmp.mapping.preset.cmdline(),
+--   sources = {
+--     { name = "buffer" },
+--   },
+-- })
+--
+-- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+-- cmp.setup.cmdline(":", {
+--   mapping = cmp.mapping.preset.cmdline(),
+--   sources = cmp.config.sources({
+--     { name = "path" },
+--   }, {
+--     { name = "cmdline" },
+--   }),
+-- })

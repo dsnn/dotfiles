@@ -5,7 +5,6 @@ local function lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = true }
   local keymap = vim.api.nvim_buf_set_keymap
 
-  keymap(bufnr, "n", "<space>i", "<cmd>lua vim.diagnostic.open_float({ border = 'rounded' })<CR>", opts)
   keymap(bufnr, "n", "<space>n", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
   keymap(bufnr, "n", "<space>p", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
   keymap(bufnr, "n", "<space>fo", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
@@ -107,9 +106,9 @@ for _, sign in ipairs(vim.tbl_get(vim.diagnostic.config(), "signs", "values") or
 end
 
 -- rounded borders
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
-require("lspconfig.ui.windows").default_options.border = "rounded"
+-- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+-- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+-- require("lspconfig.ui.windows").default_options.border = "rounded"
 
 for _, server in pairs(servers) do
   local opts = {

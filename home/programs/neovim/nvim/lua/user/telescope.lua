@@ -30,10 +30,6 @@ local function dotfiles()
   builtin.find_files(opts)
 end
 
-local function help_tags()
-  builtin.help_tags()
-end
-
 local function find_files()
   builtin.find_files({
     layout_strategy = "vertical",
@@ -51,10 +47,6 @@ local function grep_word()
     layout_config = { width = 0.6, height = 0.9 },
     sorter = sorters.get_fzy_sorter(),
   })
-end
-
-local function live_grep()
-  builtin.live_grep()
 end
 
 local function buffers()
@@ -78,27 +70,26 @@ local function grep_current_cWORD()
   builtin.grep_string({ search = word })
 end
 
+local opt = { noremap = true, silent = true }
+vim.keymap.set("n", "<space>sd", dotfiles, opt)
+vim.keymap.set("n", "<Leader><space>", buffers, opt)
+vim.keymap.set("n", "<space>sa", find_files, opt)
+vim.keymap.set("n", "<space>sc", builtin.colorscheme, opt)
+vim.keymap.set("n", "<space>sh", builtin.help_tags, opt)
+vim.keymap.set("n", "<space>sp", projects, opt)
+vim.keymap.set("n", "<space>sn", notes, opt)
+vim.keymap.set("n", "<space>sr", builtin.oldfiles, opt)
+vim.keymap.set("n", "<space>sg", builtin.live_grep, opt)
+vim.keymap.set("n", "<space>sf", grep_word, opt)
+vim.keymap.set("n", "<space>sk", builtin.keymaps, opt)
+vim.keymap.set("n", "<space>sq", builtin.quickfix, opt)
+vim.keymap.set("n", "<space>sw", grep_current_cword, opt)
+vim.keymap.set("n", "<space>sW", grep_current_cWORD, opt)
+
 local action_layout = require("telescope.actions.layout")
 local actions = require("telescope.actions")
 local previewers = require("telescope.previewers")
 local sorters = require("telescope.sorters")
-
-local opt = { noremap = true, silent = true }
-vim.keymap.set("n", "<space>fd", dotfiles, opt)
-vim.keymap.set("n", "<Leader><space>", buffers, opt)
-vim.keymap.set("n", "<space>b", buffers, opt)
-vim.keymap.set("n", "<space>f", find_files, opt)
-vim.keymap.set("n", "<space>fc", "<cmd>Telescope colorscheme<CR>", opt)
-vim.keymap.set("n", "<space>fh", help_tags, opt)
-vim.keymap.set("n", "<space>fm", projects, opt)
-vim.keymap.set("n", "<space>fn", notes, opt)
-vim.keymap.set("n", "<space>fr", "<cmd>Telescope oldfiles<CR>", opt)
-vim.keymap.set("n", "<space>fg", live_grep, opt)
-vim.keymap.set("n", "<space>fw", grep_word, opt)
-vim.keymap.set("n", "<space>k", "<cmd>Telescope keymaps<CR>", opt)
-vim.keymap.set("n", "<space>fq", "<cmd>Telescope quickfix<CR>", opt)
-vim.keymap.set("n", "<space>sw", grep_current_cword, opt)
-vim.keymap.set("n", "<space>sW", grep_current_cWORD, opt)
 
 telescope.setup({
   defaults = {

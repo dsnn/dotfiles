@@ -27,6 +27,8 @@ in {
     nodePackages."typescript-language-server"
     nodePackages."vim-language-server"
     nodePackages."vscode-langservers-extracted" # HTML/CSS/JSON/ESLint language servers extracted from vscode
+    nodePackages."jsonlint"
+    nodePackages."prettier"
     prettierd
     rnix-lsp
     shfmt
@@ -34,6 +36,16 @@ in {
     tailwindcss-language-server
     yaml-language-server
     docker-compose-language-service
+    ansible-lint
+    yamllint
+    eslint_d
+    proselint
+    shellcheck
+    statix
+    commitlint
+    markdownlint-cli
+    stylelint
+    jq
   ];
 
   programs.neovim = {
@@ -52,6 +64,7 @@ in {
       cmp-path
       cmp_luasnip
       conform-nvim
+      nvim-lint
       copilot-cmp
       copilot-lua
       diffview-nvim

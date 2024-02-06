@@ -7,7 +7,6 @@ with pkgs;
   # terraform
   # terraform-ls
   ansible
-  ansible-lint
   curl
   fd
   git-crypt
@@ -26,7 +25,6 @@ with pkgs;
   wakeonlan
   xclip
   spotify-tui
-  proselint
 ] ++ pkgs.lib.optionals isServer [
   _1password
 ]

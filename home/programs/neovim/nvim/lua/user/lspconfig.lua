@@ -1,3 +1,8 @@
+-- https://github.com/folke/neodev.nvim
+-- https://github.com/neovim/nvim-lspconfig
+-- https://github.com/hrsh7th/nvim-cmp
+
+require("neodev").setup({})
 local lspconfig = require("lspconfig")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
@@ -26,8 +31,7 @@ end
 
 local function common_capabilities()
   local vim_capabilities = vim.lsp.protocol.make_client_capabilities()
-  local cmp_capabilities = cmp_nvim_lsp.default_capabilities()
-  local capabilities = vim.tbl_deep_extend("force", {}, vim_capabilities, cmp_capabilities)
+  local capabilities = cmp_nvim_lsp.default_capabilities(vim_capabilities)
 
   capabilities.textDocument.completion.completionItem.snippetSupport = true
 
@@ -54,23 +58,48 @@ local function filterReactDTS(value)
 end
 
 local servers = {
-  "bashls",
-  "cssls",
-  "diagnosticls",
-  "dockerls",
-  "docker_compose_language_service",
-  -- "eslint",
-  "graphql",
-  "html",
-  "jsonls",
-  "lua_ls",
-  "nil_ls",
-  "tsserver",
-  "vimls",
-  "yamlls",
+  bashls = {},
+  cssls = {},
+  diagnosticls = {},
+  dockerls = {},
+  docker_compose_language_service = {},
+  graphql = {},
+  html = {},
+  jsonls = {},
+  lua_ls = {
+    settings = {
+      Lua = {
+        diagnostics = {
+          globals = { "vim" },
+        },
+        workspace = { checkThirdParty = false },
+        telemetry = { enabled = false },
+      },
+    },
+  },
+  nil_ls = {},
+  tsserver = {
+    settings = {
+      experimental = {
+        enableProjectDiagnostics = true,
+      },
+    },
+    handlers = {
+      ["textDocument/definition"] = function(err, result, method, ...)
+        if vim.tbl_islist(result) and #result > 1 then
+          local filtered_result = filter(result, filterReactDTS)
+          return vim.lsp.handlers["textDocument/definition"](err, filtered_result, method, ...)
+        end
+
+        vim.lsp.handlers["textDocument/definition"](err, result, method, ...)
+      end,
+    },
+  },
+  vimls = {},
+  yamlls = {},
 }
 
-local default_diagnostic_config = {
+vim.diagnostic.config({
   signs = {
     active = true,
     values = {
@@ -92,56 +121,24 @@ local default_diagnostic_config = {
     header = "",
     prefix = "",
   },
-}
-
-vim.diagnostic.config(default_diagnostic_config)
+})
 
 for _, sign in ipairs(vim.tbl_get(vim.diagnostic.config(), "signs", "values") or {}) do
   vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
 end
 
--- rounded borders
--- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
--- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
--- require("lspconfig.ui.windows").default_options.border = "rounded"
+local default_handlers = {
+  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
+  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
+}
+require("lspconfig.ui.windows").default_options.border = "rounded"
 
-for _, server in pairs(servers) do
-  local opts = {
-    on_attach = on_attach,
+for name, config in pairs(servers) do
+  lspconfig[name].setup({
     capabilities = common_capabilities(),
-  }
-
-  if server == "lua_ls" then
-    require("neodev").setup({})
-    require("lspconfig").lua_ls.setup({
-      on_attach = on_attach,
-      capabilities = common_capabilities(),
-      settings = {
-        Lua = {
-          diagnostics = {
-            globals = { "vim" },
-          },
-        },
-      },
-    })
-  end
-
-  if server == "tsserver" then
-    require("lspconfig").tsserver.setup({
-      on_attach = on_attach,
-      capabilities = common_capabilities(),
-      handlers = {
-        ["textDocument/definition"] = function(err, result, method, ...)
-          if vim.tbl_islist(result) and #result > 1 then
-            local filtered_result = filter(result, filterReactDTS)
-            return vim.lsp.handlers["textDocument/definition"](err, filtered_result, method, ...)
-          end
-
-          vim.lsp.handlers["textDocument/definition"](err, result, method, ...)
-        end,
-      },
-    })
-  end
-
-  lspconfig[server].setup(opts)
+    fileTypes = config.fileTypes,
+    handlers = vim.tbl_deep_extend("force", {}, default_handlers, config.handlers or {}),
+    on_attach = on_attach,
+    settings = config.settings,
+  })
 end

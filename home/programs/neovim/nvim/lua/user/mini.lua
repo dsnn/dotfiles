@@ -1,3 +1,6 @@
+-- https://github.com/echasnovski/mini.nvim
+-- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
+
 require("ts_context_commentstring").setup({
   enable_autocmd = false,
 })

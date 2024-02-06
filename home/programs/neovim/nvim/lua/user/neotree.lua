@@ -1,3 +1,5 @@
+-- https://github.com/nvim-neo-tree/neo-tree.nvim
+
 vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
 local function getTelescopeOpts(state, path)
@@ -5,20 +7,20 @@ local function getTelescopeOpts(state, path)
     cwd = path,
     search_dirs = { path },
     attach_mappings = function(prompt_bufnr)
-      local actions = require "telescope.actions"
+      local actions = require("telescope.actions")
       actions.select_default:replace(function()
         actions.close(prompt_bufnr)
-        local action_state = require "telescope.actions.state"
+        local action_state = require("telescope.actions.state")
         local selection = action_state.get_selected_entry()
         local filename = selection.filename
-        if (filename == nil) then
+        if filename == nil then
           filename = selection[1]
         end
         -- any way to open the file without triggering auto-close event of neo-tree?
         require("neo-tree.sources.filesystem").navigate(state, state.path, filename)
       end)
       return true
-    end
+    end,
   }
 end
 
@@ -30,9 +32,8 @@ end
 --     "nvim-tree/nvim-web-devicons",
 --     "MunifTanjim/nui.nvim",
 --   },
---   tag = "3.16", 
+--   tag = "3.16",
 -- }
-
 
 require("plenary")
 require("nvim-web-devicons")
@@ -48,14 +49,14 @@ require("neo-tree").setup({
     {
       event = "neo_tree_buffer_enter",
       handler = function(arg)
-        vim.cmd [[ setlocal relativenumber ]]
+        vim.cmd([[ setlocal relativenumber ]])
       end,
-    }
+    },
   },
 
   default_component_configs = {
     container = {
-      enable_character_fade = true
+      enable_character_fade = true,
     },
     indent = {
       indent_size = 2,
@@ -74,7 +75,7 @@ require("neo-tree").setup({
       folder_open = "",
       folder_empty = "ﰊ",
       default = "*",
-      highlight = "NeoTreeFileIcon"
+      highlight = "NeoTreeFileIcon",
     },
     modified = {
       symbol = "[+]",
@@ -88,17 +89,17 @@ require("neo-tree").setup({
     git_status = {
       symbols = {
         -- Change type
-        added     = "",
-        modified  = "",
-        deleted   = "✖",
-        renamed   = "➜",
+        added = "",
+        modified = "",
+        deleted = "✖",
+        renamed = "➜",
         -- Status type
         untracked = "",
-        ignored   = "",
-        unstaged  = "",
-        staged    = "✓",
-        conflict  = "",
-      }
+        ignored = "",
+        unstaged = "",
+        staged = "✓",
+        conflict = "",
+      },
     },
   },
 
@@ -137,7 +138,7 @@ require("neo-tree").setup({
       ["<2-LeftMouse>"] = "open",
       ["<cr>"] = "open",
       ["<esc>"] = "cancel",
-      ["<space>"] = { "toggle_node", nowait = false, },
+      ["<space>"] = { "toggle_node", nowait = false },
       [">"] = "next_source",
       ["?"] = "show_help",
       ["A"] = "add_directory",
@@ -162,35 +163,35 @@ require("neo-tree").setup({
       ["z"] = "close_all_nodes",
       ["h"] = function(state)
         local node = state.tree:get_node()
-        if node.type == 'directory' and node:is_expanded() then
-          require 'neo-tree.sources.filesystem'.toggle_directory(state, node)
+        if node.type == "directory" and node:is_expanded() then
+          require("neo-tree.sources.filesystem").toggle_directory(state, node)
         else
-          require 'neo-tree.ui.renderer'.focus_node(state, node:get_parent_id())
+          require("neo-tree.ui.renderer").focus_node(state, node:get_parent_id())
         end
       end,
       ["l"] = function(state)
         local node = state.tree:get_node()
-        if node.type == 'directory' then
+        if node.type == "directory" then
           if not node:is_expanded() then
-            require 'neo-tree.sources.filesystem'.toggle_directory(state, node)
+            require("neo-tree.sources.filesystem").toggle_directory(state, node)
           elseif node:has_children() then
-            require 'neo-tree.ui.renderer'.focus_node(state, node:get_child_ids()[1])
+            require("neo-tree.ui.renderer").focus_node(state, node:get_child_ids()[1])
           end
         end
       end,
-    }
+    },
   },
   filesystem = {
     commands = {
       telescope_find = function(state)
         local node = state.tree:get_node()
         local path = node:get_id()
-        require('telescope.builtin').find_files(getTelescopeOpts(state, path))
+        require("telescope.builtin").find_files(getTelescopeOpts(state, path))
       end,
       telescope_grep = function(state)
         local node = state.tree:get_node()
         local path = node:get_id()
-        require('telescope.builtin').live_grep(getTelescopeOpts(state, path))
+        require("telescope.builtin").live_grep(getTelescopeOpts(state, path))
       end,
     },
     filtered_items = {
@@ -234,8 +235,8 @@ require("neo-tree").setup({
         ["<c-x>"] = "clear_filter",
         ["C-k"] = "prev_git_modified",
         ["C-j"] = "next_git_modified",
-      }
-    }
+      },
+    },
   },
   buffers = {
     follow_current_file = {
@@ -249,23 +250,23 @@ require("neo-tree").setup({
         ["bd"] = "buffer_delete",
         ["<bs>"] = "navigate_up",
         ["."] = "set_root",
-      }
+      },
     },
   },
   git_status = {
     window = {
       position = "float",
       mappings = {
-        ["A"]  = "git_add_all",
+        ["A"] = "git_add_all",
         ["gu"] = "git_unstage_file",
         ["ga"] = "git_add_file",
         ["gr"] = "git_revert_file",
         ["gc"] = "git_commit",
         ["gp"] = "git_push",
         ["gg"] = "git_commit_and_push",
-      }
-    }
-  }
+      },
+    },
+  },
   -- filesystem = {
   --   follow_current_file = true,
   --   hijack_netrw_behavior = "open_current",

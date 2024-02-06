@@ -1,3 +1,5 @@
+-- https://github.com/catppuccin/nvim
+
 vim.o.background = "dark"
 
 require("catppuccin").setup({

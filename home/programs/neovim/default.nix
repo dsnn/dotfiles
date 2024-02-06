@@ -91,6 +91,7 @@ in {
       nvim-web-devicons
       plenary-nvim
       telescope-fzf-native-nvim
+      telescope-ui-select-nvim # review (not used atm)
       telescope-nvim
       trouble-nvim
       vim-fugitive

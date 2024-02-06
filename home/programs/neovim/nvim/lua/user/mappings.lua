@@ -3,6 +3,7 @@ local silent_no = { noremap = true, silent = true }
 
 vim.keymap.set("n", "<leader>q", ":lua MiniBufremove.delete()<CR>", silent_no)
 vim.keymap.set("n", "<leader>w", ":q<CR>", silent_no)
+vim.keymap.set("n", "<space>qq", ":qa!<CR>", silent_no)
 vim.keymap.set("n", "<leader>.", "<C-^>", silent_no)
 vim.keymap.set("n", "<leader>,", ":wall<CR>", silent_no)
 vim.keymap.set("n", "<C-s>", ":wall<CR>", silent_no)
@@ -49,7 +50,7 @@ vim.keymap.set("v", "<A-k>", ":m '<-1<CR>gv=gv", silent_no)
 vim.keymap.set("n", "U", "<C-r>", silent_no)
 
 -- quickfix
-vim.keymap.set("n", "<space>co", ":copen<CR>", silent_no)
+vim.keymap.set("n", "<space>co", ":Trouble quickfix<CR>", silent_no)
 
 -- window resizing
 vim.keymap.set("n", "<Up>", ":resize -2<CR>", silent_no)

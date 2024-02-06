@@ -10,7 +10,7 @@ local function lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = true }
   local keymap = vim.api.nvim_buf_set_keymap
 
-  keymap(bufnr, "n", "<space>ca", "<cmd>vim.lsp.buf.code_action<CR>", opts)
+  keymap(bufnr, "n", "<space>.", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
   keymap(bufnr, "n", "<space>fo", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
   keymap(bufnr, "n", "<space>n", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
   keymap(bufnr, "n", "<space>p", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)

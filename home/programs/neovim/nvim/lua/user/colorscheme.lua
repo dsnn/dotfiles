@@ -34,26 +34,22 @@ require("catppuccin").setup({
   color_overrides = {},
   custom_highlights = {},
   integrations = {
+    -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
     cmp = true,
-    treesitter = true,
     harpoon = true,
-    neotree = true,
+    lsp_trouble = true,
     mini = {
       enabled = true,
       indentscope_color = "",
     },
-    treesitter_context = true,
-    telescope = {
-      enabled = true,
-    },
-    lsp_trouble = true,
     native_lsp = {
       enabled = true,
-      inlay_hints = {
-        background = true,
-      },
+      inlay_hints = { background = true },
     },
-    -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+    neotree = true,
+    telescope = true,
+    treesitter = true,
+    treesitter_context = true,
   },
 })
 

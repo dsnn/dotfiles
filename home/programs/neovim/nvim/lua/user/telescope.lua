@@ -70,6 +70,17 @@ local function grep_current_cWORD()
   builtin.grep_string({ search = word })
 end
 
+local function oldfiles()
+  local themes = require("telescope.themes")
+  local opts = themes.get_dropdown({
+    short_path = false,
+    hidden = true,
+    layout_strategy = "vertical",
+    layout_config = { width = 0.6, height = 0.9 },
+  })
+  builtin.oldfiles(opts)
+end
+
 local opt = { noremap = true, silent = true }
 vim.keymap.set("n", "<space>sd", dotfiles, opt)
 vim.keymap.set("n", "<Leader><space>", buffers, opt)
@@ -78,7 +89,7 @@ vim.keymap.set("n", "<space>sc", builtin.colorscheme, opt)
 vim.keymap.set("n", "<space>sh", builtin.help_tags, opt)
 vim.keymap.set("n", "<space>sp", projects, opt)
 vim.keymap.set("n", "<space>sn", notes, opt)
-vim.keymap.set("n", "<space>sr", builtin.oldfiles, opt)
+vim.keymap.set("n", "<space>sr", oldfiles, opt)
 vim.keymap.set("n", "<space>sg", builtin.live_grep, opt)
 vim.keymap.set("n", "<space>sf", grep_word, opt)
 vim.keymap.set("n", "<space>sk", builtin.keymaps, opt)

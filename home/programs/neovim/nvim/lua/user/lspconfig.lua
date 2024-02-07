@@ -21,12 +21,12 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
 end
 
-local function on_attach(client, bufnr)
+local function on_attach(_, bufnr)
   lsp_keymaps(bufnr)
 
-  if client.supports_method("textDocument/inlayHint") then
-    vim.lsp.inlay_hint.enable(bufnr, true)
-  end
+  -- if client.supports_method("textDocument/inlayHint") then
+  --   vim.lsp.inlay_hint.enable(bufnr, true)
+  -- end
 end
 
 local function common_capabilities()

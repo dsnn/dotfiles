@@ -1,106 +1,85 @@
-local silent = { silent = true }
-local silent_no = { noremap = true, silent = true }
+local opts = { noremap = true, silent = true }
 
-vim.keymap.set("n", "<leader>q", ":lua MiniBufremove.delete()<CR>", silent_no)
-vim.keymap.set("n", "<leader>w", ":q<CR>", silent_no)
-vim.keymap.set("n", "<space>qq", ":qa!<CR>", silent_no)
-vim.keymap.set("n", "<leader>.", "<C-^>", silent_no)
-vim.keymap.set("n", "<leader>,", ":wall<CR>", silent_no)
-vim.keymap.set("n", "<C-s>", ":wall<CR>", silent_no)
-vim.keymap.set("n", "<leader>h", ":set hlsearch!<CR>", silent_no)
-vim.keymap.set("n", "<leader>x", ":luafile %<CR>", silent_no)
-vim.keymap.set("n", "<leader>m", ":messages<CR>", silent_no)
-vim.keymap.set("n", "<esc>", ":noh<cr>", silent_no)
+vim.keymap.set("n", "<leader>q", ":lua MiniBufremove.delete()<CR>", opts)
+vim.keymap.set("n", "<leader>w", ":q<CR>", opts)
+vim.keymap.set("n", "<space>qq", ":qa!<CR>", opts)
+vim.keymap.set("n", "<leader>.", "<C-^>", opts)
+vim.keymap.set("n", "<leader>,", ":wall<CR>", opts)
+vim.keymap.set("n", "<C-s>", ":wall<CR>", opts)
+vim.keymap.set("n", "<leader>h", ":set hlsearch!<CR>", opts)
+vim.keymap.set("n", "<leader>x", ":luafile %<CR>", opts)
+vim.keymap.set("n", "<leader>m", ":messages<CR>", opts)
+vim.keymap.set("n", "<esc>", ":noh<cr>", opts)
 
 -- do not replace yank on multiple paste
-vim.keymap.set("x", "p", "pgvy", silent_no)
+vim.keymap.set("x", "p", "pgvy", opts)
 
 -- line indentation
-vim.keymap.set("v", "<", "<gv", silent_no)
-vim.keymap.set("v", ">", ">gv", silent_no)
+vim.keymap.set("v", "<", "<gv", opts)
+vim.keymap.set("v", ">", ">gv", opts)
 
 -- visual search
 -- vim.keymap.set('v', '<m-/>', '<esc>/\\%V'
 vim.keymap.set("x", "/", "<Esc>/\\%V")
 
 -- navigation
-vim.keymap.set("n", "<C-h>", "<C-w>h", silent)
-vim.keymap.set("n", "<C-j>", "<C-w>j", silent)
-vim.keymap.set("n", "<C-k>", "<C-w>k", silent)
-vim.keymap.set("n", "<C-l>", "<C-w>l", silent)
+vim.keymap.set("n", "<C-h>", "<C-w>h", { silent = true })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { silent = true })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { silent = true })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { silent = true })
 
-vim.keymap.set("n", "n", "nzz", silent_no)
-vim.keymap.set("n", "N", "Nzz", silent_no)
-vim.keymap.set("n", "*", "*zz", silent_no)
-vim.keymap.set("n", "#", "#zz", silent_no)
-vim.keymap.set("n", "g*", "g*zz", silent_no)
-vim.keymap.set("n", "g#", "g#zz", silent_no)
+vim.keymap.set("n", "n", "nzz", opts)
+vim.keymap.set("n", "N", "Nzz", opts)
+vim.keymap.set("n", "*", "*zz", opts)
+vim.keymap.set("n", "#", "#zz", opts)
+vim.keymap.set("n", "g*", "g*zz", opts)
+vim.keymap.set("n", "g#", "g#zz", opts)
 
 -- start / end of line
-vim.keymap.set("n", "H", "^", silent_no)
-vim.keymap.set("n", "L", "$", silent_no)
-vim.keymap.set("v", "H", "^", silent_no)
-vim.keymap.set("v", "L", "$", silent_no)
+vim.keymap.set("n", "H", "^", opts)
+vim.keymap.set("n", "L", "$", opts)
+vim.keymap.set("v", "H", "^", opts)
+vim.keymap.set("v", "L", "$", opts)
 
 -- move code
-vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", silent_no)
-vim.keymap.set("v", "<A-k>", ":m '<-1<CR>gv=gv", silent_no)
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", opts)
+vim.keymap.set("v", "<A-k>", ":m '<-1<CR>gv=gv", opts)
 
 -- redo
-vim.keymap.set("n", "U", "<C-r>", silent_no)
-
--- quickfix
-vim.keymap.set("n", "<space>c", ":Trouble quickfix<CR>", silent_no)
+vim.keymap.set("n", "U", "<C-r>", opts)
 
 -- window resizing
-vim.keymap.set("n", "<Up>", ":resize -2<CR>", silent_no)
-vim.keymap.set("n", "<Down>", ":resize +2<CR>", silent_no)
-vim.keymap.set("n", "<Right>", ":vertical resize -2<CR>", silent_no)
-vim.keymap.set("n", "<Left>", ":vertical resize +2<CR>", silent_no)
+vim.keymap.set("n", "<Up>", ":resize -2<CR>", opts)
+vim.keymap.set("n", "<Down>", ":resize +2<CR>", opts)
+vim.keymap.set("n", "<Right>", ":vertical resize -2<CR>", opts)
+vim.keymap.set("n", "<Left>", ":vertical resize +2<CR>", opts)
 
 -- buffer navigation
-vim.keymap.set("n", "<TAB>", ":bnext<CR>", silent_no)
-vim.keymap.set("n", "<S-TAB>", ":bprevious<CR>", silent_no)
+vim.keymap.set("n", "<TAB>", ":bnext<CR>", opts)
+vim.keymap.set("n", "<S-TAB>", ":bprevious<CR>", opts)
 
 -- buffer split
-vim.keymap.set("n", "vv", "<C-w>v", silent_no)
-vim.keymap.set("n", "ss", "<C-w>s", silent_no)
-
--- file tree nav
-vim.keymap.set("n", "<C-n>", ":Neotree toggle<CR>", silent_no)
-vim.keymap.set("n", "<Leader>k", ":Neotree reveal_file=%<CR>", silent_no)
-
--- snippets
-vim.keymap.set("n", "<Leader>s", '<cmd>:lua require("luasnip.loaders").edit_snippet_files()<CR>', silent_no)
+vim.keymap.set("n", "vv", "<C-w>v", opts)
+vim.keymap.set("n", "ss", "<C-w>s", opts)
 
 -- bookmarks
-vim.keymap.set("n", "<space>a", "<cmd>:lua require('harpoon.mark').add_file()<CR>", silent_no)
-vim.keymap.set("n", "<space>h", "<cmd>:lua require('harpoon.ui').toggle_quick_menu()<CR>", silent_no)
-vim.keymap.set("n", "<space>1", "<cmd>:lua require('harpoon.ui').nav_file(1)<CR>", silent_no)
-vim.keymap.set("n", "<space>2", "<cmd>:lua require('harpoon.ui').nav_file(2)<CR>", silent_no)
-vim.keymap.set("n", "<space>3", "<cmd>:lua require('harpoon.ui').nav_file(3)<CR>", silent_no)
-vim.keymap.set("n", "<space>4", "<cmd>:lua require('harpoon.ui').nav_file(4)<CR>", silent_no)
-
--- lsp trouble
-vim.keymap.set("n", "<space>t", ":TroubleToggle<CR>", silent_no)
+vim.keymap.set("n", "<space>a", "<cmd>:lua require('harpoon.mark').add_file()<CR>", opts)
+vim.keymap.set("n", "<space>h", "<cmd>:lua require('harpoon.ui').toggle_quick_menu()<CR>", opts)
+vim.keymap.set("n", "<space>1", "<cmd>:lua require('harpoon.ui').nav_file(1)<CR>", opts)
+vim.keymap.set("n", "<space>2", "<cmd>:lua require('harpoon.ui').nav_file(2)<CR>", opts)
+vim.keymap.set("n", "<space>3", "<cmd>:lua require('harpoon.ui').nav_file(3)<CR>", opts)
+vim.keymap.set("n", "<space>4", "<cmd>:lua require('harpoon.ui').nav_file(4)<CR>", opts)
 
 -- diffview
-vim.keymap.set("n", "<space>do", ":DiffviewOpen<CR>", silent_no)
-vim.keymap.set("n", "<space>dc", ":DiffviewClose<CR>", silent_no)
-
--- git / fugitive
-vim.keymap.set("n", "<space>g", ":Git<CR>", silent_no)
-vim.keymap.set("n", "<space>gs", ":Git st<CR>", silent_no)
-vim.keymap.set("n", "<space>gb", ":Git blame<CR>", silent_no)
-vim.keymap.set("n", "<space>gm", ":Git mergetool<CR>", silent_no)
-vim.keymap.set("n", "<space>gl", ":Git last<CR>", silent_no)
+vim.keymap.set("n", "<space>do", ":DiffviewOpen<CR>", opts)
+vim.keymap.set("n", "<space>dc", ":DiffviewClose<CR>", opts)
 
 -- console.log
 vim.keymap.set(
   "n",
   "<space>l",
   "<cmd> :put! =printf('console.log(''%s:'',  %s);', expand('<cword>'), expand('<cword>'))<CR>-2==+",
-  silent_no
+  opts
 )
 
 -- remove whitespace manually

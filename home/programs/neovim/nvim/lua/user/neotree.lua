@@ -1,5 +1,9 @@
 -- https://github.com/nvim-neo-tree/neo-tree.nvim
 
+local opts = { noremap = true, silent = true }
+vim.keymap.set("n", "<C-n>", ":Neotree toggle<CR>", opts)
+vim.keymap.set("n", "<Leader>k", ":Neotree reveal_file=%<CR>", opts)
+
 vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
 local function getTelescopeOpts(state, path)

@@ -19,6 +19,13 @@ copilot_cmp.setup({
 
 lspkind.init()
 
+vim.keymap.set(
+  "n",
+  "<Leader>s",
+  '<cmd>:lua require("luasnip.loaders").edit_snippet_files()<CR>',
+  { noremap = true, silent = true }
+)
+
 local has_words_before = function()
   unpack = unpack or table.unpack
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))

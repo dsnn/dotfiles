@@ -1,5 +1,9 @@
 -- https://github.com/folke/trouble.nvim/
 
+local opts = { noremap = true, silent = true }
+vim.keymap.set("n", "<space>t", ":TroubleToggle<CR>", opts)
+vim.keymap.set("n", "<space>c", ":Trouble quickfix<CR>", opts)
+
 require("trouble").setup({
   position = "bottom", -- position of the list can be: bottom, top, left, right
   height = 10, -- height of the trouble list when position is top or bottom

@@ -90,6 +90,7 @@ in {
       nvim-ts-context-commentstring
       nvim-web-devicons
       plenary-nvim
+      persistence-nvim
       telescope-fzf-native-nvim
       telescope-ui-select-nvim # review (not used atm)
       telescope-nvim

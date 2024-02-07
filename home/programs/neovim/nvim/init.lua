@@ -17,18 +17,10 @@ require("user.neotree")
 require("user.telescope")
 require("user.treesitter")
 require("user.trouble")
+require("user.persistence")
 
 -- return {
---   "f3fora/cmp-spell",
---   "godlygeek/tabular",
---   "j-hui/fidget.nvim",
 --   "mhinz/vim-startify",
---   "nvim-lua/lsp-status.nvim",
---   "nvim-lualine/lualine.nvim",
---   "onsails/lspkind-nvim",
---   "rcarriga/nvim-dap-ui",
---   "tpope/vim-fugitive",
 --   "tpope/vim-repeat",
 --   "tpope/vim-surround",
---   "unblevable/quick-scope",
 -- }

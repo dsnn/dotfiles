@@ -88,8 +88,12 @@ vim.keymap.set("n", "<space>t", ":TroubleToggle<CR>", silent_no)
 vim.keymap.set("n", "<space>do", ":DiffviewOpen<CR>", silent_no)
 vim.keymap.set("n", "<space>dc", ":DiffviewClose<CR>", silent_no)
 
--- git
+-- git / fugitive
 vim.keymap.set("n", "<space>g", ":Git<CR>", silent_no)
+vim.keymap.set("n", "<space>gs", ":Git st<CR>", silent_no)
+vim.keymap.set("n", "<space>gb", ":Git blame<CR>", silent_no)
+vim.keymap.set("n", "<space>gm", ":Git mergetool<CR>", silent_no)
+vim.keymap.set("n", "<space>gl", ":Git last<CR>", silent_no)
 
 -- console.log
 vim.keymap.set(

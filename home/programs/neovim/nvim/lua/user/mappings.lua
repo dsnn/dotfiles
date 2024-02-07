@@ -50,7 +50,7 @@ vim.keymap.set("v", "<A-k>", ":m '<-1<CR>gv=gv", silent_no)
 vim.keymap.set("n", "U", "<C-r>", silent_no)
 
 -- quickfix
-vim.keymap.set("n", "<space>co", ":Trouble quickfix<CR>", silent_no)
+vim.keymap.set("n", "<space>c", ":Trouble quickfix<CR>", silent_no)
 
 -- window resizing
 vim.keymap.set("n", "<Up>", ":resize -2<CR>", silent_no)

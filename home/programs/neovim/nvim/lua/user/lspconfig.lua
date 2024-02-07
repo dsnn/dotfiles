@@ -79,6 +79,8 @@ local servers = {
   },
   nil_ls = {},
   tsserver = {
+    root_dir = lspconfig.util.find_git_ancestor,
+    single_file_support = false,
     settings = {
       experimental = {
         enableProjectDiagnostics = true,
@@ -135,6 +137,8 @@ require("lspconfig.ui.windows").default_options.border = "rounded"
 
 for name, config in pairs(servers) do
   lspconfig[name].setup({
+    root_dir = config.root_dir or nil,
+    single_file_support = config.single_file_support or nil,
     capabilities = common_capabilities(),
     fileTypes = config.fileTypes,
     handlers = vim.tbl_deep_extend("force", {}, default_handlers, config.handlers or {}),

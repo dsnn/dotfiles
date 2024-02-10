@@ -1,6 +1,6 @@
 { config, ... }: {
 
-  sops.secrets."zsh-exports" = { };
+  sops.secrets.exports = { sopsFile = ../../secrets/zsh.yaml; };
 
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
@@ -92,8 +92,8 @@
     zle -N run-cd-command
     bindkey '^u' run-cd-command
 
-    if [ -f '${config.sops.secrets."zsh-exports".path}' ]; then
-      source '${config.sops.secrets."zsh-exports".path}'
+    if [ -f '${config.sops.secrets.exports.path}' ]; then
+      source '${config.sops.secrets.exports.path}'
     fi
   '';
 }

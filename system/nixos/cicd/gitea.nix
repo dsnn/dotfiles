@@ -2,8 +2,9 @@
 
   networking.firewall.allowedTCPPorts = [ 3000 ];
 
-  sops.secrets = {
-    "postgres-gitea-db-pass" = { owner = config.services.gitea.user; };
+  sops.secrets."postgres-gitea-db-pass" = {
+    sopsFile = ../../../secrets/cicd.yaml;
+    owner = config.services.gitea.user;
   };
 
   services.postgresql = {

@@ -1,31 +1,6 @@
 keys:
   - &primary age1f4tujr44q6ldjf4n69yv0x5tn7xcu4hy5xj9lapmtgrzny56xfasw2803c
 creation_rules:
-  - path_regex: home/[^/]+\.yaml$
-    key_groups:
-      - age:
-          - *primary
-
-  - path_regex: hosts/black/[^/]+\.yaml$
-    key_groups:
-      - age:
-          - *primary
-
-  - path_regex: hosts/grey/[^/]+\.yaml$
-    key_groups:
-      - age:
-          - *primary
-
-  - path_regex: hosts/silver/[^/]+\.yaml$
-    key_groups:
-      - age:
-          - *primary
-
-  - path_regex: hosts/green/[^/]+\.yaml$
-    key_groups:
-      - age:
-          - *primary
-
   - path_regex: secrets/[^/]+\.yaml$
     key_groups:
       - age:

@@ -3,13 +3,11 @@
   imports = [
     ../../system/common.nix
     ../../system/nixos/cifs.nix
-    ../../system/nixos/containers/drone-runner-docker.nix
-    ../../system/nixos/security.nix
+    ../../system/nixos/cicd/drone-runner-docker.nix
     ../../system/nixos/security.nix
     ../../system/nixos/services/fail2ban.nix
     ../../system/nixos/services/openssh.nix
     ../../system/nixos/users.nix
-    ../../system/sops.nix
     ./hardware.nix
   ];
 

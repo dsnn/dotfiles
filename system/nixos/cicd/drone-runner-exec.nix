@@ -2,7 +2,10 @@
 let droneserver = config.users.users.droneserver.name;
 in {
 
-  sops.secrets = { "drone" = { owner = droneserver; }; };
+  sops.secrets.drone = {
+    sopsFile = ../../../secrets/cicd.yaml;
+    owner = droneserver;
+  };
 
   users.users.droneserver = {
     isSystemUser = true;

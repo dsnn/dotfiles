@@ -4,7 +4,10 @@ in {
 
   networking.firewall.allowedTCPPorts = [ 3030 ];
 
-  sops.secrets = { "drone" = { owner = droneserver; }; };
+  sops.secrets.drone = {
+    sopsFile = ../../../secrets/cicd.yaml;
+    owner = droneserver;
+  };
 
   users.users.droneserver = {
     isSystemUser = true;

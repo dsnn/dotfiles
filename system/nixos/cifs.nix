@@ -12,10 +12,10 @@ in {
 
   environment.systemPackages = with pkgs; [ cifs-utils ];
 
-  sops.secrets."samba-credentials" = { };
+  sops.secrets."credentials" = { sopsFile = ../../secrets/cifs.yaml; };
 
   environment.etc."nixos/smb-secrets".source =
-    config.sops.secrets."samba-credentials".path;
+    config.sops.secrets."credentials".path;
   environment.etc."nixos/smb-secrets".mode = "0600";
 
   fileSystems."/mnt/private" = cifsShare "private";

@@ -1,8 +1,12 @@
 { inputs, pkgs, ... }:
-let trustedUsers = [ "root" "dsn" "@wheel" ];
+let
+  inherit (pkgs.stdenv) isDarwin;
+  home = if isDarwin then "/Users/dsn" else "/home/dsn";
+  trustedUsers = [ "root" "dsn" "@wheel" ];
 in {
 
-  imports = [ inputs.sops-nix.nixosModules.sops ./sops.nix ];
+  imports = [ inputs.sops-nix.nixosModules.sops ];
+  sops.age.keyFile = "${home}/.config/sops/age/keys.txt";
 
   environment.shells = with pkgs; [ bash zsh ];
   environment.systemPackages = with pkgs; [

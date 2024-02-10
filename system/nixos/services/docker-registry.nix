@@ -1,41 +1,31 @@
 { config, ... }:
-let droneserver = config.users.users.droneserver.name;
+let docker-registry = config.users.users.docker-registry.name;
 in {
 
   networking.firewall.allowedTCPPorts = [ 5000 ];
 
   sops.secrets = {
-    "docker-registry-http-secret" = { owner = droneserver; };
-    "docker-registry-htpasswd" = { owner = droneserver; };
+    "docker-registry-http-secret" = { owner = docker-registry; };
+    "docker-registry-htpasswd" = { owner = docker-registry; };
   };
-
-  users.users.droneserver = {
-    isSystemUser = true;
-    createHome = true;
-    group = droneserver;
-  };
-  users.groups.droneserver = { };
 
   services.dockerRegistry = {
     enable = true;
-    listenAddress = "127.0.0.1";
+    listenAddress = "192.168.2.2"; # required. 127.0.0.1 doesn't work (?)
     port = 5000;
     enableDelete = true;
     enableGarbageCollect = true;
     garbageCollectDates = "daily";
+    # https://distribution.github.io/distribution#override-specific-configuration-options 
     extraConfig = {
-      http.secret = config.sops.secrets."docker-registry-http-secret".path;
-      # auth.htpasswd.realm = "Registry Realm";
-      # auth.htpasswd.path = "/auth/htpasswd";
-      # config.sops.secrets."docker-registry-htpasswd".path;
-      # environment:
-      #       REGISTRY_AUTH: htpasswd
-      #       REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
-      #       REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
+      REGISTRY_AUTH = "htpasswd";
+      REGISTRY_AUTH_HTPASSWD_PATH =
+        config.sops.secrets."docker-registry-htpasswd".path;
+      REGISTRY_AUTH_HTPASSWD_REALM = "Registry Realm";
     };
   };
 
   services.nginx.virtualHosts."registry.dsnn.io" = {
-    locations."/".proxyPass = "http://127.0.0.1:5000";
+    locations."/".proxyPass = "http://192.168.2.2:5000";
   };
 }

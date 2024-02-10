@@ -13,6 +13,7 @@ with pkgs;
   gnused
   htop
   jq
+  lsof
   lazydocker
   mosh
   nawk

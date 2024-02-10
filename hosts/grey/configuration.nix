@@ -9,7 +9,7 @@
     ../../system/nixos/containers/drone-runner-docker.nix
     ../../system/nixos/containers/flame.nix
     ../../system/nixos/security.nix
-    # ../../system/nixos/services/drone-runner-exec.nix
+    ../../system/nixos/services/drone-runner-exec.nix
     ../../system/nixos/services/drone-srv.nix
     ../../system/nixos/services/fail2ban.nix
     ../../system/nixos/services/gitea.nix

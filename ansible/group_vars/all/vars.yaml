@@ -1,0 +1,9 @@
+---
+ansible_python_interpreter: /usr/bin/python3
+
+user:
+  name: dsn
+  group: users
+  home: "/home/dsn"
+  shell: /usr/bin/zsh
+  email: dsn@dsnn.io

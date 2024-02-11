@@ -3,16 +3,8 @@
   programs.nix-ld.dev.enable = true;
 
   imports = [
-    ../../system/nixos/cicd
-    # ../../system/nixos/containers/drone-runner-docker.nix
-    # ../../system/nixos/services/docker-registry.nix
-    # ../../system/nixos/services/drone-runner-exec.nix
-    # ../../system/nixos/services/drone-srv.nix
-    # ../../system/nixos/services/gitea.nix
-    # ../../system/nixos/services/nginx.nix
-    # ../../system/nixos/services/postgres.nix
-    # ../../system/nixos/virtualisation.nix
     ../../system/common.nix
+    ../../system/nixos/cicd
     ../../system/nixos/cifs.nix
     ../../system/nixos/security.nix
     ../../system/nixos/services/fail2ban.nix

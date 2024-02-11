@@ -30,7 +30,6 @@
       service = { DISABLE_REGISTRATION = true; };
       server = {
         DOMAIN = "gitea.dsnn.io";
-        HTTP_ADDR = "192.168.2.2"; # required. 127.0.0.1 doesn't work (?)
         HTTP_PORT = 3000;
         ROOT_URL = "https://gitea.dsnn.io/";
       };

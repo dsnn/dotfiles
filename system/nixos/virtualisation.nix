@@ -8,7 +8,6 @@
       enable = true;
       dates = "weekly";
     };
-    extraOptions = "--insecure-registry='http://192.168.2.2:5000'";
   };
 
   # TODO: review this (fails building VM)

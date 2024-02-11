@@ -17,7 +17,7 @@ in {
 
   services.dockerRegistry = {
     enable = true;
-    listenAddress = "192.168.2.2"; # required. 127.0.0.1 doesn't work (?)
+    listenAddress = "0.0.0.0";
     port = 5000;
     enableDelete = true;
     enableGarbageCollect = true;
@@ -32,6 +32,6 @@ in {
   };
 
   services.nginx.virtualHosts."registry.dsnn.io" = {
-    locations."/".proxyPass = "http://192.168.2.2:5000";
+    locations."/".proxyPass = "http://127.0.0.1:5000";
   };
 }

@@ -33,6 +33,7 @@
         HTTP_PORT = 3000;
         ROOT_URL = "https://gitea.dsnn.io/";
       };
+      webhook = { ALLOWED_HOST_LIST = "*"; };
     };
   };
 

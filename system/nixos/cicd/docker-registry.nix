@@ -5,10 +5,6 @@ in {
   networking.firewall.allowedTCPPorts = [ 5000 ];
 
   sops.secrets = {
-    "docker-registry-http-secret" = {
-      sopsFile = ../../../secrets/cicd.yaml;
-      owner = docker-registry;
-    };
     "docker-registry-htpasswd" = {
       sopsFile = ../../../secrets/cicd.yaml;
       owner = docker-registry;

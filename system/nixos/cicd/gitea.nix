@@ -32,6 +32,7 @@
         DOMAIN = "gitea.dsnn.io";
         HTTP_PORT = 3000;
         ROOT_URL = "https://gitea.dsnn.io/";
+        SSH_PORT = 2222;
       };
       webhook = { ALLOWED_HOST_LIST = "*"; };
     };

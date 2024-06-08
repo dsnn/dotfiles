@@ -7,6 +7,8 @@
     ../../system/nixos/cicd
     ../../system/nixos/cifs.nix
     ../../system/nixos/security.nix
+    # ../../system/nixos/services/avahi.nix
+    # ../../system/nixos/services/cups.nix
     ../../system/nixos/services/fail2ban.nix
     ../../system/nixos/services/homepage-dashboard.nix
     ../../system/nixos/services/jellyfin.nix
@@ -14,16 +16,6 @@
     ../../system/nixos/users.nix
     ./hardware.nix
   ];
-
-  services.printing = {
-    enable = true;
-    listenAddresses = [ "*:631" ];
-    allowFrom = [ "all" ];
-    browsing = true;
-    defaultShared = true;
-    openFirewall = true;
-    drivers = with pkgs; [ cups-bjnp gutenprint ];
-  };
 
   services.avahi = {
     enable = true;
@@ -35,24 +27,15 @@
     };
   };
 
-  # networking.wg-quick.interfaces = {
-  #    wg0 = {
-  #      address = [ "192.168.1.1/24" "fdc9:281f:04d7:9ee9::2/64" ];
-  #      dns = [ "10.0.0.1" "fdc9:281f:04d7:9ee9::1" ];
-  #      privateKeyFile = "/root/wireguard-keys/privatekey";
-  #
-  #      peers = [
-  #        {
-  #          publicKey = "{server public key}";
-  #          presharedKeyFile = "/root/wireguard-keys/preshared_from_peer0_key";
-  #          allowedIPs = [ "0.0.0.0/0" "::/0" ];
-  #          endpoint = "{server ip}:51820";
-  #          persistentKeepalive = 25;
-  #        }
-  #      ];
-  #    };
-  #  };
-  #
+  services.printing = {
+    enable = true;
+    listenAddresses = [ "*:631" ];
+    allowFrom = [ "all" ];
+    browsing = true;
+    defaultShared = true;
+    openFirewall = true;
+    drivers = with pkgs; [ cups-bjnp gutenprint ];
+  };
 
   nixpkgs.config.allowUnfree = true;
 
@@ -80,9 +63,6 @@
     LC_TELEPHONE = "sv_SE.UTF-8";
     LC_TIME = "sv_SE.UTF-8";
   };
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
 
   programs.zsh.enable = true;
 

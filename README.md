@@ -61,6 +61,7 @@ If node isn't available check that host configuration has nix-ld enabled.
 - [jellyfin hw acc](https://nixos.wiki/wiki/Jellyfin)
 - [impermanence](https://nixos.wiki/wiki/Impermanence)
 - [flame](https://github.com/pawelmalak/flame)
+- [docker registry ui](https://github.com/Joxit/docker-registry-ui)
 
 ## Links
 

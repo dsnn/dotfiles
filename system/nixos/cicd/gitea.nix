@@ -1,6 +1,6 @@
 { config, ... }: {
 
-  networking.firewall.allowedTCPPorts = [ 3000 ];
+  networking.firewall.allowedTCPPorts = [ 3100 ];
 
   sops.secrets."postgres-gitea-db-pass" = {
     sopsFile = ../../../secrets/cicd.yaml;
@@ -30,7 +30,7 @@
       service = { DISABLE_REGISTRATION = true; };
       server = {
         DOMAIN = "gitea.dsnn.io";
-        HTTP_PORT = 3000;
+        HTTP_PORT = 3100;
         ROOT_URL = "https://gitea.dsnn.io/";
         SSH_PORT = 2222;
       };
@@ -39,7 +39,7 @@
   };
 
   services.nginx.virtualHosts."gitea.dsnn.io" = {
-    locations."/".proxyPass = "http://127.0.0.1:3000";
+    locations."/".proxyPass = "http://127.0.0.1:3100";
 
     extraConfig = ''
       # recommended HTTP headers according to https://securityheaders.io

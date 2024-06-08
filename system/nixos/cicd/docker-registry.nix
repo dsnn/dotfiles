@@ -2,8 +2,6 @@
 let docker-registry = config.users.users.docker-registry.name;
 in {
 
-  networking.firewall.allowedTCPPorts = [ 5000 ];
-
   sops.secrets = {
     "docker-registry-htpasswd" = {
       sopsFile = ../../../secrets/cicd.yaml;
@@ -18,7 +16,7 @@ in {
     enableDelete = true;
     enableGarbageCollect = true;
     garbageCollectDates = "daily";
-    # https://distribution.github.io/distribution#override-specific-configuration-options 
+    openFirewall = true;
     extraConfig = {
       REGISTRY_AUTH = "htpasswd";
       REGISTRY_AUTH_HTPASSWD_PATH =

@@ -1,0 +1,37 @@
+#cloud-config
+autoinstall:
+  version: 1
+  locale: en_US
+  refresh-installer:
+      update: false
+  keyboard:
+    layout: en 
+  ssh:
+    install-server: true
+    allow-pw: true
+    disable_root: true
+    ssh_quiet_keygen: true
+    allow_public_ssh_keys: true
+  storage:
+    layout:
+      name: direct
+    swap:
+      size: 0
+  user-data:
+    package_upgrade: true
+    timezone: Europe/Stockholm
+    ssh_pwauth: true
+    users:
+      - name: dsn 
+        groups: [dsn, sudo]
+        lock-passwd: false
+        sudo: ALL=(ALL) NOPASSWD:ALL
+        shell: /bin/bash
+        passwd: $6$ExeyIL4g0IbyGlop$xphjed.IVRhWTlooInCJY2iZW3YCRNHDn46MoM6F3Y8ZD.dKQoOMq4Fked1hhudiVXUDdMRtzNicgoSx6fCsM1
+  packages:
+    - qemu-guest-agent
+		- git
+    - sudo
+    - vim
+    - zip
+    - unzip

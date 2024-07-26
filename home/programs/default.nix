@@ -1,5 +1,6 @@
 [
   ./bat.nix
+  ./bottom.nix
   ./dircolors
   ./docker.nix
   ./fzf.nix

@@ -47,6 +47,9 @@
   networking.networkmanager.enable = true;
   networking.firewall.enable = true;
 
+  # allow packer http server port
+  networking.firewall.allowedTCPPorts = [ 8802 ];
+
   systemd.services.NetworkManager-wait-online.enable = false;
 
   time.timeZone = "Europe/Stockholm";
@@ -72,6 +75,7 @@
     pavucontrol
     pciutils
     terraform
+    packer
   ];
 
   system.stateVersion = "23.05";

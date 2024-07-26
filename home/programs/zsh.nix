@@ -2,12 +2,14 @@
 
   sops.secrets.exports = { sopsFile = ../../secrets/zsh.yaml; };
 
-  programs.zsh.enable = true;
-  programs.zsh.enableCompletion = true;
-  programs.zsh.enableAutosuggestions = true;
-  programs.zsh.syntaxHighlighting.enable = true;
-  programs.zsh.dotDir = ".config/zsh";
-  programs.zsh.autocd = true;
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    dotDir = ".config/zsh";
+    autocd = true;
+  };
   programs.zsh.history = {
     size = 10000;
     save = 10000;

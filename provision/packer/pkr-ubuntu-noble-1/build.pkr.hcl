@@ -2,7 +2,7 @@ source "proxmox-iso" "pkr-ubuntu-noble-1" {
   proxmox_url               = "${var.proxmox_api_url}"
   username                  = "${var.proxmox_api_token_id}"
   token                     = "${var.proxmox_api_token_secret}"
-  insecure_skip_tls_verify  = false
+  insecure_skip_tls_verify  = true 
 
   node                      = "omega"
   vm_id                     = "901"
@@ -36,7 +36,7 @@ source "proxmox-iso" "pkr-ubuntu-noble-1" {
 
   network_adapters {
     model                   = "virtio"
-    bridge                  = "vmbr1"
+    bridge                  = "vmbr0"
     firewall                = "false"
   }
 
@@ -53,10 +53,13 @@ source "proxmox-iso" "pkr-ubuntu-noble-1" {
   boot_wait                 = "6s"
   communicator              = "ssh"
 
-  http_directory            = "pkr-ubuntu-noble-1/http"
+  http_directory            = "http"
+	http_bind_address					= "0.0.0.0"
+	http_port_min							= 8802 
+	http_port_max							= 8802
 
-  ssh_username              = "${var.ssh_username}"
-  ssh_password              = "${var.ssh_password}"
+	ssh_username              = "dsn"
+	ssh_password              = "asd123"
 
   # Raise the timeout, when installation takes longer
   ssh_timeout               = "30m"
@@ -66,7 +69,7 @@ source "proxmox-iso" "pkr-ubuntu-noble-1" {
 
 build {
 
-  name    = "pkr-ubuntu-noble-1"
+  name = "pkr-ubuntu-noble-1"
   sources = [
       "proxmox-iso.pkr-ubuntu-noble-1"
   ]
@@ -89,7 +92,7 @@ build {
 
   # Provisioning the VM Template for Cloud-Init Integration in Proxmox #2
   provisioner "file" {
-    source      = "pkr-ubuntu-noble-1/files/99-pve.cfg"
+    source      = "files/99-pve.cfg"
     destination = "/tmp/99-pve.cfg"
   }
   provisioner "shell" {

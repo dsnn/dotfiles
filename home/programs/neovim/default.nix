@@ -17,7 +17,7 @@ in {
     lua-language-server
     nil
     nixd
-    nixfmt
+    nixfmt-classic
     nixpkgs-fmt
     nodePackages."bash-language-server"
     nodePackages."diagnostic-languageserver"
@@ -30,7 +30,6 @@ in {
     nodePackages."jsonlint"
     nodePackages."prettier"
     prettierd
-    rnix-lsp
     shfmt
     stylua
     tailwindcss-language-server

@@ -19,13 +19,11 @@ with pkgs;
   nawk
   gnumake
   cmake
-  packer
   ripgrep
   unzip
   vim
   wakeonlan
   xclip
-  spotify-tui
 ] ++ pkgs.lib.optionals isServer [
   _1password
 ]

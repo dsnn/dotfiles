@@ -64,9 +64,11 @@ Create proxmox templates. Run command inside OS folder e.g pkr-ubuntu-noble-1
 ## terraform
 
 Create and run infrastructure (virtual machines, DNS etc).
+Sync state in cloud with terraform login.
 
 ```bash
-    terraform apply -var-file=<(sops -d ~/dotfiles/secrets/secret.tfvars.json)
+    terraform plan -var-file=<(sops -d ~/dotfiles/secrets/secret.tfvars.json)
+    terraform apply -var-file=<(sops -d ~/dotfiles/secrets/secret.tfvars.json) -auto-approve
 ```
 
 ## TODO

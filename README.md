@@ -53,6 +53,22 @@ If node isn't available check that host configuration has nix-ld enabled.
   programs.nix-ld.dev.enable = true;
 ```
 
+## packer
+
+Create proxmox templates. Run command inside OS folder e.g pkr-ubuntu-noble-1
+
+```bash
+    packer build -var-file=<(sops -d ~/dotfiles/secrets/secret.tfvars.json) .
+```
+
+## terraform
+
+Create and run infrastructure (virtual machines, DNS etc).
+
+```bash
+    terraform apply -var-file=<(sops -d ~/dotfiles/secrets/secret.tfvars.json)
+```
+
 ## TODO
 
 - [catppuccin base16](https://github.com/catppuccin/base16)

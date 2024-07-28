@@ -17,7 +17,6 @@ resource "proxmox_lxc" "srv-ubuntu-02" {
 		# clone = 0 # vmid of template to clone
     password = "${var.ssh_password}"
     unprivileged = true
-		tags = "docker"
 		onboot = true # start on boot
 		start = true # start after creation
 		# TODO: nameserver = ""

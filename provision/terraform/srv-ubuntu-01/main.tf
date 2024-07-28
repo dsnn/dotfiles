@@ -19,7 +19,6 @@ resource "proxmox_vm_qemu" "srv-ubuntu-01" {
     cpu = "host"
 		memory = 2024 
     name = "srv-ubuntu-01" 
-    hostname = "srv-ubuntu-01"
     onboot = true
     os_type = "cloud-init"
 		sockets = 1 
@@ -28,7 +27,6 @@ resource "proxmox_vm_qemu" "srv-ubuntu-01" {
 		# nameserver = "192.168.2.1"
 		automatic_reboot = false
 	  bios   = "seabios"
-		tags = "docker"
 	  boot = "order=virtio0;ide0;net0"
 		# TODO: nameserver = ""
 

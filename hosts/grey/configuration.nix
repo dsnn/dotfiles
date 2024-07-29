@@ -76,6 +76,7 @@
     pciutils
     terraform
     packer
+    colmena
   ];
 
   system.stateVersion = "23.05";

@@ -2,12 +2,10 @@
   description = "Nix configuration";
 
   inputs = {
-    # nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
-    # nixos-generators.url = "github:nix-community/nixos-generators";
+    nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-generators.url = "github:nix-community/nixos-generators";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = "github:lnl7/nix-darwin";
-    deploy-rs.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    deploy-rs.url = "github:serokell/deploy-rs";
     flake-checker.inputs.nixpkgs.follows = "nixpkgs-unstable";
     flake-checker.url = "github:DeterminateSystems/flake-checker";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -20,9 +18,11 @@
     sops-nix.url = "github:Mic92/sops-nix";
     nix-ld.url = "github:Mic92/nix-ld";
     nix-ld.inputs.nixpkgs.follows = "nixpkgs";
+    colmena.url = "github:zhaofengli/colmena";
+    colmena.inputs.nixpkgs.follows = "nixpkgs";
   };
-  outputs = inputs@{ self, nixpkgs, darwin, home-manager, deploy-rs, sops-nix
-    , nixos-wsl, nix-ld, ... }:
+  outputs = inputs@{ self, nixpkgs, darwin, home-manager, sops-nix, nixos-wsl
+    , nix-ld, ... }:
     let
       inherit (self) outputs;
       aarch64-darwin = "aarch64-darwin";
@@ -97,16 +97,53 @@
         system = x86_64-linux;
       };
 
-      deploy.nodes = {
-        grey = {
-          hostname = "grey";
-          fastConnection = true;
-          profiles.system = {
-            user = "dsn";
-            path = deploy-rs.lib.x86_64-linux.activate.nixos
-              self.nixosConfigurations.grey;
-            remoteBuild = true;
+      colmena = {
+        meta = {
+          nixpkgs = import nixpkgs {
+            system = "x86_64-linux";
+            overlays = [ ];
           };
+        };
+
+        # This module will be imported by all hosts
+        defaults = { pkgs, ... }: {
+          environment.systemPackages = with pkgs; [ vim wget curl git sudo ];
+
+          # enable and allow ssh
+          services.openssh = {
+            enable = true;
+            passwordAuthentication = true;
+          };
+          networking.firewall.allowedTCPPorts = [ 22 ];
+
+          systemd.mounts = [{
+            where = "/sys/kernel/debug";
+            enable = false;
+          }];
+
+          boot.isContainer = true;
+          time.timeZone = "Europe/Stockholm";
+
+          system = { stateVersion = "23.05"; };
+        };
+
+        srv-nixos-01 = import ./hosts/srv-nixos {
+          name = "srv-nixos-01";
+          targetHost = "192.168.2.111";
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          inherit inputs;
+        };
+        srv-nixos-02 = import ./hosts/srv-nixos {
+          name = "srv-nixos-02";
+          targetHost = "192.168.2.112";
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          inherit inputs;
+        };
+        srv-nixos-03 = import ./hosts/srv-nixos {
+          name = "srv-nixos-03";
+          targetHost = "192.168.2.113";
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          inherit inputs;
         };
       };
     };

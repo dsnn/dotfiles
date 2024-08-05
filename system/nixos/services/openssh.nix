@@ -10,5 +10,6 @@
       PermitRootLogin = "no";
       # KbdInteractiveAuthentication = false;
     };
+    extraConfig = "\n";
   };
 }

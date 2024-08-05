@@ -2,27 +2,31 @@
   description = "Nix configuration";
 
   inputs = {
-    nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
     nixos-generators.url = "github:nix-community/nixos-generators";
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = "github:lnl7/nix-darwin";
-    flake-checker.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
     flake-checker.url = "github:DeterminateSystems/flake-checker";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    flake-checker.inputs.nixpkgs.follows = "nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager/release-24.05";
-    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
+    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     nix-ld.url = "github:Mic92/nix-ld";
     nix-ld.inputs.nixpkgs.follows = "nixpkgs";
     colmena.url = "github:zhaofengli/colmena";
     colmena.inputs.nixpkgs.follows = "nixpkgs";
+    terranix.url = "github:terranix/terranix";
+    terranix.inputs.nixpkgs.follows = "nixpkgs";
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs@{ self, nixpkgs, darwin, home-manager, sops-nix, nixos-wsl
-    , nix-ld, ... }:
+    , nix-ld, nixos-generators, terranix, disko, ... }:
     let
       inherit (self) outputs;
       aarch64-darwin = "aarch64-darwin";
@@ -146,5 +150,6 @@
           inherit inputs;
         };
       };
+
     };
 }

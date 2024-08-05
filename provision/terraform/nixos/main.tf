@@ -9,12 +9,11 @@ terraform {
     }
 }
 
-resource "proxmox_lxc" "srv-nixos-01" {
-		vmid = 110
+resource "proxmox_lxc" "nixos-template" {
+		vmid = 902 
     target_node = "omega"
-    hostname = "srv-nixos-01"
+    hostname = "custom-nixos-template"
 		ostemplate = "local:vztmpl/nixos-system-x86_64-linux.tar.xz"
-		# clone = 0 # vmid of template to clone
     password = "${var.ssh_password}"
     unprivileged = true
 		onboot = true # start on boot
@@ -26,23 +25,20 @@ resource "proxmox_lxc" "srv-nixos-01" {
 			storage = "local-lvm"
 		}
 
-		# TODO: mounts / mountpoints ?
-
 		network {
 				name = "eth0"
         bridge = "vmbr0"
 				firewall = false
-        ip = "dhcp"
-        ip6 = "dhcp"
+        ip = "192.168.2.200/24"
+        gw = "192.168.2.1"
     }
 
     features {
-				# fuse = true
-				# mount = ""
         nesting = true
     }
 
     ssh_public_keys = <<EOF
+    ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAaLTAnk7ZuDsWIcahlr0SWKfq9BlwSJTyE1c6CGktKB
     ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCblbdi9GiPOhBlH1aSn3+/0w8w7OVP+jNVbjX0iOf31WMJpyGi8X1ybsZfjrAQ2VoHuX/dN1BJlvOGO36PcDRsXDKE/+Db9VcJR8vzs4d1Nik8lbmjXgWHPv6Ig8SDVrqanV/6Yv9AbgZFqIbfqIsW41i/zkVt8wXYewATI6bjHs5gWox+5h/NBBu6bTCD1He4I8v6/1Dg3D/9o0fmhrwGOdd7W1zxPorjUC9uziUCc4uOnnTH5n1K59TvMYeUsdYtkToew7b1fJAsC1FY09GrgyQ+y+O07oGNLI9NyckEMIi+1hsSi3dNwLG2Y/lqcHM/YgdY3iez63h+W02tEuaF
     EOF
 }

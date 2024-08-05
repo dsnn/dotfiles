@@ -71,6 +71,16 @@ Sync state in cloud with terraform login.
     terraform apply -var-file=<(sops -d ~/dotfiles/secrets/secret.tfvars.json) -auto-approve
 ```
 
+## nixos container template
+
+Create a container tarball.
+
+```nix
+    nix run github:nix-community/nixos-generators -- --format proxmox-lxc
+```
+
+Upload to proxmox and run colmena build/apply.
+
 ## TODO
 
 - [catppuccin base16](https://github.com/catppuccin/base16)
@@ -93,3 +103,4 @@ Sync state in cloud with terraform login.
 - [nix-community srvos](https://github.com/nix-community/srvos)
 - [nix-community infra](https://github.com/nix-community/infra)
 - [nixos proxmox ve](https://nixos.wiki/wiki/Proxmox_Virtual_Environment)
+- [nixos anywhere](https://github.com/nix-community/nixos-anywhere)

@@ -38,53 +38,53 @@ provider "proxmox" {
     pm_tls_insecure = true
 }
 
-variable "srv-nixos-cluster" {
+variable "nixos-cluster" {
   default = {
-    "srv-nixos-01" = {
+    "nixos-node-01" = {
       vmid = "111"
-      name = "srv-nixos-01"
+      name = "nixos-node-01"
       ip_address = "192.168.2.111/24"
       gateway = "192.168.2.1"
     }
-    "srv-nixos-02" = {
+    "nixos-node-02" = {
       vmid = "112"
-      name = "srv-nixos-02"
+      name = "nixos-node-02"
       ip_address = "192.168.2.112/24"
       gateway = "192.168.2.1"
     }
-    "srv-nixos-03" = {
+    "nixos-node-03" = {
       vmid = "113"
-      name = "srv-nixos-03"
+      name = "nixos-node-03"
       ip_address = "192.168.2.113/24"
       gateway = "192.168.2.1"
     }
-    "srv-nixos-agent-01" = {
+    "nixos-agent-01" = {
       vmid = "114"
-      name = "srv-nixos-agent-01"
+      name = "nixos-agent-01"
       ip_address = "192.168.2.114/24"
       gateway = "192.168.2.1"
     }
-    "srv-nixos-agent-02" = {
+    "nixos-agent-02" = {
       vmid = "115"
-      name = "srv-nixos-agent-02"
+      name = "nixos-agent-02"
       ip_address = "192.168.2.115/24"
       gateway = "192.168.2.1"
     }
   }
 }
 
-resource "proxmox_lxc" "srv-nixos-lxc-cluster" {
-    for_each = var.srv-nixos-cluster
+resource "proxmox_lxc" "nixos-lxc-cluster" {
+    for_each = var.,ixos-cluster
 
     vmid = each.value.vmid
     target_node = "omega"
     hostname = each.value.name
-		ostemplate = "local:vztmpl/nixos-system-x86_64-linux.tar.xz"
+	  ostemplate = "local:vztmpl/nixos-system-x86_64-linux.tar.xz"
     password = "${var.ssh_password}"
     unprivileged = true
 		onboot = true # start on boot
 		start = true # start after creation
-		cmode = "console" # make the console shell work.
+		cmode = "console" # make the console/shell work.
 
 		rootfs {
 			size    = "8G"
@@ -98,8 +98,6 @@ resource "proxmox_lxc" "srv-nixos-lxc-cluster" {
 				gw = each.value.gateway
     }
     features {
-				# fuse = true
-				# mount = ""
         nesting = true
     }
 

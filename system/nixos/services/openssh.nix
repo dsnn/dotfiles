@@ -1,5 +1,4 @@
 { ... }: {
-
   services.openssh = {
     enable = true;
     ports = [ 22 ];
@@ -9,7 +8,7 @@
       StrictModes = true;
       PasswordAuthentication = false;
       PermitRootLogin = "no";
+      # KbdInteractiveAuthentication = false;
     };
-    # extraConfig = "\n";
   };
 }

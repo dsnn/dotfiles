@@ -16,6 +16,8 @@ nixos-rebuild switch --flake .#profile --fast --use-remote-sudo \
 
 ## Apple upgrades
 
+### zsh
+
 When upgrading macOS your /etc/zshrc might reset.
 Result: commands or configurations stop working, NIX_PATH is empty etc.
 Fix: Add this to the bottom of /etc/zshrc.
@@ -26,6 +28,11 @@ if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
 fi
 
 ```
+
+### Touch ID for sudo
+
+Also, macOS resets /etc/pam.d/sudo which enables touch id for sudo.
+More info here: [enableSudoTouchIdAuth](https://daiderd.com/nix-darwin/manual/index.html#opt-security.pam.enableSudoTouchIdAuth)
 
 ## Home-manager
 

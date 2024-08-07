@@ -1,7 +1,7 @@
 { config, ... }:
 let
   binPath = "${config.home.homeDirectory}/.local/bin";
-  scriptsPath = "${config.home.homeDirectory}/dotfiles/home/scripts";
+  scriptsPath = "${config.home.homeDirectory}/dotfiles/modules/home/scripts";
 in {
   home.file."${binPath}".source =
     config.lib.file.mkOutOfStoreSymlink "${scriptsPath}";

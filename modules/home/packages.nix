@@ -1,36 +1,45 @@
-{ pkgs, ... }:
-with pkgs; [
-  dotnet-sdk_8
-  # omnisharp-roslyn
-  # sstp
-  # terraform
-  # terraform-ls
-  ansible
-  curl
-  fd
-  git-crypt
-  gnused
-  htop
-  jq
-  lsof
-  lazydocker
-  mosh
-  nawk
-  gnumake
-  cmake
-  ripgrep
-  unzip
-  vim
-  wakeonlan
-  xclip
-]
+{ lib, config, pkgs, ... }:
+with lib;
+let cfg = config.dsn.packages;
+in {
 
-# TODO: make this a module (instead of passing values) 
-# ++ pkgs.lib.optionals isServer [
-#   _1password
-# ]
+  options.dsn.packages = {
+    enable = mkEnableOption "Enable common stuff";
+    enable-dev-tools = mkEnableOption "Enable development tools";
+  };
 
-# TODO: packages: install fonts
-# [
-#   (nerdfonts.override { fonts = [ "FiraCode" "RobotoMono" ]; })
-# ];
+  config = mkIf cfg.enable {
+
+    home.packages = with pkgs;
+      [
+        cmake
+        curl
+        fd
+        git-crypt
+        gnumake
+        gnused
+        htop
+        jq
+        lazydocker
+        lsof
+        mosh
+        nawk
+        ripgrep
+        unzip
+        vim
+        wakeonlan
+        xclip
+      ] ++ pkgs.lib.optionals cfg.enable-dev-tools [
+        # terraform
+        # terraform-ls
+        dotnet-sdk_8
+        ansible
+        # _1password 
+      ];
+
+    # [
+    #   (nerdfonts.override { fonts = [ "FiraCode" "RobotoMono" ]; })
+    # ];
+  };
+}
+

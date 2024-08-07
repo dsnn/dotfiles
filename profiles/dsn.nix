@@ -1,7 +1,6 @@
-{ lib, config, pkgs, isServer, hostname, ... }:
+{ lib, config, pkgs, hostname, ... }:
 let
   inherit (pkgs.stdenv) isDarwin;
-  packages = import ../modules/home/packages.nix;
   rebuild-command =
     if isDarwin then "darwin-rebuild" else "sudo -H nixos-rebuild";
 in {
@@ -9,10 +8,16 @@ in {
   # Fix home manager for non NixOS
   # targets.genericLinux.enable = true;
 
+  dsn = {
+    packages = {
+      enable = true;
+      enable-dev-tools = true;
+    };
+  };
+
   imports = lib.concatMap import [
     ../modules/home/programs
     ../modules/home/scripts
-    # ../modules/home/services
     ../modules/home/secrets
   ];
 
@@ -27,7 +32,6 @@ in {
     username = "dsn";
     homeDirectory = if isDarwin then "/Users/dsn" else "/home/dsn";
     stateVersion = "23.11";
-    packages = packages { inherit pkgs isServer; };
     file."${config.home.homeDirectory}/.hushlogin".text = "";
   };
 
@@ -57,7 +61,7 @@ in {
 
   # host specific aliases
   programs.zsh.shellAliases = {
-    cfc = "vim $HOME/dotfiles/hosts/${hostname}/configuration.nix";
+    cfc = "vim $HOME/dotfiles/configs/${hostname}.nix";
     cfg = "vim $HOME/dotfiles/modules/home/git.nix";
     cfh = "vim $HOME/dotfiles/profiles/dsn.nix";
     cfz = "vim $HOME/dotfiles/modules/home/zsh.nix";

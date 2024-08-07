@@ -47,7 +47,7 @@
     in {
 
       homeConfigurations.silver = homeManagerConfiguration {
-        modules = [ ./profiles/dsn.nix ];
+        modules = [ ./profiles/dsn.nix ./modules/home ];
         pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin;
         extraSpecialArgs = {
           inherit inputs outputs;
@@ -56,11 +56,8 @@
       };
 
       darwinConfigurations.silver = darwinSystem {
-        modules = [
-          ./hosts/silver/configuration.nix
-          ./modules/common.nix
-          ./modules/darwin
-        ];
+        modules =
+          [ ./configs/silver.nix ./modules/common.nix ./modules/darwin ];
         specialArgs = { inherit inputs outputs; };
         system = aarch64-darwin;
       };

@@ -34,7 +34,7 @@
     in {
 
       homeConfigurations.silver = home-manager.lib.homeManagerConfiguration {
-        modules = [ ./home/home.nix ];
+        modules = [ ./profiles/dsn.nix ];
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         extraSpecialArgs = {
           inherit inputs outputs;

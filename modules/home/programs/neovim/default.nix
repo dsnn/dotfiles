@@ -113,5 +113,5 @@ in {
 
   home.file."${config.home.homeDirectory}/.config/nvim".source =
     config.lib.file.mkOutOfStoreSymlink
-    "${config.home.homeDirectory}/dotfiles/home/programs/neovim/nvim";
+    "${config.home.homeDirectory}/dotfiles/modules/home/programs/neovim/nvim";
 }

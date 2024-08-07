@@ -1,7 +1,7 @@
 { lib, config, pkgs, isServer, hostname, ... }:
 let
   inherit (pkgs.stdenv) isDarwin;
-  packages = import ./packages.nix;
+  packages = import ../modules/home/packages.nix;
   rebuild-command =
     if isDarwin then "darwin-rebuild" else "sudo -H nixos-rebuild";
 in {
@@ -10,11 +10,10 @@ in {
   # targets.genericLinux.enable = true;
 
   imports = lib.concatMap import [
-    ./programs
-    ./scripts
-    ./services
-    ./modules
-    ./secrets
+    ../modules/home/programs
+    ../modules/home/scripts
+    # ../modules/home/services
+    ../modules/home/secrets
   ];
 
   nixpkgs = {
@@ -60,7 +59,7 @@ in {
   programs.zsh.shellAliases = {
     cfc = "vim $HOME/dotfiles/hosts/${hostname}/configuration.nix";
     cfg = "vim $HOME/dotfiles/modules/home/git.nix";
-    cfh = "vim $HOME/dotfiles/home.nix";
+    cfh = "vim $HOME/dotfiles/profiles/dsn.nix";
     cfz = "vim $HOME/dotfiles/modules/home/zsh.nix";
     rf =
       "home-manager switch --flake ~/dotfiles/#${hostname}; source ~/.config/zsh/.zshrc";

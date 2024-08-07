@@ -16,7 +16,7 @@ in {
     if isDarwin then darwin-extra-config else linux-extra-config;
 
   sops.secrets.hosts = {
-    sopsFile = ../../secrets/ssh.yaml;
+    sopsFile = ../../../secrets/ssh.yaml;
     path = "${config.home.homeDirectory}/.ssh/config.d/ssh-hosts-internal";
   };
 }

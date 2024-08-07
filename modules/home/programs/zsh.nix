@@ -1,6 +1,6 @@
 { config, ... }: {
 
-  sops.secrets.exports = { sopsFile = ../../secrets/zsh.yaml; };
+  sops.secrets.exports = { sopsFile = ../../../secrets/zsh.yaml; };
 
   programs.zsh = {
     enable = true;

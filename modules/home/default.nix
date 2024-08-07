@@ -3,7 +3,6 @@
     ./bat.nix
     ./bottom.nix
     ./dircolors
-    ./docker.nix
     ./fzf.nix
     ./git.nix
     ./inputrc.nix

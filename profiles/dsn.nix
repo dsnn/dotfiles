@@ -1,4 +1,4 @@
-{ lib, config, pkgs, hostname, ... }:
+{ config, pkgs, hostname, ... }:
 let
   inherit (pkgs.stdenv) isDarwin;
   rebuild-command =
@@ -16,7 +16,6 @@ in {
     bat.enable = true;
     bottom.enable = true;
     dircolors.enable = true;
-    docker.enable = true;
     fzf.enable = true;
     git.enable = true;
     inputrc.enable = true;
@@ -36,7 +35,10 @@ in {
     xdg.enable = true;
     xresources.enable = true;
     zoxide.enable = true;
-    zsh.enable = true;
+    zsh = {
+      enable = true;
+      enable-docker-aliases = false;
+    };
     sops.enable = true;
   };
 

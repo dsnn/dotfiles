@@ -9,9 +9,6 @@ in {
   options.dsn.kitty = { enable = mkEnableOption "Enable kitty"; };
 
   config = mkIf cfg.enable {
-    # TODO: https://github.com/catppuccin/kitty
-    # https://github.com/nix-community/home-manager/blob/master/modules/programs/kitty.nix
-
     programs.kitty.enable = true;
 
     programs.kitty.settings = {

@@ -2,39 +2,28 @@
   description = "My dotfiles and infrastructure";
 
   inputs = {
-    nixos-generators.url = "github:nix-community/nixos-generators";
-    nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
-
-    darwin.url = "github:lnl7/nix-darwin";
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
-
-    flake-checker.url = "github:DeterminateSystems/flake-checker";
-    flake-checker.inputs.nixpkgs.follows = "nixpkgs-unstable";
-
-    home-manager.url = "github:nix-community/home-manager/release-24.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    nixos-wsl.url = "github:nix-community/NixOS-WSL";
-    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
-
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
-
-    sops-nix.url = "github:Mic92/sops-nix";
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-
-    nix-ld.url = "github:Mic92/nix-ld";
-    nix-ld.inputs.nixpkgs.follows = "nixpkgs";
-
-    colmena.url = "github:zhaofengli/colmena";
     colmena.inputs.nixpkgs.follows = "nixpkgs";
-
-    terranix.url = "github:terranix/terranix";
-    terranix.inputs.nixpkgs.follows = "nixpkgs";
-
-    disko.url = "github:nix-community/disko";
+    colmena.url = "github:zhaofengli/colmena";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
+    darwin.url = "github:lnl7/nix-darwin";
     disko.inputs.nixpkgs.follows = "nixpkgs";
+    disko.url = "github:nix-community/disko";
+    flake-checker.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    flake-checker.url = "github:DeterminateSystems/flake-checker";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.url = "github:nix-community/home-manager/release-24.05";
+    nix-ld.inputs.nixpkgs.follows = "nixpkgs";
+    nix-ld.url = "github:Mic92/nix-ld";
+    nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-generators.url = "github:nix-community/nixos-generators";
+    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-wsl.url = "github:nix-community/NixOS-WSL";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    sops-nix.url = "github:Mic92/sops-nix";
+    terranix.inputs.nixpkgs.follows = "nixpkgs";
+    terranix.url = "github:terranix/terranix";
   };
   outputs = inputs@{ self, ... }:
     let

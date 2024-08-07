@@ -3,7 +3,10 @@ with lib;
 let cfg = config.dsn.zsh;
 in {
 
-  options.dsn.zsh = { enable = mkEnableOption "Enable zsh"; };
+  options.dsn.zsh = {
+    enable = mkEnableOption "Enable zsh";
+    enable-docker-aliases = mkEnableOption "Enable docker aliases";
+  };
 
   config = mkIf cfg.enable {
 
@@ -17,6 +20,7 @@ in {
       dotDir = ".config/zsh";
       autocd = true;
     };
+
     programs.zsh.history = {
       size = 10000;
       save = 10000;
@@ -24,8 +28,10 @@ in {
       share = true;
       extended = true;
     };
+
     programs.zsh.history.path =
       "${config.home.homeDirectory}/.config/zsh/history";
+
     programs.zsh.sessionVariables = {
       LC_CTYPE = "en_US.UTF-8";
       LEDGER_COLOR = "true";
@@ -74,6 +80,13 @@ in {
       biu = "nix run";
       bii = "nix-instansiate";
       bis = "nix shell";
+
+    } // optionalAttrs cfg.enable-docker-aliases {
+      ds = "docker ps -a";
+      di = "docker images";
+      drm = ''docker rm $(docker ps -qa --no-trunc --filter "status=exited")'';
+      drmi = "docker rmi $(docker images -q -f dangling=true)";
+      # dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
     };
 
     programs.zsh.initExtra = ''

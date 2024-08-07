@@ -1,5 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
+with lib;
 let
+  cfg = config.dsn.cifs;
   cifsShare = name: {
     device = "//dss/${name}";
     fsType = "cifs";
@@ -9,16 +11,20 @@ let
     in [ "${automount_opts},credentials=/etc/nixos/smb-secrets" ];
   };
 in {
+  options.dsn.cifs = { enable = mkEnableOption "Enable cifs"; };
 
-  environment.systemPackages = with pkgs; [ cifs-utils ];
+  config = mkIf cfg.enable {
 
-  sops.secrets."credentials" = { sopsFile = ../../secrets/cifs.yaml; };
+    environment.systemPackages = with pkgs; [ cifs-utils ];
 
-  environment.etc."nixos/smb-secrets".source =
-    config.sops.secrets."credentials".path;
-  environment.etc."nixos/smb-secrets".mode = "0600";
+    sops.secrets."credentials" = { sopsFile = ../../secrets/cifs.yaml; };
 
-  fileSystems."/mnt/private" = cifsShare "private";
-  fileSystems."/mnt/share" = cifsShare "share";
-  fileSystems."/mnt/share2" = cifsShare "share2";
+    environment.etc."nixos/smb-secrets".source =
+      config.sops.secrets."credentials".path;
+    environment.etc."nixos/smb-secrets".mode = "0600";
+
+    fileSystems."/mnt/private" = cifsShare "private";
+    fileSystems."/mnt/share" = cifsShare "share";
+    fileSystems."/mnt/share2" = cifsShare "share2";
+  };
 }

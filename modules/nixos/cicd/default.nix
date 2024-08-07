@@ -1,5 +1,4 @@
 { ... }: {
-
   imports = [
     ./docker-registry.nix
     ./drone-runner-docker.nix
@@ -10,5 +9,4 @@
     ../services/postgres.nix
     ../virtualisation.nix
   ];
-
 }

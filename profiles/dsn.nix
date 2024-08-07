@@ -13,13 +13,38 @@ in {
       enable = true;
       enable-dev-tools = true;
     };
+    bat.enable = true;
+    bottom.enable = true;
+    dircolors.enable = true;
+    docker.enable = true;
+    fzf.enable = true;
+    git.enable = true;
+    inputrc.enable = true;
+    karabiner.enable = true;
+    keychain.enable = true;
+    kitty.enable = true;
+    lazygit.enable = true;
+    lsd.enable = true;
+    nvim.enable = true;
+    ssh.enable = true;
+    starship.enable = true;
+    tmux.enable = true;
+    tmuxp.enable = true;
+    vivid.enable = true;
+    volta.enable = true;
+    wget.enable = true;
+    xdg.enable = true;
+    xresources.enable = true;
+    zoxide.enable = true;
+    zsh.enable = true;
+    sops.enable = true;
   };
 
-  imports = lib.concatMap import [
-    ../modules/home/programs
-    ../modules/home/scripts
-    ../modules/home/secrets
-  ];
+  # imports = lib.concatMap import [
+  #   ../modules/home
+  #   ../modules/home/scripts
+  #   ../modules/home/secrets
+  # ];
 
   nixpkgs = {
     config = {

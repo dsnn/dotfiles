@@ -2,16 +2,22 @@
 
 ## Test configurations
 
-```nix
+```console
 nix-build '<nixpkgs/nixos>' -A vm -I nixpkgs=channel:nixos-23.11 \
   -I nixos-config=./configuration.nix
 ```
 
 ## Remote deploy via nixos-rebuild
 
-```nix
+```console
 nixos-rebuild switch --flake .#profile --fast --use-remote-sudo \
   --target-host <user@host> --build-host <user@host> --verbose
+```
+
+## Generate options doc
+
+```console
+    nix build .#options-doc
 ```
 
 ## Apple upgrades
@@ -39,7 +45,7 @@ More info here: [enableSudoTouchIdAuth](https://daiderd.com/nix-darwin/manual/in
 If home manager crashes on 'Could not find suitable profile directory':
 Manually create this folder:
 
-```zsh
+```console
 mkdir -p ~/.local/state/nix/profiles
 ```
 
@@ -64,7 +70,7 @@ If node isn't available check that host configuration has nix-ld enabled.
 
 Create proxmox templates. Run command inside OS folder e.g pkr-ubuntu-noble-1
 
-```bash
+```console
     packer build -var-file=<(sops -d ~/dotfiles/secrets/secret.tfvars.json) .
 ```
 
@@ -73,7 +79,7 @@ Create proxmox templates. Run command inside OS folder e.g pkr-ubuntu-noble-1
 Create and run infrastructure (virtual machines, DNS etc).
 Sync state in cloud with terraform login.
 
-```bash
+```console
     terraform plan -var-file=<(sops -d ~/dotfiles/secrets/secret.tfvars.json)
     terraform apply -var-file=<(sops -d ~/dotfiles/secrets/secret.tfvars.json) -auto-approve
 ```
@@ -82,7 +88,7 @@ Sync state in cloud with terraform login.
 
 Create a container tarball.
 
-```nix
+```console
     nix run github:nix-community/nixos-generators -- --format proxmox-lxc
 ```
 

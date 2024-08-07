@@ -49,6 +49,12 @@
         system = aarch64-darwin;
       };
 
+      packages.aarch64-darwin.options-doc = let
+        pkgs' = import ./packages {
+          pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin;
+        };
+      in pkgs'.options-doc;
+
       # colmena = {
       #   meta = {
       #     nixpkgs = import nixpkgs {

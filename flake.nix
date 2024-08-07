@@ -1,50 +1,66 @@
 {
-  description = "Nix configuration";
+  description = "My dotfiles and infrastructure";
 
   inputs = {
     nixos-generators.url = "github:nix-community/nixos-generators";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
+
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
+
     flake-checker.url = "github:DeterminateSystems/flake-checker";
     flake-checker.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
+
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
     nix-ld.url = "github:Mic92/nix-ld";
     nix-ld.inputs.nixpkgs.follows = "nixpkgs";
+
     colmena.url = "github:zhaofengli/colmena";
     colmena.inputs.nixpkgs.follows = "nixpkgs";
+
     terranix.url = "github:terranix/terranix";
     terranix.inputs.nixpkgs.follows = "nixpkgs";
+
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
   };
-  outputs = inputs@{ self, nixpkgs, darwin, home-manager, sops-nix, nixos-wsl
-    , nix-ld, nixos-generators, terranix, disko, ... }:
+  outputs = inputs@{ self, ... }:
     let
       inherit (self) outputs;
       aarch64-darwin = "aarch64-darwin";
       # x86_64-linux = "x86_64-linux";
+      # inherit (inputs.nixpkgs.lib) nixosSystem mapAttrs;
+      inherit (inputs.darwin.lib) darwinSystem;
+      inherit (inputs.home-manager.lib) homeManagerConfiguration;
     in {
 
-      homeConfigurations.silver = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.silver = homeManagerConfiguration {
         modules = [ ./profiles/dsn.nix ];
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+        pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin;
         extraSpecialArgs = {
           inherit inputs outputs;
-          isServer = false;
           hostname = "silver";
         };
       };
 
-      darwinConfigurations.silver = darwin.lib.darwinSystem {
-        modules = [ ./hosts/silver/configuration.nix ];
+      darwinConfigurations.silver = darwinSystem {
+        modules = [
+          ./hosts/silver/configuration.nix
+          ./modules/common.nix
+          ./modules/darwin
+        ];
         specialArgs = { inherit inputs outputs; };
         system = aarch64-darwin;
       };
@@ -54,6 +70,18 @@
           pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin;
         };
       in pkgs'.options-doc;
+
+      # homeConfigurations = mapAttrs (target: cfg:
+      #   homeManagerConfiguration {
+      #     pkgs = inputs.nixpkgs.legacyPackages.${cfg.system};
+      #     extraSpecialArgs = { inherit inputs outputs; };
+      #     modules = [
+      #       ./profiles/${cfg.profile}.nix
+      #       # { home.stateVersion = cfg.stateVersion; }
+      #       # ./hm-modules/all.nix
+      #       { inherit (cfg) my-nixos-hm; }
+      #     ];
+      #   }) (import ./profiles);
 
       # colmena = {
       #   meta = {

@@ -1,8 +1,10 @@
 { ... }: {
 
-  imports = [ ../../modules/common.nix ../../modules/darwin ];
-
-  dsn.common.enable = true;
+  dsn = {
+    common.enable = true;
+    homebrew.enable = true;
+    skhd.enable = true;
+  };
 
   environment.systemPath = [ "/opt/homebrew/bin" ];
   environment.pathsToLink = [ "/Applications" ];

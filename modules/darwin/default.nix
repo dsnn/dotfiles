@@ -1,7 +1,1 @@
-{ ... }: {
-  imports = [
-    ./homebrew.nix
-    ./skhd.nix
-    # ./yabai.nix
-  ];
-}
+{ ... }: { imports = [ ./homebrew.nix ./skhd.nix ./yabai.nix ]; }

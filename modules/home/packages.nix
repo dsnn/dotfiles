@@ -1,6 +1,5 @@
-{ pkgs, isServer, ... }:
-with pkgs;
-[
+{ pkgs, ... }:
+with pkgs; [
   dotnet-sdk_8
   # omnisharp-roslyn
   # sstp
@@ -24,9 +23,12 @@ with pkgs;
   vim
   wakeonlan
   xclip
-] ++ pkgs.lib.optionals isServer [
-  _1password
 ]
+
+# TODO: make this a module (instead of passing values) 
+# ++ pkgs.lib.optionals isServer [
+#   _1password
+# ]
 
 # TODO: packages: install fonts
 # [

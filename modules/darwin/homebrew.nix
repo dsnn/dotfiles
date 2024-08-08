@@ -10,14 +10,13 @@ in {
       caskArgs.no_quarantine = true;
       global.brewfile = true;
       taps = [
-        "fujiapple852/trippy"
+        "fujiapple852/trippy" # access this by cmd "trip"
         # "homebrew/core"
         # "homebrew/cask"
         # "homebrew/cask-fonts"
       ];
       brews = [ "mas" "sstp-client" "trippy" "git-crypt" ];
       casks = [
-        # "arc"
         # "raycast"
         # "firefox"
         # "spotify"

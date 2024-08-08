@@ -19,7 +19,6 @@ in {
         gnused
         htop
         jq
-        lazydocker
         lsof
         mosh
         nawk
@@ -29,11 +28,10 @@ in {
         wakeonlan
         xclip
       ] ++ pkgs.lib.optionals cfg.enable-dev-tools [
-        # terraform
-        # terraform-ls
-        dotnet-sdk_8
+        #_1password
         ansible
-        # _1password 
+        dotnet-sdk_8
+        lazydocker
       ];
 
     # [

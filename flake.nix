@@ -33,22 +33,26 @@
       # inherit (inputs.nixpkgs.lib) nixosSystem mapAttrs;
       inherit (inputs.darwin.lib) darwinSystem;
       inherit (inputs.home-manager.lib) homeManagerConfiguration;
+      unstable = import inputs.nixpkgs-unstable {
+        system = aarch64-darwin;
+        config.allowUnfree = true;
+      };
     in {
 
       homeConfigurations.silver = homeManagerConfiguration {
-        modules = [ ./profiles/dsn.nix ./modules/home ];
-        pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin;
         extraSpecialArgs = {
           inherit inputs outputs;
           hostname = "silver";
         };
+        pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin;
+        modules = [ ./profiles/dsn.nix ./modules/home ];
       };
 
       darwinConfigurations.silver = darwinSystem {
+        system = aarch64-darwin;
+        specialArgs = { inherit inputs outputs unstable; };
         modules =
           [ ./configs/silver.nix ./modules/common.nix ./modules/darwin ];
-        specialArgs = { inherit inputs outputs; };
-        system = aarch64-darwin;
       };
 
       packages.aarch64-darwin.options-doc = let

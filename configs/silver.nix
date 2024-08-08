@@ -1,9 +1,14 @@
 { ... }: {
 
   dsn = {
-    common.enable = true;
+    common = {
+      enable = true;
+      enable-darwin-gc-interval = true;
+      enable-darwin-paths = true;
+    };
     homebrew.enable = true;
     skhd.enable = true;
+    terraform.enable = true;
   };
 
   environment.systemPath = [ "/opt/homebrew/bin" ];
@@ -15,7 +20,7 @@
 
   services.nix-daemon.enable = true;
 
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
 
   programs.zsh.enable = true;
 

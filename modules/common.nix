@@ -2,33 +2,35 @@
 with lib;
 let
   cfg = config.dsn.common;
-  # inherit (pkgs.stdenv) isDarwin;
-  # home = if isDarwin then "/Users/dsn" else "/home/dsn";
   trustedUsers = [ "root" "dsn" "@wheel" ];
 in {
 
-  options.dsn.common = { enable = mkEnableOption "Enable common stuff"; };
+  options.dsn.common = {
+    enable = mkEnableOption "Enable common stuff";
+    enable-darwin-gc-interval = mkEnableOption "Enable gc interval for osx";
+    enable-darwin-paths = mkEnableOption "Enable darwin paths";
+  };
 
   config = mkIf cfg.enable {
-
-    # TODO: set systemPath & pathsToLink if isDarwin
-    # environment.systemPath = [ "/opt/homebrew/bin" ];
-    # environment.pathsToLink = [ "/Applications" ];
-
-    environment.loginShell = pkgs.zsh;
-    environment.shells = with pkgs; [ bash zsh ];
-    environment.systemPackages = with pkgs; [
-      age
-      coreutils
-      git
-      home-manager
-      htop
-      man
-      sops
-      vim
-      wget
-      nix
-    ];
+    environment = {
+      loginShell = pkgs.zsh;
+      shells = with pkgs; [ bash zsh ];
+      systemPackages = with pkgs; [
+        age
+        coreutils
+        git
+        home-manager
+        htop
+        man
+        sops
+        vim
+        wget
+        nix
+      ];
+    } // optionalAttrs cfg.enable-darwin-paths {
+      systemPath = [ "/opt/homebrew/bin" ];
+      pathsToLink = [ "/Applications" ];
+    };
 
     nix = {
       package = pkgs.nix;
@@ -57,7 +59,12 @@ in {
       gc = {
         automatic = true;
         options = "--delete-older-than 30d";
-
+      } // optionalAttrs cfg.enable-darwin-gc-interval {
+        interval = {
+          Weekday = 0;
+          Hour = 0;
+          Minute = 0;
+        };
       };
 
       # nixPath = [
@@ -72,11 +79,6 @@ in {
       #   "/nix/var/nix/profiles/per-user/root/channels"
       # ];
 
-      # gc.interval = lib.mkIf (isDarwin) {
-      #   Weekday = 0;
-      #   Hour = 0;
-      #   Minute = 0;
-      # };
     };
   };
 }

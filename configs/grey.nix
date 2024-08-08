@@ -3,17 +3,17 @@
   programs.nix-ld.dev.enable = true;
 
   imports = [
-    ../../system/common.nix
-    ../../system/nixos/cicd
-    ../../system/nixos/cifs.nix
-    ../../system/nixos/security.nix
-    # ../../system/nixos/services/avahi.nix
-    # ../../system/nixos/services/cups.nix
-    ../../system/nixos/services/fail2ban.nix
-    ../../system/nixos/services/homepage-dashboard.nix
-    ../../system/nixos/services/jellyfin.nix
-    ../../system/nixos/services/openssh.nix
-    ../../system/nixos/users.nix
+    # ../modules/nixos/avahi.nix
+    # ../modules/nixos/cups.nix
+    ../common.nix
+    ../modules/nixos/cicd
+    ../modules/nixos/cifs.nix
+    ../modules/nixos/security.nix
+    ../modules/nixos/fail2ban.nix
+    ../modules/nixos/homepage-dashboard.nix
+    ../modules/nixos/jellyfin.nix
+    ../modules/nixos/openssh.nix
+    ../modules/nixos/users.nix
     ./hardware.nix
   ];
 

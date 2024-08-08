@@ -19,5 +19,6 @@
     ./wireguard.nix
     ./cicd
     ./awesomewm
+    ./sops.nix
   ];
 }

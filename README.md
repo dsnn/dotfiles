@@ -14,6 +14,12 @@ nixos-rebuild switch --flake .#profile --fast --use-remote-sudo \
   --target-host <user@host> --build-host <user@host> --verbose
 ```
 
+or
+
+```console
+nix run github:nix-community/nixos-anywhere -- --flake .#template --build-on-remote user@ip
+```
+
 ## Generate options doc
 
 ```console
@@ -66,7 +72,16 @@ If node isn't available check that host configuration has nix-ld enabled.
   programs.nix-ld.dev.enable = true;
 ```
 
-## packer
+## infrastructure
+
+headers below contains information on how to deploy resources in homelab.
+mixed instructions for both regular linux and nixos.
+
+for nixos, nixos-anywhere is used to install nixos and apply initial configuration to a server.
+from there on we apply changes with either colmena or nixos-rebuild.
+use colmena on darwin systems since nixos-rebuild isn't available (without some hacky stuff)
+
+### packer
 
 Create proxmox templates. Run command inside OS folder e.g pkr-ubuntu-noble-1
 
@@ -74,7 +89,7 @@ Create proxmox templates. Run command inside OS folder e.g pkr-ubuntu-noble-1
     packer build -var-file=<(sops -d ~/dotfiles/secrets/secret.tfvars.json) .
 ```
 
-## terraform
+### terraform
 
 Create and run infrastructure (virtual machines, DNS etc).
 Sync state in cloud with terraform login.
@@ -84,7 +99,7 @@ Sync state in cloud with terraform login.
     terraform apply -var-file=<(sops -d ~/dotfiles/secrets/secret.tfvars.json) -auto-approve
 ```
 
-## nixos container template
+### nixos container template
 
 Create a container tarball.
 

@@ -7,13 +7,11 @@ in {
 
   options.dsn.common = {
     enable = mkEnableOption "Enable common stuff";
-    enable-darwin-gc-interval = mkEnableOption "Enable gc interval for osx";
-    enable-darwin-paths = mkEnableOption "Enable darwin paths";
+    enable-darwin = mkEnableOption "Enable environment options";
   };
 
   config = mkIf cfg.enable {
     environment = {
-      loginShell = pkgs.zsh;
       shells = with pkgs; [ bash zsh ];
       systemPackages = with pkgs; [
         age
@@ -27,7 +25,8 @@ in {
         wget
         nix
       ];
-    } // optionalAttrs cfg.enable-darwin-paths {
+    } // optionalAttrs cfg.enable-darwin {
+      loginShell = pkgs.zsh;
       systemPath = [ "/opt/homebrew/bin" ];
       pathsToLink = [ "/Applications" ];
     };
@@ -59,7 +58,7 @@ in {
       gc = {
         automatic = true;
         options = "--delete-older-than 30d";
-      } // optionalAttrs cfg.enable-darwin-gc-interval {
+      } // optionalAttrs cfg.enable-darwin {
         interval = {
           Weekday = 0;
           Hour = 0;

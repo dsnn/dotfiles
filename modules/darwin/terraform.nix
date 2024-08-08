@@ -6,7 +6,12 @@ in {
   options.dsn.terraform = { enable = mkEnableOption "Enable terraform"; };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [ unstable.terraform unstable.terraform-ls ];
+    environment.systemPackages = [
+      unstable.terraform
+      unstable.terraform-ls
+      unstable.terraform-providers.null
+      unstable.terraform-providers.external
+    ];
   };
 }
 

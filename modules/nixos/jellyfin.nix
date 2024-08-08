@@ -1,10 +1,10 @@
 { config, pkgs, lib, ... }:
 with lib;
 let
-  cfg = config.dsn.fail2ban;
+  cfg = config.dsn.jellyfin;
   group = config.users.users.jellyfin.name;
 in {
-  options.dsn.fail2ban = { enable = mkEnableOption "Enable fail2ban"; };
+  options.dsn.jellyfin = { enable = mkEnableOption "Enable jellyfin"; };
 
   config = mkIf cfg.enable {
     users.users.jellyfin = {

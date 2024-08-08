@@ -1,10 +1,8 @@
 { config, pkgs, lib, ... }:
 with lib;
-let cfg = config.dsn.virtualisation;
+let cfg = config.dsn.wireguard;
 in {
-  options.dsn.virtualisation = {
-    enable = mkEnableOption "Enable virtualisation";
-  };
+  options.dsn.wireguard = { enable = mkEnableOption "Enable wireguard"; };
 
   config = mkIf cfg.enable {
     # networking.wg-quick.interfaces = {

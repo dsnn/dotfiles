@@ -1,8 +1,8 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.dsn.sshd;
+let cfg = config.dsn.openssh;
 in {
-  options.dsn.sshd = { enable = mkEnableOption "Enable ssh server"; };
+  options.dsn.openssh = { enable = mkEnableOption "Enable ssh server"; };
 
   config = mkIf cfg.enable {
     services.openssh = {

@@ -3,8 +3,7 @@
   dsn = {
     common = {
       enable = true;
-      enable-darwin-gc-interval = true;
-      enable-darwin-paths = true;
+      enable-darwin = true;
     };
     homebrew.enable = true;
     skhd.enable = true;

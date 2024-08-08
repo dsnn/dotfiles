@@ -29,14 +29,15 @@
     let
       inherit (self) outputs;
       aarch64-darwin = "aarch64-darwin";
-      # x86_64-linux = "x86_64-linux";
-      # inherit (inputs.nixpkgs.lib) nixosSystem mapAttrs;
+      x86_64-linux = "x86_64-linux";
+      inherit (inputs.nixpkgs.lib) nixosSystem; # mapAttrs;
       inherit (inputs.darwin.lib) darwinSystem;
       inherit (inputs.home-manager.lib) homeManagerConfiguration;
-      unstable = import inputs.nixpkgs-unstable {
-        system = aarch64-darwin;
-        config.allowUnfree = true;
-      };
+      unstable = system:
+        import inputs.nixpkgs-unstable {
+          inherit system;
+          config.allowUnfree = true;
+        };
     in {
 
       homeConfigurations.silver = homeManagerConfiguration {
@@ -50,9 +51,26 @@
 
       darwinConfigurations.silver = darwinSystem {
         system = aarch64-darwin;
-        specialArgs = { inherit inputs outputs unstable; };
+        specialArgs = {
+          unstable = unstable aarch64-darwin;
+          inherit inputs outputs;
+        };
         modules =
           [ ./configs/silver.nix ./modules/common.nix ./modules/darwin ];
+      };
+
+      nixosConfigurations.template = nixosSystem {
+        system = x86_64-linux;
+        specialArgs = {
+          unstable = unstable x86_64-linux;
+          inherit inputs outputs;
+        };
+        modules = [
+          inputs.disko.nixosModules.disko
+          ./configs/template.nix
+          ./modules/common.nix
+          ./modules/nixos
+        ];
       };
 
       packages.aarch64-darwin.options-doc = let
@@ -73,54 +91,20 @@
       #     ];
       #   }) (import ./profiles);
 
-      # colmena = {
-      #   meta = {
-      #     nixpkgs = import nixpkgs {
-      #       system = "x86_64-linux";
-      #       overlays = [ ];
-      #     };
-      #   };
-      #
-      #   # This module will be imported by all hosts
-      #   defaults = { pkgs, ... }: {
-      #     environment.systemPackages = with pkgs; [ vim wget curl git sudo ];
-      #
-      #     # enable and allow ssh
-      #     services.openssh = {
-      #       enable = true;
-      #       passwordAuthentication = true;
-      #     };
-      #     networking.firewall.allowedTCPPorts = [ 22 ];
-      #
-      #     systemd.mounts = [{
-      #       where = "/sys/kernel/debug";
-      #       enable = false;
-      #     }];
-      #
-      #     boot.isContainer = true;
-      #     time.timeZone = "Europe/Stockholm";
-      #
-      #     system = { stateVersion = "23.05"; };
-      #   };
-      #
-      #   srv-nixos-01 = import ./hosts/srv-nixos {
-      #     name = "srv-nixos-01";
-      #     targetHost = "192.168.2.111";
-      #     pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      #     inherit inputs;
-      #   };
-      #   srv-nixos-02 = import ./hosts/srv-nixos {
-      #     name = "srv-nixos-02";
-      #     targetHost = "192.168.2.112";
-      #     pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      #     inherit inputs;
-      #   };
-      #   srv-nixos-03 = import ./hosts/srv-nixos {
-      #     name = "srv-nixos-03";
-      #     targetHost = "192.168.2.113";
-      #     pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      #     inherit inputs;
-      #   };
-      # };
+      colmena = {
+        meta = {
+          nixpkgs = import nixpkgs {
+            system = "x86_64-linux";
+            overlays = [ ];
+          };
+        };
+
+        template = import ./configs/template.nix {
+          name = "srv-nixos-01";
+          targetHost = "192.168.2.111";
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          inherit inputs;
+        };
+      };
     };
 }

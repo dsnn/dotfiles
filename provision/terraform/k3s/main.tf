@@ -1,12 +1,14 @@
-resource "proxmox_lxc" "srv-ubuntu-02" {
-  vmid         = 102
+resource "proxmox_lxc" "k3s-cluster" {
+  for_each = var.servers
+
+  vmid         = each.value.vmid
   target_node  = "omega"
-  hostname     = "srv-ubuntu-02"
+  hostname     = each.value.name
   ostemplate   = "local:vztmpl/ubuntu-24.04-standard_24.04-2_amd64.tar.zst"
   password     = var.ssh_password
   unprivileged = true
-  onboot       = true
-  start        = true
+  onboot       = true # start on boot
+  start        = true # start after creation
 
   rootfs {
     size    = "8G"
@@ -17,8 +19,8 @@ resource "proxmox_lxc" "srv-ubuntu-02" {
     name     = "eth0"
     bridge   = "vmbr0"
     firewall = false
-    ip       = "dhcp"
-    ip6      = "dhcp"
+    ip       = each.value.ip_address
+    gw       = each.value.gateway
   }
 
   features {

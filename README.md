@@ -99,7 +99,13 @@ Sync state in cloud with terraform login.
     terraform apply -var-file=<(sops -d ~/dotfiles/secrets/secret.tfvars.json) -auto-approve
 ```
 
-### nixos container template
+### nixos generators
+
+#### vma
+
+nix run github:nix-community/nixos-generators -- --format proxmox --configuration <file.nix>
+
+#### container
 
 Create a container tarball.
 

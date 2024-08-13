@@ -14,12 +14,6 @@ nixos-rebuild switch --flake .#profile --fast --use-remote-sudo \
   --target-host <user@host> --build-host <user@host> --verbose
 ```
 
-or
-
-```console
-nix run github:nix-community/nixos-anywhere -- --flake .#template --build-on-remote user@ip
-```
-
 ## Generate options doc
 
 ```console
@@ -81,6 +75,21 @@ for nixos, nixos-anywhere is used to install nixos and apply initial configurati
 from there on we apply changes with either colmena or nixos-rebuild.
 use colmena on darwin systems since nixos-rebuild isn't available (without some hacky stuff)
 
+### nixos-anywhere
+
+create a new virtual machine with a minimal installer atached to cdrom.
+enter console in proxmox ui, get ip for the vm and set a password for root (used for deploy).
+
+```console
+    sudo passwd root
+```
+
+then:
+
+```console
+nix run github:nix-community/nixos-anywhere -- --flake .#template --build-on-remote user@ip
+```
+
 ### packer
 
 Create proxmox templates. Run command inside OS folder e.g pkr-ubuntu-noble-1
@@ -117,6 +126,8 @@ Upload to proxmox and run colmena build/apply.
 
 ## TODO
 
+- [local nixos cache](https://docs.cachix.org/)
+- [terraform sops](https://github.com/carlpett/terraform-provider-sops)
 - [catppuccin base16](https://github.com/catppuccin/base16)
 - [flake checker GitHub action](https://determinate.systems/posts/flake-checker)
 - [tmux-continuum issue 118](https://github.com/tmux-plugins/tmux-continuum/issues/118)
@@ -124,7 +135,6 @@ Upload to proxmox and run colmena build/apply.
 - [impermanence](https://nixos.wiki/wiki/Impermanence)
 - [flame](https://github.com/pawelmalak/flame)
 - [docker registry ui](https://github.com/Joxit/docker-registry-ui)
-- [terraform sops](https://github.com/carlpett/terraform-provider-sops)
 
 ## Links
 

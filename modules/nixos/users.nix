@@ -21,8 +21,12 @@ in {
       defaultUserShell = pkgs.zsh;
     };
 
-    users.users.root.hashedPasswordFile =
-      config.sops.secrets."password/root".path;
+    users.users.root = {
+      hashedPasswordFile = config.sops.secrets."password/root".path;
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAaLTAnk7ZuDsWIcahlr0SWKfq9BlwSJTyE1c6CGktKB"
+      ];
+    };
 
     users.users.dsn = {
       shell = pkgs.zsh;

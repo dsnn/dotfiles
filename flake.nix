@@ -49,6 +49,15 @@
         modules = [ ./profiles/dsn.nix ./modules/home ];
       };
 
+      homeConfigurations.dev = homeManagerConfiguration {
+        extraSpecialArgs = {
+          inherit inputs outputs;
+          hostname = "dev";
+        };
+        pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+        modules = [ ./profiles/dsn.nix ./modules/home ];
+      };
+
       darwinConfigurations.silver = darwinSystem {
         system = aarch64-darwin;
         specialArgs = {
@@ -59,7 +68,7 @@
           [ ./configs/silver.nix ./modules/common.nix ./modules/darwin ];
       };
 
-      nixosConfigurations.template = nixosSystem {
+      nixosConfigurations.dev = nixosSystem {
         system = x86_64-linux;
         specialArgs = {
           unstable = unstable x86_64-linux;
@@ -67,7 +76,7 @@
         };
         modules = [
           inputs.disko.nixosModules.disko
-          ./configs/template.nix
+          ./provision/nixos/dev/dev.nix
           ./modules/common.nix
           ./modules/nixos
         ];

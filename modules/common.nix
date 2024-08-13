@@ -31,6 +31,8 @@ in {
       pathsToLink = [ "/Applications" ];
     };
 
+    time.timeZone = "Europe/Stockholm";
+
     nix = {
       package = pkgs.nix;
       # package = pkgs.nixFlakes;

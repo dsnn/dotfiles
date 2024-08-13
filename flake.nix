@@ -91,20 +91,12 @@
       #     ];
       #   }) (import ./profiles);
 
-      colmena = {
-        meta = {
-          nixpkgs = import nixpkgs {
-            system = "x86_64-linux";
-            overlays = [ ];
-          };
-        };
-
-        template = import ./configs/template.nix {
-          name = "srv-nixos-01";
-          targetHost = "192.168.2.111";
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          inherit inputs;
-        };
-      };
+      # colmena = {
+      #   template = import ./configs/template.nix {
+      #     targetHost = "192.168.2.134";
+      #     pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+      #     inherit inputs;
+      #   };
+      # };
     };
 }

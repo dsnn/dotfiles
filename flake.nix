@@ -82,11 +82,29 @@
         ];
       };
 
-      packages.aarch64-darwin.options-doc = let
-        pkgs' = import ./packages {
-          pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin;
+      nixosConfigurations.service = nixosSystem {
+        system = x86_64-linux;
+        specialArgs = {
+          unstable = unstable x86_64-linux;
+          inherit inputs outputs;
         };
-      in pkgs'.options-doc;
+        modules = [
+          inputs.disko.nixosModules.disko
+          ./provision/nixos/dev/dev.nix
+          ./modules/common.nix
+          ./modules/nixos
+        ];
+      };
+
+      packages = {
+        aarch64-darwin = {
+          options-doc = let
+            pkgs' = import ./packages {
+              pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin;
+            };
+          in pkgs'.options-doc;
+        };
+      };
 
       # homeConfigurations = mapAttrs (target: cfg:
       #   homeManagerConfiguration {

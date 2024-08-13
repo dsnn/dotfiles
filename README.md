@@ -3,26 +3,18 @@
 ## Test configurations
 
 ```console
-nix-build '<nixpkgs/nixos>' -A vm -I nixpkgs=channel:nixos-23.11 \
+nix-build '<nixpkgs/nixos>' -A vm -I nixpkgs=channel:nixos-24.05 \
   -I nixos-config=./configuration.nix
 ```
 
-## Remote deploy via nixos-rebuild
+## [Remote deploy via nixos-rebuild](https://nixos.wiki/wiki/Nixos-rebuild)
 
 ```console
 nixos-rebuild switch --flake .#profile --fast --use-remote-sudo \
   --target-host <user@host> --build-host <user@host> --verbose
 ```
 
-## Generate options doc
-
-```console
-    nix build .#options-doc
-```
-
 ## Apple upgrades
-
-### zsh
 
 When upgrading macOS your /etc/zshrc might reset.
 Result: commands or configurations stop working, NIX_PATH is empty etc.
@@ -35,12 +27,12 @@ fi
 
 ```
 
-### Touch ID for sudo
+## [Touch ID for sudo](https://daiderd.com/nix-darwin/manual/index.html#opt-security.pam.enableSudoTouchIdAuth)
 
 Also, macOS resets /etc/pam.d/sudo which enables touch id for sudo.
-More info here: [enableSudoTouchIdAuth](https://daiderd.com/nix-darwin/manual/index.html#opt-security.pam.enableSudoTouchIdAuth)
+More info here:
 
-## Home-manager
+## [Home-manager](https://home-manager-options.extranix.com/)
 
 If home manager crashes on 'Could not find suitable profile directory':
 Manually create this folder:
@@ -49,7 +41,7 @@ Manually create this folder:
 mkdir -p ~/.local/state/nix/profiles
 ```
 
-## node
+## Node
 
 If node isn't available check that host configuration has nix-ld enabled.
 
@@ -66,31 +58,15 @@ If node isn't available check that host configuration has nix-ld enabled.
   programs.nix-ld.dev.enable = true;
 ```
 
-## infrastructure
+## Infrastructure
 
-headers below contains information on how to deploy resources in homelab.
-mixed instructions for both regular linux and nixos.
-
-for nixos, nixos-anywhere is used to install nixos and apply initial configuration to a server.
-from there on we apply changes with either colmena or nixos-rebuild.
-use colmena on darwin systems since nixos-rebuild isn't available (without some hacky stuff)
-
-### nixos-anywhere
-
-create a new virtual machine with a minimal installer atached to cdrom.
-enter console in proxmox ui, get ip for the vm and set a password for root (used for deploy).
+### [NixOS Anywhere](https://github.com/nix-community/nixos-anywhere)
 
 ```console
-    sudo passwd root
+    nix run github:nix-community/nixos-anywhere -- --flake .#template --build-on-remote user@ip
 ```
 
-then:
-
-```console
-nix run github:nix-community/nixos-anywhere -- --flake .#template --build-on-remote user@ip
-```
-
-### packer
+### [Packer](https://developer.hashicorp.com/packer/docs?product_intent=packer)
 
 Create proxmox templates. Run command inside OS folder e.g pkr-ubuntu-noble-1
 
@@ -98,7 +74,7 @@ Create proxmox templates. Run command inside OS folder e.g pkr-ubuntu-noble-1
     packer build -var-file=<(sops -d ~/dotfiles/secrets/secret.tfvars.json) .
 ```
 
-### terraform
+### [Terraform](https://developer.hashicorp.com/terraform?product_intent=terraform)
 
 Create and run infrastructure (virtual machines, DNS etc).
 Sync state in cloud with terraform login.
@@ -108,21 +84,11 @@ Sync state in cloud with terraform login.
     terraform apply -var-file=<(sops -d ~/dotfiles/secrets/secret.tfvars.json) -auto-approve
 ```
 
-### nixos generators
-
-#### vma
-
-nix run github:nix-community/nixos-generators -- --format proxmox --configuration <file.nix>
-
-#### container
-
-Create a container tarball.
+## [Generate documentation](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/default.nix)
 
 ```console
-    nix run github:nix-community/nixos-generators -- --format proxmox-lxc
+    nix build .#options-doc
 ```
-
-Upload to proxmox and run colmena build/apply.
 
 ## TODO
 
@@ -147,5 +113,3 @@ Upload to proxmox and run colmena build/apply.
 - [bat-extras](https://github.com/eth-p/bat-extras/tree/master)
 - [nix-community srvos](https://github.com/nix-community/srvos)
 - [nix-community infra](https://github.com/nix-community/infra)
-- [nixos proxmox ve](https://nixos.wiki/wiki/Proxmox_Virtual_Environment)
-- [nixos anywhere](https://github.com/nix-community/nixos-anywhere)

@@ -6,6 +6,7 @@ let
     check = false;
     modules = [ ../modules/common.nix ];
   };
+
   optionsDoc = nixosOptionsDoc {
     inherit (eval) options;
     transformOptions = opt:

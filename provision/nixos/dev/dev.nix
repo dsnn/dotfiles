@@ -12,7 +12,15 @@
     openssh.enable = true;
     user.enable = true;
     sops.enable = true;
+    virtualisation.enable = true;
+    gitea.enable = true;
+    drone-server.enable = true;
+    drone-runner-docker.enable = true;
+    docker-registry.enable = true;
+    homepage.enable = true;
   };
+
+  nixpkgs.config.allowUnfree = true;
 
   boot = {
     loader.grub = {

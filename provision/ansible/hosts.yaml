@@ -1,5 +1,16 @@
 ---
-all:
+k3s-master:
   hosts:
-    local:
-      ansible_connection: local
+    192.168.2.121:
+    192.168.2.122:
+    192.168.2.123:
+
+k3s-node:
+  hosts:
+    192.168.2.124:
+    192.168.2.125:
+
+k3s-cluster:
+  children:
+    k3s-master:
+    k3s-node:

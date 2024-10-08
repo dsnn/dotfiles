@@ -3,6 +3,8 @@
 - [nixos](docs/nixos.md)
 - [infrastructure](docs/infra.md)
 
+or mkdocs on [www.dsnn.io/dotfiles](https://www.dsnn.io/dotfiles/)
+
 ## TODO
 
 For more information see issues.

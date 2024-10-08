@@ -93,10 +93,22 @@ terraform apply --var-file=secrets.dec.json
 
 ```
 
+For manual formatting:
+
+```console
+terraform fmt -write -recursive <folder>
+```
+
 ## [Generate documentation](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/default.nix)
 
 ```console
     nix build .#options-doc
+```
+
+## Ansible
+
+```console
+ansible k3s-cluster -m ping
 ```
 
 ## TODO
@@ -122,3 +134,4 @@ terraform apply --var-file=secrets.dec.json
 - [bat-extras](https://github.com/eth-p/bat-extras/tree/master)
 - [nix-community srvos](https://github.com/nix-community/srvos)
 - [nix-community infra](https://github.com/nix-community/infra)
+- [proxmox template](https://technotim.live/posts/cloud-init-cloud-image/)

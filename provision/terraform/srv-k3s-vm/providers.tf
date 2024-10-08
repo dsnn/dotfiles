@@ -1,7 +1,7 @@
 terraform {
   required_version = ">= 0.13.0"
 
-	cloud {
+  cloud {
     organization = "dsw"
     workspaces {
       name = "proxmox"

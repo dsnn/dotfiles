@@ -20,8 +20,8 @@ variable "ssh_password" {
   sensitive = true
 }
 
-variable "public_ssh_key" {
-	type			= string
+variable "ssh_public_key" {
+  type = string
 }
 
 variable "servers" {

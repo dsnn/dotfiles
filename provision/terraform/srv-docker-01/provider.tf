@@ -4,7 +4,7 @@ terraform {
   cloud {
     organization = "dsw"
     workspaces {
-      name = "proxmox"
+      name = "docker"
     }
   }
 
@@ -15,6 +15,7 @@ terraform {
     }
   }
 }
+
 
 provider "proxmox" {
   pm_api_url          = var.proxmox_api_url

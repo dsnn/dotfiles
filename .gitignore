@@ -14,5 +14,6 @@ tags
 **/*/secrets.json
 **/*/.terraform
 **/*/.terraform.lock.hcl
-**/*/terraform.tfstate
+**/*/*.tfstate
 **/*/terraform.tfstate.backup
+**/*/*.dec.json

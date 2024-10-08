@@ -84,6 +84,15 @@ Sync state in cloud with terraform login.
     terraform apply -var-file=<(sops -d ~/dotfiles/secrets/secret.tfvars.json) -auto-approve
 ```
 
+or decrypt secrets first to \*.dec.json (ignored by git but be careful anyway)
+
+```console
+sops -d ~/dotfiles/secrets/secrets.tfvars.json > secrets.dec.json
+terraform plan --var-file=secrets.dec.json
+terraform apply --var-file=secrets.dec.json
+
+```
+
 ## [Generate documentation](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/default.nix)
 
 ```console

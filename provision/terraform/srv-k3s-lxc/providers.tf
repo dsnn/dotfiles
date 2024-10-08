@@ -4,7 +4,7 @@ terraform {
 	cloud {
     organization = "dsw"
     workspaces {
-      name = "proxmox"
+      name = "myconf"
     }
   }
 

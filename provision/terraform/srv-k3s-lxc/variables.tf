@@ -20,6 +20,10 @@ variable "ssh_password" {
   sensitive = true
 }
 
+variable "public_ssh_key" {
+	type			= string
+}
+
 variable "servers" {
   default = {
     "srv-k3s-01" = {

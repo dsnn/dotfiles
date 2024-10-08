@@ -3,14 +3,14 @@
 ## Test configurations
 
 ```console
-nix-build '<nixpkgs/nixos>' -A vm -I nixpkgs=channel:nixos-24.05 \
+    nix-build '<nixpkgs/nixos>' -A vm -I nixpkgs=channel:nixos-24.05 \
   -I nixos-config=./configuration.nix
 ```
 
 ## [Remote deploy via nixos-rebuild](https://nixos.wiki/wiki/Nixos-rebuild)
 
 ```console
-nixos-rebuild switch --flake .#profile --fast --use-remote-sudo \
+    nixos-rebuild switch --flake .#profile --fast --use-remote-sudo \
   --target-host <user@host> --build-host <user@host> --verbose
 ```
 
@@ -20,10 +20,10 @@ When upgrading macOS your /etc/zshrc might reset.
 Result: commands or configurations stop working, NIX_PATH is empty etc.
 Fix: Add this to the bottom of /etc/zshrc.
 
-```zsh
-if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-. '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-fi
+```console
+    if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+    . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+    fi
 
 ```
 
@@ -38,7 +38,7 @@ If home manager crashes on 'Could not find suitable profile directory':
 Manually create this folder:
 
 ```console
-mkdir -p ~/.local/state/nix/profiles
+    mkdir -p ~/.local/state/nix/profiles
 ```
 
 ## Node
@@ -46,7 +46,6 @@ mkdir -p ~/.local/state/nix/profiles
 If node isn't available check that host configuration has nix-ld enabled.
 
 ```nix
-
   ...
   nixosConfigurations.host = nixpkgs.lib.nixosSystem {
     modules = [

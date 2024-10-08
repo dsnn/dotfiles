@@ -27,16 +27,15 @@ Sync state in cloud with terraform login.
 or decrypt secrets first to \*.dec.json (ignored by git but be careful anyway)
 
 ```console
-sops -d ~/dotfiles/secrets/secrets.tfvars.json > secrets.dec.json
-terraform plan --var-file=secrets.dec.json
-terraform apply --var-file=secrets.dec.json
-
+    sops -d ~/dotfiles/secrets/secrets.tfvars.json > secrets.dec.json
+    terraform plan --var-file=secrets.dec.json
+    terraform apply --var-file=secrets.dec.json
 ```
 
 For manual formatting:
 
 ```console
-terraform fmt -write -recursive <folder>
+    terraform fmt -write -recursive <folder>
 ```
 
 ## [Generate documentation](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/default.nix)
@@ -48,9 +47,9 @@ terraform fmt -write -recursive <folder>
 ## Ansible
 
 ```console
-ansible k3s-cluster -m ping
+    ansible k3s-cluster -m ping
 ```
 
 ```console
-ansible-galaxy install -r ./collections/requirements.yml
+    ansible-galaxy install -r ./collections/requirements.yml
 ```

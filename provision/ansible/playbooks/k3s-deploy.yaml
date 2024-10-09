@@ -14,7 +14,7 @@
   become: true
   environment: "{{ proxy_env | default({}) }}"
   roles:
-    - role: proxmox_lxc
+    - role: techno_tim.k3s_ansible.proxmox_lxc
       when: proxmox_lxc_configure
 
 - name: Prepare k3s nodes
@@ -22,16 +22,16 @@
   gather_facts: true
   environment: "{{ proxy_env | default({}) }}"
   roles:
-    - role: lxc
+    - role: techno_tim.k3s_ansible.lxc
       become: true
       when: proxmox_lxc_configure
-    - role: prereq
+    - role: techno_tim.k3s_ansible.prereq
       become: true
-    - role: download
+    - role: techno_tim.k3s_ansible.download
       become: true
-    - role: raspberrypi
+    - role: techno_tim.k3s_ansible.raspberrypi
       become: true
-    - role: k3s_custom_registries
+    - role: techno_tim.k3s_ansible.k3s_custom_registries
       become: true
       when: custom_registries
 
@@ -39,21 +39,21 @@
   hosts: master
   environment: "{{ proxy_env | default({}) }}"
   roles:
-    - role: k3s_server
+    - role: techno_tim.k3s_ansible.k3s_server
       become: true
 
 - name: Setup k3s agents
   hosts: node
   environment: "{{ proxy_env | default({}) }}"
   roles:
-    - role: k3s_agent
+    - role: techno_tim.k3s_ansible.k3s_agent
       become: true
 
 - name: Configure k3s cluster
   hosts: master
   environment: "{{ proxy_env | default({}) }}"
   roles:
-    - role: k3s_server_post
+    - role: techno_tim.k3s_ansible.k3s_server_post
       become: true
 
 - name: Storing kubeconfig in the playbook directory

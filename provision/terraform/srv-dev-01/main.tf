@@ -1,39 +1,58 @@
 resource "proxmox_vm_qemu" "srv-dev-01" {
-  agent            = 1
-  cipassword       = var.ssh_password
-  ciuser           = var.ssh_username
-  clone            = "pkr-ubuntu-noble-1"
-  cores            = 1
-  cpu              = "host"
-  memory           = 2024
-  name             = "srv-dev-01"
+
+  vmid        = 101
+  name        = "srv-dev-01"
+  target_node = "alpha"
+  os_type     = "cloud-init"
+
+  # clone template
+  clone = "noble-ubuntu-cloud"
+
+  # boot (scsi0 is the boot/OS disk)
   onboot           = true
-  os_type          = "cloud-init"
-  sockets          = 1
-  target_node      = "omega"
-  vmid             = 101
   automatic_reboot = false
-  bios             = "seabios"
-  boot             = "order=virtio0;ide0;net0"
+  boot             = "order=scsi0;ide2;net0"
+
+  # qemu
+  agent = 1
+
+  # define resources
+  cpu     = "host"
+  cores   = 4
+  sockets = 1
+  memory  = 6144
+
+  # specify our custom userdata script
+  cipassword = var.ssh_password
+  ciuser     = var.ssh_username
+
+  # benchmarks faster then iscsi https://kb.blockbridge.com/technote/proxmox-aio-vs-iouring/#recommended-settings
+  scsihw = "virtio-scsi-single"
 
   disks {
     ide {
-      ide0 {
+      ide2 {
         cloudinit {
-          storage = "local-lvm"
+          storage = "local"
         }
       }
     }
-    virtio {
-      virtio0 {
+    scsi {
+      scsi0 {
         disk {
-          size    = "20G"
+          size    = "32G"
+          storage = "ssd"
+          format  = "raw"
           cache   = "writeback"
-          storage = "local-lvm"
-          discard = true
+          backup  = false
         }
       }
     }
+  }
+
+  serial {
+    id   = 0
+    type = "socket"
   }
 
   network {
@@ -44,6 +63,6 @@ resource "proxmox_vm_qemu" "srv-dev-01" {
 
   # cloud init
   ipconfig0 = "ip=192.168.2.101/24,gw=192.168.2.1"
-  sshkeys   = var.ssh_public_keys
+  sshkeys   = var.ssh_public_key
 }
 

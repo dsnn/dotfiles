@@ -1,7 +1,7 @@
 ---
 k3s_version: v1.30.2+k3s2
 # this is the user that has ssh access to these machines
-ansible_user: ansibleuser
+ansible_user: root #ansibleuser
 systemd_dir: /etc/systemd/system
 
 # Set your timezone
@@ -120,17 +120,17 @@ metal_lb_ip_range: 192.168.30.80-192.168.30.90
 # Mixing and matching VMs and lxc containers is not supported, ymmv if you want to do this.
 # I would only really recommend using this if you have particularly low powered proxmox nodes where the overhead of
 # VMs would use a significant portion of your available resources.
-proxmox_lxc_configure: false
+proxmox_lxc_configure: true
 # the user that you would use to ssh into the host, for example if you run ssh some-user@my-proxmox-host,
 # set this value to some-user
 proxmox_lxc_ssh_user: root
 # the unique proxmox ids for all of the containers in the cluster, both worker and master nodes
 proxmox_lxc_ct_ids:
-  - 200
-  - 201
-  - 202
-  - 203
-  - 204
+  - 121
+  - 122
+  - 123
+  - 124
+  - 125
 
 # Only enable this if you have set up your own container registry to act as a mirror / pull-through cache
 # (harbor / nexus / docker's official registry / etc).

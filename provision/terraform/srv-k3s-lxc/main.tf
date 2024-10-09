@@ -4,11 +4,12 @@ resource "proxmox_lxc" "k3s-cluster" {
   vmid         = each.value.vmid
   target_node  = "omega"
   hostname     = each.value.name
-  ostemplate   = "local:vztmpl/ubuntu-24.04-standard_24.04-2_amd64.tar.zst"
+  ostemplate   = "local:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
   password     = var.ssh_password
-  unprivileged = true
+  unprivileged = false
   onboot       = true # start on boot
   start        = true # start after creation
+  memory       = each.value.memory
 
   rootfs {
     size    = "8G"
@@ -24,7 +25,7 @@ resource "proxmox_lxc" "k3s-cluster" {
   }
 
   features {
-    nesting = true
+    nesting = false
   }
 
   ssh_public_keys = var.ssh_public_key

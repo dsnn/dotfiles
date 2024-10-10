@@ -1,0 +1,18 @@
+---
+- name: Install core
+  hosts: "{{ hosts }}"
+  become: true
+  tasks:
+    - name: install core packages
+      apt:
+        name:
+          - nfs-common
+          - qemu-guest-agent
+          - unzip
+        update_cache: yes
+
+    - name: start guest qemu-guest-agent
+      service:
+        name: qemu-guest-agent
+        state: started
+        enabled: yes

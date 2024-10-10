@@ -1,31 +1,65 @@
-resource "proxmox_lxc" "srv-docker-01" {
-  vmid         = 102
-  target_node  = "omega"
-  hostname     = "srv-docker-01"
-  ostemplate   = "local:vztmpl/ubuntu-24.04-standard_24.04-2_amd64.tar.zst"
-  password     = var.ssh_password
-  unprivileged = true
-  onboot       = true
-  start        = true
+resource "proxmox_vm_qemu" "srv-docker-01" {
 
-  rootfs {
-    size    = "8G"
-    storage = "local-lvm"
+  vmid        = 110
+  name        = "srv-docker-01"
+  target_node = "omega"
+  os_type     = "cloud-init"
+
+  # clone template
+  clone = "ubuntu-cloud"
+
+  # boot (scsi0 is the boot/OS disk)
+  onboot           = true
+  automatic_reboot = false
+  boot             = "order=scsi0;ide2;net0"
+
+  # qemu
+  agent = 1
+
+  # define resources
+  cpu     = "host"
+  cores   = 4
+  sockets = 1
+  memory  = 8192
+
+  scsihw = "virtio-scsi-single"
+
+  disks {
+    ide {
+      ide2 {
+        cloudinit {
+          storage = "local"
+        }
+      }
+    }
+    scsi {
+      scsi0 {
+        disk {
+          size    = "32G"
+          storage = "local-lvm"
+          format  = "raw"
+          cache   = "writeback"
+          backup  = false
+        }
+      }
+    }
+  }
+
+  serial {
+    id   = 0
+    type = "socket"
   }
 
   network {
-    name     = "eth0"
     bridge   = "vmbr0"
+    model    = "virtio"
     firewall = false
-    ip       = "dhcp"
-    ip6      = "dhcp"
   }
 
-  features {
-    # fuse = true
-    # mount = ""
-    nesting = true
-  }
-
-  ssh_public_keys = var.ssh_public_keys
+  # cloud init
+  ipconfig0 = "ip=192.168.2.110/24,gw=192.168.2.1"
+  nameserver = "192.168.2.1"
+  cipassword = var.ssh_password
+  ciuser     = var.ssh_username
+  sshkeys   = var.ssh_public_key
 }

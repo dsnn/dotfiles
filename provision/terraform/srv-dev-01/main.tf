@@ -22,10 +22,6 @@ resource "proxmox_vm_qemu" "srv-dev-01" {
   sockets = 1
   memory  = 6144
 
-  # specify our custom userdata script
-  cipassword = var.ssh_password
-  ciuser     = var.ssh_username
-
   # benchmarks faster then iscsi https://kb.blockbridge.com/technote/proxmox-aio-vs-iouring/#recommended-settings
   scsihw = "virtio-scsi-single"
 
@@ -63,5 +59,8 @@ resource "proxmox_vm_qemu" "srv-dev-01" {
 
   # cloud init
   ipconfig0 = "ip=192.168.2.101/24,gw=192.168.2.1"
+  nameserver = "192.168.2.1"
+  cipassword = var.ssh_password
+  ciuser     = var.ssh_username
   sshkeys   = var.ssh_public_key
 }

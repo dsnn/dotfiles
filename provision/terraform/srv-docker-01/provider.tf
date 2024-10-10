@@ -4,7 +4,7 @@ terraform {
   cloud {
     organization = "dsw"
     workspaces {
-      name = "docker"
+      name = "docker01"
     }
   }
 

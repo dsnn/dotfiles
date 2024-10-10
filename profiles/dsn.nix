@@ -40,6 +40,7 @@ in {
       enable-docker-aliases = false;
     };
     sops.enable = true;
+    scripts.enable = true;
   };
 
   # imports = lib.concatMap import [

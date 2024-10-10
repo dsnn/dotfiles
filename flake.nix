@@ -46,7 +46,7 @@
           hostname = "silver";
         };
         pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin;
-        modules = [ ./profiles/dsn.nix ./modules/home ];
+        modules = [ ./profiles/dsn.nix ./modules/home ./modules/scripts ];
       };
 
       homeConfigurations.dev = homeManagerConfiguration {

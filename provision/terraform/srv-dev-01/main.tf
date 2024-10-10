@@ -65,4 +65,3 @@ resource "proxmox_vm_qemu" "srv-dev-01" {
   ipconfig0 = "ip=192.168.2.101/24,gw=192.168.2.1"
   sshkeys   = var.ssh_public_key
 }
-

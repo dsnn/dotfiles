@@ -32,4 +32,3 @@ resource "proxmox_vm_qemu" "virtual_machine" {
 			firewall = false
     }
 }
-

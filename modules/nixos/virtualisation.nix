@@ -17,7 +17,7 @@ in {
       };
     };
 
-    # TODO: review this 
+    # TODO: review this
     # systemd = {
     #   timers.docker-prune = {
     #     wantedBy = [ "timers.target" ];

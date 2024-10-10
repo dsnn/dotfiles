@@ -1,6 +1,7 @@
 ---
-- hosts: local
+- name: Example
+  hosts: local
   tasks:
-    # - import_tasks: ../tasks/sometask.yml
     - name: Echo hello
       ansible.builtin.command: "echo hello"
+      changed_when: false

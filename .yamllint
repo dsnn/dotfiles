@@ -16,5 +16,5 @@ rules:
   truthy:
     allowed-values: ["true", "false"]
 
-# ignore:
-#   - somefile.yml
+ignore:
+  - /secrets

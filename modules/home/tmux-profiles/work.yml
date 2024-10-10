@@ -1,3 +1,4 @@
+---
 session_name: work
 start_directory: ~/work/core/code/
 windows:
@@ -8,4 +9,3 @@ windows:
   - window_name: npm
     panes:
       - focus: true
-

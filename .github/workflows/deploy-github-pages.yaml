@@ -1,3 +1,4 @@
+---
 name: Build GitHub Pages
 on:
   push:

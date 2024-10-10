@@ -3,3 +3,9 @@
 # setup secure ssh (deploy w/ nopass sshkey)
 # sudo for dsn and root access for deploy user
 # maybe simple vim config for users (dsn, deploy and root) ?
+- name: Prepare
+  hosts: local
+  tasks:
+    - name: Echo hello
+      ansible.builtin.command: "echo hello"
+      changed_when: false

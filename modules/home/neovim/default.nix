@@ -19,11 +19,6 @@ in {
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       # neovim
-      lua-language-server
-      nil
-      nixd
-      nixfmt-classic
-      nixpkgs-fmt
       nodePackages."bash-language-server"
       nodePackages."diagnostic-languageserver"
       nodePackages."dockerfile-language-server-nodejs"
@@ -34,22 +29,28 @@ in {
       nodePackages."vscode-langservers-extracted" # HTML/CSS/JSON/ESLint language servers extracted from vscode
       nodePackages."jsonlint"
       nodePackages."prettier"
+      ansible-lint
+      commitlint
+      docker-compose-language-service
+      eslint_d
+      jq
+      lua-language-server
+      markdownlint-cli
+      nil
+      nixd
+      nixfmt-classic
+      nixpkgs-fmt
+      pre-commit
       prettierd
+      proselint
+      shellcheck
       shfmt
+      statix
+      stylelint
       stylua
       tailwindcss-language-server
       yaml-language-server
-      docker-compose-language-service
-      ansible-lint
       yamllint
-      eslint_d
-      proselint
-      shellcheck
-      statix
-      commitlint
-      markdownlint-cli
-      stylelint
-      jq
     ];
 
     programs.neovim = {

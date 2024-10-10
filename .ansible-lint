@@ -1,0 +1,13 @@
+---
+profile: production # min, basic, moderate, safety, shared, production
+exclude_paths:
+  - .cache/
+  - .github/
+  - test/fixtures/formatting-before/
+  - test/fixtures/formatting-prettier/
+
+# var_naming_pattern: "^[a-z_][a-z0-9_]*$"
+# use_default_rules: true
+
+skip_list:
+  - var-naming[no-role-prefix]

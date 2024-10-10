@@ -1,11 +1,12 @@
-session_name: dev 
+---
+session_name: dev
 start_directory: ~/projects
 windows:
-  - window_name: dev 
+  - window_name: dev
     layout: main-horizontal
-    options: 
-      main-pane-height: 50 
+    options:
+      main-pane-height: 50
     panes:
-      - focus: true 
-      - pane 
-      - pane 
+      - focus: true
+      - pane
+      - pane

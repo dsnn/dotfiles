@@ -44,7 +44,7 @@ in {
       # Show churn for a time range:
       #   $ git churn --since='1 month ago'
       churn = ''
-        !f() { git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort | awk 'BEGIN {print "count	file"} {print $1 "	" $2}' | sort -g; }; f'';
+        !f() { git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort | awk 'BEGIN {print "count    file"} {print $1 "  " $2}' | sort -g; }; f'';
     };
 
     programs.git = {

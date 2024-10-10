@@ -64,6 +64,6 @@ in {
     };
 
     # systemd.services.homepage-dashboard.environment.HOMEPAGE_CONFIG_DIR
-    #   = lib.mkForce “/whatever/path/you/want”;
+    #   = lib.mkForce "/whatever/path/you/want";
   };
 }

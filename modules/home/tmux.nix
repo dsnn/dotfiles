@@ -103,8 +103,8 @@ in {
           set -g status-justify left
           set -g status-position top
 
-      		set -ga terminal-overrides ',*:Tc' # this is for 256 color
-      	  set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q' # this is for the cursor shape
+            set -ga terminal-overrides ',*:Tc' # this is for 256 color
+          set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q' # this is for the cursor shape
 
           # don't exit from tmux when closing a session
           set -g detach-on-destroy off

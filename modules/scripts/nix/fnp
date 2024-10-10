@@ -3,7 +3,7 @@
 FZF_CMD="fzf --cycle"
 
 function abort_on_empty() {
-	[ -z $1 ] && exit 1
+    [ -z $1 ] && exit 1
 }
 
 declare -A CHOICE_ARR

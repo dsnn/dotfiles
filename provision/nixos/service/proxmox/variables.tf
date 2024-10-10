@@ -12,25 +12,25 @@ variable "proxmox_api_token_secret" {
 }
 
 variable "target_node" {
-    type = string
+  type = string
 }
 
 variable "vmid" {
-    type = string
+  type = string
 }
 
 variable "name" {
-    type = string
+  type = string
 }
 
 variable "image" {
-    type = string
+  type = string
 }
 
 variable "cores" {
-    type = string
+  type = string
 }
 
 variable "memory" {
-    type = string
+  type = string
 }

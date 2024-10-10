@@ -2,6 +2,7 @@
 exclude: |
   (?x)^(
       modules/home/karabiner/.*|
+      secrets/.*|
       tests/.*
   )$
 fail_fast: true

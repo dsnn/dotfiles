@@ -9,3 +9,4 @@ user:
   email: dsn@dsnn.io
 
 dotfiles_dir: "/home/dsn/dotfiles"
+docker_dir: "/home/dsn/docker"

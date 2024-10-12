@@ -1,5 +1,0 @@
----
-# TODO: copy configuration and docker compose file.
-# TODO: change DNSStubListener in /etc/systemd/resolved.conf to DNSStubListener=no.
-# TODO: systemctl restart systemd-resolved.service.
-# TODO: start the docker compose container.

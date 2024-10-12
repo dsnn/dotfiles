@@ -16,3 +16,11 @@ resource "dns_a_record_set" "docker-wildcard" {
   ttl = 300
 }
 
+resource "dns_a_record_set" "dev" {
+  zone = "home.dsnn.io."
+  name = "dev"
+  addresses = [
+    "192.168.2.101"
+  ]
+  ttl = 300
+}

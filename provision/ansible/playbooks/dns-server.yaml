@@ -1,0 +1,36 @@
+---
+- name: Install Bind DNS Server
+  hosts: docker
+  tasks:
+    - name: Copy docker-compose file
+      ansible.builtin.copy:
+        src: ../files/dns/docker-compose.yaml
+        dest: "{{ docker_dir }}/dns/"
+
+    - name: Copy configuration
+      become: true
+      ansible.builtin.copy:
+        src: "../files/dns/config"
+        dest: "{{ docker_dir }}/dns"
+        owner: root
+        group: root
+        force: true # replace content if src differ
+
+    - name: Set DNSStubListener
+      become: true
+      lineinfile:
+        path: /etc/systemd/resolved.conf
+        regexp: "^(.*)DNSStubListener(.*)$"
+        line: "DNSStubListener=no"
+        backrefs: yes
+
+    - name: Restart service httpd, in all cases
+      become: true
+      ansible.builtin.service:
+        name: systemd-resolved
+        state: restarted
+
+    - name: Create and start services
+      community.docker.docker_compose_v2:
+        project_src: "{{ docker_dir }}/dns"
+      register: output

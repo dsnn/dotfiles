@@ -1,11 +1,14 @@
-$ORIGIN .
 $TTL 86400	; 1 day
-home.dsnn.io	IN SOA	ns.home.dsnn.io. home.dsnn.io. (
+$ORIGIN home.dsnn.io.
+
+@           IN      SOA     ns1.home.dsnn.io home.dsnn.io (
 				2001062618 ; serial
 				3600       ; refresh (1 hour)
 				3600       ; retry (1 hour)
 				2419200    ; expire (4 weeks)
 				3600       ; minimum (1 hour)
 				)
-			NS	ns.home.dsnn.io.
+@           IN      NS      ns1.home.dsnn.io.
+
+ns1		      IN      A	    192.168.2.110
 

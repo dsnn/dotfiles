@@ -54,6 +54,15 @@ For manual formatting:
     ansible-galaxy install -r ./collections/requirements.yml
 ```
 
+## Home manager
+
+To change shell when using standalone home manager on a e.g. ubuntu installation, use:
+
+```console
+echo ~/.nix-profile/bin/zsh | sudo tee -a /etc/shells
+usermod -s ~/.nix-profile/bin/zsh $user
+```
+
 ## DNS
 
 The custom dns server is hosted as a docker container in my homelab.

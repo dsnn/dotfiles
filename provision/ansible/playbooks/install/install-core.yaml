@@ -1,4 +1,8 @@
 ---
+# TODO: add users (dsn and deploy)
+# TODO :setup secure ssh (deploy w/ nopass sshkey)
+# TODO: sudo for dsn and root access for deploy user
+# TODO: maybe simple vim config for users (dsn, deploy and root) ?
 - name: Install core
   hosts: "{{ hosts }}"
   become: true

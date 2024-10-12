@@ -1,0 +1,3 @@
+---
+local_docker_dir: "/home/dsn/dotfiles/provision/docker"
+remote_docker_dir: "/home/dsn/docker"

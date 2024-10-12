@@ -6,6 +6,7 @@
     - name: install core packages
       apt:
         name:
+          - net-tools
           - nfs-common
           - qemu-guest-agent
           - unzip

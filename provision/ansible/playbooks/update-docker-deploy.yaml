@@ -1,7 +1,24 @@
 ---
 - name: Docker deploy
-  hosts: local
+  hosts: docker
   tasks:
-    - name: Echo hello
-      ansible.builtin.command: "echo hello"
-      changed_when: false
+    - name: Copy docker folders
+      ansible.builtin.copy:
+        src: "{{ local_docker_dir }}/{{ item }}/"
+        dest: "{{ remote_docker_dir }}/{{ item }}"
+        owner: dsn
+        group: dsn
+        force: true # replace content if src differ
+      loop_control:
+        label: "{{ item }}"
+      loop:
+        - dns
+
+    # - name: deploy docker-compose project
+    #   community.docker.docker_compose_v2:
+    #     project_src: "{{ remote_project_dir }}"
+    #     files:
+    #       - docker-compose.yaml
+    #     state: present
+    #     pull: policy
+    #     remove_orphans: true

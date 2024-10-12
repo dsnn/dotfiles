@@ -2,7 +2,7 @@
 services:
   bind9:
     container_name: dns-server
-    image: ubuntu/bind9:9.18-23.04_edge
+    image: ubuntu/bind9:9.18-24.04_edge
     environment:
       - BIND9_USER=root
       - TZ=Europe/Stockholm

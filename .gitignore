@@ -17,3 +17,4 @@ tags
 **/*/*.tfstate
 **/*/terraform.tfstate.backup
 **/*/*.dec.json
+named.conf.key

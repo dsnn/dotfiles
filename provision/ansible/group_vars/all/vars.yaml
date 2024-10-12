@@ -7,3 +7,5 @@ user:
   home: "/home/dsn"
   shell: /usr/bin/zsh
   email: dsn@dsnn.io
+
+dotfiles_dir: "/home/dsn/dotfiles"

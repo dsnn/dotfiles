@@ -1,5 +1,8 @@
-variable "TSIG_KEY_HOME" {
+variable "TSIG_KEY" {
   type      = string
   sensitive = true
 }
+
+
+
 

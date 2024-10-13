@@ -4,20 +4,20 @@
 # TODO: sudo for dsn and root access for deploy user
 # TODO: maybe simple vim config for users (dsn, deploy and root) ?
 - name: Install core
-  hosts: "{{ hosts }}"
+  hosts: all # "{{ hosts }}"
   become: true
   tasks:
-    - name: install core packages
-      apt:
+    - name: Install core packages
+      ansible.builtin.apt:
         name:
           - net-tools
           - nfs-common
           - qemu-guest-agent
           - unzip
-        update_cache: yes
+        update_cache: true
 
-    - name: start guest qemu-guest-agent
-      service:
+    - name: Start guest qemu-guest-agent
+      ansible.builtin.service:
         name: qemu-guest-agent
         state: started
-        enabled: yes
+        enabled: true

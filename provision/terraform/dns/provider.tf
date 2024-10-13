@@ -24,4 +24,3 @@ provider "dns" {
     key_secret    = var.TSIG_KEY
   }
 }
-

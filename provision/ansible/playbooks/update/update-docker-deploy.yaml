@@ -2,14 +2,15 @@
 - name: Docker deploy
   hosts: docker
   tasks:
-    - name: copy docker-compose file
-      copy:
+    - name: Copy docker-compose file
+      ansible.builtin.copy:
         src: "{{ local_project_dir }}/{{ item }}"
         dest: "{{ remote_project_dir }}/{{ item }}"
+        mode: u=rw,g=r,o=r
       loop:
         - docker-compose.yaml
 
-    - name: deploy docker-compose project
+    - name: Deploy docker-compose project
       community.docker.docker_compose_v2:
         project_src: "{{ remote_project_dir }}"
         files:

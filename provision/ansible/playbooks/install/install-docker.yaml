@@ -3,41 +3,43 @@
   hosts: docker
   become: true
   tasks:
-    - name: install prerequisites
-      apt:
+    - name: Install prerequisites
+      ansible.builtin.apt:
         name:
           - ca-certificates
           - curl
-        update_cache: yes
+        update_cache: true
 
-    - name: add Docker GPG key
-      apt_key:
+    - name: Add Docker GPG key
+      ansible.builtin.apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
         state: present
 
-    - name: get ubuntu version
-      command: "lsb_release -cs"
+    - name: Get ubuntu version
+      ansible.builtin.command: "lsb_release -cs"
       register: ubuntu_version
+      changed_when: false
 
-    - name: add Docker repository
-      apt_repository:
+    - name: Add Docker repository
+      ansible.builtin.apt_repository:
         repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ubuntu_version.stdout }} stable"
         state: present
 
-    - name: update apt cache
-      apt:
-        update_cache: yes
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: true
 
-    - name: install Docker
-      apt:
+    - name: Install Docker
+      ansible.builtin.apt:
         name:
           - docker-ce
           - docker-ce-cli
           - containerd.io
           - docker-compose-plugin
           - docker-buildx-plugin
-        update_cache: yes
+        update_cache: true
 
     # add the current user to the docker group
-    - name: add user permissions
-      shell: "usermod -aG docker {{ ansible_env.SUDO_USER }}"
+    - name: Add user permissions
+      ansible.builtin.command: "usermod -aG docker {{ ansible_env.SUDO_USER }}"
+      changed_when: false

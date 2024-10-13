@@ -23,4 +23,3 @@ variable "ssh_password" {
 variable "ssh_public_key" {
   type = string
 }
-

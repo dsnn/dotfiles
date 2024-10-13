@@ -6,25 +6,29 @@
       ansible.builtin.copy:
         src: "{{ local_docker_dir }}/traefik/docker-compose.yaml"
         dest: "{{ remote_docker_dir }}/traefik/"
+        mode: u=rw,g=r,o=r
 
     - name: Copy env file
       ansible.builtin.copy:
         src: "{{ local_docker_dir }}/traefik/.env"
         dest: "{{ remote_docker_dir }}/traefik/"
+        mode: u=rw
 
     - name: Copy configuration
       ansible.builtin.copy:
         src: "{{ local_docker_dir }}/traefik/config"
         dest: "{{ remote_docker_dir }}/traefik"
         force: true # replace content if src differ
+        mode: u=rw,g=r,o=r
 
     - name: Create cert dir
       ansible.builtin.file:
         path: "{{ remote_docker_dir }}/traefik/data/certs"
         state: directory
+        mode: u=rw,g=rw,o=rw
 
     - name: Create traefik network
-      docker_network:
+      community.docker.docker_network:
         name: traefik-network
 
     - name: Create and start services

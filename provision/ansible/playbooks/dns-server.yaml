@@ -6,6 +6,7 @@
       ansible.builtin.copy:
         src: "{{ local_docker_dir }}/dns/docker-compose.yaml"
         dest: "{{ remote_docker_dir }}/dns/"
+        mode: u=rw,g=r,o=r
 
     - name: Copy configuration
       become: true
@@ -15,14 +16,15 @@
         owner: root
         group: root
         force: true # replace content if src differ
+        mode: u=rw,g=r,o=r
 
     - name: Set DNSStubListener
       become: true
-      lineinfile:
+      ansible.builtin.lineinfile:
         path: /etc/systemd/resolved.conf
         regexp: "^(.*)DNSStubListener(.*)$"
         line: "DNSStubListener=no"
-        backrefs: yes
+        backrefs: true
 
     - name: Restart service httpd, in all cases
       become: true

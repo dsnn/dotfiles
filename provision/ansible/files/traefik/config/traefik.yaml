@@ -1,0 +1,54 @@
+---
+global:
+  checkNewVersion: false
+  sendAnonymousUsage: false
+
+# log:
+#   level: DEBUG # TRACE, DEBUG, INFO, WARN, ERROR, FATAL
+#   format: common # common, json
+#   filePath: /var/log/traefik/traefik.log
+
+# accesslog:
+#   format: common # common, json
+#   filePath: /var/log/traefik/access.log
+
+api:
+  dashboard: true
+  disableDashboardAd: true
+  insecure: true
+
+entryPoints:
+  web:
+    address: :80
+    # Redirect all HTTP to HTTPS
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+  websecure:
+    address: :443
+
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      storage: /var/traefik/certs/cloudflare-acme.json
+      # caServer: https://acme-v02.api.letsencrypt.org/directory # production
+      caServer: "https://acme-staging-v02.api.letsencrypt.org/directory" # staging
+      httpChallenge:
+        entryPoint: web
+      dnsChallenge:
+        provider: cloudflare
+        delayBeforeCheck: 5
+        resolvers:
+          - "1.1.1.1:53"
+          - "8.8.8.8:53"
+
+providers:
+  docker:
+    exposedByDefault: false
+    endpoint: "unix:///var/run/docker.sock"
+    watch: true
+  file:
+    directory: /etc/traefik/conf/
+    watch: true

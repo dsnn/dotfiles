@@ -32,6 +32,7 @@ in {
         ansible
         dotnet-sdk_8
         lazydocker
+        nixos-generators
       ];
 
     # [

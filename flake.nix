@@ -40,22 +40,24 @@
         };
     in {
 
-      homeConfigurations.silver = homeManagerConfiguration {
-        extraSpecialArgs = {
-          inherit inputs outputs;
-          hostname = "silver";
+      homeConfigurations = {
+        silver = homeManagerConfiguration {
+          extraSpecialArgs = {
+            inherit inputs outputs;
+            hostname = "silver";
+          };
+          pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin;
+          modules = [ ./profiles/dsn.nix ./modules/home ./modules/scripts ];
         };
-        pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin;
-        modules = [ ./profiles/dsn.nix ./modules/home ./modules/scripts ];
-      };
 
-      homeConfigurations.dev = homeManagerConfiguration {
-        extraSpecialArgs = {
-          inherit inputs outputs;
-          hostname = "dev";
+        dev = homeManagerConfiguration {
+          extraSpecialArgs = {
+            inherit inputs outputs;
+            hostname = "dev";
+          };
+          pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+          modules = [ ./profiles/dsn.nix ./modules/home ];
         };
-        pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-        modules = [ ./profiles/dsn.nix ./modules/home ];
       };
 
       darwinConfigurations.silver = darwinSystem {
@@ -68,32 +70,33 @@
           [ ./configs/silver.nix ./modules/common.nix ./modules/darwin ];
       };
 
-      nixosConfigurations.dev = nixosSystem {
-        system = x86_64-linux;
-        specialArgs = {
-          unstable = unstable x86_64-linux;
-          inherit inputs outputs;
+      nixosConfigurations = {
+        dev = nixosSystem {
+          system = x86_64-linux;
+          specialArgs = {
+            unstable = unstable x86_64-linux;
+            inherit inputs outputs;
+          };
+          modules = [
+            inputs.disko.nixosModules.disko
+            ./provision/nixos/dev/dev.nix
+            ./modules/common.nix
+            ./modules/nixos
+          ];
         };
-        modules = [
-          inputs.disko.nixosModules.disko
-          ./provision/nixos/dev/dev.nix
-          ./modules/common.nix
-          ./modules/nixos
-        ];
-      };
-
-      nixosConfigurations.service = nixosSystem {
-        system = x86_64-linux;
-        specialArgs = {
-          unstable = unstable x86_64-linux;
-          inherit inputs outputs;
+        service = nixosSystem {
+          system = x86_64-linux;
+          specialArgs = {
+            unstable = unstable x86_64-linux;
+            inherit inputs outputs;
+          };
+          modules = [
+            inputs.disko.nixosModules.disko
+            ./provision/terraform/service/service.nix
+            ./modules/common.nix
+            ./modules/nixos
+          ];
         };
-        modules = [
-          inputs.disko.nixosModules.disko
-          ./provision/nixos/service/service.nix
-          ./modules/common.nix
-          ./modules/nixos
-        ];
       };
 
       packages = {

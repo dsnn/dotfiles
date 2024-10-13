@@ -84,19 +84,6 @@
             ./modules/nixos
           ];
         };
-        service = nixosSystem {
-          system = x86_64-linux;
-          specialArgs = {
-            unstable = unstable x86_64-linux;
-            inherit inputs outputs;
-          };
-          modules = [
-            inputs.disko.nixosModules.disko
-            ./provision/terraform/service/service.nix
-            ./modules/common.nix
-            ./modules/nixos
-          ];
-        };
       };
 
       packages = {

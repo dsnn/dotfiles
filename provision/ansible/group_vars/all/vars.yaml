@@ -9,4 +9,5 @@ user:
   email: dsn@dsnn.io
 
 dotfiles_dir: "/home/dsn/dotfiles"
-docker_dir: "/home/dsn/docker"
+local_docker_dir: "/home/dsn/docker/provision/docker"
+remote_docker_dir: "/home/dsn/docker"

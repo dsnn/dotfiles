@@ -25,7 +25,7 @@ resource "proxmox_lxc" "k3s-cluster" {
   }
 
   features {
-    nesting = false
+    nesting = true
   }
 
   ssh_public_keys = var.ssh_public_key

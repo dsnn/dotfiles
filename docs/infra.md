@@ -47,7 +47,7 @@ For manual formatting:
 ## Ansible
 
 ```console
-    ansible k3s-cluster -m ping
+    ansible -i inventory/k3s.yaml -m ping
 ```
 
 ```console

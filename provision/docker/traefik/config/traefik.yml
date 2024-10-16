@@ -1,0 +1,41 @@
+---
+global:
+  checkNewVersion: false
+  sendAnonymousUsage: false
+
+# log:
+#   level: DEBUG # TRACE, DEBUG, INFO, WARN, ERROR, FATAL
+#   format: common # common, json
+#   filePath: /traefik.log
+
+api:
+  dashboard: true
+
+entryPoints:
+  http:
+    address: :80
+    http:
+      redirections:
+        entryPoint:
+          to: https
+          scheme: https
+  https:
+    address: :443
+
+certificatesResolvers:
+  cloudflare:
+    acme:
+      storage: /acme.json
+      caServer: https://acme-v02.api.letsencrypt.org/directory # production
+      # caServer: "https://acme-staging-v02.api.letsencrypt.org/directory" # staging
+      dnsChallenge:
+        provider: cloudflare
+        resolvers:
+          - "1.1.1.1:53"
+          - "8.8.8.8:53"
+
+providers:
+  docker:
+    exposedByDefault: false
+    endpoint: "unix:///var/run/docker.sock"
+    watch: true

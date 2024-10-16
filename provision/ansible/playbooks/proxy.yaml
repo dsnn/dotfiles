@@ -8,24 +8,31 @@
         dest: "{{ remote_docker_dir }}/traefik/"
         mode: u=rw,g=r,o=r
 
-    - name: Copy env file
+    - name: Copy .env file
       ansible.builtin.copy:
         src: "{{ local_docker_dir }}/traefik/.env"
         dest: "{{ remote_docker_dir }}/traefik/"
-        mode: u=rw
+        mode: u=rw,g=rwx,o=rwx
 
-    - name: Copy configuration
-      ansible.builtin.copy:
-        src: "{{ local_docker_dir }}/traefik/config"
-        dest: "{{ remote_docker_dir }}/traefik"
-        force: true # replace content if src differ
-        mode: u=rw,g=r,o=r
-
-    - name: Create cert dir
+    - name: Create traefik config dir
       ansible.builtin.file:
-        path: "{{ remote_docker_dir }}/traefik/data/certs"
+        path: "{{ remote_docker_dir }}/traefik/config"
         state: directory
-        mode: u=rw,g=rw,o=rw
+
+    - name: Copy traefik configuration
+      ansible.builtin.copy:
+        src: "{{ local_docker_dir }}/traefik/config/traefik.yml"
+        dest: "{{ remote_docker_dir }}/traefik/config/traefik.yml"
+        force: true # replace content if src differ
+
+    - name: Create traefik acme.json (if it doesnt exists)
+      become: true
+      ansible.builtin.file:
+        path: "{{ remote_docker_dir }}/traefik/config/acme.json"
+        state: touch
+        mode: u+rw,g-rwx,o-rwx
+        modification_time: preserve
+        access_time: preserve
 
     - name: Create traefik network
       community.docker.docker_network:

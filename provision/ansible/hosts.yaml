@@ -1,4 +1,4 @@
 ---
 docker:
   hosts:
-    192.168.2.110:
+    docker.home.dsnn.io:

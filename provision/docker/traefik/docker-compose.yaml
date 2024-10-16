@@ -1,25 +1,42 @@
 ---
 services:
   traefik:
-    image: docker.io/library/traefik:v3.1.6
+    image: traefik:v3.1.6
     container_name: traefik
+    security_opt:
+      - no-new-privileges:true
     ports:
       - 80:80
       - 443:443
       - 8080:8080
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - /run/docker.sock:/run/docker.sock:ro
-      - ./config/traefik.yaml:/etc/traefik/traefik.yaml:ro
-      - ./config/conf/:/etc/traefik/conf/:ro
-      - ./data/certs/:/var/traefik/certs/:rw
+      - ./config/traefik.yml:/traefik.yml:ro
+      - ./config/acme.json:/acme.json
     networks:
       - traefik-network
+    env_file: .env
     environment:
-      - CF_API_EMAIL=${EMAIL}
-      - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
+      - CF_API_EMAIL=${CF_API_EMAIL}
+      - CF_API_KEY=${CF_API_KEY}
     command:
-      - "--certificatesresolvers.cloudflare.acme.email=${EMAIL}"
+      - "--certificatesresolvers.cloudflare.acme.email=${CF_API_EMAIL}"
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.entrypoints=http"
+      - "traefik.http.routers.traefik.rule=Host(`proxy.home.dsnn.io`)"
+      - "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https"
+      - "traefik.http.routers.traefik.middlewares=traefik-https-redirect"
+      - "traefik.http.routers.traefik-secure.entrypoints=https"
+      - "traefik.http.routers.traefik-secure.rule=Host(`proxy.home.dsnn.io`)"
+      - "traefik.http.routers.traefik-secure.tls=true"
+      - "traefik.http.routers.traefik-secure.tls.certresolver=cloudflare"
+      - "traefik.http.routers.traefik-secure.tls.domains[0].main=home.dsnn.io"
+      - "traefik.http.routers.traefik-secure.tls.domains[0].sans=*.home.dsnn.io"
+      - "traefik.http.routers.traefik-secure.service=api@internal"
 
 networks:
   traefik-network:

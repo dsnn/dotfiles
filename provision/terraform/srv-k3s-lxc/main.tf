@@ -20,7 +20,7 @@ resource "proxmox_lxc" "k3s-cluster" {
     name     = "eth0"
     bridge   = "vmbr0"
     firewall = false
-    ip       = each.value.ip_address
+    ip       = "${each.value.ip_address}/24"
     gw       = each.value.gateway
   }
 
@@ -29,4 +29,15 @@ resource "proxmox_lxc" "k3s-cluster" {
   }
 
   ssh_public_keys = var.ssh_public_key
+}
+
+resource "dns_a_record_set" "k3s-cluster-dns" {
+  for_each = var.servers
+
+  zone = "home.dsnn.io."
+  name = each.value.name
+  addresses = [
+    each.value.ip_address
+  ]
+  ttl = 300
 }

@@ -36,10 +36,8 @@ in {
       jq
       lua-language-server
       markdownlint-cli
-      nil
       nixd
-      nixfmt-classic
-      nixpkgs-fmt
+      nixfmt-rfc-style
       pre-commit
       prettierd
       proselint

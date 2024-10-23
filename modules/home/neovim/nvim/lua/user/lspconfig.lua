@@ -77,7 +77,18 @@ local servers = {
       },
     },
   },
-  nil_ls = {},
+  nixd = {
+    settings = {
+      nixd = {
+        nixpkgs = {
+          expr = "import <nixpkgs> { }",
+        },
+        formatting = {
+          command = { "nixfmt" },
+        },
+      },
+    },
+  },
   tsserver = {
     root_dir = lspconfig.util.find_git_ancestor,
     single_file_support = false,

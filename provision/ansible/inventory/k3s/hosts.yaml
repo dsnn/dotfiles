@@ -2,16 +2,16 @@
 proxmox:
   hosts:
     srv-k3s-01.home.dsnn.io:
-    srv-k3s-02.home.dsnn.io:
-    srv-k3s-03.home.dsnn.io:
+    # srv-k3s-02.home.dsnn.io:
+    # srv-k3s-03.home.dsnn.io:
     srv-k3s-agent-01.home.dsnn.io:
     srv-k3s-agent-02.home.dsnn.io:
 
 master:
   hosts:
     srv-k3s-01.home.dsnn.io:
-    srv-k3s-02.home.dsnn.io:
-    srv-k3s-03.home.dsnn.io:
+    # srv-k3s-02.home.dsnn.io:
+    # srv-k3s-03.home.dsnn.io:
 
 node:
   hosts:

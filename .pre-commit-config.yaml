@@ -25,6 +25,13 @@ repos:
       - id: yamllint
         args: [-c=.yamllint]
 
+  # This is an unofficial pre-commit hook to use until this PR gets merged:
+  # https://github.com/oppiliappan/statix/pull/81
+  - repo: https://github.com/fidgetingbits/pre-commit-statix
+    rev: v1.0.0
+    hooks:
+      - id: statix-check
+
   - repo: https://github.com/ansible-community/ansible-lint.git
     rev: v6.22.2
     hooks:

@@ -20,6 +20,8 @@ in
         };
 
         # custom ls aliases
+      };
+      zsh = {
         shellAliases = {
           l = "lsd -lA --group-dirs=first";
           ls = "lsd -lA --group-dirs=first";

@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  pkgs,
   ...
 }:
 with lib;
@@ -17,6 +18,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    home.packages = [ pkgs.sops ];
     sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
   };
 }

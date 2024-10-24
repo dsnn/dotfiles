@@ -65,7 +65,7 @@ in
 
   home = {
     username = "dsn";
-    homeDirectory = if isDarwin then "/Users/dsn" else "/home/dsn";
+    homeDirectory = if isDarwin then "/Users/dsn" else "/home/dsn"; # required by sops
     stateVersion = "23.11";
     file."${config.home.homeDirectory}/.hushlogin".text = "";
   };

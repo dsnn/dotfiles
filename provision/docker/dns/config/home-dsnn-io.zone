@@ -13,11 +13,11 @@ $ORIGIN home.dsnn.io.
 ns1           IN      A     192.168.2.110
 
 $ORIGIN home.dsnn.io.
-$TTL 86400	; 1 day
-ns1			    A	      192.168.2.110
+$TTL 86400  ; 1 day
+ns1             A         192.168.2.110
 
 $ORIGIN home.dsnn.io.
-$TTL 300	; 5 minutes
-*			      A	      192.168.2.110
-dev			    A	      192.168.2.101
-docker			A	      192.168.2.110
+$TTL 300    ; 5 minutes
+*                 A       192.168.2.110
+dev             A         192.168.2.101
+docker          A         192.168.2.110

@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
 
   programs.nix-ld.dev.enable = true;
 
@@ -17,43 +18,50 @@
     ./hardware.nix
   ];
 
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-    publish = {
-      enable = true;
-      userServices = true;
-    };
-  };
-
-  services.printing = {
-    enable = true;
-    listenAddresses = [ "*:631" ];
-    allowFrom = [ "all" ];
-    browsing = true;
-    defaultShared = true;
-    openFirewall = true;
-    drivers = with pkgs; [ cups-bjnp gutenprint ];
-  };
-
   nixpkgs.config.allowUnfree = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostId = "199f97e0";
-  networking.hostName = "grey";
-  networking.networkmanager.enable = true;
-  networking.firewall.enable = true;
+  networking = {
+    hostId = "199f97e0";
+    hostName = "grey";
+    networkmanager.enable = true;
+    firewall.enable = true;
+  };
 
   # allow packer http server port
   networking.firewall.allowedTCPPorts = [ 8802 ];
 
   systemd.services.NetworkManager-wait-online.enable = false;
 
+  services = {
+    timesyncd.enable = true;
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+      publish = {
+        enable = true;
+        userServices = true;
+      };
+    };
+
+    printing = {
+      enable = true;
+      listenAddresses = [ "*:631" ];
+      allowFrom = [ "all" ];
+      browsing = true;
+      defaultShared = true;
+      openFirewall = true;
+      drivers = with pkgs; [
+        cups-bjnp
+        gutenprint
+      ];
+    };
+  };
+
   time.timeZone = "Europe/Stockholm";
-  services.timesyncd.enable = true;
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "sv_SE.UTF-8";

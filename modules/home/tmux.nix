@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.dsn.tmux;
@@ -13,92 +18,95 @@ let
       sha256 = "0l+2ZRj9knjDRUiGePTt14UxrI0FNVHIdIZtKZs8bek=";
     };
   };
-in {
+in
+{
 
-  options.dsn.tmux = { enable = mkEnableOption "Enable tmux"; };
+  options.dsn.tmux = {
+    enable = mkEnableOption "Enable tmux";
+  };
 
   config = mkIf cfg.enable {
-    programs.zsh.initExtra = ''
-      export PATH=${tmux-smart-session-manager}/share/tmux-plugins/t-smart-tmux-session-manager/bin/:$PATH
-    '';
+    programs = {
+      zsh.initExtra = ''
+        export PATH=${tmux-smart-session-manager}/share/tmux-plugins/t-smart-tmux-session-manager/bin/:$PATH
+      '';
 
-    programs.tmux = {
-      enable = true;
-      aggressiveResize = true;
-      baseIndex = 1;
-      clock24 = true;
-      customPaneNavigationAndResize = false;
-      disableConfirmationPrompt = true;
-      escapeTime = 0;
-      keyMode = "vi";
-      mouse = true;
-      prefix = "C-a";
-      reverseSplit = false;
-      sensibleOnTop = false;
-      terminal = "xterm-256color";
-      resizeAmount = 10;
-      historyLimit = 5000;
-    };
+      tmux = {
+        enable = true;
+        aggressiveResize = true;
+        baseIndex = 1;
+        clock24 = true;
+        customPaneNavigationAndResize = false;
+        disableConfirmationPrompt = true;
+        escapeTime = 0;
+        keyMode = "vi";
+        mouse = true;
+        prefix = "C-a";
+        reverseSplit = false;
+        sensibleOnTop = false;
+        terminal = "xterm-256color";
+        resizeAmount = 10;
+        historyLimit = 5000;
 
-    programs.tmux.plugins = with pkgs.tmuxPlugins; [
-      better-mouse-mode
-      yank
-      {
-        plugin = tmux-smart-session-manager;
-        extraConfig = ''
-          set -g @t-fzf-prompt '  '
-          set -g @t-fzf-default-results 'sessions'
-          set -g @t-bind "space"
-        '';
-      }
-      {
-        plugin = tmux-thumbs;
-        extraConfig = ''
-          set -g @plugin 'fcsonline/tmux-thumbs'
-          set -g @thumbs-command 'echo -n {} | pbcopy' # copy to clipboard
-          set -g @thumbs-key C
-          set -g @thumbs-contrast 1
-        '';
-      }
-      {
-        plugin = fzf-tmux-url;
-        extraConfig = ''
-          set -g @plugin 'wfxr/tmux-fzf-url'
-          set -g @fzf-url-bind 'u'
-          set -g @fzf-url-history-limit '2000'
-          set -g @fzf-url-fzf-options '-w 50% -h 50% --multi -0 --no-preview --no-border'
-        '';
-      }
-      {
-        plugin = tilish;
-        extraConfig = ''
-          set -g @plugin 'jabirali/tmux-tilish'
-        '';
-      }
-      {
-        plugin = vim-tmux-navigator;
-        extraConfig = ''
-          set -g @plugin 'christoomey/vim-tmux-navigator'
-          set -g @tilish-navigator 'on'
-        '';
-      }
-      {
-        plugin = tmux-fzf;
-        extraConfig = ''
-          TMUX_FZF_LAUNCH_KEY="f"
-        '';
-      }
-      {
-        plugin = catppuccin;
-        extraConfig = ''
-          set -g @catppuccin_flavour 'mocha'
-          set -g @catppuccin_window_tabs_enabled on
-          set -g @catppuccin_status_modules_right "application session"
-        '';
-      }
-    ];
+        plugins = with pkgs.tmuxPlugins; [
+          better-mouse-mode
+          yank
+          {
+            plugin = tmux-smart-session-manager;
+            extraConfig = ''
+              set -g @t-fzf-prompt '  '
+              set -g @t-fzf-default-results 'sessions'
+              set -g @t-bind "space"
+            '';
+          }
+          {
+            plugin = tmux-thumbs;
+            extraConfig = ''
+              set -g @plugin 'fcsonline/tmux-thumbs'
+              set -g @thumbs-command 'echo -n {} | pbcopy' # copy to clipboard
+              set -g @thumbs-key C
+              set -g @thumbs-contrast 1
+            '';
+          }
+          {
+            plugin = fzf-tmux-url;
+            extraConfig = ''
+              set -g @plugin 'wfxr/tmux-fzf-url'
+              set -g @fzf-url-bind 'u'
+              set -g @fzf-url-history-limit '2000'
+              set -g @fzf-url-fzf-options '-w 50% -h 50% --multi -0 --no-preview --no-border'
+            '';
+          }
+          {
+            plugin = tilish;
+            extraConfig = ''
+              set -g @plugin 'jabirali/tmux-tilish'
+            '';
+          }
+          {
+            plugin = vim-tmux-navigator;
+            extraConfig = ''
+              set -g @plugin 'christoomey/vim-tmux-navigator'
+              set -g @tilish-navigator 'on'
+            '';
+          }
+          {
+            plugin = tmux-fzf;
+            extraConfig = ''
+              TMUX_FZF_LAUNCH_KEY="f"
+            '';
+          }
+          {
+            plugin = catppuccin;
+            extraConfig = ''
+              set -g @catppuccin_flavour 'mocha'
+              set -g @catppuccin_window_tabs_enabled on
+              set -g @catppuccin_status_modules_right "application session"
+            '';
+          }
+        ];
 
-    programs.tmux.extraConfig = ''
+        extraConfig = ''
           set -g status-interval 0
           set -g status-justify left
           set -g status-position top
@@ -133,6 +141,8 @@ in {
           bind -T copy-mode-vi v send-keys -X begin-selection
           bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
           bind -T copy-mode-vi r send-keys -X rectangle-toggle
-    '';
+        '';
+      };
+    };
   };
 }

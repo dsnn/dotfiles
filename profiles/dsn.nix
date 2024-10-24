@@ -47,8 +47,6 @@ in
     sops.enable = true;
   };
 
-  home.sessionVariables.NIXD_FLAGS = "-log=error";
-
   # scripts.enable = true;
   # imports = lib.concatMap import [
   #   ../modules/home
@@ -68,40 +66,42 @@ in
     homeDirectory = if isDarwin then "/Users/dsn" else "/home/dsn"; # required by sops
     stateVersion = "23.11";
     file."${config.home.homeDirectory}/.hushlogin".text = "";
+    sessionVariables.NIXD_FLAGS = "-log=error";
+    file."${config.home.homeDirectory}/.inputrc".text = ''
+      set show-all-if-ambiguous on
+      set completion-ignore-case on
+      set mark-directories on
+      set mark-symlinked-directories on
+      set match-hidden-files off
+      set visible-stats on
+      set keymap vi
+      set editing-mode vi-insert
+    '';
   };
-
-  home.file."${config.home.homeDirectory}/.inputrc".text = ''
-    set show-all-if-ambiguous on
-    set completion-ignore-case on
-    set mark-directories on
-    set mark-symlinked-directories on
-    set match-hidden-files off
-    set visible-stats on
-    set keymap vi
-    set editing-mode vi-insert
-  '';
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
-  programs.home-manager.enable = true;
-
-  programs.direnv = {
-    enable = true;
-    enableZshIntegration = true;
-    nix-direnv.enable = true;
-  };
-
   # fonts.fontconfig.enable = true;
 
-  # host specific aliases
-  programs.zsh.shellAliases = {
-    cfc = "vim $HOME/dotfiles/configs/${hostname}.nix";
-    cfg = "vim $HOME/dotfiles/modules/home/git.nix";
-    cfh = "vim $HOME/dotfiles/profiles/dsn.nix";
-    cfz = "vim $HOME/dotfiles/modules/home/zsh.nix";
-    rf = "home-manager switch --flake ~/dotfiles/#${hostname}; source ~/.config/zsh/.zshrc";
-    rs = "${rebuild-command} switch --flake ~/dotfiles/#${hostname}";
-    ru = "pushd ~/dotfiles; nix flake update; rf; popd";
+  programs = {
+    home-manager.enable = true;
+
+    direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+    };
+
+    # host specific aliases
+    zsh.shellAliases = {
+      cfc = "vim $HOME/dotfiles/configs/${hostname}.nix";
+      cfg = "vim $HOME/dotfiles/modules/home/git.nix";
+      cfh = "vim $HOME/dotfiles/profiles/dsn.nix";
+      cfz = "vim $HOME/dotfiles/modules/home/zsh.nix";
+      rf = "home-manager switch --flake ~/dotfiles/#${hostname}; source ~/.config/zsh/.zshrc";
+      rs = "${rebuild-command} switch --flake ~/dotfiles/#${hostname}";
+      ru = "pushd ~/dotfiles; nix flake update; rf; popd";
+    };
   };
 }

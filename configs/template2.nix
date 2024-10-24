@@ -1,23 +1,75 @@
-{ config, pkgs, modulesPath, ... }: {
+{
+  config,
+  pkgs,
+  modulesPath,
+  ...
+}:
+{
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
   config = {
     # Provide a default hostname
-    networking.hostName = "nixos-cloud";
     networking = {
+      hostName = "nixos-cloud";
       useDHCP = false;
       dhcpcd.enable = false;
       interfaces.eth0.useDHCP = false;
     };
 
-    # Enable QEMU Guest for Proxmox
-    services.qemuGuest.enable = true;
+    services = {
+      # Enable QEMU Guest for Proxmox
+      qemuGuest.enable = true;
+
+      # Enable ssh
+      openssh = {
+        enable = true;
+        settings = {
+          PasswordAuthentication = false;
+          KbdInteractiveAuthentication = false;
+        };
+      };
+
+      cloud-init = {
+        enable = true;
+        network.enable = true;
+        config = ''
+          system_info:
+            distro: nixos
+            network:
+              renderers: [ 'networkd' ]
+            default_user:
+              name: dsn
+          users:
+              - default
+          ssh_pwauth: false
+          chpasswd:
+            expire: false
+          cloud_init_modules:
+            - migrator
+            - seed_random
+            - growpart
+            - resizefs
+          cloud_config_modules:
+            - disk_setup
+            - mounts
+            - set-passwords
+            - ssh
+          cloud_final_modules: []
+        '';
+      };
+
+    };
 
     # Use the boot drive for grub
-    boot.loader.grub.enable = true;
-    boot.loader.grub.device = "/dev/sda";
-
-    boot.growPartition = true;
+    boot = {
+      loader = {
+        grub = {
+          enable = true;
+          device = "/dev/sda";
+        };
+      };
+      growPartition = true;
+    };
 
     users.users.dsn = {
       isNormalUser = true;
@@ -25,8 +77,15 @@
     };
 
     # Allow remote updates with flakes and non-root users
-    nix.settings.trusted-users = [ "dsn" "root" "@wheel" ];
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    nix.settings.trusted-users = [
+      "dsn"
+      "root"
+      "@wheel"
+    ];
+    nix.settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
 
     # Enable mDNS for `hostname.local` addresses
     # services.avahi.enable = true;
@@ -60,12 +119,6 @@
     # Don't ask for passwords
     security.sudo.wheelNeedsPassword = false;
 
-    # Enable ssh
-    services.openssh = {
-      enable = true;
-      settings.PasswordAuthentication = false;
-      settings.KbdInteractiveAuthentication = false;
-    };
     programs.ssh.startAgent = true;
 
     # Default filesystem
@@ -73,35 +126,6 @@
       label = "nixos";
       fsType = "ext4";
       autoResize = true;
-    };
-
-    services.cloud-init = {
-      enable = true;
-      network.enable = true;
-      config = ''
-        system_info:
-          distro: nixos
-          network:
-            renderers: [ 'networkd' ]
-          default_user:
-            name: dsn
-        users:
-            - default
-        ssh_pwauth: false
-        chpasswd:
-          expire: false
-        cloud_init_modules:
-          - migrator
-          - seed_random
-          - growpart
-          - resizefs
-        cloud_config_modules:
-          - disk_setup
-          - mounts
-          - set-passwords
-          - ssh
-        cloud_final_modules: []
-      '';
     };
 
     system.stateVersion = "24.05";

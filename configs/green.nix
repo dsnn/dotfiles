@@ -1,4 +1,5 @@
-{ inputs, pkgs, ... }: {
+{ inputs, pkgs, ... }:
+{
 
   programs.nix-ld.dev.enable = true;
 
@@ -7,9 +8,11 @@
 
   wsl = {
     enable = true;
-    wslConf.automount.root = "/mnt";
-    wslConf.interop.appendWindowsPath = false;
-    wslConf.network.generateHosts = false;
+    wslConf = {
+      automount.root = "/mnt";
+      interop.appendWindowsPath = false;
+      network.generateHosts = false;
+    };
     defaultUser = "dsn";
     startMenuLaunchers = true;
 
@@ -29,7 +32,11 @@
       auto-optimise-store = true;
     };
 
-    registry = { nixpkgs = { flake = inputs.nixpkgs; }; };
+    registry = {
+      nixpkgs = {
+        flake = inputs.nixpkgs;
+      };
+    };
 
     nixPath = [
       "nixpkgs=${inputs.nixpkgs.outPath}"

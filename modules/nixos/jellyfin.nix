@@ -1,15 +1,23 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 with lib;
 let
   cfg = config.dsn.jellyfin;
   group = config.users.users.jellyfin.name;
-in {
-  options.dsn.jellyfin = { enable = mkEnableOption "Enable jellyfin"; };
+in
+{
+  options.dsn.jellyfin = {
+    enable = mkEnableOption "Enable jellyfin";
+  };
 
   config = mkIf cfg.enable {
     users.users.jellyfin = {
       isSystemUser = true;
-      group = group;
+      inherit group;
     };
 
     users.groups.jellyfin = { };

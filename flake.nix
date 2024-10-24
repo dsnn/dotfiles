@@ -25,7 +25,8 @@
     terranix.inputs.nixpkgs.follows = "nixpkgs";
     terranix.url = "github:terranix/terranix";
   };
-  outputs = inputs@{ self, ... }:
+  outputs =
+    inputs@{ self, ... }:
     let
       inherit (self) outputs;
       aarch64-darwin = "aarch64-darwin";
@@ -33,30 +34,41 @@
       inherit (inputs.nixpkgs.lib) nixosSystem; # mapAttrs;
       inherit (inputs.darwin.lib) darwinSystem;
       inherit (inputs.home-manager.lib) homeManagerConfiguration;
-      unstable = system:
+      unstable =
+        system:
         import inputs.nixpkgs-unstable {
           inherit system;
           config.allowUnfree = true;
         };
-    in {
+    in
+    {
 
       homeConfigurations = {
         silver = homeManagerConfiguration {
           extraSpecialArgs = {
+            unstable = unstable aarch64-darwin;
             inherit inputs outputs;
             hostname = "silver";
           };
           pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin;
-          modules = [ ./profiles/dsn.nix ./modules/home ./modules/scripts ];
+          modules = [
+            ./profiles/dsn.nix
+            ./modules/home
+            ./modules/scripts
+          ];
         };
 
         dev = homeManagerConfiguration {
           extraSpecialArgs = {
+            unstable = unstable x86_64-linux;
             inherit inputs outputs;
             hostname = "dev";
           };
           pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-          modules = [ ./profiles/dsn.nix ./modules/home ];
+          modules = [
+            ./profiles/dsn.nix
+            ./modules/home
+          ];
         };
       };
 
@@ -66,8 +78,11 @@
           unstable = unstable aarch64-darwin;
           inherit inputs outputs;
         };
-        modules =
-          [ ./configs/silver.nix ./modules/common.nix ./modules/darwin ];
+        modules = [
+          ./configs/silver.nix
+          ./modules/common.nix
+          ./modules/darwin
+        ];
       };
 
       nixosConfigurations = {
@@ -88,11 +103,11 @@
 
       packages = {
         aarch64-darwin = {
-          options-doc = let
-            pkgs' = import ./packages {
-              pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin;
-            };
-          in pkgs'.options-doc;
+          options-doc =
+            let
+              pkgs' = import ./packages { pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin; };
+            in
+            pkgs'.options-doc;
         };
       };
 

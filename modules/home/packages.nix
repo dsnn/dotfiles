@@ -1,7 +1,14 @@
-{ lib, config, pkgs, ... }:
-with lib;
-let cfg = config.dsn.packages;
-in {
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.dsn.packages;
+  inherit (lib) mkEnableOption mkIf optionals;
+in
+{
 
   options.dsn.packages = {
     enable = mkEnableOption "Enable common stuff";
@@ -9,7 +16,8 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs;
+    home.packages =
+      with pkgs;
       [
         cmake
         curl
@@ -27,7 +35,8 @@ in {
         vim
         wakeonlan
         xclip
-      ] ++ pkgs.lib.optionals cfg.enable-dev-tools [
+      ]
+      ++ optionals cfg.enable-dev-tools [
         #_1password
         ansible
         dotnet-sdk_8

@@ -1,9 +1,14 @@
-{ config, pkgs, hostname, ... }:
+{
+  config,
+  pkgs,
+  hostname,
+  ...
+}:
 let
   inherit (pkgs.stdenv) isDarwin;
-  rebuild-command =
-    if isDarwin then "darwin-rebuild" else "sudo -H nixos-rebuild";
-in {
+  rebuild-command = if isDarwin then "darwin-rebuild" else "sudo -H nixos-rebuild";
+in
+{
 
   # Fix home manager for non NixOS
   # targets.genericLinux.enable = true;
@@ -41,6 +46,8 @@ in {
     };
     sops.enable = true;
   };
+
+  home.sessionVariables.NIXD_FLAGS = "-log=error";
 
   # scripts.enable = true;
   # imports = lib.concatMap import [
@@ -93,8 +100,7 @@ in {
     cfg = "vim $HOME/dotfiles/modules/home/git.nix";
     cfh = "vim $HOME/dotfiles/profiles/dsn.nix";
     cfz = "vim $HOME/dotfiles/modules/home/zsh.nix";
-    rf =
-      "home-manager switch --flake ~/dotfiles/#${hostname}; source ~/.config/zsh/.zshrc";
+    rf = "home-manager switch --flake ~/dotfiles/#${hostname}; source ~/.config/zsh/.zshrc";
     rs = "${rebuild-command} switch --flake ~/dotfiles/#${hostname}";
     ru = "pushd ~/dotfiles; nix flake update; rf; popd";
   };

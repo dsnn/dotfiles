@@ -86,6 +86,21 @@ local servers = {
         formatting = {
           command = { "nixfmt" },
         },
+        diagnostic = {
+          suppress = {
+            "sema-escaping-with",
+            "var-bind-to-this",
+            "escaping-this-with",
+          },
+        },
+        options = {
+          nixos = {
+            expr = '(builtins.getFlake "/home/dsn/dotfiles").nixosConfigurations.dev.options',
+          },
+          home_manager = {
+            expr = '(builtins.getFlake "/home/dsn/dotfiles").homeConfigurations.dev.options',
+          },
+        },
       },
     },
   },
@@ -151,7 +166,7 @@ for name, config in pairs(servers) do
     root_dir = config.root_dir or nil,
     single_file_support = config.single_file_support or nil,
     capabilities = common_capabilities(),
-    fileTypes = config.fileTypes,
+    fileTypes = config.fileTypes or nil,
     handlers = vim.tbl_deep_extend("force", {}, default_handlers, config.handlers or {}),
     on_attach = on_attach,
     settings = config.settings,

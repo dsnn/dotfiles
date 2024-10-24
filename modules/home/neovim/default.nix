@@ -1,8 +1,15 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  unstable,
+  ...
+}:
 with lib;
 let
   cfg = config.dsn.nvim;
-  fromGitHub = rev: ref: repo:
+  fromGitHub =
+    rev: ref: repo:
     pkgs.vimUtils.buildVimPlugin {
       pname = "${lib.strings.sanitizeDerivationName repo}";
       version = ref;
@@ -12,43 +19,46 @@ let
         rev = rev;
       };
     };
-in {
+in
+{
 
-  options.dsn.nvim = { enable = mkEnableOption "Enable neovim"; };
+  options.dsn.nvim = {
+    enable = mkEnableOption "Enable neovim";
+  };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
+    home.packages = [
       # neovim
-      nodePackages."bash-language-server"
-      nodePackages."diagnostic-languageserver"
-      nodePackages."dockerfile-language-server-nodejs"
-      nodePackages."graphql-language-service-cli"
-      nodePackages."typescript"
-      nodePackages."typescript-language-server"
-      nodePackages."vim-language-server"
-      nodePackages."vscode-langservers-extracted" # HTML/CSS/JSON/ESLint language servers extracted from vscode
-      nodePackages."jsonlint"
-      nodePackages."prettier"
-      ansible-lint
-      commitlint
-      docker-compose-language-service
-      eslint_d
-      jq
-      lua-language-server
-      markdownlint-cli
-      nixd
-      nixfmt-rfc-style
-      pre-commit
-      prettierd
-      proselint
-      shellcheck
-      shfmt
-      statix
-      stylelint
-      stylua
-      tailwindcss-language-server
-      yaml-language-server
-      yamllint
+      pkgs.nodePackages."bash-language-server"
+      pkgs.nodePackages."diagnostic-languageserver"
+      pkgs.nodePackages."dockerfile-language-server-nodejs"
+      pkgs.nodePackages."graphql-language-service-cli"
+      pkgs.nodePackages."typescript"
+      pkgs.nodePackages."typescript-language-server"
+      pkgs.nodePackages."vim-language-server"
+      pkgs.nodePackages."vscode-langservers-extracted" # HTML/CSS/JSON/ESLint language servers extracted from vscode
+      pkgs.nodePackages."jsonlint"
+      pkgs.nodePackages."prettier"
+      pkgs.ansible-lint
+      pkgs.commitlint
+      pkgs.docker-compose-language-service
+      pkgs.eslint_d
+      pkgs.jq
+      pkgs.lua-language-server
+      pkgs.markdownlint-cli
+      unstable.nixd
+      pkgs.nixfmt-rfc-style
+      pkgs.pre-commit
+      pkgs.prettierd
+      pkgs.proselint
+      pkgs.shellcheck
+      pkgs.shfmt
+      pkgs.statix
+      pkgs.stylelint
+      pkgs.stylua
+      pkgs.tailwindcss-language-server
+      pkgs.yaml-language-server
+      pkgs.yamllint
     ];
 
     programs.neovim = {
@@ -102,7 +112,8 @@ in {
         vim-surround
         vim-tmux-navigator
         (fromGitHub "483019d251c31acd14102bc279f938f98d9a3de6" "main"
-          "mrbjarksen/neo-tree-diagnostics.nvim")
+          "mrbjarksen/neo-tree-diagnostics.nvim"
+        )
       ];
     };
 
@@ -115,8 +126,6 @@ in {
       bindkey "^n" run_nvim
     '';
 
-    home.file."${config.home.homeDirectory}/.config/nvim".source =
-      config.lib.file.mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/dotfiles/modules/home/neovim/nvim";
+    home.file."${config.home.homeDirectory}/.config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/modules/home/neovim/nvim";
   };
 }

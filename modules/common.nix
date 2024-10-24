@@ -1,9 +1,19 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.dsn.common;
-  trustedUsers = [ "root" "dsn" "@wheel" ];
-in {
+  trustedUsers = [
+    "root"
+    "dsn"
+    "@wheel"
+  ];
+in
+{
 
   options.dsn.common = {
     enable = mkEnableOption "Enable common stuff";
@@ -11,25 +21,29 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment = {
-      shells = with pkgs; [ bash zsh ];
-      systemPackages = with pkgs; [
-        age
-        coreutils
-        git
-        home-manager
-        htop
-        man
-        sops
-        vim
-        wget
-        nix
-      ];
-    } // optionalAttrs cfg.enable-darwin {
-      loginShell = pkgs.zsh;
-      systemPath = [ "/opt/homebrew/bin" ];
-      pathsToLink = [ "/Applications" ];
-    };
+    environment =
+      {
+        shells = with pkgs; [
+          bash
+          zsh
+        ];
+        systemPackages = with pkgs; [
+          age
+          coreutils
+          git
+          home-manager
+          htop
+          man
+          vim
+          wget
+          nix
+        ];
+      }
+      // optionalAttrs cfg.enable-darwin {
+        loginShell = pkgs.zsh;
+        systemPath = [ "/opt/homebrew/bin" ];
+        pathsToLink = [ "/Applications" ];
+      };
 
     time.timeZone = "Europe/Stockholm";
 
@@ -48,8 +62,10 @@ in {
         trusted-users = trustedUsers;
         warn-dirty = false;
 
-        substituters =
-          [ "https://cache.nixos.org" "https://nix-community.cachix.org" ];
+        substituters = [
+          "https://cache.nixos.org"
+          "https://nix-community.cachix.org"
+        ];
 
         trusted-public-keys = [
           "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -57,16 +73,18 @@ in {
         ];
       };
 
-      gc = {
-        automatic = true;
-        options = "--delete-older-than 30d";
-      } // optionalAttrs cfg.enable-darwin {
-        interval = {
-          Weekday = 0;
-          Hour = 0;
-          Minute = 0;
+      gc =
+        {
+          automatic = true;
+          options = "--delete-older-than 30d";
+        }
+        // optionalAttrs cfg.enable-darwin {
+          interval = {
+            Weekday = 0;
+            Hour = 0;
+            Minute = 0;
+          };
         };
-      };
 
       # nixPath = [
       #   {

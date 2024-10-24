@@ -40,6 +40,7 @@ in
     xdg.enable = true;
     xresources.enable = true;
     zoxide.enable = true;
+    just.enable = true;
     zsh = {
       enable = true;
       enable-docker-aliases = false;

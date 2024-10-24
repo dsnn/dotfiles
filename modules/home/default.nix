@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   imports = [
     ./bat.nix
     ./bottom.nix
@@ -6,13 +7,16 @@
     ./fzf.nix
     ./git.nix
     ./inputrc.nix
+    ./just.nix
     ./karabiner
     ./keychain.nix
     ./kitty.nix
     ./lazygit.nix
     ./lsd.nix
     ./neovim
+    ./neovim
     ./packages.nix
+    ./sops.nix
     ./ssh.nix
     ./starship.nix
     ./tmux.nix
@@ -24,7 +28,5 @@
     ./xresources.nix
     ./zoxide.nix
     ./zsh.nix
-    ./neovim
-    ./sops.nix
   ];
 }

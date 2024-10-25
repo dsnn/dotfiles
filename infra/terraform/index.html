@@ -463,7 +463,7 @@
         
   
   <span class="md-ellipsis">
-    Nixos
+    NixOS
   </span>
   
 
@@ -547,9 +547,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#terraform_1" class="md-nav__link">
+  <a href="#documentation" class="md-nav__link">
     <span class="md-ellipsis">
-      Terraform
+      Documentation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Usage
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formatting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Formatting
     </span>
   </a>
   
@@ -598,7 +616,9 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -721,7 +741,9 @@
 
 
 <h1 id="terraform">Terraform</h1>
-<h2 id="terraform_1"><a href="https://developer.hashicorp.com/terraform?product_intent=terraform">Terraform</a></h2>
+<h2 id="documentation">Documentation</h2>
+<p><a href="https://developer.hashicorp.com/terraform?product_intent=terraform">Documentation</a></p>
+<h2 id="basic-usage">Basic Usage</h2>
 <p>Create and run infrastructure (virtual machines, DNS etc).
 Sync state in cloud with terraform login.</p>
 <pre><code class="language-console">    terraform plan -var-file=&lt;(sops -d ~/dotfiles/secrets/secret.tfvars.json)
@@ -732,6 +754,7 @@ Sync state in cloud with terraform login.</p>
     terraform plan --var-file=secrets.dec.json
     terraform apply --var-file=secrets.dec.json
 </code></pre>
+<h2 id="formatting">Formatting</h2>
 <p>For manual formatting:</p>
 <pre><code class="language-console">    terraform fmt -write -recursive &lt;folder&gt;
 </code></pre>
@@ -787,7 +810,7 @@ Sync state in cloud with terraform login.</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["content.action.edit", "content.action.view", "content.code.copy", "content.tooltips", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "search.highlight", "search.share", "search.suggest", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.action.edit", "content.action.view", "content.code.copy", "content.tooltips", "navigation.indexes", "navigation.sections", "navigation.expand", "navigation.tabs", "navigation.top", "search.highlight", "search.share", "search.suggest", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>

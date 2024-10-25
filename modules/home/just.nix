@@ -20,6 +20,9 @@ in
       shellAliases = {
         j = "just";
       };
+      initExtra = ''
+        export JUST_UNSTABLE=1
+      '';
     };
   };
 }

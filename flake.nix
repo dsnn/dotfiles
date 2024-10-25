@@ -109,6 +109,14 @@
             in
             pkgs'.options-doc;
         };
+        x86_64-linux = {
+          options-doc =
+            let
+              pkgs' = import ./packages { pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin; };
+            in
+            pkgs'.options-doc;
+        };
+
       };
 
       # homeConfigurations = mapAttrs (target: cfg:

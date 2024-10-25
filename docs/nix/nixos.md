@@ -14,3 +14,9 @@ nix-build '<nixpkgs/nixos>' -A vm -I nixpkgs=channel:nixos-24.05 \
 ```console
 nix build .#options-doc
 ```
+
+## Generate iso
+
+```console
+nix build .#nixosConfigurations.live.config.system.build.isoImage
+```

@@ -99,6 +99,14 @@
             ./modules/nixos
           ];
         };
+        live = nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            (inputs.nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
+            ./dev.nix
+            ./dev-disk-config.nix
+          ];
+        };
       };
 
       packages = {

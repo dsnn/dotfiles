@@ -32,9 +32,10 @@ theme:
     - content.action.view
     - content.code.copy
     - content.tooltips
+    - navigation.expand
     - navigation.indexes
     - navigation.sections
-    - navigation.tabs
+    - navigation.tracking
     - navigation.top
     - search.highlight
     - search.share
@@ -66,3 +67,15 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to system preference
+
+nav:
+  - Home: index.md
+  - Infrastructure:
+      - infra/ansible.md
+      - infra/dns.md
+      - infra/nixos.md
+      - infra/terraform.md
+  - Nix:
+      - nix/home-manager.md
+      - nix/nixos.md
+      - nix/troubleshooting.md

@@ -3,16 +3,5 @@ with import <nixpkgs> { };
 
 mkShell {
   name = "dotfiles";
-  packages = [
-    mkdocs
-    python310Packages.mkdocs-material
-    # dotnet-sdk
-    # (
-    #   with dotnetCorePackages;
-    #   combinePackages [
-    #     sdk_6_0
-    #     sdk_7_0
-    #   ]
-    # )
-  ];
+  packages = [ mkdocs python3 python311Packages.mkdocs-material ];
 }

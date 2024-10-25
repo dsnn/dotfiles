@@ -83,6 +83,7 @@ in
             biu = "nix run";
             bii = "nix-instansiate";
             bis = "nix shell";
+            "nix-shell" = "nix-shell --run zsh";
 
           }
           // optionalAttrs cfg.enable-docker-aliases {

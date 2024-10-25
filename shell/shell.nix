@@ -2,9 +2,17 @@
 with import <nixpkgs> { };
 
 mkShell {
-  name = "dotnet-env";
+  name = "dotfiles";
   packages = [
-    dotnet-sdk
-    (with dotnetCorePackages; combinePackages [ sdk_6_0 sdk_7_0 ])
+    mkdocs
+    python310Packages.mkdocs-material
+    # dotnet-sdk
+    # (
+    #   with dotnetCorePackages;
+    #   combinePackages [
+    #     sdk_6_0
+    #     sdk_7_0
+    #   ]
+    # )
   ];
 }

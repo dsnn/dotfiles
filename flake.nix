@@ -102,17 +102,13 @@
       };
 
       packages = {
-        aarch64-darwin = {
-          options-doc =
-            let
-              pkgs' = import ./packages { pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin; };
-            in
-            pkgs'.options-doc;
-        };
         x86_64-linux = {
           options-doc =
             let
-              pkgs' = import ./packages { pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin; };
+              pkgs' = import ./packages {
+                inherit inputs;
+                pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+              };
             in
             pkgs'.options-doc;
         };

@@ -2,14 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://www.dsnn.io/dotfiles/</loc>
-         <lastmod>2024-10-08</lastmod>
+         <lastmod>2024-10-25</lastmod>
     </url>
     <url>
-         <loc>https://www.dsnn.io/dotfiles/infra/</loc>
-         <lastmod>2024-10-08</lastmod>
+         <loc>https://www.dsnn.io/dotfiles/infra/ansible/</loc>
+         <lastmod>2024-10-25</lastmod>
     </url>
     <url>
-         <loc>https://www.dsnn.io/dotfiles/nixos/</loc>
-         <lastmod>2024-10-08</lastmod>
+         <loc>https://www.dsnn.io/dotfiles/infra/dns/</loc>
+         <lastmod>2024-10-25</lastmod>
+    </url>
+    <url>
+         <loc>https://www.dsnn.io/dotfiles/infra/nixos/</loc>
+         <lastmod>2024-10-25</lastmod>
+    </url>
+    <url>
+         <loc>https://www.dsnn.io/dotfiles/infra/packer/</loc>
+         <lastmod>2024-10-25</lastmod>
+    </url>
+    <url>
+         <loc>https://www.dsnn.io/dotfiles/infra/terraform/</loc>
+         <lastmod>2024-10-25</lastmod>
+    </url>
+    <url>
+         <loc>https://www.dsnn.io/dotfiles/nix/home-manager/</loc>
+         <lastmod>2024-10-25</lastmod>
+    </url>
+    <url>
+         <loc>https://www.dsnn.io/dotfiles/nix/nixos/</loc>
+         <lastmod>2024-10-25</lastmod>
+    </url>
+    <url>
+         <loc>https://www.dsnn.io/dotfiles/nix/troubleshooting/</loc>
+         <lastmod>2024-10-25</lastmod>
     </url>
 </urlset>

@@ -8,28 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://www.dsnn.io/dotfiles/infra/">
+        <link rel="canonical" href="https://www.dsnn.io/dotfiles/infra/dns/">
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../ansible/">
       
       
         <link rel="next" href="../nixos/">
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
     
     
       
-        <title>Infrastructure - dsnn.io/dotfiles</title>
+        <title>DNS - dsnn.io/dotfiles</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.8c3ca2c6.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0253249f.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -48,7 +48,7 @@
       
     
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#infrastructure" class="md-skip">
+        <a href="#dns" class="md-skip">
           Skip to content
         </a>
       
@@ -88,7 +88,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="dsnn.io/dotfiles" class="md-header__button md-logo" aria-label="dsnn.io/dotfiles" data-md-component="logo">
+    <a href="../.." title="dsnn.io/dotfiles" class="md-header__button md-logo" aria-label="dsnn.io/dotfiles" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Infrastructure
+              DNS
             
           </span>
         </div>
@@ -232,7 +232,7 @@
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
     
@@ -250,16 +250,19 @@
     
   
   
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="./" class="md-tabs__link">
-        
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../ansible/" class="md-tabs__link">
+          
   
     
   
-  Infrastructure
+  Infra
 
-      </a>
-    </li>
+        </a>
+      </li>
+    
   
 
       
@@ -267,16 +270,19 @@
   
   
   
-    <li class="md-tabs__item">
-      <a href="../nixos/" class="md-tabs__link">
-        
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../nix/home-manager/" class="md-tabs__link">
+          
   
     
   
-  NixOS
+  Nix
 
-      </a>
-    </li>
+        </a>
+      </li>
+    
   
 
       
@@ -304,7 +310,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="dsnn.io/dotfiles" class="md-nav__button md-logo" aria-label="dsnn.io/dotfiles" data-md-component="logo">
+    <a href="../.." title="dsnn.io/dotfiles" class="md-nav__button md-logo" aria-label="dsnn.io/dotfiles" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -334,7 +340,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -355,6 +361,84 @@
   
   
   
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Infra
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Infra
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ansible/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ansible
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
     <li class="md-nav__item md-nav__item--active">
       
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
@@ -363,90 +447,86 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Infrastructure
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    Infrastructure
+    DNS
   </span>
   
 
       </a>
       
-        
+    </li>
+  
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+              
+            
+              
+                
   
   
   
-    
+  
+    <li class="md-nav__item">
+      <a href="../nixos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Nixos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#nixos-anywhere" class="md-nav__link">
-    <span class="md-ellipsis">
-      NixOS Anywhere
-    </span>
-  </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#packer" class="md-nav__link">
-    <span class="md-ellipsis">
-      Packer
-    </span>
-  </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#terraform" class="md-nav__link">
-    <span class="md-ellipsis">
-      Terraform
-    </span>
-  </a>
+    <li class="md-nav__item">
+      <a href="../packer/" class="md-nav__link">
+        
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#generate-documentation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Generate documentation
-    </span>
-  </a>
+  <span class="md-ellipsis">
+    Packer
+  </span>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ansible" class="md-nav__link">
-    <span class="md-ellipsis">
-      Ansible
-    </span>
-  </a>
+
+      </a>
+    </li>
   
-</li>
-      
-    </ul>
+
+              
+            
+              
+                
   
-</nav>
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../terraform/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Terraform
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
     </li>
   
@@ -458,8 +538,77 @@
   
   
   
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Nix
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Nix
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../nixos/" class="md-nav__link">
+      <a href="../../nix/home-manager/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home manager
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nix/nixos/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -468,6 +617,35 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nix/troubleshooting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -487,7 +665,7 @@
                   
 
   
-    <a href="https://github.com/dsnn/dotfiles/edit/master/docs/infra.md" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/dsnn/dotfiles/edit/master/docs/infra/dns.md" title="Edit this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -496,42 +674,26 @@
     
       
     
-    <a href="https://github.com/dsnn/dotfiles/raw/master/docs/infra.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/dsnn/dotfiles/raw/master/docs/infra/dns.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="infrastructure">Infrastructure</h1>
-<h2 id="nixos-anywhere"><a href="https://github.com/nix-community/nixos-anywhere">NixOS Anywhere</a></h2>
-<pre><code class="language-console">    nix run github:nix-community/nixos-anywhere -- --flake .#template --build-on-remote user@ip
-</code></pre>
-<h2 id="packer"><a href="https://developer.hashicorp.com/packer/docs?product_intent=packer">Packer</a></h2>
-<p>Create proxmox templates. Run command inside OS folder e.g pkr-ubuntu-noble-1</p>
-<pre><code class="language-console">    packer build -var-file=&lt;(sops -d ~/dotfiles/secrets/secret.tfvars.json) .
-</code></pre>
-<h2 id="terraform"><a href="https://developer.hashicorp.com/terraform?product_intent=terraform">Terraform</a></h2>
-<p>Create and run infrastructure (virtual machines, DNS etc).
-Sync state in cloud with terraform login.</p>
-<pre><code class="language-console">    terraform plan -var-file=&lt;(sops -d ~/dotfiles/secrets/secret.tfvars.json)
-    terraform apply -var-file=&lt;(sops -d ~/dotfiles/secrets/secret.tfvars.json) -auto-approve
-</code></pre>
-<p>or decrypt secrets first to *.dec.json (ignored by git but be careful anyway)</p>
-<pre><code class="language-console">    sops -d ~/dotfiles/secrets/secrets.tfvars.json &gt; secrets.dec.json
-    terraform plan --var-file=secrets.dec.json
-    terraform apply --var-file=secrets.dec.json
-</code></pre>
-<p>For manual formatting:</p>
-<pre><code class="language-console">    terraform fmt -write -recursive &lt;folder&gt;
-</code></pre>
-<h2 id="generate-documentation"><a href="https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/default.nix">Generate documentation</a></h2>
-<pre><code class="language-console">    nix build .#options-doc
-</code></pre>
-<h2 id="ansible">Ansible</h2>
-<pre><code class="language-console">    ansible k3s-cluster -m ping
-</code></pre>
-<pre><code class="language-console">    ansible-galaxy install -r ./collections/requirements.yml
+<h1 id="dns">DNS</h1>
+<p>The custom dns server is hosted as a docker container in my homelab.
+For now it is hosted on the <code>srv-docker-01</code>.</p>
+<ul>
+<li>
+<p>Copy the configuration and docker compose with the ansible playbook <code>dns-server.yaml</code></p>
+</li>
+<li>
+<p>Start the container manually</p>
+</li>
+</ul>
+<p>tsig-key is generated with the command:</p>
+<pre><code class="language-console">docker exec dns-server tsig-keygen -a hmac-sha256
 </code></pre>
 
 
@@ -585,10 +747,10 @@ Sync state in cloud with terraform login.</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["content.action.edit", "content.action.view", "content.code.copy", "content.tooltips", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "search.highlight", "search.share", "search.suggest", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.action.edit", "content.action.view", "content.code.copy", "content.tooltips", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "search.highlight", "search.share", "search.suggest", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.525ec568.min.js"></script>
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
       
     
   </body>

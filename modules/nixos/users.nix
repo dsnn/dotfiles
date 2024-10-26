@@ -1,8 +1,17 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 with lib;
-let cfg = config.dsn.user;
-in {
-  options.dsn.user = { enable = mkEnableOption "Enable users"; };
+let
+  cfg = config.dsn.user;
+in
+{
+  options.dsn.user = {
+    enable = mkEnableOption "Enable users";
+  };
 
   config = mkIf cfg.enable {
     sops.secrets = {
@@ -31,8 +40,15 @@ in {
     users.users.dsn = {
       shell = pkgs.zsh;
       isNormalUser = true;
-      extraGroups =
-        [ "wheel" "video" "audio" "disk" "networkmanager" "docker" ];
+      group = "users";
+      extraGroups = [
+        "wheel"
+        "video"
+        "audio"
+        "disk"
+        "networkmanager"
+        "docker"
+      ];
       hashedPasswordFile = config.sops.secrets."password/dsn".path;
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAaLTAnk7ZuDsWIcahlr0SWKfq9BlwSJTyE1c6CGktKB"

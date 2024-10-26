@@ -85,19 +85,6 @@ in
             Minute = 0;
           };
         };
-
-      # nixPath = [
-      #   {
-      #     path = "/nix/var/nix/profiles/per-user/root/channels/nixos";
-      #     prefix = "nixpkgs";
-      #   }
-      #   {
-      #     path = "/Users/dsn/dotfiles/hosts/silver/configuration.nix";
-      #     prefix = "darwin-config";
-      #   }
-      #   "/nix/var/nix/profiles/per-user/root/channels"
-      # ];
-
     };
   };
 }

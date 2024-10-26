@@ -42,6 +42,7 @@ in
         dotnet-sdk_8
         lazydocker
         nixos-generators
+        colmena
       ];
 
     # [

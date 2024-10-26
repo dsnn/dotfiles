@@ -123,6 +123,75 @@
 
       };
 
+      colmena = {
+        meta = {
+          nixpkgs = import inputs.nixpkgs {
+            system = "x86_64-linux";
+            overlays = [ ];
+          };
+          specialArgs = {
+            unstable = unstable x86_64-linux;
+            inherit inputs outputs;
+          };
+        };
+
+        defaults =
+          { ... }:
+          {
+            imports = [
+              inputs.disko.nixosModules.disko
+              ./modules/common.nix
+              ./modules/nixos
+            ];
+
+            deployment = {
+              keys = {
+                "sops-key" = {
+                  name = "keys.txt";
+                  keyFile = "/home/dsn/.config/sops/age/keys.txt";
+                  destDir = "/home/dsn/.config/sops/age";
+                  user = "dsn";
+                };
+              };
+            };
+          };
+
+        srv-nixos-01 =
+          { ... }:
+          {
+            imports = [
+              ./configs/srv-nixos-01.nix
+              inputs.home-manager.nixosModules.home-manager
+            ];
+
+            deployment = {
+              targetHost = "192.168.2.111";
+              targetUser = "dsn";
+            };
+
+            home-manager = {
+
+              # saves extra eval, consistency and rm dep on NIX_PATH
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+
+              extraSpecialArgs = {
+                unstable = unstable x86_64-linux;
+                inherit inputs outputs;
+              };
+
+              sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
+
+              users.dsn.imports = [
+                ./profiles/dsn-small.nix
+                ./modules/home/default-sys-module.nix
+              ];
+            };
+
+            boot.isContainer = true;
+          };
+      };
+
       # homeConfigurations = mapAttrs (target: cfg:
       #   homeManagerConfiguration {
       #     pkgs = inputs.nixpkgs.legacyPackages.${cfg.system};

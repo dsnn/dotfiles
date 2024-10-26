@@ -20,6 +20,12 @@
 
 Proxmox might have trouble showing the shell in the web console (serial0). Try change tty or something.
 
+- When the virtual machine is up and running with NixOS you can either update it with terraform (not tested yet) or colmena.
+
+- Colmena uses system wide home-manager which requires a different import of sops-nix.
+
+- Be careful with target user for colmena since it can create folders as e.g root and affect permissions etc. (I had problems with it creating .config/sops/age/keys.txt as root for instance)
+
 ## NixOS Anywhere
 
 [NixOS Anywhere](https://github.com/nix-community/nixos-anywhere)

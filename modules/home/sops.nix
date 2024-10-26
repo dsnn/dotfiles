@@ -11,6 +11,7 @@ let
 in
 {
 
+  # import for standalone home manager
   imports = [ inputs.sops-nix.homeManagerModules.sops ];
 
   options.dsn.sops = {

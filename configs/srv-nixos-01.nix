@@ -3,7 +3,7 @@
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
-    ./disk-config.nix
+    ./srv-nixos-01-disk-config.nix
   ];
 
   boot.loader.grub = {

@@ -19,7 +19,6 @@
       inherit (self) outputs;
       x86_64-linux = "x86_64-linux";
       inherit (inputs.nixpkgs.lib) nixosSystem; # mapAttrs;
-      inherit (inputs.home-manager.lib) homeManagerConfiguration;
       unstable =
         system:
         import inputs.nixpkgs-unstable {
@@ -36,7 +35,7 @@
         };
         modules = [
           inputs.disko.nixosModules.disko
-          ./configuration.nix
+          /home/dsn/dotfiles/configs/srv-nixos-01.nix
         ];
       };
     };

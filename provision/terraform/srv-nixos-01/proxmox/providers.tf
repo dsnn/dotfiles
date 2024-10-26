@@ -1,6 +1,13 @@
 terraform {
   required_version = ">= 0.13.0"
 
+  cloud {
+    organization = "dsw"
+    workspaces {
+      name = "nixos01"
+    }
+  }
+
   required_providers {
     proxmox = {
       source  = "Telmate/proxmox"

@@ -94,7 +94,7 @@
           };
           modules = [
             inputs.disko.nixosModules.disko
-            ./provision/nixos/dev/dev.nix
+            ./configs/dev.nix
             ./modules/common.nix
             ./modules/nixos
           ];

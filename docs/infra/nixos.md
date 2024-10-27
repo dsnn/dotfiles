@@ -1,6 +1,28 @@
 # NixOS
 
-## Automated deplyment
+## Automated deployment (LXC)
+
+- Create a LXC container with:
+
+```console
+nix build .#proxmox-lxc
+```
+
+- Upload tarball to proxmox
+
+Important: check that you put the tarball in the correct folder, /cache and not /iso (?).
+
+```console
+scp /result/tarball/nixos-system-x86_64-linux.tar.xz user@host:/var/lib/vz/template/cache
+```
+
+- Create host-container(s) with terraform
+
+- Configure host-container(s) with colmena.
+
+Important: Use correct user instead of root or it will fail (files and folders will be owned by root)
+
+## Automated deployment (VM)
 
 - Set up a terraform module to provision a virtual machine with cloud init (like regular ubuntu cloud init for instance).
 

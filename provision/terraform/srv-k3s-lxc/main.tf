@@ -1,4 +1,4 @@
-resource "proxmox_lxc" "k3s-cluster" {
+resource "proxmox_lxc" "k3s" {
   for_each = var.servers
 
   vmid         = each.value.vmid
@@ -31,7 +31,7 @@ resource "proxmox_lxc" "k3s-cluster" {
   ssh_public_keys = var.ssh_public_key
 }
 
-resource "dns_a_record_set" "k3s-cluster-dns" {
+resource "dns_a_record_set" "k3s-dns" {
   for_each = var.servers
 
   zone = "home.dsnn.io."

@@ -1,6 +1,6 @@
-# Helper script to generate password for different tools
+#!/run/current-system/sw/bin/bash
 
-#!/usr/bin/env bash
+# Helper script to generate password for different tools
 
 set -euo pipefail
 

@@ -1,9 +1,13 @@
-{ modulesPath, ... }:
+{
+  modulesPath,
+  hostName,
+  address,
+  ...
+}:
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
-    ./srv-nixos-01-disk-config.nix
   ];
 
   boot.loader.grub = {
@@ -26,14 +30,7 @@
   };
 
   networking = {
-    hostName = "srv-nixos-01";
     enableIPv6 = false;
-    interfaces.ens18.ipv4.addresses = [
-      {
-        address = "192.168.2.111";
-        prefixLength = 24;
-      }
-    ];
     defaultGateway = "192.168.2.1";
   };
 
@@ -42,4 +39,6 @@
   system = {
     stateVersion = "24.05";
   };
+
+  boot.isContainer = true;
 }

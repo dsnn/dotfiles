@@ -1,4 +1,7 @@
-{ lib }:
+{ inputs }:
+let
+  lib = inputs.nixpkgs.lib;
+in
 rec {
   mainGateway = "192.168.1.1"; # main router
   defaultGateway = "192.168.2.1";
@@ -22,7 +25,6 @@ rec {
       ipv4 = "192.168.2.103";
     };
   };
-
   hostsInterface = lib.attrsets.mapAttrs (key: val: {
     interfaces."${val.iface}" = {
       useDHCP = false;

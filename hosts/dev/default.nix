@@ -1,10 +1,11 @@
-{ modulesPath, ... }: {
+{ modulesPath, ... }:
+{
   # let keyPath = "/home/dsn/.config/sops/age";
 
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
-    ./dev-disk-config.nix
+    ./disko.nix
   ];
 
   dsn = {
@@ -41,5 +42,7 @@
     interfaces.eth0.useDHCP = true;
   };
 
-  system = { stateVersion = "24.05"; };
+  system = {
+    stateVersion = "24.05";
+  };
 }

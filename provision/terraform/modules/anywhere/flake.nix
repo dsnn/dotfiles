@@ -27,7 +27,7 @@
         };
     in
     {
-      nixosConfigurations."srv-nixos-01" = nixosSystem {
+      nixosConfigurations.template = nixosSystem {
         system = x86_64-linux;
         specialArgs = {
           unstable = unstable x86_64-linux;
@@ -35,7 +35,7 @@
         };
         modules = [
           inputs.disko.nixosModules.disko
-          /home/dsn/dotfiles/hosts/srv-nixos-01
+          /home/dsn/dotfiles/hosts/template
         ];
       };
     };

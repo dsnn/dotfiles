@@ -96,7 +96,7 @@ in
 
     # host specific aliases
     zsh.shellAliases = {
-      cfc = "vim $HOME/dotfiles/configs/${hostname}.nix";
+      cfc = "vim $HOME/dotfiles/hosts/${hostname}/default.nix";
       cfg = "vim $HOME/dotfiles/modules/home/git.nix";
       cfh = "vim $HOME/dotfiles/profiles/dsn.nix";
       cfz = "vim $HOME/dotfiles/modules/home/zsh.nix";

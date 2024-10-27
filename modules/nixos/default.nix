@@ -1,6 +1,9 @@
-{ ... }: {
+{ ... }:
+{
   imports = [
     ./avahi.nix
+    ./awesomewm
+    ./cicd
     ./cifs.nix
     ./cups.nix
     ./fail2ban.nix
@@ -12,13 +15,11 @@
     ./openssh.nix
     ./postgres.nix
     ./security.nix
+    ./sops.nix
     ./system.nix
     ./traefik.nix
     ./users.nix
     ./virtualisation.nix
     ./wireguard.nix
-    ./cicd
-    ./awesomewm
-    ./sops.nix
   ];
 }

@@ -1,7 +1,12 @@
-# shell.nix
-with import <nixpkgs> { };
-
-mkShell {
+let
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-24.05";
+  pkgs = import nixpkgs { config.allowUnfree = true; };
+in
+pkgs.mkShellNoCC {
   name = "dotfiles";
-  packages = [ mkdocs python3 python311Packages.mkdocs-material ];
+  packages = with pkgs; [
+    mkdocs
+    python3
+    python311Packages.mkdocs-material
+  ];
 }

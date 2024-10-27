@@ -77,33 +77,34 @@ local servers = {
       },
     },
   },
-  nixd = {
-    settings = {
-      nixd = {
-        nixpkgs = {
-          expr = "import <nixpkgs> { }",
-        },
-        formatting = {
-          command = { "nixfmt" },
-        },
-        diagnostic = {
-          suppress = {
-            "sema-escaping-with",
-            "var-bind-to-this",
-            "escaping-this-with",
-          },
-        },
-        options = {
-          nixos = {
-            expr = '(builtins.getFlake "/home/dsn/dotfiles").nixosConfigurations.dev.options',
-          },
-          home_manager = {
-            expr = '(builtins.getFlake "/home/dsn/dotfiles").homeConfigurations.dev.options',
-          },
-        },
-      },
-    },
-  },
+  nil_ls = {},
+  -- nixd = {
+  --   settings = {
+  --     nixd = {
+  --       nixpkgs = {
+  --         expr = "import <nixpkgs> { }",
+  --       },
+  --       formatting = {
+  --         command = { "nixfmt" },
+  --       },
+  --       diagnostic = {
+  --         suppress = {
+  --           "sema-escaping-with",
+  --           "var-bind-to-this",
+  --           "escaping-this-with",
+  --         },
+  --       },
+  --       options = {
+  --         nixos = {
+  --           expr = '(builtins.getFlake "/home/dsn/dotfiles").nixosConfigurations.dev.options',
+  --         },
+  --         home_manager = {
+  --           expr = '(builtins.getFlake "/home/dsn/dotfiles").homeConfigurations.dev.options',
+  --         },
+  --       },
+  --     },
+  --   },
+  -- },
   tsserver = {
     root_dir = lspconfig.util.find_git_ancestor,
     single_file_support = false,

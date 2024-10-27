@@ -45,6 +45,7 @@ in
       pkgs.jq
       pkgs.lua-language-server
       pkgs.markdownlint-cli
+      pkgs.nil
       unstable.nixd
       pkgs.nixfmt-rfc-style
       pkgs.pre-commit

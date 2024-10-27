@@ -24,6 +24,8 @@
     sops-nix.url = "github:Mic92/sops-nix";
     terranix.inputs.nixpkgs.follows = "nixpkgs";
     terranix.url = "github:terranix/terranix";
+    nixvim.url = "github:nix-community/nixvim/nixos-24.05";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs =
     inputs@{ self, ... }:
@@ -172,8 +174,8 @@
             home-manager = {
 
               # saves extra eval, consistency and rm dep on NIX_PATH
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
+              useGlobalPkgs = true;
+              useUserPackages = true;
 
               extraSpecialArgs = {
                 unstable = unstable x86_64-linux;

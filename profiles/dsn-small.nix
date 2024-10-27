@@ -3,6 +3,8 @@
   sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
   systemd.user.services.mbsync.Unit.After = [ "sops-nix.service" ];
 
+  imports = [ ../modules/home/nixvim ];
+
   dsn = {
     packages = {
       enable = true;

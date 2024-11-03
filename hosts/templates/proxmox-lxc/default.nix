@@ -39,6 +39,8 @@
     manageNetwork = false;
   };
 
+  networking.usePredictableInterfaceNames = false;
+
   programs = {
     zsh.enable = true;
   };
@@ -59,22 +61,6 @@
       ../../../modules/home/default-sys-module.nix
     ];
   };
-
-  # users = {
-  #   mutableUsers = true;
-  #   users = {
-  #     root = {
-  #       initialHashedPassword = vars.initialHashedPassword;
-  #       openssh.authorizedKeys.keys = vars.pubKeys;
-  #     };
-  #     dsn = {
-  #       isNormalUser = true;
-  #       extraGroups = [ "wheel" ];
-  #       openssh.authorizedKeys.keys = vars.pubKeys;
-  #       initialHashedPassword = vars.initialHashedPassword;
-  #     };
-  #   };
-  # };
 
   nix.settings.trusted-users = [ "dsn" ];
 

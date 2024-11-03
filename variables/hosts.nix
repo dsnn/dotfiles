@@ -5,20 +5,20 @@
     #   ip = "192.168.2.111";
     #   modules = [ ../hosts/srv-nixos-01 ];
     # };
-    k3smaster01 = {
+    srv-k3s-01 = {
       name = "srv-k3s-01";
       ip = "192.168.2.121";
-      modules = [ ../hosts/k3s/master ];
+      modules = [ ../hosts/k3s/master.nix ];
     };
-    # k3sagent01 = {
-    #   name = "srv-k3s-agent-01";
-    #   ip = "192.168.2.122";
-    #   modules = [ ../hosts/k3s/agent ];
-    # };
-    # k3sagent02 = {
-    #   name = "srv-k3s-agent-01";
-    #   ip = "192.168.2.123";
-    #   modules = [ ../hosts/k3s/agent ];
-    # };
+    k3sagent01 = {
+      name = "srv-k3s-agent-01";
+      ip = "192.168.2.122";
+      modules = [ ../hosts/k3s/agent.nix ];
+    };
+    k3sagent02 = {
+      name = "srv-k3s-agent-01";
+      ip = "192.168.2.123";
+      modules = [ ../hosts/k3s/agent.nix ];
+    };
   };
 }

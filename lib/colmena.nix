@@ -36,7 +36,7 @@ in
     };
     specialArgs = {
       unstable = unstable system.x86_64-linux;
-      inherit inputs;
+      inherit inputs vars;
     };
   };
 
@@ -54,13 +54,33 @@ in
         targetUser = vars.username;
       };
 
-      networking.hostName = name;
-      networking.interfaces.eth0.ipv4.addresses = [
-        {
-          address = ip;
-          prefixLength = 24;
-        }
-      ];
+      nixpkgs.config.allowUnfree = true;
+
+      programs.zsh.enable = true;
+
+      boot.isContainer = true;
+
+      services = {
+        qemuGuest.enable = true;
+        openssh.enable = true;
+      };
+
+      networking = {
+        usePredictableInterfaceNames = false;
+        hostName = name;
+        enableIPv6 = false;
+        interfaces.eth0.ipv4.addresses = [
+          {
+            address = ip;
+            prefixLength = 24;
+          }
+        ];
+        defaultGateway = vars.networking.defaultGateway;
+      };
+
+      system = {
+        stateVersion = "24.05";
+      };
 
       home-manager = {
         # saves extra eval, consistency and rm dep on NIX_PATH
@@ -69,7 +89,7 @@ in
 
         extraSpecialArgs = {
           unstable = unstable system.x86_64-linux;
-          inherit inputs;
+          inherit inputs vars;
         };
 
         sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];

@@ -1,5 +1,9 @@
 # NixOS
 
+## k3s
+
+[Documentation](https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/networking/cluster/k3s/README.md)
+
 ## Automated deployment (LXC)
 
 - Create a LXC container with:

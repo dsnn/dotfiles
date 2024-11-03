@@ -3,7 +3,7 @@
   username = "dsn";
   useremail = "dsn@dsnn.io";
 
-  # networking = import ./network.nix { inherit inputs; };
+  networking = import ./network.nix { inherit inputs; };
 
   hosts = import ./hosts.nix;
 

@@ -5,7 +5,8 @@
   ...
 }:
 let
-  inherit (vars) system keyPath keyName;
+  inherit (vars) system sopsOptions;
+  inherit (sopsOptions) keyName keyPath;
 in
 {
   defaults =
@@ -41,15 +42,21 @@ in
   };
 
   mkDeployment =
-    args:
+    host:
     { ... }:
     let
-      inherit (args) name ip modules;
+      inherit (host)
+        name
+        ip
+        modules
+        tags
+        ;
     in
     {
       imports = [ inputs.home-manager.nixosModules.home-manager ] ++ modules;
 
       deployment = {
+        inherit tags;
         targetHost = ip;
         targetUser = vars.username;
       };
@@ -65,6 +72,10 @@ in
         openssh.enable = true;
       };
 
+      security.sudo.wheelNeedsPassword = false;
+
+      nix.settings.trusted-users = [ "dsn" ];
+
       networking = {
         usePredictableInterfaceNames = false;
         hostName = name;
@@ -75,7 +86,6 @@ in
             prefixLength = 24;
           }
         ];
-        defaultGateway = vars.networking.defaultGateway;
       };
 
       system = {

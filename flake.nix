@@ -37,9 +37,11 @@
       };
       vars = import ./variables { inherit inputs; };
       myLib = import ./lib { inherit inputs; };
-      inherit (vars) x86_64-linux aarch64-darwin;
+      inherit (vars.system) x86_64-linux aarch64-darwin;
     in
     {
+      # for debugging
+      inherit vars;
 
       # Home manager as a module (NixOS configurations)
       homeManagerModules.default = ./modules/home;
@@ -68,6 +70,6 @@
       colmena = {
         meta = myLib.colmena.meta;
         defaults = myLib.colmena.defaults;
-      } // builtins.mapAttrs (name: cfg: myLib.colmena.mkDeployment cfg) vars.hosts.colmena;
+      } // builtins.mapAttrs (name: host: myLib.colmena.mkDeployment host) vars.networking.hostsAddr;
     };
 }

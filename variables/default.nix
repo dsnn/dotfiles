@@ -5,19 +5,21 @@
 
   networking = import ./network.nix { inherit inputs; };
 
-  hosts = import ./hosts.nix;
-
   system = {
     aarch64-darwin = "aarch64-darwin";
     x86_64-linux = "x86_64-linux";
   };
 
-  formats = {
-    proxmox-lxc = "proxmox-lxc";
+  generateOptions = {
+    formats = {
+      proxmox-lxc = "proxmox-lxc";
+    };
   };
 
-  keyName = "keys.txt";
-  keyPath = "/home/dsn/.config/sops/age";
+  sopsOptions = {
+    keyName = "keys.txt";
+    keyPath = "/home/dsn/.config/sops/age";
+  };
 
   # generate with modules/scripts/generate-password
   initialHashedPassword = "$2b$05$yPIF0wnops49ceqHXaDsM.h.RdJ1TLbyNUvQrZFjEGI1wF1KWVORu"; # asd123

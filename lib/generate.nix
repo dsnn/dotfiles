@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (vars) system formats;
+  inherit (vars) system generateOptions;
 in
 {
   proxmox-lxc = inputs.nixos-generators.nixosGenerate {
@@ -19,6 +19,6 @@ in
       ../modules/common.nix
       ../modules/nixos
     ];
-    format = formats.proxmox-lxc;
+    format = generateOptions.formats.proxmox-lxc;
   };
 }

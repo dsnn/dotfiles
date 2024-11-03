@@ -9,7 +9,7 @@
   dsn = {
     k3s-agent = {
       enable = true;
-      serverAddr = "https://${vars.hosts.colmena.srv-k3s-01.ip}:6443";
+      serverAddr = "https://${vars.networking.hostsAddr.srv-k3s-01.ip}:6443";
     };
   };
 }

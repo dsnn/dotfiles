@@ -4,8 +4,8 @@
   pkgs,
   ...
 }:
-with lib;
 let
+  inherit (lib) mkIf mkEnableOption optionalAttrs;
   cfg = config.dsn.common;
   trustedUsers = [
     "root"
@@ -94,12 +94,13 @@ in
         warn-dirty = false;
 
         substituters = [
-          # add your own cache server here
+          "http://cache.dsnn.io"
           "https://cache.nixos.org"
           "https://nix-community.cachix.org"
         ];
 
         trusted-public-keys = [
+          "cache.dsnn.io:1IY1jXcL3Ra4hRuv2L3+I7g37I6YWDksX8A744KLOng"
           "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         ];

@@ -79,7 +79,7 @@
     zsh.shellAliases = {
       # cfc = "vim $HOME/dotfiles/hosts/${hostname}/default.nix";
       cfg = "vim $HOME/dotfiles/modules/home/git.nix";
-      cfh = "vim $HOME/dotfiles/profiles/dsn.nix";
+      cfh = "vim $HOME/dotfiles/profiles/dsn-small.nix";
       cfz = "vim $HOME/dotfiles/modules/home/zsh.nix";
       # rf = "home-manager switch --flake ~/dotfiles/#${hostname}; source ~/.config/zsh/.zshrc";
       # rs = "${rebuild-command} switch --flake ~/dotfiles/#${hostname}";

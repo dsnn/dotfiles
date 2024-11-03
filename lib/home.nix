@@ -13,9 +13,9 @@ in
       };
       pkgs = inputs.nixpkgs.legacyPackages.${system};
       modules = [
-        ./profiles/dsn.nix
-        ./modules/home
-        ./modules/scripts
+        ../profiles/dsn.nix
+        ../modules/home
+        ../modules/scripts
       ];
     };
 }

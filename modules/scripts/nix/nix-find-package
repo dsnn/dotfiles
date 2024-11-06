@@ -3,7 +3,7 @@
 FZF_CMD="fzf --cycle"
 
 function abort_on_empty() {
-    [ -z $1 ] && exit 1
+  [ -z "$1" ] && exit 1
 }
 
 declare -A CHOICE_ARR
@@ -12,16 +12,16 @@ CHOICE_ARR["darwin"]="$HOME/projects/nix/nix-darwin/modules"
 CHOICE_ARR["nixpkgs"]="$HOME/projects/nix/nixpkgs/pkgs"
 
 CHOICE_KEYS="${!CHOICE_ARR[*]}"
-SELECTED_CHOICE=$(echo -e $CHOICE_KEYS | tr " " "\n" | $FZF_CMD)
+SELECTED_CHOICE=$(echo -e "$CHOICE_KEYS" | tr " " "\n" | $FZF_CMD)
 
-abort_on_empty $SELECTED_CHOICE
+abort_on_empty "$SELECTED_CHOICE"
 
 SELECTED_PATH=${CHOICE_ARR[$SELECTED_CHOICE]}
 
-abort_on_empty $SELECTED_PATH
+abort_on_empty "$SELECTED_PATH"
 
-SELECTED_RESULT=$(fd . $SELECTED_PATH | $FZF_CMD)
+SELECTED_RESULT=$(fd . "$SELECTED_PATH" | $FZF_CMD)
 
-abort_on_empty $SELECTED_RESULT
+abort_on_empty "$SELECTED_RESULT"
 
-nvim $SELECTED_RESULT
+nvim "$SELECTED_RESULT"

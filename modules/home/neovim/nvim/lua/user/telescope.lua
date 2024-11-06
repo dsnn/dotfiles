@@ -3,20 +3,6 @@
 local telescope = require("telescope")
 local builtin = require("telescope.builtin")
 
-local function notes()
-  builtin.find_files({
-    cwd = "~/projects/notes",
-    file_ignore_patterns = { "assets/*" },
-  })
-end
-
-local function projects()
-  builtin.find_files({
-    cwd = "~/projects",
-    file_ignore_patterns = { "node_modules/*" },
-  })
-end
-
 local function dotfiles()
   local themes = require("telescope.themes")
   local opts = themes.get_dropdown({
@@ -51,11 +37,14 @@ end
 
 local function buffers()
   local themes = require("telescope.themes")
-  local opts = themes.get_dropdown({
+  -- local opts = themes.get_dropdown({
+  local opts = themes.get_ivy({
     prompt_title = "~ buffers ~",
     hidden = true,
-    layout_strategy = "vertical",
-    layout_config = { width = 0.6, height = 0.9 },
+    -- layout_strategy = "vertical",
+    -- layout_config = { width = 0.6, height = 0.9 },
+    layout_config = { height = 0.5 },
+    initial_mode = "normal",
   })
   builtin.buffers(opts)
 end
@@ -88,18 +77,19 @@ vim.keymap.set("n", "<space>gc", builtin.git_bcommits, opts)
 vim.keymap.set("n", "<space>gf", builtin.git_files, opts)
 vim.keymap.set("n", "<space>gs", builtin.git_status, opts)
 vim.keymap.set("n", "<space>sW", grep_current_cWORD, opts)
+vim.keymap.set("n", "<Leader>f", find_files, opts)
 vim.keymap.set("n", "<space>sa", find_files, opts)
 vim.keymap.set("n", "<space>sc", builtin.colorscheme, opts)
 vim.keymap.set("n", "<space>sd", dotfiles, opts)
 vim.keymap.set("n", "<space>sf", grep_word, opts)
 vim.keymap.set("n", "<space>sg", builtin.live_grep, opts)
+vim.keymap.set("n", "<Leader>g", builtin.live_grep, opts)
 vim.keymap.set("n", "<space>sh", builtin.help_tags, opts)
 vim.keymap.set("n", "<space>sk", builtin.keymaps, opts)
-vim.keymap.set("n", "<space>sn", notes, opts)
 vim.keymap.set("n", "<space>sl", builtin.resume, opts)
-vim.keymap.set("n", "<space>sp", projects, opts)
 vim.keymap.set("n", "<space>sq", builtin.quickfix, opts)
 vim.keymap.set("n", "<space>sr", oldfiles, opts)
+vim.keymap.set("n", "<Leader>r", oldfiles, opts)
 vim.keymap.set("n", "<space>sw", grep_current_cword, opts)
 
 local action_layout = require("telescope.actions.layout")
@@ -151,12 +141,12 @@ telescope.setup({
       i = {
         ["<C-n>"] = actions.move_selection_next,
         ["<C-p>"] = actions.move_selection_previous,
-
         ["<C-q>"] = actions.send_to_qflist,
         ["<C-s>"] = actions.select_vertical,
         ["<C-v>"] = action_layout.toggle_preview,
       },
       n = {
+        ["d"] = actions.delete_buffer,
         ["j"] = actions.move_selection_next,
         ["k"] = actions.move_selection_previous,
         ["p"] = action_layout.toggle_preview,

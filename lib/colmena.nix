@@ -14,7 +14,7 @@ in
     {
       imports = [
         inputs.disko.nixosModules.disko
-        ../modules/common.nix
+        ../modules/sets/common.nix
         ../modules/nixos
       ];
 

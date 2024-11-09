@@ -16,7 +16,7 @@ in
     };
     modules = [
       ../hosts/templates/proxmox-lxc
-      ../modules/common.nix
+      ../modules/sets/common.nix
       ../modules/nixos
     ];
     format = generateOptions.formats.proxmox-lxc;

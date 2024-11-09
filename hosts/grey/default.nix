@@ -6,7 +6,7 @@
   imports = [
     # ../modules/nixos/avahi.nix
     # ../modules/nixos/cups.nix
-    ../common.nix
+    ../modules/sets/common.nix
     ../modules/nixos/cicd
     ../modules/nixos/cifs.nix
     ../modules/nixos/security.nix

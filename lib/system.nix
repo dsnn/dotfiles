@@ -21,7 +21,7 @@ in
       modules = [
         inputs.disko.nixosModules.disko
         ../hosts/${host}
-        ../modules/common.nix
+        ../modules/sets/common.nix
         ../modules/nixos
       ];
     };
@@ -36,7 +36,7 @@ in
       };
       modules = [
         ../hosts/${host}
-        ../modules/common.nix
+        ../modules/sets/common.nix
         ../modules/darwin
       ];
     };

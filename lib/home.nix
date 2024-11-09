@@ -15,7 +15,6 @@ in
       modules = [
         ../profiles/dsn.nix
         ../modules/home
-        ../modules/scripts
       ];
     };
 }

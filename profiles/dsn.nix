@@ -51,7 +51,6 @@ in
   # scripts.enable = true;
   # imports = lib.concatMap import [
   #   ../modules/home
-  #   ../modules/home/scripts
   #   ../modules/home/secrets
   # ];
 

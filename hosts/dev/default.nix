@@ -8,6 +8,10 @@
 
   dsn = {
     common.enable = true;
+    systemPackages = {
+      enableMonitoringPkgs = true;
+      enableNetworkingPkgs = true;
+    };
   };
 
   nixpkgs.config.allowUnfree = true;

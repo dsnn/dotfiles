@@ -8,7 +8,7 @@
   dsn = {
     packages = {
       enable = true;
-      enable-dev-tools = false;
+      enableDevPkgs = false;
     };
     bat.enable = true;
     bottom.enable = true;

@@ -5,6 +5,8 @@ in
 pkgs.mkShellNoCC {
   name = "dotfiles";
   packages = with pkgs; [
+    nixos-generators
+    colmena
     mkdocs
     python3
     python311Packages.mkdocs-material

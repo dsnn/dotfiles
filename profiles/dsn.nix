@@ -16,7 +16,7 @@ in
   dsn = {
     packages = {
       enable = true;
-      enable-dev-tools = true;
+      enableDevPkgs = true;
     };
     bat.enable = true;
     bottom.enable = true;

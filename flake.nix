@@ -41,7 +41,7 @@
     in
     {
       # for debugging
-      inherit vars;
+      inherit vars myLib;
 
       # Home manager as a module (NixOS configurations)
       homeManagerModules.default = ./modules/home;

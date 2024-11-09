@@ -1,28 +1,35 @@
-{ config, lib, ... }:
-with lib;
+{
+  config,
+  lib,
+  vars,
+  ...
+}:
 let
+  inherit (lib) mkIf mkEnableOption;
+  inherit (vars) username;
   cfg = config.dsn.security;
 in
 {
-
   options.dsn.security = {
     enable = mkEnableOption "Enable security";
   };
 
   config = mkIf cfg.enable {
-
-    # security.polkit.enable = true;
-
-    security.sudo.extraRules = [
-      {
-        users = [ "dsn" ];
-        commands = [
+    security = {
+      sudo = {
+        wheelNeedsPassword = false;
+        extraRules = [
           {
-            command = "ALL";
-            options = [ "NOPASSWD" ]; # "SETENV" # Adding the following could be a good idea
+            users = [ username ];
+            commands = [
+              {
+                command = "ALL";
+                options = [ "NOPASSWD" ];
+              }
+            ];
           }
         ];
-      }
-    ];
+      };
+    };
   };
 }

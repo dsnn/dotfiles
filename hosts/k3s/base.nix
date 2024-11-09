@@ -1,7 +1,7 @@
 { ... }:
 {
   dsn = {
-    common.enable = true;
+    # common.enable = true;
     openssh.enable = true;
     user.enable = true;
     sops.enable = true;

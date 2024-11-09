@@ -8,9 +8,6 @@
 
   dsn = {
     common.enable = true;
-    openssh.enable = true;
-    user.enable = true;
-    sops.enable = true;
   };
 
   nixpkgs.config.allowUnfree = true;

@@ -3,9 +3,21 @@ let
   lib = inputs.nixpkgs.lib;
 in
 rec {
-  mainGateway = "192.168.1.1"; # main router
-  defaultGateway = "192.168.1.1";
-  prefixLength = 24;
+
+  ip = {
+    mainGateway = "192.168.1.1"; # main router
+    defaultGateway = "192.168.1.1";
+    loopback = "127.0.0.1";
+    allInterfaces = "0.0.0.0";
+  };
+
+  fail2ban = {
+    ignoreIP = [
+      "10.0.0.0/24"
+      "192.168.0.0/24"
+    ];
+    maxretry = 5;
+  };
 
   nameservers = [
     "1.1.1.1"
@@ -31,6 +43,13 @@ rec {
       modules = [ ../hosts/cache ];
       tags = [ "cache" ];
     };
+    monit = {
+      name = "monit";
+      ip = "192.168.2.103";
+      modules = [ ../hosts/monit ];
+      tags = [ "monit" ];
+    };
+
     # srv-k3s-01 = {
     #   name = "srv-k3s-01";
     #   ip = "192.168.2.121";

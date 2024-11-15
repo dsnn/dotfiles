@@ -2,46 +2,61 @@
   description = "My dotfiles and infrastructure";
 
   inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable-small";
+
     colmena.inputs.nixpkgs.follows = "nixpkgs";
     colmena.url = "github:zhaofengli/colmena";
+
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = "github:lnl7/nix-darwin";
+
     disko.inputs.nixpkgs.follows = "nixpkgs";
     disko.url = "github:nix-community/disko";
+
     flake-checker.inputs.nixpkgs.follows = "nixpkgs-unstable";
     flake-checker.url = "github:DeterminateSystems/flake-checker";
+
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager/release-24.05";
+
     impermanence.url = "github:nix-community/impermanence";
+
     nix-ld.inputs.nixpkgs.follows = "nixpkgs";
     nix-ld.url = "github:Mic92/nix-ld";
+
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
     nixos-generators.url = "github:nix-community/nixos-generators";
+
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
     nixvim.url = "github:nix-community/nixvim/nixos-24.05";
+
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix";
+
     terranix.inputs.nixpkgs.follows = "nixpkgs";
     terranix.url = "github:terranix/terranix";
   };
   outputs =
     inputs@{ self, ... }:
     let
-      pkgs' = import ./packages {
-        inherit inputs;
-        pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-      };
+      # pkgs' = import ./packages {
+      #   inherit inputs;
+      #   pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+      # };
       vars = import ./variables { inherit inputs; };
       myLib = import ./lib { inherit inputs; };
       inherit (vars.system) x86_64-linux aarch64-darwin;
     in
     {
       # for debugging
-      inherit vars myLib;
+      debugAttr = {
+        inherit vars myLib;
+      };
 
       # Home manager as a module (NixOS configurations)
       homeManagerModules.default = ./modules/home;
@@ -60,12 +75,12 @@
         dev = myLib.system.mkNixos "dev";
       };
 
-      packages = {
-        x86_64-linux = {
-          proxmox-lxc = myLib.generate.proxmox-lxc;
-          options-doc = pkgs'.options-doc;
-        };
-      };
+      # packages = {
+      #   x86_64-linux = {
+      #     proxmox-lxc = myLib.generate.proxmox-lxc;
+      #     options-doc = pkgs'.options-doc;
+      #   };
+      # };
 
       colmena = {
         meta = myLib.colmena.meta;

@@ -1,10 +1,11 @@
 { inputs, ... }:
 let
   inherit (inputs.nixpkgs) lib;
-  # pkgs' = import ./packages {
-  #   inherit inputs;
-  #   pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-  # };
+  inherit (myvars.system) x86_64-linux;
+  myvars = import ./variables { inherit lib; };
+  mylib = import ./lib { inherit lib; };
+  pkgs' = import ./packages { inherit inputs; };
+  hosts = myvars.networking.hostsAddr;
 
   unstable =
     system:
@@ -13,46 +14,29 @@ let
       config.allowUnfree = true;
     };
 
-  home = import ./lib/home.nix { inherit inputs unstable myvars; };
-  system = import ./lib/system.nix { inherit inputs unstable myvars; };
-  colmena = import ./lib/colmena.nix { inherit inputs unstable myvars; };
-  # generate = import ./lib/generate.nix { inherit inputs unstable myvars; };
-
-  myvars = import ./variables { inherit lib; };
-  mylib = import ./lib { inherit lib; };
-  inherit (myvars.system) x86_64-linux aarch64-darwin;
+  args = {
+    inherit inputs unstable myvars;
+  };
 in
-# args = {
-#   inherit inputs unstable myvars;
-# };
 {
-  # for debugging
   debugAttr = {
     inherit myvars mylib;
   };
 
-  homeConfigurations = {
-    silver = home.mkHome aarch64-darwin "silver";
-    dev = home.mkHome x86_64-linux "dev";
-  };
+  homeConfigurations.${hosts.silver.name} = mylib.homeConfig (args // hosts.silver);
+  homeConfigurations.${hosts.dev.name} = mylib.homeConfig (args // hosts.dev);
+  darwinConfigurations.${hosts.silver.name} = mylib.darwinsystem (args // hosts.silver);
+  nixosConfigurations.${hosts.dev.name} = mylib.nixosSystem (args // hosts.dev);
 
-  darwinConfigurations = {
-    silver = system.mkDarwin "silver";
-  };
-
-  nixosConfigurations = {
-    dev = system.mkNixos "dev";
-  };
-
-  # packages = {
-  #   x86_64-linux = {
-  #     proxmox-lxc = mylib.generate.proxmox-lxc;
-  #     options-doc = pkgs'.options-doc;
-  #   };
-  # };
+  packages.x86_64-linux.options-doc = pkgs'.options-doc;
 
   colmena = {
-    meta = colmena.meta;
-    defaults = colmena.defaults;
-  } // builtins.mapAttrs (name: host: colmena.mkDeployment host) myvars.networking.hostsAddr;
+    meta = {
+      nixpkgs = import inputs.nixpkgs { system = x86_64-linux; };
+      specialArgs = {
+        unstable = unstable x86_64-linux;
+        inherit inputs myvars;
+      };
+    };
+  } // builtins.mapAttrs (name: host: mylib.colmenaSystem (args // { inherit host; })) hosts;
 }

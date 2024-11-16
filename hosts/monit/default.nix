@@ -2,18 +2,17 @@
   modulesPath,
   config,
   inputs,
+  unstable,
   myvars,
   ...
 }:
 let
   inherit (myvars.networking) hostsAddr ip;
+  inherit (hostsAddr.monit) name home-modules profiles;
   addr = hostsAddr.monit.ip;
 in
 {
-  imports = [
-    (modulesPath + "/virtualisation/proxmox-lxc.nix")
-    inputs.home-manager.nixosModules.home-manager
-  ];
+  imports = [ (modulesPath + "/virtualisation/proxmox-lxc.nix") ];
 
   networking.firewall.allowedTCPPorts = [
     config.services.grafana.settings.server.http_port
@@ -22,6 +21,40 @@ in
 
   dsn = {
     common.enable = true;
+  };
+
+  boot.isContainer = true;
+  programs.zsh.enable = true;
+  services.qemuGuest.enable = true;
+
+  networking = {
+    usePredictableInterfaceNames = false;
+    hostName = name;
+    enableIPv6 = false;
+    interfaces.eth0.ipv4.addresses = [
+      {
+        address = addr;
+        prefixLength = 24;
+      }
+    ];
+  };
+
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+
+    extraSpecialArgs = {
+      unstable = unstable "x86_64-linux";
+      inherit inputs myvars;
+    };
+
+    sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
+
+    users.dsn.imports = home-modules ++ profiles;
+  };
+
+  system = {
+    stateVersion = "24.05";
   };
 
   # prometheus: port 3020 (8020)

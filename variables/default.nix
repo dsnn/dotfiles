@@ -1,5 +1,5 @@
 { lib }:
-{
+rec {
   username = "dsn";
   useremail = "dsn@dsnn.io";
 
@@ -24,9 +24,13 @@
     };
   };
 
-  sopsOptions = {
-    keyName = "keys.txt";
-    keyPath = "/home/dsn/.config/sops/age";
+  deploymentKeys = {
+    "sops-key" = {
+      name = "keys.txt";
+      keyFile = "/home/dsn/.config/sops/age/keys.txt";
+      destDir = "/home/dsn/.config/sops/age";
+      user = username;
+    };
   };
 
   cacheOptions = {

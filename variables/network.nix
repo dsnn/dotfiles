@@ -28,23 +28,48 @@ rec {
     #   modules = [ ../hosts/srv-nixos-01 ];
     #   tags = [ "srv-nixos-01" ];
     # };
+    silver = {
+      name = "silver";
+      nixos-modules = [ ../hosts/silver ];
+      home-modules = [ ../modules/home ];
+      profiles = [ ../profiles/dsn.nix ];
+      system = "aarch64-darwin";
+    };
+    dev = {
+      name = "dev";
+      ip = "192.168.2.10";
+      nixos-modules = [ ../hosts/dev ];
+      home-modules = [ ../modules/home ];
+      profiles = [ ../profiles/dsn.nix ];
+      tags = [ "dev" ];
+      system = "x86_64-linux";
+    };
     bind = {
       name = "bind";
       ip = "192.168.2.101";
-      modules = [ ../hosts/bind ];
+      nixos-modules = [ ../hosts/bind ];
+      home-modules = [ ../modules/home ];
+      profiles = [ ../profiles/dsn.nix ];
       tags = [ "bind" ];
+      system = "x86_64-linux";
     };
     cache = {
       name = "cache";
       ip = "192.168.2.102";
-      modules = [ ../hosts/cache ];
+      nixos-modules = [ ../hosts/cache ];
+      home-modules = [ ../modules/home ];
+      profiles = [ ../profiles/dsn.nix ];
       tags = [ "cache" ];
+      system = "x86_64-linux";
     };
     monit = {
       name = "monit";
       ip = "192.168.2.103";
-      modules = [ ../hosts/monit ];
+      nixos-modules = [ ../hosts/monit ];
+      home-modules = [ ../modules/home/default-sys-module.nix ];
+      profiles = [ ../profiles/dsn-small.nix ];
       tags = [ "monit" ];
+      system = "x86_64-linux";
     };
 
     # srv-k3s-01 = {
@@ -164,50 +189,50 @@ rec {
     ];
   };
 
-  ssh = {
-    # define the host alias for remote builders
-    # this config will be written to /etc/ssh/ssh_config
-    # ''
-    #   Host server1
-    #     HostName 192.168.2.100
-    #     Port 22
-    #
-    #   Host server2
-    #     HostName 192.168.2.101
-    #     Port 22
-    #   ...
-    # '';
-    extraConfig = lib.attrsets.foldlAttrs (
-      acc: host: val:
-      acc
-      + ''
-        Host ${host}
-          HostName ${val.ipv4}
-          Port 22
-      ''
-    ) "" hostsAddr;
-
-    # define the host key for remote builders so that nix can verify all the remote builders
-    # this config will be written to /etc/ssh/ssh_known_hosts
-    knownHosts =
-      # Update only the values of the given attribute set.
-      #
-      #   mapAttrs
-      #   (name: value: ("bar-" + value))
-      #   { x = "a"; y = "b"; }
-      #     => { x = "bar-a"; y = "bar-b"; }
-      lib.attrsets.mapAttrs
-        (host: value: {
-          hostNames = [
-            host
-            hostsAddr.${host}.ipv4
-          ];
-          publicKey = value.publicKey;
-        })
-        {
-          server1.publicKey = "";
-          server2.publicKey = "";
-          server3.publicKey = "";
-        };
-  };
+  # ssh = {
+  #   # define the host alias for remote builders
+  #   # this config will be written to /etc/ssh/ssh_config
+  #   # ''
+  #   #   Host server1
+  #   #     HostName 192.168.2.100
+  #   #     Port 22
+  #   #
+  #   #   Host server2
+  #   #     HostName 192.168.2.101
+  #   #     Port 22
+  #   #   ...
+  #   # '';
+  #   extraConfig = lib.attrsets.foldlAttrs (
+  #     acc: host: val:
+  #     acc
+  #     + ''
+  #       Host ${host}
+  #         HostName ${val.ipv4}
+  #         Port 22
+  #     ''
+  #   ) "" hostsAddr;
+  #
+  #   # define the host key for remote builders so that nix can verify all the remote builders
+  #   # this config will be written to /etc/ssh/ssh_known_hosts
+  #   knownHosts =
+  #     # Update only the values of the given attribute set.
+  #     #
+  #     #   mapAttrs
+  #     #   (name: value: ("bar-" + value))
+  #     #   { x = "a"; y = "b"; }
+  #     #     => { x = "bar-a"; y = "bar-b"; }
+  #     lib.attrsets.mapAttrs
+  #       (host: value: {
+  #         hostNames = [
+  #           host
+  #           hostsAddr.${host}.ipv4
+  #         ];
+  #         publicKey = value.publicKey;
+  #       })
+  #       {
+  #         server1.publicKey = "";
+  #         server2.publicKey = "";
+  #         server3.publicKey = "";
+  #       };
+  # };
 }

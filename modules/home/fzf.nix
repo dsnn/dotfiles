@@ -19,7 +19,10 @@ in
     # https://github.com/nix-community/home-manager/blob/master/modules/programs/fzf.nix
 
     # deps
-    home.packages = with pkgs; [ fd ];
+    home.packages = with pkgs; [
+      fd
+      sysz # fzf for systemctl
+    ];
 
     programs = {
       fzf = {

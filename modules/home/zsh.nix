@@ -1,6 +1,11 @@
-{ config, lib, ... }:
-with lib;
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
+  inherit (lib) mkIf mkEnableOption optionalAttrs;
   cfg = config.dsn.zsh;
 in
 {
@@ -15,6 +20,9 @@ in
     sops.secrets.exports = {
       sopsFile = ../../secrets/zsh.yaml;
     };
+
+    # deps
+    home.packages = with pkgs; [ zsh-fzf-tab ];
 
     programs = {
       zsh = {

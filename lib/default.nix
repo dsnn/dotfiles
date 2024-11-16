@@ -1,13 +1,5 @@
-{ inputs, ... }:
-let
-  unstable =
-    system:
-    import inputs.nixpkgs-unstable {
-      inherit system;
-      config.allowUnfree = true;
-    };
-  myvars = import ../variables { inherit inputs; };
-  lib = inputs.nixpkgs.lib;
+{ lib, ... }:
+{
   scanPaths =
     path:
     builtins.map (f: (path + "/${f}")) (
@@ -22,18 +14,4 @@ let
         ) (builtins.readDir path)
       )
     );
-in
-{
-  home = import ./home.nix { inherit inputs unstable myvars; };
-  system = import ./system.nix { inherit inputs unstable myvars; };
-  colmena = import ./colmena.nix {
-    inherit
-      inputs
-      unstable
-      myvars
-      scanPaths
-      ;
-  };
-  generate = import ./generate.nix { inherit inputs unstable myvars; };
-
 }

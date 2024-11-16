@@ -1,9 +1,9 @@
-{ inputs }:
+{ lib }:
 {
   username = "dsn";
   useremail = "dsn@dsnn.io";
 
-  networking = import ./network.nix { inherit inputs; };
+  networking = import ./network.nix { inherit lib; };
 
   version = "24.05";
 

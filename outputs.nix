@@ -1,13 +1,30 @@
 { inputs, ... }:
 let
+  inherit (inputs.nixpkgs) lib;
   # pkgs' = import ./packages {
   #   inherit inputs;
   #   pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
   # };
-  myvars = import ./variables { inherit inputs; };
-  mylib = import ./lib { inherit inputs; };
+
+  unstable =
+    system:
+    import inputs.nixpkgs-unstable {
+      inherit system;
+      config.allowUnfree = true;
+    };
+
+  home = import ./lib/home.nix { inherit inputs unstable myvars; };
+  system = import ./lib/system.nix { inherit inputs unstable myvars; };
+  colmena = import ./lib/colmena.nix { inherit inputs unstable myvars; };
+  # generate = import ./lib/generate.nix { inherit inputs unstable myvars; };
+
+  myvars = import ./variables { inherit lib; };
+  mylib = import ./lib { inherit lib; };
   inherit (myvars.system) x86_64-linux aarch64-darwin;
 in
+# args = {
+#   inherit inputs unstable myvars;
+# };
 {
   # for debugging
   debugAttr = {
@@ -15,16 +32,16 @@ in
   };
 
   homeConfigurations = {
-    silver = mylib.home.mkHome aarch64-darwin "silver";
-    dev = mylib.home.mkHome x86_64-linux "dev";
+    silver = home.mkHome aarch64-darwin "silver";
+    dev = home.mkHome x86_64-linux "dev";
   };
 
   darwinConfigurations = {
-    silver = mylib.system.mkDarwin "silver";
+    silver = system.mkDarwin "silver";
   };
 
   nixosConfigurations = {
-    dev = mylib.system.mkNixos "dev";
+    dev = system.mkNixos "dev";
   };
 
   # packages = {
@@ -35,7 +52,7 @@ in
   # };
 
   colmena = {
-    meta = mylib.colmena.meta;
-    defaults = mylib.colmena.defaults;
-  } // builtins.mapAttrs (name: host: mylib.colmena.mkDeployment host) myvars.networking.hostsAddr;
+    meta = colmena.meta;
+    defaults = colmena.defaults;
+  } // builtins.mapAttrs (name: host: colmena.mkDeployment host) myvars.networking.hostsAddr;
 }

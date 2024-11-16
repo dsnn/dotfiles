@@ -1,7 +1,4 @@
-{ inputs }:
-let
-  lib = inputs.nixpkgs.lib;
-in
+{ lib }:
 rec {
 
   ip = {

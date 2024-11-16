@@ -1,12 +1,12 @@
 {
   config,
   lib,
-  vars,
+  myvars,
   ...
 }:
 let
   inherit (lib) mkIf mkEnableOption;
-  inherit (vars) username;
+  inherit (myvars) username;
   cfg = config.dsn.security;
 in
 {

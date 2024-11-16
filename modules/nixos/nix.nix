@@ -3,12 +3,12 @@
   config,
   lib,
   pkgs,
-  vars,
+  myvars,
   ...
 }:
 let
   inherit (lib) mkEnableOption mkIf optionalAttrs;
-  inherit (vars) trustedUsers;
+  inherit (myvars) trustedUsers;
   inherit (pkgs.stdenv) isDarwin;
   cfg = config.dsn.nix;
 in

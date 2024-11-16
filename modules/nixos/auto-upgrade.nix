@@ -1,12 +1,12 @@
 {
   config,
   lib,
-  vars,
+  myvars,
   ...
 }:
 let
   inherit (lib) mkEnableOption mkIf;
-  inherit (vars) version;
+  inherit (myvars) version;
   cfg = config.dsn.autoUpgrade;
 in
 {

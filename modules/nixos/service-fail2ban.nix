@@ -1,12 +1,12 @@
 {
   config,
   lib,
-  vars,
+  myvars,
   ...
 }:
 let
   inherit (lib) mkIf mkEnableOption;
-  inherit (vars.networking.fail2ban) ignoreIP maxretry;
+  inherit (myvars.networking.fail2ban) ignoreIP maxretry;
   cfg = config.dsn.fail2ban;
 in
 {

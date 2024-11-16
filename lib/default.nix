@@ -6,7 +6,7 @@ let
       inherit system;
       config.allowUnfree = true;
     };
-  vars = import ../variables { inherit inputs; };
+  myvars = import ../variables { inherit inputs; };
   lib = inputs.nixpkgs.lib;
   scanPaths =
     path:
@@ -24,16 +24,16 @@ let
     );
 in
 {
-  home = import ./home.nix { inherit inputs unstable vars; };
-  system = import ./system.nix { inherit inputs unstable vars; };
+  home = import ./home.nix { inherit inputs unstable myvars; };
+  system = import ./system.nix { inherit inputs unstable myvars; };
   colmena = import ./colmena.nix {
     inherit
       inputs
       unstable
-      vars
+      myvars
       scanPaths
       ;
   };
-  generate = import ./generate.nix { inherit inputs unstable vars; };
+  generate = import ./generate.nix { inherit inputs unstable myvars; };
 
 }

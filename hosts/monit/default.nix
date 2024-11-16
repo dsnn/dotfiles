@@ -2,11 +2,11 @@
   modulesPath,
   config,
   inputs,
-  vars,
+  myvars,
   ...
 }:
 let
-  inherit (vars.networking) hostsAddr ip;
+  inherit (myvars.networking) hostsAddr ip;
   addr = hostsAddr.monit.ip;
 in
 {

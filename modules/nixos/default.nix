@@ -1,6 +1,5 @@
 { ... }:
 {
-  # imports = scanPaths ./.;
   imports = [
     ./auto-upgrade.nix
     ./awesomewm

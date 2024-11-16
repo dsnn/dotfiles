@@ -2,7 +2,7 @@
   modulesPath,
   inputs,
   unstable,
-  vars,
+  myvars,
   ...
 }:
 {
@@ -16,7 +16,7 @@
     # openssh.enable = true;
     user = {
       enable = true;
-      initialHashedPassword = vars.initialHashedPassword;
+      initialHashedPassword = myvars.initialHashedPassword;
     };
     sops.enable = true;
     # nixvim.enable = true; # use system wide nixvim ?

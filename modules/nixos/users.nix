@@ -2,7 +2,7 @@
   config,
   pkgs,
   lib,
-  vars,
+  myvars,
   ...
 }:
 let
@@ -12,7 +12,7 @@ let
     mkOption
     types
     ;
-  inherit (vars) username pubKeys;
+  inherit (myvars) username pubKeys;
   cfg = config.dsn.user;
 in
 {

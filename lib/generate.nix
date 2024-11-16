@@ -1,18 +1,18 @@
 {
   inputs,
   unstable,
-  vars,
+  myvars,
   ...
 }:
 let
-  inherit (vars) system generateOptions;
+  inherit (myvars) system generateOptions;
 in
 {
   proxmox-lxc = inputs.nixos-generators.nixosGenerate {
     system = system.x86_64-linux;
     specialArgs = {
       unstable = unstable system.x86_64-linux;
-      inherit inputs vars;
+      inherit inputs myvars;
     };
     modules = [
       ../hosts/templates/proxmox-lxc

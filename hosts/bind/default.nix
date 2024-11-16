@@ -1,11 +1,11 @@
 {
   modulesPath,
   inputs,
-  vars,
+  myvars,
   ...
 }:
 let
-  inherit (vars.networking.bindOptions)
+  inherit (myvars.networking.bindOptions)
     zones
     forwarders
     cacheNetworks

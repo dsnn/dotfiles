@@ -4,38 +4,38 @@ let
   #   inherit inputs;
   #   pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
   # };
-  vars = import ./variables { inherit inputs; };
-  myLib = import ./lib { inherit inputs; };
-  inherit (vars.system) x86_64-linux aarch64-darwin;
+  myvars = import ./variables { inherit inputs; };
+  mylib = import ./lib { inherit inputs; };
+  inherit (myvars.system) x86_64-linux aarch64-darwin;
 in
 {
   # for debugging
   debugAttr = {
-    inherit vars myLib;
+    inherit myvars mylib;
   };
 
   homeConfigurations = {
-    silver = myLib.home.mkHome aarch64-darwin "silver";
-    dev = myLib.home.mkHome x86_64-linux "dev";
+    silver = mylib.home.mkHome aarch64-darwin "silver";
+    dev = mylib.home.mkHome x86_64-linux "dev";
   };
 
   darwinConfigurations = {
-    silver = myLib.system.mkDarwin "silver";
+    silver = mylib.system.mkDarwin "silver";
   };
 
   nixosConfigurations = {
-    dev = myLib.system.mkNixos "dev";
+    dev = mylib.system.mkNixos "dev";
   };
 
   # packages = {
   #   x86_64-linux = {
-  #     proxmox-lxc = myLib.generate.proxmox-lxc;
+  #     proxmox-lxc = mylib.generate.proxmox-lxc;
   #     options-doc = pkgs'.options-doc;
   #   };
   # };
 
   colmena = {
-    meta = myLib.colmena.meta;
-    defaults = myLib.colmena.defaults;
-  } // builtins.mapAttrs (name: host: myLib.colmena.mkDeployment host) vars.networking.hostsAddr;
+    meta = mylib.colmena.meta;
+    defaults = mylib.colmena.defaults;
+  } // builtins.mapAttrs (name: host: mylib.colmena.mkDeployment host) myvars.networking.hostsAddr;
 }

@@ -1,11 +1,11 @@
 {
   inputs,
   unstable,
-  vars,
+  myvars,
   ...
 }:
 let
-  inherit (vars) system sopsOptions;
+  inherit (myvars) system sopsOptions;
   inherit (sopsOptions) keyName keyPath;
 in
 {
@@ -37,7 +37,7 @@ in
     };
     specialArgs = {
       unstable = unstable system.x86_64-linux;
-      inherit inputs vars;
+      inherit inputs myvars;
     };
   };
 
@@ -58,7 +58,7 @@ in
       deployment = {
         inherit tags;
         targetHost = ip;
-        targetUser = vars.username;
+        targetUser = myvars.username;
       };
 
       nixpkgs.config.allowUnfree = true;
@@ -99,7 +99,7 @@ in
 
         extraSpecialArgs = {
           unstable = unstable system.x86_64-linux;
-          inherit inputs vars;
+          inherit inputs myvars;
         };
 
         sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];

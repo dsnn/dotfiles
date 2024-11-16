@@ -1,13 +1,13 @@
 {
   inputs,
   unstable,
-  vars,
+  myvars,
   ...
 }:
 let
   inherit (inputs.nixpkgs.lib) nixosSystem;
   inherit (inputs.darwin.lib) darwinSystem;
-  inherit (vars.system) x86_64-linux aarch64-darwin;
+  inherit (myvars.system) x86_64-linux aarch64-darwin;
 in
 {
   mkNixos =
@@ -16,7 +16,7 @@ in
       system = x86_64-linux;
       specialArgs = {
         unstable = unstable x86_64-linux;
-        inherit inputs vars;
+        inherit inputs myvars;
       };
       modules = [
         inputs.disko.nixosModules.disko
@@ -32,7 +32,7 @@ in
       system = aarch64-darwin;
       specialArgs = {
         unstable = unstable aarch64-darwin;
-        inherit inputs vars;
+        inherit inputs myvars;
       };
       modules = [
         ../hosts/${host}

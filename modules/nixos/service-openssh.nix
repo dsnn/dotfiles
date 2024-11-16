@@ -1,12 +1,6 @@
-{
-  config,
-  lib,
-  vars,
-  ...
-}:
+{ config, lib, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
-  inherit (vars) pubKeys;
   cfg = config.dsn.openssh;
 in
 {

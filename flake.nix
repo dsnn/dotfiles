@@ -1,6 +1,13 @@
 {
   description = "My dotfiles and infrastructure";
 
+  outputs = inputs: import ./outputs.nix { inherit inputs; };
+
+  nixConfig = {
+    extra-substituters = [ "http://cache.dsnn.io" ];
+    extra-trusted-public-keys = [ "cache.dsnn.io:1IY1jXcL3Ra4hRuv2L3+I7g37I6YWDksX8A744KLOng" ];
+  };
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
@@ -41,50 +48,4 @@
     terranix.inputs.nixpkgs.follows = "nixpkgs";
     terranix.url = "github:terranix/terranix";
   };
-  outputs =
-    inputs@{ self, ... }:
-    let
-      # pkgs' = import ./packages {
-      #   inherit inputs;
-      #   pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-      # };
-      vars = import ./variables { inherit inputs; };
-      myLib = import ./lib { inherit inputs; };
-      inherit (vars.system) x86_64-linux aarch64-darwin;
-    in
-    {
-      # for debugging
-      debugAttr = {
-        inherit vars myLib;
-      };
-
-      # Home manager as a module (NixOS configurations)
-      homeManagerModules.default = ./modules/home;
-      # modules = [ ... inputs.self.outputs.homeManagerModules.default ]
-
-      homeConfigurations = {
-        silver = myLib.home.mkHome aarch64-darwin "silver";
-        dev = myLib.home.mkHome x86_64-linux "dev";
-      };
-
-      darwinConfigurations = {
-        silver = myLib.system.mkDarwin "silver";
-      };
-
-      nixosConfigurations = {
-        dev = myLib.system.mkNixos "dev";
-      };
-
-      # packages = {
-      #   x86_64-linux = {
-      #     proxmox-lxc = myLib.generate.proxmox-lxc;
-      #     options-doc = pkgs'.options-doc;
-      #   };
-      # };
-
-      colmena = {
-        meta = myLib.colmena.meta;
-        defaults = myLib.colmena.defaults;
-      } // builtins.mapAttrs (name: host: myLib.colmena.mkDeployment host) vars.networking.hostsAddr;
-    };
 }

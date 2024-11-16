@@ -8,7 +8,7 @@
 }:
 let
   inherit (lib) mkEnableOption mkIf optionalAttrs;
-  inherit (vars) trustedUsers cacheOptions;
+  inherit (vars) trustedUsers;
   inherit (pkgs.stdenv) isDarwin;
   cfg = config.dsn.nix;
 in
@@ -33,12 +33,12 @@ in
         trusted-users = trustedUsers;
         warn-dirty = false;
 
-        substituters = cacheOptions.substituters ++ [
+        substituters = [
           "https://cache.nixos.org"
           "https://nix-community.cachix.org"
         ];
 
-        trusted-public-keys = cacheOptions.trusted-public-keys ++ [
+        trusted-public-keys = [
           "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         ];

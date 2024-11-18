@@ -1,8 +1,9 @@
-{ modulesPath, ... }:
+{ modulesPath, inputs, ... }:
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
+    inputs.nix-ld.nixosModules.nix-ld
     ./disko.nix
   ];
 
@@ -26,6 +27,16 @@
   };
 
   programs.zsh.enable = true;
+  programs.nix-ld.dev.enable = true;
+  # programs.nix-ld = {
+  #   enable = true;
+  #   libraries = with pkgs; [
+  #     stdenv.cc.cc
+  #     volta
+  #   ];
+  # };
+  # NIX_LD_LIBRARY_PATH = lib.makeLibraryPath (with pkgs; [ stdenv.cc.cc openssl ]);
+  # NIX_LD = lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
 
   services.qemuGuest.enable = true;
 

@@ -30,7 +30,7 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
-    nix-ld.inputs.nixpkgs.follows = "nixpkgs";
+    nix-ld.inputs.nixpkgs.follows = "nixpkgs-unstable";
     nix-ld.url = "github:Mic92/nix-ld";
 
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";

@@ -1,11 +1,15 @@
-{ inputs, lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   cfg = config.dsn.sops;
   inherit (pkgs.stdenv) isDarwin;
   home = if isDarwin then "/Users/dsn" else "/home/dsn";
-in {
-
-  imports = [ inputs.sops-nix.nixosModules.sops ];
+in
+{
 
   options.dsn.sops = {
     enable = lib.mkEnableOption "Enable sops";

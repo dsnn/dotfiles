@@ -1,8 +1,8 @@
 {
   inputs,
-  unstable,
   myvars,
   name,
+  genSpecialArgs,
   ...
 }:
 let
@@ -14,9 +14,6 @@ let
 in
 inputs.darwin.lib.darwinSystem {
   system = aarch64-darwin;
-  specialArgs = {
-    unstable = unstable aarch64-darwin;
-    inherit inputs myvars;
-  };
+  specialArgs = genSpecialArgs aarch64-darwin;
   modules = defaultModules ++ [ ../hosts/${name} ];
 }

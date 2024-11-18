@@ -1,16 +1,14 @@
 {
   inputs,
-  unstable,
   system,
   name,
   home-modules,
   profiles,
+  genSpecialArgs,
   ...
 }:
 inputs.home-manager.lib.homeManagerConfiguration {
-  extraSpecialArgs = {
-    unstable = unstable system;
-    inherit inputs;
+  extraSpecialArgs = (genSpecialArgs system) // {
     hostname = name;
   };
   pkgs = inputs.nixpkgs.legacyPackages.${system};

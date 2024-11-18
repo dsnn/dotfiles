@@ -1,7 +1,7 @@
 {
   description = "My dotfiles and infrastructure";
 
-  outputs = inputs: import ./outputs.nix { inherit inputs; };
+  outputs = inputs: import ./outputs.nix inputs;
 
   nixConfig = {
     extra-substituters = [ "http://cache.dsnn.io" ];

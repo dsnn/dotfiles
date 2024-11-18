@@ -13,7 +13,13 @@ let
 in
 { ... }:
 {
-  imports = nixos-modules ++ defaultModules ++ [ inputs.home-manager.nixosModules.home-manager ];
+  imports =
+    nixos-modules
+    ++ defaultModules
+    ++ [
+      inputs.home-manager.nixosModules.home-manager
+      inputs.sops-nix.nixosModules.sops
+    ];
 
   deployment = {
     tags = tags;

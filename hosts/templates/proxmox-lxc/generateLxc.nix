@@ -1,7 +1,7 @@
 {
   inputs,
-  unstable,
   myvars,
+  genSpecialArgs,
   ...
 }:
 let
@@ -9,10 +9,7 @@ let
 in
 inputs.nixos-generators.nixosGenerate {
   system = system.x86_64-linux;
-  specialArgs = {
-    unstable = unstable system.x86_64-linux;
-    inherit inputs myvars;
-  };
+  specialArgs = genSpecialArgs system.x86_64-linux;
   modules = [
     ../hosts/templates/proxmox-lxc
     ../modules/sets/common.nix

@@ -2,16 +2,23 @@
 rec {
   username = "dsn";
   useremail = "dsn@dsnn.io";
+  timeZone = "Europe/Stockholm";
+  version = "24.05";
 
   networking = import ./network.nix { inherit lib; };
-
-  version = "24.05";
 
   trustedUsers = [
     "root"
     "dsn"
     "@wheel"
   ];
+
+  configurations = {
+    nixos = "nixos";
+    darwin = "darwin";
+    home = "home";
+    colmena = "colmena";
+  };
 
   system = {
     aarch64-darwin = "aarch64-darwin";

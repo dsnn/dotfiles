@@ -1,19 +1,18 @@
 {
   inputs,
-  myvars,
-  name,
+  host,
   genSpecialArgs,
   ...
 }:
 let
-  inherit (myvars.system) aarch64-darwin;
+  inherit (host) darwin-modules system;
   defaultModules = [
     ../modules/sets/common.nix
     ../modules/darwin
   ];
 in
 inputs.darwin.lib.darwinSystem {
-  system = aarch64-darwin;
-  specialArgs = genSpecialArgs aarch64-darwin;
-  modules = defaultModules ++ [ ../hosts/${name} ];
+  inherit system;
+  specialArgs = genSpecialArgs system;
+  modules = defaultModules ++ darwin-modules;
 }

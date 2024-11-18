@@ -1,11 +1,9 @@
 { ... }@inputs:
 let
   inherit (inputs.nixpkgs) lib;
-  inherit (myvars.system) x86_64-linux;
   myvars = import ./variables { inherit lib; };
   mylib = import ./lib { inherit lib; };
-  pkgs' = import ./packages { inherit inputs; };
-  hosts = myvars.networking.hostsAddr;
+  mypkgs = import ./packages { inherit inputs; };
 
   genSpecialArgs = system: {
     inherit inputs myvars mylib;
@@ -24,29 +22,44 @@ let
   args = {
     inherit
       inputs
-      myvars
+      lib
       mylib
+      myvars
       genSpecialArgs
       ;
+
   };
+
+  getConfigurations =
+    configuration:
+    mylib.mergeAttrs (
+      map (
+        currentHost:
+        let
+          inherit (currentHost) name;
+          host = import ./hosts/${name}/default.nix args // {
+            host = currentHost;
+          };
+        in
+        if builtins.hasAttr configuration host then { ${name} = host.${configuration}.${name}; } else { }
+      ) (builtins.attrValues myvars.networking.hostsAddr)
+    );
 in
 {
   debugAttr = {
     inherit myvars mylib;
   };
 
-  homeConfigurations.${hosts.dev.name} = mylib.homeConfig (args // hosts.dev);
-  nixosConfigurations.${hosts.dev.name} = mylib.nixosSystem (args // hosts.dev);
+  homeConfigurations = getConfigurations myvars.configurations.home;
+  nixosConfigurations = getConfigurations myvars.configurations.nixos;
+  darwinConfigurations = getConfigurations myvars.configurations.darwin;
 
-  homeConfigurations.${hosts.silver.name} = mylib.homeConfig (args // hosts.silver);
-  darwinConfigurations.${hosts.silver.name} = mylib.darwinsystem (args // hosts.silver);
-
-  packages.x86_64-linux.options-doc = pkgs'.options-doc;
+  packages.x86_64-linux.options-doc = mypkgs.options-doc;
 
   colmena = {
     meta = {
-      nixpkgs = import inputs.nixpkgs { system = x86_64-linux; };
-      specialArgs = genSpecialArgs x86_64-linux;
+      nixpkgs = import inputs.nixpkgs { system = myvars.system.x86_64-linux; };
+      specialArgs = genSpecialArgs myvars.system.x86_64-linux;
     };
-  } // builtins.mapAttrs (name: host: mylib.colmenaSystem (args // { inherit host; })) hosts;
+  } // getConfigurations myvars.configurations.colmena;
 }

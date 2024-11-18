@@ -1,12 +1,17 @@
 {
   inputs,
-  system,
-  name,
-  home-modules,
-  profiles,
+  host,
   genSpecialArgs,
   ...
 }:
+let
+  inherit (host)
+    name
+    system
+    home-modules
+    profiles
+    ;
+in
 inputs.home-manager.lib.homeManagerConfiguration {
   extraSpecialArgs = (genSpecialArgs system) // {
     hostname = name;

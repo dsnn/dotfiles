@@ -30,7 +30,7 @@ rec {
     # };
     silver = {
       name = "silver";
-      nixos-modules = [ ../hosts/silver ];
+      darwin-modules = [ ../hosts/silver/configuration.nix ];
       home-modules = [ ../modules/home ];
       profiles = [ ../profiles/dsn.nix ];
       system = "aarch64-darwin";
@@ -38,7 +38,7 @@ rec {
     dev = {
       name = "dev";
       ip = "192.168.2.10";
-      nixos-modules = [ ../hosts/dev ];
+      nixos-modules = [ ../hosts/dev/configuration.nix ];
       home-modules = [ ../modules/home ];
       profiles = [ ../profiles/dsn.nix ];
       tags = [ "dev" ];
@@ -47,7 +47,7 @@ rec {
     bind = {
       name = "bind";
       ip = "192.168.2.101";
-      nixos-modules = [ ../hosts/bind ];
+      nixos-modules = [ ../hosts/bind/configuration.nix ];
       home-modules = [ ../modules/home ];
       profiles = [ ../profiles/dsn.nix ];
       tags = [ "bind" ];
@@ -56,7 +56,7 @@ rec {
     cache = {
       name = "cache";
       ip = "192.168.2.102";
-      nixos-modules = [ ../hosts/cache ];
+      nixos-modules = [ ../hosts/cache/configuration.nix ];
       home-modules = [ ../modules/home ];
       profiles = [ ../profiles/dsn.nix ];
       tags = [ "cache" ];
@@ -65,7 +65,7 @@ rec {
     monit = {
       name = "monit";
       ip = "192.168.2.103";
-      nixos-modules = [ ../hosts/monit ];
+      nixos-modules = [ ../hosts/monit/configuration.nix ];
       home-modules = [ ../modules/home/default-sys-module.nix ];
       profiles = [ ../profiles/dsn-small.nix ];
       tags = [ "monit" ];

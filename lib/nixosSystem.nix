@@ -1,12 +1,11 @@
 {
   inputs,
-  myvars,
-  name,
+  host,
   genSpecialArgs,
   ...
 }:
 let
-  inherit (myvars.system) x86_64-linux;
+  inherit (host) nixos-modules system;
   defaultModules = [
     inputs.disko.nixosModules.disko
     inputs.sops-nix.nixosModules.sops
@@ -15,7 +14,7 @@ let
   ];
 in
 inputs.nixpkgs.lib.nixosSystem {
-  system = x86_64-linux;
-  specialArgs = genSpecialArgs x86_64-linux;
-  modules = defaultModules ++ [ ../hosts/${name} ];
+  inherit system;
+  specialArgs = genSpecialArgs system;
+  modules = nixos-modules ++ defaultModules;
 }

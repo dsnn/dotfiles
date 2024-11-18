@@ -13,7 +13,7 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
-    colmena.inputs.nixpkgs.follows = "nixpkgs";
+    colmena.inputs.nixpkgs.follows = "nixpkgs-unstable";
     colmena.url = "github:zhaofengli/colmena";
 
     darwin.inputs.nixpkgs.follows = "nixpkgs";

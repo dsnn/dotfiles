@@ -22,14 +22,19 @@ rec {
   ];
 
   hostsAddr = {
-    # srv-nixos-01 = {
-    #   name = "";
-    #   ip = "192.168.2.111";
-    #   modules = [ ../hosts/srv-nixos-01 ];
-    #   tags = [ "srv-nixos-01" ];
-    # };
+    nixos1 = {
+      name = "nixos01";
+      hostname = "srv-nixos-01";
+      ip = "192.168.2.111";
+      nixos-modules = [ ../hosts/nixos1/configuration.nix ];
+      home-modules = [ ../modules/home ];
+      profiles = [ ../profiles/dsn.nix ];
+      tags = [ "srv-nixos-01" ];
+      system = "x86_64-linux";
+    };
     silver = {
       name = "silver";
+      hostname = "silver";
       darwin-modules = [ ../hosts/silver/configuration.nix ];
       home-modules = [ ../modules/home ];
       profiles = [ ../profiles/dsn.nix ];
@@ -37,6 +42,7 @@ rec {
     };
     dev = {
       name = "dev";
+      hostname = "dev";
       ip = "192.168.2.10";
       nixos-modules = [ ../hosts/dev/configuration.nix ];
       home-modules = [ ../modules/home ];
@@ -46,6 +52,7 @@ rec {
     };
     bind = {
       name = "bind";
+      hostname = "bind";
       ip = "192.168.2.101";
       nixos-modules = [ ../hosts/bind/configuration.nix ];
       home-modules = [ ../modules/home ];
@@ -55,6 +62,7 @@ rec {
     };
     cache = {
       name = "cache";
+      hostname = "cache";
       ip = "192.168.2.102";
       nixos-modules = [ ../hosts/cache/configuration.nix ];
       home-modules = [ ../modules/home ];
@@ -64,6 +72,7 @@ rec {
     };
     monit = {
       name = "monit";
+      hostname = "monit";
       ip = "192.168.2.103";
       nixos-modules = [ ../hosts/monit/configuration.nix ];
       home-modules = [ ../modules/home/default-sys-module.nix ];
@@ -71,25 +80,36 @@ rec {
       tags = [ "monit" ];
       system = "x86_64-linux";
     };
-
-    # srv-k3s-01 = {
-    #   name = "srv-k3s-01";
-    #   ip = "192.168.2.121";
-    #   modules = [ ../hosts/k3s/master.nix ];
-    #   tags = [ "k3s" ];
-    # };
-    # k3sagent01 = {
-    #   name = "srv-k3s-agent-01";
-    #   ip = "192.168.2.122";
-    #   modules = [ ../hosts/k3s/agent.nix ];
-    #   tags = [ "k3s" ];
-    # };
-    # k3sagent02 = {
-    #   name = "srv-k3s-agent-01";
-    #   ip = "192.168.2.123";
-    #   modules = [ ../hosts/k3s/agent.nix ];
-    #   tags = [ "k3s" ];
-    # };
+    k3smaster01 = {
+      name = "k3s";
+      hostname = "srv-k3s-01";
+      ip = "192.168.2.121";
+      nixos-modules = [ ../hosts/k3s/master.nix ];
+      home-modules = [ ../modules/home/default-sys-module.nix ];
+      profiles = [ ../profiles/dsn-small.nix ];
+      tags = [ "k3s" ];
+      system = "x86_64-linux";
+    };
+    k3sagent01 = {
+      name = "k3s";
+      hostname = "srv-k3s-agent-01";
+      ip = "192.168.2.122";
+      nixos-modules = [ ../hosts/k3s/agent.nix ];
+      home-modules = [ ../modules/home/default-sys-module.nix ];
+      profiles = [ ../profiles/dsn-small.nix ];
+      tags = [ "k3s" ];
+      system = "x86_64-linux";
+    };
+    k3sagent02 = {
+      name = "k3s";
+      hostname = "srv-k3s-agent-01";
+      ip = "192.168.2.123";
+      nixos-modules = [ ../hosts/k3s/agent.nix ];
+      home-modules = [ ../modules/home/default-sys-module.nix ];
+      profiles = [ ../profiles/dsn-small.nix ];
+      tags = [ "k3s" ];
+      system = "x86_64-linux";
+    };
   };
 
   # hostsInterface = lib.attrsets.mapAttrs (key: val: {

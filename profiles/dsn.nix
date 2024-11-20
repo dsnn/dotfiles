@@ -21,7 +21,6 @@ in {
     inputrc.enable = true;
     karabiner.enable = isDarwin;
     keychain.enable = true;
-    kitty.enable = true;
     lazygit.enable = true;
     lsd.enable = true;
     nvim.enable = true;

@@ -9,11 +9,11 @@
   # };
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
-    colmena.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    colmena.inputs.nixpkgs.follows = "nixpkgs";
     colmena.url = "github:zhaofengli/colmena";
 
     darwin.inputs.nixpkgs.follows = "nixpkgs";
@@ -22,15 +22,15 @@
     disko.inputs.nixpkgs.follows = "nixpkgs";
     disko.url = "github:nix-community/disko";
 
-    flake-checker.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    flake-checker.inputs.nixpkgs.follows = "nixpkgs";
     flake-checker.url = "github:DeterminateSystems/flake-checker";
 
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager/release-24.05";
+    home-manager.url = "github:nix-community/home-manager/master";
 
     impermanence.url = "github:nix-community/impermanence";
 
-    nix-ld.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    nix-ld.inputs.nixpkgs.follows = "nixpkgs";
     nix-ld.url = "github:Mic92/nix-ld";
 
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";

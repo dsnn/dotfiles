@@ -26,7 +26,7 @@ let
     xclip
   ];
   devPkgs = with pkgs; [
-    _1password
+    _1password-cli
     ansible
     lazydocker
     nixos-generators

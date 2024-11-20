@@ -14,7 +14,12 @@ in {
       optimise.automatic = true;
       settings = {
         allowed-users = trustedUsers;
-        experimental-features = [ "nix-command" "flakes" ];
+        auto-optimise-store = true;
+        experimental-features = [
+          "nix-command"
+          "flakes"
+          "pipe-operators"
+        ];
         http-connections = 50;
         log-lines = 50;
         trusted-users = trustedUsers;

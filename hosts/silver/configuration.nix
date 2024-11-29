@@ -1,26 +1,21 @@
-{ ... }:
-{
+{ ... }: {
 
   dsn = {
-    common = {
-      enable = true;
-      enable-darwin = true;
-    };
+    nix.enable = true;
+    shells.enable = true;
+    systemPackages.enable = true;
     homebrew.enable = true;
     skhd.enable = true;
     terraform.enable = true;
   };
 
-  environment.systemPath = [ "/opt/homebrew/bin" ];
-  environment.pathsToLink = [ "/Applications" ];
+  time.timeZone = "Europe/Stockholm";
 
   security.pam.enableSudoTouchIdAuth = true;
 
   users.users.dsn.home = "/Users/dsn";
 
   services.nix-daemon.enable = true;
-
-  # nixpkgs.config.allowUnfree = true;
 
   programs.zsh.enable = true;
 
@@ -30,7 +25,6 @@
       AppleShowAllExtensions = true;
       InitialKeyRepeat = 15;
       KeyRepeat = 2;
-      # _HIHideMenuBar = true;
     };
     dock = {
       autohide = true;

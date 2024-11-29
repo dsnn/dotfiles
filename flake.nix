@@ -3,10 +3,10 @@
 
   outputs = inputs: import ./outputs.nix inputs;
 
-  nixConfig = {
-    extra-substituters = [ "http://cache.dsnn.io" ];
-    extra-trusted-public-keys = [ "cache.dsnn.io:1IY1jXcL3Ra4hRuv2L3+I7g37I6YWDksX8A744KLOng" ];
-  };
+  # nixConfig = {
+  #   extra-substituters = [ "http://cache.dsnn.io" ];
+  #   extra-trusted-public-keys = [ "cache.dsnn.io:1IY1jXcL3Ra4hRuv2L3+I7g37I6YWDksX8A744KLOng" ];
+  # };
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";

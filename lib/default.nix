@@ -9,6 +9,7 @@ in
   nixosSystem = import ./nixosSystem.nix;
   darwinSystem = import ./darwinSystem.nix;
   colmenaSystem = import ./colmenaSystem.nix;
+  generateSystem = import ./generateSystem.nix;
 
   scanPaths =
     path:

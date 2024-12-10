@@ -20,13 +20,38 @@ import 'provision/ansible/ansible.just'
 default:
     @just --list
 
+# List PATH-vars separated by new line
 [group('common')]
 path:
    echo $PATH | tr ':' '\n'
 
+############################################################################
+#
+#  Homelab - Remote deployment
+#
+############################################################################
+
+# Run colmena apply on host
+[linux]
+[group('homelab')]
+col host:
+  colmena apply --on '@{{host}}' --verbose --show-trace
+
+# Run nixos-anywhere with #cloud and ip as target-host
+[linux]
+[group('homelab')]
+any ip:
+  nix run github:nix-community/nixos-anywhere -- --flake ~/dotfiles#anywhere --target-host dsn'@{{ip}}'
+
+############################################################################
+#
+#  Nix commands
+#
+############################################################################
+
 # Update all the flake inputs
 [group('nix')]
-up:
+update:
   nix flake update
 
 # List all generations of the system profile
@@ -55,21 +80,39 @@ gc:
   # https://github.com/NixOS/nix/issues/8508
   nix-collect-garbage --delete-older-than 7d
 
-[group('nix')]
+
+
+############################################################################
+#
+#  Nix build commands
+#
+############################################################################
+
+# Build NixOS iso image
+[group('nix-build')]
+iso:
+  nix build .#iso
+
+# Build NixOS .raw-disk with disko and NixOS
+[group('nix-build')]
+raw:
+  nix build .#raw
+
+# Build NixOS proxmox backup (restore in proxmox)
+[group('nix-build')]
+vma:
+  nix build .#vma
+
+############################################################################
+#
+#  Repo commands
+#
+############################################################################
+
+# Run pre-commit on all files
+[group('repo')]
 test:
   pre-commit run -a
-
-############################################################################
-#
-#  Homelab - Kubevirt Cluster related commands
-#
-############################################################################
-
-# Remote deployment via colmena
-[linux]
-[group('homelab')]
-col tag:
-  colmena apply --on '@{{tag}}' --verbose --show-trace
 
 # =================================================
 #

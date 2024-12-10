@@ -3,9 +3,10 @@ rec {
 
   ip = {
     mainGateway = "192.168.1.1"; # main router
-    defaultGateway = "192.168.1.1";
+    defaultGateway = "192.168.2.1";
     loopback = "127.0.0.1";
     allInterfaces = "0.0.0.0";
+    defaultInterfaceName = "eth0";
   };
 
   fail2ban = {
@@ -22,6 +23,28 @@ rec {
   ];
 
   hostsAddr = {
+    anywhere = {
+      name = "anywhere";
+      nixos-modules = [ ../hosts/anywhere/anywhere.nix ];
+      system = "x86_64-linux";
+    };
+    iso = {
+      name = "iso";
+      generate-modules = [ ../hosts/iso/configuration.nix ];
+      format = "iso";
+      system = "x86_64-linux";
+    };
+    raw = {
+      name = "raw";
+      nixos-modules = [ ../hosts/raw/configuration.nix ];
+      system = "x86_64-linux";
+    };
+    vma = {
+      name = "vma";
+      generate-modules = [ ../hosts/vma/proxmox-image.nix ];
+      format = "proxmox";
+      system = "x86_64-linux";
+    };
     nixos1 = {
       name = "nixos01";
       hostname = "srv-nixos-01";
@@ -80,36 +103,36 @@ rec {
       tags = [ "monit" ];
       system = "x86_64-linux";
     };
-    k3smaster01 = {
-      name = "k3s";
-      hostname = "srv-k3s-01";
+    k3smaster = {
+      name = "k3smaster";
+      hostname = "k3smaster01";
       ip = "192.168.2.121";
-      nixos-modules = [ ../hosts/k3s/master.nix ];
+      nixos-modules = [ ../hosts/k3smaster/configuration.nix ];
       home-modules = [ ../modules/home/default-sys-module.nix ];
       profiles = [ ../profiles/dsn-small.nix ];
       tags = [ "k3s" ];
       system = "x86_64-linux";
     };
-    k3sagent01 = {
-      name = "k3s";
-      hostname = "srv-k3s-agent-01";
-      ip = "192.168.2.122";
-      nixos-modules = [ ../hosts/k3s/agent.nix ];
-      home-modules = [ ../modules/home/default-sys-module.nix ];
-      profiles = [ ../profiles/dsn-small.nix ];
-      tags = [ "k3s" ];
-      system = "x86_64-linux";
-    };
-    k3sagent02 = {
-      name = "k3s";
-      hostname = "srv-k3s-agent-01";
-      ip = "192.168.2.123";
-      nixos-modules = [ ../hosts/k3s/agent.nix ];
-      home-modules = [ ../modules/home/default-sys-module.nix ];
-      profiles = [ ../profiles/dsn-small.nix ];
-      tags = [ "k3s" ];
-      system = "x86_64-linux";
-    };
+    # k3sagent01 = {
+    #   name = "k3sagent01";
+    #   hostname = "k3sagent01";
+    #   ip = "192.168.2.122";
+    #   nixos-modules = [ ../hosts/k3sagent/configuration.nix ];
+    #   home-modules = [ ../modules/home/default-sys-module.nix ];
+    #   profiles = [ ../profiles/dsn-small.nix ];
+    #   tags = [ "k3s" ];
+    #   system = "x86_64-linux";
+    # };
+    # k3sagent02 = {
+    #   name = "k3sagent02";
+    #   hostname = "k3sagent02";
+    #   ip = "192.168.2.123";
+    #   nixos-modules = [ ../hosts/k3sagent/configuration.nix ];
+    #   home-modules = [ ../modules/home/default-sys-module.nix ];
+    #   profiles = [ ../profiles/dsn-small.nix ];
+    #   tags = [ "k3s" ];
+    #   system = "x86_64-linux";
+    # };
   };
 
   # hostsInterface = lib.attrsets.mapAttrs (key: val: {

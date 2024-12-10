@@ -9,9 +9,9 @@
   # };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
     colmena.inputs.nixpkgs.follows = "nixpkgs";
     colmena.url = "github:zhaofengli/colmena";
@@ -20,7 +20,7 @@
     darwin.url = "github:lnl7/nix-darwin";
 
     disko.inputs.nixpkgs.follows = "nixpkgs";
-    disko.url = "github:nix-community/disko";
+    disko.url = "github:nix-community/disko/latest";
 
     flake-checker.inputs.nixpkgs.follows = "nixpkgs";
     flake-checker.url = "github:DeterminateSystems/flake-checker";

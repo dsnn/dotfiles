@@ -6,6 +6,10 @@ in
 {
   options.dsn.k3s-server = {
     enable = mkEnableOption "Enable k3s server";
+    serverAddr = mkOption {
+      type = types.str;
+      default = "";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -30,6 +34,7 @@ in
       role = "server";
       tokenFile = config.sops.secrets."k3s_token".path;
       clusterInit = true;
+      serverAddr = cfg.serverAddr;
     };
   };
 }

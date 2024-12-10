@@ -1,4 +1,4 @@
-{ ... }@inputs:
+{ self, ... }@inputs:
 let
   inherit (inputs.nixpkgs) lib;
   myvars = import ./variables { inherit lib; };
@@ -54,7 +54,10 @@ in
   nixosConfigurations = getConfigurations myvars.configurations.nixos;
   darwinConfigurations = getConfigurations myvars.configurations.darwin;
 
-  packages.x86_64-linux.options-doc = mypkgs.options-doc;
+  packages.x86_64-linux = {
+    options-doc = mypkgs.options-doc;
+    raw = self.nixosConfigurations.raw.config.system.build.diskoImages;
+  } // getConfigurations myvars.configurations.generate;
 
   colmena = {
     meta = {

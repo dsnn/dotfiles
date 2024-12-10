@@ -1,4 +1,11 @@
-{ modulesPath, myvars, ... }:
+{
+  modulesPath,
+  host,
+  ...
+}:
+let
+  inherit (host) ip;
+in
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -7,9 +14,10 @@
   ];
 
   dsn = {
+    common.enable = true;
     k3s-agent = {
       enable = true;
-      serverAddr = "https://${myvars.networking.hostsAddr.srv-k3s-01.ip}:6443";
+      serverAddr = "https://${ip}:6443";
     };
   };
 }

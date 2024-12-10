@@ -18,5 +18,11 @@ nix build .#options-doc
 ## Generate iso
 
 ```console
-nix build .#nixosConfigurations.live.config.system.build.isoImage
+nix build .#nixosConfigurations.iso.config.system.build.isoImage
+```
+
+or
+
+```console
+just iso
 ```

@@ -2,7 +2,7 @@ variable "ipv4" {
   type = string
 }
 
-variable "hostname" {
+variable "name" {
   type = string
 }
 

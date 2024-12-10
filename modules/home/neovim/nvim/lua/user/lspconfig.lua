@@ -105,7 +105,7 @@ local servers = {
   --     },
   --   },
   -- },
-  tsserver = {
+  ts_ls = {
     root_dir = lspconfig.util.find_git_ancestor,
     single_file_support = false,
     settings = {

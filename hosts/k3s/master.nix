@@ -1,4 +1,7 @@
-{ modulesPath, ... }:
+{ modulesPath, host, ... }:
+let
+  inherit (host) ip;
+in
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -7,6 +10,10 @@
   ];
 
   dsn = {
-    k3s-server.enable = true;
+    common.enable = true;
+    k3s-server = {
+      enable = true;
+      serverAddr = "https://${ip}:6443";
+    };
   };
 }

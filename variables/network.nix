@@ -22,6 +22,14 @@ rec {
   ];
 
   hostsAddr = {
+    iso = {
+      name = "iso";
+      nixos-modules = [ ../hosts/iso/configuration.nix ];
+      home-modules = [ ../modules/home/default-sys-module.nix ];
+      profiles = [ ../profiles/dsn-small.nix ];
+      format = "iso";
+      system = "x86_64-linux";
+    };
     nixos1 = {
       name = "nixos01";
       hostname = "srv-nixos-01";

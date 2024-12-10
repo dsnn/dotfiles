@@ -54,7 +54,10 @@ in
   nixosConfigurations = getConfigurations myvars.configurations.nixos;
   darwinConfigurations = getConfigurations myvars.configurations.darwin;
 
-  packages.x86_64-linux.options-doc = mypkgs.options-doc;
+  packages.x86_64-linux = {
+    options-doc = mypkgs.options-doc;
+    iso = mypkgs.create-iso args;
+  };
 
   colmena = {
     meta = {

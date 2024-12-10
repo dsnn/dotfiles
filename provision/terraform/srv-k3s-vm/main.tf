@@ -8,7 +8,6 @@ resource "proxmox_vm_qemu" "k3s-cluster" {
   agent            = 1
   qemu_os          = "other"
   bios             = "seabios"
-  full_clone       = true
   onboot           = true
   startup          = ""
   automatic_reboot = false
@@ -19,6 +18,16 @@ resource "proxmox_vm_qemu" "k3s-cluster" {
   memory  = 4096
 
   scsihw = "virtio-scsi-pci"
+
+  disks {
+    ide {
+      ide2 {
+        cdrom {
+          iso = "local:iso/nixos.iso"
+        }
+      }
+    }
+  }
 
   define_connection_info = false
 

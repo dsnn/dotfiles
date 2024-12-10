@@ -26,6 +26,11 @@ path:
 
 # Update all the flake inputs
 [group('nix')]
+iso:
+  nix build .#iso
+
+# Update all the flake inputs
+[group('nix')]
 up:
   nix flake update
 

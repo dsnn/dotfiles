@@ -1,11 +1,21 @@
-{ inputs, config, lib, pkgs, myvars, ... }:
+{
+  inputs,
+  config,
+  lib,
+  pkgs,
+  myvars,
+  ...
+}:
 let
   inherit (lib) mkEnableOption mkIf optionalAttrs;
   inherit (myvars) trustedUsers;
   inherit (pkgs.stdenv) isDarwin;
   cfg = config.dsn.nix;
-in {
-  options.dsn.nix = { enable = mkEnableOption "Enable common nix settings"; };
+in
+{
+  options.dsn.nix = {
+    enable = mkEnableOption "Enable common nix settings";
+  };
 
   config = mkIf cfg.enable {
     nix = {
@@ -25,8 +35,10 @@ in {
         trusted-users = trustedUsers;
         warn-dirty = false;
 
-        substituters =
-          [ "https://cache.nixos.org" "https://nix-community.cachix.org" ];
+        substituters = [
+          "https://cache.nixos.org"
+          "https://nix-community.cachix.org"
+        ];
 
         trusted-public-keys = [
           "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -41,21 +53,20 @@ in {
 
       # make `nix repl '<nixpkgs>'` use the same nixpkgs as the one used by this flake.
       # discard all the default paths, and only use the one from this flake.
-      nixPath = lib.mkForce [ "/etc/nix/inputs" ];
+      # nixPath = lib.mkForce [ "/etc/nix/inputs" ];
 
-      # https://github.com/NixOS/nix/issues/9574
-      # nix-path = lib.mkForce "nixpkgs=/etc/nix/inputs/nixpkgs";
-
-      gc = {
-        automatic = true;
-        options = "--delete-older-than 30d";
-      } // optionalAttrs isDarwin {
-        interval = {
-          Weekday = 0;
-          Hour = 0;
-          Minute = 0;
+      gc =
+        {
+          automatic = true;
+          options = "--delete-older-than 30d";
+        }
+        // optionalAttrs isDarwin {
+          interval = {
+            Weekday = 0;
+            Hour = 0;
+            Minute = 0;
+          };
         };
-      };
     };
   };
 }

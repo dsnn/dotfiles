@@ -4,4 +4,5 @@ let
 in
 {
   options-doc = pkgs.callPackage ./options-doc.nix args;
+  create-iso = import ./generate-iso.nix;
 }

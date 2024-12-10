@@ -18,6 +18,7 @@ rec {
     darwin = "darwin";
     home = "home";
     colmena = "colmena";
+    generate = "generate";
   };
 
   system = {

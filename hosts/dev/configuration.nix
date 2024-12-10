@@ -15,6 +15,7 @@
     };
   };
 
+  nix.settings.nix-path = "nixpkgs=flake:nixpkgs";
   nixpkgs.config.allowUnfree = true;
 
   boot = {

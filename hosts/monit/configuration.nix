@@ -54,7 +54,7 @@ in
   };
 
   system = {
-    stateVersion = "24.05";
+    stateVersion = "24.11";
   };
 
   # prometheus: port 3020 (8020)

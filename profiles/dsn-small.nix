@@ -48,7 +48,7 @@
   home = {
     username = "dsn";
     homeDirectory = lib.mkDefault "/home/dsn"; # required by sops
-    stateVersion = "24.05";
+    stateVersion = "24.11";
     file."${config.home.homeDirectory}/.hushlogin".text = "";
     sessionVariables.NIXD_FLAGS = "-log=error";
     file."${config.home.homeDirectory}/.inputrc".text = ''

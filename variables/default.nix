@@ -3,7 +3,7 @@ rec {
   username = "dsn";
   useremail = "dsn@dsnn.io";
   timeZone = "Europe/Stockholm";
-  version = "24.05";
+  version = "24.11";
 
   networking = import ./network.nix { inherit lib; };
 

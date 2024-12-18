@@ -10,9 +10,16 @@
 
   boot = {
     loader.grub = {
-      efiSupport = true;
-      efiInstallAsRemovable = true;
+      devices = [ "/dev/vda" ];
+      # efiSupport = true;
+      # efiInstallAsRemovable = true;
     };
+  };
+
+  fileSystems."/" = {
+    device = "/dev/disk/by-partlabel/disk-disk1-root";
+    autoResize = true;
+    fsType = "ext4";
   };
 
   dsn = {
@@ -28,14 +35,34 @@
       enable = true;
       initialHashedPassword = "$2b$05$yPIF0wnops49ceqHXaDsM.h.RdJ1TLbyNUvQrZFjEGI1wF1KWVORu";
     };
-    k3s-server = {
-      enable = true;
-      serverAddr = "https://192.168.2.121:6443"; # TODO: get ip from hosts
-    };
+    # k3s-server = {
+    #   enable = true;
+    #   serverAddr = "https://192.168.2.121:6443"; # TODO: get ip from hosts
+    # };
   };
 
+  # ------ k3s single node
+  networking.firewall.allowedTCPPorts = [
+    6443 # k3s: required so that pods can reach the API server (running on port 6443 by default)
+    # 2379 # k3s, etcd clients: required if using a "High Availability Embedded etcd" configuration
+    # 2380 # k3s, etcd peers: required if using a "High Availability Embedded etcd" configuration
+  ];
+  networking.firewall.allowedUDPPorts = [
+    # 8472 # k3s, flannel: required if using multi-node for inter-node networking
+  ];
+  services.k3s.enable = true;
+  services.k3s.role = "server";
+  services.k3s.extraFlags = toString [
+    # "--debug" # Optionally add additional args to k3s
+  ];
+  # ------
+
+  time.timeZone = "Europe/Stockholm";
+  programs.zsh.enable = true;
+  services.qemuGuest.enable = true;
+
   networking = {
-    hostName = "k3smaster01";
+    hostName = "k3smaster";
     enableIPv6 = false;
     interfaces.ens18.ipv4.addresses = [
       {
@@ -45,12 +72,6 @@
     ];
     defaultGateway = "192.168.2.1";
   };
-
-  time.timeZone = "Europe/Stockholm";
-
-  programs.zsh.enable = true;
-
-  services.qemuGuest.enable = true;
 
   systemd.mounts = [
     {

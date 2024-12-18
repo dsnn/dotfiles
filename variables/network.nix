@@ -105,7 +105,7 @@ rec {
     };
     k3smaster = {
       name = "k3smaster";
-      hostname = "k3smaster01";
+      hostname = "k3smaster";
       ip = "192.168.2.121";
       nixos-modules = [ ../hosts/k3smaster/configuration.nix ];
       home-modules = [ ../modules/home/default-sys-module.nix ];

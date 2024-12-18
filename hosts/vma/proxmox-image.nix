@@ -8,7 +8,7 @@
   proxmox = {
     qemuConf = {
       boot = "order=virtio0;ide2;net0";
-      virtio0 = "local:901/disk1"; # old: base-901-disk-0. try use custom disk from #raw
+      virtio0 = "local:901/base-901-disk-0";
       ostype = "cloud-init";
       cores = 4;
       memory = 4096;

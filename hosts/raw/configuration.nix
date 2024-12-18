@@ -8,32 +8,6 @@
     ./disko.nix
   ];
 
-  # Since we aren't letting Disko manage fileSystems.*, we need to configure it ourselves
-  # Root partition, third partition on the disk image. Since my VPS recognizes
-  # hard drive as "sda", I specify "sda3" here. If your VPS recognizes the drive
-  # differently, change accordingly
-  fileSystems."/" = {
-    device = "/dev/vda3";
-    fsType = "btrfs";
-    options = [
-      "compress-force=zstd"
-      "nosuid"
-      "nodev"
-    ];
-  };
-
-  # /boot partition, second partition on the disk image. Since my VPS recognizes
-  # hard drive as "sda", I specify "sda2" here. If your VPS recognizes the drive
-  # differently, change accordingly
-  fileSystems."/boot" = {
-    device = "/dev/vda2";
-    fsType = "vfat";
-    options = [
-      "fmask=0077"
-      "dmask=0077"
-    ];
-  };
-
   # Kernel parameters I use
   boot.kernelParams = [
     # Disable auditing

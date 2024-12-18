@@ -50,9 +50,9 @@
 
   services.k3s = {
     enable = true;
-    role = "server";
+    role = "agent";
     token = "secret-token";
-    clusterInit = true;
+    serverAddr = "https://192.168.2.122:6443";
     extraFlags = toString [
       # "--debug" # Optionally add additional args to k3s
     ];
@@ -65,7 +65,7 @@
   services.qemuGuest.enable = true;
 
   networking = {
-    hostName = "k3smaster";
+    hostName = "k3sagent01";
     enableIPv6 = false;
     defaultGateway = "192.168.2.1";
   };

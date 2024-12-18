@@ -1,4 +1,9 @@
-{ modulesPath, inputs, ... }:
+{
+  modulesPath,
+  inputs,
+  pkgs,
+  ...
+}:
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -14,6 +19,10 @@
       enableNetworkingPkgs = true;
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    k3s
+  ];
 
   nix.settings.nix-path = "nixpkgs=flake:nixpkgs";
   nixpkgs.config.allowUnfree = true;

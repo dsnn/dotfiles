@@ -7,6 +7,8 @@ let
 in
 {
   home.${host.name} = mylib.homeConfig myargs;
+
   nixos.${host.name} = mylib.nixosSystem myargs;
-  colmena.${host.name} = mylib.colmenaSystem myargs;
+
+  # colmena.${host.name} = mylib.colmenaSystem myargs;
 }

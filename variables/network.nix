@@ -45,14 +45,14 @@ rec {
       format = "proxmox";
       system = "x86_64-linux";
     };
-    nixos1 = {
+    nixos01 = {
       name = "nixos01";
-      hostname = "srv-nixos-01";
+      hostname = "nixos01";
       ip = "192.168.2.111";
-      nixos-modules = [ ../hosts/nixos1/configuration.nix ];
+      nixos-modules = [ ../hosts/nixos01/configuration.nix ];
       home-modules = [ ../modules/home ];
       profiles = [ ../profiles/dsn.nix ];
-      tags = [ "srv-nixos-01" ];
+      tags = [ "nixos01" ];
       system = "x86_64-linux";
     };
     silver = {
@@ -113,26 +113,26 @@ rec {
       tags = [ "k3s" ];
       system = "x86_64-linux";
     };
-    # k3sagent01 = {
-    #   name = "k3sagent01";
-    #   hostname = "k3sagent01";
-    #   ip = "192.168.2.122";
-    #   nixos-modules = [ ../hosts/k3sagent/configuration.nix ];
-    #   home-modules = [ ../modules/home/default-sys-module.nix ];
-    #   profiles = [ ../profiles/dsn-small.nix ];
-    #   tags = [ "k3s" ];
-    #   system = "x86_64-linux";
-    # };
-    # k3sagent02 = {
-    #   name = "k3sagent02";
-    #   hostname = "k3sagent02";
-    #   ip = "192.168.2.123";
-    #   nixos-modules = [ ../hosts/k3sagent/configuration.nix ];
-    #   home-modules = [ ../modules/home/default-sys-module.nix ];
-    #   profiles = [ ../profiles/dsn-small.nix ];
-    #   tags = [ "k3s" ];
-    #   system = "x86_64-linux";
-    # };
+    k3sagent01 = {
+      name = "k3sagent01";
+      hostname = "k3sagent01";
+      ip = "192.168.2.122";
+      nixos-modules = [ ../hosts/k3sagent01/configuration.nix ];
+      home-modules = [ ../modules/home/default-sys-module.nix ];
+      profiles = [ ../profiles/dsn-small.nix ];
+      tags = [ "k3s" ];
+      system = "x86_64-linux";
+    };
+    k3sagent02 = {
+      name = "k3sagent02";
+      hostname = "k3sagent02";
+      ip = "192.168.2.123";
+      nixos-modules = [ ../hosts/k3sagent02/configuration.nix ];
+      home-modules = [ ../modules/home/default-sys-module.nix ];
+      profiles = [ ../profiles/dsn-small.nix ];
+      tags = [ "k3s" ];
+      system = "x86_64-linux";
+    };
   };
 
   # hostsInterface = lib.attrsets.mapAttrs (key: val: {

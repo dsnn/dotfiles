@@ -103,31 +103,11 @@ rec {
       tags = [ "monit" ];
       system = "x86_64-linux";
     };
-    k3smaster = {
-      name = "k3smaster";
-      hostname = "k3smaster";
+    k3s = {
+      name = "k3s";
+      hostname = "k3s";
       ip = "192.168.2.121";
-      nixos-modules = [ ../hosts/k3smaster/configuration.nix ];
-      home-modules = [ ../modules/home/default-sys-module.nix ];
-      profiles = [ ../profiles/dsn-small.nix ];
-      tags = [ "k3s" ];
-      system = "x86_64-linux";
-    };
-    k3sagent01 = {
-      name = "k3sagent01";
-      hostname = "k3sagent01";
-      ip = "192.168.2.122";
-      nixos-modules = [ ../hosts/k3sagent01/configuration.nix ];
-      home-modules = [ ../modules/home/default-sys-module.nix ];
-      profiles = [ ../profiles/dsn-small.nix ];
-      tags = [ "k3s" ];
-      system = "x86_64-linux";
-    };
-    k3sagent02 = {
-      name = "k3sagent02";
-      hostname = "k3sagent02";
-      ip = "192.168.2.123";
-      nixos-modules = [ ../hosts/k3sagent02/configuration.nix ];
+      nixos-modules = [ ../hosts/k3s/configuration.nix ];
       home-modules = [ ../modules/home/default-sys-module.nix ];
       profiles = [ ../profiles/dsn-small.nix ];
       tags = [ "k3s" ];

@@ -38,21 +38,23 @@
   # ------ k3s
 
   networking.firewall = {
+    enable = true;
     allowedTCPPorts = [
       6443 # k3s: required so that pods can reach the API server (running on port 6443 by default)
-      2379 # k3s, etcd clients: required if using a "High Availability Embedded etcd" configuration
-      2380 # k3s, etcd peers: required if using a "High Availability Embedded etcd" configuration
+      # 2379 # k3s, etcd clients: required if using a "High Availability Embedded etcd" configuration
+      # 2380 # k3s, etcd peers: required if using a "High Availability Embedded etcd" configuration
+      80
+      443
     ];
     allowedUDPPorts = [
-      8472 # k3s, flannel: required if using multi-node for inter-node networking
+      # 8472 # k3s, flannel: required if using multi-node for inter-node networking
     ];
   };
 
   services.k3s = {
     enable = true;
-    role = "agent";
-    token = "secret-token";
-    serverAddr = "https://192.168.2.123:6443";
+    role = "server";
+    clusterInit = true;
     extraFlags = toString [
       # "--debug" # Optionally add additional args to k3s
     ];
@@ -65,7 +67,7 @@
   services.qemuGuest.enable = true;
 
   networking = {
-    hostName = "k3sagent02";
+    hostName = "k3s";
     enableIPv6 = false;
     defaultGateway = "192.168.2.1";
   };

@@ -18,7 +18,7 @@ resource "proxmox_vm_qemu" "k3s-cluster" {
   cpu     = "host"
   cores   = 4
   sockets = 1
-  memory  = 4096
+  memory  = 12288
 
 
   disks {
@@ -32,8 +32,8 @@ resource "proxmox_vm_qemu" "k3s-cluster" {
     virtio {
       virtio0 {
         disk {
-          size    = "10G"
-          storage = "local"
+          size    = "32G"
+          storage = "local-lvm"
           format  = "raw"
           cache   = "writeback"
           backup  = false

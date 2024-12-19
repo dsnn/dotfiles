@@ -6,5 +6,7 @@ pkgs.mkShellNoCC {
   name = "k3s";
   packages = with pkgs; [
     k3s
+    kubernetes-helm
+    kustomize
   ];
 }

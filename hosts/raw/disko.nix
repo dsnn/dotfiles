@@ -1,9 +1,13 @@
+# https://github.com/nix-community/disko/blob/master/docs/disko-images.md
+# https://lantian.pub/en/article/modify-computer/nixos-low-ram-vps.lantian/
 { ... }:
 {
   disko.devices = {
     disk.disk1 = {
       device = "/dev/vda";
       type = "disk";
+      imageName = "nixos-cloud-btrfs";
+      imageSize = "10G";
       content = {
         type = "gpt";
         partitions = {

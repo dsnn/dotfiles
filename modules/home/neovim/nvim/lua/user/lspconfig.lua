@@ -65,6 +65,7 @@ local servers = {
   docker_compose_language_service = {},
   graphql = {},
   html = {},
+  tailwindcss = {},
   jsonls = {},
   lua_ls = {
     settings = {

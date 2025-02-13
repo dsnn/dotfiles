@@ -6,7 +6,6 @@
     systemPackages.enable = true;
     homebrew.enable = true;
     skhd.enable = true;
-    terraform.enable = true;
   };
 
   time.timeZone = "Europe/Stockholm";

@@ -106,6 +106,9 @@ in
           # make vi mode transitions faster
           export KEYTIMEOUT=1
 
+          # export dotnet-ef for migrations
+          export PATH="$PATH:/Users/dsn/.dotnet/tools"
+
           # enable vi-mode
           bindkey -v
 

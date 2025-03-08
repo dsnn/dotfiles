@@ -41,11 +41,6 @@ rec {
     };
   };
 
-  cacheOptions = {
-    substituters = [ "http://cache.dsnn.io" ];
-    trusted-public-keys = [ "cache.dsnn.io:1IY1jXcL3Ra4hRuv2L3+I7g37I6YWDksX8A744KLOng" ];
-  };
-
   # generate with modules/scripts/generate-password
   initialHashedPassword = "$2b$05$yPIF0wnops49ceqHXaDsM.h.RdJ1TLbyNUvQrZFjEGI1wF1KWVORu"; # asd123
 

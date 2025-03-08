@@ -13,12 +13,22 @@
   ];
 
   dsn = {
-    common.enable = true;
+    i18n.enable = true;
+    nix.enable = true;
+    openssh.enable = true;
+    prometheus.enable = true;
+    security.enable = true;
+    shells.enable = true;
+    sops.enable = true;
+    systemPackages.enable = true;
+    user.enable = true;
     systemPackages = {
       enableMonitoringPkgs = true;
       enableNetworkingPkgs = true;
     };
   };
+
+  time.timeZone = "Europe/Stockholm";
 
   environment.systemPackages = with pkgs; [
     k3s

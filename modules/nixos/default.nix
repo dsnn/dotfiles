@@ -26,7 +26,6 @@
     ./sops.nix
     ./users.nix
     ./virtualisation.nix
-    ./wireguard.nix
     ./zram.nix
   ];
 }

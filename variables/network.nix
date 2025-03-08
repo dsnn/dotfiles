@@ -1,6 +1,5 @@
 { lib }:
-rec {
-
+{
   ip = {
     mainGateway = "192.168.1.1"; # main router
     defaultGateway = "192.168.2.1";
@@ -28,40 +27,15 @@ rec {
       nixos-modules = [ ../hosts/anywhere/anywhere.nix ];
       system = "x86_64-linux";
     };
-    iso = {
-      name = "iso";
-      generate-modules = [ ../hosts/iso/configuration.nix ];
-      format = "iso";
-      system = "x86_64-linux";
-    };
-    raw = {
-      name = "raw";
-      nixos-modules = [ ../hosts/raw/configuration.nix ];
-      system = "x86_64-linux";
-    };
-    vma = {
-      name = "vma";
-      generate-modules = [ ../hosts/vma/proxmox-image.nix ];
-      format = "proxmox";
-      system = "x86_64-linux";
-    };
-    nixos01 = {
-      name = "nixos01";
-      hostname = "nixos01";
-      ip = "192.168.2.111";
-      nixos-modules = [ ../hosts/nixos01/configuration.nix ];
+    bind = {
+      name = "bind";
+      hostname = "bind";
+      ip = "192.168.2.101";
+      nixos-modules = [ ../hosts/bind/configuration.nix ];
       home-modules = [ ../modules/home ];
       profiles = [ ../profiles/dsn.nix ];
-      tags = [ "nixos01" ];
+      tags = [ "bind" ];
       system = "x86_64-linux";
-    };
-    silver = {
-      name = "silver";
-      hostname = "silver";
-      darwin-modules = [ ../hosts/silver/configuration.nix ];
-      home-modules = [ ../modules/home ];
-      profiles = [ ../profiles/dsn.nix ];
-      system = "aarch64-darwin";
     };
     dev = {
       name = "dev";
@@ -73,14 +47,10 @@ rec {
       tags = [ "dev" ];
       system = "x86_64-linux";
     };
-    bind = {
-      name = "bind";
-      hostname = "bind";
-      ip = "192.168.2.101";
-      nixos-modules = [ ../hosts/bind/configuration.nix ];
-      home-modules = [ ../modules/home ];
-      profiles = [ ../profiles/dsn.nix ];
-      tags = [ "bind" ];
+    iso = {
+      name = "iso";
+      generate-modules = [ ../hosts/iso/configuration.nix ];
+      format = "iso";
       system = "x86_64-linux";
     };
     k3s = {
@@ -91,6 +61,20 @@ rec {
       home-modules = [ ../modules/home/default-sys-module.nix ];
       profiles = [ ../profiles/dsn-small.nix ];
       tags = [ "k3s" ];
+      system = "x86_64-linux";
+    };
+    silver = {
+      name = "silver";
+      hostname = "silver";
+      darwin-modules = [ ../hosts/silver/configuration.nix ];
+      home-modules = [ ../modules/home ];
+      profiles = [ ../profiles/dsn.nix ];
+      system = "aarch64-darwin";
+    };
+    vma = {
+      name = "vma";
+      generate-modules = [ ../hosts/vma/proxmox-image.nix ];
+      format = "proxmox";
       system = "x86_64-linux";
     };
   };
@@ -106,91 +90,6 @@ rec {
   #     ];
   #   };
   # }) hostsAddr;
-
-  bindOptions = {
-    hosts = {
-      dev = {
-        ip = "192.168.2.10";
-        domain = "dev.home.dsnn.io";
-      };
-      docker = {
-        ip = "192.168.2.110";
-        domain = "docker.home.dsnn.io";
-      };
-    };
-
-    zones = [
-      {
-        name = "home.dsnn.io";
-        master = true;
-        file = "/etc/bind/home.dsnn.io";
-        masters = [ "192.168.2.1" ];
-        slaves = [ ];
-      }
-    ];
-
-    # maps to environment.etc (e.g. /etc/bind/home.dsnn.io)
-    envAttrs = {
-      "bind/home.dsnn.io" = {
-        user = "named";
-        group = "named";
-        mode = "644";
-        text = ''
-          $TTL 86400  ; 1 day
-          $ORIGIN home.dsnn.io.
-
-          @             IN      SOA   ns1.home.dsnn.io home.dsnn.io (
-                          2001062618  ; serial
-                          3600        ; refresh (1 hour)
-                          3600        ; retry (1 hour)
-                          2419200     ; expire (4 weeks)
-                          3600        ; minimum (1 hour)
-                          )
-          @             IN      NS    ns1.home.dsnn.io.
-
-          ns1           IN      A     192.168.2.101
-
-          $ORIGIN home.dsnn.io.
-          $TTL 86400  ; 1 day
-
-          $ORIGIN home.dsnn.io.
-          $TTL 300    ; 5 minutes
-          *             A             192.168.2.101
-          ${bindOptions.zoneHosts}
-        '';
-      };
-    };
-
-    zoneHosts = lib.concatMapStrings (
-      { name, value }:
-      ''
-        ${name}         A             ${value.ip}
-      ''
-    ) (lib.attrsets.attrsToList bindOptions.hosts);
-
-    masters = [ "192.168.2.1" ];
-
-    forwarders = [
-      "1.1.1.1"
-      "1.0.0.1"
-    ];
-
-    cacheNetworks = [
-      # self
-      "127.0.0.1"
-      # docker
-      "172.17.0.0/16"
-      "172.18.0.0/16"
-      "172.19.0.0/16"
-      "172.20.0.0/16"
-      "172.21.0.0/16"
-      "172.22.0.0/16"
-      "172.23.0.0/16"
-      "172.24.0.0/16"
-      # services
-      "192.168.0.0/16"
-    ];
-  };
 
   # ssh = {
   #   # define the host alias for remote builders

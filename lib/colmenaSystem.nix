@@ -7,7 +7,6 @@
 let
   inherit (host) tags ip nixos-modules;
   defaultModules = [
-    ../modules/sets/common.nix
     ../modules/nixos
   ];
 in

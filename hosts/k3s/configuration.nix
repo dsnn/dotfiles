@@ -23,12 +23,12 @@
   dsn = {
     i18n.enable = true;
     nix.enable = true;
-    systemPackages.enable = true;
+    openssh.enable = true;
+    prometheus.enable = true;
     security.enable = true;
     shells.enable = true;
-    openssh.enable = true;
     sops.enable = true;
-    prometheus.enable = true;
+    systemPackages.enable = true;
     user = {
       enable = true;
       initialHashedPassword = "$2b$05$yPIF0wnops49ceqHXaDsM.h.RdJ1TLbyNUvQrZFjEGI1wF1KWVORu";

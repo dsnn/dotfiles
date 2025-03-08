@@ -20,7 +20,7 @@ resource "proxmox_vm_qemu" "srv-docker-01" {
   cpu     = "host"
   cores   = 4
   sockets = 1
-  memory  = 8192
+  memory  = 12288
 
   scsihw = "virtio-scsi-single"
 

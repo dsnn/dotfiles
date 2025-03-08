@@ -83,26 +83,6 @@ rec {
       tags = [ "bind" ];
       system = "x86_64-linux";
     };
-    cache = {
-      name = "cache";
-      hostname = "cache";
-      ip = "192.168.2.102";
-      nixos-modules = [ ../hosts/cache/configuration.nix ];
-      home-modules = [ ../modules/home ];
-      profiles = [ ../profiles/dsn.nix ];
-      tags = [ "cache" ];
-      system = "x86_64-linux";
-    };
-    monit = {
-      name = "monit";
-      hostname = "monit";
-      ip = "192.168.2.103";
-      nixos-modules = [ ../hosts/monit/configuration.nix ];
-      home-modules = [ ../modules/home/default-sys-module.nix ];
-      profiles = [ ../profiles/dsn-small.nix ];
-      tags = [ "monit" ];
-      system = "x86_64-linux";
-    };
     k3s = {
       name = "k3s";
       hostname = "k3s";

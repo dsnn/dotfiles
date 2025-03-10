@@ -1,6 +1,6 @@
 { myvars, mylib, ... }@args:
 let
-  host = myvars.networking.hostsAddr.iso;
+  host = myvars.hosts.hostsAddr.iso;
   myargs = args // {
     inherit host;
   };

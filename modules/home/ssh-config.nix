@@ -11,7 +11,7 @@ let
   cfg = config.dsn.ssh;
   inherit (pkgs.stdenv) isDarwin;
   inherit (mylib) generateSshHosts;
-  inherit (myvars.networking) hostsAddr sshHosts;
+  inherit (myvars.hosts) hostsAddr sshHosts;
   linux-extra-config = ''
     IdentityAgent ~/.1password/agent.sock
   '';

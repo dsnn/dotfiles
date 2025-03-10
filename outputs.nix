@@ -42,7 +42,7 @@ let
           };
         in
         if builtins.hasAttr configuration host then { ${name} = host.${configuration}.${name}; } else { }
-      ) (builtins.attrValues myvars.networking.hostsAddr)
+      ) (builtins.attrValues myvars.hosts.hostsAddr)
     );
 in
 {

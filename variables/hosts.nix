@@ -1,26 +1,5 @@
 { lib }:
 {
-  ip = {
-    mainGateway = "192.168.1.1"; # main router
-    defaultGateway = "192.168.2.1";
-    loopback = "127.0.0.1";
-    allInterfaces = "0.0.0.0";
-    defaultInterfaceName = "eth0";
-  };
-
-  fail2ban = {
-    ignoreIP = [
-      "10.0.0.0/24"
-      "192.168.0.0/24"
-    ];
-    maxretry = 5;
-  };
-
-  nameservers = [
-    "1.1.1.1"
-    "1.0.0.1"
-  ];
-
   sshHosts = {
     "git" = {
       ip = "github.com";
@@ -112,16 +91,4 @@
       system = "x86_64-linux";
     };
   };
-
-  # hostsInterface = lib.attrsets.mapAttrs (key: val: {
-  #   interfaces."${val.iface}" = {
-  #     useDHCP = false;
-  #     ipv4.addresses = [
-  #       {
-  #         inherit prefixLength;
-  #         address = val.ipv4;
-  #       }
-  #     ];
-  #   };
-  # }) hostsAddr;
 }

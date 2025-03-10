@@ -27,6 +27,12 @@
     prometheus.enable = true;
     security.enable = true;
     shells.enable = true;
+    k3s-server = {
+      enable = true;
+      services = {
+        traefik = false;
+      };
+    };
     sops.enable = true;
     systemPackages.enable = true;
     user = {
@@ -34,33 +40,6 @@
       initialHashedPassword = "$2b$05$yPIF0wnops49ceqHXaDsM.h.RdJ1TLbyNUvQrZFjEGI1wF1KWVORu";
     };
   };
-
-  # ------ k3s
-
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [
-      6443 # k3s: required so that pods can reach the API server (running on port 6443 by default)
-      # 2379 # k3s, etcd clients: required if using a "High Availability Embedded etcd" configuration
-      # 2380 # k3s, etcd peers: required if using a "High Availability Embedded etcd" configuration
-      80
-      443
-    ];
-    allowedUDPPorts = [
-      # 8472 # k3s, flannel: required if using multi-node for inter-node networking
-    ];
-  };
-
-  services.k3s = {
-    enable = true;
-    role = "server";
-    clusterInit = true;
-    extraFlags = toString [
-      # "--debug" # Optionally add additional args to k3s
-    ];
-  };
-
-  # ------
 
   time.timeZone = "Europe/Stockholm";
   programs.zsh.enable = true;

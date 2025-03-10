@@ -15,8 +15,7 @@
     ./service-gitea.nix
     ./service-homepage-dashboard.nix
     ./service-jellyfin.nix
-    ./service-k3s-agent.nix
-    ./service-k3s-srv.nix
+    ./service-k3s.nix
     ./service-nginx.nix
     ./service-openssh.nix
     ./service-postgres.nix

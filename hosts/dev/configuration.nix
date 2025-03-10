@@ -28,8 +28,6 @@
     };
   };
 
-  time.timeZone = "Europe/Stockholm";
-
   environment.systemPackages = with pkgs; [
     k3s
   ];

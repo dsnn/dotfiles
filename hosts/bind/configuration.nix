@@ -98,7 +98,6 @@ in
     user.enable = true;
   };
 
-  time.timeZone = "Europe/Stockholm";
   programs.zsh.enable = true;
 
   networking.firewall = {

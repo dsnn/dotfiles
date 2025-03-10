@@ -9,7 +9,15 @@ in
   };
 
   config = mkIf cfg.enable {
+
+    time.timeZone = "Europe/Stockholm";
+
+    # console = {
+    #   keyMap = "sv";
+    # };
+
     i18n.defaultLocale = "en_US.UTF-8";
+
     i18n.extraLocaleSettings = {
       LC_ADDRESS = "sv_SE.UTF-8";
       LC_IDENTIFICATION = "sv_SE.UTF-8";

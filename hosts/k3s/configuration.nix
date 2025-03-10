@@ -41,7 +41,6 @@
     };
   };
 
-  time.timeZone = "Europe/Stockholm";
   programs.zsh.enable = true;
   services.qemuGuest.enable = true;
 

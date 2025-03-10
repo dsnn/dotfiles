@@ -16,7 +16,7 @@
     ./neovim
     ./packages.nix
     ./sops.nix
-    ./ssh.nix
+    ./ssh-config.nix
     ./starship.nix
     ./tmux.nix
     ./tmuxp.nix

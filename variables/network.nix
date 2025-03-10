@@ -21,6 +21,40 @@
     "1.0.0.1"
   ];
 
+  sshHosts = {
+    "git" = {
+      ip = "github.com";
+      port = 22;
+      user = "git";
+      forwardAgent = "True";
+    };
+    "alpha" = {
+      ip = "192.168.2.2";
+      port = 22;
+      user = "root";
+    };
+    "omega" = {
+      ip = "192.168.2.3";
+      port = 22;
+      user = "root";
+    };
+    "nas" = {
+      ip = "192.168.3.2";
+      port = 11223;
+      user = "dsn";
+    };
+    "docker1" = {
+      ip = "192.168.2.110";
+      port = 22;
+      user = "dsn";
+    };
+    "docker2" = {
+      ip = "192.168.2.104";
+      port = 22;
+      user = "dsn";
+    };
+  };
+
   hostsAddr = {
     anywhere = {
       name = "anywhere";
@@ -90,51 +124,4 @@
   #     ];
   #   };
   # }) hostsAddr;
-
-  # ssh = {
-  #   # define the host alias for remote builders
-  #   # this config will be written to /etc/ssh/ssh_config
-  #   # ''
-  #   #   Host server1
-  #   #     HostName 192.168.2.100
-  #   #     Port 22
-  #   #
-  #   #   Host server2
-  #   #     HostName 192.168.2.101
-  #   #     Port 22
-  #   #   ...
-  #   # '';
-  #   extraConfig = lib.attrsets.foldlAttrs (
-  #     acc: host: val:
-  #     acc
-  #     + ''
-  #       Host ${host}
-  #         HostName ${val.ipv4}
-  #         Port 22
-  #     ''
-  #   ) "" hostsAddr;
-  #
-  #   # define the host key for remote builders so that nix can verify all the remote builders
-  #   # this config will be written to /etc/ssh/ssh_known_hosts
-  #   knownHosts =
-  #     # Update only the values of the given attribute set.
-  #     #
-  #     #   mapAttrs
-  #     #   (name: value: ("bar-" + value))
-  #     #   { x = "a"; y = "b"; }
-  #     #     => { x = "bar-a"; y = "bar-b"; }
-  #     lib.attrsets.mapAttrs
-  #       (host: value: {
-  #         hostNames = [
-  #           host
-  #           hostsAddr.${host}.ipv4
-  #         ];
-  #         publicKey = value.publicKey;
-  #       })
-  #       {
-  #         server1.publicKey = "";
-  #         server2.publicKey = "";
-  #         server3.publicKey = "";
-  #       };
-  # };
 }

@@ -1,9 +1,14 @@
-{ config, pkgs, hostname, ... }:
+{
+  config,
+  pkgs,
+  hostname,
+  ...
+}:
 let
   inherit (pkgs.stdenv) isDarwin;
-  rebuild-command =
-    if isDarwin then "darwin-rebuild" else "sudo -H nixos-rebuild";
-in {
+  rebuild-command = if isDarwin then "darwin-rebuild" else "sudo -H nixos-rebuild";
+in
+{
 
   # Fix home manager for non NixOS
   # targets.genericLinux.enable = true;
@@ -51,8 +56,7 @@ in {
 
   home = {
     username = "dsn";
-    homeDirectory =
-      if isDarwin then "/Users/dsn" else "/home/dsn"; # required by sops
+    homeDirectory = if isDarwin then "/Users/dsn" else "/home/dsn"; # required by sops
     stateVersion = "23.11";
     file."${config.home.homeDirectory}/.hushlogin".text = "";
     sessionVariables.NIXD_FLAGS = "-log=error";
@@ -88,8 +92,7 @@ in {
       cfg = "vim $HOME/dotfiles/modules/home/git.nix";
       cfh = "vim $HOME/dotfiles/profiles/dsn.nix";
       cfz = "vim $HOME/dotfiles/modules/home/zsh.nix";
-      rf =
-        "home-manager switch --flake ~/dotfiles/#${hostname}; source ~/.config/zsh/.zshrc";
+      rf = "home-manager switch --flake ~/dotfiles/#${hostname}; source ~/.config/zsh/.zshrc";
       rs = "${rebuild-command} switch --flake ~/dotfiles/#${hostname}";
       ru = "pushd ~/dotfiles; nix flake update; rf; popd";
     };

@@ -1,8 +1,15 @@
-{ lib, config, pkgs, unstable, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  unstable,
+  ...
+}:
 with lib;
 let
   cfg = config.dsn.nvim;
-  fromGitHub = rev: ref: repo:
+  fromGitHub =
+    rev: ref: repo:
     pkgs.vimUtils.buildVimPlugin {
       pname = "${lib.strings.sanitizeDerivationName repo}";
       version = ref;
@@ -11,9 +18,12 @@ let
         inherit ref rev;
       };
     };
-in {
+in
+{
 
-  options.dsn.nvim = { enable = mkEnableOption "Enable neovim"; };
+  options.dsn.nvim = {
+    enable = mkEnableOption "Enable neovim";
+  };
 
   config = mkIf cfg.enable {
     home.packages = [
@@ -21,7 +31,7 @@ in {
       pkgs.nodePackages."bash-language-server"
       pkgs.nodePackages."diagnostic-languageserver"
       pkgs.nodePackages."dockerfile-language-server-nodejs"
-      pkgs.nodePackages."graphql-language-service-cli"
+      # pkgs.nodePackages."graphql-language-service-cli"
       pkgs.nodePackages."typescript"
       pkgs.nodePackages."typescript-language-server"
       # pkgs.nodePackages."vim-language-server"
@@ -101,8 +111,9 @@ in {
         vim-fugitive
         vim-surround
         vim-tmux-navigator
-        (fromGitHub "483019d251c31acd14102bc279f938f98d9a3de6" "main"
-          "mrbjarksen/neo-tree-diagnostics.nvim")
+        # (fromGitHub "483019d251c31acd14102bc279f938f98d9a3de6" "main"
+        #   "mrbjarksen/neo-tree-diagnostics.nvim"
+        # )
       ];
     };
 
@@ -116,7 +127,6 @@ in {
     '';
 
     home.file."${config.home.homeDirectory}/.config/nvim".source =
-      config.lib.file.mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/dotfiles/modules/home/neovim/nvim";
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/modules/home/neovim/nvim";
   };
 }

@@ -1,9 +1,11 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.dsn.virtualisation;
-in {
-  options.dsn.virtualisation = {
-    enable = mkEnableOption "Enable virtualisation";
+let
+  cfg = config.dsn.docker;
+in
+{
+  options.dsn.docker = {
+    enable = mkEnableOption "Enable docker";
   };
 
   config = mkIf cfg.enable {

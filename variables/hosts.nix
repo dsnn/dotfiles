@@ -60,6 +60,16 @@
       tags = [ "dev" ];
       system = "x86_64-linux";
     };
+    work = {
+      name = "work";
+      hostname = "work";
+      ip = "192.168.2.10";
+      nixos-modules = [ ../hosts/work/configuration.nix ];
+      home-modules = [ ../modules/home ];
+      profiles = [ ../profiles/dsn.nix ];
+      tags = [ "dev" ];
+      system = "x86_64-linux";
+    };
     iso = {
       name = "iso";
       generate-modules = [ ../hosts/iso/configuration.nix ];

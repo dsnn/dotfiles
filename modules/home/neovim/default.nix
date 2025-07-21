@@ -117,7 +117,7 @@ in
       ];
     };
 
-    programs.zsh.initExtra = ''
+    programs.zsh.initContent = ''
       function run_nvim() {
         BUFFER="nvim && clear"
         zle accept-line

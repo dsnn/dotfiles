@@ -1,3 +1,4 @@
+# https://github.com/jabirali/tmux-tilish
 {
   lib,
   config,
@@ -27,7 +28,7 @@ in
 
   config = mkIf cfg.enable {
     programs = {
-      zsh.initExtra = ''
+      zsh.initContent = ''
         export PATH=${tmux-smart-session-manager}/share/tmux-plugins/t-smart-tmux-session-manager/bin/:$PATH
       '';
 

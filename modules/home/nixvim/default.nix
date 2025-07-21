@@ -2,7 +2,7 @@
 {
   imports = [ inputs.nixvim.homeManagerModules.nixvim ];
 
-  programs.zsh.initExtra = ''
+  programs.zsh.initContent = ''
     function run_nvim() {
       BUFFER="nvim && clear"
       zle accept-line

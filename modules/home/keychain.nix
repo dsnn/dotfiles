@@ -18,7 +18,6 @@ in
           "--quiet"
           "--quick"
         ];
-        agents = [ "ssh" ];
         keys = [ "id_rsa" ];
       };
     };

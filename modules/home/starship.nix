@@ -15,7 +15,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.zsh.initExtra = ''
+    programs.zsh.initContent = ''
       if command -v starship &> /dev/null
       then
         eval "$(starship init zsh)"

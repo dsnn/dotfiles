@@ -20,7 +20,7 @@ in
       shellAliases = {
         j = "just";
       };
-      initExtra = ''
+      initContent = ''
         export JUST_UNSTABLE=1
       '';
     };

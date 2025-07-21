@@ -1,9 +1,13 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.dsn.lazygit;
-in {
+let
+  cfg = config.dsn.lazygit;
+in
+{
 
-  options.dsn.lazygit = { enable = mkEnableOption "Enable lazygit"; };
+  options.dsn.lazygit = {
+    enable = mkEnableOption "Enable lazygit";
+  };
 
   config = mkIf cfg.enable {
     programs.lazygit = {
@@ -19,7 +23,7 @@ in {
       };
     };
 
-    programs.zsh.initExtra = ''
+    programs.zsh.initContent = ''
       function run_lazy_git() {
         BUFFER="lazygit && clear"
         zle accept-line

@@ -1,22 +1,22 @@
-{ ... }: {
+{ ... }:
+{
 
   dsn = {
     nix.enable = true;
     shells.enable = true;
     systemPackages.enable = true;
     homebrew.enable = true;
-    skhd.enable = true;
   };
 
   time.timeZone = "Europe/Stockholm";
 
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   users.users.dsn.home = "/Users/dsn";
 
-  services.nix-daemon.enable = true;
-
   programs.zsh.enable = true;
+
+  system.primaryUser = "dsn";
 
   system.defaults = {
     NSGlobalDomain = {

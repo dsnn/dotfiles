@@ -16,19 +16,16 @@ in
         enable = true;
         settings = {
           date = "+%Y-%m-%d %H:%m:%S";
-          # ignore-globs = [ ".git" ".hg" ];
         };
-
-        # custom ls aliases
       };
       zsh = {
         shellAliases = {
           l = "lsd -lA --group-dirs=first";
-          ls = "lsd -lA --group-dirs=first";
+          # ls = "lsd -lA --group-dirs=first";
           lso = "lsd -lA --group-dirs=first --permission=octal";
-          la = "lsd -la";
+          # la = "lsd -la";
           lst = "lsd -lAt";
-          lt = "lsd --tree";
+          # lt = "lsd --tree";
           ltr = "lsd -lA --tree";
           lls = "lsd -lA --total-size";
         };

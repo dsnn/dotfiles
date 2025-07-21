@@ -102,7 +102,7 @@ in
             # dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
           };
 
-        initExtra = ''
+        initContent = ''
           # make vi mode transitions faster
           export KEYTIMEOUT=1
 

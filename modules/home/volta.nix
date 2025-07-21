@@ -1,14 +1,23 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 with lib;
-let cfg = config.dsn.volta;
-in {
+let
+  cfg = config.dsn.volta;
+in
+{
 
-  options.dsn.volta = { enable = mkEnableOption "Enable volta"; };
+  options.dsn.volta = {
+    enable = mkEnableOption "Enable volta";
+  };
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [ volta ];
 
-    programs.zsh.initExtra = ''
+    programs.zsh.initContent = ''
       export VOLTA_HOME="$HOME/.config/volta"
       export PATH="$VOLTA_HOME/bin:$PATH"
 

@@ -1,9 +1,7 @@
 // @ts-ignore
 import fs from "fs";
 import {KarabinerRules} from "./types";
-import {createHyperSubLayers, app, open, window } from "./utils";
-
-const KARABINER_FILENAME = "../src/karabiner.json";
+import {createHyperSubLayers, app, open, window, switchToLanguage} from "./utils";
 
 const rules: KarabinerRules[] = [
   {
@@ -12,10 +10,10 @@ const rules: KarabinerRules[] = [
       {
         "from": {
           "key_code": "caps_lock",
-          "modifiers": { "optional": ["any"] }
+          "modifiers": {"optional": ["any"]}
         },
-        "to": [{ "key_code": "left_control" }],
-        "to_if_alone": [{ "key_code": "escape" }],
+        "to": [{"key_code": "left_control"}],
+        "to_if_alone": [{"key_code": "escape"}],
         "type": "basic"
       }
     ]
@@ -47,30 +45,27 @@ const rules: KarabinerRules[] = [
             },
           },
         ],
-        // to_if_alone: [
-        //   {
-        //     key_code: "escape",
-        //   },
-        // ],
         type: "basic",
       },
     ],
   },
   ...createHyperSubLayers({
-    // Browse
+    // b = Browse
     b: {
       c: open("https://calendar.google.com"),
       m: open("https://mail.google.com"),
       r: open("https://www.reddit.com"),
       t: open("https://app.todoist.com/app/inbox"),
-      y: open("https://wwww.yputube.com"),
+      y: open("https://www.youtube.com"),
+      s: open("raycast://extensions/raycast/browser-bookmarks/index")
     },
-    // Open applications
+
+    // o = Open applications
     o: {
       1: app("1Password"),
+      b: app("Google Chrome"),
       d: app("Discord"),
       f: app("Finder"),
-      g: app("Google Chrome"),
       m: app("Spotify"),
       n: app("Obsidian"),
       r: app("Rider"),
@@ -79,7 +74,7 @@ const rules: KarabinerRules[] = [
       w: app("Teams"),
     },
 
-    // Window managment
+    // w = Window managment
     w: {
       h: window("left-half"),
       j: window("bottom-half"),
@@ -88,28 +83,24 @@ const rules: KarabinerRules[] = [
       y: window("previous-display"),
       o: window("next-display"),
       f: window("maximize"),
+      r: window("restore"),
       m: {
         description: "Window: Hide",
-        to: [{key_code: "h", modifiers: ["right_command"]}],
+        to: [{key_code: "h", modifiers: ["left_command"]}],
       },
-      n: {
-        description: "Window: Next Window",
-        to: [{key_code: "grave_accent_and_tilde", modifiers: ["right_command"]},
-        ],
-      },
+      p: open("raycast://extensions/raycast/window-management/previous-desktop"),
+      n: open("raycast://extensions/raycast/window-management/next-desktop"),
     },
 
-    // s = "System"
+    // s = System
     s: {
-      u: {to: [{key_code: "volume_increment"}]},
-      j: {to: [{key_code: "volume_decrement"}]},
+      j: {to: [{key_code: "volume_increment"}]},
+      k: {to: [{key_code: "volume_decrement"}]},
       i: {to: [{key_code: "display_brightness_increment"}]},
-      k: {to: [{key_code: "display_brightness_decrement"}]},
+      o: {to: [{key_code: "display_brightness_decrement"}]},
       l: {to: [{key_code: "q", modifiers: ["right_control", "right_command"]}]},
       p: {to: [{key_code: "play_or_pause"}]},
       semicolon: {to: [{key_code: "fastforward"}]},
-      // "D"o not disturb toggle
-      d: open(`raycast://extensions/yakitrak/do-not-disturb/toggle?launchType=background`),
     },
 
     // v = Arrows
@@ -118,29 +109,36 @@ const rules: KarabinerRules[] = [
       j: {to: [{key_code: "down_arrow"}]},
       k: {to: [{key_code: "up_arrow"}]},
       l: {to: [{key_code: "right_arrow"}]},
+      p: {to: [{key_code: "page_up"}]},
+      n: {to: [{key_code: "page_down"}]},
     },
 
     // c = Music
     c: {
-      p: {to: [{key_code: "play_or_pause"}]},
-      n: {to: [{key_code: "fastforward"}]},
       b: {to: [{key_code: "rewind"}]},
+      n: {to: [{key_code: "fastforward"}]},
+      p: {to: [{key_code: "play_or_pause"}]},
     },
 
-    // r = "Raycast"
+    // r = Raycast
     r: {
       c: open("raycast://extensions/thomas/color-picker/pick-color"),
-      n: open("raycast://script-commands/dismiss-notifications"),
-      e: open("raycast://extensions/raycast/emoji-symbols/search-emoji-symbols"),
-      p: open("raycast://extensions/raycast/raycast/confetti"),
+      s: open("raycast://extensions/raycast/emoji-symbols/search-emoji-symbols"),
       h: open("raycast://extensions/raycast/clipboard-history/clipboard-history"),
-      x: open("raycast://extensions/raycast/raycast-settings/extensions"),
-    }
+      n: open("raycast://script-commands/dismiss-notifications"),
+      p: open("raycast://extensions/raycast/raycast/confetti"),
+      e: open("raycast://extensions/raycast/raycast-settings/extensions"),
+    },
+
+    // l = Language
+    l: {
+      e: switchToLanguage("en"),
+      s: switchToLanguage("sv"),
+    },
   }),
 ];
 
 const global = {show_in_menu_bar: false};
-
 const defaultProfile = {
   name: "Default profile",
   selected: true,
@@ -150,11 +148,11 @@ const defaultProfile = {
     keyboard_type_v2: "iso"
   }
 };
-
 const profiles = [defaultProfile];
 const settings = {global, profiles}
+const karabiner_filename = "../src/karabiner.json";
 
 fs.writeFileSync(
-  KARABINER_FILENAME,
+  karabiner_filename,
   JSON.stringify(settings, null, 2)
 );

@@ -21,7 +21,7 @@ export interface Parameters {
 type Conditions =
   | FrontMostApplicationCondition
   | DeviceCondition
-  | KeybaordTypeCondition
+  | KeyboardTypeCondition
   | InputSourceCondition
   | VaribaleCondition
   | EventChangedCondition;
@@ -53,7 +53,7 @@ interface Identifiers {
   is_built_in_keyboard?: boolean;
 }
 
-type KeybaordTypeCondition = {
+type KeyboardTypeCondition = {
   type: "keyboard_type_if" | "keyboard_type_unless";
   keyboard_types: string[];
   description?: string;
@@ -142,6 +142,9 @@ export interface To {
    * @see: {@link https://karabiner-elements.pqrs.org/docs/json/complex-modifications-manipulator-definition/to/software_function/iokit_power_management_sleep_system/}
    */
   software_function?: SoftwareFunction;
+  select_input_source?: {
+    language: string;
+  };
 }
 
 export interface MouseKey {

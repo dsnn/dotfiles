@@ -9,8 +9,8 @@
 
 let
   inherit (lib) mkOption types mkIf;
-  modKeys = import ./types/modifiers.nix;
-  keyCodeType = types.enum ./types/keycodes.nix;
+  modKeys = import ./modifiers.nix;
+  keyCodeType = types.enum ./keycodes.nix;
   modifierType = types.listOf (types.enum modKeys);
 
 in

@@ -20,3 +20,4 @@ tags
 named.conf.key
 .env
 **/*/*.secrets*
+.idea

@@ -3,8 +3,7 @@ rec {
   username = "dsn";
   useremail = "dsn@dsnn.io";
   timeZone = "Europe/Stockholm";
-  version = "24.11";
-
+  version = "25.05";
   networking = {
     mainGateway = "192.168.1.1"; # main router
     defaultGateway = "192.168.2.1";

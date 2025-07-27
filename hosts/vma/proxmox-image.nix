@@ -1,4 +1,4 @@
-# https://github.com/NixOS/nixpkgs/blob/nixos-24.11/nixos/modules/virtualisation/proxmox-image.nix
+# https://github.com/NixOS/nixpkgs/blob/nixos-25.05/nixos/modules/virtualisation/proxmox-image.nix
 { modulesPath, ... }:
 {
   imports = [

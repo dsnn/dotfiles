@@ -29,6 +29,7 @@ in
     lazygit.enable = true;
     lsd.enable = true;
     nvim.enable = true;
+    # nixvim.enable = true;
     ssh.enable = true;
     starship.enable = true;
     tmux.enable = true;

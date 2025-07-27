@@ -28,8 +28,8 @@ in
     keychain.enable = true;
     lazygit.enable = true;
     lsd.enable = true;
-    nvim.enable = true;
-    # nixvim.enable = true;
+    nvim.enable = false;
+    nixvim.enable = true;
     ssh.enable = true;
     starship.enable = true;
     tmux.enable = true;

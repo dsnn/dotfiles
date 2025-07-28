@@ -14,7 +14,7 @@ let
 in
 inputs.home-manager.lib.homeManagerConfiguration {
   extraSpecialArgs = (genSpecialArgs system) // {
-    inherit hostname;
+    inherit hostname system;
   };
   pkgs = inputs.nixpkgs.legacyPackages.${system};
   modules = home-modules ++ profiles;

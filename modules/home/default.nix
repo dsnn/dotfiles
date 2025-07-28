@@ -14,7 +14,6 @@
     ./lazygit.nix
     ./lsd.nix
     ./neovim
-    ./nixvim
     ./packages.nix
     ./sops.nix
     ./ssh-config.nix

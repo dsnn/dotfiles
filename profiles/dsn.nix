@@ -1,7 +1,9 @@
 {
+  inputs,
   config,
   pkgs,
   hostname,
+  system,
   ...
 }:
 let
@@ -12,6 +14,10 @@ in
 
   # Fix home manager for non NixOS
   # targets.genericLinux.enable = true;
+
+  home.packages = [
+    inputs.mynixvim.packages.${system}.default
+  ];
 
   dsn = {
     packages = {
@@ -29,7 +35,6 @@ in
     lazygit.enable = true;
     lsd.enable = true;
     nvim.enable = false;
-    nixvim.enable = true;
     ssh.enable = true;
     starship.enable = true;
     tmux.enable = true;

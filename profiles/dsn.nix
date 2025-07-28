@@ -16,7 +16,7 @@ in
   # targets.genericLinux.enable = true;
 
   home.packages = [
-    inputs.mynixvim.packages.${system}.default
+    inputs.myflakes.packages.${system}.neovim
   ];
 
   dsn = {

@@ -17,7 +17,36 @@ in
 
   home.packages = [
     inputs.myflakes.packages.${system}.neovim
+
+    pkgs.ansible-lint
+    pkgs.commitlint
+    pkgs.docker-compose-language-service
+    pkgs.eslint_d
+    pkgs.jq
+    pkgs.lua-language-server
+    pkgs.markdownlint-cli
+    pkgs.nil
+    pkgs.nixfmt-rfc-style
+    pkgs.pre-commit
+    pkgs.prettierd
+    pkgs.proselint
+    pkgs.shellcheck
+    pkgs.shfmt
+    pkgs.statix
+    pkgs.stylelint
+    pkgs.stylua
+    pkgs.vale
+    pkgs.yamllint
   ];
+
+  programs.zsh.initContent = ''
+    function run_nvim() {
+      BUFFER="nvim && clear"
+      zle accept-line
+    }
+    zle -N run_nvim
+    bindkey "^n" run_nvim
+  '';
 
   dsn = {
     packages = {

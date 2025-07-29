@@ -14,32 +14,22 @@
   '';
 
   dsn = {
-    bat.enable = true;
     bottom.enable = true;
     dircolors.enable = false;
-    fzf.enable = true;
     git.enable = true;
-    inputrc.enable = true;
+    just.enable = true;
     karabiner.enable = true;
     keychain.enable = true;
     lazygit.enable = true;
-    lsd.enable = true;
+    shell.enable = true;
+    sops.enable = true;
     ssh.enable = true;
-    starship.enable = true;
     tmux.enable = true;
     tmuxp.enable = true;
-    vivid.enable = true;
     volta.enable = true;
     wget.enable = true;
     xdg.enable = true;
     xresources.enable = true;
-    zoxide.enable = true;
-    just.enable = true;
-    zsh = {
-      enable = true;
-      enable-docker-aliases = false;
-    };
-    sops.enable = true;
   };
 
   nixpkgs = {

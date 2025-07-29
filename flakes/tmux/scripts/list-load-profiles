@@ -1,0 +1,11 @@
+#!/run/current-system/sw/bin/bash
+
+# list and load available tmuxp profiles
+
+PROFILE_PATH=$HOME/.config/tmuxp
+SELECTED=$(ls -1 "$PROFILE_PATH" | tr " " "\n" | fzf)
+
+if [ -n $SELECTED ]; then
+    echo $SELECTED
+    tmuxp load "$PROFILE_PATH/$SELECTED"
+fi

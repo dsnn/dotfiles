@@ -1,4 +1,9 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  system,
+  ...
+}:
 {
 
   # move to shell:

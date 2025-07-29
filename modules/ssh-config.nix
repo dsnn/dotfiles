@@ -67,7 +67,6 @@ let
     IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
   '';
   osSpecificConfig = if isDarwin then darwin-extra-config else linux-extra-config;
-  allHosts = hostsAddr // sshHosts;
 in
 {
 
@@ -84,7 +83,7 @@ in
       extraConfig = lib.strings.concatStrings [
         osSpecificConfig
         "\n"
-        (generateSshHosts allHosts)
+        (generateSshHosts sshHosts)
       ];
     };
   };

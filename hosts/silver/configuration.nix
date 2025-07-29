@@ -1,11 +1,33 @@
-{ ... }:
+{ pkgs, ... }:
 {
 
   dsn = {
     nix.enable = true;
-    shells.enable = true;
-    systemPackages.enable = true;
     homebrew.enable = true;
+  };
+
+  environment.systemPackages = with pkgs; [
+    age
+    coreutils
+    file
+    findutils
+    git
+    home-manager
+    htop
+    man
+    nix
+    tree
+    vim
+    which
+  ];
+
+  environment = {
+    shells = with pkgs; [
+      bash
+      zsh
+    ];
+    systemPath = [ "/opt/homebrew/bin" ];
+    pathsToLink = [ "/Applications" ];
   };
 
   time.timeZone = "Europe/Stockholm";

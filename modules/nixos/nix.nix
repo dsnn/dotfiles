@@ -1,11 +1,21 @@
-{ inputs, config, lib, pkgs, myvars, ... }:
+{
+  inputs,
+  config,
+  lib,
+  pkgs,
+  myvars,
+  ...
+}:
 let
   inherit (lib) mkEnableOption mkIf optionalAttrs;
   inherit (myvars) trustedUsers;
   inherit (pkgs.stdenv) isDarwin;
   cfg = config.dsn.nix;
-in {
-  options.dsn.nix = { enable = mkEnableOption "Enable common nix settings"; };
+in
+{
+  options.dsn.nix = {
+    enable = mkEnableOption "Enable common nix settings";
+  };
 
   config = mkIf cfg.enable {
     nix = {
@@ -14,14 +24,20 @@ in {
       optimise.automatic = true;
       settings = {
         allowed-users = trustedUsers;
-        experimental-features = [ "nix-command" "flakes" "pipe-operators" ];
+        experimental-features = [
+          "nix-command"
+          "flakes"
+          "pipe-operators"
+        ];
         http-connections = 50;
         log-lines = 50;
         trusted-users = trustedUsers;
         warn-dirty = false;
 
-        substituters =
-          [ "https://cache.nixos.org" "https://nix-community.cachix.org" ];
+        substituters = [
+          "https://cache.nixos.org"
+          "https://nix-community.cachix.org"
+        ];
 
         trusted-public-keys = [
           "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -41,7 +57,8 @@ in {
       gc = {
         automatic = true;
         options = "--delete-older-than 30d";
-      } // optionalAttrs isDarwin {
+      }
+      // optionalAttrs isDarwin {
         interval = {
           Weekday = 0;
           Hour = 0;

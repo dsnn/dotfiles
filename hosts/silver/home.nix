@@ -1,43 +1,9 @@
 {
-  inputs,
   config,
-  pkgs,
   hostname,
-  system,
   ...
 }:
-let
-  inherit (pkgs.stdenv) isDarwin;
-  rebuild-command = if isDarwin then "darwin-rebuild" else "sudo -H nixos-rebuild";
-in
 {
-
-  # Fix home manager for non NixOS
-  # targets.genericLinux.enable = true;
-
-  home.packages = [
-    inputs.myflakes.packages.${system}.neovim
-
-    pkgs.ansible-lint
-    pkgs.commitlint
-    pkgs.docker-compose-language-service
-    pkgs.eslint_d
-    pkgs.jq
-    pkgs.lua-language-server
-    pkgs.markdownlint-cli
-    pkgs.nil
-    pkgs.nixfmt-rfc-style
-    pkgs.pre-commit
-    pkgs.prettierd
-    pkgs.proselint
-    pkgs.shellcheck
-    pkgs.shfmt
-    pkgs.statix
-    pkgs.stylelint
-    pkgs.stylua
-    pkgs.vale
-    pkgs.yamllint
-  ];
 
   programs.zsh.initContent = ''
     function run_nvim() {
@@ -59,7 +25,7 @@ in
     fzf.enable = true;
     git.enable = true;
     inputrc.enable = true;
-    karabiner.enable = isDarwin;
+    karabiner.enable = true;
     keychain.enable = true;
     lazygit.enable = true;
     lsd.enable = true;
@@ -91,8 +57,8 @@ in
 
   home = {
     username = "dsn";
-    homeDirectory = if isDarwin then "/Users/dsn" else "/home/dsn"; # required by sops
-    stateVersion = "23.11";
+    homeDirectory = "/Users/dsn";
+    stateVersion = "25.05";
     file."${config.home.homeDirectory}/.hushlogin".text = "";
     sessionVariables.NIXD_FLAGS = "-log=error";
     file."${config.home.homeDirectory}/.inputrc".text = ''
@@ -110,8 +76,6 @@ in
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
-  # fonts.fontconfig.enable = true;
-
   programs = {
     home-manager.enable = true;
 
@@ -121,14 +85,13 @@ in
       nix-direnv.enable = true;
     };
 
-    # host specific aliases
     zsh.shellAliases = {
       cfc = "vim $HOME/dotfiles/hosts/${hostname}/default.nix";
       cfg = "vim $HOME/dotfiles/modules/home/git.nix";
       cfh = "vim $HOME/dotfiles/profiles/dsn.nix";
       cfz = "vim $HOME/dotfiles/modules/home/zsh.nix";
       rf = "home-manager switch --flake ~/dotfiles/#${hostname}; source ~/.config/zsh/.zshrc";
-      rs = "${rebuild-command} switch --flake ~/dotfiles/#${hostname}";
+      rs = "sudo darwin-rebuild switch --flake ~/dotfiles/#${hostname}";
       ru = "pushd ~/dotfiles; nix flake update; rf; popd";
     };
   };

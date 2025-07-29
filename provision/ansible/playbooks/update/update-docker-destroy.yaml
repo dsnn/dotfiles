@@ -1,7 +1,0 @@
----
-- name: Docker destroy
-  hosts: local
-  tasks:
-    - name: Echo hello
-      ansible.builtin.command: "echo hello"
-      changed_when: false

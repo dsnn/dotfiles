@@ -9,7 +9,7 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
     myflakes = {
-      url = "./flakes";
+      url = "path:flakes";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-stable.follows = "nixpkgs-stable";
     };

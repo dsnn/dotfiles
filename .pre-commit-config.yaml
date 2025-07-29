@@ -1,7 +1,7 @@
 ---
 exclude: |
   (?x)^(
-      modules/home/karabiner/.*|
+      modules/karabiner/.*|
       secrets/.*|
       tests/.*
   )$
@@ -19,11 +19,11 @@ repos:
       - id: trailing-whitespace
         args: [--markdown-linebreak-ext=md]
 
-  - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.33.0
-    hooks:
-      - id: yamllint
-        args: [-c=.yamllint]
+  # - repo: https://github.com/adrienverge/yamllint.git
+  #   rev: v1.33.0
+  #   hooks:
+  #     - id: yamllint
+  #       args: [-c=.yamllint]
 
   # This is an unofficial pre-commit hook to use until this PR gets merged:
   # https://github.com/oppiliappan/statix/pull/81
@@ -32,10 +32,10 @@ repos:
     hooks:
       - id: statix-check
 
-  - repo: https://github.com/ansible-community/ansible-lint.git
-    rev: v6.22.2
-    hooks:
-      - id: ansible-lint
+  # - repo: https://github.com/ansible-community/ansible-lint.git
+  #   rev: v6.22.2
+  #   hooks:
+  #     - id: ansible-lint
 
   # - repo: https://github.com/shellcheck-py/shellcheck-py
   #   rev: v0.9.0.6

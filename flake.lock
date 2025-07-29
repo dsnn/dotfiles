@@ -247,11 +247,11 @@
         "terminal-flake": "terminal-flake"
       },
       "locked": {
-        "path": "./flakes",
+        "path": "flakes",
         "type": "path"
       },
       "original": {
-        "path": "./flakes",
+        "path": "flakes",
         "type": "path"
       },
       "parent": []

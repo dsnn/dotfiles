@@ -16,17 +16,18 @@ let
     };
   };
 
+  systems = {
+    aarch64-darwin = "aarch64-darwin";
+    x86_64-linux = "x86_64-linux";
+  };
+
   args = {
     inherit
       inputs
       lib
+      systems
       genSpecialArgs
       ;
-
-    systems = {
-      aarch64-darwin = "aarch64-darwin";
-      x86_64-linux = "x86_64-linux";
-    };
 
   };
 
@@ -35,4 +36,9 @@ in
 {
   homeConfigurations.silver = laptop.home;
   darwinConfigurations.silver = laptop.system;
+
+  packages = {
+    neovim = inputs.myflakes.packages.${systems.aarch64-darwin}.neovim;
+    # terminal = inputs.myflakes.packages.${systems.aarch64-darwin}.terminal;
+  };
 }

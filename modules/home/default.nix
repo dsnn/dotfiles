@@ -1,0 +1,29 @@
+{ ... }:
+{
+  imports = [
+    ./bat.nix
+    ./bottom.nix
+    ./dircolors
+    ./fzf.nix
+    ./git.nix
+    ./inputrc.nix
+    ./just.nix
+    ./karabiner
+    ./keychain.nix
+    ./kitty.nix
+    ./lazygit.nix
+    ./lsd.nix
+    ./sops.nix
+    ./ssh-config.nix
+    ./starship.nix
+    ./tmux.nix
+    ./tmuxp.nix
+    ./vivid.nix
+    ./volta.nix
+    ./wget.nix
+    ./xdg.nix
+    ./xresources.nix
+    ./zoxide.nix
+    ./zsh.nix
+  ];
+}

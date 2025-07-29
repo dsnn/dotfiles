@@ -30,13 +30,22 @@ let
       ;
   };
 
-  laptop = import ./laptop/default.nix args;
+  silver = import ./hosts/silver/default.nix args;
+  # dev = import ./hosts/dev/default.nix args;
+  iso = import ./packages/iso args;
+  vma = import ./packages/vma args;
 in
 {
-  homeConfigurations.silver = laptop.home;
-  darwinConfigurations.silver = laptop.system;
+  homeConfigurations.silver = silver.home;
+  darwinConfigurations.silver = silver.system;
+
+  # homeConfigurations.dev = dev.home;
+  # nixosConfigurations.dev = dev.system;
 
   packages = {
-    neovim = inputs.myflakes.packages.${systems.aarch64-darwin}.neovim;
+    # neovim = inputs.myflakes.packages.${systems.aarch64-darwin}.neovim;
+    ${systems.x86_64-linux} = {
+      inherit iso vma;
+    };
   };
 }

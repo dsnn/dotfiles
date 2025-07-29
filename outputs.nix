@@ -28,7 +28,6 @@ let
       systems
       genSpecialArgs
       ;
-
   };
 
   laptop = import ./laptop/default.nix args;
@@ -39,6 +38,5 @@ in
 
   packages = {
     neovim = inputs.myflakes.packages.${systems.aarch64-darwin}.neovim;
-    # terminal = inputs.myflakes.packages.${systems.aarch64-darwin}.terminal;
   };
 }

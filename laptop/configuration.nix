@@ -69,26 +69,27 @@
 
   programs.zsh.enable = true;
 
-  system.primaryUser = "dsn";
+  system = {
+    primaryUser = "dsn";
 
-  system.defaults = {
-    NSGlobalDomain = {
-      AppleInterfaceStyle = "Dark";
-      AppleShowAllExtensions = true;
-      InitialKeyRepeat = 15;
-      KeyRepeat = 2;
-    };
-    dock = {
-      autohide = true;
-      orientation = "bottom";
-      show-recents = false;
-    };
-    finder = {
-      AppleShowAllExtensions = true;
-      _FXShowPosixPathInTitle = true;
+    # Used for backwards compatibility, please read the changelog before changing.
+    stateVersion = 4;
+    defaults = {
+      NSGlobalDomain = {
+        AppleInterfaceStyle = "Dark";
+        AppleShowAllExtensions = true;
+        InitialKeyRepeat = 15;
+        KeyRepeat = 2;
+      };
+      dock = {
+        autohide = true;
+        orientation = "bottom";
+        show-recents = false;
+      };
+      finder = {
+        AppleShowAllExtensions = true;
+        _FXShowPosixPathInTitle = true;
+      };
     };
   };
-
-  # Used for backwards compatibility, please read the changelog before changing.
-  system.stateVersion = 4;
 }

@@ -1,3 +1,0 @@
-# Karabiner 
-
-My karabiner config

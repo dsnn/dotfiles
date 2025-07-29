@@ -1,18 +1,36 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 with lib;
-let cfg = config.dsn.bat;
-in {
+let
+  cfg = config.dsn.bat;
+in
+{
 
-  options.dsn.bat = { enable = mkEnableOption "Enable bat"; };
+  options.dsn.bat = {
+    enable = mkEnableOption "Enable bat";
+  };
 
   config = mkIf cfg.enable {
-    programs.zsh.shellAliases = { cat = "bat"; };
+    programs.zsh.shellAliases = {
+      cat = "bat";
+    };
 
     programs.bat = {
       enable = true;
-      config = { theme = "catppuccin"; };
+      config = {
+        theme = "catppuccin";
+      };
       # https://github.com/eth-p/bat-extras/tree/master
-      extraPackages = with pkgs.bat-extras; [ batdiff batman batgrep batwatch ];
+      extraPackages = with pkgs.bat-extras; [
+        batdiff
+        batman
+        batgrep
+        batwatch
+      ];
       themes = {
         catppuccin = {
           src = pkgs.fetchFromGitHub {

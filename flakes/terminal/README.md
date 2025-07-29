@@ -1,3 +1,0 @@
-# Terminal 
-
-My terminal config

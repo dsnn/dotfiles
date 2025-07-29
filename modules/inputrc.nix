@@ -1,9 +1,18 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
-let cfg = config.dsn.inputrc;
-in {
+let
+  cfg = config.dsn.inputrc;
+in
+{
 
-  options.dsn.inputrc = { enable = mkEnableOption "Enable inputrc"; };
+  options.dsn.inputrc = {
+    enable = mkEnableOption "Enable inputrc";
+  };
 
   config = mkIf cfg.enable {
     home.file."${config.home.homeDirectory}/.inputrc".text = ''

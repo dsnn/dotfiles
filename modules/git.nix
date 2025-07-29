@@ -1,18 +1,27 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 with lib;
 let
   cfg = config.dsn.git;
   inherit (pkgs.stdenv) isDarwin;
-in {
+in
+{
 
-  options.dsn.git = { enable = mkEnableOption "Enable git"; };
+  options.dsn.git = {
+    enable = mkEnableOption "Enable git";
+  };
 
   config = mkIf cfg.enable {
     home.sessionVariables = {
-      SSH_AUTH_SOCK = if isDarwin then
-        "${config.home.homeDirectory}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-      else
-        "${config.home.homeDirectory}/.1password/agent.sock";
+      SSH_AUTH_SOCK =
+        if isDarwin then
+          "${config.home.homeDirectory}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+        else
+          "${config.home.homeDirectory}/.1password/agent.sock";
     };
 
     programs.zsh.shellAliases = {
@@ -30,12 +39,10 @@ in {
       lzg = "lazygit";
 
       # TODO: review this. not tested
-      delete-merged-branches =
-        "!f() { git checkout --quiet master && git branch --merged | grep --invert-match '\\*' | xargs -n 1 git branch --delete; git checkout --quiet @{-1}; }; f";
+      delete-merged-branches = "!f() { git checkout --quiet master && git branch --merged | grep --invert-match '\\*' | xargs -n 1 git branch --delete; git checkout --quiet @{-1}; }; f";
 
       # TODO: show commits for today
-      day =
-        "!sh -c 'git log --reverse --no-merges --branches --date=iso --after=\"yesterday 23:59\" --author=\"`git config --get user.name`\"'";
+      day = "!sh -c 'git log --reverse --no-merges --branches --date=iso --after=\"yesterday 23:59\" --author=\"`git config --get user.name`\"'";
 
       # TODO: review this. not working.
       # order files by number of commits, ascending
@@ -43,15 +50,18 @@ in {
       # Scriptified by Gary Bernhardt
       # Show churn for a time range:
       #   $ git churn --since='1 month ago'
-      churn = ''
-        !f() { git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort | awk 'BEGIN {print "count    file"} {print $1 "  " $2}' | sort -g; }; f'';
+      churn = ''!f() { git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort | awk 'BEGIN {print "count    file"} {print $1 "  " $2}' | sort -g; }; f'';
     };
 
     programs.git = {
       enable = true;
       userName = "dsn";
       userEmail = "dsn@dsnn.io";
-      ignores = [ ".DS_Store" "node_modules" "npm-debug.log" ];
+      ignores = [
+        ".DS_Store"
+        "node_modules"
+        "npm-debug.log"
+      ];
 
       extraConfig = {
         core.editor = "nvim";
@@ -113,14 +123,10 @@ in {
         cob = "checkout -b";
         gpf = "push --force-with-lease";
         la = "!${pkgs.git}/bin/git config -l | grep alias | cut -c 7-";
-        ls = ''
-          !${pkgs.git}/bin/git log --pretty=format:"%h %Cblue%ad%Creset %an %Cgreen%s%Creset" --decorate --date=format:'%Y-%m-%d %H:%M:%S' -10'';
-        lg = ''
-          !${pkgs.git}/bin/git log --pretty="%C(yellow)%h%Creset | %cd %d %s (%C(cyan)%an)" --date=format:"%Y-%m-%d %H:%M:%S" --graph'';
-        last = ''
-          !${pkgs.git}/bin/git log -''${1+}''${1-1} HEAD --pretty=format:"%h %Cblue%ad%Creset %an %Cgreen%s%Creset" --decorate --date=format:'%Y-%m-%d %H:%M:%S' -10'';
-        pr =
-          "!${pkgs.git}/bin/git checkout master;!${pkgs.git}/bin/git pull;git checkout @{-1};!${pkgs.git}/bin/git rebase master";
+        ls = ''!${pkgs.git}/bin/git log --pretty=format:"%h %Cblue%ad%Creset %an %Cgreen%s%Creset" --decorate --date=format:'%Y-%m-%d %H:%M:%S' -10'';
+        lg = ''!${pkgs.git}/bin/git log --pretty="%C(yellow)%h%Creset | %cd %d %s (%C(cyan)%an)" --date=format:"%Y-%m-%d %H:%M:%S" --graph'';
+        last = ''!${pkgs.git}/bin/git log -''${1+}''${1-1} HEAD --pretty=format:"%h %Cblue%ad%Creset %an %Cgreen%s%Creset" --decorate --date=format:'%Y-%m-%d %H:%M:%S' -10'';
+        pr = "!${pkgs.git}/bin/git checkout master;!${pkgs.git}/bin/git pull;git checkout @{-1};!${pkgs.git}/bin/git rebase master";
         pu = "!${pkgs.git}/bin/git push -u origin $(!${pkgs.git}/bin/git cb)";
         rba = "rebase --abort";
         rbc = "rebase --continue";

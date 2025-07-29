@@ -1,9 +1,13 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.dsn.bottom;
-in {
+let
+  cfg = config.dsn.bottom;
+in
+{
 
-  options.dsn.bottom = { enable = mkEnableOption "Enable bottom"; };
+  options.dsn.bottom = {
+    enable = mkEnableOption "Enable bottom";
+  };
 
   config = mkIf cfg.enable {
     programs.bottom = {

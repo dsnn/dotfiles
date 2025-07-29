@@ -1,9 +1,13 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.dsn.xresources;
-in {
+let
+  cfg = config.dsn.xresources;
+in
+{
 
-  options.dsn.xresources = { enable = mkEnableOption "Enable xresources"; };
+  options.dsn.xresources = {
+    enable = mkEnableOption "Enable xresources";
+  };
 
   config = mkIf cfg.enable {
     xresources.properties = {

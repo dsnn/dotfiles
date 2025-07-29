@@ -21,7 +21,7 @@
     };
     bat.enable = true;
     bottom.enable = true;
-    dircolors.enable = true;
+    dircolors.enable = false;
     fzf.enable = true;
     git.enable = true;
     inputrc.enable = true;

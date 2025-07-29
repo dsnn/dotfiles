@@ -1,9 +1,18 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 with lib;
-let cfg = config.dsn.wget;
-in {
+let
+  cfg = config.dsn.wget;
+in
+{
 
-  options.dsn.wget = { enable = mkEnableOption "Enable wget"; };
+  options.dsn.wget = {
+    enable = mkEnableOption "Enable wget";
+  };
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [ wget ];

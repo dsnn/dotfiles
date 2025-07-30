@@ -2,6 +2,27 @@
 
 Dotfiles to manage everything.
 
+---
+
+generate documentation and files
+# https://flake.parts/options/files.html
+see: mightyiam/infra/modules/meta/files.nix
+
+e.g
+
+- `README.md`
+- `.github/workflows/check.yaml`
+- `.gitignore`
+- `LICENSE`
+
+--- 
+
+add gh-dash
+https://github.com/dlvhdr/gh-dash
+https://github.com/jojojames/fussy
+https://github.com/nix-community/nh
+https://github.com/jzbor/nix-sweep
+
 # Home manager
 
 ## Shell

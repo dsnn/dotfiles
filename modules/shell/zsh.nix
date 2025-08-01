@@ -4,7 +4,7 @@
   };
 
   flake.modules.homeManager.shell =
-    { config, pkgs }:
+    { config, pkgs, ... }:
     {
       # deps
       home.packages = with pkgs; [ zsh-fzf-tab ];

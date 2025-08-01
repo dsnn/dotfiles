@@ -1,6 +1,6 @@
 {
   flake.modules.homeManager.git =
-    { config, pkgs }:
+    { config, pkgs, ... }:
     let
       inherit (pkgs) stdenv;
 

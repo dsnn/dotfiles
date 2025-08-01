@@ -11,38 +11,23 @@ let
   darwin = mkDarwin "aarch64-darwin";
   home = mkHome "aarch64-darwin";
 
-  # mkHome =
-  #   system: name:
-  #   inputs.home-manager.lib.homeManagerConfiguration {
-  #     extraSpecialArgs = { inherit system; };
-  #     pkgs = inputs.nixpkgs.legacyPackages.${system};
-  #     modules = [
-  #       inputs.self.modules.homeManager
-  #       inputs.self.modules.homeManager.${name}
-  #     ];
-  #   };
-
   mkHome =
-    system: host:
+    system: name:
     inputs.home-manager.lib.homeManagerConfiguration {
+      extraSpecialArgs = { inherit inputs system; };
       pkgs = inputs.nixpkgs.legacyPackages.${system};
-      modules = inputs.self.modules.homeManager.${host}.imports;
-      extraSpecialArgs = { inherit system; };
-    };
-
-  mkNixos =
-    system: cls: name:
-    inputs.nixpkgs.lib.nixosSystem {
-      inherit system;
       modules = [
-        inputs.self.modules.nixos.${name}
-        {
-          networking.hostName = lib.mkDefault name;
-          nixpkgs.hostPlatform = lib.mkDefault system;
-          system.stateVersion = "25.05";
-        }
+        inputs.self.modules.homeManager.${name}
       ];
     };
+
+  # mkHome =
+  #   system: host:
+  #   inputs.home-manager.lib.homeManagerConfiguration {
+  #     pkgs = inputs.nixpkgs.legacyPackages.${system};
+  #     modules = inputs.self.modules.homeManager.${host}.imports;
+  #     extraSpecialArgs = { inherit system; };
+  #   };
 
   mkDarwin =
     system: name:
@@ -54,6 +39,21 @@ let
           networking.hostName = lib.mkDefault name;
           nixpkgs.hostPlatform = lib.mkDefault system;
           system.stateVersion = 4; # fix later (increase to 6 (?))
+        }
+      ];
+    };
+
+  mkNixos =
+    system: cls: name:
+    inputs.nixpkgs.lib.nixosSystem {
+      inherit system;
+      modules = [
+        inputs.self.modules.nixos.${cls}
+        inputs.self.modules.nixos.${name}
+        {
+          networking.hostName = lib.mkDefault name;
+          nixpkgs.hostPlatform = lib.mkDefault system;
+          system.stateVersion = "25.05";
         }
       ];
     };

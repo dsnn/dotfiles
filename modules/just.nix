@@ -1,14 +1,16 @@
 {
-  flake.modules.homeManager.just = pkgs: {
-    home.packages = with pkgs; [ just ];
+  flake.modules.homeManager.just =
+    { pkgs, ... }:
+    {
+      home.packages = with pkgs; [ just ];
 
-    programs.zsh = {
-      shellAliases = {
-        j = "just";
+      programs.zsh = {
+        shellAliases = {
+          j = "just";
+        };
+        initContent = ''
+          export JUST_UNSTABLE=1
+        '';
       };
-      initContent = ''
-        export JUST_UNSTABLE=1
-      '';
     };
-  };
 }

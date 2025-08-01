@@ -20,26 +20,40 @@
       inputs.nixpkgs-stable.follows = "nixpkgs-stable";
     };
 
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
-    darwin.url = "github:lnl7/nix-darwin";
+    darwin = {
+      url = "github:lnl7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    flake-checker.inputs.nixpkgs.follows = "nixpkgs";
-    flake-checker.url = "github:DeterminateSystems/flake-checker";
+    flake-checker = {
+      url = "github:DeterminateSystems/flake-checker";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager/master";
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    disko.inputs.nixpkgs.follows = "nixpkgs";
-    disko.url = "github:nix-community/disko/latest";
+    disko = {
+      url = "github:nix-community/disko/latest";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    colmena.inputs.nixpkgs.follows = "nixpkgs";
-    colmena.url = "github:zhaofengli/colmena";
+    colmena = {
+      url = "github:zhaofengli/colmena";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    nix-ld.inputs.nixpkgs.follows = "nixpkgs";
-    nix-ld.url = "github:Mic92/nix-ld";
+    nix-ld = {
+      url = "github:Mic92/nix-ld";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -60,10 +74,17 @@
     # tell nix about non-standard outputs (like lib for `nix flake show`)
     # inputs.flake-schemas.url = "github:DeterminateSystems/flake-schemas";
 
-    treefmt-nix.url = "github:numtide/treefmt-nix";
-    make-shell.url = "github:nicknovitski/make-shell";
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+    };
 
-    import-tree.url = "github:vic/import-tree";
+    make-shell = {
+      url = "github:nicknovitski/make-shell";
+    };
+
+    import-tree = {
+      url = "github:vic/import-tree";
+    };
   };
 
   # outputs =

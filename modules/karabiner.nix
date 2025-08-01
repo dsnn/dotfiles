@@ -1,6 +1,6 @@
 {
   flake.modules.homeManager.karabiner =
-    { config }:
+    { config, ... }:
     let
       destination = "${config.home.homeDirectory}.config/karabiner";
       source = "${config.home.homeDirectory}/dotfiles/modules/home/_karabiner/src";

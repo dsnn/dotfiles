@@ -1,6 +1,6 @@
 {
   flake.modules.homeManager.shell =
-    { lib, pkgs }:
+    { lib, pkgs, ... }:
     {
       programs.zsh.initContent = ''
         if command -v starship &> /dev/null

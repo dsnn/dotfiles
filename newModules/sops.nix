@@ -1,7 +1,21 @@
-{ inputs }:
 {
+  flake.modules.nixos.sops =
+    { inputs, pkgs }:
+    let
+      inherit (pkgs.stdenv) isDarwin;
+      home = if isDarwin then "/Users/dsn" else "/home/dsn";
+    in
+    {
+      sops.age.keyFile = "${home}/.config/sops/age/keys.txt";
+      sops.age.sshKeyPaths = [ ];
+    };
+
   flake.modules.home.sops =
-    { config, pkgs }:
+    {
+      inputs,
+      config,
+      pkgs,
+    }:
     {
       imports = [ inputs.sops-nix.homeManagerModules.sops ];
 

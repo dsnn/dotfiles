@@ -7,7 +7,20 @@
     # allow-import-from-derivation = false;
   };
 
-  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
+  outputs =
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+
+      imports = [ (inputs.import-tree ./modules) ];
+
+      # systems = [
+      #   "x86_64-linux"
+      #   "aarch64-darwin"
+      # ];
+
+      _module.args.rootPath = ./.;
+
+    };
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";

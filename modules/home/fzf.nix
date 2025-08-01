@@ -1,24 +1,8 @@
 {
-  config,
-  pkgs,
-  lib,
-  ...
-}:
-with lib;
-let
-  cfg = config.dsn.fzf;
-in
-{
+  # https://github.com/junegunn/fzf
+  # https://github.com/nix-community/home-manager/blob/master/modules/programs/fzf.nix
 
-  options.dsn.fzf = {
-    enable = mkEnableOption "Enable fzf";
-  };
-
-  config = mkIf cfg.enable {
-    # https://github.com/junegunn/fzf
-    # https://github.com/nix-community/home-manager/blob/master/modules/programs/fzf.nix
-
-    # deps
+  flake.modules.home.fzf = pkgs: {
     home.packages = with pkgs; [
       fd
       sysz # fzf for systemctl

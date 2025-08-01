@@ -1,5 +1,5 @@
 {
-  flake.module.services.gitea =
+  flake.modules.services.gitea =
     { config }:
     {
       networking.firewall.allowedTCPPorts = [ 3100 ];

@@ -1,5 +1,5 @@
 {
-  flake.modules.home.xdg =
+  flake.modules.homeManager.xdg =
     { config }:
     {
       xdg = {

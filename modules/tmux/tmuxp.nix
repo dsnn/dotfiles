@@ -1,5 +1,5 @@
 {
-  flake.modules.home.tmuxp =
+  flake.modules.homeManager.tmuxp =
     { config }:
     {
       programs.tmux.tmuxp.enable = true;

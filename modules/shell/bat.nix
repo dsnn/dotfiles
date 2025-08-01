@@ -1,5 +1,5 @@
 {
-  flake.modules.home.shell = pkgs: {
+  flake.modules.homeManager.shell = pkgs: {
     programs.zsh.shellAliases = {
       cat = "bat";
     };

@@ -10,7 +10,7 @@
       sops.age.sshKeyPaths = [ ];
     };
 
-  flake.modules.home.sops =
+  flake.modules.homeManager.sops =
     {
       inputs,
       config,

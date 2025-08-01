@@ -1,5 +1,5 @@
 {
-  flake.modules.home.volta = pkgs: {
+  flake.modules.homeManager.volta = pkgs: {
     home.packages = with pkgs; [ volta ];
 
     programs.zsh.initContent = ''

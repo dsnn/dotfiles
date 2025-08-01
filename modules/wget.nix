@@ -1,5 +1,5 @@
 {
-  flake.modules.home.wget = pkgs: {
+  flake.modules.homeManager.wget = pkgs: {
     home.packages = with pkgs; [ wget ];
 
     programs.zsh.shellAliases = {

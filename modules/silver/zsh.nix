@@ -1,5 +1,5 @@
 {
-  flake.modules.home.silver.zsh = {
+  flake.modules.homeManager.silver.zsh = {
     programs.zsh = {
       initContent = ''
         function run_nvim() {

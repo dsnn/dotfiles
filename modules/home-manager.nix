@@ -1,5 +1,5 @@
 {
-  flake.modules.home.home-manager = {
+  flake.modules.homeManager.home-manager = {
     programs.home-manager.enable = true;
   };
 }

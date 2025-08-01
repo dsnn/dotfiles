@@ -1,5 +1,5 @@
 {
-  flake.modules.home.keychain = {
+  flake.modules.homeManager.keychain = {
     programs = {
       keychain = {
         enable = true;

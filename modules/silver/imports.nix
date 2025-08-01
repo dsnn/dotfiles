@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake.modules.home.silver.imports = with inputs.self.modules.home; [
+  flake.modules.homeManager.silver.imports = with inputs.self.modules.homeManager; [
     bottom
     git
     just

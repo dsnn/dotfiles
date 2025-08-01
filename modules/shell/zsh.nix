@@ -3,7 +3,7 @@
     programs.zsh.enable = true;
   };
 
-  flake.modules.home.shell =
+  flake.modules.homeManager.shell =
     { config, pkgs }:
     {
       # deps

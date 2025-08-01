@@ -1,6 +1,6 @@
 # change to predicate and define unfree pkgs explicitly.
 {
-  flake.modules.home.silver.unfree =
+  flake.modules.homeManager.silver.unfree =
     { lib }:
     {
       nixpkgs = {

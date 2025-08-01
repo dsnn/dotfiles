@@ -20,7 +20,7 @@ let
 in
 {
 
-  flake.modules.home.tmux = {
+  flake.modules.homeManager.tmux = {
     programs = {
       zsh.initContent = ''
         export PATH=${tmux-smart-session-manager}/share/tmux-plugins/t-smart-tmux-session-manager/bin/:$PATH

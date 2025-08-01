@@ -11,14 +11,23 @@ let
   darwin = mkDarwin "aarch64-darwin";
   home = mkHome "aarch64-darwin";
 
+  # mkHome =
+  #   system: name:
+  #   inputs.home-manager.lib.homeManagerConfiguration {
+  #     extraSpecialArgs = { inherit system; };
+  #     pkgs = inputs.nixpkgs.legacyPackages.${system};
+  #     modules = [
+  #       inputs.self.modules.homeManager
+  #       inputs.self.modules.homeManager.${name}
+  #     ];
+  #   };
+
   mkHome =
-    system: name:
+    system: host:
     inputs.home-manager.lib.homeManagerConfiguration {
-      extraSpecialArgs = { inherit system; };
       pkgs = inputs.nixpkgs.legacyPackages.${system};
-      modules = [
-        inputs.self.modules.home.${name}
-      ];
+      modules = inputs.self.modules.homeManager.${host}.imports;
+      extraSpecialArgs = { inherit system; };
     };
 
   mkNixos =

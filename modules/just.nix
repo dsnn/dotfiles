@@ -1,5 +1,5 @@
 {
-  flake.modules.home.just = pkgs: {
+  flake.modules.homeManager.just = pkgs: {
     home.packages = with pkgs; [ just ];
 
     programs.zsh = {

@@ -5,7 +5,7 @@
 # E.g tmux, zsh etc.
 # Review and add more cool integrations like zsh-fzf-tab, alot of nice stuff out there!
 {
-  flake.modules.home.fzf =
+  flake.modules.homeManager.fzf =
     {
       config,
       pkgs,

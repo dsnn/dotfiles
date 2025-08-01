@@ -1,5 +1,5 @@
 {
-  flake.modules.home.silver.home =
+  flake.modules.homeManager.silver.home =
     { config, pkgs }:
     let
       default-packages = with pkgs; [

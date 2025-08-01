@@ -1,5 +1,5 @@
 {
-  flake.modules.home.karabiner =
+  flake.modules.homeManager.karabiner =
     { config }:
     let
       destination = "${config.home.homeDirectory}.config/karabiner";

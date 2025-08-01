@@ -1,5 +1,5 @@
 {
-  flake.modules.home.shell =
+  flake.modules.homeManager.shell =
     { lib, pkgs }:
     {
       programs.zsh.initContent = ''

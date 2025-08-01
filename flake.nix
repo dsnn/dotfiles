@@ -65,11 +65,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # inputs in module(s) and generate flake.nix instead ?
-    # flake-file.inputs = {
-    #   flake-file.url = "github:vic/flake-file";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    files = {
+      url = "github:mightyiam/files";
+    };
 
     # tell nix about non-standard outputs (like lib for `nix flake show`)
     # inputs.flake-schemas.url = "github:DeterminateSystems/flake-schemas";

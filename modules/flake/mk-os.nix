@@ -12,12 +12,11 @@ let
   home = mkHome "aarch64-darwin";
 
   mkHome =
-    system: cls: name:
+    system: name:
     inputs.home-manager.lib.homeManagerConfiguration {
       extraSpecialArgs = { inherit system; };
       pkgs = inputs.nixpkgs.legacyPackages.${system};
       modules = [
-        inputs.self.modules.home.${cls}
         inputs.self.modules.home.${name}
       ];
     };
@@ -27,7 +26,6 @@ let
     inputs.nixpkgs.lib.nixosSystem {
       inherit system;
       modules = [
-        inputs.self.modules.nixos.${cls}
         inputs.self.modules.nixos.${name}
         {
           networking.hostName = lib.mkDefault name;
@@ -42,7 +40,6 @@ let
     inputs.darwin.lib.darwinSystem {
       inherit system;
       modules = [
-        # inputs.self.modules.darwin.darwin
         inputs.self.modules.darwin.${name}
         {
           networking.hostName = lib.mkDefault name;

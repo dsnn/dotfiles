@@ -14,11 +14,11 @@
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
-    # myflakes = {
-    #   url = "github:dsnn/flakes";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    #   inputs.nixpkgs-stable.follows = "nixpkgs-stable";
-    # };
+    myflakes = {
+      url = "github:dsnn/flakes";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
+    };
 
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = "github:lnl7/nix-darwin";

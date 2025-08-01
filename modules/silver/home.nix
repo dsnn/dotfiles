@@ -1,20 +1,8 @@
 {
-  flake.modules.home.silver.packages =
-    {
-      inputs,
-      pkgs,
-      system,
-      ...
-    }:
-    {
-      # move to shell:
-      # nixos-generators
-      # colmena
-
-      home.packages = with pkgs; [
-        inputs.myflakes.packages.${system}.neovim
-
-        # default
+  flake.modules.home.silver.home =
+    { config, pkgs }:
+    let
+      default-packages = with pkgs; [
         cmake
         curl
         fd
@@ -30,8 +18,12 @@
         vim
         wakeonlan
         xclip
+      ];
 
-        # dev
+      dev-packages = with pkgs; [
+        nixos-generators
+        colmena
+
         _1password-cli
         lazydocker
         (
@@ -42,8 +34,10 @@
           ]
         )
         ansible
+      ];
 
-        # neovim
+      neovim-package = with pkgs; [
+        inputs.myflakes.packages."aarch64-darwin".neovim
         ansible-lint
         commitlint
         docker-compose-language-service
@@ -64,5 +58,15 @@
         vale
         yamllint
       ];
+    in
+    {
+      home = {
+        username = "dsn";
+        homeDirectory = "/Users/dsn";
+        stateVersion = "25.05";
+        sessionVariables.NIXD_FLAGS = "-log=error";
+
+        packages = default-packages ++ dev-packages ++ neovim-package;
+      };
     };
 }

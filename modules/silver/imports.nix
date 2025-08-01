@@ -15,7 +15,12 @@
     volta
     wget
     xdg
-    silver.packages
+    systemd
+    home-manager
+    direnv
+    silver.home
+    silver.zsh
+    silver.unfree
   ];
 
   flake.modules.darwin.silver.imports = with inputs.self.modules.darwin; [
@@ -25,6 +30,7 @@
     security
     system
     time
+    zsh
     { users.users.dsn.home = "/Users/dsn"; }
   ];
 }

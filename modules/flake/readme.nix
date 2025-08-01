@@ -1,4 +1,4 @@
-{ config, ... }:
+{ inputs, config, ... }:
 {
   text.readme = {
     order = [
@@ -11,6 +11,8 @@
         Testing
       '';
   };
+
+  imports = [ inputs.files.flakeModules.default ];
 
   perSystem =
     { pkgs, ... }:

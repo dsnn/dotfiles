@@ -21,3 +21,6 @@ named.conf.key
 .env
 **/*/*.secrets*
 .idea
+.direnv
+.envrc
+.pre-commit-config.yaml

@@ -1,5 +1,10 @@
 { inputs, ... }:
 {
+  text.gitignore = ''
+    /result
+    /result.*
+  '';
+
   flake.modules.darwin.nix =
     {
       config,

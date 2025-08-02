@@ -4,7 +4,12 @@
   };
 
   flake.modules.homeManager.shell =
-    { config, pkgs, ... }:
+    {
+      lib,
+      config,
+      pkgs,
+      ...
+    }:
     {
       # deps
       home.packages = with pkgs; [ zsh-fzf-tab ];
@@ -44,6 +49,7 @@
           };
 
           shellAliases = {
+            nix-shell = "nix-shell --run ${lib.getExe pkgs.zsh}";
             awk = "nawk";
             tracert = "trip";
 
@@ -75,8 +81,6 @@
             biu = "nix run";
             bii = "nix-instansiate";
             bis = "nix shell";
-            "nix-shell" = "nix-shell --run zsh";
-
           };
 
           initContent = ''

@@ -26,6 +26,7 @@ in
       volta
       wget
       xdg
+      nh
     ];
   };
 

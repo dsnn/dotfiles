@@ -10,14 +10,6 @@ using [the _files_ flake-parts module](https://github.com/mightyiam/files):
 - `README.md`
 - `.gitignore`
 
-## Host Configurations
-
-All hosts are defined in [`modules/hosts/`](modules/hosts/)
-
-| Host   | Platform | Users | Notes          |
-| ------ | -------- | ----- | -------------- |
-| silver | darwin   | dsn   | Macbook Pro M1 |
-
 ## Links
 
 - [hm-options](https://home-manager-options.extranix.com/)

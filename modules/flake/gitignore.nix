@@ -1,22 +1,20 @@
 { config, ... }:
 {
   text.gitignore = ''
+    **/*/*.secrets*
     *.log
     *.qcow2
     .DS_Store
+    .direnv
+    .env
+    .envrc
+    .idea
     .luarc.json
     .uuid
-    .vagrant/
     .zcompdump
     history
     node_modules/
     package-lock.json
-    named.conf.key
-    .env
-    **/*/*.secrets*
-    .idea
-    .direnv
-    .envrc
   '';
 
   perSystem =

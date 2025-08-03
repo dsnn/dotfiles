@@ -3,7 +3,6 @@
     {
       inputs,
       genSpecialArgs,
-      host,
       ...
     }:
     let

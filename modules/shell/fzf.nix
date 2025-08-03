@@ -6,12 +6,7 @@
 # Review and add more cool integrations like zsh-fzf-tab, alot of nice stuff out there!
 {
   flake.modules.homeManager.shell =
-    {
-      config,
-      pkgs,
-      lib,
-      ...
-    }:
+    { pkgs, ... }:
     {
       # deps
       home.packages = with pkgs; [

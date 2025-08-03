@@ -1,12 +1,6 @@
 {
   flake.modules.homeManager.silver =
-    {
-      inputs,
-      config,
-      pkgs,
-      system,
-      ...
-    }:
+    { inputs, pkgs, ... }:
     let
       default-packages = with pkgs; [
         cmake

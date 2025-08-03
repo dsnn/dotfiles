@@ -11,12 +11,14 @@ in
       # sops
       bottom
       direnv
+      gh
       git
       home-manager
       just
       karabiner
       keychain
       lazygit
+      nh
       shell
       silver
       ssh
@@ -26,8 +28,6 @@ in
       volta
       wget
       xdg
-      nh
-      gh
     ];
   };
 

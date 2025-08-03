@@ -10,16 +10,8 @@
   outputs =
     inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-
       imports = [ (inputs.import-tree ./modules) ];
-
-      # systems = [
-      #   "x86_64-linux"
-      #   "aarch64-darwin"
-      # ];
-
       _module.args.rootPath = ./.;
-
     };
 
   inputs = {
@@ -86,9 +78,6 @@
       url = "github:mightyiam/files";
     };
 
-    # tell nix about non-standard outputs (like lib for `nix flake show`)
-    # inputs.flake-schemas.url = "github:DeterminateSystems/flake-schemas";
-
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
     };
@@ -101,64 +90,4 @@
       url = "github:vic/import-tree";
     };
   };
-
-  # outputs =
-  #   { ... }@inputs:
-  #   let
-  #     inherit (inputs.nixpkgs) lib;
-  #
-  #     genSpecialArgs = system: {
-  #       inherit inputs;
-  #
-  #       unstable = import inputs.nixpkgs-unstable {
-  #         inherit system;
-  #         config.allowUnfree = true;
-  #       };
-  #
-  #       stable = import inputs.nixpkgs-stable {
-  #         inherit system;
-  #         config.allowUnfree = true;
-  #       };
-  #     };
-  #
-  #     systems = {
-  #       aarch64-darwin = "aarch64-darwin";
-  #       x86_64-linux = "x86_64-linux";
-  #     };
-  #
-  #     args = {
-  #       inherit
-  #         inputs
-  #         lib
-  #         systems
-  #         genSpecialArgs
-  #         ;
-  #     };
-  #
-  #     silver = import ./hosts/silver/default.nix args;
-  #     # dev = import ./hosts/dev/default.nix args;
-  #     # iso = import ./packages/iso args;
-  #     # vma = import ./packages/vma args;
-  #   in
-  #   inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-  #
-  #     imports = [
-  #       (inputs.import-tree ./newModules)
-  #     ];
-  #
-  #     # _module.args.rootPath = ./.;
-  #
-  #     # homeConfigurations.silver = silver.home;
-  #     # darwinConfigurations.silver = silver.system;
-  #
-  #     # homeConfigurations.dev = dev.home;
-  #     # nixosConfigurations.dev = dev.system;
-  #
-  #     # packages = {
-  #     #   # neovim = inputs.myflakes.packages.${systems.aarch64-darwin}.neovim;
-  #     #   ${systems.x86_64-linux} = {
-  #     #     inherit iso vma;
-  #     #   };
-  #     # };
-  #   };
 }

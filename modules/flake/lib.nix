@@ -12,22 +12,12 @@ let
   home = mkHome "aarch64-darwin";
 
   mkHome =
-    system: name:
+    system: host: modules:
     inputs.home-manager.lib.homeManagerConfiguration {
-      extraSpecialArgs = { inherit inputs system; };
       pkgs = inputs.nixpkgs.legacyPackages.${system};
-      modules = [
-        inputs.self.modules.homeManager.${name}
-      ];
+      modules = [ inputs.self.modules.homeManager.${host} ];
+      extraSpecialArgs = { inherit inputs system; };
     };
-
-  # mkHome =
-  #   system: host:
-  #   inputs.home-manager.lib.homeManagerConfiguration {
-  #     pkgs = inputs.nixpkgs.legacyPackages.${system};
-  #     modules = inputs.self.modules.homeManager.${host}.imports;
-  #     extraSpecialArgs = { inherit system; };
-  #   };
 
   mkDarwin =
     system: name:

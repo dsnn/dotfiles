@@ -22,7 +22,9 @@
             "nix-command"
             "flakes"
             "pipe-operators"
+            "recursive-nix"
           ];
+          extra-system-features = [ "recursive-nix" ];
 
           http-connections = 50;
           log-lines = 50;

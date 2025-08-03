@@ -4,6 +4,7 @@
     order = [
       "intro"
       "files"
+      "hosts"
       "links"
     ];
 

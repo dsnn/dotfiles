@@ -23,6 +23,7 @@
       dev-packages = with pkgs; [
         nixos-generators
         colmena
+        watchexec
 
         _1password-cli
         lazydocker

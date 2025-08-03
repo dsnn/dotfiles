@@ -27,6 +27,7 @@ in
       wget
       xdg
       nh
+      gh
     ];
   };
 

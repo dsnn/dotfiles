@@ -73,6 +73,10 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
+    mkdocs-flake = {
+      url = "github:applicative-systems/mkdocs-flake";
+    };
+
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";

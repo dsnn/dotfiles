@@ -7,8 +7,8 @@ Dotfiles to manage everything, powered by [nix](https://nix.dev/).
 The following files in this repository are generated and checked
 using [the _files_ flake-parts module](https://github.com/mightyiam/files):
 
-- `README.md`
 - `.gitignore`
+- `README.md`
 
 ## Links
 

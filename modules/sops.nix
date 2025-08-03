@@ -17,7 +17,7 @@
         age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
         age.sshKeyPaths = [ ];
         age.generateKey = false;
-        defaultSopsFile = ./sops.yaml;
+        defaultSopsFile = ./sops.yml;
         validateSopsFiles = true;
 
         # secrets = {

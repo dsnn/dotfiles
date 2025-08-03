@@ -4,6 +4,7 @@
     ''
       ## Links
 
+      - [mightyiam](https://github.com/mightyiam/infra)
       - [bottom](https://github.com/ClementTsang/bottom)
       - [deleting old generations](https://github.com/LnL7/nix-darwin/wiki/Deleting-old-generations)
       - [upgrading macos](https://github.com/LnL7/nix-darwin/wiki/Upgrading-macOS)

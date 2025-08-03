@@ -13,6 +13,7 @@
         # Dotfiles
 
         Dotfiles to manage everything, powered by [nix](https://nix.dev/).
+
       '';
   };
 

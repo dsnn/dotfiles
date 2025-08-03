@@ -4,6 +4,7 @@
     ''
       ## Links
 
+      - [hm-options](https://home-manager-options.extranix.com/)
       - [mightyiam](https://github.com/mightyiam/infra)
       - [vix](https://github.com/vic/vix)
       - [drupol](https://github.com/drupol/infra)

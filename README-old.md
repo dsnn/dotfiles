@@ -4,19 +4,6 @@ Dotfiles to manage everything.
 
 ---
 
-generate documentation and files
-# https://flake.parts/options/files.html
-see: mightyiam/infra/modules/meta/files.nix
-
-e.g
-
-- `README.md`
-- `.github/workflows/check.yaml`
-- `.gitignore`
-- `LICENSE`
-
---- 
-
 add gh-dash
 https://github.com/dlvhdr/gh-dash
 https://github.com/jojojames/fussy
@@ -24,15 +11,6 @@ https://github.com/nix-community/nh
 https://github.com/jzbor/nix-sweep
 
 # Home manager
-
-## Shell
-
-To change shell when using standalone home manager on a e.g. ubuntu installation, use:
-
-```console
-echo ~/.nix-profile/bin/zsh | sudo tee -a /etc/shells
-usermod -s ~/.nix-profile/bin/zsh $user
-```
 
 ## Options
 

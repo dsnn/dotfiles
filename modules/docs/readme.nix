@@ -3,31 +3,22 @@
   text.readme = {
     order = [
       "intro"
-      "second"
       "files"
+      "links"
     ];
 
     parts.intro =
       # markdown
       ''
-        # Dotfiles 
-      '';
+        # Dotfiles
 
-    parts.second =
-      # markdown
-      ''
-        this is a second test
+        Dotfiles to manage everything, powered by [nix](https://nix.dev/).
       '';
   };
 
   perSystem =
     { pkgs, ... }:
     {
-      # packages.readme = pkgs.writeTextFile {
-      #   name = "README.md";
-      #   destination = "/README.md";
-      #   text = config.text.readme;
-      # };
       files.files = [
         {
           path_ = "README.md";

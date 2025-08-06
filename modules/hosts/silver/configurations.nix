@@ -32,4 +32,28 @@ in
   };
 
   flake.darwinConfigurations.silver = darwin "silver";
+
+  # flake.darwinConfigurations.silver = inputs.nixpkgs.lib.nixosSystem {
+  #   inherit system;
+  #   modules =
+  #     with inputs.self.modules.darwin;
+  #     [
+  #       environment
+  #       homebrew
+  #       security
+  #       system
+  #       time
+  #       zsh
+  #       { users.users.dsn.home = "/Users/dsn"; }
+  #     ]
+  #     ++ [
+  #       inputs.self.modules.nixos.${system}
+  #       inputs.self.modules.nixos.silver
+  #       {
+  #         networking.hostName = lib.mkDefault "silver";
+  #         nixpkgs.hostPlatform = lib.mkDefault system;
+  #         system.stateVersion = "25.05";
+  #       }
+  #     ];
+  # };
 }

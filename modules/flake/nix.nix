@@ -13,6 +13,7 @@
     }:
     {
       nix = {
+        enable = true;
         package = pkgs.nix;
         channel.enable = false;
         optimise.automatic = true;

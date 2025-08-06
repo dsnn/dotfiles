@@ -28,7 +28,7 @@ let
         {
           networking.hostName = lib.mkDefault name;
           nixpkgs.hostPlatform = lib.mkDefault system;
-          system.stateVersion = 4; # fix later (increase to 6 (?))
+          system.stateVersion = 6;
         }
       ];
     };

@@ -5,29 +5,24 @@
 
     homebrew = {
       enable = true;
-      caskArgs.no_quarantine = true;
-      global.brewfile = true;
-      taps = [
-        "fujiapple852/trippy" # access this by cmd "trip"
-        # "homebrew/core"
-        # "homebrew/cask"
-        # "homebrew/cask-fonts"
-      ];
-      brews = [
-        "mas"
-        "sstp-client"
-        "trippy"
-        "git-crypt"
-      ];
+      onActivation = {
+        cleanup = "uninstall";
+        upgrade = true;
+      };
+      caskArgs = {
+        no_quarantine = true;
+      };
+      global = {
+        autoUpdate = true;
+      };
+      taps = [ ];
+      brews = [ ];
       casks = [
         # "raycast"
-        # "firefox"
         # "spotify"
         # "slack"
-        # "visual-studio-code"
         # "zoom"
         # "obs"
-        # "font-sf-mono-nerd-font"
       ];
     };
   };

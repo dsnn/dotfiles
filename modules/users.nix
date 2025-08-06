@@ -1,4 +1,7 @@
 {
+  flake.modules.darwin.users = {
+    users.users.dsn.home = "/Users/dsn";
+  };
   flake.modules.nixos.users =
     {
       config,

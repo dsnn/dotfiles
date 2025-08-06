@@ -2,6 +2,8 @@
   flake.modules = {
     darwin.system = {
       system = {
+        stateVersion = 6;
+
         primaryUser = "dsn";
 
         defaults = {

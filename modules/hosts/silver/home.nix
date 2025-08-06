@@ -39,6 +39,7 @@
 
       neovim-package = with pkgs; [
         inputs.myflakes.packages."aarch64-darwin".neovim
+        inputs.myflakes.packages."aarch64-darwin".tmux
         ansible-lint
         commitlint
         docker-compose-language-service

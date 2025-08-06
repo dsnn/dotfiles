@@ -88,7 +88,7 @@
             export KEYTIMEOUT=1
 
             # export dotnet-ef for migrations
-            export PATH="$PATH:/Users/dsn/.dotnet/tools"
+            export PATH="$PATH:${config.home.homeDirectory}/.dotnet/tools"
 
             # enable vi-mode
             bindkey -v

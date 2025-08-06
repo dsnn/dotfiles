@@ -27,8 +27,6 @@ in
       silver
       ssh
       systemd
-      tmux
-      tmuxp
       volta
       wget
       xdg
@@ -42,8 +40,8 @@ in
     modules = with inputs.self.modules.darwin; [
       environment
       homebrew
+      nix
       security
-      silver
       system
       time
       zsh

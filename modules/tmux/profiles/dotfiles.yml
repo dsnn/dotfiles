@@ -1,8 +1,0 @@
----
-session_name: dotfiles
-start_directory: ~/dotfiles
-windows:
-  - window_name: dev
-    panes:
-      - shell_command: nvim
-  - window_name: nix

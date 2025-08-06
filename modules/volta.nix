@@ -1,14 +1,14 @@
 {
   flake.modules.homeManager.volta =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     {
       home.packages = with pkgs; [ volta ];
 
       programs.zsh.initContent = ''
-        export VOLTA_HOME="$HOME/.config/volta"
+        export VOLTA_HOME="${config.home.homeDirectory}/.config/volta"
         export PATH="$VOLTA_HOME/bin:$PATH"
 
-        PATH="$PATH:$HOME/.node_modules/bin"
+        PATH="$PATH:${config.home.homeDirectory}/.node_modules/bin"
         export npm_config_prefix=~/.node_modules
       '';
 

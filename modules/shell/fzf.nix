@@ -1,9 +1,3 @@
-# https://github.com/junegunn/fzf
-# https://github.com/nix-community/home-manager/blob/master/modules/programs/fzf.nix
-
-# TODO: Add options for integrations with other apps.
-# E.g tmux, zsh etc.
-# Review and add more cool integrations like zsh-fzf-tab, alot of nice stuff out there!
 {
   flake.modules.homeManager.shell =
     { pkgs, ... }:

@@ -18,6 +18,7 @@
           "*.png"
           "*.toml"
           "*/.gitignore"
+          "*karabiner/**"
           "LICENSE"
           "envdis"
         ];

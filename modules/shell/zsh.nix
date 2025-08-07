@@ -10,18 +10,68 @@
       pkgs,
       ...
     }:
+    let
+      zshPlugins = [
+        {
+          package = pkgs.nix-zsh-completions;
+          url = "https://github.com/nix-community/nix-zsh-completions";
+          subPath = "/share/zsh/plugins/nix/nix-zsh-completions.plugin.zsh";
+        }
+        {
+          package = pkgs.zsh-fzf-tab;
+          url = "https://github.com/Aloxaf/fzf-tab";
+          subPath = "/share/fzf-tab/fzf-tab.plugin.zsh";
+        }
+        {
+          package = pkgs.zsh-vi-mode;
+          url = "https://github.com/jeffreytse/zsh-vi-mode";
+          subPath = "/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+        }
+        {
+          package = pkgs.zsh-you-should-use;
+          url = "https://github.com/MichaelAquilina/zsh-you-should-use";
+          subPath = "/share/zsh/plugins/you-should-use/you-should-use.plugin.zsh";
+        }
+      ];
+      pluginSources = builtins.concatStringsSep "\n" (
+        map (p: "source ${p.package}${p.subPath}") zshPlugins
+      );
+    in
     {
       # deps
-      home.packages = with pkgs; [ zsh-fzf-tab ];
+      home.packages =
+        with pkgs;
+        [
+          trash-cli # https://github.com/andreafrancia/trash-cli
+        ]
+        ++ (map (p: p.package) zshPlugins);
 
       programs = {
         zsh = {
           enable = true;
-          enableCompletion = true;
-          autosuggestion.enable = true;
-          syntaxHighlighting.enable = true;
-          dotDir = "${config.home.homeDirectory}/.config/zsh";
           autocd = true;
+          dotDir = "${config.home.homeDirectory}/.config/zsh";
+
+          enableVteIntegration = true;
+          enableCompletion = true;
+
+          autosuggestion = {
+            enable = true;
+            strategy = [
+              "match_prev_cmd"
+              "completion"
+              "history"
+            ];
+          };
+          syntaxHighlighting.enable = true;
+
+          # plugins = [
+          #   {
+          #     name = "vi-mode";
+          #     src = pkgs.zsh-vi-mode;
+          #     file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+          #   }
+          # ];
 
           history = {
             size = 10000;
@@ -69,31 +119,125 @@
 
             # actions
             mv = "mv -v";
-            rm = "rm -i -v";
+            rm = "trash";
             rmd = "rm -rf";
             cp = "cp -v";
             df = "df -h";
             mkdir = "mkdir -pv";
             rl = "source ~/.config/zsh/.zshrc";
 
+            # disk usage
+            dud = "du --max-depth=1 --human-readable";
+            duf = "du --summarize --human-readable *";
+
             # nix
             bir = "nix repl";
             biu = "nix run";
             bii = "nix-instansiate";
             bis = "nix shell";
+
+            # Recursively delete `.DS_Store` files
+            cleanup = "find . -name '*.DS_Store' -type f -ls -delete";
+
+            # list the PATH separated by new lines
+            lpath = "echo $PATH | tr ':' '\n'";
+
+            # remove broken symlinks
+            clsym = "find -L . -name . -o -type d -prune -o -type l -exec rm {} +";
+          };
+
+          # Similar to programs.zsh.shellAliases,
+          # but are substituted anywhere on a line.
+          shellGlobalAliases = {
+            H = "| head";
+            T = "| tail";
+            G = "| grep";
+            L = "| less";
+            M = "| most";
+            LL = "2>&1 | less";
+            CA = "2>&1 | cat -A";
+            NE = "2> /dev/null";
+            NUL = "> /dev/null 2>&1";
+            P = "2>&1| pygmentize -l pytb";
           };
 
           initContent = ''
             # make vi mode transitions faster
             export KEYTIMEOUT=1
 
+            # ---------------------- #
+            #       zsh-fzf-tab      #
+            # ---------------------- #
+
+            # disable sort when completing `git checkout`
+            zstyle ':completion:*:git-checkout:*' sort false
+
+            # set descriptions format to enable group support
+            # NOTE: don't use escape sequences (like '%F{red}%d%f') here, fzf-tab will ignore them
+            zstyle ':completion:*:descriptions' format '[%d]'
+
+            # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+            zstyle ':completion:*' menu no
+
+            # preview directory's content with eza when completing cd
+            zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd -1 --color=always $realpath'
+
+            # custom fzf flags
+            # NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
+            zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
+
+            # To make fzf-tab follow FZF_DEFAULT_OPTS.
+            # NOTE: This may lead to unexpected behavior since some flags break this plugin. See Aloxaf/fzf-tab#455.
+            zstyle ':fzf-tab:*' use-fzf-default-opts yes
+
+            # switch group using `<` and `>`
+            zstyle ':fzf-tab:*' switch-group '<' '>'
+
+            # ---------------------- #
+            #         dotnet         #
+            # ---------------------- #
+
             # export dotnet-ef for migrations
             export PATH="$PATH:${config.home.homeDirectory}/.dotnet/tools"
 
-            # enable vi-mode
-            bindkey -v
+            # ---------------------- #
+            #          accept        #
+            # ---------------------- #
 
+            # ctrl + space to accept
             bindkey '^ ' autosuggest-accept
+            bindkey '^Y' autosuggest-accept
+
+            # ---------------------- #
+            #        extract         #
+            # ---------------------- #
+
+            ex ()
+            {
+              if [ -f $1 ] ; then
+                case $1 in
+                  *.tar.bz2)   tar xjf $1   ;;
+                  *.tar.gz)    tar xzf $1   ;;
+                  *.tar.xz)    tar xJf $1   ;;
+                  *.bz2)       bunzip3 $1   ;;
+                  *.rar)       unrar x $1   ;;
+                  *.gz)        gunzip $1    ;;
+                  *.tar)       tar xf $1    ;;
+                  *.tbz2)      tar xjf $1   ;;
+                  *.tgz)       tar xzf $1   ;;
+                  *.zip)       unzip $1     ;;
+                  *.Z)         uncompress $1;;
+                  *.7z)        7z x $1      ;;
+                  *)           echo "'$1' cannot be extracted via ex()" ;;
+                esac
+              else
+                echo "'$1' is not a valid file"
+              fi
+            }
+
+            # ---------------------- #
+            #      fn bindings       #
+            # ---------------------- #
 
             # ctrl + n to open nvim 
             function run_nvim() {
@@ -106,23 +250,24 @@
             autoload -U edit-command-line; zle -N edit-command-line
             bindkey '^e' edit-command-line
 
-            # list the PATH separated by new lines
-            alias lpath='echo $PATH | tr ":" "\n"'
-
-            # Recursively delete `.DS_Store` files
-            alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
-
-            # remove broken symlinks
-            alias clsym="find -L . -name . -o -type d -prune -o -type l -exec rm {} +"
-
             run-cd-command () { BUFFER="cd .."; zle accept-line }
             zle -N run-cd-command
             bindkey '^u' run-cd-command
+
+            # ---------------------- #
+            #      1Password         #
+            # ---------------------- #
 
             if command -v op &> /dev/null
             then
               eval "$(op completion zsh)"; compdef _op op
             fi
+
+            # ---------------------- #
+            #      plugins (pkgs)    #
+            # ---------------------- #
+
+            ${pluginSources}
           '';
         };
       };

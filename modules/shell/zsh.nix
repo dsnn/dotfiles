@@ -95,6 +95,14 @@
 
             bindkey '^ ' autosuggest-accept
 
+            # ctrl + n to open nvim 
+            function run_nvim() {
+              BUFFER="nvim && clear"
+              zle accept-line
+            }
+            zle -N run_nvim
+            bindkey "^n" run_nvim
+
             autoload -U edit-command-line; zle -N edit-command-line
             bindkey '^e' edit-command-line
 
@@ -111,7 +119,7 @@
             zle -N run-cd-command
             bindkey '^u' run-cd-command
 
-              if command -v op &> /dev/null
+            if command -v op &> /dev/null
             then
               eval "$(op completion zsh)"; compdef _op op
             fi
@@ -120,11 +128,3 @@
       };
     };
 }
-
-# // optionalAttrs cfg.enable-docker-aliases {
-#   ds = "docker ps -a";
-#   di = "docker images";
-#   drm = ''docker rm $(docker ps -qa --no-trunc --filter "status=exited")'';
-#   drmi = "docker rmi $(docker images -q -f dangling=true)";
-#   # dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
-# };

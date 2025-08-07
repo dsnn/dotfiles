@@ -95,6 +95,7 @@
             TINC_USE_NIX = "yes";
             WORDCHARS = "";
             BROWSER = "chrome";
+            EDITOR = "nvim";
             MANWIDTH = 79;
           };
 

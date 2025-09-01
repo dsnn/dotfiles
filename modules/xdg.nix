@@ -1,7 +1,9 @@
 {
   flake.modules.homeManager.xdg =
-    { config, ... }:
+    { config, pkgs, ... }:
     {
+      home.packages = with pkgs; [ volta ];
+
       xdg = {
         enable = true;
         cacheHome = "${config.home.homeDirectory}/.local/cache";

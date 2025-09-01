@@ -15,6 +15,11 @@
         inherit SSH_AUTH_SOCK;
       };
 
+      home.packages = with pkgs; [
+        git
+        gh
+      ];
+
       programs.zsh.shellAliases = {
         g = "git";
         ga = "git add .";

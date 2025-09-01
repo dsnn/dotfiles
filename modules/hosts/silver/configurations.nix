@@ -12,24 +12,8 @@ in
     };
     pkgs = inputs.nixpkgs.legacyPackages.${aarch64};
     modules = with inputs.self.modules.homeManager; [
-      # sops
-      bottom
-      direnv
-      gh
-      git
-      home-manager
-      just
-      karabiner
-      keychain
-      lazygit
-      nh
       shell
       silver
-      ssh
-      systemd
-      volta
-      wget
-      xdg
     ];
   };
 

@@ -11,6 +11,7 @@
     {
       home.packages =
         (with pkgs; [
+          nh
           nix-output-monitor
           nix-fast-build
           nix-tree

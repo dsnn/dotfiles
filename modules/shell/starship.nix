@@ -73,7 +73,7 @@
               pkgs.fetchFromGitHub {
                 owner = "catppuccin";
                 repo = "starship";
-                rev = "5629d2356f62a9f2f8efad3ff37476c19969bd4f"; # Replace with the latest commit hash
+                rev = "661c8a2c1cc43b1c0ba1f034ee1dd17442cce815"; # Replace with the latest commit hash
                 sha256 = "nsRuxQFKbQkyEI4TXgvAjcroVdG+heKX5Pauq/4Ota0=";
               }
               + /palettes/${flavour}.toml

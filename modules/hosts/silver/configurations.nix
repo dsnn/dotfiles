@@ -23,10 +23,11 @@ in
       # karabiner
       keychain
       nh
-      # ssh
+      ssh
       # systemd
       volta
       xdg
+      docker
     ];
   };
 
@@ -40,6 +41,7 @@ in
       system
       time
       zsh
+      docker
       users
       {
         networking.hostName = "silver";

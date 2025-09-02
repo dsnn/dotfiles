@@ -27,7 +27,7 @@
         liberation_ttf
         fira-code
         fira-code-symbols
-        Iosevka-nerd-font
+        # Iosevka-nerd-font
       ];
 
       dev-packages = with pkgs; [

@@ -206,14 +206,6 @@
             #      fn bindings       #
             # ---------------------- #
 
-            # ctrl + n to open nvim 
-            function run_nvim() {
-              BUFFER="nvim && clear"
-              zle accept-line
-            }
-            zle -N run_nvim
-            bindkey "^n" run_nvim
-
             autoload -U edit-command-line; zle -N edit-command-line
             bindkey '^e' edit-command-line
 

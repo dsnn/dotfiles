@@ -1,6 +1,6 @@
 {
   flake.modules.homeManager.silver =
-    { inputs, pkgs, ... }:
+    { pkgs, ... }:
     let
       default-packages = with pkgs; [
         cmake
@@ -42,8 +42,6 @@
       ];
 
       neovim-package = with pkgs; [
-        inputs.myflakes.packages."aarch64-darwin".neovim
-        inputs.myflakes.packages."aarch64-darwin".tmux
         ansible-lint
         commitlint
         docker-compose-language-service
@@ -71,7 +69,6 @@
         homeDirectory = "/Users/dsn";
         stateVersion = "25.05";
         sessionVariables.NIXD_FLAGS = "-log=error";
-
         packages = default-packages ++ dev-packages ++ neovim-package ++ font-pkacges;
       };
     };

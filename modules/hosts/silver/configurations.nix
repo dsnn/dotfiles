@@ -14,10 +14,21 @@ in
     modules = with inputs.self.modules.homeManager; [
       shell
       silver
+      bottom
+      direnv
+      git
+      # home-manager
+      lazygit
+      just
+      # karabiner
+      keychain
+      nh
+      # ssh
+      # systemd
+      volta
+      xdg
     ];
   };
-
-  # flake.darwinConfigurations.silver = darwin "silver";
 
   flake.darwinConfigurations.silver = inputs.darwin.lib.darwinSystem {
     system = aarch64;

@@ -20,6 +20,16 @@
         xclip
       ];
 
+      font-pkacges = with pkgs; [
+        noto-fonts
+        noto-fonts-cjk-sans
+        noto-fonts-emoji
+        liberation_ttf
+        fira-code
+        fira-code-symbols
+        Iosevka-nerd-font
+      ];
+
       dev-packages = with pkgs; [
         nixos-generators
         colmena
@@ -68,7 +78,7 @@
         stateVersion = "25.05";
         sessionVariables.NIXD_FLAGS = "-log=error";
 
-        packages = default-packages ++ dev-packages ++ neovim-package;
+        packages = default-packages ++ dev-packages ++ neovim-package ++ font-pkacges;
       };
     };
 }

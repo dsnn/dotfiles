@@ -40,8 +40,8 @@ in
       security
       system
       time
-      zsh
       docker
+      zsh
       users
       {
         networking.hostName = "silver";

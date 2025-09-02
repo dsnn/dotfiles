@@ -5,6 +5,10 @@
       home.packages = with pkgs; [ volta ];
 
       programs.zsh.initContent = ''
+        # ---------------------- #
+        #         volta          #
+        # ---------------------- #
+
         export VOLTA_HOME="${config.home.homeDirectory}/.config/volta"
         export PATH="$VOLTA_HOME/bin:$PATH"
 

@@ -22,11 +22,13 @@
           url = "https://github.com/Aloxaf/fzf-tab";
           subPath = "/share/fzf-tab/fzf-tab.plugin.zsh";
         }
-        {
-          package = pkgs.zsh-vi-mode;
-          url = "https://github.com/jeffreytse/zsh-vi-mode";
-          subPath = "/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
-        }
+        # WARNING: This plugin adds alot of keybindings,
+        # thus breaking my own fn keybindings. review later.
+        # {
+        #   package = pkgs.zsh-vi-mode;
+        #   url = "https://github.com/jeffreytse/zsh-vi-mode";
+        #   subPath = "/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+        # }
         {
           package = pkgs.zsh-you-should-use;
           url = "https://github.com/MichaelAquilina/zsh-you-should-use";
@@ -64,14 +66,6 @@
             ];
           };
           syntaxHighlighting.enable = true;
-
-          # plugins = [
-          #   {
-          #     name = "vi-mode";
-          #     src = pkgs.zsh-vi-mode;
-          #     file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
-          #   }
-          # ];
 
           history = {
             size = 10000;
@@ -120,8 +114,8 @@
 
             # actions
             mv = "mv -v";
-            rm = "trash";
-            rmd = "rm -rf";
+            rm = "trash-put";
+            rmd = "trash-put";
             cp = "cp -v";
             df = "df -h";
             mkdir = "mkdir -pv";
@@ -165,34 +159,6 @@
           initContent = ''
             # make vi mode transitions faster
             export KEYTIMEOUT=1
-
-            # ---------------------- #
-            #       zsh-fzf-tab      #
-            # ---------------------- #
-
-            # disable sort when completing `git checkout`
-            zstyle ':completion:*:git-checkout:*' sort false
-
-            # set descriptions format to enable group support
-            # NOTE: don't use escape sequences (like '%F{red}%d%f') here, fzf-tab will ignore them
-            zstyle ':completion:*:descriptions' format '[%d]'
-
-            # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
-            zstyle ':completion:*' menu no
-
-            # preview directory's content with eza when completing cd
-            zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd -1 --color=always $realpath'
-
-            # custom fzf flags
-            # NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
-            zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
-
-            # To make fzf-tab follow FZF_DEFAULT_OPTS.
-            # NOTE: This may lead to unexpected behavior since some flags break this plugin. See Aloxaf/fzf-tab#455.
-            zstyle ':fzf-tab:*' use-fzf-default-opts yes
-
-            # switch group using `<` and `>`
-            zstyle ':fzf-tab:*' switch-group '<' '>'
 
             # ---------------------- #
             #         dotnet         #
@@ -269,6 +235,34 @@
             # ---------------------- #
 
             ${pluginSources}
+
+            # # ---------------------- #
+            # #       zsh-fzf-tab      #
+            # # ---------------------- #
+            #
+            # # disable sort when completing `git checkout`
+            # zstyle ':completion:*:git-checkout:*' sort false
+            #
+            # # set descriptions format to enable group support
+            # # NOTE: don't use escape sequences (like '%F{red}%d%f') here, fzf-tab will ignore them
+            # zstyle ':completion:*:descriptions' format '[%d]'
+            #
+            # # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+            # zstyle ':completion:*' menu no
+            #
+            # # preview directory's content with eza when completing cd
+            # zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd -1 --color=always $realpath'
+            #
+            # # custom fzf flags
+            # # NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
+            # zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
+            #
+            # # To make fzf-tab follow FZF_DEFAULT_OPTS.
+            # # NOTE: This may lead to unexpected behavior since some flags break this plugin. See Aloxaf/fzf-tab#455.
+            # zstyle ':fzf-tab:*' use-fzf-default-opts yes
+            #
+            # # switch group using `<` and `>`
+            # zstyle ':fzf-tab:*' switch-group '<' '>'
           '';
         };
       };

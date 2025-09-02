@@ -19,6 +19,10 @@
       };
 
       programs.zsh.initContent = ''
+        # ---------------------- #
+        #        lazygit         #
+        # ---------------------- #
+
         function run_lazy_git() {
           BUFFER="lazygit && clear"
           zle accept-line

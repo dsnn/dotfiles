@@ -28,6 +28,7 @@ in
       volta
       xdg
       docker
+      qutebrowser
     ];
   };
 

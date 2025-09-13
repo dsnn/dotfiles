@@ -46,7 +46,7 @@
             forwardAgent = true;
           };
           "alpha" = {
-            hostname = "192.168.2.2";
+            hostname = "192.168.1.8";
             port = 22;
             user = "root";
           };
@@ -58,16 +58,6 @@
           "nas" = {
             hostname = "192.168.3.2";
             port = 11223;
-            user = "dsn";
-          };
-          "docker1" = {
-            hostname = "192.168.2.110";
-            port = 22;
-            user = "dsn";
-          };
-          "docker2" = {
-            hostname = "192.168.2.104";
-            port = 22;
             user = "dsn";
           };
         };

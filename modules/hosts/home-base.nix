@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.silver =
+  flake.modules.homeManager.packages =
     { pkgs, ... }:
     let
       default-packages = with pkgs; [
@@ -29,7 +29,7 @@
         colmena
         watchexec
 
-        _1password-cli
+        # _1password-cli
         lazydocker
         (
           with dotnetCorePackages;
@@ -66,7 +66,6 @@
     {
       home = {
         username = "dsn";
-        homeDirectory = "/Users/dsn";
         stateVersion = "25.05";
         sessionVariables.NIXD_FLAGS = "-log=error";
         packages = default-packages ++ dev-packages ++ neovim-package ++ font-pkacges;

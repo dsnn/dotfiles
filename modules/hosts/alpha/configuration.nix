@@ -1,47 +1,53 @@
 { inputs, ... }:
 let
   x86_64-linux = "x86_64-linux";
-  hostSettings = {
-    nixpkgs.hostPlatform = x86_64-linux;
-    boot.loader.grub = {
-      efiSupport = true;
-      efiInstallAsRemovable = true;
-    };
+  extraSpecialArgs = {
+    inherit inputs;
+    system = x86_64-linux;
+  };
+  systemSettings = {
     networking = {
       hostName = "alpha";
       dhcpcd.enable = true;
       interfaces.eth0.useDHCP = true;
     };
+    boot = {
+      loader.grub = {
+        efiSupport = true;
+        efiInstallAsRemovable = true;
+      };
+    };
+    nixpkgs = {
+      hostPlatform = x86_64-linux;
+    };
     system = {
       stateVersion = "25.05";
     };
+    nixpkgs.config.allowUnfree = true;
   };
 in
 {
+  flake.modules.homeManager.alpha.home.homeDirectory = "/home/dsn";
 
   flake.homeConfigurations.alpha = inputs.home-manager.lib.homeManagerConfiguration {
-    extraSpecialArgs = {
-      inherit inputs;
-    }
-    // {
-      system = x86_64-linux;
-    };
+    inherit extraSpecialArgs;
     pkgs = inputs.nixpkgs.legacyPackages.${x86_64-linux};
     modules = with inputs.self.modules.homeManager; [
-      shell
       alpha
+      qutebrowser
       bottom
       direnv
+      docker
       git
-      lazygit
       just
       keychain
+      lazygit
       nh
+      shell
       ssh
       volta
       xdg
-      docker
-      # qutebrowser
+      packages
     ];
   };
 
@@ -53,72 +59,12 @@ in
         disko-btrfs
         environment
         nix
-        time
-        zsh
-        users
         openssh
-        system
-        hostSettings
+        time
+        users
+        zsh
+        systemSettings
       ]
-      ++ [ inputs.disko.nixosModules.disko ]
       ++ [ inputs.disko.nixosModules.disko ];
   };
 }
-
-# {
-#   modulesPath,
-#   pkgs,
-#   ...
-# }:
-# {
-#   imports = [
-#     (modulesPath + "/installer/scan/not-detected.nix")
-#     ./disko.nix
-#   ];
-#
-#   dsn = {
-#     i18n.enable = true;
-#     nix.enable = true;
-#     openssh.enable = true;
-#     prometheus.enable = true;
-#     security.enable = true;
-#     shells.enable = true;
-#     sops.enable = true;
-#     systemPackages.enable = true;
-#     user.enable = true;
-#     systemPackages = {
-#       enableMonitoringPkgs = true;
-#       enableNetworkingPkgs = true;
-#     };
-#   };
-#
-#   environment.systemPackages = with pkgs; [
-#     k3s
-#   ];
-#
-#   nix.settings.nix-path = "nixpkgs=flake:nixpkgs";
-#   nixpkgs.config.allowUnfree = true;
-#
-#   boot = {
-#     loader.grub = {
-#       devices = [ ];
-#       efiSupport = true;
-#       efiInstallAsRemovable = true;
-#     };
-#     isContainer = false;
-#   };
-#
-#   programs.zsh.enable = true;
-#
-#   services.qemuGuest.enable = true;
-#
-#   networking = {
-#     hostName = "nixos-dev";
-#     dhcpcd.enable = true;
-#     interfaces.eth0.useDHCP = true;
-#   };
-#
-#   system = {
-#     stateVersion = "25.05";
-#   };
-# }

@@ -1,6 +1,6 @@
 {
   flake.modules.homeManager.xdg =
-    { config, pkgs, ... }:
+    { config, ... }:
     {
       xdg = {
         enable = true;

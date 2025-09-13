@@ -1,9 +1,21 @@
 {
+  # perSystem =
+  #   { inputs, system, ... }:
+  #   {
+  #     home.packages = [
+  #       inputs.myflakes.packages.${system}.neovim
+  #     ];
+  #   };
+  #
   flake.modules.homeManager.shell =
-    { inputs, ... }:
+    { inputs, pkgs, ... }:
+    let
+      inherit (pkgs.stdenv) isDarwin;
+      system = if isDarwin then "aarch64-darwin" else "x86_64-linux";
+    in
     {
       home.packages = [
-        inputs.myflakes.packages."aarch64-darwin".neovim
+        inputs.myflakes.packages.${system}.neovim
       ];
 
       programs.zsh.initContent = ''

@@ -11,6 +11,7 @@ let
   };
 in
 {
+
   flake.nixosConfigurations.alpha = inputs.nixpkgs.lib.nixosSystem {
     system = x86_64-linux;
     modules =
@@ -26,6 +27,7 @@ in
         system
         hostSettings
       ]
+      ++ [ inputs.disko.nixosModules.disko ]
       ++ [ inputs.disko.nixosModules.disko ];
   };
 }

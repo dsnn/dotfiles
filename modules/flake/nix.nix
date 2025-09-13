@@ -11,17 +11,17 @@ let
     };
 
     settings = {
+      http-connections = 50;
+      log-lines = 50;
+      warn-dirty = false;
+      extra-system-features = [ "recursive-nix" ];
+
       experimental-features = [
         "nix-command"
         "flakes"
         "pipe-operators"
         "recursive-nix"
       ];
-      extra-system-features = [ "recursive-nix" ];
-
-      http-connections = 50;
-      log-lines = 50;
-      warn-dirty = false;
 
       trusted-users = [
         "root"
@@ -52,16 +52,15 @@ in
       {
         nix = nix-defaults // {
           package = pkgs.nix;
-          # make `nix run nixpkgs#nixpkgs` use the same nixpkgs as the one used by this flake.
           registry.nixpkgs.flake = inputs.nixpkgs;
         };
       };
+
     darwin.nix =
       { pkgs, ... }:
       {
         nix = nix-defaults // {
           package = pkgs.nix;
-          # make `nix run nixpkgs#nixpkgs` use the same nixpkgs as the one used by this flake.
           registry.nixpkgs.flake = inputs.nixpkgs;
         };
       };

@@ -28,15 +28,8 @@
     };
 
   flake.modules.nixos.environment =
-    {
-      config,
-      lib,
-      pkgs,
-      ...
-    }:
+    { pkgs, ... }:
     let
-      inherit (lib) mkEnableOption mkIf optionals;
-      cfg = config.dsn.systemPackages;
       defaultPkgs = with pkgs; [
         age
         coreutils
@@ -76,18 +69,6 @@
       ];
     in
     {
-
-      options.dsn.systemPackages = {
-        enable = mkEnableOption "Enable default common packages";
-        enableMonitoringPkgs = mkEnableOption "Enable monitoring packages";
-        enableNetworkingPkgs = mkEnableOption "Enable network packages";
-      };
-
-      config = mkIf cfg.enable {
-        environment.systemPackages =
-          defaultPkgs
-          ++ optionals cfg.enableMonitoringPkgs monitoringPkgs
-          ++ optionals cfg.enableNetworkingPkgs networkingPkgs;
-      };
+      environment.systemPackages = defaultPkgs ++ monitoringPkgs ++ networkingPkgs;
     };
 }

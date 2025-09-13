@@ -1,0 +1,8 @@
+# ------------------------------------------
+# Fresh NixOS install w/ nixos-anywhere
+#
+# Used USB w/ minimal installer (ventoy)
+# Set root password with `sudo passwd root`
+# Run:
+# ------------------------------------------
+nix run github:nix-community/nixos-anywhere -- --flake ~/dotfiles/#alpha -i ~/.ssh/id_ed25519 --target-host root@192.168.1.133 --build-on-remote

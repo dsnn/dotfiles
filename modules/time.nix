@@ -1,5 +1,10 @@
+{ ... }:
+let
+  timeZone = "Europe/Stockholm";
+in
 {
-  flake.modules.darwin.time = {
-    time.timeZone = "Europe/Stockholm";
+  flake.modules = {
+    nixos.time.time = { inherit timeZone; };
+    darwin.time.time = { inherit timeZone; };
   };
 }

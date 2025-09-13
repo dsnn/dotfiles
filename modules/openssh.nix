@@ -1,5 +1,5 @@
 {
-  flake.modules.services.openssh = {
+  flake.modules.nixos.openssh = {
     services.openssh = {
       enable = true;
       ports = [ 22 ];

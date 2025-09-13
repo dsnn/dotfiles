@@ -1,5 +1,6 @@
 {
   flake.modules = {
+    nixos.system.system.stateVersion = "25.05";
     darwin.system = {
       system = {
         stateVersion = 6;

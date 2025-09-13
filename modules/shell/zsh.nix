@@ -1,6 +1,8 @@
 {
-  flake.modules.darwin.zsh = {
-    programs.zsh.enable = true;
+
+  flake.modules = {
+    darwin.zsh.programs.zsh.enable = true;
+    nixos.zsh.programs.zsh.enable = true;
   };
 
   flake.modules.homeManager.shell =

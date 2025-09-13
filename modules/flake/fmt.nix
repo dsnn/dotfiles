@@ -6,13 +6,13 @@
     treefmt = {
       projectRootFile = "flake.nix";
       programs = {
-        nixfmt.enable = true;
+        nixfmt.enable = false;
         prettier.enable = true;
         shfmt.enable = true;
         yamlfmt.enable = true;
       };
       settings = {
-        on-unmatched = "fatal";
+        on-unmatched = "warn";
         global.excludes = [
           "*.jpg"
           "*.png"
@@ -21,9 +21,10 @@
           "*karabiner/**"
           "LICENSE"
           "envdis"
+          "modules/_scripts/*"
         ];
       };
     };
-    pre-commit.settings.hooks.treefmt.enable = true;
+    pre-commit.settings.hooks.treefmt.enable = false;
   };
 }

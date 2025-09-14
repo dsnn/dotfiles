@@ -7,69 +7,28 @@ let
   };
 in
 {
-  # host specific settings
-  flake.modules.nixos.alpha =
-    { pkgs, ... }:
-    {
-      networking = {
-        hostName = "alpha";
-        dhcpcd.enable = true;
-        interfaces.eth0.useDHCP = true;
-      };
-      boot = {
-        loader.grub = {
-          efiSupport = true;
-          efiInstallAsRemovable = true;
-        };
-        kernelModules = [ "iwlwifi" ];
-      };
-      nixpkgs = {
-        hostPlatform = x86_64-linux;
-      };
-      system = {
-        stateVersion = "25.05";
-      };
-      nixpkgs.config.allowUnfree = true;
-      hardware = {
-        logitech.wireless.enable = true;
-        logitech.wireless.enableGraphical = true;
-        enableRedistributableFirmware = true;
-        firmware = [ pkgs.linux-firmware ];
-      };
-      networking.networkmanager.enable = true;
-      networking.networkmanager.wifi.backend = "wpa_supplicant";
-    };
-
   flake.homeConfigurations.alpha = inputs.home-manager.lib.homeManagerConfiguration {
     inherit extraSpecialArgs;
     pkgs = inputs.nixpkgs.legacyPackages.${x86_64-linux};
-    modules =
-      with inputs.self.modules.homeManager;
-      [
-        alpha
-        bottom
-        direnv
-        docker
-        git
-        hyprland
-        just
-        keychain
-        kitty
-        lazygit
-        nh
-        qutebrowser
-        shell
-        ssh
-        user-dsn
-        volta
-        xdg
-      ]
-      ++ [
-        {
-          # host specific home-manager settings
-          home.homeDirectory = "/home/dsn";
-        }
-      ];
+    modules = with inputs.self.modules.homeManager; [
+      alpha
+      bottom
+      direnv
+      docker
+      git
+      hyprland
+      just
+      keychain
+      kitty
+      lazygit
+      nh
+      qutebrowser
+      shell
+      ssh
+      user-dsn
+      volta
+      xdg
+    ];
   };
 
   flake.nixosConfigurations.alpha = inputs.nixpkgs.lib.nixosSystem {

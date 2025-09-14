@@ -17,6 +17,7 @@
 
       environment.systemPackages = [
         pkgs.bluetui
+        pkgs.bluetuith
       ];
     };
 }

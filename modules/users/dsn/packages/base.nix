@@ -18,6 +18,7 @@
         vim
         wakeonlan
         xclip
+        pciutils
       ];
     };
 }

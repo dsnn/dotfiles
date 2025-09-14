@@ -19,6 +19,10 @@
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+    };
+
     myflakes = {
       url = "github:dsnn/flakes";
       inputs.nixpkgs.follows = "nixpkgs";

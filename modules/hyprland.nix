@@ -6,6 +6,7 @@
         enable = true;
         xwayland.enable = true;
       };
+      # set no update news
 
       # wayland.windowManager.hyprland.plugins = [
       #   # pkgs.hyprlandPlugins.<plugin>
@@ -19,16 +20,11 @@
 
       programs.hyprlock.enable = true;
 
-      environment.systemPackages = [
-        pkgs.wayvnc
-      ];
-      networking.firewall.enable = true;
-      networking.firewall.allowedTCPPorts = [
-        22
-        80
-        443
-        5900
-      ];
+      services.rustdesk-server = {
+        enable = true;
+        openFirewall = true;
+        signal.relayHosts = [ "127.0.0.1" ];
+      };
 
       # services.xserver = {
       #   enable = true;

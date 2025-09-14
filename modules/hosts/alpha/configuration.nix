@@ -29,6 +29,12 @@ in
     nixpkgs.config.allowUnfree = true;
   };
 
+  flake.modules.homeManager.kitty = {
+    programs.kitty = {
+      enable = true;
+    };
+  };
+
   flake.homeConfigurations.alpha = inputs.home-manager.lib.homeManagerConfiguration {
     inherit extraSpecialArgs;
     pkgs = inputs.nixpkgs.legacyPackages.${x86_64-linux};
@@ -50,6 +56,7 @@ in
         user-dsn
         volta
         xdg
+        kitty
       ]
       ++ [
         {

@@ -1,8 +1,8 @@
 {
   flake.modules.nixos.xrdp = {
     services.xrdp = {
-      enable = true;
-      openFirewall = true;
+      enable = false;
+      openFirewall = false;
     };
 
     # Disable systemd targets for sleep and hibernation

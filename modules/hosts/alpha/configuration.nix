@@ -35,6 +35,7 @@ in
     modules =
       with inputs.self.modules.homeManager;
       [
+        alpha
         bottom
         direnv
         docker
@@ -66,7 +67,6 @@ in
         alpha
         disko-btrfs
         environment
-        graphics
         hyprland
         nix
         openssh
@@ -74,6 +74,7 @@ in
         users
         xrdp
         zsh
+        bluetooth
       ]
       ++ [ inputs.disko.nixosModules.disko ];
   };

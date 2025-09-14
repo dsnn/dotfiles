@@ -27,11 +27,9 @@ in
       stateVersion = "25.05";
     };
     nixpkgs.config.allowUnfree = true;
-  };
-
-  flake.modules.homeManager.kitty = {
-    programs.kitty = {
-      enable = true;
+    hardware = {
+      logitech.wireless.enable = true;
+      logitech.wireless.enableGraphical = true;
     };
   };
 
@@ -46,8 +44,10 @@ in
         direnv
         docker
         git
+        hyprland
         just
         keychain
+        kitty
         lazygit
         nh
         qutebrowser
@@ -56,7 +56,6 @@ in
         user-dsn
         volta
         xdg
-        kitty
       ]
       ++ [
         {

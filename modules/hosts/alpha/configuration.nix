@@ -5,7 +5,10 @@ let
     inherit inputs;
     system = x86_64-linux;
   };
-  systemSettings = {
+in
+{
+  # host specific settings
+  flake.modules.nixos.alpha = {
     networking = {
       hostName = "alpha";
       dhcpcd.enable = true;
@@ -25,31 +28,34 @@ let
     };
     nixpkgs.config.allowUnfree = true;
   };
-in
-{
-  flake.modules.homeManager.alpha.home.homeDirectory = "/home/dsn";
 
   flake.homeConfigurations.alpha = inputs.home-manager.lib.homeManagerConfiguration {
     inherit extraSpecialArgs;
     pkgs = inputs.nixpkgs.legacyPackages.${x86_64-linux};
-    modules = with inputs.self.modules.homeManager; [
-      alpha
-      qutebrowser
-      bottom
-      direnv
-      docker
-      git
-      just
-      keychain
-      lazygit
-      nh
-      shell
-      ssh
-      volta
-      xdg
-      packages
-      hyprland
-    ];
+    modules =
+      with inputs.self.modules.homeManager;
+      [
+        bottom
+        direnv
+        docker
+        git
+        just
+        keychain
+        lazygit
+        nh
+        qutebrowser
+        shell
+        ssh
+        user-dsn
+        volta
+        xdg
+      ]
+      ++ [
+        {
+          # host specific home-manager settings
+          home.homeDirectory = "/home/dsn";
+        }
+      ];
   };
 
   flake.nixosConfigurations.alpha = inputs.nixpkgs.lib.nixosSystem {
@@ -57,14 +63,17 @@ in
     modules =
       with inputs.self.modules.nixos;
       [
+        alpha
         disko-btrfs
         environment
+        graphics
+        hyprland
         nix
         openssh
         time
         users
+        xrdp
         zsh
-        systemSettings
       ]
       ++ [ inputs.disko.nixosModules.disko ];
   };

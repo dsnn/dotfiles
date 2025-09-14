@@ -42,21 +42,22 @@ in
     inherit extraSpecialArgs;
     pkgs = inputs.nixpkgs.legacyPackages.${aarch64-darwin};
     modules = with inputs.self.modules.homeManager; [
-      silver
-      qutebrowser
       bottom
       direnv
       docker
       git
+      homeSettings
       just
       keychain
       lazygit
       nh
+      qutebrowser
       shell
+      silver
       ssh
+      user-dsn
       volta
       xdg
-      packages
     ];
   };
 
@@ -66,9 +67,9 @@ in
       docker
       environment
       homebrew
-      systemSettings
       nix
       security
+      systemSettings
       time
       users
       zsh

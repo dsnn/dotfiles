@@ -48,6 +48,7 @@ in
       volta
       xdg
       packages
+      hyprland
     ];
   };
 

@@ -16,7 +16,6 @@ in
       direnv
       docker
       git
-      homeSettings
       just
       keychain
       lazygit
@@ -40,7 +39,6 @@ in
       homebrew
       nix
       security
-      systemSettings
       time
       users
       zsh

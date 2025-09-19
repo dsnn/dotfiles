@@ -18,13 +18,18 @@
     };
 
     silver = {
-      programs.zsh.shellAliases = {
-        cfc = "vim $HOME/dotfiles/modules/silver/configurations.nix";
-        cfh = "vim $HOME/dotfiles/modules/silver/home.nix";
-        cfg = "vim $HOME/dotfiles/modules/git.nix";
-        cfz = "vim $HOME/dotfiles/modules/silver/zsh.nix";
-        rf = "home-manager switch --flake ~/dotfiles/#silver; source ~/.config/zsh/.zshrc";
-        rs = "sudo darwin-rebuild switch --flake ~/dotfiles/#silver";
+      programs.zsh = {
+        sessionVariables = {
+          TEMP = "$HOME/projects/work/repos";
+        };
+        shellAliases = {
+          cfc = "vim $HOME/dotfiles/modules/silver/configurations.nix";
+          cfh = "vim $HOME/dotfiles/modules/silver/home.nix";
+          cfg = "vim $HOME/dotfiles/modules/git.nix";
+          cfz = "vim $HOME/dotfiles/modules/silver/zsh.nix";
+          rf = "home-manager switch --flake ~/dotfiles/#silver; source ~/.config/zsh/.zshrc";
+          rs = "sudo darwin-rebuild switch --flake ~/dotfiles/#silver";
+        };
       };
     };
   };

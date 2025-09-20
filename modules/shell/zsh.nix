@@ -23,6 +23,7 @@
           TEMP = "$HOME/projects/work/repos";
         };
         shellAliases = {
+          dotnet = "/usr/local/share/dotnet/dotnet";
           cfc = "vim $HOME/dotfiles/modules/silver/configurations.nix";
           cfh = "vim $HOME/dotfiles/modules/silver/home.nix";
           cfg = "vim $HOME/dotfiles/modules/git.nix";

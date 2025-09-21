@@ -9,7 +9,7 @@
       hostPlatform = "aarch64-darwin";
     };
     system = {
-      system.stateVersion = 6;
+      stateVersion = 6;
       primaryUser = "dsn";
       defaults = {
         NSGlobalDomain = {

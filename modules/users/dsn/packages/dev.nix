@@ -7,16 +7,15 @@
         colmena
         watchexec
         lazydocker
-        # (import ../../../scripts/gc.nix { inherit pkgs; })
-
+        gum
         # combine multiple dotnet SDK versions
-        # (
-        #   with dotnetCorePackages;
-        #   combinePackages [
-        #     sdk_8_0
-        #     sdk_9_0
-        #   ]
-        # )
+        (
+          with dotnetCorePackages;
+          combinePackages [
+            sdk_8_0
+            sdk_9_0
+          ]
+        )
       ];
     };
 }

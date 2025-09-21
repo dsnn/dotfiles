@@ -46,7 +46,12 @@
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-secrets = {
+      url = "git+ssh://git@github.com/dsnn/secrets.git";
+      flake = false;
     };
 
     disko = {

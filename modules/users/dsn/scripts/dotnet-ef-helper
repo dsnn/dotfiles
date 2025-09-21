@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# --- Helpers ---------------------------------------------------
+
+confirm_and_run() {
+  local cmd="$1"
+  echo
+  gum confirm "Run command: $cmd" && eval "$cmd" || echo "Aborted!"
+}
+
+# --- Main EF Action --------------------------------------------
+
+MAIN_ACTION=$(gum choose "update" "migrations")
+
+case "$MAIN_ACTION" in
+update)
+  # Optional target migration
+  TARGET=$(gum input --placeholder "Target migration (leave blank for latest)")
+
+  CMD="dotnet ef database update"
+  if [[ -n "$TARGET" ]]; then
+    CMD="$CMD $TARGET"
+  fi
+
+  confirm_and_run "$CMD"
+  ;;
+
+migrations)
+  SUB_ACTION=$(gum choose "add" "list" "remove")
+
+  case "$SUB_ACTION" in
+  add)
+    NAME=$(gum input --placeholder "Migration name")
+    if [[ -z "$NAME" ]]; then
+      echo "Migration name cannot be empty!" >&2
+      exit 1
+    fi
+    confirm_and_run "dotnet ef migrations add \"$NAME\""
+    ;;
+
+  list)
+    confirm_and_run "dotnet ef migrations list"
+    ;;
+
+  remove)
+    confirm_and_run "dotnet ef migrations remove"
+    ;;
+  esac
+  ;;
+esac

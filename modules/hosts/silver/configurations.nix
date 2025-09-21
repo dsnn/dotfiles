@@ -23,6 +23,7 @@ in
       qutebrowser
       shell
       silver
+      sops
       ssh
       user-dsn
       volta
@@ -42,6 +43,7 @@ in
       time
       users
       zsh
+      sops
     ];
   };
 }

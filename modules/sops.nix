@@ -1,3 +1,4 @@
+{ inputs, ... }:
 {
   flake.modules.homeManager.sops =
     {
@@ -17,32 +18,29 @@
         age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
         age.sshKeyPaths = [ ];
         age.generateKey = false;
-        defaultSopsFile = ./sops.yml;
+        defaultSopsFile = "${inputs.nix-secrets}/secrets/secrets.yaml";
         validateSopsFiles = true;
-
-        # secrets = {
-        #   "ssh/id_ed25519" = {
-        #     format = "binary";
-        #     sopsFile = ./secrets/silver;
-        #   };
-        #   "ssh/sops_ssh_config" = {
-        #     format = "binary";
-        #     sopsFile = ./secrets/sshconf;
-        #   };
-        # };
       };
     };
 
   flake.modules.darwin.sops =
-    { config }:
+    { config, ... }:
     {
+      imports = [
+        inputs.sops-nix.darwinModules.sops
+      ];
+
       sops.age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
       sops.age.sshKeyPaths = [ ];
     };
 
   flake.modules.nixos.sops =
-    { config }:
+    { config, ... }:
     {
+      imports = [
+        inputs.sops-nix.nixosModules.sops
+      ];
+
       sops.age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
       sops.age.sshKeyPaths = [ ];
     };

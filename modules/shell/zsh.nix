@@ -19,9 +19,6 @@
 
     silver = {
       programs.zsh = {
-        sessionVariables = {
-          TEMP = "$HOME/projects/work/repos";
-        };
         shellAliases = {
           dotnet = "/usr/local/share/dotnet/dotnet";
           cfc = "vim $HOME/dotfiles/modules/silver/configurations.nix";
@@ -53,18 +50,6 @@
           package = pkgs.zsh-fzf-tab;
           url = "https://github.com/Aloxaf/fzf-tab";
           subPath = "/share/fzf-tab/fzf-tab.plugin.zsh";
-        }
-        # WARNING: This plugin adds alot of keybindings,
-        # thus breaking my own fn keybindings. review later.
-        # {
-        #   package = pkgs.zsh-vi-mode;
-        #   url = "https://github.com/jeffreytse/zsh-vi-mode";
-        #   subPath = "/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
-        # }
-        {
-          package = pkgs.zsh-you-should-use;
-          url = "https://github.com/MichaelAquilina/zsh-you-should-use";
-          subPath = "/share/zsh/plugins/you-should-use/you-should-use.plugin.zsh";
         }
       ];
       pluginSources = builtins.concatStringsSep "\n" (

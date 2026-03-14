@@ -7,11 +7,11 @@ let
   };
 in
 {
-  flake.homeConfigurations.alpha = inputs.home-manager.lib.homeManagerConfiguration {
+  flake.homeConfigurations.nixos = inputs.home-manager.lib.homeManagerConfiguration {
     inherit extraSpecialArgs;
     pkgs = inputs.nixpkgs.legacyPackages.${x86_64-linux};
     modules = with inputs.self.modules.homeManager; [
-      alpha
+      nixos
       bottom
       direnv
       docker
@@ -31,11 +31,10 @@ in
     ];
   };
 
-  flake.nixosConfigurations.alpha = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.nixos = inputs.nixpkgs.lib.nixosSystem {
     system = x86_64-linux;
     modules = with inputs.self.modules.nixos; [
-      alpha
-      disko-btrfs
+      nixos
       environment
       hyprland
       nix

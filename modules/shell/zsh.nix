@@ -6,6 +6,17 @@
   };
 
   flake.modules.homeManager = {
+    nixos = {
+      programs.zsh.shellAliases = {
+        cfc = "vim $HOME/dotfiles/modules/nixos/configurations.nix";
+        cfh = "vim $HOME/dotfiles/modules/nixos/home.nix";
+        cfg = "vim $HOME/dotfiles/modules/git.nix";
+        cfz = "vim $HOME/dotfiles/modules/nixos/zsh.nix";
+        rf = "home-manager switch --flake ~/dotfiles/#nixos; source ~/.config/zsh/.zshrc";
+        rs = "sudo nixos-rebuild switch --flake ~/dotfiles/#nixos";
+      };
+    };
+
     alpha = {
       programs.zsh.shellAliases = {
         cfc = "vim $HOME/dotfiles/modules/alpha/configurations.nix";

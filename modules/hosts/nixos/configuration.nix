@@ -16,7 +16,7 @@ in
       direnv
       docker
       git
-      hyprland
+      i3
       just
       keychain
       kitty
@@ -35,8 +35,8 @@ in
     system = x86_64-linux;
     modules = with inputs.self.modules.nixos; [
       nixos
+      i3
       environment
-      hyprland
       nix
       openssh
       time
@@ -44,6 +44,7 @@ in
       xrdp
       zsh
       bluetooth
+      xrdp
     ];
   };
 }

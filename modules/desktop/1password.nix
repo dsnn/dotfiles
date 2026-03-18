@@ -2,9 +2,9 @@
   flake.modules.homeManager.desktop =
     { pkgs, ... }:
     {
-      # home.packages = with pkgs; [
-      #   _1password
-      #   _1password-gui
-      # ];
+      home.packages = with pkgs; [
+        _1password-cli
+        _1password-gui
+      ];
     };
 }

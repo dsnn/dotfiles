@@ -1,5 +1,4 @@
 {
-
   flake.modules.homeManager.i3 =
     { pkgs, ... }:
     let

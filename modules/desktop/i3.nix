@@ -15,8 +15,6 @@
       # xsession.windowManager.i3.config.fonts = [ "Meslo LG" ];
       xsession.windowManager.i3.config.window.titlebar = false;
       xsession.windowManager.i3.config.startup = [
-        # { command = "exec firefox"; }
-        # { command = "exec Discord"; }
         {
           # xrandr --output X --primary
           command = "exec i3-msg workspace 1";
@@ -24,7 +22,7 @@
           notification = false;
         }
         # {
-        #   command = "/home/dsn/.config/polybar/launch.sh";
+        #   command = "pkill polybar; polybar mybar &";
         #   always = true;
         #   notification = false;
         # }

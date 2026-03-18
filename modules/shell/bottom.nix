@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.bottom =
+  flake.modules.homeManager.shell =
     { pkgs, ... }:
     {
       home.packages = with pkgs; [ bottom ];

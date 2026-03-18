@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.direnv =
+  flake.modules.homeManager.shell =
     { pkgs, ... }:
     {
       home.packages = with pkgs; [ direnv ];

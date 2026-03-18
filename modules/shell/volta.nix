@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.volta =
+  flake.modules.homeManager.shell =
     { config, pkgs, ... }:
     {
       home.packages = with pkgs; [ volta ];

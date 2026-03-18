@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.keychain =
+  flake.modules.homeManager.shell =
     { pkgs, ... }:
     {
       home.packages = with pkgs; [ keychain ];

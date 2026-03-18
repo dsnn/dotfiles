@@ -12,22 +12,16 @@ in
     pkgs = inputs.nixpkgs.legacyPackages.${x86_64-linux};
     modules = with inputs.self.modules.homeManager; [
       nixos
-      bottom
-      direnv
-      docker
-      git
-      i3
-      just
-      keychain
-      kitty
-      lazygit
-      nh
-      qutebrowser
       shell
-      ssh
+      desktop
       user-dsn
-      volta
-      xdg
+      docker
+      i3
+      lazygit
+      lazysql
+      nh
+      polybar
+      qutebrowser
     ];
   };
 

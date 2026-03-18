@@ -22,6 +22,7 @@ in
       nh
       polybar
       qutebrowser
+      rider
     ];
   };
 

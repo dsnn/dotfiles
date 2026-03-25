@@ -4,7 +4,7 @@
     {
       programs.kitty.enable = true;
       programs.kitty.settings = {
-        font_size = 11;
+        font_size = 14;
       };
       programs.kitty.keybindings = {
         "ctrl+alt+n" = "new_tab";

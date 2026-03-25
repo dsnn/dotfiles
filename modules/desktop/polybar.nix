@@ -33,22 +33,6 @@
       # disable i3's own status bar
       xsession.windowManager.i3.config.bars = [ ];
 
-      # systemd.user.services.polybar = {
-      #   Unit = {
-      #     Description = "Polybar";
-      #     After = [ "graphical-session.target" ];
-      #   };
-      #
-      #   Service = {
-      #     ExecStart = "${pkgs.polybar}/bin/polybar --reload mybar";
-      #     Restart = "always";
-      #   };
-      #
-      #   Install = {
-      #     WantedBy = [ "graphical-session.target" ];
-      #   };
-      # };
-
       services.polybar.enable = true;
       services.polybar.script = ''
         for m in $(${pkgs.polybar}/bin/polybar --list-monitors | cut -d: -f1); do

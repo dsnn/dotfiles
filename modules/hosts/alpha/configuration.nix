@@ -12,12 +12,9 @@ in
     pkgs = inputs.nixpkgs.legacyPackages.${x86_64-linux};
     modules = with inputs.self.modules.homeManager; [
       alpha
-      bottom
-      direnv
+      shell
       docker
-      git
       hyprland
-      just
       keychain
       kitty
       lazygit

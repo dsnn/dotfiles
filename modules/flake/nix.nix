@@ -15,6 +15,7 @@ let
       log-lines = 50;
       warn-dirty = false;
       extra-system-features = [ "recursive-nix" ];
+      download-buffer-size = 524288000; # 500MiB
 
       experimental-features = [
         "nix-command"

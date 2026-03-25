@@ -20,7 +20,7 @@ in
       lazygit
       lazysql
       nh
-      polybar
+      # polybar
       qutebrowser
       rider
     ];
@@ -31,6 +31,7 @@ in
     modules = with inputs.self.modules.nixos; [
       nixos
       i3
+      fonts
       environment
       nix
       openssh

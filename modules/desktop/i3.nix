@@ -12,7 +12,24 @@
 
       xsession.windowManager.i3.enable = true;
       xsession.windowManager.i3.config.modifier = mod;
-      # xsession.windowManager.i3.config.fonts = [ "Meslo LG" ];
+      xsession.windowManager.i3.config.bars = [
+        {
+          position = "bottom";
+          statusCommand = "${pkgs.i3status}/bin/i3status";
+          fonts = {
+            names = [
+              "FontAwesome"
+              "Meslo LG"
+            ];
+            style = "Regular";
+            size = 18.0;
+          };
+        }
+      ];
+      programs.i3status = {
+
+      };
+
       xsession.windowManager.i3.config.window.titlebar = false;
       xsession.windowManager.i3.config.startup = [
         {

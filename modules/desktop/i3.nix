@@ -22,12 +22,82 @@
               "Meslo LG"
             ];
             style = "Regular";
-            size = 18.0;
+            size = 12.0;
           };
         }
       ];
-      programs.i3status = {
 
+      programs.i3status = {
+        enable = true;
+        # package = "${pkgs.i3status}/bin/i3status";
+
+        general = {
+          colors = true;
+          interval = 5;
+        };
+
+        modules = {
+          ipv6 = {
+            enable = false;
+            position = 1;
+          };
+
+          "wireless _first_" = {
+            enable = false;
+            position = 2;
+            settings = {
+              format_up = "W: (%quality at %essid) %ip";
+              format_down = "W: down";
+            };
+          };
+
+          "ethernet _first_" = {
+            enable = false;
+            position = 3;
+            settings = {
+              format_up = "IP: %ip |";
+            };
+          };
+
+          "battery all" = {
+            enable = false;
+            position = 4;
+            settings = {
+              format = "%status %percentage %remaining";
+            };
+          };
+
+          "disk /" = {
+            enable = false;
+            position = 5;
+            settings = {
+              format = "D: %avail |";
+            };
+          };
+
+          load = {
+            position = 6;
+            settings = {
+              format = "  %1min";
+            };
+          };
+
+          memory = {
+            position = 7;
+            settings = {
+              format = "   %used / %available";
+              threshold_degraded = "1G";
+              format_degraded = "   < %available";
+            };
+          };
+
+          "tztime local" = {
+            position = 8;
+            settings = {
+              format = "󰥔  %Y-%m-%d %H:%M:%S";
+            };
+          };
+        };
       };
 
       xsession.windowManager.i3.config.window.titlebar = false;

@@ -119,13 +119,14 @@
       xsession.windowManager.i3.config.keybindings = {
         "${mod}+f" = "fullscreen toggle";
         "${mod}+t" = "split toggle";
-        "${mod}+Space" = "focus toggle_mode";
-        "${mod}+Shift+f" = "floating toggle";
+        # "${mod}+Space" = "focus toggle_mode";
+        # "${mod}+Shift+f" = "floating toggle";
 
         "${mod}+w" = "kill";
 
         "${mod}+Return" = "exec ${pkgs.kitty}/bin/kitty";
         "${mod}+d" = "exec ${pkgs.rofi}/bin/rofi -show run";
+        "${mod}+b" = "exec ${pkgs.qutebrowser}/bin/qutebrowser";
 
         "${mod}+h" = "focus left";
         "${mod}+j" = "focus down";
@@ -137,8 +138,8 @@
         "${mod}+Shift+k" = "move up 30";
         "${mod}+Shift+l" = "move right 30";
 
-        "${mod}+Tab" = "workspace back_and_forth";
-        "${mod}+Shift+Tab" = "workspace prev";
+        "Ctrl+Tab" = "workspace back_and_forth";
+        "Ctrl+Shift+Tab" = "workspace prev";
 
         "${mod}+1" = "workspace 1";
         "${mod}+2" = "workspace 2";

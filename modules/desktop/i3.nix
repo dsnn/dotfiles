@@ -12,6 +12,7 @@
 
       xsession.windowManager.i3.enable = true;
       xsession.windowManager.i3.config.modifier = mod;
+
       # xsession.windowManager.i3.config.bars = [
       #   {
       #     position = "bottom";

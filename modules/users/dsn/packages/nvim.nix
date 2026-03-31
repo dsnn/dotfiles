@@ -22,6 +22,8 @@
         stylua
         vale
         yamllint
+        gcc
+        ninja
       ];
     };
 }

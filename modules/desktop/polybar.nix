@@ -2,6 +2,7 @@
   flake.modules.homeManager.polybar =
     { config, pkgs, ... }:
     let
+      polybarPkg = pkgs.polybarFull;
       colors = {
         black = "#263238";
         white = "#D8DEE9";
@@ -47,13 +48,8 @@
       };
 
       services.polybar.enable = true;
+      services.polybar.package = polybarPkg;
       services.polybar.script = ''
-        ${pkgs.procps}/bin/pkill -x polybar || true
-
-        while ${pkgs.procps}/bin/pgrep -x polybar >/dev/null; do
-          sleep 1
-        done
-
         if command -v ${pkgs.xorg.xrandr}/bin/xrandr >/dev/null; then
           MONITORS=$(${pkgs.xorg.xrandr}/bin/xrandr --query | \
             ${pkgs.gnugrep}/bin/grep " connected" | \
@@ -67,10 +63,9 @@
         fi
 
         for MONITOR in $MONITORS; do
-          MONITOR=$MONITOR ${pkgs.polybar}/bin/polybar mybar &
+          # MONITOR=$MONITOR ${polybarPkg}/bin/polybar mybar &
+          MONITOR=$MONITOR ${polybarPkg}/bin/polybar mybar >/dev/null 2>&1 &
         done
-
-        wait
       '';
       services.polybar.config = {
         "bar/mybar" = {
@@ -90,7 +85,9 @@
           monitor = "\${env:MONITOR}";
           enable-ipc = true;
 
-          font-0 = "RobotoMono Nerd Font:weight=bold:size=11;2";
+          font-0 = "MesloLGL Nerd Font:weight=bold:size=11;2";
+          font-1 = "Fira Code Nerd Font:weight=bold:size=11";
+          font-2 = "Noto Sans:size=11";
 
           modules-left = "i3";
           modules-right = "lan cpu memory sound storage battery date powermenu";

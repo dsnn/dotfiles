@@ -90,7 +90,8 @@
           font-2 = "Noto Sans:size=11";
 
           modules-left = "i3";
-          modules-right = "lan cpu memory sound storage battery date powermenu";
+          # modules-right = "lan cpu memory sound storage battery date powermenu";
+          modules-right = "lan cpu memory storage date powermenu";
         };
 
         "module/i3" = {
@@ -124,12 +125,12 @@
           interface = "eth0"; # CHANGE THIS
           accumulate-stats = true;
 
-          format-connected = "<ramp-signal> <label-connected>";
-          label-connected = "  %downspeed% %local_ip%";
+          format-connected = "<label-connected>";
+          label-connected = "   %downspeed% %local_ip% ";
           format-connected-background = colors.violet;
           format-connected-foreground = colors.black;
 
-          label-disconnected = "";
+          label-disconnected = "󱘖 ";
           format-disconnected-background = colors.red;
           format-disconnected-foreground = colors.black;
         };
@@ -139,7 +140,7 @@
           mount-0 = "/";
           interval = 20;
 
-          label-mounted = "  %free% ";
+          label-mounted = "   %free% ";
           format-mounted-background = colors.orange;
           format-mounted-foreground = colors.black;
         };
@@ -148,7 +149,7 @@
           type = "internal/cpu";
           interval = 2;
 
-          label = " ﬙ %percentage:2%% ";
+          label = "   %percentage:2%% ";
           format-background = colors.cyan;
           format-foreground = colors.black;
         };
@@ -157,7 +158,7 @@
           type = "internal/memory";
           interval = 3;
 
-          label = "  %gb_used% ";
+          label = "   %gb_used% ";
           format-background = colors.green;
           format-foreground = colors.black;
         };

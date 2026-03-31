@@ -2,7 +2,7 @@
   flake.modules.homeManager.desktop =
     { config, pkgs, ... }:
     {
-      services.dunst.enable = true;
+      services.dunst.enable = false;
 
       services.dunst.settings.global = {
         browser = "${config.programs.firefox.package}/bin/firefox -new-tab";

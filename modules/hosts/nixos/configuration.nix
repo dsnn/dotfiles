@@ -20,7 +20,7 @@ in
       lazygit
       lazysql
       nh
-      # polybar
+      polybar
       qutebrowser
       rider
     ];

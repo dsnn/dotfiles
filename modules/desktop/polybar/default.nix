@@ -32,12 +32,45 @@
 
       # disable i3's own status bar
       xsession.windowManager.i3.config.bars = [ ];
+      xsession.windowManager.i3.config.startup = [
+        {
+          command = "systemctl --user restart polybar";
+          always = true;
+        }
+      ];
+
+      systemd.user.services.polybar.Service = {
+        Environment = [
+          "DISPLAY=:10"
+          "XAUTHORITY=%h/.Xauthority"
+        ];
+      };
 
       services.polybar.enable = true;
       services.polybar.script = ''
-        for m in $(${pkgs.polybar}/bin/polybar --list-monitors | cut -d: -f1); do
-          MONITOR=$m ${pkgs.polybar}/bin/polybar --reload mybar &
+        ${pkgs.procps}/bin/pkill -x polybar || true
+
+        while ${pkgs.procps}/bin/pgrep -x polybar >/dev/null; do
+          sleep 1
         done
+
+        if command -v ${pkgs.xorg.xrandr}/bin/xrandr >/dev/null; then
+          MONITORS=$(${pkgs.xorg.xrandr}/bin/xrandr --query | \
+            ${pkgs.gnugrep}/bin/grep " connected" | \
+            ${pkgs.coreutils}/bin/cut -d" " -f1)
+        else
+          MONITORS=""
+        fi
+
+        if [ -z "$MONITORS" ]; then
+          MONITORS="default"
+        fi
+
+        for MONITOR in $MONITORS; do
+          MONITOR=$MONITOR ${pkgs.polybar}/bin/polybar mybar &
+        done
+
+        wait
       '';
       services.polybar.config = {
         "bar/mybar" = {

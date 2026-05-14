@@ -1,0 +1,56 @@
+# -----------------------
+# CORE SETTINGS
+# -----------------------
+
+set -g prefix C-a
+set -g mouse on
+set -g base-index 1
+set -g history-limit 1000000
+set -s escape-time 0
+set -g default-shell /usr/bin/zsh
+set -g default-terminal "tmux-256color"
+set -as terminal-overrides ',*:Tc'
+set -g allow-rename off
+set -g detach-on-destroy off
+set -g clock-mode-style 24
+set -g focus-events off
+setw -g aggressive-resize on
+
+# -----------------------
+# KEYBINDS
+# -----------------------
+
+bind c new-window -c "#{pane_current_path}"
+bind h split-window -c "#{pane_current_path}"
+bind v split-window -h -c "#{pane_current_path}"
+
+bind-key & kill-window
+bind-key x kill-pane
+
+bind -n C-M-y setw synchronize-panes
+
+bind -T copy-mode-vi v send-keys -X begin-selection
+bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+
+# -----------------------
+# PLUGIN CONFIG
+# -----------------------
+
+set -g @catppuccin_flavour "mocha"
+set -g @tmux-fzf-launch-key "f"
+set -g @tilish-navigator "on"
+
+# -----------------------
+# PLUGINS
+# -----------------------
+
+set -g @plugin 'catppuccin/tmux'
+set -g @plugin 'jabirali/tmux-tilish'
+set -g @plugin 'christoomey/vim-tmux-navigator'
+set -g @plugin 'tmux-plugins/tmux-fzf'
+
+# -----------------------
+# TPM
+# -----------------------
+
+run '~/.config/tmux/plugins/tpm/tpm'

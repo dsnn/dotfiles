@@ -1,0 +1,17 @@
+export __HM_ZSH_SESS_VARS_SOURCED=1
+export BROWSER="chrome"
+export EDITOR="nvim"
+export LC_CTYPE="en_US.UTF-8"
+export LEDGER_COLOR="true"
+export LESS="-FRSXM"
+export LESSCHARSET="utf-8"
+export MANWIDTH="79"
+export PAGER="less"
+export PROMPT="%m %~ $ "
+export PROMPT_DIRTRIM="2"
+export RPROMPT=""
+export TERM="xterm-256color"
+export TINC_USE_NIX="yes"
+export WORDCHARS=""
+
+export ZDOTDIR=/home/dsn/.config/zsh

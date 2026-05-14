@@ -1,0 +1,18 @@
+Include /Users/dsn/.ssh/private/*
+
+Host *
+  AddKeysToAgent yes
+  ControlMaster auto
+  ControlPath ~/.ssh/controlmasters/%C
+  ControlPersist 10m
+  ServerAliveInterval 60
+  ServerAliveCountMax 3
+  PreferredAuthentications publickey
+  IdentitiesOnly yes
+  HashKnownHosts yes
+  Compression yes
+
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519

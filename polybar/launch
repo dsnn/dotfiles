@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# Kill existing bars
+killall -q polybar
+
+# Wait until fully terminated
+while pgrep -x polybar >/dev/null; do
+  sleep 0.2
+done
+
+# Launch on all monitors
+if command -v xrandr >/dev/null 2>&1; then
+  while read -r monitor; do
+    MONITOR="$monitor" polybar example 2>&1 | tee -a /tmp/polybar.log &
+  done < <(
+    xrandr --query | grep " connected" | cut -d " " -f1
+  )
+else
+  polybar example 2>&1 | tee -a /tmp/polybar.log &
+fi
+
+echo "Polybar launched"

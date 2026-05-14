@@ -1,0 +1,24 @@
+# Show all completion matches immediately if completion is ambiguous.
+# Instead of beeping on first TAB press, readline displays possible matches.
+set show-all-if-ambiguous on
+
+# Ignore uppercase/lowercase differences during tab completion.
+# Example: "doc<TAB>" can match "Documents".
+set completion-ignore-case on
+
+# Append "/" to completed directory names.
+# Makes it visually obvious that the result is a directory.
+set mark-directories on
+
+# Also append "/" for symlinked directories.
+set mark-symlinked-directories on
+
+# Do not include hidden files/directories (dotfiles) in tab completion
+# unless explicitly requested by typing "." first.
+set match-hidden-files off
+
+# Show file type indicators in completions:
+#   / = directory
+#   * = executable
+#   @ = symlink
+set visible-stats on

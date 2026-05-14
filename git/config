@@ -1,0 +1,108 @@
+[user]
+    name = dsn
+    email = dsn@dsnn.io
+
+[core]
+    editor = nvim
+    excludesfile = ~/.config/git/ignore
+
+[pull]
+    rebase = true
+
+[merge]
+    tool = vimdiff
+    conflictstyle = diff3
+
+[mergetool]
+    prompt = false
+
+[delta]
+    features = chameleon
+    side-by-side = true
+
+[delta "chameleon"]
+    dark = true
+    line-numbers = true
+    side-by-side = true
+    keep-plus-minus-markers = true
+    syntax-theme = Nord
+
+    file-style = "#434C5E bold"
+    file-decoration-style = "#434C5E ul"
+
+    file-added-label = "[+]"
+    file-copied-label = "[==]"
+    file-modified-label = "[*]"
+    file-removed-label = "[-]"
+    file-renamed-label = "[->]"
+
+    hunk-header-style = omit
+
+    line-numbers-left-format = " {nm:>1} │"
+    line-numbers-left-style = red
+
+    line-numbers-right-format = " {np:>1} │"
+    line-numbers-right-style = green
+
+    line-numbers-minus-style = "red italic black"
+    line-numbers-plus-style = "green italic black"
+    line-numbers-zero-style = "#434C5E italic"
+
+    minus-style = "bold red"
+    minus-emph-style = "bold red"
+
+    plus-style = "bold green"
+    plus-emph-style = "bold green"
+
+    zero-style = syntax
+    blame-code-style = syntax
+
+    blame-format = "{author:<18} ({commit:>7}) {timestamp:^12} "
+    blame-palette = "#2E3440 #3B4252 #434C5E #4C566A"
+
+[alias]
+    ba = branch -a
+    bl = branch --list
+    br = branch -r
+
+    current = rev-parse --abbrev-ref HEAD
+    cb = rev-parse --abbrev-ref HEAD
+
+    cm = commit -m
+    cma = commit --amend --no-edit
+
+    co = checkout
+    cob = checkout -b
+
+    gpf = push --force-with-lease
+
+    la = "!git config -l | grep alias | cut -c 7-"
+
+    ls = "!git log --pretty=format:\"%h %Cblue%ad%Creset %an %Cgreen%s%Creset\" --decorate --date=format:'%Y-%m-%d %H:%M:%S' -10"
+
+    lg = "!git log --pretty=\"%C(yellow)%h%Creset | %cd %d %s (%C(cyan)%an)\" --date=format:\"%Y-%m-%d %H:%M:%S\" --graph"
+
+    st = status -s
+
+    undo = "!git reset HEAD^"
+
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+
+[init]
+    defaultBranch = main
+
+[rerere]
+    enabled = true
+
+[fetch]
+    prune = true

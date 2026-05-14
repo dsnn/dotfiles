@@ -1,0 +1,27 @@
+# dotfiles
+
+- zsh-autosuggestions
+- zsh-syntax-highlighting
+- zsh-completions
+- zoxide 
+- fzf
+- lazygit
+- volta
+- dotnet
+- fzf-tab-plugin
+- vivid
+- sesh
+- starship
+- keychain
+- docker
+- lsd
+- bat
+- op
+- bottom
+- htop
+- brew
+- prettier
+- qutebrowser
+- vscode
+- rider
+- azure cli

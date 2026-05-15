@@ -106,3 +106,8 @@
 
 [fetch]
     prune = true
+[credential]
+	useHttpPath = true
+	helper = cache
+[credential "https://dev.azure.com"]
+	useHttpPath = true

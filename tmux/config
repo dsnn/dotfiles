@@ -15,6 +15,7 @@ set -g detach-on-destroy off
 set -g clock-mode-style 24
 set -g focus-events off
 setw -g aggressive-resize on
+set -g set-clipboard on
 
 # -----------------------
 # KEYBINDS
@@ -30,14 +31,42 @@ bind-key x kill-pane
 bind -n C-M-y setw synchronize-panes
 
 bind -T copy-mode-vi v send-keys -X begin-selection
-bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel "xclip -selection clipboard"
+
+# -----------------------
+# sesh
+# -----------------------
+
+# sesh last session
+bind -N "last-session (via sesh)" L run-shell "sesh last"
+
+# sesh fzf tmux
+bind-key K run-shell "sesh connect \"$(
+  sesh list --icons --hide-duplicates | fzf-tmux -p 100%,100% --no-border \
+    --ansi \
+    --list-border \
+    --no-sort --prompt '⚡  ' \
+    --color 'list-border:6,input-border:3,preview-border:4,header-bg:-1,header-border:6' \
+    --input-border \
+    --header-border \
+    --bind 'tab:down,btab:up' \
+    --bind 'ctrl-b:abort' \
+    --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' \
+    --bind 'ctrl-t:change-prompt(  )+reload(sesh list -t --icons)' \
+    --bind 'ctrl-g:change-prompt(⚙️  )+reload(sesh list -c --icons)' \
+    --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z --icons)' \
+    --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
+    --bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
+    --preview-window 'right:70%' \
+    --preview 'sesh preview {}' \
+)"
 
 # -----------------------
 # PLUGIN CONFIG
 # -----------------------
 
 set -g @catppuccin_flavour "mocha"
-set -g @tmux-fzf-launch-key "f"
+TMUX_FZF_LAUNCH_KEY="f"
 set -g @tilish-navigator "on"
 
 # -----------------------
@@ -47,7 +76,7 @@ set -g @tilish-navigator "on"
 set -g @plugin 'catppuccin/tmux'
 set -g @plugin 'jabirali/tmux-tilish'
 set -g @plugin 'christoomey/vim-tmux-navigator'
-set -g @plugin 'tmux-plugins/tmux-fzf'
+set -g @plugin 'sainnhe/tmux-fzf'
 
 # -----------------------
 # TPM

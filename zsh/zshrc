@@ -1,18 +1,21 @@
 typeset -U path cdpath fpath manpath
-# for profile in ${(z)NIX_PROFILES}; do
-#   fpath+=($profile/share/zsh/site-functions $profile/share/zsh/$ZSH_VERSION/functions $profile/share/zsh/vendor-completions)
-# done
 
-# HELPDIR="/nix/store/i8c3lvyjcciljizv5bbign9rgfkzk0fh-zsh-5.9/share/zsh/$ZSH_VERSION/help"
-
-autoload -U compinit && compinit
-# source /nix/store/nk22gl93k4j04b7h3as62bnga9sddxsj-zsh-autosuggestions-0.7.1/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-# ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion history)
-# History options should be set in .zshrc and after oh-my-zsh sourcing.
-# See https://github.com/nix-community/home-manager/issues/177.
+fpath=(~/.config/zsh/completions $fpath)
+autoload -Uz compinit
+compinit
 
 # ---------------------- #
-#         history        #
+#         plugins        #
+# ---------------------- #
+
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
+
+ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion history)
+
+# ---------------------- #
+#         core           #
 # ---------------------- #
 
 HISTSIZE="10000"
@@ -83,6 +86,14 @@ export FZF_CTRL_R_OPTS="
 --header 'Press CTRL-Y to copy command into clipboard'
 "
 
+# ---------------------- #
+#         fzf-tab        #
+# ---------------------- #
+ 
+zstyle ':completion:*' menu yes select
+zstyle ':fzf-tab:*' switch-group ',' '.'
+zstyle ':fzf-tab:*' fzf-command fzf
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd --tree --color=always $realpath'
 
 # ---------------------- #
 #         zoxide         #
@@ -94,11 +105,11 @@ eval "$(zoxide init zsh)"
 #         volta          #
 # ---------------------- #
 
-# VOLTA_HOME="/Users/dsn/.config/volta"
-# mkdir -p "$(dirname "$VOLTA_HOME")"
-# export $VOLTA_HOME
-# export PATH="$VOLTA_HOME/bin:$PATH"
-# 
+VOLTA_HOME="/home/dsn/.config/volta"
+mkdir -p "$(dirname "$VOLTA_HOME")"
+export VOLTA_HOME="$VOLTA_HOME"
+export PATH="$VOLTA_HOME/bin:$PATH"
+ 
 # PATH="$PATH:/Users/dsn/.node_modules/bin"
 # export npm_config_prefix=~/.node_modules
 
@@ -107,11 +118,28 @@ eval "$(zoxide init zsh)"
 # ---------------------- #
 
 # export dotnet-ef for migrations
-# export PATH="$PATH:/Users/dsn/.dotnet/tools"
+export PATH="$PATH:/users/dsn/.dotnet/tools"
 
 # export for work
-# export TEMP='/Users/dsn/projects/work/repos'
-# export PATH="/usr/local/share/dotnet:$PATH"
+export TEMP='/users/dsn/projects/work/repos'
+export PATH="/usr/local/share/dotnet:$PATH"
+
+_dotnet_zsh_complete()
+{
+  local completions=("$(dotnet complete "$words")")
+
+  # If the completion list is empty, just continue with filename selection
+  if [ -z "$completions" ]
+  then
+    _arguments '*::arguments: _normal'
+    return
+  fi
+
+  # This is not a variable assignment, don't remove spaces!
+  _values = "${(ps:\n:)completions}"
+}
+
+compdef _dotnet_zsh_complete dotnet
 
 # ---------------------- #
 #          accept        #
@@ -167,12 +195,6 @@ if command -v op &> /dev/null
 then
   eval "$(op completion zsh)"; compdef _op op
 fi
-
-# ---------------------- #
-#         plugins        #
-# ---------------------- #
-
-# source /nix/store/vvfsgfiq4566hl41fj7qdp0wqvkx6g2w-zsh-fzf-tab-1.2.0/share/fzf-tab/fzf-tab.plugin.zsh
 
 # ---------------------- #
 #         vivid          #
@@ -256,9 +278,12 @@ alias .....='cd ../../../..'
 alias h='cd ~/'
 alias cd..='cd ..'
 alias cf='cd ~/.config'
-alias cfg='nvim $HOME/dotfiles/git/config'
 alias cfp='cd ~/projects/'
-alias cfz='nvim $HOME/dotfiles/zsh/.zshrc'
+alias cfz='nvim $HOME/dotfiles/zsh/zshrc'
+alias cft='nvim $HOME/dotfiles/tmux/config'
+alias cfi='nvim $HOME/dotfiles/i3/config'
+alias cfg='nvim $HOME/dotfiles/git/config'
+alias cfj='nvim $HOME/dotfiles/justfile'
 alias cp='cp -v'
 alias d='cd ~/dotfiles'
 alias df='df -h'

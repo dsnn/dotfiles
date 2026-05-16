@@ -131,6 +131,29 @@ htop:
 rider:
     ln -sf {{ DOTFILES }}/ideavimrc {{ HOME}}/.ideavimrc
 
+
+# --------------------------------------------------
+# System
+# --------------------------------------------------
+
+[group('system')]
+pacman:
+    sudo ln -sf {{ DOTFILES }}/arch/pacman.conf /etc/pacman.conf
+
+[group('system')]
+systemd:
+    sudo ln -sf {{ DOTFILES }}/arch/systemd/paccache.service /etc/systemd/system/paccache.service
+    sudo ln -sf {{ DOTFILES }}/arch/systemd/paccache.timer /etc/systemd/system/paccache.timer
+    sudo ln -sf {{ DOTFILES }}/arch/systemd/reflector.service /etc/systemd/system/reflector.service
+    sudo ln -sf {{ DOTFILES }}/arch/systemd/reflector.timer /etc/systemd/system/reflector.timer
+
+    # enable timers
+    sudo systemctl enable --now paccache.timer
+    sudo systemctl enable --now reflector.timer
+
+    # reload systemd
+    sudo systemctl daemon-reload
+
 # --------------------------------------------------
 # Services
 # --------------------------------------------------

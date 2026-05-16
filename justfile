@@ -9,6 +9,7 @@ DOTFILES := HOME + "/dotfiles"
 CONFIG := HOME + "/.config"
 LOCAL := HOME + "/.local"
 BIN := LOCAL + "/bin"
+WORK:= HOME + "/projects/work"
 
 # --------------------------------------------------
 # DEFAULT
@@ -32,8 +33,9 @@ zsh:
     ln -sf {{ DOTFILES }}/zsh/zshrc {{ CONFIG }}/zsh/.zshrc
     ln -sf {{ DOTFILES }}/zsh/zshenv {{ HOME }}/.zshenv
 
-    mkdir -p {{ CONFIG }}/zsh/completions
-    volta completions zsh > {{HOME}}/.config/zsh/completions/_volta
+    volta completions zsh > {{ DOTFILES }}/zsh/completions/_volta
+    sesh completion zsh > {{ DOTFILES }}//zsh/completions/_sesh
+    ln -sf {{ DOTFILES }}/zsh/completions {{ CONFIG }}/zsh/completions
 
 [group('dotfiles')]
 git:
@@ -48,7 +50,7 @@ starship:
 [group('dotfiles')]
 lazygit:
     mkdir -p {{ CONFIG }}/lazygit
-    ln -sf {{ DOTFILES }}/lazygit.yml {{ CONFIG }}/lazygit/config.yml
+    ln -sf {{ DOTFILES }}/lazygit {{ CONFIG }}/lazygit/config.yml
 
 [group('dotfiles')]
 i3:
@@ -103,6 +105,31 @@ rofi:
 picom:
     mkdir -p {{ CONFIG }}/picom
     ln -sf {{ DOTFILES }}/picom {{ CONFIG }}/picom/picom.conf
+
+[group('dotfiles')]
+bat:
+    mkdir -p {{ CONFIG }}/bat
+    ln -sf {{ DOTFILES }}/bat/config {{ CONFIG }}/bat/config
+    ln -sf {{ DOTFILES }}/bat/themes {{ CONFIG }}/bat/themes
+
+[group('dotfiles')]
+lsd:
+    mkdir -p {{ CONFIG }}/lsd
+    ln -sf {{ DOTFILES }}/lsd {{ CONFIG }}/lsd/config.yaml
+
+[group('dotfiles')]
+bottom:
+    mkdir -p {{ CONFIG }}/bottom
+    ln -sf {{ DOTFILES }}/bottom {{ CONFIG }}/bottom/bottom.toml
+
+[group('dotfiles')]
+htop:
+    mkdir -p {{ CONFIG }}/htop
+    ln -sf {{ DOTFILES }}/htop {{ CONFIG }}/htop/htoprc
+
+[group('dotfiles')]
+rider:
+    ln -sf {{ DOTFILES }}/ideavimrc {{ HOME}}/.ideavimrc
 
 # --------------------------------------------------
 # Services

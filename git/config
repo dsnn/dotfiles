@@ -106,8 +106,13 @@
 
 [fetch]
     prune = true
+
 [credential]
-	useHttpPath = true
-	helper = cache
+    useHttpPath = true
+    helper = cache
+
 [credential "https://dev.azure.com"]
-	useHttpPath = true
+    useHttpPath = true
+
+[includeIf "gitdir:~/projects/work/"]
+    path = "~/projects/work/.gitconfig-work"

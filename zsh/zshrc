@@ -4,13 +4,23 @@ fpath=(~/.config/zsh/completions $fpath)
 autoload -Uz compinit
 compinit
 
+source_if_exists() {
+  [[ -r "$1" ]] && source "$1"
+}
+
 # ---------------------- #
 #         plugins        #
 # ---------------------- #
 
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
+# Arch paths
+source_if_exists /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source_if_exists /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source_if_exists /usr/share/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
+
+# Debian/Ubuntu-ish paths
+source_if_exists /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source_if_exists /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source_if_exists "$HOME/.local/share/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
 
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion history)
 
@@ -50,8 +60,9 @@ if [[ $options[zle] = on ]]; then
   source <(fzf --zsh)
 fi
 
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
+# Arch paths
+source_if_exists /usr/share/fzf/key-bindings.zsh
+source_if_exists /usr/share/fzf/completion.zsh
 
 export FZF_TMUX_OPTS="-p80%,60%"
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --exclude .git"
@@ -99,7 +110,10 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd --tree --color=always $realpath
 #         zoxide         #
 # ---------------------- #
 
-eval "$(zoxide init zsh)"
+# zoxide
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+fi
 
 # ---------------------- #
 #         volta          #
@@ -290,7 +304,7 @@ alias df='df -h'
 alias mkdir='mkdir -pv'
 alias mv='mv -v'
 alias rl='source ~/.config/zsh/.zshrc'
-alias -- cat=bat
+alias cat=bat
 # alias lpath='echo $PATH | tr '\'':'\'' '\''
 
 # lsd

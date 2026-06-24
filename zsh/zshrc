@@ -214,7 +214,7 @@ fi
 #         vivid          #
 # ---------------------- #
 
-# export LS_COLORS="$(vivid generate catppuccin-mocha)"
+export LS_COLORS="$(vivid generate catppuccin-mocha)"
 
 # ---------------------- #
 #         sesh           #

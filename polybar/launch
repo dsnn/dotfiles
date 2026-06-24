@@ -2,18 +2,19 @@
 
 killall -q polybar
 
-while pgrep -x polybar >/dev/null; do sleep 0.1; done
+while pgrep -x polybar >/dev/null; do
+  sleep 0.1
+done
 
-if type "xrandr" >/dev/null 2>&1; then
-  MONITORS=$(xrandr --query | grep " connected" | cut -d" " -f1)
-else
-  MONITORS="default"
+# Get monitors safely
+mapfile -t MONITORS < <(xrandr --query | grep " connected" | cut -d" " -f1)
+
+# Fallback if empty
+if [ ${#MONITORS[@]} -eq 0 ]; then
+  MONITORS=("default")
 fi
 
-if [ -z "$MONITORS" ]; then
-  MONITORS="default"
-fi
-
-for m in $MONITORS; do
-  MONITOR=$m polybar mybar >/dev/null 2>&1 &
+# Launch polybar per monitor
+for m in "${MONITORS[@]}"; do
+  MONITOR="$m" polybar mybar >/dev/null 2>&1 &
 done

@@ -20,7 +20,7 @@ default:
     @just --list --unsorted
 
 [group("core")]
-bootstrap: zsh starship git lazygit
+bootstrap: zsh starship git 
     @echo "✓ dotfiles bootstrap complete"
 
 # --------------------------------------------------

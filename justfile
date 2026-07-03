@@ -29,22 +29,22 @@ bootstrap: zsh starship git lazygit
 
 [group('dotfiles')]
 zsh:
-    mkdir -p {{ CONFIG }}/zsh
-    ln -sf {{ DOTFILES }}/zsh/zshrc {{ CONFIG }}/zsh/.zshrc
-    ln -sf {{ DOTFILES }}/zsh/zshenv {{ HOME }}/.zshenv
+	mkdir -p {{ CONFIG }}/zsh
+	ln -sf {{ DOTFILES }}/zsh/zshrc {{ CONFIG }}/zsh/.zshrc
+	ln -sf {{ DOTFILES }}/zsh/zshenv {{ HOME }}/.zshenv
 
-    if command -v volta >/dev/null 2>&1; then
-        volta completions zsh > {{ DOTFILES }}/zsh/completions/_volta
-    else
-        echo "volta not found; skipping _volta completion generation"
-    fi
+	if command -v volta >/dev/null 2>&1; then
+		volta completions zsh > {{ DOTFILES }}/zsh/completions/_volta
+	else
+		echo "volta not found; skipping _volta completion generation"
+	fi
 
-    if command -v sesh >/dev/null 2>&1; then
-        sesh completion zsh > {{ DOTFILES }}/zsh/completions/_sesh
-    else
-        echo "sesh not found; skipping _sesh completion generation"
-    fi
-    ln -sf {{ DOTFILES }}/zsh/completions {{ CONFIG }}/zsh/completions
+	if command -v sesh >/dev/null 2>&1; then
+		sesh completion zsh > {{ DOTFILES }}/zsh/completions/_sesh
+	else
+		echo "sesh not found; skipping _sesh completion generation"
+	fi
+	ln -sf {{ DOTFILES }}/zsh/completions {{ CONFIG }}/zsh/completions
 
 [group('dotfiles')]
 git:
@@ -52,26 +52,10 @@ git:
     ln -sf {{ DOTFILES }}/git/config {{ CONFIG }}/git/config
     ln -sf {{ DOTFILES }}/git/ignore {{ CONFIG }}/git/ignore
 
+
 [group('dotfiles')]
 starship:
     ln -sf {{ DOTFILES }}/starship {{ CONFIG }}/starship.toml
-
-[group('dotfiles')]
-lazygit:
-    mkdir -p {{ CONFIG }}/lazygit
-    ln -sf {{ DOTFILES }}/lazygit {{ CONFIG }}/lazygit/config.yml
-
-[group('dotfiles')]
-i3:
-    mkdir -p {{ CONFIG }}/i3
-    ln -sf {{ DOTFILES }}/i3/config {{ CONFIG }}/i3/config
-
-[group('dotfiles')]
-polybar:
-    mkdir -p {{ CONFIG }}/polybar
-    chmod +x {{ DOTFILES }}/polybar/launch
-    ln -sf {{ DOTFILES }}/polybar/config {{ CONFIG }}/polybar/config
-    ln -snf {{ DOTFILES }}/polybar/launch {{ CONFIG }}/polybar/launch.sh
 
 [group('dotfiles')]
 ssh:

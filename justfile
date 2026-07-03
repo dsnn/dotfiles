@@ -23,6 +23,10 @@ default:
 bootstrap: zsh starship git 
     @echo "✓ dotfiles bootstrap complete"
 
+[group("brew")]
+sesh:
+    brew install sesh
+
 # --------------------------------------------------
 # Dotfiles
 # --------------------------------------------------

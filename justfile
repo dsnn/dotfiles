@@ -29,22 +29,22 @@ bootstrap: zsh starship git lazygit
 
 [group('dotfiles')]
 zsh:
-	mkdir -p {{ CONFIG }}/zsh
-	ln -sf {{ DOTFILES }}/zsh/zshrc {{ CONFIG }}/zsh/.zshrc
-	ln -sf {{ DOTFILES }}/zsh/zshenv {{ HOME }}/.zshenv
+    mkdir -p {{ CONFIG }}/zsh
+    ln -sf {{ DOTFILES }}/zsh/zshrc {{ CONFIG }}/zsh/.zshrc
+    ln -sf {{ DOTFILES }}/zsh/zshenv {{ HOME }}/.zshenv
 
-	if command -v volta >/dev/null 2>&1; then
-		volta completions zsh > {{ DOTFILES }}/zsh/completions/_volta
-	else
-		echo "volta not found; skipping _volta completion generation"
-	fi
+#    if command -v volta >/dev/null 2>&1; then
+#        volta completions zsh > {{ DOTFILES }}/zsh/completions/_volta
+#    else
+#        echo "volta not found; skipping _volta completion generation"
+#    fi
 
-	if command -v sesh >/dev/null 2>&1; then
-		sesh completion zsh > {{ DOTFILES }}/zsh/completions/_sesh
-	else
-		echo "sesh not found; skipping _sesh completion generation"
-	fi
-	ln -sf {{ DOTFILES }}/zsh/completions {{ CONFIG }}/zsh/completions
+#    if command -v sesh >/dev/null 2>&1; then
+#        sesh completion zsh > {{ DOTFILES }}/zsh/completions/_sesh
+#    else
+#        echo "sesh not found; skipping _sesh completion generation"
+#    fi
+#    ln -sf {{ DOTFILES }}/zsh/completions {{ CONFIG }}/zsh/completions
 
 [group('dotfiles')]
 git:

@@ -304,7 +304,17 @@ alias df='df -h'
 alias mkdir='mkdir -pv'
 alias mv='mv -v'
 alias rl='source ~/.config/zsh/.zshrc'
-alias cat=bat
+
+# Prefer `bat` (Arch) or `batcat` (Debian) for `cat`-like output, fall back to system `cat`.
+cat() {
+  if command -v bat >/dev/null 2>&1; then
+    bat "$@"
+  elif command -v batcat >/dev/null 2>&1; then
+    batcat "$@"
+  else
+    command cat "$@"
+  fi
+}
 # alias lpath='echo $PATH | tr '\'':'\'' '\''
 
 # lsd
@@ -359,8 +369,6 @@ alias j=just
 # alias -- ns='npm start'
 # alias -- nt='npm test'
 # alias -- ntu='npm run test:update-snapshot'
-
-alias rl='source ~/.config/zsh/.zshrc'
 
 # trash
 # alias -- rm=trash-put

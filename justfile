@@ -10,6 +10,7 @@ CONFIG := HOME + "/.config"
 LOCAL := HOME + "/.local"
 BIN := LOCAL + "/bin"
 WORK:= HOME + "/projects/work"
+OS := `uname -s`
 
 # --------------------------------------------------
 # DEFAULT
@@ -20,8 +21,8 @@ default:
     @just --list --unsorted
 
 [group("core")]
-bootstrap: zsh starship git 
-    @echo "✓ dotfiles bootstrap complete"
+bootstrap: zsh starship git ssh tmux bat lsd bottom
+    @echo "✓ dotfiles bootstrap complete ({{ OS }})"
 
 # --------------------------------------------------
 # Dotfiles

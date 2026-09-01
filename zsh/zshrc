@@ -31,7 +31,7 @@ ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion history)
 HISTSIZE="10000"
 SAVEHIST="10000"
 
-HISTFILE="/home/dsn/.config/zsh/history"
+HISTFILE="$HOME/.config/zsh/history"
 mkdir -p "$(dirname "$HISTFILE")"
 
 setopt HIST_FCNTL_LOCK
@@ -119,7 +119,7 @@ fi
 #         volta          #
 # ---------------------- #
 
-VOLTA_HOME="/home/dsn/.config/volta"
+VOLTA_HOME="$HOME/.config/volta"
 mkdir -p "$(dirname "$VOLTA_HOME")"
 export VOLTA_HOME="$VOLTA_HOME"
 export PATH="$VOLTA_HOME/bin:$PATH"

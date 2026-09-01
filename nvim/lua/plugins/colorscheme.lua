@@ -3,6 +3,7 @@ return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
+    lazy = false,
     priority = 1000,
     config = function()
       require("catppuccin").setup({
@@ -13,7 +14,6 @@ return {
           neotree = true,
           treesitter = true,
           which_key = true,
-          lualine = true,
           trouble = true,
         },
       })

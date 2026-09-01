@@ -2,6 +2,7 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "master",
     build = ":TSUpdate",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
@@ -33,6 +34,7 @@ return {
   -- Treesitter text objects
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "master",
     dependencies = "nvim-treesitter/nvim-treesitter",
     event = "VeryLazy",
     config = function()
@@ -43,7 +45,7 @@ return {
             lookahead = true,
             keymaps = {
               af = "@function.outer",
-              if = "@function.inner",
+              ["if"] = "@function.inner",
               ac = "@class.outer",
               ic = "@class.inner",
               ab = "@block.outer",

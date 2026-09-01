@@ -8,7 +8,6 @@ return {
       "folke/neodev.nvim",
     },
     config = function()
-      local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       -- Keymaps for LSP
@@ -59,13 +58,17 @@ return {
         -- eslint = {},
       }
 
-      -- Setup each server
+      -- Shared configuration for all language servers
+      vim.lsp.config("*", {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
+
+      -- Configure and enable each server
       for server, config in pairs(servers) do
-        lspconfig[server].setup(vim.tbl_extend("force", {
-          on_attach = on_attach,
-          capabilities = capabilities,
-        }, config))
+        vim.lsp.config(server, config)
       end
+      vim.lsp.enable(vim.tbl_keys(servers))
 
       -- Diagnostic styling
       vim.diagnostic.config({

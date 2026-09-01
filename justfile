@@ -21,7 +21,7 @@ default:
     @just --list --unsorted
 
 [group("core")]
-bootstrap: zsh starship git ssh tmux bat lsd bottom
+bootstrap: zsh starship git ssh tmux bat lsd bottom nvim
     @echo "✓ dotfiles bootstrap complete ({{ OS }})"
 
 # --------------------------------------------------
@@ -124,6 +124,12 @@ htop:
 [group('dotfiles')]
 rider:
     ln -sf {{ DOTFILES }}/ideavimrc {{ HOME}}/.ideavimrc
+
+[group('dotfiles')]
+nvim:
+    mkdir -p {{ CONFIG }}/nvim
+    ln -snf {{ DOTFILES }}/nvim {{ CONFIG }}/nvim
+    @echo "✓ Neovim config linked to {{ CONFIG }}/nvim"
 
 
 # --------------------------------------------------

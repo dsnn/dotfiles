@@ -1,0 +1,26 @@
+brew "just"
+brew "fzf"
+brew "vivid"
+brew "starship"
+brew "lsd"
+brew "tmux"
+brew "bat"
+brew "bottom"
+brew "git-delta"
+brew "lazygit"
+brew "fd"
+brew "zoxide"
+brew "sesh"
+brew "ripgrep"
+brew "volta"
+brew "zsh-syntax-highlighting"
+brew "neovim"
+
+# Neovim: Language Servers & Dev Tools
+brew "lua-language-server"
+brew "bash-language-server"
+
+# Formatters
+brew "stylua"
+brew "shfmt"
+brew "prettier"

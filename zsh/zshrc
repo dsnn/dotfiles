@@ -391,5 +391,4 @@ alias tracert=trip
 # alias -g -- P='2>&1| pygmentize -l pytb'
 # alias -g -- T='| tail'
 
-# source /nix/store/5sz7nq1fa9xm5qmr4bykqcf9cz9b9gkf-zsh-syntax-highlighting-0.8.0/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# ZSH_HIGHLIGHT_HIGHLIGHTERS+=()
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

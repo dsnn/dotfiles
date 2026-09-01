@@ -81,7 +81,7 @@ ssh:
 [group('dotfiles')]
 tmux:
     mkdir -p {{ CONFIG }}/tmux/plugins
-    ln -sf {{ DOTFILES }}/tmux/config {{ CONFIG }}/tmux/.tmux.conf
+    ln -sf {{ DOTFILES }}/tmux/config {{ CONFIG }}/tmux/tmux.conf
 
 [group('dotfiles')]
 x11:

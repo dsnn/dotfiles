@@ -20,12 +20,54 @@ bootstrap: zsh inputrc starship git ssh tmux bat lazygit lsd bottom htop nvim ri
     @echo "✓ dotfiles bootstrap complete ({{ OS }})"
 
 [group("core")]
-check: _check_tmux _check_nvim
+check: _check_ideavim _check_tmux _check_nvim
     @just --fmt --check --unstable
     @zsh -n "{{ DOTFILES }}/zsh/zshenv" "{{ DOTFILES }}/zsh/zprofile" "{{ DOTFILES }}/zsh/zshrc"
     @ssh -G -T -F "{{ DOTFILES }}/ssh/config" github.com >/dev/null
     @git config --file "{{ DOTFILES }}/git/config" --list >/dev/null
     @echo "✓ configuration syntax checks passed"
+
+[private]
+_check_ideavim:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    config='{{ DOTFILES }}/ideavimrc'
+
+    if rg -n '^\s*(map|nmap|xmap|nnoremap|xnoremap)\s+\S+\s+:action\s' "$config"; then
+      printf 'error: use <Action>(...) instead of :action in IdeaVim mappings\n' >&2
+      exit 1
+    fi
+
+    if rg -n '^\s*(noremap|nnoremap|xnoremap)\s+\S+\s+.*<Action>\(' "$config"; then
+      printf 'error: IdeaVim <Action> mappings do not support noremap\n' >&2
+      exit 1
+    fi
+
+    awk '
+      $1 == "map" || $1 == "nmap" || $1 == "nnoremap" {
+        if (++normal[$2] > 1) {
+          printf "duplicate normal-mode mapping: %s\n", $2 > "/dev/stderr"
+          failed = 1
+        }
+      }
+      $1 == "map" || $1 == "xmap" || $1 == "xnoremap" {
+        if (++visual[$2] > 1) {
+          printf "duplicate visual-mode mapping: %s\n", $2 > "/dev/stderr"
+          failed = 1
+        }
+      }
+      /^let g:WhichKeyDesc_/ {
+        description = $0
+        sub(/^[^"]*"/, "", description)
+        split(description, fields, /[[:space:]]+/)
+        if (++which_key[fields[1]] > 1) {
+          printf "duplicate which-key description: %s\n", fields[1] > "/dev/stderr"
+          failed = 1
+        }
+      }
+      END { exit failed }
+    ' "$config"
 
 [private]
 _check_tmux:

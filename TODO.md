@@ -11,7 +11,7 @@ Alla konfigurationer är syntaktiskt giltiga, men följande förbättringar har 
 | Klar | ~~lsd~~ | Åtgärdat: tidsformatet använder nu `%M` för minuter och visar korrekt `%H:%M:%S`. |
 | Klar | ~~SSH~~ | Åtgärdat: includes använder `~`, GitHub har ett värdspecifikt och strikt nyckelval, generiska värdar tillåter åter sina egna autentiseringsmetoder och onödig global komprimering är borttagen. Bootstrap skapar och säkrar båda SSH-katalogerna. |
 | Klar | ~~Git~~ | Åtgärdat: Git Credential Manager anropas med det portabla helper-namnet, global `useHttpPath` och ignore av `nuget.config` är borttagna, och Delta har en enda sammanhållen Catppuccin Mocha-konfiguration. |
-| Medel | IdeaVim | Which-key-beskrivningar kolliderar eller stämmer inte med mappings, `<leader>gu` definieras dubbelt och många rekursiva `map` bör bli modspecifika `nnoremap`/`vnoremap`. |
+| Klar | ~~IdeaVim~~ | Åtgärdat: IDE-actions använder modern `<Action>(…)`-syntax och modspecifika mappings, Which-key-beskrivningarna är unika och korrekta, LSP-navigationen matchar Neovim och nya genvägar täcker diagnostics, VCS-hunks, filhistorik, blame, imports, inline-refaktorering, projektfönster och terminal. |
 | Installationslucka | htop | Konfigurationen finns och bootstrap länkar den, men `htop` är inte installerat och saknas i `Brewfile`. Själva filen bör därefter genereras med aktuell htop-version. |
 | Låg | inputrc | Fungerar, men påverkar inte Zsh—bara Readline-program som Bash. Kan kompletteras om dessa används. |
 | Låg | Starship | Giltig och fungerande. Paletten är betydligt större än vad prompten använder och formatet kan förenklas, men inga riktiga fel hittades. |

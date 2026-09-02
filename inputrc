@@ -1,5 +1,6 @@
-# Show all completion matches immediately if completion is ambiguous.
-# Instead of beeping on first TAB press, readline displays possible matches.
+# This file is read by Readline programs such as Bash; it does not affect Zsh.
+
+# Show all completion matches immediately when completion is ambiguous.
 set show-all-if-ambiguous on
 
 # Ignore uppercase/lowercase differences during tab completion.
@@ -7,7 +8,6 @@ set show-all-if-ambiguous on
 set completion-ignore-case on
 
 # Append "/" to completed directory names.
-# Makes it visually obvious that the result is a directory.
 set mark-directories on
 
 # Also append "/" for symlinked directories.
@@ -22,3 +22,12 @@ set match-hidden-files off
 #   * = executable
 #   @ = symlink
 set visible-stats on
+
+# Keep interactive shells quiet when no completion or history match exists.
+set bell-style none
+
+# Search history using the command prefix already typed on the current line.
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+"\eOA": history-search-backward
+"\eOB": history-search-forward

@@ -111,8 +111,8 @@ git: (_link (DOTFILES + "/git/config") (CONFIG + "/git/config")) (_link (DOTFILE
 
 [group("dotfiles")]
 ssh: (_link (DOTFILES + "/ssh/config") (HOME_DIR + "/.ssh/config"))
-    @mkdir -p "{{ HOME_DIR }}/.ssh/controlmasters"
-    @chmod 700 "{{ HOME_DIR }}/.ssh" "{{ HOME_DIR }}/.ssh/controlmasters"
+    @mkdir -p "{{ HOME_DIR }}/.ssh/controlmasters" "{{ HOME_DIR }}/.ssh/private"
+    @chmod 700 "{{ HOME_DIR }}/.ssh" "{{ HOME_DIR }}/.ssh/controlmasters" "{{ HOME_DIR }}/.ssh/private"
     @chmod 600 "{{ DOTFILES }}/ssh/config"
     @echo "✓ SSH config linked and directories secured"
 

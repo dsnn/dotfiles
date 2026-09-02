@@ -1,6 +1,12 @@
-Include /Users/dsn/.colima/ssh_config
+Include ~/.colima/ssh_config
 
-Include /Users/dsn/.ssh/private/*
+Include ~/.ssh/private/*
+
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
 
 Host *
   AddKeysToAgent yes
@@ -9,12 +15,4 @@ Host *
   ControlPersist 10m
   ServerAliveInterval 60
   ServerAliveCountMax 3
-  PreferredAuthentications publickey
-  IdentitiesOnly yes
   HashKnownHosts yes
-  Compression yes
-
-Host github.com
-  HostName github.com
-  User git
-  IdentityFile ~/.ssh/id_ed25519

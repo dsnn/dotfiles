@@ -109,10 +109,8 @@
 
 [credential]
     useHttpPath = true
-    helper = cache
-
-[credential "https://dev.azure.com"]
-    useHttpPath = true
+    helper =
+    helper = /usr/local/share/gcm-core/git-credential-manager
 
 [includeIf "gitdir:~/projects/work/"]
     path = "~/projects/work/.gitconfig-work"

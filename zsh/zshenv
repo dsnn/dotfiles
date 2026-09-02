@@ -7,6 +7,7 @@ export PAGER="${PAGER:-less}"
 export LESS="${LESS:--FRSXM}"
 export LESSCHARSET="${LESSCHARSET:-utf-8}"
 export LEDGER_COLOR="${LEDGER_COLOR:-true}"
+export TEMP="$HOME/projects/work/repos"
 
 # Make Homebrew discoverable before .zprofile can run `brew shellenv`.
 typeset -U path PATH

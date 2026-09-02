@@ -18,6 +18,7 @@ brew "zsh-autosuggestions"
 brew "zsh-completions"
 brew "zsh-syntax-highlighting"
 brew "neovim"
+brew "tree-sitter-cli"
 
 # Neovim: Language Servers & Dev Tools
 brew "lua-language-server"

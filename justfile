@@ -20,7 +20,7 @@ bootstrap: zsh inputrc starship git ssh tmux bat lazygit lsd bottom htop nvim ri
     @echo "✓ dotfiles bootstrap complete ({{ OS }})"
 
 [group("core")]
-check: _check_tmux
+check: _check_tmux _check_nvim
     @just --fmt --check --unstable
     @zsh -n "{{ DOTFILES }}/zsh/zshenv" "{{ DOTFILES }}/zsh/zprofile" "{{ DOTFILES }}/zsh/zshrc"
     @ssh -G -T -F "{{ DOTFILES }}/ssh/config" github.com >/dev/null
@@ -42,6 +42,21 @@ _check_tmux:
     trap cleanup EXIT
 
     tmux -S "$socket" -f '{{ DOTFILES }}/tmux/config' new-session -d -s dotfiles-check
+
+[private]
+_check_nvim:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    files=(
+      '{{ DOTFILES }}/nvim/init.lua'
+      '{{ DOTFILES }}/nvim/lua/config/'*.lua
+      '{{ DOTFILES }}/nvim/lua/plugins/'*.lua
+    )
+
+    for file in "${files[@]}"; do
+      nvim --clean --headless -i NONE "+lua assert(loadfile([[$file]]))" '+qa!'
+    done
 
 # Create or update a managed symlink without overwriting unique local content.
 [private]

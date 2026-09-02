@@ -41,7 +41,7 @@ opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 -- Performance and behavior
 opt.timeoutlen = 300
 opt.updatetime = 100
-opt.swapfile = false
-opt.undofile = false
+opt.swapfile = true
+opt.undofile = true
 opt.foldenable = false
 opt.spell = false

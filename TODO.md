@@ -6,7 +6,7 @@ Alla konfigurationer är syntaktiskt giltiga, men följande förbättringar har 
 |---|---|---|
 | Klar | ~~Zsh~~ | Åtgärdat: minimal `.zshenv`, portabel `.zprofile`, defensiv plugin-laddning, säkrare historik/completion-cache, portabla verktygssökvägar och reparerade funktioner/alias. |
 | Klar | ~~tmux~~ | Åtgärdat: korrekt `tmux-256color` och moderna terminal features, fokus och clipboard, fungerande statusuppdatering, Catppuccin v2-konfiguration, säkrare binds, en enda sesh-launcher samt reproducerbar TPM-installation och syntaxkontroll. |
-| Hög | Neovim | Installerade Neovim 0.12 stöds inte av vald Treesitter-branch, som dessutom är fryst och felaktigt lazy-loadad. `neodev` är EOL, flera aktiverade LSP-servrar saknas och både swap samt persistent undo är avstängda. |
+| Klar | ~~Neovim~~ | Åtgärdat: Treesitter `main` och dess nya Neovim 0.12-API, reproducerbara parserberoenden och bevarad incremental selection, `lazydev` i stället för EOL `neodev`, Mason-hanterade LSP-servrar, robusta `LspAttach`-mappings samt aktiverad swap och persistent undo. |
 | Hög | lazygit | Använder `xdg-open`, som inte finns på macOS-installationen. Öppna-fil-funktionen fungerar därför inte. Clipboard-kommandot kan också göras enklare och mer portabelt. |
 | Hög, liten fix | lsd | Tidsformatet använder `%m` för minuter; `%m` betyder månad. Det ska vara `%H:%M:%S`. |
 | Medel | SSH | Två absoluta `/Users/dsn`-includes gör filen icke-portabel. Globala `IdentitiesOnly` och `PreferredAuthentications publickey` kan dessutom blockera legitima värdar och MFA-inloggningar. |

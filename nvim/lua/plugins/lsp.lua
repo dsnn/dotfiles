@@ -1,17 +1,32 @@
 -- Language Server Protocol setup
+local servers = {
+  "bashls",
+  "cssls",
+  "html",
+  "jsonls",
+  "lua_ls",
+  "ts_ls",
+  "yamlls",
+}
+
 return {
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
-      "folke/neodev.nvim",
+      "mason-org/mason.nvim",
+      "mason-org/mason-lspconfig.nvim",
+      {
+        "folke/lazydev.nvim",
+        ft = "lua",
+        opts = {},
+      },
     },
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      -- Keymaps for LSP
-      local function on_attach(client, bufnr)
+      local function set_lsp_keymaps(bufnr)
         local map = vim.keymap.set
         local opts = { noremap = true, silent = true, buffer = bufnr }
 
@@ -27,50 +42,39 @@ return {
         end, opts)
       end
 
-      -- Diagnostic keymaps (global)
-      vim.keymap.set("n", "<space>n", function()
-        vim.diagnostic.jump({ count = 1, float = true })
-      end, { silent = true })
-      vim.keymap.set("n", "<space>p", function()
-        vim.diagnostic.jump({ count = -1, float = true })
-      end, { silent = true })
-
-      -- Essential language servers (add/remove as needed)
-      local servers = {
-        lua_ls = {
-          settings = {
-            Lua = {
-              diagnostics = { globals = { "vim" } },
-              workspace = { checkThirdParty = false },
-              telemetry = { enabled = false },
-            },
-          },
-        },
-        ts_ls = {},
-        bashls = {},
-        cssls = {},
-        html = {},
-        jsonls = {},
-        yamlls = {},
-        -- Uncomment as needed:
-        -- tailwindcss = {},
-        -- dockerls = {},
-        -- eslint = {},
-      }
-
-      -- Shared configuration for all language servers
-      vim.lsp.config("*", {
-        on_attach = on_attach,
-        capabilities = capabilities,
+      local group = vim.api.nvim_create_augroup("LspKeymaps", { clear = true })
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = group,
+        callback = function(args)
+          set_lsp_keymaps(args.buf)
+        end,
       })
 
-      -- Configure and enable each server
-      for server, config in pairs(servers) do
-        vim.lsp.config(server, config)
-      end
-      vim.lsp.enable(vim.tbl_keys(servers))
+      vim.keymap.set("n", "<space>n", function()
+        vim.diagnostic.jump({ count = 1, float = true })
+      end, { silent = true, desc = "Next diagnostic" })
+      vim.keymap.set("n", "<space>p", function()
+        vim.diagnostic.jump({ count = -1, float = true })
+      end, { silent = true, desc = "Previous diagnostic" })
 
-      -- Diagnostic styling
+      vim.lsp.config("*", {
+        capabilities = capabilities,
+      })
+      vim.lsp.config("lua_ls", {
+        settings = {
+          Lua = {
+            workspace = { checkThirdParty = false },
+            telemetry = { enabled = false },
+          },
+        },
+      })
+
+      require("mason").setup()
+      require("mason-lspconfig").setup({
+        ensure_installed = servers,
+        automatic_enable = servers,
+      })
+
       vim.diagnostic.config({
         virtual_text = false,
         signs = true,
@@ -85,23 +89,6 @@ return {
     end,
   },
 
-  -- Dev environment for Lua (improves completion for nvim API)
-  {
-    "folke/neodev.nvim",
-    lazy = true,
-  },
-
-  -- Format on save (optional, currently disabled by default)
-  {
-    "lukas-reineke/lsp-format.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("lsp-format").setup({})
-    end,
-    enabled = false,
-  },
-
-  -- Trouble - better diagnostics UI
   {
     "folke/trouble.nvim",
     cmd = "Trouble",
@@ -109,14 +96,12 @@ return {
       { "<space>t", "<cmd>Trouble diagnostics toggle<cr>", desc = "Trouble diagnostics" },
       { "<space>c", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix list" },
     },
-    config = function()
-      require("trouble").setup({
-        modes = {
-          lsp = {
-            win = { position = "right" },
-          },
+    opts = {
+      modes = {
+        lsp = {
+          win = { position = "right" },
         },
-      })
-    end,
+      },
+    },
   },
 }

@@ -1,19 +1,14 @@
-set shell := ["bash", "-cu"]
+set shell := ["bash", "-euo", "pipefail", "-c"]
 
-# --------------------------------------------------
-# CORE PATHS (ALDRIG env_var i recipes)
-# --------------------------------------------------
-
-HOME := env_var("HOME")
-DOTFILES := HOME + "/dotfiles"
-CONFIG := HOME + "/.config"
-LOCAL := HOME + "/.local"
-BIN := LOCAL + "/bin"
-WORK:= HOME + "/projects/work"
+# Resolve paths once. The repository may be cloned somewhere other than ~/dotfiles,
+# and XDG_CONFIG_HOME should be respected when it is set.
+HOME_DIR := env_var("HOME")
+DOTFILES := justfile_directory()
+CONFIG := env_var_or_default("XDG_CONFIG_HOME", HOME_DIR + "/.config")
 OS := `uname -s`
 
 # --------------------------------------------------
-# DEFAULT
+# Core
 # --------------------------------------------------
 
 [group("core")]
@@ -21,153 +16,146 @@ default:
     @just --list --unsorted
 
 [group("core")]
-bootstrap: zsh starship git ssh tmux bat lsd bottom nvim
+bootstrap: zsh inputrc starship git ssh tmux bat lazygit lsd bottom htop nvim rider
     @echo "✓ dotfiles bootstrap complete ({{ OS }})"
+
+[group("core")]
+check:
+    @just --fmt --check --unstable
+    @zsh -n "{{ DOTFILES }}/zsh/zshenv" "{{ DOTFILES }}/zsh/zshrc"
+    @ssh -G -T -F "{{ DOTFILES }}/ssh/config" github.com >/dev/null
+    @git config --file "{{ DOTFILES }}/git/config" --list >/dev/null
+    @echo "✓ configuration syntax checks passed"
+
+# Create or update a managed symlink without overwriting unique local content.
+[private]
+_link source target:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    source='{{ source }}'
+    target='{{ target }}'
+
+    if [[ ! -e "$source" ]]; then
+      printf 'error: source does not exist: %s\n' "$source" >&2
+      exit 1
+    fi
+
+    mkdir -p "$(dirname "$target")"
+
+    if [[ -L "$target" ]]; then
+      if [[ "$(readlink "$target")" == "$source" ]]; then
+        printf '✓ already linked: %s\n' "$target"
+      else
+        ln -sfn "$source" "$target"
+        printf '✓ relinked: %s -> %s\n' "$target" "$source"
+      fi
+    elif [[ -f "$source" && -f "$target" ]] && cmp -s "$source" "$target"; then
+      ln -sfn "$source" "$target"
+      printf '✓ adopted identical file: %s -> %s\n' "$target" "$source"
+    elif [[ -e "$target" ]]; then
+      printf 'error: refusing to overwrite existing path: %s\n' "$target" >&2
+      printf 'move it aside and run the recipe again\n' >&2
+      exit 1
+    else
+      ln -s "$source" "$target"
+      printf '✓ linked: %s -> %s\n' "$target" "$source"
+    fi
 
 # --------------------------------------------------
 # Dotfiles
 # --------------------------------------------------
 
-[group('dotfiles')]
-zsh:
-    mkdir -p {{ CONFIG }}/zsh
-    ln -sf {{ DOTFILES }}/zsh/zshrc {{ CONFIG }}/zsh/.zshrc
-    ln -sf {{ DOTFILES }}/zsh/zshenv {{ HOME }}/.zshenv
+[group("dotfiles")]
+zsh: (_link (DOTFILES + "/zsh/zshrc") (CONFIG + "/zsh/.zshrc")) (_link (DOTFILES + "/zsh/zshenv") (HOME_DIR + "/.zshenv"))
 
-#    if command -v volta >/dev/null 2>&1; then
-#        volta completions zsh > {{ DOTFILES }}/zsh/completions/_volta
-#    else
-#        echo "volta not found; skipping _volta completion generation"
-#    fi
+[group("dotfiles")]
+inputrc: (_link (DOTFILES + "/inputrc") (HOME_DIR + "/.inputrc"))
 
-#    if command -v sesh >/dev/null 2>&1; then
-#        sesh completion zsh > {{ DOTFILES }}/zsh/completions/_sesh
-#    else
-#        echo "sesh not found; skipping _sesh completion generation"
-#    fi
-#    ln -sf {{ DOTFILES }}/zsh/completions {{ CONFIG }}/zsh/completions
+[group("dotfiles")]
+starship: (_link (DOTFILES + "/starship") (CONFIG + "/starship.toml"))
 
-[group('dotfiles')]
-git:
-    mkdir -p {{ CONFIG }}/git
-    ln -sf {{ DOTFILES }}/git/config {{ CONFIG }}/git/config
-    ln -sf {{ DOTFILES }}/git/ignore {{ CONFIG }}/git/ignore
+[group("dotfiles")]
+git: (_link (DOTFILES + "/git/config") (CONFIG + "/git/config")) (_link (DOTFILES + "/git/ignore") (CONFIG + "/git/ignore"))
 
+[group("dotfiles")]
+ssh: (_link (DOTFILES + "/ssh/config") (HOME_DIR + "/.ssh/config"))
+    @mkdir -p "{{ HOME_DIR }}/.ssh/controlmasters"
+    @chmod 700 "{{ HOME_DIR }}/.ssh" "{{ HOME_DIR }}/.ssh/controlmasters"
+    @chmod 600 "{{ DOTFILES }}/ssh/config"
+    @echo "✓ SSH config linked and directories secured"
 
-[group('dotfiles')]
-starship:
-    ln -sf {{ DOTFILES }}/starship {{ CONFIG }}/starship.toml
+[group("dotfiles")]
+tmux: (_link (DOTFILES + "/tmux/config") (CONFIG + "/tmux/tmux.conf"))
+    @mkdir -p "{{ CONFIG }}/tmux/plugins"
 
-[group('dotfiles')]
-ssh:
-    # Ensure SSH dirs exist
-    mkdir -p {{ HOME }}/.ssh
-    mkdir -p {{ HOME }}/.ssh/controlmasters
+[group("dotfiles")]
+bat: (_link (DOTFILES + "/bat/config") (CONFIG + "/bat/config")) (_link (DOTFILES + "/bat/themes/Catppuccin Mocha.tmTheme") (CONFIG + "/bat/themes/Catppuccin Mocha.tmTheme"))
 
-    # Symlink config from dotfiles (symlink, treat as normal file, force)
-    ln -snf {{ DOTFILES }}/ssh/config {{ HOME }}/.ssh/config
+[group("dotfiles")]
+lazygit: (_link (DOTFILES + "/lazygit") (CONFIG + "/lazygit/config.yml"))
 
-    # Permissions (IMPORTANT: only real files/dirs, not symlinks)
-    chmod 700 {{ HOME }}/.ssh
-    chmod 700 {{ HOME }}/.ssh/controlmasters
-    chmod 600 {{ HOME }}/.ssh/config
+[group("dotfiles")]
+lsd: (_link (DOTFILES + "/lsd") (CONFIG + "/lsd/config.yaml"))
 
-    # Fix key permissions (if present)
-    find {{ HOME }}/.ssh -type f -name "id_*" ! -name "*.pub" -exec chmod 600 {} \;
-    find {{ HOME }}/.ssh -type f -name "*.pub" -exec chmod 644 {} \;
+[group("dotfiles")]
+bottom: (_link (DOTFILES + "/bottom") (CONFIG + "/bottom/bottom.toml"))
 
-    echo "SSH config linked + permissions applied"
+[group("dotfiles")]
+htop: (_link (DOTFILES + "/htop") (CONFIG + "/htop/htoprc"))
 
-[group('dotfiles')]
-tmux:
-    mkdir -p {{ CONFIG }}/tmux/plugins
-    ln -sf {{ DOTFILES }}/tmux/config {{ CONFIG }}/tmux/tmux.conf
+[group("dotfiles")]
+rider: (_link (DOTFILES + "/ideavimrc") (HOME_DIR + "/.ideavimrc"))
 
-[group('dotfiles')]
-x11:
-    chmod +x {{ DOTFILES }}/x11/xinitrc
-    ln -snf {{ DOTFILES }}/x11/xinitrc {{ HOME }}/.xinitrc
-    ln -snf {{ DOTFILES }}/x11/xinitrc {{ HOME }}/.Xclients
-    ln -snf {{ DOTFILES }}/x11/Xresources {{ HOME }}/.Xresources
+[group("dotfiles")]
+nvim: (_link (DOTFILES + "/nvim") (CONFIG + "/nvim"))
 
-[group('dotfiles')]
-rofi:
-    mkdir -p {{ CONFIG }}/rofi
-    ln -sf {{ DOTFILES }}/rofi {{ CONFIG }}/rofi/config.rasi
+[group("dotfiles")]
+[linux]
+x11: (_link (DOTFILES + "/x11/xinitrc") (HOME_DIR + "/.xinitrc")) (_link (DOTFILES + "/x11/xinitrc") (HOME_DIR + "/.Xclients")) (_link (DOTFILES + "/x11/Xresources") (HOME_DIR + "/.Xresources"))
+    @chmod +x "{{ DOTFILES }}/x11/xinitrc"
 
-[group('dotfiles')]
-picom:
-    mkdir -p {{ CONFIG }}/picom
-    ln -sf {{ DOTFILES }}/picom {{ CONFIG }}/picom/picom.conf
+[group("dotfiles")]
+[linux]
+rofi: (_link (DOTFILES + "/rofi") (CONFIG + "/rofi/config.rasi"))
 
-[group('dotfiles')]
-bat:
-    mkdir -p {{ CONFIG }}/bat
-    ln -sf {{ DOTFILES }}/bat/config {{ CONFIG }}/bat/config
-    ln -sf {{ DOTFILES }}/bat/themes {{ CONFIG }}/bat/themes
-
-[group('dotfiles')]
-lsd:
-    mkdir -p {{ CONFIG }}/lsd
-    ln -sf {{ DOTFILES }}/lsd {{ CONFIG }}/lsd/config.yaml
-
-[group('dotfiles')]
-bottom:
-    mkdir -p {{ CONFIG }}/bottom
-    ln -sf {{ DOTFILES }}/bottom {{ CONFIG }}/bottom/bottom.toml
-
-[group('dotfiles')]
-htop:
-    mkdir -p {{ CONFIG }}/htop
-    ln -sf {{ DOTFILES }}/htop {{ CONFIG }}/htop/htoprc
-
-[group('dotfiles')]
-rider:
-    ln -sf {{ DOTFILES }}/ideavimrc {{ HOME}}/.ideavimrc
-
-[group('dotfiles')]
-nvim:
-    mkdir -p {{ CONFIG }}/nvim
-    ln -snf {{ DOTFILES }}/nvim {{ CONFIG }}/nvim
-    @echo "✓ Neovim config linked to {{ CONFIG }}/nvim"
-
+[group("dotfiles")]
+[linux]
+picom: (_link (DOTFILES + "/picom") (CONFIG + "/picom/picom.conf"))
 
 # --------------------------------------------------
 # System
 # --------------------------------------------------
 
-[group('system')]
+[group("system")]
+[linux]
 pacman:
-    sudo ln -sf {{ DOTFILES }}/arch/pacman.conf /etc/pacman.conf
+    sudo ln -sfn "{{ DOTFILES }}/arch/pacman.conf" /etc/pacman.conf
 
-[group('system')]
+[group("system")]
+[linux]
 systemd:
-    sudo ln -sf {{ DOTFILES }}/arch/systemd/paccache.service /etc/systemd/system/paccache.service
-    sudo ln -sf {{ DOTFILES }}/arch/systemd/paccache.timer /etc/systemd/system/paccache.timer
-    sudo ln -sf {{ DOTFILES }}/arch/systemd/reflector.service /etc/systemd/system/reflector.service
-    sudo ln -sf {{ DOTFILES }}/arch/systemd/reflector.timer /etc/systemd/system/reflector.timer
-
-    # enable timers
-    sudo systemctl enable --now paccache.timer
-    sudo systemctl enable --now reflector.timer
-
-    # reload systemd
+    sudo ln -sfn "{{ DOTFILES }}/arch/systemd/paccache.service" /etc/systemd/system/paccache.service
+    sudo ln -sfn "{{ DOTFILES }}/arch/systemd/paccache.timer" /etc/systemd/system/paccache.timer
+    sudo ln -sfn "{{ DOTFILES }}/arch/systemd/reflector.service" /etc/systemd/system/reflector.service
+    sudo ln -sfn "{{ DOTFILES }}/arch/systemd/reflector.timer" /etc/systemd/system/reflector.timer
     sudo systemctl daemon-reload
+    sudo systemctl enable --now paccache.timer reflector.timer
 
 # --------------------------------------------------
 # Services
 # --------------------------------------------------
 
-[group('services')]
+[group("services")]
 sys:
     sysz
 
-[group('services')]
+[group("services")]
 [linux]
 list-inactive:
-    systemctl list-units -all --state=inactive
+    systemctl list-units --all --state=inactive
 
-[group('services')]
+[group("services")]
 [linux]
 list-failed:
-    systemctl list-units -all --state=failed
+    systemctl list-units --all --state=failed

@@ -12,9 +12,9 @@ Alla konfigurationer är syntaktiskt giltiga, men följande förbättringar har 
 | Klar | ~~SSH~~ | Åtgärdat: includes använder `~`, GitHub har ett värdspecifikt och strikt nyckelval, generiska värdar tillåter åter sina egna autentiseringsmetoder och onödig global komprimering är borttagen. Bootstrap skapar och säkrar båda SSH-katalogerna. |
 | Klar | ~~Git~~ | Åtgärdat: Git Credential Manager anropas med det portabla helper-namnet, global `useHttpPath` och ignore av `nuget.config` är borttagna, och Delta har en enda sammanhållen Catppuccin Mocha-konfiguration. |
 | Klar | ~~IdeaVim~~ | Åtgärdat: IDE-actions använder modern `<Action>(…)`-syntax och modspecifika mappings, Which-key-beskrivningarna är unika och korrekta, LSP-navigationen matchar Neovim och nya genvägar täcker diagnostics, VCS-hunks, filhistorik, blame, imports, inline-refaktorering, projektfönster och terminal. |
-| Installationslucka | htop | Konfigurationen finns och bootstrap länkar den, men `htop` är inte installerat och saknas i `Brewfile`. Själva filen bör därefter genereras med aktuell htop-version. |
-| Låg | inputrc | Fungerar, men påverkar inte Zsh—bara Readline-program som Bash. Kan kompletteras om dessa används. |
-| Låg | Starship | Giltig och fungerande. Paletten är betydligt större än vad prompten använder och formatet kan förenklas, men inga riktiga fel hittades. |
-| Mycket låg | bat | Fungerar. Catppuccin Mocha ingår redan i bat 0.26.1, så den separata temafilen och symlänken är numera överflödiga. |
+| Klar | ~~htop~~ | Åtgärdat: htop 3.5.3 är installerat och deklarerat i `Brewfile`; den befintliga layouten är verifierad mot aktuell parser och versionsmarkören är uppdaterad utan att användarens mätare, kolumner eller sortering skrivits över. |
+| Klar | ~~inputrc~~ | Åtgärdat: filens Readline-scope är dokumenterat, terminalklockan är avstängd och upp/ned söker nu historik efter redan inskrivet kommandoprefix. Konfigurationen verifieras via Bash i `just check`. |
+| Klar | ~~Starship~~ | Åtgärdat: formatet är förenklat, Git-statusens style appliceras korrekt, Catppuccin-paletten innehåller bara använda färger och officiell schemahint samt runtime-kontroll är tillagda. |
+| Klar | ~~bat~~ | Åtgärdat: den redundanta Catppuccin-filen och bootstrap-symlänken är borttagna; bat använder sitt inbyggda Catppuccin Mocha och städar den tidigare hanterade symlänken säkert. |
 
-Rekommenderad arbetsordning: Zsh → tmux → Neovim → SSH → Git → lazygit → lsd → IdeaVim → resten.
+Alla granskade konfigurationer är nu åtgärdade.

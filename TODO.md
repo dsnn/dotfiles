@@ -4,7 +4,7 @@ Alla konfigurationer är syntaktiskt giltiga, men följande förbättringar har 
 
 | Prioritet | Konfiguration | Faktiska förbättringar |
 |---|---|---|
-| Hög | Zsh | Skriver över `TERM`, har hårdkodade Homebrew- och användarsökvägar, kan ge startfel på Linux, saknar eller dubbelladdar plugins, innehåller skrivfelet `bunzip3` och har ett par trasiga alias. |
+| Klar | ~~Zsh~~ | Åtgärdat: minimal `.zshenv`, portabel `.zprofile`, defensiv plugin-laddning, säkrare historik/completion-cache, portabla verktygssökvägar och reparerade funktioner/alias. |
 | Hög | tmux | Bör använda `tmux-256color`; `focus-events` är avstängt; flera Catppuccin-inställningar är gamla eller felstavade; `status-interval 0` stänger av uppdateringar. |
 | Hög | Neovim | Installerade Neovim 0.12 stöds inte av vald Treesitter-branch, som dessutom är fryst och felaktigt lazy-loadad. `neodev` är EOL, flera aktiverade LSP-servrar saknas och både swap samt persistent undo är avstängda. |
 | Hög | lazygit | Använder `xdg-open`, som inte finns på macOS-installationen. Öppna-fil-funktionen fungerar därför inte. Clipboard-kommandot kan också göras enklare och mer portabelt. |

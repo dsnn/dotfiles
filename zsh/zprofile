@@ -1,0 +1,7 @@
+# Homebrew belongs in login-shell initialization, not in .zshenv where it
+# would run for every Zsh process (including non-interactive commands).
+if (( $+commands[brew] )); then
+  eval "$("$commands[brew]" shellenv)"
+fi
+
+typeset -U path PATH fpath FPATH manpath MANPATH

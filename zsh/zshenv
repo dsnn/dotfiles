@@ -1,16 +1,18 @@
-export BROWSER="chrome"
-export EDITOR="nvim"
-export LC_CTYPE="en_US.UTF-8"
-export LEDGER_COLOR="true"
-export LESS="-FRSXM"
-export LESSCHARSET="utf-8"
-export MANWIDTH="79"
-export PAGER="less"
-export PROMPT="%m %~ $ "
-export PROMPT_DIRTRIM="2"
-export RPROMPT=""
-export TERM="xterm-256color"
-export WORDCHARS=""
+# Keep this file quiet and lightweight: .zshenv is read by every Zsh process.
+export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 
-export ZDOTDIR="$HOME/.config/zsh"
-eval "$(/opt/homebrew/bin/brew shellenv)"
+export EDITOR="${EDITOR:-nvim}"
+export VISUAL="${VISUAL:-$EDITOR}"
+export PAGER="${PAGER:-less}"
+export LESS="${LESS:--FRSXM}"
+export LESSCHARSET="${LESSCHARSET:-utf-8}"
+export LEDGER_COLOR="${LEDGER_COLOR:-true}"
+
+# Make Homebrew discoverable before .zprofile can run `brew shellenv`.
+typeset -U path PATH
+for brew_prefix in /opt/homebrew /home/linuxbrew/.linuxbrew; do
+  if [[ -d "$brew_prefix/bin" ]]; then
+    path=("$brew_prefix/bin" "$brew_prefix/sbin" $path)
+  fi
+done
+unset brew_prefix

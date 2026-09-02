@@ -22,7 +22,7 @@ bootstrap: zsh inputrc starship git ssh tmux bat lazygit lsd bottom htop nvim ri
 [group("core")]
 check:
     @just --fmt --check --unstable
-    @zsh -n "{{ DOTFILES }}/zsh/zshenv" "{{ DOTFILES }}/zsh/zshrc"
+    @zsh -n "{{ DOTFILES }}/zsh/zshenv" "{{ DOTFILES }}/zsh/zprofile" "{{ DOTFILES }}/zsh/zshrc"
     @ssh -G -T -F "{{ DOTFILES }}/ssh/config" github.com >/dev/null
     @git config --file "{{ DOTFILES }}/git/config" --list >/dev/null
     @echo "✓ configuration syntax checks passed"
@@ -67,7 +67,7 @@ _link source target:
 # --------------------------------------------------
 
 [group("dotfiles")]
-zsh: (_link (DOTFILES + "/zsh/zshrc") (CONFIG + "/zsh/.zshrc")) (_link (DOTFILES + "/zsh/zshenv") (HOME_DIR + "/.zshenv"))
+zsh: (_link (DOTFILES + "/zsh/zshrc") (CONFIG + "/zsh/.zshrc")) (_link (DOTFILES + "/zsh/zprofile") (CONFIG + "/zsh/.zprofile")) (_link (DOTFILES + "/zsh/zshenv") (HOME_DIR + "/.zshenv"))
 
 [group("dotfiles")]
 inputrc: (_link (DOTFILES + "/inputrc") (HOME_DIR + "/.inputrc"))

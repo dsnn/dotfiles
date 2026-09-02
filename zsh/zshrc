@@ -1,79 +1,138 @@
-typeset -U path cdpath fpath manpath
+typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
 
-fpath=(~/.config/zsh/completions $fpath)
-autoload -Uz compinit
-compinit
+typeset -g DOTFILES_DIR="${${(%):-%N}:A:h:h}"
+typeset -g ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+typeset -g ZSH_BREW_PREFIX="${HOMEBREW_PREFIX:-}"
+typeset -gi ZSH_HAS_TTY=0
 
-source_if_exists() {
-  [[ -r "$1" ]] && source "$1"
-}
+[[ -o interactive && -t 0 && -t 1 ]] && ZSH_HAS_TTY=1
 
-# ---------------------- #
-#         plugins        #
-# ---------------------- #
-
-# Arch paths
-source_if_exists /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source_if_exists /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source_if_exists /usr/share/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
-
-# Debian/Ubuntu-ish paths
-source_if_exists /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source_if_exists /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source_if_exists "$HOME/.local/share/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
-
-ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion history)
-
-# ---------------------- #
-#         core           #
-# ---------------------- #
-
-HISTSIZE="10000"
-SAVEHIST="10000"
-
-HISTFILE="$HOME/.config/zsh/history"
-mkdir -p "$(dirname "$HISTFILE")"
-
-setopt HIST_FCNTL_LOCK
-unsetopt APPEND_HISTORY
-setopt HIST_IGNORE_DUPS
-unsetopt HIST_IGNORE_ALL_DUPS
-unsetopt HIST_SAVE_NO_DUPS
-unsetopt HIST_FIND_NO_DUPS
-setopt HIST_IGNORE_SPACE
-unsetopt HIST_EXPIRE_DUPS_FIRST
-setopt SHARE_HISTORY
-setopt EXTENDED_HISTORY
-setopt autocd
-
-# make vi mode transitions faster
-export KEYTIMEOUT=1
-
-# vi mode
-bindkey -v
-
-# ---------------------- #
-#         brew           #
-# ---------------------- #
-
-export PATH="/opt/homebrew/bin:$PATH"
-
-# ---------------------- #
-#         fzf            #
-# ---------------------- #
-
-if [[ $options[zle] = on ]]; then
-  source <(fzf --zsh)
+if [[ -z "$ZSH_BREW_PREFIX" && -n "${commands[brew]:-}" ]]; then
+  ZSH_BREW_PREFIX="${commands[brew]%/bin/brew}"
 fi
 
-# Arch paths
-source_if_exists /usr/share/fzf/key-bindings.zsh
-source_if_exists /usr/share/fzf/completion.zsh
+mkdir -p "$ZSH_CACHE_DIR"
+
+source_first() {
+  local file
+  for file in "$@"; do
+    if [[ -r "$file" ]]; then
+      source "$file"
+      return 0
+    fi
+  done
+  return 1
+}
+
+# --------------------------------------------------
+# Interactive environment
+# --------------------------------------------------
+
+if [[ -z "${BROWSER:-}" || ( "$BROWSER" == chrome && -z "${commands[chrome]:-}" ) ]]; then
+  if [[ "$OSTYPE" == darwin* ]] && (( $+commands[open] )); then
+    export BROWSER="open"
+  elif (( $+commands[xdg-open] )); then
+    export BROWSER="xdg-open"
+  fi
+fi
+
+PROMPT="%m %2~ %# "
+PROMPT_DIRTRIM=2
+RPROMPT=""
+WORDCHARS=""
+KEYTIMEOUT=1
+export JUST_UNSTABLE=1
+
+setopt AUTO_CD
+setopt INTERACTIVE_COMMENTS
+
+# --------------------------------------------------
+# History
+# --------------------------------------------------
+
+HISTFILE="${ZDOTDIR:-$HOME}/history"
+HISTSIZE=50000
+SAVEHIST=50000
+mkdir -p "${HISTFILE:h}"
+
+setopt EXTENDED_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FCNTL_LOCK
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_REDUCE_BLANKS
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_VERIFY
+setopt SHARE_HISTORY
+
+# --------------------------------------------------
+# Vi mode and completions
+# --------------------------------------------------
+
+bindkey -v
+
+typeset -a completion_dirs
+completion_dirs=("$DOTFILES_DIR/zsh/completions")
+if [[ -n "$ZSH_BREW_PREFIX" ]]; then
+  completion_dirs+=(
+    "$ZSH_BREW_PREFIX/share/zsh-completions"
+    "$ZSH_BREW_PREFIX/share/zsh/site-functions"
+  )
+fi
+
+for completion_dir in "${completion_dirs[@]}"; do
+  [[ -d "$completion_dir" ]] && fpath=("$completion_dir" $fpath)
+done
+unset completion_dir completion_dirs
+
+zstyle ':completion:*' cache-path "$ZSH_CACHE_DIR/completion-cache"
+zstyle ':completion:*' completer _complete _match
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' menu no
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*:descriptions' format '[%d]'
+
+autoload -Uz compinit
+typeset zcompdump="$ZSH_CACHE_DIR/zcompdump-$ZSH_VERSION"
+typeset zcompaudit_stamp="$ZSH_CACHE_DIR/compaudit-stamp"
+typeset -A zcompaudit_stat
+typeset -i run_compaudit=1
+
+zmodload zsh/datetime
+zmodload zsh/stat
+if [[ -s "$zcompdump" ]] \
+  && zstat -H zcompaudit_stat +mtime "$zcompaudit_stamp" 2>/dev/null \
+  && (( EPOCHSECONDS - zcompaudit_stat[mtime] < 86400 )); then
+  run_compaudit=0
+fi
+
+if (( run_compaudit )); then
+  typeset -a compinit_args=(-d "$zcompdump")
+  (( ZSH_HAS_TTY )) || compinit_args=(-i $compinit_args)
+  if compinit "${compinit_args[@]}"; then
+    (: >| "$zcompaudit_stamp") 2>/dev/null || true
+  fi
+  unset compinit_args
+else
+  compinit -C -d "$zcompdump"
+fi
+unset zcompaudit_stamp zcompaudit_stat run_compaudit zcompdump
+
+# --------------------------------------------------
+# Colors and fzf
+# --------------------------------------------------
+
+typeset vivid_colors=""
+if (( $+commands[vivid] )) && vivid_colors="$(vivid generate catppuccin-mocha 2>/dev/null)"; then
+  export LS_COLORS="$vivid_colors"
+  zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+fi
+unset vivid_colors
 
 export FZF_TMUX_OPTS="-p80%,60%"
-export FZF_DEFAULT_COMMAND="fd --type f --hidden --exclude .git"
-export FZF_ALT_C_COMMAND="fd --type d --hidden --exclude .git"
-
 export FZF_DEFAULT_OPTS="
 --color=bg:#1e1e2e
 --color=bg+:#313244
@@ -85,211 +144,251 @@ export FZF_DEFAULT_OPTS="
 --color=spinner:#f5e0dc
 "
 
+if (( $+commands[fd] )); then
+  export FZF_DEFAULT_COMMAND="fd --type f --hidden --exclude .git"
+  export FZF_ALT_C_COMMAND="fd --type d --hidden --exclude .git"
+fi
+
+typeset bat_preview="cat"
+if (( $+commands[bat] )); then
+  bat_preview="bat --number --color=always"
+elif (( $+commands[batcat] )); then
+  bat_preview="batcat --number --color=always"
+fi
+
 export FZF_CTRL_T_OPTS="
---preview 'bat -n --color=always {}'
+--preview '$bat_preview {}'
 --bind 'ctrl-/:change-preview-window(down|hidden|)'
 "
 
-export FZF_ALT_C_OPTS="
---preview 'tree -C {}'
-"
+typeset directory_preview="ls -la"
+(( $+commands[lsd] )) && directory_preview="lsd --tree --color=always"
+export FZF_ALT_C_OPTS="--preview '$directory_preview {}'"
 
 export FZF_CTRL_R_OPTS="
---preview 'echo {}'
+--preview 'printf %s {}'
 --preview-window up:3:hidden:wrap
 --bind 'ctrl-/:toggle-preview'
---bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
 --color header:italic
---header 'Press CTRL-Y to copy command into clipboard'
 "
 
-# ---------------------- #
-#         fzf-tab        #
-# ---------------------- #
- 
-zstyle ':completion:*' menu yes select
+typeset clipboard_command=""
+if (( $+commands[pbcopy] )); then
+  clipboard_command="pbcopy"
+elif (( $+commands[wl-copy] )); then
+  clipboard_command="wl-copy"
+elif (( $+commands[xclip] )); then
+  clipboard_command="xclip -selection clipboard"
+fi
+
+if [[ -n "$clipboard_command" ]]; then
+  FZF_CTRL_R_OPTS+="
+--bind 'ctrl-y:execute-silent(printf %s {2..} | $clipboard_command)+abort'
+--header 'Press CTRL-Y to copy command into clipboard'
+"
+fi
+export FZF_CTRL_R_OPTS
+unset bat_preview clipboard_command directory_preview
+
+typeset fzf_init=""
+if (( ZSH_HAS_TTY )); then
+  if (( $+commands[fzf] )) && fzf_init="$(fzf --zsh 2>/dev/null)"; then
+    eval "$fzf_init"
+  else
+    source_first \
+      /usr/share/fzf/key-bindings.zsh \
+      /usr/share/doc/fzf/examples/key-bindings.zsh || true
+    source_first \
+      /usr/share/fzf/completion.zsh \
+      /usr/share/doc/fzf/examples/completion.zsh || true
+  fi
+fi
+unset fzf_init
+
+# fzf-tab must load after compinit/fzf completion and before plugins that wrap widgets.
+if (( ZSH_HAS_TTY )); then
+  source_first \
+    "$ZSH_BREW_PREFIX/opt/fzf-tab/share/fzf-tab/fzf-tab.zsh" \
+    "$ZSH_BREW_PREFIX/share/fzf-tab/fzf-tab.plugin.zsh" \
+    /usr/share/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh \
+    "$HOME/.local/share/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh" || true
+fi
+
 zstyle ':fzf-tab:*' switch-group ',' '.'
-zstyle ':fzf-tab:*' fzf-command fzf
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd --tree --color=always $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd --tree --color=always $realpath 2>/dev/null || ls -la $realpath'
 
-# ---------------------- #
-#         zoxide         #
-# ---------------------- #
+ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion history)
+if (( ZSH_HAS_TTY )); then
+  source_first \
+    "$ZSH_BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" \
+    /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh \
+    /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh \
+    "$HOME/.local/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" || true
+fi
 
-# zoxide
-if command -v zoxide >/dev/null 2>&1; then
+# --------------------------------------------------
+# Tool initialization
+# --------------------------------------------------
+
+if (( $+commands[zoxide] )); then
   eval "$(zoxide init zsh)"
 fi
 
-# ---------------------- #
-#         volta          #
-# ---------------------- #
+export VOLTA_HOME="${VOLTA_HOME:-$HOME/.config/volta}"
+path=("$VOLTA_HOME/bin" $path)
 
-VOLTA_HOME="$HOME/.config/volta"
-mkdir -p "$(dirname "$VOLTA_HOME")"
-export VOLTA_HOME="$VOLTA_HOME"
-export PATH="$VOLTA_HOME/bin:$PATH"
- 
-# PATH="$PATH:/Users/dsn/.node_modules/bin"
-# export npm_config_prefix=~/.node_modules
+path+=("$HOME/.dotnet/tools")
+[[ -d /usr/local/share/dotnet ]] && path=(/usr/local/share/dotnet $path)
 
-# ---------------------- #
-#         dotnet         #
-# ---------------------- #
+if (( $+commands[dotnet] )); then
+  _dotnet_zsh_complete() {
+    local -a completions
+    completions=("${(@f)$(dotnet complete "$words")}")
 
-# export dotnet-ef for migrations
-export PATH="$PATH:/users/dsn/.dotnet/tools"
-
-# export for work
-export TEMP='/users/dsn/projects/work/repos'
-export PATH="/usr/local/share/dotnet:$PATH"
-
-_dotnet_zsh_complete()
-{
-  local completions=("$(dotnet complete "$words")")
-
-  # If the completion list is empty, just continue with filename selection
-  if [ -z "$completions" ]
-  then
-    _arguments '*::arguments: _normal'
-    return
-  fi
-
-  # This is not a variable assignment, don't remove spaces!
-  _values = "${(ps:\n:)completions}"
-}
-
-compdef _dotnet_zsh_complete dotnet
-
-# ---------------------- #
-#          accept        #
-# ---------------------- #
-
-# ctrl + space to accept
-bindkey '^ ' autosuggest-accept
-bindkey '^Y' autosuggest-accept
-
-# ---------------------- #
-#        extract         #
-# ---------------------- #
-
-ex ()
-{
-  if [ -f $1 ] ; then
-    case $1 in
-      *.tar.bz2)   tar xjf $1   ;;
-      *.tar.gz)    tar xzf $1   ;;
-      *.tar.xz)    tar xJf $1   ;;
-      *.bz2)       bunzip3 $1   ;;
-      *.rar)       unrar x $1   ;;
-      *.gz)        gunzip $1    ;;
-      *.tar)       tar xf $1    ;;
-      *.tbz2)      tar xjf $1   ;;
-      *.tgz)       tar xzf $1   ;;
-      *.zip)       unzip $1     ;;
-      *.Z)         uncompress $1;;
-      *.7z)        7z x $1      ;;
-      *)           echo "'$1' cannot be extracted via ex()" ;;
-    esac
-  else
-    echo "'$1' is not a valid file"
-  fi
-}
-
-# ---------------------- #
-#      fn bindings       #
-# ---------------------- #
-
-autoload -U edit-command-line; zle -N edit-command-line
-bindkey '^e' edit-command-line
-
-run-cd-command () { BUFFER="cd .."; zle accept-line }
-zle -N run-cd-command
-bindkey '^u' run-cd-command
-
-# ---------------------- #
-#      1Password         #
-# ---------------------- #
-
-if command -v op &> /dev/null
-then
-  eval "$(op completion zsh)"; compdef _op op
+    if (( ${#completions} )); then
+      _describe 'dotnet completions' completions
+    else
+      _arguments '*::arguments: _normal'
+    fi
+  }
+  compdef _dotnet_zsh_complete dotnet
 fi
 
-# ---------------------- #
-#         vivid          #
-# ---------------------- #
+if (( $+commands[op] )); then
+  eval "$(op completion zsh)"
+  compdef _op op
+fi
 
-export LS_COLORS="$(vivid generate catppuccin-mocha)"
-
-# ---------------------- #
-#         sesh           #
-# ---------------------- #
-
-function sesh-sessions() {
-  {
-    exec </dev/tty
-    exec <&1
-    local session
-    session=$(sesh list -t -c | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
-    zle reset-prompt > /dev/null 2>&1 || true
-    [[ -z "$session" ]] && return
-    sesh connect $session
-  }
-}
-
-zle     -N             sesh-sessions
-bindkey -M vicmd '\es' sesh-sessions
-bindkey -M viins '\es' sesh-sessions
-
-# ---------------------- #
-#        neovim          #
-# ---------------------- #
-
-# ctrl + n to open nvim
-function run_nvim() {
-  BUFFER="nvim && clear"
-  zle accept-line
-}
-zle -N run_nvim
-bindkey "^n" run_nvim
-
-# ---------------------- #
-#        lazygit         #
-# ---------------------- #
-
-function run_lazy_git() {
-  BUFFER="lazygit && clear"
-  zle accept-line
-}
-zle -N run_lazy_git
-bindkey "^g" run_lazy_git
-
-# ---------------------- #
-#        justfile        #
-# ---------------------- #
-
-export JUST_UNSTABLE=1
-
-# ---------------------- #
-#        keychain        #
-# ---------------------- #
-
-if command -v keychain >/dev/null; then
+if (( $+commands[keychain] )) && [[ -r "$HOME/.ssh/id_ed25519" ]]; then
   eval "$(keychain --eval --quiet id_ed25519)"
 fi
 
-# ---------------------- #
-#        starship        #
-# ---------------------- #
+# --------------------------------------------------
+# Functions and ZLE widgets
+# --------------------------------------------------
 
-if [[ $TERM != "dumb" ]]; then
-  eval "$(starship init zsh)"
+ex() {
+  if (( $# != 1 )); then
+    print -u2 'usage: ex <archive>'
+    return 2
+  fi
+
+  local archive="$1"
+  if [[ ! -f "$archive" ]]; then
+    print -u2 -- "'$archive' is not a valid file"
+    return 1
+  fi
+
+  case "$archive" in
+    (*.tar.bz2|*.tbz2) tar xjf "$archive" ;;
+    (*.tar.gz|*.tgz)   tar xzf "$archive" ;;
+    (*.tar.xz)         tar xJf "$archive" ;;
+    (*.tar.zst)        tar --zstd -xf "$archive" ;;
+    (*.bz2)            bunzip2 "$archive" ;;
+    (*.rar)            unrar x "$archive" ;;
+    (*.gz)             gunzip "$archive" ;;
+    (*.tar)            tar xf "$archive" ;;
+    (*.zip)            unzip "$archive" ;;
+    (*.Z)              uncompress "$archive" ;;
+    (*.7z)             7z x "$archive" ;;
+    (*)
+      print -u2 -- "'$archive' cannot be extracted by ex"
+      return 1
+      ;;
+  esac
+}
+
+if (( ZSH_HAS_TTY )); then
+  autoload -Uz edit-command-line
+  zle -N edit-command-line
+  bindkey -M viins '^E' edit-command-line
+
+  run-cd-command() {
+    BUFFER='cd ..'
+    zle accept-line
+  }
+  zle -N run-cd-command
+  bindkey -M viins '^U' run-cd-command
+
+  if (( ${+widgets[autosuggest-accept]} )); then
+    bindkey -M viins '^ ' autosuggest-accept
+    bindkey -M viins '^Y' autosuggest-accept
+  fi
+
+  if (( $+commands[sesh] && $+commands[fzf] )); then
+    sesh-sessions() {
+      local session
+      session="$(sesh list -t -c | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')"
+      [[ -n "$session" ]] && sesh connect "$session"
+      zle reset-prompt
+    }
+    zle -N sesh-sessions
+    bindkey -M vicmd '\es' sesh-sessions
+    bindkey -M viins '\es' sesh-sessions
+  fi
+
+  if (( $+commands[nvim] )); then
+    run-nvim() {
+      BUFFER='nvim'
+      zle accept-line
+    }
+    zle -N run-nvim
+    bindkey -M viins '^N' run-nvim
+  fi
+
+  if (( $+commands[lazygit] )); then
+    run-lazygit() {
+      BUFFER='lazygit'
+      zle accept-line
+    }
+    zle -N run-lazygit
+    bindkey -M viins '^G' run-lazygit
+  fi
 fi
 
-# ---------------------- #
-#        aliases         #
-# ---------------------- #
+day() {
+  local author
+  author="$(git config --get user.name)" || return
+  git log --reverse --no-merges --branches --date=iso --since=midnight --author="$author" "$@"
+}
+
+delete-merged-branches() {
+  local base="${1:-}"
+  local branch
+  local -a branches
+
+  if [[ -z "$base" ]]; then
+    base="$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null)"
+    base="${base#origin/}"
+  fi
+  [[ -n "$base" ]] || base="$(git config --get init.defaultBranch)"
+  [[ -n "$base" ]] || base=main
+
+  if ! git rev-parse --verify --quiet "$base^{commit}" >/dev/null; then
+    print -u2 -- "base branch not found: $base"
+    return 1
+  fi
+
+  branches=("${(@f)$(git for-each-ref --format='%(refname:short)' --merged "$base" refs/heads/)}")
+  for branch in "${branches[@]}"; do
+    [[ -n "$branch" && "$branch" != "$base" ]] && git branch -d -- "$branch"
+  done
+}
+
+s() {
+  if ! (( $+commands[sesh] && $+commands[fzf] )); then
+    print -u2 'sesh and fzf are required'
+    return 127
+  fi
+
+  local session
+  session="$(sesh list --icons | fzf --ansi)"
+  [[ -n "$session" ]] && sesh connect "$session"
+}
+
+# --------------------------------------------------
+# Aliases
+# --------------------------------------------------
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -299,102 +398,81 @@ alias h='cd ~/'
 alias cd..='cd ..'
 alias cf='cd ~/.config'
 alias cfp='cd ~/projects/'
-alias cfz='nvim $HOME/dotfiles/zsh/zshrc'
-alias cft='nvim $HOME/dotfiles/tmux/config'
-alias cfi='nvim $HOME/dotfiles/i3/config'
-alias cfg='nvim $HOME/dotfiles/git/config'
-alias cfj='nvim $HOME/dotfiles/justfile'
+alias cfz='$EDITOR "$DOTFILES_DIR/zsh/zshrc"'
+alias cft='$EDITOR "$DOTFILES_DIR/tmux/config"'
+alias cfi='$EDITOR "$DOTFILES_DIR/i3/config"'
+alias cfg='$EDITOR "$DOTFILES_DIR/git/config"'
+alias cfj='$EDITOR "$DOTFILES_DIR/justfile"'
 alias cp='cp -v'
-alias d='cd ~/dotfiles'
+alias d='cd "$DOTFILES_DIR"'
 alias df='df -h'
 alias mkdir='mkdir -pv'
 alias mv='mv -v'
-alias rl='source ~/.config/zsh/.zshrc'
+alias rl='exec zsh'
 
-# Prefer `bat` (Arch) or `batcat` (Debian) for `cat`-like output, fall back to system `cat`.
 cat() {
-  if command -v bat >/dev/null 2>&1; then
+  if (( $+commands[bat] )); then
     bat "$@"
-  elif command -v batcat >/dev/null 2>&1; then
+  elif (( $+commands[batcat] )); then
     batcat "$@"
   else
     command cat "$@"
   fi
 }
-# alias lpath='echo $PATH | tr '\'':'\'' '\''
 
-# lsd
-alias l='lsd -lA --group-dirs=first'
-alias la='lsd -A'
-alias ll='lsd -l'
-alias lla='lsd -lA'
-alias lls='lsd -lA --total-size'
-alias llt='lsd -l --tree' '\'''
-alias lso='lsd -lA --group-dirs=first --permission=octal'
-alias lst='lsd -lAt'
-alias lt='lsd --tree'
-alias ltr='lsd -lA --tree'
-alias ls=lsd
+if (( $+commands[lsd] )); then
+  alias ls='lsd'
+  alias l='lsd -lA --group-dirs=first'
+  alias la='lsd -A'
+  alias ll='lsd -l'
+  alias lla='lsd -lA'
+  alias lls='lsd -lA --total-size'
+  alias llt='lsd -l --tree'
+  alias lso='lsd -lA --group-dirs=first --permission=octal'
+  alias lst='lsd -lAt'
+  alias lt='lsd --tree'
+  alias ltr='lsd -lA --tree'
+fi
 
-# awk
-alias awk=nawk
+(( $+commands[nawk] )) && alias awk='nawk'
 
-# git
-# alias -- churn='!f() { git log --all -M -C --name-only --format='\''format:'\'' "$@" | sort | grep -v '\''^$'\'' | uniq -c | sort | awk '\''BEGIN {print "count    file"} {print $1 "  " $2}'\'' | sort -g; }; f'
-alias day='!sh -c '\''git log --reverse --no-merges --branches --date=iso --after="yesterday 23:59" --author="`git config --get user.name`"'\'''
-alias delete-merged-branches='!f() { git checkout --quiet master && git branch --merged | grep --invert-match '\''\*'\'' | xargs -n 1 git branch --delete; git checkout --quiet @{-1}; }; f'
-alias g="git"
-alias ga="git add ."
-alias gc="git commit -m"
-alias gd="git diff"
-alias gpl="git pull"
-alias gl="git ls"
-alias gp="git push origin master"
-alias gpf="git push --force-with-lease"
-alias gs="git st"
-alias cb="git cb"
-alias gam="git commit --amend --no-edit"
-alias lzg="lazygit"
+alias g='git'
+alias ga='git add --all'
+alias gc='git commit -m'
+alias gd='git diff'
+alias gpl='git pull'
+alias gl='git ls'
+alias gp='git push'
+alias gpf='git push --force-with-lease'
+alias gs='git st'
+alias cb='git cb'
+alias gam='git commit --amend --no-edit'
+alias lzg='lazygit'
 
-# docker
 alias di='docker images'
 alias drm='docker rm $(docker ps -qa --no-trunc --filter "status=exited")'
 alias drmi='docker rmi $(docker images -q -f dangling=true)'
 alias ds='docker ps -a'
 
-# du
-alias dud='du --max-depth=1 --human-readable'
-alias duf='du --summarize --human-readable *'
-alias j=just
+alias dud='du -hd 1'
+alias duf='du -sh ./*'
+alias j='just'
 
-# npm
-# alias -- nd='npm run dev'
-# alias -- ni='npm install'
-# alias -- nrl='npm run lint'
-# alias -- nrt='npm run typecheck'
-# alias -- ns='npm start'
-# alias -- nt='npm test'
-# alias -- ntu='npm run test:update-snapshot'
+(( $+commands[trip] )) && alias tracert='trip'
 
-# trash
-# alias -- rm=trash-put
-# alias -- rmd=trash-put
+# --------------------------------------------------
+# Prompt and syntax highlighting
+# --------------------------------------------------
 
-# sesh
-alias s='sesh connect $(sesh list --icons | fzf --ansi)'
+if (( ZSH_HAS_TTY && $+commands[starship] )) && [[ "$TERM" != dumb ]]; then
+  eval "$(starship init zsh)"
+fi
 
-# tracert
-alias tracert=trip
-
-# alias -g -- CA='2>&1 | cat -A'
-# alias -g -- G='| grep'
-# alias -g -- H='| head'
-# alias -g -- L='| less'
-# alias -g -- LL='2>&1 | less'
-# alias -g -- M='| most'
-# alias -g -- NE='2> /dev/null'
-# alias -g -- NUL='> /dev/null 2>&1'
-# alias -g -- P='2>&1| pygmentize -l pytb'
-# alias -g -- T='| tail'
-
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# zsh-syntax-highlighting must be sourced after all widgets and bindings.
+if (( ZSH_HAS_TTY )); then
+  source_first \
+    "$ZSH_BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" \
+    /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
+    /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
+    "$HOME/.local/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" || true
+fi

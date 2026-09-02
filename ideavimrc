@@ -89,9 +89,9 @@ nmap ]c <Action>(VcsShowNextChangeMarker)
 
 " LSP-style navigation, aligned with the Neovim mappings.
 nmap gh <Action>(ShowHoverInfo)
-nmap gd <Action>(GotoDeclaration)
+nmap gd <Action>(ReSharperGotoImplementation)
 nmap gD <Action>(FindUsages)
-nmap gi <Action>(ReSharperGotoImplementation)
+nmap gi <Action>(GotoDeclaration)
 nmap gt <Action>(GotoTypeDeclaration)
 
 " IDE shortcuts
@@ -161,18 +161,18 @@ let g:WhichKeyDesc_g                             = "<leader>g Git / goto"
 let g:WhichKeyDesc_g_annotate                    = "<leader>ga Git annotate (blame)"
 let g:WhichKeyDesc_g_branches                    = "<leader>gb Git branches"
 let g:WhichKeyDesc_g_commit                      = "<leader>gc Git commit"
-let g:WhichKeyDesc_g_declaration                 = "<leader>gd Go to declaration"
+let g:WhichKeyDesc_g_declaration                 = "<leader>gi Go to declaration"
 let g:WhichKeyDesc_g_history                     = "<leader>gh Show file history"
-let g:WhichKeyDesc_g_implementation              = "<leader>gi Go to implementation"
+let g:WhichKeyDesc_g_implementation              = "<leader>gd Go to implementation"
 let g:WhichKeyDesc_g_status                      = "<leader>gs Git status"
 let g:WhichKeyDesc_g_type_declaration            = "<leader>gt Go to type definition"
 let g:WhichKeyDesc_g_usages                      = "<leader>gu Show usages"
 nmap <leader>ga <Action>(Annotate)
 nmap <leader>gb <Action>(Git.Branches)
 nmap <leader>gc <Action>(CheckinProject)
-nmap <leader>gd <Action>(GotoDeclaration)
+nmap <leader>gi <Action>(GotoDeclaration)
 nmap <leader>gh <Action>(Vcs.ShowTabbedFileHistory)
-nmap <leader>gi <Action>(ReSharperGotoImplementation)
+nmap <leader>gd <Action>(ReSharperGotoImplementation)
 nmap <leader>gs <Action>(ActivateVersionControlToolWindow)
 nmap <leader>gt <Action>(GotoTypeDeclaration)
 nmap <leader>gu <Action>(ShowUsages)

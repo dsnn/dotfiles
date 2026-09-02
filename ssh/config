@@ -1,3 +1,5 @@
+Include /Users/dsn/.colima/ssh_config
+
 Include /Users/dsn/.ssh/private/*
 
 Host *

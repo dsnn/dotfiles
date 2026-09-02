@@ -5,7 +5,7 @@ Alla konfigurationer är syntaktiskt giltiga, men följande förbättringar har 
 | Prioritet | Konfiguration | Faktiska förbättringar |
 |---|---|---|
 | Klar | ~~Zsh~~ | Åtgärdat: minimal `.zshenv`, portabel `.zprofile`, defensiv plugin-laddning, säkrare historik/completion-cache, portabla verktygssökvägar och reparerade funktioner/alias. |
-| Hög | tmux | Bör använda `tmux-256color`; `focus-events` är avstängt; flera Catppuccin-inställningar är gamla eller felstavade; `status-interval 0` stänger av uppdateringar. |
+| Klar | ~~tmux~~ | Åtgärdat: korrekt `tmux-256color` och moderna terminal features, fokus och clipboard, fungerande statusuppdatering, Catppuccin v2-konfiguration, säkrare binds, en enda sesh-launcher samt reproducerbar TPM-installation och syntaxkontroll. |
 | Hög | Neovim | Installerade Neovim 0.12 stöds inte av vald Treesitter-branch, som dessutom är fryst och felaktigt lazy-loadad. `neodev` är EOL, flera aktiverade LSP-servrar saknas och både swap samt persistent undo är avstängda. |
 | Hög | lazygit | Använder `xdg-open`, som inte finns på macOS-installationen. Öppna-fil-funktionen fungerar därför inte. Clipboard-kommandot kan också göras enklare och mer portabelt. |
 | Hög, liten fix | lsd | Tidsformatet använder `%m` för minuter; `%m` betyder månad. Det ska vara `%H:%M:%S`. |

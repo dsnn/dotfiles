@@ -20,12 +20,28 @@ bootstrap: zsh inputrc starship git ssh tmux bat lazygit lsd bottom htop nvim ri
     @echo "✓ dotfiles bootstrap complete ({{ OS }})"
 
 [group("core")]
-check:
+check: _check_tmux
     @just --fmt --check --unstable
     @zsh -n "{{ DOTFILES }}/zsh/zshenv" "{{ DOTFILES }}/zsh/zprofile" "{{ DOTFILES }}/zsh/zshrc"
     @ssh -G -T -F "{{ DOTFILES }}/ssh/config" github.com >/dev/null
     @git config --file "{{ DOTFILES }}/git/config" --list >/dev/null
     @echo "✓ configuration syntax checks passed"
+
+[private]
+_check_tmux:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    socket_dir="$(mktemp -d "${TMPDIR:-/tmp}/dotfiles-tmux.XXXXXX")"
+    socket="$socket_dir/socket"
+
+    cleanup() {
+      tmux -S "$socket" kill-server >/dev/null 2>&1 || true
+      rmdir "$socket_dir" >/dev/null 2>&1 || true
+    }
+    trap cleanup EXIT
+
+    tmux -S "$socket" -f '{{ DOTFILES }}/tmux/config' new-session -d -s dotfiles-check
 
 # Create or update a managed symlink without overwriting unique local content.
 [private]
@@ -87,7 +103,21 @@ ssh: (_link (DOTFILES + "/ssh/config") (HOME_DIR + "/.ssh/config"))
 
 [group("dotfiles")]
 tmux: (_link (DOTFILES + "/tmux/config") (CONFIG + "/tmux/tmux.conf"))
-    @mkdir -p "{{ CONFIG }}/tmux/plugins"
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    mkdir -p '{{ CONFIG }}/tmux/plugins'
+    tpm='{{ CONFIG }}/tmux/plugins/tpm'
+    if [[ ! -x "$tpm/tpm" ]]; then
+      if [[ -e "$tpm" ]]; then
+        printf 'error: incomplete TPM installation: %s\n' "$tpm" >&2
+        exit 1
+      fi
+      git clone --depth 1 https://github.com/tmux-plugins/tpm "$tpm"
+      printf '✓ installed TPM: %s\n' "$tpm"
+    else
+      printf '✓ TPM already installed: %s\n' "$tpm"
+    fi
 
 [group("dotfiles")]
 bat: (_link (DOTFILES + "/bat/config") (CONFIG + "/bat/config")) (_link (DOTFILES + "/bat/themes/Catppuccin Mocha.tmTheme") (CONFIG + "/bat/themes/Catppuccin Mocha.tmTheme"))

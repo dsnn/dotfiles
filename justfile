@@ -25,6 +25,11 @@ check: _check_ideavim _check_tmux _check_nvim
     @zsh -n "{{ DOTFILES }}/zsh/zshenv" "{{ DOTFILES }}/zsh/zprofile" "{{ DOTFILES }}/zsh/zshrc"
     @ssh -G -T -F "{{ DOTFILES }}/ssh/config" github.com >/dev/null
     @git config --file "{{ DOTFILES }}/git/config" --list >/dev/null
+    @INPUTRC="{{ DOTFILES }}/inputrc" bash --noprofile --norc -c 'set -o emacs; bind -f "$INPUTRC"' 2>/dev/null
+    @TERM=xterm-256color STARSHIP_CONFIG="{{ DOTFILES }}/starship" STARSHIP_CACHE="${TMPDIR:-/tmp}/dotfiles-starship-cache" starship prompt >/dev/null
+    @bat --config-file "{{ DOTFILES }}/bat/config" --style=plain --color=never "{{ DOTFILES }}/bat/config" >/dev/null
+    @bat --list-themes | rg -qx 'Catppuccin Mocha'
+    @htop --version >/dev/null
     @echo "✓ configuration syntax checks passed"
 
 [private]
@@ -177,7 +182,17 @@ tmux: (_link (DOTFILES + "/tmux/config") (CONFIG + "/tmux/tmux.conf"))
     fi
 
 [group("dotfiles")]
-bat: (_link (DOTFILES + "/bat/config") (CONFIG + "/bat/config")) (_link (DOTFILES + "/bat/themes/Catppuccin Mocha.tmTheme") (CONFIG + "/bat/themes/Catppuccin Mocha.tmTheme"))
+bat: (_link (DOTFILES + "/bat/config") (CONFIG + "/bat/config"))
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    legacy_theme='{{ CONFIG }}/bat/themes/Catppuccin Mocha.tmTheme'
+    managed_target='{{ DOTFILES }}/bat/themes/Catppuccin Mocha.tmTheme'
+    if [[ -L "$legacy_theme" && "$(readlink "$legacy_theme")" == "$managed_target" ]]; then
+      unlink "$legacy_theme"
+      bat cache --build >/dev/null
+      printf '✓ removed obsolete bat theme symlink; using built-in Catppuccin Mocha\n'
+    fi
 
 [group("dotfiles")]
 lazygit: (_link (DOTFILES + "/lazygit") (CONFIG + "/lazygit/config.yml"))

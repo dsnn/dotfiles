@@ -17,18 +17,15 @@
     prompt = false
 
 [delta]
-    features = chameleon
-    side-by-side = true
-
-[delta "chameleon"]
     dark = true
+    navigate = true
     line-numbers = true
     side-by-side = true
     keep-plus-minus-markers = true
-    syntax-theme = Nord
+    syntax-theme = Catppuccin Mocha
 
-    file-style = "#434C5E bold"
-    file-decoration-style = "#434C5E ul"
+    file-style = "#585B70 bold"
+    file-decoration-style = "#585B70 ul"
 
     file-added-label = "[+]"
     file-copied-label = "[==]"
@@ -46,7 +43,7 @@
 
     line-numbers-minus-style = "red italic black"
     line-numbers-plus-style = "green italic black"
-    line-numbers-zero-style = "#434C5E italic"
+    line-numbers-zero-style = "#585B70 italic"
 
     minus-style = "bold red"
     minus-emph-style = "bold red"
@@ -58,7 +55,7 @@
     blame-code-style = syntax
 
     blame-format = "{author:<18} ({commit:>7}) {timestamp:^12} "
-    blame-palette = "#2E3440 #3B4252 #434C5E #4C566A"
+    blame-palette = "#1E1E2E #313244 #45475A #585B70"
 
 [alias]
     ba = branch -a
@@ -95,9 +92,6 @@
 [interactive]
     diffFilter = delta --color-only
 
-[delta]
-    navigate = true
-
 [init]
     defaultBranch = main
 
@@ -108,9 +102,7 @@
     prune = true
 
 [credential]
-    useHttpPath = true
-    helper =
-    helper = /usr/local/share/gcm-core/git-credential-manager
+    helper = manager
 
 [includeIf "gitdir:~/projects/work/"]
     path = "~/projects/work/.gitconfig-work"

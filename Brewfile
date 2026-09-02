@@ -24,3 +24,5 @@ brew "bash-language-server"
 brew "stylua"
 brew "shfmt"
 brew "prettier"
+
+cask "git-credential-manager"

@@ -53,6 +53,12 @@ export KEYTIMEOUT=1
 bindkey -v
 
 # ---------------------- #
+#         brew           #
+# ---------------------- #
+
+export PATH="/opt/homebrew/bin:$PATH"
+
+# ---------------------- #
 #         fzf            #
 # ---------------------- #
 

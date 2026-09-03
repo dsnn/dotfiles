@@ -145,6 +145,35 @@ nnoremap <leader>al :actionlist<CR>
 nmap <leader>am <Action>(ShowIntentionActions)
 nmap <leader>as <Action>(SearchEverywhere)
 
+" Database
+" Query results and SQL output are shown in the Services tool window.
+let g:WhichKeyDesc_database                      = "<leader>d Database"
+let g:WhichKeyDesc_database_console              = "<leader>dc Jump to query console"
+let g:WhichKeyDesc_database_window               = "<leader>dd Database tool window"
+let g:WhichKeyDesc_database_execute              = "<leader>de Execute SQL"
+let g:WhichKeyDesc_database_history              = "<leader>dh Query history"
+let g:WhichKeyDesc_database_manage_schemas       = "<leader>dm Manage shown schemas"
+let g:WhichKeyDesc_database_new_console          = "<leader>dn New query console"
+let g:WhichKeyDesc_database_object               = "<leader>do Go to database object"
+let g:WhichKeyDesc_database_properties           = "<leader>dp Data sources and drivers"
+let g:WhichKeyDesc_database_refresh              = "<leader>dr Refresh database"
+let g:WhichKeyDesc_database_services             = "<leader>ds Services / SQL output"
+let g:WhichKeyDesc_database_schema               = "<leader>du Use / choose schema"
+let g:WhichKeyDesc_database_view                 = "<leader>dv Select in database view"
+nmap <leader>dc <Action>(Jdbc.OpenConsole.Any)
+nmap <leader>dd <Action>(ActivateDatabaseToolWindow)
+nmap <leader>de <Action>(Console.Jdbc.Execute)
+xmap <leader>de <Action>(Console.Jdbc.Execute)
+nmap <leader>dh <Action>(Console.Jdbc.BrowseHistory)
+nmap <leader>dm <Action>(DatabaseView.AddSchemasAction)
+nmap <leader>dn <Action>(Jdbc.OpenConsole.New)
+nmap <leader>do <Action>(GotoDatabaseObject)
+nmap <leader>dp <Action>(DatabaseView.PropertiesAction)
+nmap <leader>dr <Action>(DatabaseView.Refresh)
+nmap <leader>ds <Action>(ActivateServicesToolWindow)
+nmap <leader>du <Action>(Console.Jdbc.ChooseSchema)
+nmap <leader>dv <Action>(sql.SelectInDatabaseView)
+
 " Errors
 let g:WhichKeyDesc_errors                        = "<leader>e Errors"
 let g:WhichKeyDesc_errors_next                   = "<leader>ej Go to next error"
@@ -218,6 +247,7 @@ let g:WhichKeyDesc_search_recent_locations       = "<leader>sl Search recent loc
 let g:WhichKeyDesc_search_file_structure         = "<leader>so Search file structure"
 let g:WhichKeyDesc_search_in_path                = "<leader>sp Search in path"
 let g:WhichKeyDesc_search_recent_files           = "<leader>sr Search recent files"
+let g:WhichKeyDesc_search_text                   = "<leader>st Search text"
 let g:WhichKeyDesc_search_usages                 = "<leader>su Search usages"
 nmap <leader>sa <Action>(GotoAction)
 nmap <leader>sf <Action>(GotoFile)
@@ -226,6 +256,7 @@ nmap <leader>sl <Action>(RecentLocations)
 nmap <leader>so <Action>(FileStructurePopup)
 nmap <leader>sp <Action>(FindInPath)
 nmap <leader>sr <Action>(RecentFiles)
+nmap <leader>st <Action>(TextSearchAction)
 nmap <leader>su <Action>(FindUsages)
 
 " View

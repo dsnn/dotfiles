@@ -36,7 +36,7 @@ return {
         map("n", "gh", vim.lsp.buf.hover, opts)
         map("n", "gt", vim.lsp.buf.type_definition, opts)
         map("n", "<space>r", vim.lsp.buf.rename, opts)
-        map("n", "<space>.", vim.lsp.buf.code_action, opts)
+        map({ "n", "x" }, "<space>.", vim.lsp.buf.code_action, opts)
         map("n", "<space>fo", function()
           vim.lsp.buf.format({ async = true })
         end, opts)

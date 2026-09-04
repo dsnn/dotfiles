@@ -20,6 +20,8 @@ return {
       { "<space>gf", "<cmd>FzfLua git_files<cr>", desc = "Git files" },
       { "<space>gs", "<cmd>FzfLua git_status<cr>", desc = "Git status" },
       { "<space>sq", "<cmd>FzfLua quickfix<cr>", desc = "Quickfix" },
+      { "<space>ss", "<cmd>FzfLua lsp_document_symbols<cr>", desc = "Document symbols" },
+      { "<space>sS", "<cmd>FzfLua lsp_workspace_symbols<cr>", desc = "Workspace symbols" },
     },
     config = function()
       require("fzf-lua").setup({

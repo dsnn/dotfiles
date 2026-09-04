@@ -64,27 +64,27 @@ set -g allow-rename off
 # binds
 # ============================================= #
 
-bind g display-popup -w "80%" -h "80%" -d "#{pane_current_path}" -E "lazygit"
+bind -N "lazygit popup" g display-popup -w "80%" -h "80%" -d "#{pane_current_path}" -E "lazygit"
 
-bind r source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded"
+bind -N "reload tmux config" r source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded"
 
-bind -n C-M-y setw synchronize-panes
+bind -N "toggle synchronized panes" -n C-M-y setw synchronize-panes
 
-bind c new-window -c "#{pane_current_path}"
-bind h split-window -c "#{pane_current_path}"
-bind v split-window -h -c "#{pane_current_path}"
-bind x kill-pane
+bind -N "new window in current directory" c new-window -c "#{pane_current_path}"
+bind -N "split pane vertically" h split-window -c "#{pane_current_path}"
+bind -N "split pane horizontally" v split-window -h -c "#{pane_current_path}"
+bind -N "kill active pane" x kill-pane
 
-bind -n C-M-u copy-mode
-bind -n C-M-p paste-buffer
+bind -N "enter copy mode" -n C-M-u copy-mode
+bind -N "paste tmux buffer" -n C-M-p paste-buffer
 
-bind -T copy-mode-vi v send-keys -X begin-selection
-bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
-bind -T copy-mode-vi r send-keys -X rectangle-toggle
+bind -N "begin copy selection" -T copy-mode-vi v send-keys -X begin-selection
+bind -N "copy selection" -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+bind -N "toggle rectangular selection" -T copy-mode-vi r send-keys -X rectangle-toggle
 
 bind -N "last-session (via sesh)" L run-shell "sesh last"
 
-bind-key s run-shell "sesh connect \"$(
+bind -N "sesh session picker" s run-shell "sesh connect \"$(
   sesh list --icons | fzf --tmux 80%,70% \
     --no-sort \
     --ansi \
@@ -101,6 +101,10 @@ bind-key s run-shell "sesh connect \"$(
     --preview-window 'right:55%' \
     --preview 'sesh preview {}'
 )\""
+
+bind -N "search zsh aliases and tmux keys" ? display-popup \
+  -w "80%" -h "70%" -d "#{pane_current_path}" \
+  -E "FZF_HELP_HEIGHT=100% zsh -ic fzf-help"
 
 set -g @plugin 'tmux-plugins/tpm'
 run-shell '"${XDG_CONFIG_HOME:-$HOME/.config}/tmux/plugins/tpm/tpm"'

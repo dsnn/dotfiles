@@ -461,6 +461,72 @@ alias j='just'
 (( $+commands[trip] )) && alias tracert='trip'
 
 # --------------------------------------------------
+# Searchable shell and tmux help
+# --------------------------------------------------
+
+_fzf-help-items() {
+  local name expansion line
+  local tmux_prefix_keys=""
+  local tmux_root_keys=""
+  local tmux_copy_keys=""
+
+  for name expansion in "${(@kv)aliases}"; do
+    expansion="${expansion//$'\n'/ }"
+    printf 'zsh alias\t%s\t%s\n' "$name" "$expansion"
+  done
+
+  if (( $+commands[tmux] )); then
+    tmux_prefix_keys="$(tmux list-keys -T prefix -N 2>/dev/null)"
+    if [[ -n "$tmux_prefix_keys" ]]; then
+      tmux_root_keys="$(tmux list-keys -T root -N 2>/dev/null)"
+      tmux_copy_keys="$(tmux list-keys -T copy-mode-vi -N 2>/dev/null)"
+
+      for line in "${(@f)tmux_prefix_keys}"; do
+        printf 'tmux key\t%s\n' "$line"
+      done
+      for line in "${(@f)tmux_root_keys}"; do
+        printf 'tmux global\t%s\n' "$line"
+      done
+      for line in "${(@f)tmux_copy_keys}"; do
+        printf 'tmux copy\t%s\n' "$line"
+      done
+    elif [[ -r "$DOTFILES_DIR/tmux/config" ]]; then
+      while IFS= read -r line; do
+        [[ "$line" == 'bind -N '* ]] \
+          && printf 'tmux config\t%s\n' "${line#bind -N }"
+      done < "$DOTFILES_DIR/tmux/config"
+    fi
+  fi
+}
+
+fzf-help() {
+  if ! (( $+commands[fzf] )); then
+    print -u2 'fzf is required'
+    return 127
+  fi
+
+  _fzf-help-items \
+    | LC_ALL=C sort -f \
+    | fzf \
+        --height "${FZF_HELP_HEIGHT:-80%}" \
+        --layout reverse \
+        --border \
+        --border-label ' aliases & keys ' \
+        --prompt 'help> ' \
+        --header 'Search Zsh aliases and tmux keys · Esc closes'
+}
+
+if (( ZSH_HAS_TTY && $+commands[fzf] )); then
+  fzf-help-widget() {
+    fzf-help >/dev/null
+    zle reset-prompt
+  }
+  zle -N fzf-help-widget
+  bindkey -M viins '\e?' fzf-help-widget
+  bindkey -M vicmd '\e?' fzf-help-widget
+fi
+
+# --------------------------------------------------
 # Prompt and syntax highlighting
 # --------------------------------------------------
 

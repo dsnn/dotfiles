@@ -24,6 +24,9 @@ source_first() {
   return 1
 }
 
+# Machine-local secrets and other values that must not be version controlled.
+source_first "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/private/env.zsh" || true
+
 # --------------------------------------------------
 # Interactive environment
 # --------------------------------------------------

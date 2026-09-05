@@ -1,3 +1,5 @@
+tap "hashicorp/tap"
+
 brew "just"
 brew "fzf"
 brew "vivid"
@@ -20,6 +22,9 @@ brew "zsh-completions"
 brew "zsh-syntax-highlighting"
 brew "neovim"
 brew "tree-sitter-cli"
+
+# Infrastructure
+brew "hashicorp/tap/terraform"
 
 # Neovim: Language Servers & Dev Tools
 brew "lua-language-server"

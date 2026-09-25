@@ -1,38 +1,163 @@
-tap "hashicorp/tap"
+# -----------------------------------------------------------------------------
+# Taps
+# -----------------------------------------------------------------------------
 
-brew "just"
-brew "fzf"
-brew "vivid"
+tap "hashicorp/tap"
+tap "azure/functions"
+
+
+# -----------------------------------------------------------------------------
+# AI Development
+# -----------------------------------------------------------------------------
+
+cask "codex"
+
+
+# -----------------------------------------------------------------------------
+# Shell & Terminal
+# -----------------------------------------------------------------------------
+
 brew "starship"
-brew "lsd"
 brew "tmux"
-brew "bat"
-brew "bottom"
-brew "htop"
-brew "git-delta"
-brew "lazygit"
-brew "fd"
-brew "zoxide"
 brew "sesh"
-brew "ripgrep"
-brew "volta"
+brew "fzf"
 brew "fzf-tab"
+brew "zoxide"
+
+# Zsh
 brew "zsh-autosuggestions"
 brew "zsh-completions"
 brew "zsh-syntax-highlighting"
+
+
+# -----------------------------------------------------------------------------
+# CLI Essentials
+# -----------------------------------------------------------------------------
+
+brew "just"
+brew "bat"
+brew "lsd"
+brew "vivid"
+brew "fd"
+brew "ripgrep"
+brew "jq"
+brew "yq"
+brew "tldr"
+brew "httpie"
+
+
+# -----------------------------------------------------------------------------
+# System & Monitoring
+# -----------------------------------------------------------------------------
+
+brew "bottom"
+brew "htop"
+brew "dust"
+brew "duf"
+
+
+# -----------------------------------------------------------------------------
+# Git & GitHub
+# -----------------------------------------------------------------------------
+
+brew "git-delta"
+brew "lazygit"
+brew "gh"
+
+cask "git-credential-manager"
+
+
+# -----------------------------------------------------------------------------
+# Editors & Development
+# -----------------------------------------------------------------------------
+
 brew "neovim"
 brew "tree-sitter-cli"
 
-# Infrastructure
-brew "hashicorp/tap/terraform"
+# JavaScript / Node
+brew "volta"
 
-# Neovim: Language Servers & Dev Tools
+# SQL Server
+brew "sqlcmd"
+
+
+# -----------------------------------------------------------------------------
+# Language Servers
+# -----------------------------------------------------------------------------
+
 brew "lua-language-server"
 brew "bash-language-server"
 
-# Formatters
+
+# -----------------------------------------------------------------------------
+# Linters & Formatters
+# -----------------------------------------------------------------------------
+
+brew "shellcheck"
 brew "stylua"
 brew "shfmt"
 brew "prettier"
 
-cask "git-credential-manager"
+
+# -----------------------------------------------------------------------------
+# Development Utilities
+# -----------------------------------------------------------------------------
+
+brew "watchexec"
+brew "hyperfine"
+brew "direnv"
+brew "mkcert"
+
+
+# -----------------------------------------------------------------------------
+# Secrets & Encryption
+# -----------------------------------------------------------------------------
+
+brew "age"
+brew "sops"
+
+
+# -----------------------------------------------------------------------------
+# Containers & Kubernetes
+# -----------------------------------------------------------------------------
+
+brew "docker"
+brew "colima"
+brew "lazydocker"
+brew "kubectl"
+brew "k9s"
+brew "helm"
+brew "stern"
+
+
+# -----------------------------------------------------------------------------
+# Cloud & Infrastructure
+# -----------------------------------------------------------------------------
+
+# Azure
+brew "azure-cli"
+brew "azure/functions/azure-functions-core-tools@4"
+
+# Terraform
+brew "hashicorp/tap/terraform"
+
+
+# -----------------------------------------------------------------------------
+# Diagramming
+# -----------------------------------------------------------------------------
+
+brew "d2"
+
+
+# -----------------------------------------------------------------------------
+# macOS Applications & Utilities
+# -----------------------------------------------------------------------------
+
+# Launcher & productivity
+cask "raycast"
+
+# Smooth scrolling with wheel mouse
+cask "mos"
+
+# macOS power tools
+cask "vorssaint"

@@ -1,6 +1,7 @@
 # AeroSpace: i3-inspired, Rider-friendly, multi-monitor portable config
 config-version = 2
 start-at-login = true
+auto-reload-config = true
 
 # Keep layouts predictable and lightweight.
 enable-normalization-flatten-containers = true
@@ -12,6 +13,9 @@ accordion-padding = 24
 # Avoid unexpected cursor movement or focus changes with Rider dialogs.
 on-focused-monitor-changed = []
 focus-follows-mouse.enabled = false
+
+# Keep numbered workspaces available even when they are empty.
+persistent-workspaces = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
 # Small gaps; set to 0 for pure i3-style edge-to-edge tiling.
 [gaps]
@@ -58,6 +62,7 @@ alt-6 = 'workspace 6'
 alt-7 = 'workspace 7'
 alt-8 = 'workspace 8'
 alt-9 = 'workspace 9'
+alt-0 = 'workspace-back-and-forth'
 alt-shift-1 = 'move-node-to-workspace 1'
 alt-shift-2 = 'move-node-to-workspace 2'
 alt-shift-3 = 'move-node-to-workspace 3'
@@ -74,6 +79,7 @@ alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
 # Maintenance and resize mode
 alt-shift-r = 'reload-config'
+alt-shift-semicolon = 'mode service'
 alt-r = 'mode resize'
 
 [mode.resize.binding]
@@ -87,4 +93,13 @@ up = 'resize height -50'
 right = 'resize width +50'
 esc = 'mode main'
 enter = 'mode main'
+
+[mode.service.binding]
+esc = 'mode main'
+r = ['flatten-workspace-tree', 'mode main']
+b = ['balance-sizes', 'mode main']
+h = ['join-with left', 'mode main']
+j = ['join-with down', 'mode main']
+k = ['join-with up', 'mode main']
+l = ['join-with right', 'mode main']
 

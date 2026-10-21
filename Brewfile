@@ -4,6 +4,7 @@
 
 tap "hashicorp/tap"
 tap "azure/functions"
+tap "nikitabobko/tap"
 
 
 # -----------------------------------------------------------------------------
@@ -42,7 +43,7 @@ brew "fd"
 brew "ripgrep"
 brew "jq"
 brew "yq"
-brew "tldr"
+brew "tealdeer"
 brew "httpie"
 
 
@@ -54,6 +55,8 @@ brew "bottom"
 brew "htop"
 brew "dust"
 brew "duf"
+
+cask "aerospace"
 
 
 # -----------------------------------------------------------------------------
@@ -135,7 +138,7 @@ brew "stern"
 # -----------------------------------------------------------------------------
 
 # Azure
-brew "azure-cli"
+cask "azure-cli"
 brew "azure/functions/azure-functions-core-tools@4"
 
 # Terraform

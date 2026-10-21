@@ -1,0 +1,90 @@
+# AeroSpace: i3-inspired, Rider-friendly, multi-monitor portable config
+config-version = 2
+start-at-login = true
+
+# Keep layouts predictable and lightweight.
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+accordion-padding = 24
+
+# Avoid unexpected cursor movement or focus changes with Rider dialogs.
+on-focused-monitor-changed = []
+focus-follows-mouse.enabled = false
+
+# Small gaps; set to 0 for pure i3-style edge-to-edge tiling.
+[gaps]
+inner.horizontal = 6
+inner.vertical = 6
+outer.left = 6
+outer.bottom = 6
+outer.top = 6
+outer.right = 6
+
+# No forced workspace-to-monitor mapping: works docked and undocked.
+# Rider is intentionally NOT auto-routed, to allow multiple IDE windows
+# on different workspaces and avoid surprises with dialogs.
+
+[mode.main.binding]
+# i3-style: navigera mellan fönster
+alt-h = 'focus --wrap-around left'
+alt-j = 'focus --wrap-around down'
+alt-k = 'focus --wrap-around up'
+alt-l = 'focus --wrap-around right'
+
+# Cykla genom fönster i layoutordning
+alt-n = 'focus --wrap-around dfs-next'
+alt-p = 'focus --wrap-around dfs-prev'
+
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
+
+# Splits and layout
+alt-slash = 'layout tiles horizontal vertical'
+alt-comma = 'layout accordion horizontal vertical'
+alt-f = 'fullscreen'
+alt-shift-space = 'layout floating tiling'
+
+# Workspaces
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+alt-shift-1 = 'move-node-to-workspace 1'
+alt-shift-2 = 'move-node-to-workspace 2'
+alt-shift-3 = 'move-node-to-workspace 3'
+alt-shift-4 = 'move-node-to-workspace 4'
+alt-shift-5 = 'move-node-to-workspace 5'
+alt-shift-6 = 'move-node-to-workspace 6'
+alt-shift-7 = 'move-node-to-workspace 7'
+alt-shift-8 = 'move-node-to-workspace 8'
+alt-shift-9 = 'move-node-to-workspace 9'
+
+# Multi-monitor navigation and moving workspaces
+alt-tab = 'focus-monitor --wrap-around next'
+alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+
+# Maintenance and resize mode
+alt-shift-r = 'reload-config'
+alt-r = 'mode resize'
+
+[mode.resize.binding]
+h = 'resize width -50'
+j = 'resize height +50'
+k = 'resize height -50'
+l = 'resize width +50'
+left = 'resize width -50'
+down = 'resize height +50'
+up = 'resize height -50'
+right = 'resize width +50'
+esc = 'mode main'
+enter = 'mode main'
+

@@ -103,6 +103,13 @@
 
 [credential]
     helper = manager
+	helper = 
+	helper = /usr/local/share/gcm-core/git-credential-manager
 
 [includeIf "gitdir:~/projects/work/"]
     path = "~/projects/work/.gitconfig-work"
+[credential "https://dev.azure.com"]
+	useHttpPath = true
+[credential "azrepos:org/Skanetrafiken2"]
+	azureAuthority = https://login.microsoftonline.com/e1fcb9f3-e5f9-496f-a583-e495dfd57497
+	username = Conny.Abrahamsson.Extern@skanetrafiken.se

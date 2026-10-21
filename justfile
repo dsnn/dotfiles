@@ -16,7 +16,8 @@ default:
     @just --list --unsorted
 
 [group("core")]
-bootstrap: zsh inputrc starship git ssh tmux bat lazygit lsd bottom htop nvim rider
+bootstrap: zsh inputrc starship git ssh tmux bat tealdeer lazygit lsd bottom htop nvim rider
+    @if [[ "{{ OS }}" == "Darwin" ]]; then just aerospace; fi
     @echo "✓ dotfiles bootstrap complete ({{ OS }})"
 
 [group("core")]
@@ -195,6 +196,9 @@ bat: (_link (DOTFILES + "/bat/config") (CONFIG + "/bat/config"))
     fi
 
 [group("dotfiles")]
+tealdeer: (_link (DOTFILES + "/tealdeer.toml") (CONFIG + "/tealdeer/config.toml"))
+
+[group("dotfiles")]
 lazygit: (_link (DOTFILES + "/lazygit") (CONFIG + "/lazygit/config.yml"))
 
 [group("dotfiles")]
@@ -211,6 +215,10 @@ rider: (_link (DOTFILES + "/ideavimrc") (HOME_DIR + "/.ideavimrc"))
 
 [group("dotfiles")]
 nvim: (_link (DOTFILES + "/nvim") (CONFIG + "/nvim"))
+
+[group("dotfiles")]
+[macos]
+aerospace: (_link (DOTFILES + "/aerospace.toml") (CONFIG + "/aerospace/aerospace.toml"))
 
 [group("dotfiles")]
 [linux]

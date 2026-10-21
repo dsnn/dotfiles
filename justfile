@@ -21,7 +21,7 @@ bootstrap: zsh inputrc starship git ssh tmux bat tealdeer lazygit lsd bottom hto
     @echo "✓ dotfiles bootstrap complete ({{ OS }})"
 
 [group("core")]
-check: _check_ideavim _check_tmux _check_nvim
+check: _check_gh_dash _check_ideavim _check_tmux _check_nvim
     @just --fmt --check --unstable
     @zsh -n "{{ DOTFILES }}/zsh/zshenv" "{{ DOTFILES }}/zsh/zprofile" "{{ DOTFILES }}/zsh/zshrc"
     @ssh -G -T -F "{{ DOTFILES }}/ssh/config" github.com >/dev/null
@@ -32,6 +32,10 @@ check: _check_ideavim _check_tmux _check_nvim
     @bat --list-themes | rg -qx 'Catppuccin Mocha'
     @htop --version >/dev/null
     @echo "✓ configuration syntax checks passed"
+
+[private]
+_check_gh_dash:
+    @yq eval '.' "{{ DOTFILES }}/gh-dash/config.yml" >/dev/null
 
 [private]
 _check_ideavim:
@@ -156,6 +160,22 @@ starship: (_link (DOTFILES + "/starship") (CONFIG + "/starship.toml"))
 
 [group("dotfiles")]
 git: (_link (DOTFILES + "/git/config") (CONFIG + "/git/config")) (_link (DOTFILES + "/git/ignore") (CONFIG + "/git/ignore"))
+
+[group("dotfiles")]
+gh-dash: (_link (DOTFILES + "/gh-dash/config.yml") (CONFIG + "/gh-dash/config.yml"))
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    if ! gh auth status --hostname github.com >/dev/null 2>&1; then
+      printf 'error: authenticate GitHub CLI first: gh auth login --hostname github.com\n' >&2
+      exit 1
+    fi
+
+    if gh extension list | rg -q '(^|[[:space:]])dlvhdr/gh-dash([[:space:]]|$)'; then
+      gh extension upgrade dlvhdr/gh-dash
+    else
+      gh extension install dlvhdr/gh-dash
+    fi
 
 [group("dotfiles")]
 ssh: (_link (DOTFILES + "/ssh/config") (HOME_DIR + "/.ssh/config"))

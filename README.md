@@ -29,7 +29,7 @@ Identical files are adopted automatically.
 
 - Shell: Zsh, Starship and Readline
 - Terminal tools: tmux, bat, lsd, bottom and htop
-- Development: Git, lazygit and SSH
+- Development: Git, GitHub CLI, gh-dash, lazygit and SSH
 - Editors: Neovim and IdeaVim for JetBrains Rider
 
 Run a single recipe when only one configuration needs to be linked:
@@ -38,7 +38,13 @@ Run a single recipe when only one configuration needs to be linked:
 just zsh
 just tmux
 just nvim
+just gh-dash
 ```
+
+`just gh-dash` links the dashboard configuration and installs or upgrades the
+`dlvhdr/gh-dash` GitHub CLI extension. Authenticate first with
+`gh auth login --hostname github.com`. Inside tmux, open the dashboard with
+`prefix + G`.
 
 Use `just --list` to see all recipes available on the current platform.
 

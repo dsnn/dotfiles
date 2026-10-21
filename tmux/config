@@ -66,6 +66,8 @@ set -g allow-rename off
 
 bind -N "lazygit popup" g display-popup -w "80%" -h "80%" -d "#{pane_current_path}" -E "lazygit"
 
+bind -N "GitHub dashboard popup" G display-popup -w "90%" -h "90%" -d "#{pane_current_path}" -E "gh dash"
+
 bind -N "reload tmux config" r source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded"
 
 bind -N "toggle synchronized panes" -n C-M-y setw synchronize-panes

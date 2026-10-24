@@ -5,7 +5,7 @@ local function has_dotnet_10(dotnet)
   end
 
   local result = vim.system({ dotnet, "--list-sdks" }, { text = true }):wait()
-  return result.code == 0 and result.stdout:match("^10%.") ~= nil
+  return result.code == 0 and result.stdout:match("10%.%d+%.%d+ %[") ~= nil
 end
 
 local function roslyn_command()

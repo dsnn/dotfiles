@@ -59,6 +59,12 @@ brew bundle check --verbose
 Readline, Starship, bat and htop configuration. The Homebrew command separately
 reports missing or outdated packages from `Brewfile`.
 
+## Documentation
+
+- [Roadmap](docs/roadmap.md) — current capabilities and future improvements
+- [Decisions](docs/decisions.md) — established principles and open choices
+- [Idea documents](docs/ideas/) — requirements, research and verification criteria
+
 ## Local and private configuration
 
 Secrets and machine-specific SSH hosts do not belong in this repository.

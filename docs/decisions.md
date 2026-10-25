@@ -18,6 +18,7 @@ This file records durable choices and the unresolved questions that affect imple
 | Treat skill selection as permission-neutral.                                       | A workflow may guide execution but cannot bypass repository or user approval boundaries.              | [AI workflows](ai/workflows.md)                           |
 | Allow worktrees only for an explicitly invoked `implement-spec` workflow.           | Enables isolated parallel work for a bounded task graph without changing normal development practice. | [AI implementation](ai/plans/implementation.md)           |
 | Keep issue tracking configurable.                                                   | Projects may use GitHub, Azure DevOps or local Markdown without changing global skills.                | [AI architecture](ai/architecture.md)                     |
+| Copy selected project skills as manifest-tracked physical files.                    | Projects and Codex Cloud remain independent of dotfiles while drift and unmanaged content stay protected. | [AI architecture](ai/architecture.md)                  |
 
 ## Open decisions
 

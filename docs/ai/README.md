@@ -14,9 +14,24 @@ just ai-check
 
 Målet är `${CODEX_HOME:-$HOME/.codex}/skills`. Installationen gör först en fullständig kollisionskontroll och skriver inget om en okänd konflikt finns. `just bootstrap` inkluderar `ai-skills`.
 
-## Globala skills och projekttemplat
+## Globala och projektlokala skills
 
 Globala skills finns i `ai/skills/` och kan användas i alla projekt efter installation. Smala disciplineskills kan väljas automatiskt; stora eller muterande arbetsflöden kräver uttrycklig invocation. Valet av skill ger aldrig nya rättigheter.
+
+Utvalda skills kan i stället kopieras till ett annat repos `.agents/skills/`. Förhandsgranskning är standard och ändrar inget:
+
+```sh
+just ai-skills-copy /path/to/project grill-me plan-tasks
+just ai-skills-copy-apply /path/to/project grill-me plan-tasks
+just ai-skills-update /path/to/project
+just ai-skills-update-apply /path/to/project
+```
+
+Projektkopior är fysiska filer, inte symlänkar, och fungerar utan dotfiles-repot. Ett litet manifest i `.agents/skills/.dotfiles-ai.json` håller checksummor och filrättigheter för enbart de skills som verktyget förvaltar. Nödvändiga skillberoenden läggs till och visas i preview; valfria beroenden rapporteras men kopieras inte.
+
+En lokalt ändrad förvaltad skill stoppar hela uppdateringen. Efter granskning kan just den redan förvaltade skillen ersättas med `scripts/ai-skills update apply --yes --project /path --overwrite skill-name`. Flaggan kan aldrig ta över en oförvaltad katalog. Skills som själva förvaltar dotfiles, dess installation eller kompletta globala katalog är inte projektkopierbara.
+
+## Projekttemplat
 
 Projekttemplatet lägger till ett checksummaskyddat, förvaltat block i projektets `AGENTS.md`. All text utanför blocket ägs av projektet. Tillgängliga profiler är `dotnet`, `azure-functions` och `avalonia`.
 
@@ -39,7 +54,7 @@ En ändrad förvaltad sektion skrivs aldrig över automatiskt. Verktyget visar d
 
 ## Tester
 
-`just ai-test` kör deterministiska beteendetester för projekttemplat, filskydd och validator. Kommandot ingår i `just ai-check` och använder endast temporära projekt.
+`just ai-test` kör deterministiska beteendetester för projekttemplat, projektlokala skillkopior, driftskydd, filskydd och validator. Kommandot ingår i `just ai-check` och använder endast temporära projekt.
 
 `just ai-eval` kör separata, modellbaserade forward-evals för routing, behörighetsgränser, planeringsspårbarhet och återstart. Körningen använder efemära, read-only Codex-sessioner men kräver modellåtkomst och kan därför ha kostnad och viss nondeterminism. Den ingår inte i `just check`.
 

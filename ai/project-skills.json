@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "dependencies": {
+    "grill-me": {
+      "required": ["grilling"],
+      "optional": []
+    },
+    "grill-with-docs": {
+      "required": ["grilling", "domain-modeling"],
+      "optional": []
+    },
+    "improve-codebase-architecture": {
+      "required": ["codebase-design", "grilling"],
+      "optional": []
+    },
+    "implement": {
+      "required": ["tdd", "code-review"],
+      "optional": []
+    },
+    "implement-spec": {
+      "required": ["implement"],
+      "optional": []
+    },
+    "retro": {
+      "required": ["writing-for-agents"],
+      "optional": []
+    },
+    "wayfinder": {
+      "required": ["grilling"],
+      "optional": ["research", "prototype"]
+    }
+  },
+  "excluded": {
+    "improve-skill": "manages skills in the dotfiles source repository",
+    "list-skills": "inspects the dotfiles-managed global installation",
+    "setup-project": "requires the dotfiles ai-project script and templates",
+    "update-skills": "compares the dotfiles source with its upstream inspiration",
+    "validate-dotfiles": "runs validation commands from the dotfiles repository",
+    "which-skill": "routes across the complete global toolkit, not a selected project subset"
+  }
+}

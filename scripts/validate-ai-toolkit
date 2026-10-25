@@ -4,6 +4,7 @@ set -euo pipefail
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 repo_dir="$(cd "$script_dir/.." && pwd -P)"
 skills_dir="$repo_dir/ai/skills"
+project_catalog="$repo_dir/ai/project-skills.json"
 failed=0
 count=0
 
@@ -50,6 +51,45 @@ for name in "${automatic_skills[@]}"; do
   value="$(yq eval '.policy.allow_implicit_invocation' "$skills_dir/$name/agents/openai.yaml")"
   [[ "$value" != false ]] || { printf 'error: %s must allow automatic selection\n' "$name" >&2; failed=1; }
 done
+
+if ! jq -e '
+  .schema == 1 and
+  (.dependencies | type == "object") and
+  (.excluded | type == "object") and
+  all(.dependencies[]; (.required | type == "array") and (.optional | type == "array"))
+' "$project_catalog" >/dev/null; then
+  printf 'error: invalid project skill catalog: %s\n' "$project_catalog" >&2
+  failed=1
+else
+  while IFS=$'\t' read -r owner dependency kind; do
+    if [[ ! "$owner" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ || ! -d "$skills_dir/$owner" ]]; then
+      printf 'error: project skill catalog has unknown owner: %s\n' "$owner" >&2
+      failed=1
+    fi
+    if [[ ! "$dependency" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ || ! -d "$skills_dir/$dependency" ]]; then
+      printf 'error: project skill catalog has unknown %s dependency: %s -> %s\n' "$kind" "$owner" "$dependency" >&2
+      failed=1
+    fi
+    if jq -e --arg name "$dependency" '.excluded[$name] != null' "$project_catalog" >/dev/null; then
+      printf 'error: project skill dependency is excluded from copying: %s -> %s\n' "$owner" "$dependency" >&2
+      failed=1
+    fi
+  done < <(jq -r '
+    .dependencies | to_entries[] as $entry |
+    ($entry.value.required[]? | [$entry.key, ., "required"] | @tsv),
+    ($entry.value.optional[]? | [$entry.key, ., "optional"] | @tsv)
+  ' "$project_catalog")
+  while IFS= read -r name; do
+    if [[ ! "$name" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ || ! -d "$skills_dir/$name" ]]; then
+      printf 'error: project skill catalog excludes an unknown skill: %s\n' "$name" >&2
+      failed=1
+    fi
+    if jq -e --arg name "$name" '.dependencies[$name] != null' "$project_catalog" >/dev/null; then
+      printf 'error: project skill catalog both configures and excludes: %s\n' "$name" >&2
+      failed=1
+    fi
+  done < <(jq -r '.excluded | keys[]' "$project_catalog")
+fi
 
 for file in "$repo_dir/ai/project-template/base.md" \
   "$repo_dir/ai/project-template/extensions/dotnet.md" \

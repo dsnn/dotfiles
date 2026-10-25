@@ -174,6 +174,34 @@ ai-skills-replace skill:
     @"{{ DOTFILES }}/scripts/ai-skills" install --replace "{{ skill }}"
 
 [group("ai")]
+ai-skills-copy project +skills:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    read -r -a selected <<< {{ quote(skills) }}
+    for skill in "${selected[@]}"; do
+      [[ "$skill" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]] || { printf 'error: unsafe skill name: %s\n' "$skill" >&2; exit 2; }
+    done
+    "{{ DOTFILES }}/scripts/ai-skills" copy preview --project {{ quote(project) }} "${selected[@]}"
+
+[group("ai")]
+ai-skills-copy-apply project +skills:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    read -r -a selected <<< {{ quote(skills) }}
+    for skill in "${selected[@]}"; do
+      [[ "$skill" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]] || { printf 'error: unsafe skill name: %s\n' "$skill" >&2; exit 2; }
+    done
+    "{{ DOTFILES }}/scripts/ai-skills" copy apply --yes --project {{ quote(project) }} "${selected[@]}"
+
+[group("ai")]
+ai-skills-update project:
+    @"{{ DOTFILES }}/scripts/ai-skills" update preview --project {{ quote(project) }}
+
+[group("ai")]
+ai-skills-update-apply project:
+    @"{{ DOTFILES }}/scripts/ai-skills" update apply --yes --project {{ quote(project) }}
+
+[group("ai")]
 project-preview project profile="":
     #!/usr/bin/env bash
     set -euo pipefail

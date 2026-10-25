@@ -2,84 +2,529 @@
 set -euo pipefail
 
 usage() {
-  printf 'usage: ai-skills <status|install> [--replace SKILL]\n'
+  cat >&2 <<'EOF'
+usage:
+  ai-skills status
+  ai-skills install [--replace SKILL]
+  ai-skills copy <preview|apply> --project PATH [--yes] SKILL...
+  ai-skills update <preview|apply> --project PATH [--yes] [--overwrite SKILL]...
+EOF
 }
 
-[[ $# -ge 1 ]] || { usage >&2; exit 2; }
-mode="$1"
-shift
-[[ "$mode" == status || "$mode" == install ]] || { usage >&2; exit 2; }
-
-replace=''
-while [[ $# -gt 0 ]]; do
-  case "$1" in
-    --replace)
-      [[ $# -ge 2 ]] || { printf 'error: --replace requires a skill name\n' >&2; exit 2; }
-      replace="$2"
-      shift 2
-      ;;
-    *) printf 'error: unknown argument: %s\n' "$1" >&2; exit 2 ;;
-  esac
-done
-[[ "$mode" == install || -z "$replace" ]] || { printf 'error: --replace is valid only with install\n' >&2; exit 2; }
+die() {
+  printf 'error: %s\n' "$*" >&2
+  exit 1
+}
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 repo_dir="$(cd "$script_dir/.." && pwd -P)"
 source_dir="$repo_dir/ai/skills"
-codex_home="${CODEX_HOME:-$HOME/.codex}"
-target_dir="$codex_home/skills"
-conflicts=()
+catalog="$repo_dir/ai/project-skills.json"
 
 is_managed_link() {
   [[ -L "$2" && "$(readlink "$2")" == "$1" ]]
 }
 
-for source in "$source_dir"/*; do
-  [[ -d "$source" ]] || continue
-  name="$(basename "$source")"
-  target="$target_dir/$name"
-  if is_managed_link "$source" "$target"; then
-    state=linked
-  elif [[ -e "$target" || -L "$target" ]]; then
-    state=conflict
-    [[ "$name" == "$replace" ]] || conflicts+=("$name")
-  else
-    state=missing
-  fi
-  printf '%-32s %s\n' "$name" "$state"
-done
+global_command() {
+  local mode="$1"
+  shift
+  local replace=''
+  local codex_home="${CODEX_HOME:-$HOME/.codex}"
+  local target_dir="$codex_home/skills"
+  local conflicts=()
+  local source name target state backup_dir backup
 
-if [[ "$mode" == status ]]; then
-  [[ ${#conflicts[@]} -eq 0 ]] || exit 1
-  exit 0
-fi
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --replace)
+        [[ $# -ge 2 ]] || die '--replace requires a skill name'
+        replace="$2"
+        shift 2
+        ;;
+      *) die "unknown argument: $1" ;;
+    esac
+  done
+  [[ "$mode" == install || -z "$replace" ]] || die '--replace is valid only with install'
 
-if [[ ${#conflicts[@]} -gt 0 ]]; then
-  printf 'error: refusing to overwrite skill conflicts: %s\n' "${conflicts[*]}" >&2
-  exit 1
-fi
-
-mkdir -p "$target_dir"
-for source in "$source_dir"/*; do
-  [[ -d "$source" ]] || continue
-  name="$(basename "$source")"
-  target="$target_dir/$name"
-  if is_managed_link "$source" "$target"; then
-    continue
-  fi
-  if [[ -e "$target" || -L "$target" ]]; then
-    [[ "$name" == "$replace" ]] || { printf 'error: unexpected collision: %s\n' "$target" >&2; exit 1; }
-    backup_dir="$codex_home/skill-backups"
-    mkdir -p "$backup_dir"
-    backup="$backup_dir/${name}-$(date +%Y%m%d-%H%M%S)"
-    mv "$target" "$backup"
-    if ! ln -s "$source" "$target"; then
-      mv "$backup" "$target"
-      exit 1
+  for source in "$source_dir"/*; do
+    [[ -d "$source" ]] || continue
+    name="$(basename "$source")"
+    target="$target_dir/$name"
+    if is_managed_link "$source" "$target"; then
+      state=linked
+    elif [[ -e "$target" || -L "$target" ]]; then
+      state=conflict
+      [[ "$name" == "$replace" ]] || conflicts+=("$name")
+    else
+      state=missing
     fi
-    printf '✓ replaced %s; backup: %s\n' "$target" "$backup"
-  else
-    ln -s "$source" "$target"
-    printf '✓ linked: %s -> %s\n' "$target" "$source"
+    printf '%-32s %s\n' "$name" "$state"
+  done
+
+  if [[ "$mode" == status ]]; then
+    [[ ${#conflicts[@]} -eq 0 ]] || exit 1
+    return
   fi
-done
+  if [[ ${#conflicts[@]} -gt 0 ]]; then
+    die "refusing to overwrite skill conflicts: ${conflicts[*]}"
+  fi
+
+  mkdir -p "$target_dir"
+  for source in "$source_dir"/*; do
+    [[ -d "$source" ]] || continue
+    name="$(basename "$source")"
+    target="$target_dir/$name"
+    if is_managed_link "$source" "$target"; then
+      continue
+    fi
+    if [[ -e "$target" || -L "$target" ]]; then
+      [[ "$name" == "$replace" ]] || die "unexpected collision: $target"
+      backup_dir="$codex_home/skill-backups"
+      mkdir -p "$backup_dir"
+      backup="$backup_dir/${name}-$(date +%Y%m%d-%H%M%S)"
+      mv "$target" "$backup"
+      if ! ln -s "$source" "$target"; then
+        mv "$backup" "$target"
+        exit 1
+      fi
+      printf '✓ replaced %s; backup: %s\n' "$target" "$backup"
+    else
+      ln -s "$source" "$target"
+      printf '✓ linked: %s -> %s\n' "$target" "$source"
+    fi
+  done
+}
+
+safe_skill_name() {
+  [[ "$1" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]]
+}
+
+safe_relative_path() {
+  [[ -n "$1" && "$1" != *$'\n'* && "$1" != *$'\t'* && "$1" != /* && \
+    "$1" != '..' && "$1" != ../* && "$1" != */../* && "$1" != */.. ]]
+}
+
+hash_file() {
+  shasum -a 256 "$1" | awk '{print $1}'
+}
+
+file_mode() {
+  if stat -f '%Lp' "$1" >/dev/null 2>&1; then
+    stat -f '%Lp' "$1"
+  else
+    stat -c '%a' "$1"
+  fi
+}
+
+snapshot_dir() {
+  local dir="$1"
+  local output="$2"
+  local next="$output.next"
+  local file rel hash mode
+
+  printf '{}\n' >"$output"
+  [[ -d "$dir" ]] || return
+  if find "$dir" -type l -print -quit | grep -q .; then
+    die "symlinks are not allowed in skill directories: $dir"
+  fi
+  if find "$dir" ! -type d ! -type f -print -quit | grep -q .; then
+    die "special files are not allowed in skill directories: $dir"
+  fi
+  while IFS= read -r file; do
+    rel="${file#"$dir"/}"
+    safe_relative_path "$rel" || die "unsafe path in skill: $rel"
+    hash="$(hash_file "$file")"
+    mode="$(file_mode "$file")"
+    jq --arg path "$rel" --arg hash "$hash" --arg mode "$mode" \
+      '. + {($path): {sha256: $hash, mode: $mode}}' "$output" >"$next"
+    mv "$next" "$output"
+  done < <(find "$dir" -type f -print | LC_ALL=C sort)
+}
+
+json_equal() {
+  jq -e -s '.[0] == .[1]' "$1" "$2" >/dev/null
+}
+
+print_file_actions() {
+  local before="$1"
+  local after="$2"
+  jq -r -s '
+    .[0] as $before | .[1] as $after |
+    (($before | keys) + ($after | keys) | unique[]) as $path |
+    if $before[$path] == null then "  ADD      \($path)"
+    elif $after[$path] == null then "  REMOVE   \($path)"
+    elif $before[$path] != $after[$path] then "  MODIFY   \($path)"
+    else empty end
+  ' "$before" "$after"
+}
+
+validate_source_skill() {
+  local name="$1"
+  local dir="$source_dir/$name"
+  local declared
+
+  safe_skill_name "$name" || die "unsafe skill name: $name"
+  [[ -d "$dir" && -f "$dir/SKILL.md" && -f "$dir/agents/openai.yaml" ]] || \
+    die "source skill is missing required files: $name"
+  if find "$dir" -type l -print -quit | grep -q .; then
+    die "source skill contains a symlink: $name"
+  fi
+  declared="$(sed -nE 's/^name: ([a-z0-9-]+)$/\1/p' "$dir/SKILL.md" | head -n 1)"
+  [[ "$declared" == "$name" ]] || die "source skill name does not match directory: $name"
+  yq eval '.' "$dir/agents/openai.yaml" >/dev/null || die "invalid metadata YAML for source skill: $name"
+  if rg -n '\[TODO|TODO:|Briefly describe|Help with .* tasks' "$dir" >/dev/null; then
+    die "source skill contains unfinished scaffold text: $name"
+  fi
+  if rg -l -F "$repo_dir" "$dir" >/dev/null; then
+    die "source skill contains an absolute dependency on this repository: $name"
+  fi
+}
+
+validate_catalog() {
+  [[ -f "$catalog" ]] || die "missing project skill catalog: $catalog"
+  jq -e '
+    .schema == 1 and
+    (.dependencies | type == "object") and
+    (.excluded | type == "object") and
+    all(.dependencies[]; (.required | type == "array") and (.optional | type == "array"))
+  ' "$catalog" >/dev/null || die "invalid project skill catalog: $catalog"
+}
+
+validate_manifest() {
+  local manifest="$1"
+  local name path hash mode
+
+  jq -e '
+    .schema == 1 and .managed_by == "dotfiles-ai-toolkit" and
+    (.skills | type == "object") and
+    all(.skills[]; (.files | type == "object"))
+  ' "$manifest" >/dev/null || die "malformed project skill manifest"
+  while IFS= read -r name; do
+    safe_skill_name "$name" || die "unsafe skill name in project manifest: $name"
+  done < <(jq -r '.skills | keys[]' "$manifest")
+  while IFS=$'\t' read -r name path hash mode; do
+    safe_relative_path "$path" || die "unsafe file path in project manifest: $path"
+    [[ "$hash" =~ ^[0-9a-f]{64}$ ]] || die "invalid checksum in project manifest: $name/$path"
+    [[ "$mode" =~ ^[0-7]{3,4}$ ]] || die "invalid mode in project manifest: $name/$path"
+  done < <(jq -r '.skills | to_entries[] as $skill | $skill.value.files | to_entries[] | [$skill.key, .key, .value.sha256, .value.mode] | @tsv' "$manifest")
+}
+
+resolve_skill() {
+  local name="$1"
+  local origin="$2"
+  local reason dep
+
+  safe_skill_name "$name" || die "unsafe skill name: $name"
+  if grep -Fxq "$name" "$selected_names" 2>/dev/null; then
+    return
+  fi
+  reason="$(jq -r --arg name "$name" '.excluded[$name] // empty' "$catalog")"
+  [[ -z "$reason" ]] || die "skill is not project-copyable: $name ($reason)"
+  validate_source_skill "$name"
+  printf '%s\n' "$name" >>"$selected_names"
+  printf '%s\t%s\n' "$name" "$origin" >>"$selection"
+  while IFS= read -r dep; do
+    [[ -n "$dep" ]] || continue
+    resolve_skill "$dep" "required by $name"
+  done < <(jq -r --arg name "$name" '.dependencies[$name].required[]? // empty' "$catalog")
+}
+
+project_command() {
+  local operation="$1"
+  shift
+  [[ $# -ge 1 ]] || { usage; exit 2; }
+  local phase="$1"
+  shift
+  [[ "$phase" == preview || "$phase" == apply ]] || { usage; exit 2; }
+
+  local project_input=''
+  local confirmed=0
+  local overwrite_names_file requested_file
+  local name root agents_dir skills_dir manifest target reason optional origin
+  local source_snapshot local_snapshot baseline_snapshot new_manifest manifest_changed=0
+  local blocked=0 directory_changes=0 drift overwrite_allowed
+  local transaction='' transaction_active=0 manifest_existed=0
+  local temp_root current_manifest selected_names selection changes_file
+  local next_manifest empty_snapshot staged_snapshot cleanup_command
+  local applied_names=() applied_had_target=()
+
+  temp_root="$(mktemp -d "${TMPDIR:-/tmp}/dotfiles-ai-skills.XXXXXX")"
+  overwrite_names_file="$temp_root/overwrite"
+  requested_file="$temp_root/requested"
+  selected_names="$temp_root/selected-names"
+  selection="$temp_root/selection"
+  : >"$overwrite_names_file"
+  : >"$requested_file"
+  : >"$selected_names"
+  : >"$selection"
+  printf -v cleanup_command 'rm -rf %q' "$temp_root"
+  trap "$cleanup_command" EXIT
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --project)
+        [[ $# -ge 2 ]] || die '--project requires a path'
+        project_input="$2"
+        shift 2
+        ;;
+      --yes)
+        confirmed=1
+        shift
+        ;;
+      --overwrite)
+        [[ $# -ge 2 ]] || die '--overwrite requires a skill name'
+        printf '%s\n' "$2" >>"$overwrite_names_file"
+        shift 2
+        ;;
+      --*) die "unknown argument: $1" ;;
+      *) printf '%s\n' "$1" >>"$requested_file"; shift ;;
+    esac
+  done
+
+  [[ -n "$project_input" ]] || die '--project is required'
+  [[ -d "$project_input" ]] || die "project directory does not exist: $project_input"
+  root="$(git -C "$project_input" rev-parse --show-toplevel 2>/dev/null)" || die "destination is not a Git repository: $project_input"
+  root="$(cd "$root" && pwd -P)"
+  project_input="$(cd "$project_input" && pwd -P)"
+  [[ "$project_input" == "$root" ]] || die "--project must name the repository root: $root"
+  [[ "$root" != / ]] || die 'refusing to use the filesystem root as a project'
+
+  agents_dir="$root/.agents"
+  skills_dir="$agents_dir/skills"
+  manifest="$skills_dir/.dotfiles-ai.json"
+  [[ ! -L "$agents_dir" ]] || die "project .agents path is a symlink: $agents_dir"
+  [[ ! -e "$agents_dir" || -d "$agents_dir" ]] || die "project .agents path is not a directory: $agents_dir"
+  [[ ! -L "$skills_dir" ]] || die "project skills path is a symlink: $skills_dir"
+  [[ ! -e "$skills_dir" || -d "$skills_dir" ]] || die "project skills path is not a directory: $skills_dir"
+  [[ ! -L "$manifest" ]] || die "project skill manifest is a symlink: $manifest"
+  [[ ! -e "$manifest" || -f "$manifest" ]] || die "project skill manifest is not a regular file: $manifest"
+
+  validate_catalog
+  current_manifest="$temp_root/current-manifest.json"
+  if [[ -f "$manifest" ]]; then
+    cp "$manifest" "$current_manifest"
+    validate_manifest "$current_manifest"
+  else
+    printf '{"schema":1,"managed_by":"dotfiles-ai-toolkit","skills":{}}\n' >"$current_manifest"
+  fi
+
+  if [[ "$phase" == apply && $confirmed -ne 1 ]]; then
+    die 'apply requires --yes after reviewing preview output'
+  fi
+  if [[ "$operation" == copy ]]; then
+    [[ ! -s "$overwrite_names_file" ]] || die '--overwrite is valid only with update'
+    [[ -s "$requested_file" ]] || die 'copy requires at least one skill name'
+  else
+    [[ ! -s "$requested_file" ]] || die 'update does not accept skill names'
+    [[ "$(jq '.skills | length' "$current_manifest")" -gt 0 ]] || die 'project manifest has no managed skills'
+  fi
+
+  while IFS= read -r name; do
+    safe_skill_name "$name" || die "unsafe --overwrite skill name: $name"
+    jq -e --arg name "$name" '.skills[$name] != null' "$current_manifest" >/dev/null || \
+      die "--overwrite can only name a skill already tracked in the project manifest: $name"
+  done <"$overwrite_names_file"
+
+  if [[ "$operation" == copy ]]; then
+    while IFS= read -r name; do
+      resolve_skill "$name" requested
+    done <"$requested_file"
+  else
+    jq -r '.skills | keys[]' "$current_manifest" >"$selected_names"
+    while IFS= read -r name; do
+      printf '%s\tmanaged update\n' "$name" >>"$selection"
+    done <"$selected_names"
+  fi
+
+  new_manifest="$temp_root/new-manifest.json"
+  cp "$current_manifest" "$new_manifest"
+  changes_file="$temp_root/directory-changes"
+  : >"$changes_file"
+
+  printf '%s %s for %s\n' "$operation" "$phase" "$root"
+  while IFS=$'\t' read -r name origin; do
+    [[ -n "$name" ]] || continue
+    target="$skills_dir/$name"
+    source_snapshot="$temp_root/source-$name.json"
+    local_snapshot="$temp_root/local-$name.json"
+    baseline_snapshot="$temp_root/baseline-$name.json"
+
+    if [[ "$operation" == update ]]; then
+      reason="$(jq -r --arg name "$name" '.excluded[$name] // empty' "$catalog")"
+      if [[ -n "$reason" ]]; then
+        printf 'BLOCKED  %s: no longer project-copyable (%s)\n' "$name" "$reason"
+        blocked=1
+        continue
+      fi
+      if [[ ! -d "$source_dir/$name" ]]; then
+        printf 'BLOCKED  %s: managed source skill is missing; destination was not deleted\n' "$name"
+        blocked=1
+        continue
+      fi
+    fi
+    validate_source_skill "$name"
+    snapshot_dir "$source_dir/$name" "$source_snapshot"
+
+    if [[ -L "$target" ]]; then
+      printf 'BLOCKED  %s: destination skill is a symlink\n' "$name"
+      blocked=1
+      continue
+    fi
+    if [[ -e "$target" && ! -d "$target" ]]; then
+      printf 'BLOCKED  %s: destination skill is not a directory\n' "$name"
+      blocked=1
+      continue
+    fi
+
+    if [[ "$operation" == copy ]]; then
+      if jq -e --arg name "$name" '.skills[$name] != null' "$current_manifest" >/dev/null; then
+        printf 'UNCHANGED %s (already managed; use update to synchronize)\n' "$name"
+        continue
+      fi
+      if [[ -e "$target" ]]; then
+        printf 'BLOCKED  %s: unmanaged destination already exists and cannot be adopted or overwritten\n' "$name"
+        blocked=1
+        continue
+      fi
+      printf 'ADD      %s (%s)\n' "$name" "$origin"
+      empty_snapshot="$temp_root/empty.json"
+      printf '{}\n' >"$empty_snapshot"
+      print_file_actions "$empty_snapshot" "$source_snapshot"
+      printf '%s\n' "$name" >>"$changes_file"
+      directory_changes=$((directory_changes + 1))
+    else
+      jq --arg name "$name" '.skills[$name].files' "$current_manifest" >"$baseline_snapshot"
+      snapshot_dir "$target" "$local_snapshot"
+      overwrite_allowed=0
+      grep -Fxq "$name" "$overwrite_names_file" && overwrite_allowed=1
+      drift=0
+      if ! json_equal "$local_snapshot" "$baseline_snapshot" && ! json_equal "$local_snapshot" "$source_snapshot"; then
+        drift=1
+      fi
+      if (( drift && ! overwrite_allowed )); then
+        printf 'BLOCKED  %s: local content differs from the managed baseline; rerun with --overwrite %s after review\n' "$name" "$name"
+        print_file_actions "$source_snapshot" "$local_snapshot"
+        blocked=1
+        continue
+      fi
+      if json_equal "$local_snapshot" "$source_snapshot"; then
+        if json_equal "$baseline_snapshot" "$source_snapshot"; then
+          printf 'UNCHANGED %s\n' "$name"
+        else
+          printf 'RECORD   %s (content already matches source)\n' "$name"
+        fi
+      else
+        if (( overwrite_allowed && drift )); then
+          printf 'OVERWRITE %s (tracked local drift explicitly approved)\n' "$name"
+        else
+          printf 'UPDATE   %s\n' "$name"
+        fi
+        print_file_actions "$local_snapshot" "$source_snapshot"
+        printf '%s\n' "$name" >>"$changes_file"
+        directory_changes=$((directory_changes + 1))
+      fi
+    fi
+
+    next_manifest="$temp_root/manifest-next.json"
+    jq --arg name "$name" --slurpfile files "$source_snapshot" \
+      '.skills[$name] = {files: $files[0]}' "$new_manifest" >"$next_manifest"
+    mv "$next_manifest" "$new_manifest"
+  done <"$selection"
+
+  while IFS= read -r name; do
+    while IFS= read -r optional; do
+      [[ -n "$optional" ]] && printf 'OPTIONAL %s -> %s (not copied automatically)\n' "$name" "$optional"
+    done < <(jq -r --arg name "$name" '.dependencies[$name].optional[]? // empty' "$catalog")
+  done <"$selected_names"
+
+  json_equal "$current_manifest" "$new_manifest" || manifest_changed=1
+  if (( blocked )); then
+    printf 'result: blocked; no project files changed\n' >&2
+    return 1
+  fi
+  if [[ "$phase" == preview ]]; then
+    printf 'result: preview complete; %s skill directorie(s), manifest %s; no project files changed\n' \
+      "$directory_changes" "$([[ $manifest_changed -eq 1 ]] && printf update || printf unchanged)"
+    return
+  fi
+  if (( directory_changes == 0 && manifest_changed == 0 )); then
+    printf 'result: already up to date\n'
+    return
+  fi
+
+  transaction_rollback() {
+    local status=$?
+    local index rollback_name rollback_target
+    trap - EXIT INT TERM
+    if (( transaction_active )); then
+      for ((index=${#applied_names[@]}-1; index>=0; index--)); do
+        rollback_name="${applied_names[$index]}"
+        rollback_target="$skills_dir/$rollback_name"
+        if [[ -e "$rollback_target" || -L "$rollback_target" ]]; then
+          mv "$rollback_target" "$transaction/failed/$rollback_name" 2>/dev/null || true
+        fi
+        if [[ "${applied_had_target[$index]}" == 1 && -e "$transaction/backup/$rollback_name" ]]; then
+          mv "$transaction/backup/$rollback_name" "$rollback_target" 2>/dev/null || true
+        fi
+      done
+      if (( manifest_existed )); then
+        if [[ -f "$transaction/manifest.original" ]]; then
+          mv "$transaction/manifest.original" "$manifest" 2>/dev/null || true
+        fi
+      elif [[ -f "$manifest" ]]; then
+        mv "$manifest" "$transaction/failed/.dotfiles-ai.json" 2>/dev/null || true
+      fi
+      printf 'error: apply failed; prior managed content was restored where possible; transaction retained at %s\n' "$transaction" >&2
+    fi
+    rm -rf "$temp_root"
+    exit "$status"
+  }
+
+  mkdir -p "$agents_dir"
+  transaction="$(mktemp -d "$agents_dir/.ai-skills-txn.XXXXXX")"
+  mkdir -p "$transaction/stage" "$transaction/backup" "$transaction/failed"
+  [[ -f "$manifest" ]] && manifest_existed=1
+  transaction_active=1
+  trap transaction_rollback EXIT INT TERM
+  while IFS= read -r name; do
+    mkdir -p "$transaction/stage/$name"
+    cp -pR "$source_dir/$name/." "$transaction/stage/$name/"
+    staged_snapshot="$temp_root/staged-$name.json"
+    snapshot_dir "$transaction/stage/$name" "$staged_snapshot"
+    source_snapshot="$temp_root/source-$name.json"
+    json_equal "$staged_snapshot" "$source_snapshot" || die "staged copy failed verification: $name"
+  done <"$changes_file"
+  cp "$new_manifest" "$transaction/manifest.new"
+
+  mkdir -p "$skills_dir"
+  if (( manifest_existed )); then
+    cp -p "$manifest" "$transaction/manifest.original"
+  fi
+  while IFS= read -r name; do
+    target="$skills_dir/$name"
+    if [[ -e "$target" ]]; then
+      mv "$target" "$transaction/backup/$name"
+      applied_names+=("$name")
+      applied_had_target+=(1)
+    else
+      applied_names+=("$name")
+      applied_had_target+=(0)
+    fi
+    mv "$transaction/stage/$name" "$target"
+  done <"$changes_file"
+  mv "$transaction/manifest.new" "$manifest"
+  transaction_active=0
+  trap - EXIT INT TERM
+  rm -rf "$transaction" "$temp_root"
+  printf 'result: applied %s skill directorie(s); manifest %s\n' \
+    "$directory_changes" "$([[ $manifest_changed -eq 1 ]] && printf updated || printf unchanged)"
+}
+
+[[ $# -ge 1 ]] || { usage; exit 2; }
+command="$1"
+shift
+case "$command" in
+  status|install) global_command "$command" "$@" ;;
+  copy|update) project_command "$command" "$@" ;;
+  *) usage; exit 2 ;;
+esac

@@ -111,6 +111,31 @@ ai-project preview ──> diff ──> godkännande ──> ai-project apply
 
 Endast blocket mellan `dotfiles-ai:start` och `dotfiles-ai:end` förvaltas. En checksumma skyddar lokala ändringar.
 
+## Projektlokala skillkopior
+
+```text
+valda skills ──> kontrollera undantag ──> expandera nödvändiga beroenden
+                                                │
+                                                v
+                                      copy preview (inga writes)
+                                                │
+                                      explicit copy apply
+                                                │
+                                                v
+                          .agents/skills/ + checksummamanifest
+                                                │
+                       ┌────────────────────────┴──────────────────────┐
+                       v                                               v
+                update preview                                  lokal drift
+         källa + baslinje + projekt                                  │
+                       │                                  STOPP; ingen skill ändras
+                       v                                               │
+              transaktionell apply                    --overwrite endast om skillen
+              add/modify/remove                         redan finns i manifestet
+```
+
+Oförvaltade skills och andra projektfiler ligger utanför flödet. En saknad källa stoppar uppdateringen men tar inte bort projektets kopia. Projekttemplat går fortsatt genom `ai-project`, inte genom skillkopieringen.
+
 ## Skapande och förbättring av skills
 
 ```text
@@ -131,14 +156,14 @@ upstream-förändring ──> update-skills ──> förslag ──> ai-check �
 ```text
 grill-me ────────────────> grilling
 grill-with-docs ─────────> grilling
-        └───────────────-> domain-modeling (valfritt)
+        └───────────────-> domain-modeling
 improve-codebase-architecture ─> codebase-design
         └──────────────────────> grilling
 wayfinder ───────────────> grilling
         ├ - - - - - - - -> research
         └ - - - - - - - -> prototype
-implement ─ - - - - - - -> tdd
-        └ - - - - - - - -> code-review
+implement ───────────────> tdd
+        └───────────────-> code-review
 implement-spec ──────────> implement ──> tdd
         └────────────────> code-review
 retro ──────────────────> writing-for-agents

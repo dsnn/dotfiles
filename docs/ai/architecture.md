@@ -6,8 +6,9 @@ Dotfiles-repot är enda skrivbara källan för den lokala verktygslådan:
 
 ```text
 ai/skills/                  repohanterade globala skills
+ai/project-skills.json      beroenden och undantag för projektkopior
 ai/project-template/        basblock och stackprofiler
-scripts/ai-skills           installation och status
+scripts/ai-skills           global länkning samt projektkopiering
 scripts/ai-project          projekt-preview och uppdatering
 scripts/validate-ai-toolkit deterministisk validering
 docs/ai/                    mänsklig dokumentation
@@ -26,6 +27,22 @@ Ett uttryckligt `--replace <skill>` flyttar den gamla katalogen till `${CODEX_HO
 
 Codex ser skillens namn och beskrivning före laddning. `agents/openai.yaml` sätter `allow_implicit_invocation: false` för stora och manuella workflows. Automatiska skills har smala beskrivningar. Invocation ändrar aldrig behörighet.
 
+## Projektlokala skillkopior
+
+`scripts/ai-skills copy` expanderar nödvändiga beroenden från `ai/project-skills.json` och kopierar endast den valda mängden till `<projekt>/.agents/skills/`. Katalogerna innehåller fysiska filer och får inte innehålla symlänkar eller absoluta beroenden till dotfiles-repot. Dotfiles-specifika drift- och installationsskills är uttryckligen undantagna. Valfria beroenden visas utan automatisk installation.
+
+Manifestet `.agents/skills/.dotfiles-ai.json` lagrar per förvaltad skill en SHA-256 och filrättighet för varje fil. Det innehåller ingen absolut källsökväg. Vid uppdatering jämförs tre tillstånd:
+
+```text
+manifestets baslinje ──┐
+projektets filer ──────┼──> oförändrad / säker uppdatering / lokal drift
+dotfiles-källan ───────┘
+```
+
+Lokal drift stoppar hela körningen. `--overwrite <skill>` godtas endast för en skill som redan finns i manifestet; en oförvaltad katalog kan aldrig tas över. Saknad källa rapporteras utan att projektkopian tas bort. Inför applicering byggs och verifieras kompletta ersättningskataloger i en transaktion under projektets `.agents/`; katalogbyten och manifest sker först när all preflight har lyckats. Vid ett appliceringsfel återställs tidigare förvaltat innehåll där det går och transaktionen behålls för felsökning.
+
+Global länkning och projektkopiering delar källkatalog men inte mål eller tillstånd. Det ena flödet ändrar aldrig det andra.
+
 ## Projekttemplat
 
 `scripts/ai-project` komponerar `base.md` och valda profiler. `azure-functions` och `avalonia` inkluderar `dotnet` eftersom deras råd förutsätter .NET-projekt.
@@ -41,6 +58,8 @@ Det genererade blocket i `AGENTS.md` innehåller profiler och SHA-256 för inneh
 - optionala planer, ADR:er, glossarier och task stores skapas inte.
 
 Projektets egna instruktioner har fortsatt kontroll över kommandon, dokumentplacering och godkännanden.
+
+Skillkopiering hanterar inte projekttemplat. `scripts/ai-project` fortsätter ensamt att äga det förvaltade blocket i `AGENTS.md`, vilket undviker två överlappande manifest- och uppdateringsmodeller.
 
 ## Beroenden och delade komponenter
 

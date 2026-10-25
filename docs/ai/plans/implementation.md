@@ -7,6 +7,7 @@
 - **Decided:** Smala skills får väljas automatiskt. Stora eller muterande workflows är manuella. Invocation ger aldrig nya rättigheter.
 - **Decided:** Trackers är valfria adapters; lokal Markdown är fallback efter godkännande.
 - **Decided:** Projektuppdateringar använder ett checksummaskyddat block i `AGENTS.md`.
+- **Decided:** Utvalda projektlokala skills är fysiska, manifestförvaltade kopior; nödvändiga beroenden följer med medan dotfiles-specifika skills undantas.
 - **Decided:** `implement-spec` får använda isolerade branches och worktrees endast när skillen uttryckligen anropas.
 
 ## Upstream-granskning
@@ -37,6 +38,7 @@ Avsiktliga avvikelser:
 
 - 32 substantiella skills med Codex-metadata och dokumenterade beroenden.
 - Kollisionssäker global symlinkinstallation och statuskontroll.
+- Preview/apply för projektlokala skillkopior med beroendeexpansion, checksummamanifest, driftskydd och transaktionell katalogersättning.
 - Basprojektmall samt profiler för .NET, Azure Functions och Avalonia.
 - Preview/apply-flöde med checksumma och skydd för projektanpassningar.
 - Deterministisk toolkitvalidering integrerad i `just check`.

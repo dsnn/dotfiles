@@ -1,0 +1,5 @@
+interface:
+  display_name: "Implement Spec"
+  short_description: "Orchestrate an approved task graph"
+policy:
+  allow_implicit_invocation: false

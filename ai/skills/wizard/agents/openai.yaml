@@ -1,0 +1,5 @@
+interface:
+  display_name: "Wizard"
+  short_description: "Guide human-only setup safely"
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,5 @@
+interface:
+  display_name: "To Questionnaire"
+  short_description: "Turn unknowns into answerable questions"
+policy:
+  allow_implicit_invocation: false

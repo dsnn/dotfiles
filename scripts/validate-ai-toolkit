@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+repo_dir="$(cd "$script_dir/.." && pwd -P)"
+skills_dir="$repo_dir/ai/skills"
+failed=0
+count=0
+
+for dir in "$skills_dir"/*; do
+  [[ -d "$dir" ]] || continue
+  count=$((count + 1))
+  name="$(basename "$dir")"
+  manifest="$dir/SKILL.md"
+  metadata="$dir/agents/openai.yaml"
+  if [[ ! -f "$manifest" || ! -f "$metadata" ]]; then
+    printf 'error: %s is missing SKILL.md or agents/openai.yaml\n' "$name" >&2
+    failed=1
+    continue
+  fi
+  manifest_name="$(sed -nE 's/^name: ([a-z0-9-]+)$/\1/p' "$manifest" | head -n 1)"
+  if [[ "$manifest_name" != "$name" ]]; then
+    printf 'error: skill directory/name mismatch: %s != %s\n' "$name" "$manifest_name" >&2
+    failed=1
+  fi
+  if rg -n '\[TODO|TODO:|Briefly describe|Help with .* tasks' "$dir"; then
+    printf 'error: unfinished scaffold content in %s\n' "$name" >&2
+    failed=1
+  fi
+  if ! yq eval '.' "$metadata" >/dev/null; then
+    printf 'error: invalid metadata YAML: %s\n' "$metadata" >&2
+    failed=1
+  fi
+done
+
+[[ "$count" == 32 ]] || { printf 'error: expected 32 managed skills, found %s\n' "$count" >&2; failed=1; }
+
+manual_skills=(grill-me grill-with-docs improve-codebase-architecture to-spec plan-tasks to-questionnaire triage wayfinder implement implement-spec setup-pre-commit handoff retro wizard teach wait-what setup-project improve-skill list-skills update-skills which-skill)
+for name in "${manual_skills[@]}"; do
+  value="$(yq eval '.policy.allow_implicit_invocation' "$skills_dir/$name/agents/openai.yaml")"
+  [[ "$value" == false ]] || { printf 'error: %s must require explicit invocation\n' "$name" >&2; failed=1; }
+done
+
+for file in "$repo_dir/ai/project-template/base.md" \
+  "$repo_dir/ai/project-template/extensions/dotnet.md" \
+  "$repo_dir/ai/project-template/extensions/azure-functions.md" \
+  "$repo_dir/ai/project-template/extensions/avalonia.md"; do
+  [[ -s "$file" ]] || { printf 'error: missing project template: %s\n' "$file" >&2; failed=1; }
+done
+
+bash -n "$repo_dir/scripts/ai-project" "$repo_dir/scripts/ai-skills" "$repo_dir/scripts/validate-ai-toolkit" || failed=1
+
+if (( failed )); then
+  exit 1
+fi
+printf '✓ AI toolkit structure valid (%s managed skills)\n' "$count"

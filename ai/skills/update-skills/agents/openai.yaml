@@ -1,0 +1,5 @@
+interface:
+  display_name: "Update Skills"
+  short_description: "Audit upstream ideas without auto-syncing"
+policy:
+  allow_implicit_invocation: false

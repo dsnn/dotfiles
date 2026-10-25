@@ -24,6 +24,7 @@ Labels used throughout the documentation:
 | Neovim editing foundation  | Done   | —        | Lazy-loaded editing, navigation, Treesitter, LSP, completion and UI components are present.        | [Neovim UI](ideas/neovim-ui.md)                 | Visual terminal rendering is not fully verified.   |
 | .NET foundation            | Done   | —        | Roslyn, EasyDotnet, Neotest and DAP are configured.                                                | [.NET development](ideas/dotnet-development.md) | Work-project behavior needs targeted verification. |
 | Architecture documentation | Done   | —        | Roadmap, decisions, idea documents and Codex instructions capture current context.                 | [decisions](decisions.md)                       | None                                               |
+| AI development toolkit      | Done   | —        | Repository-managed Codex skills, project templates, validation and safety workflows are available. | [AI toolkit](ai/README.md)                       | Real-project usage will guide focused refinements. |
 
 ## In progress
 

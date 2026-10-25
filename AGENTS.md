@@ -42,6 +42,14 @@ Do not combine unrelated changes. Preserve all unrelated user work. Never reset,
 - Be especially careful with shell startup, `PATH`, tmux, and Neovim startup.
 - Do not execute unknown scripts merely to inspect them.
 
+## AI development toolkit
+
+- Repository-managed global skills live under `ai/skills/`; install them only through the reviewed `just ai-skills` workflow.
+- Selecting or invoking a skill changes the workflow, never the user's permissions or the repository approval requirements.
+- Large orchestration workflows, especially `implement-spec`, require explicit invocation. Worktrees are an opt-in isolation mechanism for that workflow, not the normal development model.
+- Project templates manage only their marked block in `AGENTS.md`. Keep project-specific commands and custom instructions outside that block.
+- Use Codex's built-in `skill-creator` when creating repository-managed skills, then apply this repository's naming, safety, documentation, and validation conventions.
+
 ## Documentation
 
 - Keep `docs/roadmap.md` as the central overview and `docs/decisions.md` as the decision log.

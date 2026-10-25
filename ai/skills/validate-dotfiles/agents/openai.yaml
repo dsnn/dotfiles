@@ -1,0 +1,3 @@
+interface:
+  display_name: "Validate Dotfiles"
+  short_description: "Check configuration and toolkit integrity"

@@ -14,6 +14,10 @@ This file records durable choices and the unresolved questions that affect imple
 | Keep Rider available as a complementary tool.                                      | Rider remains useful for workflows where terminal tooling is less capable or less efficient.          | [.NET development](ideas/dotnet-development.md)            |
 | Do not make Git worktrees the foundation of the session workflow.                  | A worktree-centered workflow was evaluated previously and intentionally rejected.                     | [tmux workflow](ideas/tmux-workflow.md)                    |
 | Require explicit approval before functional environment changes.                   | Makes changes focused, reviewable and reversible.                                                     | [`AGENTS.md`](../AGENTS.md)                                |
+| Manage reusable Codex skills and project templates from this dotfiles repository.  | Keeps installation reviewable, versioned and independent of runtime upstream changes.                 | [AI architecture](ai/architecture.md)                     |
+| Treat skill selection as permission-neutral.                                       | A workflow may guide execution but cannot bypass repository or user approval boundaries.              | [AI workflows](ai/workflows.md)                           |
+| Allow worktrees only for an explicitly invoked `implement-spec` workflow.           | Enables isolated parallel work for a bounded task graph without changing normal development practice. | [AI implementation](ai/plans/implementation.md)           |
+| Keep issue tracking configurable.                                                   | Projects may use GitHub, Azure DevOps or local Markdown without changing global skills.                | [AI architecture](ai/architecture.md)                     |
 
 ## Open decisions
 

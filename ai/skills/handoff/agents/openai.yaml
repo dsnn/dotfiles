@@ -1,0 +1,5 @@
+interface:
+  display_name: "Handoff"
+  short_description: "Preserve reliable continuation context"
+policy:
+  allow_implicit_invocation: false

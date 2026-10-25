@@ -1,0 +1,5 @@
+interface:
+  display_name: "Which Skill?"
+  short_description: "Choose the smallest useful workflow"
+policy:
+  allow_implicit_invocation: false

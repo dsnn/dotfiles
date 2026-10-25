@@ -1,0 +1,5 @@
+interface:
+  display_name: "Grill with Docs"
+  short_description: "Refine an idea and preserve decisions"
+policy:
+  allow_implicit_invocation: false

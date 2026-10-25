@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  printf 'usage: ai-skills <status|install> [--replace SKILL]\n'
+}
+
+[[ $# -ge 1 ]] || { usage >&2; exit 2; }
+mode="$1"
+shift
+[[ "$mode" == status || "$mode" == install ]] || { usage >&2; exit 2; }
+
+replace=''
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --replace)
+      [[ $# -ge 2 ]] || { printf 'error: --replace requires a skill name\n' >&2; exit 2; }
+      replace="$2"
+      shift 2
+      ;;
+    *) printf 'error: unknown argument: %s\n' "$1" >&2; exit 2 ;;
+  esac
+done
+[[ "$mode" == install || -z "$replace" ]] || { printf 'error: --replace is valid only with install\n' >&2; exit 2; }
+
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+repo_dir="$(cd "$script_dir/.." && pwd -P)"
+source_dir="$repo_dir/ai/skills"
+codex_home="${CODEX_HOME:-$HOME/.codex}"
+target_dir="$codex_home/skills"
+conflicts=()
+
+is_managed_link() {
+  [[ -L "$2" && "$(readlink "$2")" == "$1" ]]
+}
+
+for source in "$source_dir"/*; do
+  [[ -d "$source" ]] || continue
+  name="$(basename "$source")"
+  target="$target_dir/$name"
+  if is_managed_link "$source" "$target"; then
+    state=linked
+  elif [[ -e "$target" || -L "$target" ]]; then
+    state=conflict
+    [[ "$name" == "$replace" ]] || conflicts+=("$name")
+  else
+    state=missing
+  fi
+  printf '%-32s %s\n' "$name" "$state"
+done
+
+if [[ "$mode" == status ]]; then
+  [[ ${#conflicts[@]} -eq 0 ]] || exit 1
+  exit 0
+fi
+
+if [[ ${#conflicts[@]} -gt 0 ]]; then
+  printf 'error: refusing to overwrite skill conflicts: %s\n' "${conflicts[*]}" >&2
+  exit 1
+fi
+
+mkdir -p "$target_dir"
+for source in "$source_dir"/*; do
+  [[ -d "$source" ]] || continue
+  name="$(basename "$source")"
+  target="$target_dir/$name"
+  if is_managed_link "$source" "$target"; then
+    continue
+  fi
+  if [[ -e "$target" || -L "$target" ]]; then
+    [[ "$name" == "$replace" ]] || { printf 'error: unexpected collision: %s\n' "$target" >&2; exit 1; }
+    backup_dir="$codex_home/skill-backups"
+    mkdir -p "$backup_dir"
+    backup="$backup_dir/${name}-$(date +%Y%m%d-%H%M%S)"
+    mv "$target" "$backup"
+    if ! ln -s "$source" "$target"; then
+      mv "$backup" "$target"
+      exit 1
+    fi
+    printf '✓ replaced %s; backup: %s\n' "$target" "$backup"
+  else
+    ln -s "$source" "$target"
+    printf '✓ linked: %s -> %s\n' "$target" "$source"
+  fi
+done

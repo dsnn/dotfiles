@@ -1,0 +1,5 @@
+interface:
+  display_name: "Plan Tasks"
+  short_description: "Create testable dependency-aware tasks"
+policy:
+  allow_implicit_invocation: false

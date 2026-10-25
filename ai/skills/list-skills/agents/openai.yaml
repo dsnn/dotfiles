@@ -1,0 +1,5 @@
+interface:
+  display_name: "List Skills"
+  short_description: "Inventory skills and installation state"
+policy:
+  allow_implicit_invocation: false

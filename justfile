@@ -16,12 +16,12 @@ default:
     @just --list --unsorted
 
 [group("core")]
-bootstrap: zsh inputrc starship git ssh tmux bat tealdeer lazygit lsd bottom htop nvim rider
+bootstrap: zsh inputrc starship git ssh tmux bat tealdeer lazygit lsd bottom htop nvim rider ai-skills
     @if [[ "{{ OS }}" == "Darwin" ]]; then just aerospace; fi
     @echo "✓ dotfiles bootstrap complete ({{ OS }})"
 
 [group("core")]
-check: _check_gh_dash _check_ideavim _check_tmux _check_nvim
+check: ai-check _check_gh_dash _check_ideavim _check_tmux _check_nvim
     @just --fmt --check --unstable
     @zsh -n "{{ DOTFILES }}/zsh/zshenv" "{{ DOTFILES }}/zsh/zprofile" "{{ DOTFILES }}/zsh/zshrc"
     @ssh -G -T -F "{{ DOTFILES }}/ssh/config" github.com >/dev/null
@@ -144,6 +144,42 @@ _link source target:
       ln -s "$source" "$target"
       printf '✓ linked: %s -> %s\n' "$target" "$source"
     fi
+
+# --------------------------------------------------
+# AI development toolkit
+# --------------------------------------------------
+
+[group("ai")]
+ai-check:
+    @"{{ DOTFILES }}/scripts/validate-ai-toolkit"
+
+[group("ai")]
+ai-skills:
+    @"{{ DOTFILES }}/scripts/ai-skills" install
+
+[group("ai")]
+ai-skills-status:
+    @"{{ DOTFILES }}/scripts/ai-skills" status
+
+[group("ai")]
+ai-skills-replace skill:
+    @"{{ DOTFILES }}/scripts/ai-skills" install --replace "{{ skill }}"
+
+[group("ai")]
+project-preview project profile="":
+    #!/usr/bin/env bash
+    set -euo pipefail
+    args=(preview --project '{{ project }}')
+    if [[ -n '{{ profile }}' ]]; then args+=(--profile '{{ profile }}'); fi
+    '{{ DOTFILES }}/scripts/ai-project' "${args[@]}"
+
+[group("ai")]
+project-apply project profile="":
+    #!/usr/bin/env bash
+    set -euo pipefail
+    args=(apply --yes --project '{{ project }}')
+    if [[ -n '{{ profile }}' ]]; then args+=(--profile '{{ profile }}'); fi
+    '{{ DOTFILES }}/scripts/ai-project' "${args[@]}"
 
 # --------------------------------------------------
 # Dotfiles

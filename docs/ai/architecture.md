@@ -1,0 +1,74 @@
+# Arkitektur
+
+## Källor och struktur
+
+Dotfiles-repot är enda skrivbara källan för den lokala verktygslådan:
+
+```text
+ai/skills/                  repohanterade globala skills
+ai/project-template/        basblock och stackprofiler
+scripts/ai-skills           installation och status
+scripts/ai-project          projekt-preview och uppdatering
+scripts/validate-ai-toolkit deterministisk validering
+docs/ai/                    mänsklig dokumentation
+```
+
+Codex inbyggda `.system`-skills och tredjepartsskills ägs inte av repot. `create-skill` återanvänder den inbyggda `$skill-creator`; lokala skilländringar sker sedan under `ai/skills/`.
+
+## Global installation och discovery
+
+`scripts/ai-skills` länkar varje katalog i `ai/skills/` till `${CODEX_HOME:-$HOME/.codex}/skills/<name>`. En tvåstegsmodell används:
+
+1. Alla mål klassificeras som `linked`, `missing` eller `conflict`.
+2. Installation sker endast om inga icke godkända konflikter finns.
+
+Ett uttryckligt `--replace <skill>` flyttar den gamla katalogen till `${CODEX_HOME}/skill-backups/` innan länken skapas. Om länkningen misslyckas återställs backupen.
+
+Codex ser skillens namn och beskrivning före laddning. `agents/openai.yaml` sätter `allow_implicit_invocation: false` för stora och manuella workflows. Automatiska skills har smala beskrivningar. Invocation ändrar aldrig behörighet.
+
+## Projekttemplat
+
+`scripts/ai-project` komponerar `base.md` och valda profiler. `azure-functions` och `avalonia` inkluderar `dotnet` eftersom deras råd förutsätter .NET-projekt.
+
+Det genererade blocket i `AGENTS.md` innehåller profiler och SHA-256 för innehållet. Vid uppdatering:
+
+- text utanför blocket kopieras byte för byte;
+- ett oförändrat block får ersättas efter visad diff och explicit `apply --yes`;
+- ett lokalt ändrat block ger stopp;
+- optionala planer, ADR:er, glossarier och task stores skapas inte.
+
+Projektets egna instruktioner har fortsatt kontroll över kommandon, dokumentplacering och godkännanden.
+
+## Beroenden och delade komponenter
+
+Återanvändbar beslutslogik ligger i egna smala skills, exempelvis `grilling`, `codebase-design` och `writing-for-agents`. Orkestrerande skills hänvisar till dem med namn. Deterministisk filhantering ligger i script i stället för att återimplementeras i prompttext.
+
+Trackers är adapters. `to-spec`, `plan-tasks`, `triage` och `wayfinder` använder dokumenterad projektkonfiguration om den finns; annars föreslår de lokal Markdown. Ingen tracker är ett runtime-beroende.
+
+## `AGENTS.md`-hierarki och säkerhet
+
+Codex läser globala och projektspecifika instruktioner i hierarki. Root-`AGENTS.md` i detta repo styr arbete här. Ett installerat projekttemplat styr sitt projekt och kan kompletteras av smalare instruktioner längre ned i trädet.
+
+Prioritetsmodellen är:
+
+```text
+system- och användarinstruktioner
+              │
+              v
+      tillämpliga AGENTS.md
+              │
+              v
+       vald skill/workflow
+```
+
+En skill får alltså inte upphäva en approval gate. Destruktiva operationer, global konfiguration, installation, externa writes, commits, push, PR-publicering och deploy följer alltid den högre instruktionen och den uttryckliga användarbegäran.
+
+## `implement-spec`
+
+Denna skill är den enda avsiktliga worktree-orkestreringen. Den kräver explicit invocation, en godkänd spec och task graph samt godkänd Git-plan. Varje task får egen branch och worktree. Integration sker seriellt till en integrationsbranch efter uppdatering och test. Konflikter eskaleras. Full validering och `code-review` avslutar flödet. Städning är separat och destruktiv städning kräver godkännande.
+
+## Utökning och upstream
+
+Nya skills skapas med `$skill-creator`, men destinationen är `ai/skills/`. En ny skill ska ha eget återkommande användningsfall, distinkt trigger, avgränsat ansvar och oberoende validering. Lägg inte till en skill för en enda regel eller ett engångsproblem.
+
+Matt Pococks `skills` används som designinspiration under [MIT-licens](upstream-license.md), inte som runtime-beroende eller automatisk upstream. `update-skills` jämför beteende och föreslår selektiv adoption. Senast granskad commit och lokala avvikelser dokumenteras i [plans/implementation.md](plans/implementation.md).

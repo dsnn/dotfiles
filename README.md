@@ -64,6 +64,7 @@ reports missing or outdated packages from `Brewfile`.
 - [Roadmap](docs/roadmap.md) — current capabilities and future improvements
 - [Decisions](docs/decisions.md) — established principles and open choices
 - [Idea documents](docs/ideas/) — requirements, research and verification criteria
+- [AI development toolkit](docs/ai/README.md) — global Codex skills, project templates and safe workflows
 
 ## Local and private configuration
 

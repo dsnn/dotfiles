@@ -1,0 +1,5 @@
+interface:
+  display_name: "Wayfinder"
+  short_description: "Map decisions for a large uncertain effort"
+policy:
+  allow_implicit_invocation: false

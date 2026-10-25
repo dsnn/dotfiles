@@ -1,0 +1,181 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  cat <<'EOF'
+usage: ai-project <preview|apply> --project PATH [--profile NAME ...] [--yes]
+
+Profiles: dotnet, azure-functions, avalonia
+`azure-functions` and `avalonia` include the `dotnet` profile.
+EOF
+}
+
+fail() {
+  printf 'error: %s\n' "$*" >&2
+  exit 1
+}
+
+hash_file() {
+  if command -v sha256sum >/dev/null 2>&1; then
+    sha256sum "$1" | awk '{print $1}'
+  else
+    shasum -a 256 "$1" | awk '{print $1}'
+  fi
+}
+
+[[ $# -ge 1 ]] || { usage >&2; exit 2; }
+mode="$1"
+shift
+[[ "$mode" == preview || "$mode" == apply ]] || fail "mode must be preview or apply"
+
+project=''
+confirmed=0
+requested_profiles=()
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --project)
+      [[ $# -ge 2 ]] || fail "--project requires a path"
+      project="$2"
+      shift 2
+      ;;
+    --profile)
+      [[ $# -ge 2 ]] || fail "--profile requires a name"
+      requested_profiles+=("$2")
+      shift 2
+      ;;
+    --yes)
+      confirmed=1
+      shift
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    *) fail "unknown argument: $1" ;;
+  esac
+done
+
+[[ -n "$project" ]] || fail "--project is required"
+[[ -d "$project" ]] || fail "project directory does not exist: $project"
+project="$(cd "$project" && pwd -P)"
+
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+repo_dir="$(cd "$script_dir/.." && pwd -P)"
+template_dir="$repo_dir/ai/project-template"
+target="$project/AGENTS.md"
+end_marker='<!-- dotfiles-ai:end -->'
+
+tmp_dir="$(mktemp -d "${TMPDIR:-/tmp}/dotfiles-ai-project.XXXXXX")"
+trap 'rm -rf "$tmp_dir"' EXIT
+body="$tmp_dir/body"
+block="$tmp_dir/block"
+candidate="$tmp_dir/AGENTS.md"
+existing_body="$tmp_dir/existing-body"
+
+profiles=()
+add_profile() {
+  local candidate_profile="$1" existing
+  case "$candidate_profile" in
+    dotnet|azure-functions|avalonia) ;;
+    *) fail "unsupported profile: $candidate_profile" ;;
+  esac
+  for existing in "${profiles[@]:-}"; do
+    [[ "$existing" == "$candidate_profile" ]] && return
+  done
+  profiles+=("$candidate_profile")
+}
+
+if [[ ${#requested_profiles[@]} -eq 0 && -f "$target" ]]; then
+  existing_profile_list="$(sed -nE 's/^<!-- dotfiles-ai:start profiles=([^ ]*) checksum=[0-9a-f]{64} -->$/\1/p' "$target")"
+  if [[ -n "$existing_profile_list" && "$existing_profile_list" != none ]]; then
+    IFS=',' read -r -a requested_profiles <<<"$existing_profile_list"
+  fi
+fi
+
+for profile in "${requested_profiles[@]:-}"; do
+  [[ -n "$profile" ]] || continue
+  if [[ "$profile" == azure-functions || "$profile" == avalonia ]]; then
+    add_profile dotnet
+  fi
+  add_profile "$profile"
+done
+
+cp "$template_dir/base.md" "$body"
+for ordered_profile in dotnet azure-functions avalonia; do
+  for profile in "${profiles[@]:-}"; do
+    if [[ "$profile" == "$ordered_profile" ]]; then
+      printf '\n' >>"$body"
+      sed -e '${/^$/d;}' "$template_dir/extensions/$profile.md" >>"$body"
+    fi
+  done
+done
+
+checksum="$(hash_file "$body")"
+profile_list=none
+if [[ ${#profiles[@]} -gt 0 ]]; then
+  profile_list="$(IFS=,; printf '%s' "${profiles[*]}")"
+fi
+{
+  printf '<!-- dotfiles-ai:start profiles=%s checksum=%s -->\n' "$profile_list" "$checksum"
+  cat "$body"
+  printf '%s\n' "$end_marker"
+} >"$block"
+
+managed_modified=0
+if [[ -f "$target" ]] && rg -q '<!-- dotfiles-ai:start ' "$target"; then
+  start_count="$(rg -c '<!-- dotfiles-ai:start ' "$target")"
+  end_count="$(rg -c '^<!-- dotfiles-ai:end -->$' "$target")"
+  [[ "$start_count" == 1 && "$end_count" == 1 ]] || fail "AGENTS.md has malformed or repeated managed markers"
+  existing_checksum="$(sed -nE 's/^<!-- dotfiles-ai:start profiles=.* checksum=([0-9a-f]{64}) -->$/\1/p' "$target")"
+  [[ -n "$existing_checksum" ]] || fail "managed marker has an invalid checksum"
+  awk '/^<!-- dotfiles-ai:start / {inside=1; next} /^<!-- dotfiles-ai:end -->$/ {inside=0; next} inside' "$target" >"$existing_body"
+  [[ "$(hash_file "$existing_body")" == "$existing_checksum" ]] || managed_modified=1
+  awk -v replacement="$block" '
+    /^<!-- dotfiles-ai:start / {
+      while ((getline line < replacement) > 0) print line
+      close(replacement)
+      inside=1
+      next
+    }
+    /^<!-- dotfiles-ai:end -->$/ && inside {inside=0; next}
+    !inside {print}
+  ' "$target" >"$candidate"
+elif [[ -f "$target" ]]; then
+  cp "$target" "$candidate"
+  if [[ -s "$candidate" ]]; then
+    last_byte="$(tail -c 1 "$candidate" | od -An -t x1 | tr -d '[:space:]')"
+    [[ "$last_byte" == 0a ]] || printf '\n' >>"$candidate"
+    printf '\n' >>"$candidate"
+  fi
+  cat "$block" >>"$candidate"
+else
+  cp "$block" "$candidate"
+  {
+    printf '\n## Project-specific agent notes\n\n'
+    printf '<!-- Owner-maintained: add verified commands and conventions here. -->\n'
+  } >>"$candidate"
+fi
+
+if [[ -f "$target" ]] && cmp -s "$target" "$candidate"; then
+  printf '✓ no project-template changes: %s\n' "$target"
+  exit 0
+fi
+
+if [[ -f "$target" ]]; then
+  diff -u --label "$target" --label "$target (proposed)" "$target" "$candidate" || true
+else
+  diff -u --label /dev/null --label "$target (proposed)" /dev/null "$candidate" || true
+fi
+
+if (( managed_modified )); then
+  fail "managed block was customized; preserve those changes manually before updating"
+fi
+
+if [[ "$mode" == preview ]]; then
+  printf 'preview only; run apply with --yes after approval\n'
+  exit 0
+fi
+
+(( confirmed )) || fail "apply requires --yes after reviewing the preview"
+install -m 0644 "$candidate" "$target"
+printf '✓ updated managed project instructions: %s\n' "$target"

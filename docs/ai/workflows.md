@@ -14,12 +14,13 @@ idé
                     ┌───────────────────────┘
                     v
                  to-spec ──> plan-tasks
+                 R/D/AC-ID      T-ID + R/D/AC-ID
                     │             │
                     │             ├──> implement ──> tdd
-                    │             │                    │
-                    │             └──> implement-spec  │
-                    │                    (explicit)     │
-                    └────────────────────────┬──────────┘
+                    │             │    evidens/AC       │
+                    │             └──> implement-spec   │
+                    │                    (explicit)      │
+                    └────────────────────────┬───────────┘
                                              v
                                        code-review ──> pr ──> retro
 ```
@@ -64,8 +65,16 @@ godkänd spec + task graph
       \         /           │
        v       v            │
     validera och integrera   │
-             │               │
-             └──── låser upp C
+       │             │       │
+       │        fel/avbrott/konflikt
+       │             │
+       │             v
+       │      rekonstruera från Git
+       │      klassificera + handoff
+       │             │
+       │       godkänd återstart
+       │             │
+       └─────────────┴── låser upp C
                          │
                          v
                   full validering
@@ -74,7 +83,17 @@ godkänd spec + task graph
                     code-review
 ```
 
-Varje worktree ägs av en uppgift. Integration sker en uppgift i taget. Semantiska konflikter stoppar flödet. Push, PR, deploy och destruktiv städning kräver egna godkännanden.
+Varje worktree ägs av en uppgift. Integration sker en uppgift i taget. Vid avbrott rekonstrueras läget från Git och observerad evidens; agentrapporter räcker inte. Delarbete bevaras, semantiska konflikter stoppar flödet och retries loopar inte automatiskt. Push, PR, deploy och destruktiv städning kräver egna godkännanden.
+
+## Spårbar handoff
+
+```text
+krav R-* ──┬──> task T-* ──> acceptance AC-* ──> evidens
+beslut D-* ┘         │                                  │
+                     └──────── handoff ─────────────────┘
+```
+
+Projektets befintliga ID:n och lagringsplats återanvänds. Om källan saknar ID:n skapas korta stabila referenser i det befintliga artefaktet; ett nytt dokumentformat eller tracker införs inte.
 
 ## Projektinstallation och uppdatering
 

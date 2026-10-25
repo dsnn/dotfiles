@@ -40,6 +40,9 @@ Avsiktliga avvikelser:
 - Basprojektmall samt profiler för .NET, Azure Functions och Avalonia.
 - Preview/apply-flöde med checksumma och skydd för projektanpassningar.
 - Deterministisk toolkitvalidering integrerad i `just check`.
+- Spårbara handoffs från krav och beslut till tasks, acceptance criteria och verifiering.
+- Recoveryregler för agentfel, delarbete, konflikter, avbrott och säker återstart i `implement-spec`.
+- Persistenta beteendetester samt separata read-only Codex forward-evals.
 - Svensk dokumentation och ASCII-diagram under `docs/ai/`.
 
 ## Trade-offs
@@ -50,7 +53,7 @@ Avsiktliga avvikelser:
 
 ## Kvarstående och uppskjutet
 
-- **Open:** Verklig användning får visa vilka skills som behöver referensfiler eller forward-evals. Sådana filer läggs inte till spekulativt.
+- **Open:** Verklig användning får visa om fler riskspecifika forward-evals behövs. Nya scenarier kräver ett observerbart invariant och ska inte testa formulering.
 - **Open:** Stöd för ytterligare språkprofiler införs först vid ett konkret projektbehov.
 - **Deferred:** Automatisk publicering som plugin eller upstream-synkronisering.
 - **Deferred:** Tracker-specifika integrationsscript; nuvarande skills använder de verktyg projektmiljön redan erbjuder.

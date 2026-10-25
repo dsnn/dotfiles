@@ -23,6 +23,13 @@ hash_file() {
   fi
 }
 
+file_mode() {
+  local mode
+  mode="$(stat -f '%Lp' "$1" 2>/dev/null || stat -c '%a' "$1")"
+  [[ "$mode" =~ ^[0-7]{3,4}$ ]] || fail "could not determine file mode: $1"
+  printf '%s\n' "$mode"
+}
+
 [[ $# -ge 1 ]] || { usage >&2; exit 2; }
 mode="$1"
 shift
@@ -65,8 +72,39 @@ template_dir="$repo_dir/ai/project-template"
 target="$project/AGENTS.md"
 end_marker='<!-- dotfiles-ai:end -->'
 
+if [[ -L "$target" ]]; then
+  fail "refusing to replace symlinked AGENTS.md: $target"
+fi
+if [[ -e "$target" && ! -f "$target" ]]; then
+  fail "AGENTS.md exists but is not a regular file: $target"
+fi
+
+has_managed_block=0
+start_line=''
+end_line=''
+if [[ -f "$target" ]]; then
+  marker_fragments="$(rg -c '<!--[^>]*dotfiles-ai:(start|end)' "$target" || true)"
+  marker_fragments="${marker_fragments:-0}"
+  if (( marker_fragments > 0 )); then
+    exact_starts="$(rg -c '^<!-- dotfiles-ai:start profiles=[^ ]+ checksum=[0-9a-f]{64} -->$' "$target" || true)"
+    exact_ends="$(rg -c '^<!-- dotfiles-ai:end -->$' "$target" || true)"
+    exact_starts="${exact_starts:-0}"
+    exact_ends="${exact_ends:-0}"
+    [[ "$marker_fragments" == 2 && "$exact_starts" == 1 && "$exact_ends" == 1 ]] || fail "AGENTS.md has malformed, orphaned, or repeated managed markers"
+    start_line="$(rg -n '^<!-- dotfiles-ai:start profiles=[^ ]+ checksum=[0-9a-f]{64} -->$' "$target" | cut -d: -f1)"
+    end_line="$(rg -n '^<!-- dotfiles-ai:end -->$' "$target" | cut -d: -f1)"
+    (( start_line < end_line )) || fail "AGENTS.md managed markers are out of order"
+    has_managed_block=1
+  fi
+fi
+
 tmp_dir="$(mktemp -d "${TMPDIR:-/tmp}/dotfiles-ai-project.XXXXXX")"
-trap 'rm -rf "$tmp_dir"' EXIT
+apply_tmp=''
+cleanup() {
+  rm -rf "$tmp_dir"
+  [[ -z "$apply_tmp" ]] || rm -f "$apply_tmp"
+}
+trap cleanup EXIT
 body="$tmp_dir/body"
 block="$tmp_dir/block"
 candidate="$tmp_dir/AGENTS.md"
@@ -85,7 +123,7 @@ add_profile() {
   profiles+=("$candidate_profile")
 }
 
-if [[ ${#requested_profiles[@]} -eq 0 && -f "$target" ]]; then
+if [[ ${#requested_profiles[@]} -eq 0 && "$has_managed_block" == 1 ]]; then
   existing_profile_list="$(sed -nE 's/^<!-- dotfiles-ai:start profiles=([^ ]*) checksum=[0-9a-f]{64} -->$/\1/p' "$target")"
   if [[ -n "$existing_profile_list" && "$existing_profile_list" != none ]]; then
     IFS=',' read -r -a requested_profiles <<<"$existing_profile_list"
@@ -122,24 +160,21 @@ fi
 } >"$block"
 
 managed_modified=0
-if [[ -f "$target" ]] && rg -q '<!-- dotfiles-ai:start ' "$target"; then
-  start_count="$(rg -c '<!-- dotfiles-ai:start ' "$target")"
-  end_count="$(rg -c '^<!-- dotfiles-ai:end -->$' "$target")"
-  [[ "$start_count" == 1 && "$end_count" == 1 ]] || fail "AGENTS.md has malformed or repeated managed markers"
+if [[ "$has_managed_block" == 1 ]]; then
   existing_checksum="$(sed -nE 's/^<!-- dotfiles-ai:start profiles=.* checksum=([0-9a-f]{64}) -->$/\1/p' "$target")"
-  [[ -n "$existing_checksum" ]] || fail "managed marker has an invalid checksum"
-  awk '/^<!-- dotfiles-ai:start / {inside=1; next} /^<!-- dotfiles-ai:end -->$/ {inside=0; next} inside' "$target" >"$existing_body"
+  if (( end_line == start_line + 1 )); then
+    : >"$existing_body"
+  else
+    sed -n "$((start_line + 1)),$((end_line - 1))p" "$target" >"$existing_body"
+  fi
   [[ "$(hash_file "$existing_body")" == "$existing_checksum" ]] || managed_modified=1
-  awk -v replacement="$block" '
-    /^<!-- dotfiles-ai:start / {
-      while ((getline line < replacement) > 0) print line
-      close(replacement)
-      inside=1
-      next
-    }
-    /^<!-- dotfiles-ai:end -->$/ && inside {inside=0; next}
-    !inside {print}
-  ' "$target" >"$candidate"
+  if (( start_line == 1 )); then
+    : >"$candidate"
+  else
+    head -n "$((start_line - 1))" "$target" >"$candidate"
+  fi
+  cat "$block" >>"$candidate"
+  tail -n "+$((end_line + 1))" "$target" >>"$candidate"
 elif [[ -f "$target" ]]; then
   cp "$target" "$candidate"
   if [[ -s "$candidate" ]]; then
@@ -177,5 +212,11 @@ if [[ "$mode" == preview ]]; then
 fi
 
 (( confirmed )) || fail "apply requires --yes after reviewing the preview"
-install -m 0644 "$candidate" "$target"
+target_mode=0644
+[[ -f "$target" ]] && target_mode="$(file_mode "$target")"
+apply_tmp="$(mktemp "$project/.AGENTS.md.dotfiles-ai.XXXXXX")"
+cp "$candidate" "$apply_tmp"
+chmod "$target_mode" "$apply_tmp"
+mv -f "$apply_tmp" "$target"
+apply_tmp=''
 printf '✓ updated managed project instructions: %s\n' "$target"

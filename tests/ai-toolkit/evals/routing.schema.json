@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["selected_skill", "mutation_authorized", "safe_stop_before_mutation", "reason"],
+  "properties": {
+    "selected_skill": { "type": "string" },
+    "mutation_authorized": { "type": "boolean" },
+    "safe_stop_before_mutation": { "type": "boolean" },
+    "reason": { "type": "string" }
+  }
+}

@@ -32,9 +32,12 @@ Codex ser skillens namn och beskrivning före laddning. `agents/openai.yaml` sä
 
 Det genererade blocket i `AGENTS.md` innehåller profiler och SHA-256 för innehållet. Vid uppdatering:
 
-- text utanför blocket kopieras byte för byte;
+- exakt ett korrekt och ordnat markörpar krävs; föräldralösa, duplicerade och trasiga markörer ger stopp;
+- symlänkar och icke-reguljära mål avvisas;
+- text utanför blocket kopieras byte för byte och befintliga filrättigheter bevaras;
 - ett oförändrat block får ersättas efter visad diff och explicit `apply --yes`;
 - ett lokalt ändrat block ger stopp;
+- applicering sker atomiskt via en temporär fil i projektkatalogen;
 - optionala planer, ADR:er, glossarier och task stores skapas inte.
 
 Projektets egna instruktioner har fortsatt kontroll över kommandon, dokumentplacering och godkännanden.
@@ -44,6 +47,8 @@ Projektets egna instruktioner har fortsatt kontroll över kommandon, dokumentpla
 Återanvändbar beslutslogik ligger i egna smala skills, exempelvis `grilling`, `codebase-design` och `writing-for-agents`. Orkestrerande skills hänvisar till dem med namn. Deterministisk filhantering ligger i script i stället för att återimplementeras i prompttext.
 
 Trackers är adapters. `to-spec`, `plan-tasks`, `triage` och `wayfinder` använder dokumenterad projektkonfiguration om den finns; annars föreslår de lokal Markdown. Ingen tracker är ett runtime-beroende.
+
+Planeringskedjan återanvänder projektets befintliga identifierare för krav, beslut, uppgifter och acceptance criteria. Om källan saknar identifierare skapar `to-spec` korta stabila referenser i samma artefakt. `plan-tasks`, `implement`, `implement-spec` och `handoff` bevarar relationerna och kopplar observerad verifiering till rätt kriterium.
 
 ## `AGENTS.md`-hierarki och säkerhet
 
@@ -65,7 +70,11 @@ En skill får alltså inte upphäva en approval gate. Destruktiva operationer, g
 
 ## `implement-spec`
 
-Denna skill är den enda avsiktliga worktree-orkestreringen. Den kräver explicit invocation, en godkänd spec och task graph samt godkänd Git-plan. Varje task får egen branch och worktree. Integration sker seriellt till en integrationsbranch efter uppdatering och test. Konflikter eskaleras. Full validering och `code-review` avslutar flödet. Städning är separat och destruktiv städning kräver godkännande.
+Denna skill är den enda avsiktliga worktree-orkestreringen. Den kräver explicit invocation, en godkänd spec och task graph samt godkänd Git-plan. Varje task får egen branch och worktree. Integration sker seriellt till en integrationsbranch efter uppdatering och test. Vid fel eller återstart rekonstrueras tillstånd från Git och observerad evidens; delarbete bevaras, retries är begränsade och semantiska konflikter eskaleras. Full validering och `code-review` avslutar flödet. Städning är separat och destruktiv städning kräver godkännande.
+
+## Testmodell
+
+`just ai-test` kör deterministiska beteendetester i temporära kataloger. De verifierar faktiska filoperationer, säker uppdatering, validatorbeteende och invocation policies. `just ai-eval` är en separat opt-in-svit som kör efemära Codex-sessioner i read-only sandbox och utvärderar strukturerade invariants för routing, behörighet, ID-kontinuitet, recovery och safe stopping. Modellevals är inte en del av den deterministiska `just check`-grinden.
 
 ## Utökning och upstream
 

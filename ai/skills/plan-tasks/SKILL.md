@@ -10,6 +10,7 @@ Read the complete source specification and repository instructions. Confirm that
 Create vertical slices that leave behavior verifiable, not horizontal layers such as “models,” “services,” and “tests.” Each task must contain:
 
 - outcome and parent specification;
+- its own stable task identifier plus the requirement and decision identifiers it covers;
 - relevant context pointers;
 - in-scope and out-of-scope work;
 - observable acceptance criteria;
@@ -18,6 +19,8 @@ Create vertical slices that leave behavior verifiable, not horizontal layers suc
 - risks or approval gates.
 
 Keep dependencies acyclic and minimal. Identify the ready frontier: tasks whose blockers are already complete.
+
+Preserve source identifiers exactly. Make every in-scope requirement reachable from at least one task, and make every acceptance criterion attributable to its task. Report uncovered requirements or tasks with no source requirement instead of silently losing or inventing scope.
 
 Use the project's configured tracker if one is documented. Otherwise propose local Markdown tasks beside the specification. Preview all external issue creation and require approval before writing to GitHub, Azure DevOps, or another service.
 

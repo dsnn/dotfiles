@@ -21,3 +21,5 @@ Include:
 - unresolved questions that prevent implementation.
 
 Every requirement must trace to conversation, repository evidence, or a cited source. Label assumptions instead of inventing completeness. Finish by identifying whether the spec is ready for `plan-tasks`.
+
+Preserve identifiers already used by the project. When requirements, decisions, or acceptance criteria have no stable identifier, give them short identifiers appropriate to the existing artifact so downstream work can refer to them without copying or reformatting the specification.

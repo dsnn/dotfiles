@@ -37,6 +37,12 @@ scripts/ai-project preview --project /path/to/project \
 
 En ändrad förvaltad sektion skrivs aldrig över automatiskt. Verktyget visar diff och stoppar.
 
+## Tester
+
+`just ai-test` kör deterministiska beteendetester för projekttemplat, filskydd och validator. Kommandot ingår i `just ai-check` och använder endast temporära projekt.
+
+`just ai-eval` kör separata, modellbaserade forward-evals för routing, behörighetsgränser, planeringsspårbarhet och återstart. Körningen använder efemära, read-only Codex-sessioner men kräver modellåtkomst och kan därför ha kostnad och viss nondeterminism. Den ingår inte i `just check`.
+
 ## Användning
 
 Anropa en manuell skill med dess namn, exempelvis `$grill-me`, `$implement` eller `$setup-project`. Codex kan välja en automatisk skill när dess smala användningsfall matchar. Se [skills.md](skills.md) för full katalog.

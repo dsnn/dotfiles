@@ -7,6 +7,10 @@ skills_dir="$repo_dir/ai/skills"
 failed=0
 count=0
 
+manual_skills=(grill-me grill-with-docs improve-codebase-architecture to-spec plan-tasks to-questionnaire triage wayfinder implement implement-spec setup-pre-commit handoff retro wizard teach wait-what setup-project improve-skill list-skills update-skills which-skill)
+automatic_skills=(code-review codebase-design diagnosing-bugs domain-modeling grilling pr prototype research tdd validate-dotfiles writing-for-agents)
+required_skills=("${manual_skills[@]}" "${automatic_skills[@]}")
+
 for dir in "$skills_dir"/*; do
   [[ -d "$dir" ]] || continue
   count=$((count + 1))
@@ -33,12 +37,18 @@ for dir in "$skills_dir"/*; do
   fi
 done
 
-[[ "$count" == 32 ]] || { printf 'error: expected 32 managed skills, found %s\n' "$count" >&2; failed=1; }
+for name in "${required_skills[@]}"; do
+  [[ -d "$skills_dir/$name" ]] || { printf 'error: required skill is missing: %s\n' "$name" >&2; failed=1; }
+done
 
-manual_skills=(grill-me grill-with-docs improve-codebase-architecture to-spec plan-tasks to-questionnaire triage wayfinder implement implement-spec setup-pre-commit handoff retro wizard teach wait-what setup-project improve-skill list-skills update-skills which-skill)
 for name in "${manual_skills[@]}"; do
   value="$(yq eval '.policy.allow_implicit_invocation' "$skills_dir/$name/agents/openai.yaml")"
   [[ "$value" == false ]] || { printf 'error: %s must require explicit invocation\n' "$name" >&2; failed=1; }
+done
+
+for name in "${automatic_skills[@]}"; do
+  value="$(yq eval '.policy.allow_implicit_invocation' "$skills_dir/$name/agents/openai.yaml")"
+  [[ "$value" != false ]] || { printf 'error: %s must allow automatic selection\n' "$name" >&2; failed=1; }
 done
 
 for file in "$repo_dir/ai/project-template/base.md" \
@@ -53,4 +63,4 @@ bash -n "$repo_dir/scripts/ai-project" "$repo_dir/scripts/ai-skills" "$repo_dir/
 if (( failed )); then
   exit 1
 fi
-printf '✓ AI toolkit structure valid (%s managed skills)\n' "$count"
+printf '✓ AI toolkit structure valid (%s discovered skills)\n' "$count"

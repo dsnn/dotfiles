@@ -150,8 +150,16 @@ _link source target:
 # --------------------------------------------------
 
 [group("ai")]
-ai-check:
+ai-check: ai-test
     @"{{ DOTFILES }}/scripts/validate-ai-toolkit"
+
+[group("ai")]
+ai-test:
+    @"{{ DOTFILES }}/tests/ai-toolkit/run.sh"
+
+[group("ai")]
+ai-eval *scenarios:
+    @"{{ DOTFILES }}/scripts/eval-ai-toolkit" {{ scenarios }}
 
 [group("ai")]
 ai-skills:

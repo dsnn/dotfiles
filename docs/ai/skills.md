@@ -19,8 +19,8 @@
 
 | Skill | Syfte och användning | Läge | Indata → utdata | Beroenden | Exempel |
 | --- | --- | --- | --- | --- | --- |
-| `to-spec` | Syntetisera fattade beslut för flersessionsarbete. | Manuell | Samtal + repo → specifikation | Ofta efter `grill-with-docs` | `$to-spec skriv spec för sökflödet` |
-| `plan-tasks` | Dela en godkänd spec i vertikala, blockeringsmedvetna uppgifter. | Manuell | Spec → task graph | `to-spec` eller annan plan | `$plan-tasks använd lokal Markdown` |
+| `to-spec` | Syntetisera fattade beslut och stabila krav-/besluts-ID:n för flersessionsarbete. | Manuell | Samtal + repo → spårbar specifikation | Ofta efter `grill-with-docs` | `$to-spec skriv spec för sökflödet` |
+| `plan-tasks` | Dela en godkänd spec i vertikala uppgifter som pekar tillbaka på krav, beslut och kriterier. | Manuell | Spec → spårbar task graph | `to-spec` eller annan plan | `$plan-tasks använd lokal Markdown` |
 | `to-questionnaire` | Gör obesvarade beslut svarbara för rätt person. | Manuell | Mottagare + oklarheter → frågeformulär | — | `$to-questionnaire för driftansvarig` |
 | `triage` | Rekommendera status, prioritet och nästa handling. | Manuell | Backlog → triageförslag | Valfritt `grilling` | `$triage gå igenom öppna buggar` |
 | `wayfinder` | Kartlägg beslut i ett stort, oklart initiativ. | Manuell | Destination + constraints → beslutskarta | `grilling`, valfritt `research`/`prototype` | `$wayfinder planera plattformsbytet` |
@@ -29,8 +29,8 @@
 
 | Skill | Syfte och användning | Läge | Indata → utdata | Beroenden | Exempel |
 | --- | --- | --- | --- | --- | --- |
-| `implement` | Implementera en godkänd, avgränsad uppgift. | Manuell | Uppgift + kriterier → ändring + evidens | `tdd`, `code-review` vid behov | `$implement uppgift 03` |
-| `implement-spec` | Orkestrera en godkänd task graph i isolerade worktrees. | Manuell | Spec + uppgifter → integrerad branch | `implement`, `tdd`, `code-review` | `$implement-spec docs/specs/search.md` |
+| `implement` | Implementera en godkänd uppgift och koppla evidens till dess kriterier. | Manuell | Uppgift + ID:n + kriterier → ändring + spårbar evidens | `tdd`, `code-review` vid behov | `$implement uppgift 03` |
+| `implement-spec` | Orkestrera och säkert återuppta en godkänd task graph i isolerade worktrees. | Manuell | Spec + uppgifter + Git-state → integrerad branch eller säker handoff | `implement`, `tdd`, `code-review`, recovery-reference | `$implement-spec docs/specs/search.md` |
 | `tdd` | Driv beteende med red–green–refactor. | Automatisk | Beteende + seam → testad slice | — | `Använd TDD för valideringsregeln.` |
 | `diagnosing-bugs` | Fastställ root cause innan fix. | Automatisk | Symptom + miljö → reproduktion och evidens | — | `Diagnostisera den intermittenta timeouten.` |
 | `code-review` | Granska diff mot korrekthet, regler och intent. | Automatisk | Fixed point + diff + spec → findings | — | `Granska ändringarna sedan merge base.` |
@@ -42,7 +42,7 @@
 
 | Skill | Syfte och användning | Läge | Indata → utdata | Beroenden | Exempel |
 | --- | --- | --- | --- | --- | --- |
-| `handoff` | Bevara verifierat sammanhang över sessionsgräns. | Manuell | Sessionstillstånd → kompakt handoff | — | `$handoff inför nästa session` |
+| `handoff` | Bevara verifierat sammanhang och befintliga ID-relationer över sessionsgräns. | Manuell | Sessionstillstånd → rekonstruerbar handoff | — | `$handoff inför nästa session` |
 | `writing-for-agents` | Skriv precisa, ekonomiska agentinstruktioner. | Automatisk | Instruktionstext → förbättrad styrning | — | `Granska detta AGENTS.md för no-ops.` |
 | `retro` | Härled små miljöförbättringar från genomfört arbete. | Manuell | Sessionsevidens → rangordnade förslag | `writing-for-agents` | `$retro granska den här sessionen` |
 | `wizard` | Skapa ett säkert interaktivt flöde för mänskliga steg. | Manuell | Manuell procedur → validerat script | — | `$wizard för CI-secret-konfiguration` |

@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["actions", "mutation_authorized", "safe_stop", "approval_needed"],
+  "properties": {
+    "actions": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["inspect", "propose", "edit", "install", "commit", "external_write"] }
+    },
+    "mutation_authorized": { "type": "boolean" },
+    "safe_stop": { "type": "boolean" },
+    "approval_needed": { "type": "array", "items": { "type": "string" } }
+  }
+}
